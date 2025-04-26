@@ -131,7 +131,7 @@ var core_types = [
 ]
 
 func isCoreType (name: String) -> Bool {
-    core_types.contains(name)
+    core_types.contains(reverseMapTypeName(name)) || name.hasPrefix("TypedArray<") || name.hasPrefix("TypedArray<")
 }
 
 func isPrimitiveType (name: String) -> Bool {
@@ -143,13 +143,27 @@ func mapTypeName (_ name: String) -> String {
         return "GString"
     }
     if name == "Array" {
-        return "GArray"
+        return "VariantArray"
     }
     if name == "Dictionary" {
-        return "GDictionary"
+        return "VariantDictionary"
     }
     return name
 }
+
+func reverseMapTypeName (_ name: String) -> String {
+    if name == "GString" {
+        return "String"
+    }
+    if name == "VariantArray" {
+        return "Array"
+    }
+    if name == "VariantDictionary" {
+        return "Dictionary"
+    }
+    return name
+}
+
 func mapTypeNameDoc (_ name: String) -> String {
     if name == "String" {
         return "String"
@@ -158,7 +172,7 @@ func mapTypeNameDoc (_ name: String) -> String {
         return "GType"
     }
     if name == "Dictionary" {
-        return "GDictionary"
+        return "VariantDictionary"
     }
     return mapTypeName (name)
 }
@@ -301,9 +315,9 @@ func getGodotType (_ t: TypeWithMeta?, kind: ArgumentKind = .classes) -> String 
             return "GString"
         }
     case "Dictionary":
-        return "GDictionary"
+        return "VariantDictionary"
     case "Array":
-        return "GArray"
+        return "VariantArray"
     case "void*":
         return "OpaquePointer?"
     case "const Glyph*":
@@ -339,9 +353,9 @@ func getGodotType (_ t: TypeWithMeta?, kind: ArgumentKind = .classes) -> String 
             let nested = SimpleType(type: nestedTypeName, meta: nil)
 
             if classMap [nestedTypeName] != nil {
-                return "ObjectCollection<\(getGodotType (nested))>"
+                return "TypedArray<\(getGodotType (nested))?>"
             } else {
-                return "VariantCollection<\(getGodotType (nested))>"
+                return "TypedArray<\(getGodotType (nested))>"
             }
         }
         if t.type.starts (with: "bitfield::") {
@@ -355,17 +369,26 @@ func getGodotType (_ t: TypeWithMeta?, kind: ArgumentKind = .classes) -> String 
 /// "content", given a godotType name of those, this returns a pair
 /// containing the Swift-type that is used to store this, and a suitable initialization
 /// value for it.
-func getBuiltinStorage (_ name: String) -> (String, String) {
+func getBuiltinStorage (_ name: String, asComputedProperty: Bool) -> (String, String) {
     guard let size = builtinSizes [name] else {
         fatalError()
     }
+    
+    func rightHandExpression(_ valueLiteral: String) -> String {
+        if asComputedProperty {
+            return " { \(valueLiteral) }"
+        } else {
+            return " = \(valueLiteral)"
+        }
+    }
+    
     switch size {
     case 4, 0:
-        return ("Int32", " = 0")
+        return ("Int32", rightHandExpression("0"))
     case 8:
-        return ("Int64", " = 0")
+        return ("Int64", rightHandExpression("0"))
     case 16:
-        return ("(Int64, Int64)", " = (0, 0)")
+        return ("(Int64, Int64)", rightHandExpression("(0, 0)"))
     default:
         fatalError()
     }

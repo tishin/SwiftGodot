@@ -64,9 +64,9 @@ private extension GodotRuntime {
                 godotLibrary = OpaquePointer (libraryPtr)
                 extensionInit?.pointee = GDExtensionInitialization (
                     minimum_initialization_level: GDEXTENSION_INITIALIZATION_CORE,
-                    userdata: nil,
-                    initialize: embeddedExtensionInit,
-                    deinitialize: embeddedExtensionDeinit
+                    userdata: libraryPtr,
+                    initialize: extension_initialize,
+                    deinitialize: extension_deinitialize
                 )
                 return 1
 
@@ -86,6 +86,7 @@ private extension GodotRuntime {
         let args = ["SwiftGodotKit", "--headless", "--verbose"]
         withUnsafePtr (strings: args) { ptr in
             godot_main (Int32 (args.count), ptr)
+            
         }
     }
 

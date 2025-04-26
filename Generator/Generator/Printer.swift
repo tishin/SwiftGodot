@@ -23,6 +23,12 @@ class Printer {
         self.name = name
         self.addPreamble = addPreamble
     }
+    
+    /// Local printer that is not intended to be written into the file
+    init() {
+        name = ""
+        addPreamble = false
+    }
 
     fileprivate static let preamble =
         """
@@ -69,27 +75,20 @@ class Printer {
         p ("}")
     }
 
-    // Prints a variable definition
-    func staticVar(visibility: String = "", name: String, type: String, block: () -> ()) {
-        if generateResettableCache {
-            p ("fileprivate static var _c_\(name): \(type)? = nil")
-            p ("fileprivate static var _g_\(name): UInt16 = 0")
-            b("\(visibility)static var \(name): \(type) ") {
-                self("if _g_\(name) == swiftGodotLibraryGeneration") {
-                    self("if let _c_\(name)") {
-                        self("return _c_\(name)")
-                    }
-                }
-                p ("_g_\(name) = swiftGodotLibraryGeneration")
-                self("func load () -> \(type)") {
-                    block()
-                }
-                self("let ret = load ()")
-                self("_c_\(name) = ret")
-                self("return ret")
-            }
+    /// Prints a static property definition.
+    /// If `isStored` it's kept as a `static let value: Something = block()`
+    /// Otherwise it's a computed property: `static var value: Something { block() }`
+    /// Xogot should set `neverCacheProcs` to `true` and it will enforce usage of computed properties
+    func staticProperty(visibility: String = "", isStored: Bool, name: String, type: String, block: () -> ()) {
+        var visibility = visibility
+        if !visibility.isEmpty {
+            visibility = "\(visibility) "
+        }
+        
+        if noStaticCaches || !isStored {
+            b("\(visibility)static var \(name): \(type)", suffix: "", block: block)
         } else {
-            b("\(visibility)static var \(name): \(type) =", suffix: "()", block: block)
+            b("\(visibility)static let \(name): \(type) =", suffix: "()", block: block)
         }
     }
 
@@ -114,7 +113,7 @@ class Printer {
         b(str, arg: arg, suffix: suffix, block: block)
     }
 
-    func save(_ file: String) {
+    func save(_ file: String) {        
         let output = (addPreamble ? Self.preamble : "") + result
 
         let existing = try? String(contentsOfFile: file)

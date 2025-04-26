@@ -7,7 +7,7 @@
 
 @_implementationOnly import GDExtension
 
-extension StringName: CustomStringConvertible, Hashable {
+extension StringName: CustomStringConvertible {
     /// Creates a StringName from a Swift String.Substring
     public convenience init (_ from: String.SubSequence) {
         self.init (from: String (from))
@@ -19,8 +19,9 @@ extension StringName: CustomStringConvertible, Hashable {
         return buffer.getStringFromUtf8().description
     }
     
-    public func hash (into hasher: inout Hasher) {
-        hasher.combine (hash ())
+    @usableFromInline
+    var asciiDescription: String {
+        toAsciiBuffer().getStringFromAscii()
     }
     
     /// Compares two StringNames for equality.
@@ -46,7 +47,7 @@ func stringFromGodotString (_ ptr: UnsafeRawPointer) -> String? {
     }
 }
     
-extension GString: CustomStringConvertible, Hashable {
+extension GString: CustomStringConvertible {
     /// Returns a Swift string from a pointer to a native Godot string
     static func stringFromGStringPtr (ptr: UnsafeRawPointer?) -> String? {
         guard let ptr else {
@@ -64,19 +65,23 @@ extension GString: CustomStringConvertible, Hashable {
     /// Returns a Swift string from this GString.
     public var description: String {
         get {
-            return withUnsafeBytes(of: &content) { ptr in
-                let len = gi.string_to_utf8_chars (ptr.baseAddress, nil, 0)
-                return withUnsafeTemporaryAllocation(of: CChar.self, capacity: Int(len+1)) { strPtr in
-                    _ = gi.string_to_utf8_chars (ptr.baseAddress, strPtr.baseAddress, len)
-                    strPtr [Int (len)] = 0
-                    return String (cString: strPtr.baseAddress!)
-                } ?? ""
-            }
+            Self.toString(pContent: &content)
         }
     }
     
-    public func hash (into hasher: inout Hasher) {
-        hasher.combine (hash ())
+    @inline(__always)
+    static func toString(pContent: UnsafeRawPointer) -> String {
+        let byteCount = gi.string_to_utf8_chars(pContent, nil, 0)
+        return withUnsafeTemporaryAllocation(of: CChar.self, capacity: Int(byteCount + 1)) { buffer in
+            guard let cString = buffer.baseAddress else {
+                GD.printErr("withUnsafeTemporaryAllocation failed") // should never happen, really
+                return "<<withUnsafeTemporaryAllocation failure>>"
+            }
+            
+            _ = gi.string_to_utf8_chars(pContent, cString, byteCount)
+            cString[Int(byteCount)] = 0 // null-terminator
+            return String(cString: cString)
+        }
     }
 }
 

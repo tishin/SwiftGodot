@@ -156,6 +156,7 @@ var targets: [Target] = [
         swiftSettings: [
             .swiftLanguageMode(.v5),
             .define("CUSTOM_BUILTIN_IMPLEMENTATIONS"),
+            .unsafeFlags(["-suppress-warnings"])
         ],
         plugins: [/*"CodeGeneratorPlugin",*/ "SwiftGodotMacroLibrary"]
     ),
@@ -182,6 +183,10 @@ var targets: [Target] = [
                 "SwiftGodotMacroLibrary",
                 "SwiftGodot",
                 .product(name: "SwiftSyntaxMacrosTestSupport", package: "swift-syntax"),
+            ],
+            exclude: ["Resources"],
+            resources: [
+                .copy("Resources")
             ],
             swiftSettings: [.swiftLanguageMode(.v5)]
         ))

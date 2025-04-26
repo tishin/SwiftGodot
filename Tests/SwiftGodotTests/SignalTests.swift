@@ -13,11 +13,16 @@ private class TestSignalNode: Node {
         receivedInt = age
         receivedString = name
     }
+
+    override func _validateProperty(_ prop: inout PropInfo) -> Bool {
+
+        return true
+    }
 }
 
 final class SignalTests: GodotTestCase {
     
-    override static var godotSubclasses: [Wrapped.Type] {
+    override static var godotSubclasses: [Object.Type] {
         return [TestSignalNode.self]
     }
     

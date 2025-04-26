@@ -21,16 +21,16 @@ func makeDefaultInit (godotType: String, initCollection: String = "") -> String 
     case "String":
         return "String ()"
     case "Array":
-        return "GArray ()"
+        return "VariantArray ()"
     case "Dictionary":
-        return "GDictionary ()"
+        return "VariantDictionary ()"
     case let t where t.starts (with: "typedarray::"):
         let nestedTypeName = String (t.dropFirst(12))
         let simple = SimpleType(type: nestedTypeName)
         if classMap [nestedTypeName] != nil {
-            return "ObjectCollection<\(getGodotType (simple))>(\(initCollection))"
+            return "TypedArray<\(getGodotType (simple))?>(\(initCollection))"
         } else {
-            return "VariantCollection<\(getGodotType (simple))>(\(initCollection))"
+            return "TypedArray<\(getGodotType (simple))>(\(initCollection))"
         }
     case "enum::Error":
         return ".ok"
@@ -93,7 +93,8 @@ func generateVirtualProxy (_ p: Printer,
         if let arguments = method.arguments, arguments.count > 0 {
             p ("guard let args else { return }")
         }
-        p ("let swiftObject = Unmanaged<\(cdef.name)>.fromOpaque(instance).takeUnretainedValue()")
+        p ("let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()")
+        p ("guard let swiftObject = reference.value as? \(cdef.name) else { return }")
         
         var argCall = ""
         var argPrep = ""
@@ -114,17 +115,12 @@ func generateVirtualProxy (_ p: Printer,
                 // This idiom guarantees that: if this is a known object, we surface this
                 // object, but if it is not known, then we create the instance
                 //
-                argPrep += "let resolved_\(i) = args [\(i)]!.load (as: UnsafeRawPointer.self)\n"
-                let handleResolver: String
-                if hasSubclasses.contains(cdef.name) {
-                    // If the type we are bubbling up has subclasses, we want to create the most
-                    // derived type if possible, so we perform the longer lookup
-                    handleResolver = "lookupObject (nativeHandle: resolved_\(i))!"
+                argPrep += "let resolved_\(i) = args [\(i)]!.load (as: UnsafeRawPointer?.self)\n"
+                if isMethodArgumentOptional(className: cdef.name, method: methodName, arg: arg.name) {
+                    argCall += "resolved_\(i) == nil ? nil : lookupObject (nativeHandle: resolved_\(i)!, ownsRef: false) as? \(arg.type)"
                 } else {
-                    // There are no subclasses, so we can create the object right away
-                    handleResolver = "\(arg.type) (nativeHandle: resolved_\(i))"
+                    argCall += "lookupObject (nativeHandle: resolved_\(i)!, ownsRef: false) as! \(arg.type)"
                 }
-                argCall += "lookupLiveObject (handleAddress: resolved_\(i)) as? \(arg.type) ?? \(handleResolver)"
             } else if let storage = builtinClassStorage [arg.type] {
                 argCall += "\(mapTypeName (arg.type)) (content: args [\(i)]!.assumingMemoryBound (to: \(storage).self).pointee)"
             } else {
@@ -189,7 +185,7 @@ func generateVirtualProxy (_ p: Printer,
                     case "String":
                         p ("ret.content = GString.zero")
                     case "Array":
-                        p ("ret.content = GArray.zero")
+                        p ("ret.content = VariantArray.zero")
                     default:
                         p ("ret.content = \(type).zero")
                     }
@@ -201,7 +197,7 @@ func generateVirtualProxy (_ p: Printer,
 
 // Dictioanry of Godot Type Name to array of method names that can get a @discardableResult
 // Notice that the type is looked up as the original Godot name, not
-// the mapped name (it is "Array", not "GArray"):
+// the mapped name (it is "Array", not "VariantArray"):
 let discardableResultList: [String: Set<String>] = [
     "Object": ["emit_signal"],
     "Array": ["resize"],
@@ -240,7 +236,7 @@ let omittedMethodsList: [String: Set<String>] = [
 
 // Dictionary used to explicitly tell the generator to replace the first argument label with "_ "
 let omittedFirstArgLabelList: [String: Set<String>] = [
-    "GArray": ["append"],
+    "VariantArray": ["append"],
     "PackedColorArray": ["append"],
     "PackedFloat64Array": ["append"],
     "PackedInt64Array": ["append"],
@@ -285,7 +281,7 @@ func generateMethods (_ p: Printer,
     }
     
     if virtuals.count > 0 {
-        p ("override class func getVirtualDispatcher (name: StringName) -> GDExtensionClassCallVirtual?"){
+        p ("override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual?"){
             p ("guard implementedOverrides().contains(name) else { return nil }")
             p ("switch name.description") {
                 for name in virtuals.keys.sorted() {
@@ -514,7 +510,7 @@ func generateSignals (_ p: Printer,
 func getSignalType(_ signal: JGodotSignal) -> String {
     var argTypes: [String] = []
     for signalArgument in signal.arguments ?? [] {
-        let godotType = getGodotType(signalArgument)
+        let godotType = getGodotType(signalArgument)        
         if !godotType.isEmpty && godotType != "Variant" {
             var t = godotType
             if !isCoreType(name: t) && !isPrimitiveType(name: signalArgument.type) {
@@ -553,6 +549,8 @@ func generateSignalDocAppendix (_ p: Printer, cdef: JGodotExtensionAPIClass, sig
     }
 }
 
+let objectInherits = "Wrapped, _GodotBridgeable, _GodotNullableBridgeable"
+
 func processClass (cdef: JGodotExtensionAPIClass, outputDir: String?) async {
     // Determine if it is a singleton, but exclude EditorInterface
     let isSingleton = jsonApi.singletons.contains (where: { $0.name == cdef.name })
@@ -568,7 +566,7 @@ func processClass (cdef: JGodotExtensionAPIClass, outputDir: String?) async {
         }
     }
     
-    let inherits = cdef.inherits ?? "Wrapped"
+    let inherits = cdef.inherits ?? objectInherits
     let typeDecl = "open class \(cdef.name): \(inherits)"
     
     var virtuals: [String: (String, JGodotClassMethod)] = [:]
@@ -586,21 +584,22 @@ func processClass (cdef: JGodotExtensionAPIClass, outputDir: String?) async {
     
     generateSignalDocAppendix (p, cdef: cdef, signals: cdef.signals)
     // class or extension (for Object)
-    p (typeDecl) {
+    p(typeDecl) {
         if isSingleton {
             p ("/// The shared instance of this class")
-            p.staticVar(visibility: "public ", name: "shared", type: cdef.name) {
-                p ("return withUnsafePointer (to: &\(cdef.name).godotClassName.content)", arg: " ptr in") {
-                    if hasSubclasses.contains(cdef.name) {
-                        p ("lookupObject (nativeHandle: gi.global_get_singleton (ptr)!)!")
-                    } else {
-                        p ("\(cdef.name) (nativeHandle: gi.global_get_singleton (ptr)!)")
-                    }
+            p.staticProperty(visibility: "public", isStored: false, name: "shared", type: cdef.name) {
+                p ("return withUnsafePointer(to: &\(cdef.name).godotClassName.content)", arg: " ptr in") {
+                    p ("lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!")
                 }
             }
         }
-        p ("fileprivate static var className = StringName(\"\(cdef.name)\")")
-        p ("override open class var godotClassName: StringName { className }")
+
+        if noStaticCaches {
+            p ("override open class var godotClassName: StringName { \"\(cdef.name)\" }")
+        } else {
+            p ("private static var className = StringName(\"\(cdef.name)\")")
+            p ("override open class var godotClassName: StringName { className }")
+        }
 
         if cdef.name == "RefCounted" {
             p ("public required init ()") {
@@ -609,10 +608,9 @@ func processClass (cdef: JGodotExtensionAPIClass, outputDir: String?) async {
             }
             p ("public required init(nativeHandle: UnsafeRawPointer)") {
                 p ("super.init (nativeHandle: nativeHandle)")
-                p ("reference()")
-                p ("ownsHandle = true")
             }
         }
+        
         var referencedMethods = Set<String>()
         
         if let enums = cdef.enums {
@@ -630,6 +628,90 @@ func processClass (cdef: JGodotExtensionAPIClass, outputDir: String?) async {
         }
         if let methods = cdef.methods {
             virtuals = generateMethods (p, cdef: cdef, methods: methods, usedMethods: referencedMethods, asSingleton: asSingleton)
+        }
+        
+        if inherits == objectInherits {
+            p.staticProperty(isStored: true, name: "variantFromSelf", type: "GDExtensionVariantFromTypeConstructorFunc") {
+                p("gi.get_variant_from_type_constructor(GDEXTENSION_VARIANT_TYPE_OBJECT)!")
+            }
+            
+            p.staticProperty(isStored: true, name: "selfFromVariant", type: "GDExtensionTypeFromVariantConstructorFunc") {
+                p("gi.get_variant_to_type_constructor(GDEXTENSION_VARIANT_TYPE_OBJECT)!")
+            }
+            
+            p("""
+            /// Wrap ``\(cdef.name)`` into a ``Variant``
+            @inline(__always)
+            @inlinable
+            public func toVariant() -> Variant {
+                Variant(self)                
+            }
+            
+            /// Wrap ``\(cdef.name)`` into a ``Variant?``
+            @inline(__always)
+            @inlinable
+            @_disfavoredOverload
+            public func toVariant() -> Variant? {
+                Variant(self)                
+            }
+            
+            /// Extract ``\(cdef.name)`` from a ``Variant``. Throws `VariantConversionError` if it's not possible.
+            @inline(__always)
+            @inlinable
+            public static func fromVariantOrThrow(_ variant: Variant) throws(VariantConversionError) -> Self {                
+                guard let value = variant.asObject(Self.self) else {
+                    throw .unexpectedContent(parsing: self, from: variant)
+                }
+                return value                
+            }
+            
+            /// Wrap ``\(cdef.name)`` into a ``FastVariant``
+            @inline(__always)
+            @inlinable
+            public func toFastVariant() -> FastVariant {
+                FastVariant(self)                
+            }
+            
+            /// Wrap ``\(cdef.name)`` into a ``FastVariant?``
+            @inline(__always)
+            @inlinable
+            @_disfavoredOverload
+            public func toFastVariant() -> FastVariant? {
+                FastVariant(self)                
+            }
+            
+            /// Extract ``\(cdef.name)`` from a ``FastVariant``. Throws `VariantConversionError` if it's not possible.
+            @inline(__always)
+            @inlinable
+            public static func fromFastVariantOrThrow(_ variant: borrowing FastVariant) throws(VariantConversionError) -> Self {                
+                guard let value = variant.to(self) else {
+                    throw .unexpectedContent(parsing: self, from: variant)
+                }
+                return value                
+            }
+            
+            /// Internal API
+            public func _macroRcRef() {
+                // no-op, needed for virtual dispatch when RefCounted is stored as Object
+            }
+            
+            /// Internal API
+            public func _macroRcUnref() {
+                // no-op, needed for virtual dispatch when RefCounted is stored as Object
+            }
+            """)
+        }
+        
+        if cdef.name == "RefCounted" {
+            p("/// Internal API")
+            p("public final override func _macroRcRef()") {
+                p("reference()")
+            }
+            
+            p("/// Internal API")
+            p("public final override func _macroRcUnref()") {
+                p("unreference()")
+            }
         }
         
         if let signals = cdef.signals {
@@ -663,5 +745,26 @@ extension Generator {
             p ("    \"\(x)\": \(x).self, //(nativeHandle:),")
         }
         p ("]")
+    }
+    
+    /// Variant itself is manally implemented, so we vary our `staticProperty` behavior here
+    /// Most of constructors sit in corresponding builtin types.
+    /// We can't extend native types to add static storage
+    func generateVariantGodotInterface(_ p: Printer) {
+        p("enum VariantGodotInterface") {
+            for (fromType, fromVariant, type) in [
+                ("variantFromBool", "boolFromVariant", "GDEXTENSION_VARIANT_TYPE_BOOL"),
+                ("variantFromInt", "intFromVariant", "GDEXTENSION_VARIANT_TYPE_INT"),
+                ("variantFromDouble", "doubleFromVariant", "GDEXTENSION_VARIANT_TYPE_FLOAT"),
+            ] {
+                p.staticProperty(isStored: true, name: fromType, type: "GDExtensionVariantFromTypeConstructorFunc") {
+                    p("gi.get_variant_from_type_constructor(\(type))!")
+                }
+                
+                p.staticProperty(isStored: true, name: fromVariant, type: "GDExtensionTypeFromVariantConstructorFunc") {
+                    p("gi.get_variant_to_type_constructor(\(type))!")
+                }
+            }
+        }
     }
 }

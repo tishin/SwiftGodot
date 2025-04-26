@@ -17,23 +17,23 @@
 /// // Let godot call `demo` and its proxy method.
 /// invokeScript ("myDemo.proxy ()", params: ["myDemo", demo])
 /// ```
+@available(*, deprecated, message: "Use Callable constructed from Swift closure instead")
 public class SignalProxy: Object {
     public static var proxyName = StringName("proxy")
-    static var initClass: Bool = {
+
+    public static func initClass() {
         register(type: SignalProxy.self)
 
         let s = ClassInfo<SignalProxy>(name: "SignalProxy")
 
         s.registerMethod(name: SignalProxy.proxyName, flags: .default, returnValue: nil, arguments: [], function: SignalProxy.proxyFunc)
-        return true
-    }()
-
+    }
+    
     /// The code invoked when Godot invokes the `proxy` method on this object.
     public typealias Proxy = (borrowing Arguments) -> ()
     public var proxy: Proxy?
-
-    public required init() {
-        let _ = SignalProxy.initClass
+    
+    public required init () {
         super.init()
     }
 

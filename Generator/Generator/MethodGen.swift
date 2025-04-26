@@ -120,13 +120,13 @@ struct MethodArgument {
         /// e.g. Godot Variant to Swift Variant?
         case variant
         
-        /// e.g. GArray.content
+        /// e.g. VariantArray.content
         case contentRef
         
         /// e.g. Object.handle
         case objectRef(isOptional: Bool)
         
-        /// e.g. ObjectCollection<Object>, VariantCollection<Float>
+        /// e.g. TypedArray<Object>, TypedArray<Float>
         case typedArray(String)
         
         /// Implicit GString -> String
@@ -306,7 +306,7 @@ func preparingMandatoryVariadicArguments(_ p: Printer, arguments: [JGodotArgumen
             let argumentName = godotArgumentToSwift(argument.name)
                         
             if argument.type != "Variant" {
-                p("let \(argumentName) = Variant(\(argumentName))")
+                p("let \(argumentName) = \(argumentName).toVariant()")
             }
             
             p("withUnsafePointer(to: \(argumentName).content)", arg: " pArg\(index) in") {
@@ -497,12 +497,12 @@ func generateMethod(_ p: Printer, method: MethodDefinition, className: String, c
     let inlineAttribute: String?
     let documentationVisibilityAttribute: String?
     if let methodHash = method.optionalHash {
-        let staticVarVisibility = if bindName != "method_get_class" { "fileprivate " } else { "" }
-        assert (!method.isVirtual)
+        // get_class and unreference are also called by Wrapped
+        let staticVarVisibility = if bindName != "method_get_class" && bindName != "method_unreference" { "fileprivate" } else { "" }
         switch generatedMethodKind {
         case .classMethod:
-            p.staticVar(visibility: staticVarVisibility, name: bindName, type: "GDExtensionMethodBindPtr") {
-                p ("let methodName = StringName(\"\(method.name)\")")
+            p.staticProperty(visibility: staticVarVisibility, isStored: true, name: bindName, type: "GDExtensionMethodBindPtr") {
+                p ("var methodName = FastStringName(\"\(method.name)\")")
             
                 p ("return withUnsafePointer(to: &\(className).godotClassName.content)", arg: " classPtr in") {
                     p ("withUnsafePointer(to: &methodName.content)", arg: " mnamePtr in") {
@@ -511,14 +511,16 @@ func generateMethod(_ p: Printer, method: MethodDefinition, className: String, c
                 }
             }
         case .utilityFunction:
-            p.staticVar(visibility: staticVarVisibility, name: bindName, type: "GDExtensionPtrUtilityFunction") {
-                p ("let methodName = StringName(\"\(method.name)\")")
+            p.staticProperty(visibility: staticVarVisibility, isStored: true, name: bindName, type: "GDExtensionPtrUtilityFunction") {
+                p ("var methodName = FastStringName(\"\(method.name)\")")
                 p ("return withUnsafePointer(to: &methodName.content)", arg: " ptr in") {
                     p ("return gi.variant_get_ptr_utility_function(ptr, \(methodHash))!")
                 }
             }
         }
-        
+    }
+
+    if !method.isVirtual {
         // If this is an internal, and being reference by a property, hide it
         if usedMethods.contains (method.name) {
             inlineAttribute = "@inline(__always)"
@@ -540,8 +542,6 @@ func generateMethod(_ p: Printer, method: MethodDefinition, className: String, c
         
         documentationVisibilityAttribute = nil
     } else {
-        assert(method.isVirtual)
-        
         inlineAttribute = nil
         // virtual overwrittable method
         finalAttribute = nil
@@ -573,7 +573,7 @@ func generateMethod(_ p: Printer, method: MethodDefinition, className: String, c
                     return "var _result: Variant.ContentType = Variant.zero"
                 }
             } else if godotReturnType.starts(with: "typedarray::") {
-                let (storage, initialize) = getBuiltinStorage ("Array")
+                let (storage, initialize) = getBuiltinStorage ("Array", asComputedProperty: false)
                 return "var _result: \(storage)\(initialize)"
             } else if godotReturnType == "String" {
                 return "let _result = GString ()"
@@ -593,6 +593,9 @@ func generateMethod(_ p: Printer, method: MethodDefinition, className: String, c
                             if builtinGodotTypeNames [godotReturnType] != .isClass {
                                 declType = "var"
                             }
+                        }
+                        if method.isVirtual {
+                            declType = "var"
                         }
                         return "\(declType) _result: \(returnType) = \(makeDefaultInit(godotType: godotReturnType))"
                     }
@@ -627,7 +630,11 @@ func generateMethod(_ p: Printer, method: MethodDefinition, className: String, c
                 } else if builtinSizes [godotReturnType] != nil {
                     ptrResult = "&_result.content"
                 } else {
-                    ptrResult = "&_result.handle"
+                    if method.isVirtual {
+                        ptrResult = "&_result"
+                    } else {
+                        ptrResult = "&_result.handle"
+                    }
                 }
             }
         } else {
@@ -669,9 +676,9 @@ func generateMethod(_ p: Printer, method: MethodDefinition, className: String, c
             return "return Variant(takingOver: _result)"
         } else if frameworkType {
             //print ("OBJ RETURN: \(className) \(method.name)")
-            return "guard let _result else { \(returnOptional ? "return nil" : "fatalError (\"Unexpected nil return from a method that should never return nil\")") } ; return lookupObject (nativeHandle: _result)!"
+            return "guard let _result else { \(returnOptional ? "return nil" : "fatalError (\"Unexpected nil return from a method that should never return nil\")") } ; return lookupObject (nativeHandle: _result, ownsRef: true)\(returnOptional ? "" : "!")"
         } else if godotReturnType?.starts(with: "typedarray::") ?? false {
-            let defaultInit = makeDefaultInit(godotType: godotReturnType!, initCollection: "content: _result")
+            let defaultInit = makeDefaultInit(godotType: godotReturnType!, initCollection: "takingOver: _result")
             return "return \(defaultInit)"
         } else if godotReturnType?.starts(with: "enum::") ?? false {
             return "return \(returnType) (rawValue: _result)!"
@@ -746,6 +753,9 @@ func generateMethod(_ p: Printer, method: MethodDefinition, className: String, c
     }
     
     p ("\(declarationTokens)(\(argumentsList))\(returnClause)") {
+        if staticAttribute == nil {
+            p("if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }")
+        }
         if method.optionalHash == nil {
             if let godotReturnType {
                 p(makeDefaultReturn(godotType: godotReturnType))

@@ -1,6 +1,6 @@
 <div align="center">
   <h1>SwiftGodot</h1>
-  <img src="https://github.com/user-attachments/assets/c537aefa-561d-413c-a563-8aac1b1758ba" width="200">
+  <img src="Resources/SwiftGodotLogo.svg" width="200">
 </div>
 <br>
 
@@ -27,6 +27,7 @@ Tutorials and Documentation:
 * [Tutorials and walkthroughs](https://migueldeicaza.github.io/SwiftGodotDocs/tutorials/swiftgodot-tutorials/)
 * SwiftGodot port of [KenneyNL's StarterKit 3D Platformer](https://github.com/lorenalexm/Starter-Kit-3D-Platformer-Swift)
 * WIP: SwiftGodot port of C# Udemy tutorial: [GridBasedPuzzleGameTutorial](https://gitlab.com/dracks/gridbasedpuzzlegametutorial)
+* [SwiftGodot template project](https://github.com/elijah-semyonov/SwiftGodotTemplate) with a Editor plugin allowing recompiling with a single button tap
 
 Of interest to the community:
 * Running Godot in VisionPro using [GodotVision](https://github.com/kevinw/GodotVision)

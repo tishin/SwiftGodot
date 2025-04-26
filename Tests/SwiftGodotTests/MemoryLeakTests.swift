@@ -92,7 +92,7 @@ class GodotEncoder: Encoder {
         var storage: [String:GodotEncodingContainer] = [:]
 
         var data: Variant? {
-            let dict = GDictionary()
+            let dict = VariantDictionary()
             for (k,v) in storage {
                 dict[k] = v.data
             }
@@ -155,7 +155,7 @@ class GodotEncoder: Encoder {
         var codingPath: [any CodingKey] = []
         var userInfo: [CodingUserInfoKey: Any]
 
-        var storage = GArray()
+        var storage = VariantArray()
 
         var data: Variant? {
             return Variant(storage)
@@ -377,20 +377,30 @@ class GodotEncoder: Encoder {
 
 final class MemoryLeakTests: GodotTestCase {
     /// Check that `body` doesn't leak. Or ensure that something is leaking, if `useUnoReverseCard` is true
-    func checkLeaks(useUnoReverseCard: Bool = false, _ body: () -> Void) {
+    @discardableResult
+    func checkLeaks(useUnoReverseCard: Bool = false, _ body: () -> Void) -> Double {
+        releasePendingObjects()
+        let beforeO = Performance.getMonitor(.objectCount)
+        let beforeR = Performance.getMonitor(.objectResourceCount)
         let before = Performance.getMonitor(.memoryStatic)
         body()
+        releasePendingObjects()
+        let afterO = Performance.getMonitor(.objectCount)
+        let afterR = Performance.getMonitor(.objectResourceCount)
         let after = Performance.getMonitor(.memoryStatic)
-        
+
+
         if useUnoReverseCard {
             XCTAssertNotEqual(before, after, "It should leak!")
         } else {
+            print("object count=\(afterO-beforeO), resource count=\(afterR-beforeR), leaked \(after - before) bytes")
             XCTAssertEqual(before, after, "Leaked \(after - before) bytes")
         }
+        return after-before
     }
     
     func testThatItLeaksIndeed() {
-        let array = GArray()
+        let array = VariantArray()
         
         checkLeaks(useUnoReverseCard: true) {
             array.append(Variant(10))
@@ -402,7 +412,7 @@ final class MemoryLeakTests: GodotTestCase {
         func oneIteration(object: Object) {
             let list = object.getPropertyList()
             let it = list.makeIterator()
-            for prop: GDictionary? in it {
+            for prop: VariantDictionary? in it {
                 _ = prop
             }
         }
@@ -419,6 +429,28 @@ final class MemoryLeakTests: GodotTestCase {
         }
     }
 
+    func testRefCountedLeak() {
+        func oneIteration() {
+            let image0 = SwiftGodot.RefCounted()
+        }
+
+        // Warm-up the code path in case it performs any one-time permanent allocations.
+
+        let n = 100
+        for _ in 0..<n {
+            oneIteration()
+        }
+        releasePendingObjects()
+        printSwiftGodotStats()
+
+        checkLeaks {
+            for _ in 0 ..< n { // 771 {
+                oneIteration()
+            }
+        }
+        printSwiftGodotStats()
+    }
+
     // https://github.com/migueldeicaza/SwiftGodot/issues/513
     func test_513_leak2() {
 
@@ -427,17 +459,19 @@ final class MemoryLeakTests: GodotTestCase {
             let variant = Variant(image0)
             let image: SwiftGodot.Image = variant.asObject()!
             _ = image.loadPngFromBuffer(bytes)
-            // Doesn't leak with line below uncommented
-            // image.unreference()
         }
 
         let bytes = PackedByteArray([137, 80, 78, 71, 13, 10, 26, 10, 0, 0, 0, 13, 73, 72, 68, 82, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, 0, 0, 0, 37, 219, 86, 202, 0, 0, 0, 3, 80, 76, 84, 69, 0, 0, 0, 167, 122, 61, 218, 0, 0, 0, 1, 116, 82, 78, 83, 0, 64, 230, 216, 102, 0, 0, 0, 10, 73, 68, 65, 84, 8, 215, 99, 96, 0, 0, 0, 2, 0, 1, 226, 33, 188, 51, 0, 0, 0, 0, 73, 69, 78, 68, 174, 66, 96, 130])
 
         // Warm-up the code path in case it performs any one-time permanent allocations.
-        oneIteration(bytes: bytes)
+        let n = 10000
+        for _ in 0..<n {
+            oneIteration(bytes: bytes)
+        }
+        releasePendingObjects()
 
         checkLeaks {
-            for _ in 0 ..< 1_000 {
+            for _ in 0 ..< n {
                 oneIteration(bytes: bytes)
             }
         }
@@ -448,6 +482,35 @@ final class MemoryLeakTests: GodotTestCase {
         checkLeaks {
             for _ in 0...1_000 {
                 let _ = Variant("daosdoasodasoda")
+            }
+        }
+    }
+    
+    func test_unsafe_strings_leaks() {
+        checkLeaks {
+            for _ in 0...1_000 {
+                var string = ""
+                for i in 0...Int.random(in: 10...15) {
+                    string += "\(i)"
+                }
+                
+                let a = GString(string)
+                let b = StringName(string)
+                let c = Variant(a)
+                let d = FastVariant(a)
+                let e = Variant(string)
+                let f = FastVariant(string)
+                let g = Variant(b)
+                let h = FastVariant(b)
+                                
+                XCTAssertEqual(a.description, string)
+                XCTAssertEqual(b.description, string)
+                XCTAssertEqual(c.to(String.self), string)
+                XCTAssertEqual(d.to(String.self), string)
+                XCTAssertEqual(e.description, string)
+                XCTAssertEqual(f.description, string)
+                XCTAssertEqual(g.to(String.self), string)
+                XCTAssertEqual(h.to(String.self), string)                
             }
         }
     }
@@ -480,7 +543,7 @@ final class MemoryLeakTests: GodotTestCase {
     }
     
     func test_array_leaks() {
-        let array = GArray()
+        let array = VariantArray()
         array.append(Variant("S"))
         array.append(Variant("M"))
         
@@ -575,6 +638,7 @@ final class MemoryLeakTests: GodotTestCase {
                 let object = Object()
                 let methodName = StringName("get_method_list")
                 _ = object.call(method: methodName)
+                object.free()
             }
         }
     }
@@ -619,7 +683,7 @@ final class MemoryLeakTests: GodotTestCase {
     
     func test_dictionary_leaks() {
         checkLeaks {
-            let dictionary = GDictionary()
+            let dictionary = VariantDictionary()
             
             for i in 0 ..< 1_000 {
                 let variant = Variant("value\(i)")
