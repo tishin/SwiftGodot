@@ -167,7 +167,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -192,7 +192,7 @@ open class ShapeCast2D: Node2D {
     fileprivate final func is_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_is_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_is_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -213,7 +213,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: shape?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_shape, handle, pArgs, nil)
                 }
                 
             }
@@ -237,9 +237,9 @@ open class ShapeCast2D: Node2D {
     @inline(__always)
     fileprivate final func get_shape() -> Shape2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_shape, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_target_position: GDExtensionMethodBindPtr = {
@@ -259,7 +259,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: localPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_target_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_target_position, handle, pArgs, nil)
                 }
                 
             }
@@ -284,7 +284,7 @@ open class ShapeCast2D: Node2D {
     fileprivate final func get_target_position() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_target_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_target_position, handle, nil, &_result)
         return _result
     }
     
@@ -305,7 +305,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -330,7 +330,7 @@ open class ShapeCast2D: Node2D {
     fileprivate final func get_margin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_margin, handle, nil, &_result)
         return _result
     }
     
@@ -351,7 +351,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: maxResults) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_max_results, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_max_results, handle, pArgs, nil)
                 }
                 
             }
@@ -376,7 +376,7 @@ open class ShapeCast2D: Node2D {
     fileprivate final func get_max_results() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_max_results, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_max_results, handle, nil, &_result)
         return _result
     }
     
@@ -395,7 +395,7 @@ open class ShapeCast2D: Node2D {
     public final func isColliding() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_is_colliding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_is_colliding, handle, nil, &_result)
         return _result
     }
     
@@ -414,7 +414,7 @@ open class ShapeCast2D: Node2D {
     public final func getCollisionCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collision_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collision_count, handle, nil, &_result)
         return _result
     }
     
@@ -435,7 +435,7 @@ open class ShapeCast2D: Node2D {
     /// 
     public final func forceShapecastUpdate() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_force_shapecast_update, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_force_shapecast_update, handle, nil, nil)
         
     }
     
@@ -453,18 +453,18 @@ open class ShapeCast2D: Node2D {
     /// Returns the collided ``Object`` of one of the multiple collisions at `index`, or `null` if no object is intersecting the shape (i.e. ``isColliding()`` returns `false`).
     public final func getCollider(index: Int32) -> Object? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collider, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collider, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_collider_rid: GDExtensionMethodBindPtr = {
@@ -485,7 +485,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collider_rid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collider_rid, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -513,7 +513,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collider_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collider_shape, handle, pArgs, &_result)
                 }
                 
             }
@@ -544,7 +544,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collision_point, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collision_point, handle, pArgs, &_result)
                 }
                 
             }
@@ -572,7 +572,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collision_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collision_normal, handle, pArgs, &_result)
                 }
                 
             }
@@ -597,7 +597,7 @@ open class ShapeCast2D: Node2D {
     public final func getClosestCollisionSafeFraction() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_closest_collision_safe_fraction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_closest_collision_safe_fraction, handle, nil, &_result)
         return _result
     }
     
@@ -619,7 +619,7 @@ open class ShapeCast2D: Node2D {
     public final func getClosestCollisionUnsafeFraction() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_closest_collision_unsafe_fraction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_closest_collision_unsafe_fraction, handle, nil, &_result)
         return _result
     }
     
@@ -640,7 +640,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_add_exception_rid, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_add_exception_rid, handle, pArgs, nil)
                 }
                 
             }
@@ -667,7 +667,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_add_exception, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_add_exception, handle, pArgs, nil)
                 }
                 
             }
@@ -694,7 +694,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_remove_exception_rid, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_remove_exception_rid, handle, pArgs, nil)
                 }
                 
             }
@@ -721,7 +721,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_remove_exception, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_remove_exception, handle, pArgs, nil)
                 }
                 
             }
@@ -745,7 +745,7 @@ open class ShapeCast2D: Node2D {
     /// Removes all collision exceptions for this shape.
     public final func clearExceptions() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_clear_exceptions, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_clear_exceptions, handle, nil, nil)
         
     }
     
@@ -766,7 +766,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_collision_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_collision_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -791,7 +791,7 @@ open class ShapeCast2D: Node2D {
     fileprivate final func get_collision_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collision_mask, handle, nil, &_result)
         return _result
     }
     
@@ -813,7 +813,7 @@ open class ShapeCast2D: Node2D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ShapeCast2D.method_set_collision_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ShapeCast2D.method_set_collision_mask_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -843,7 +843,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collision_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collision_mask_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -870,7 +870,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_exclude_parent_body, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_exclude_parent_body, handle, pArgs, nil)
                 }
                 
             }
@@ -895,7 +895,7 @@ open class ShapeCast2D: Node2D {
     fileprivate final func get_exclude_parent_body() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_exclude_parent_body, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_exclude_parent_body, handle, nil, &_result)
         return _result
     }
     
@@ -916,7 +916,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_collide_with_areas, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_collide_with_areas, handle, pArgs, nil)
                 }
                 
             }
@@ -941,7 +941,7 @@ open class ShapeCast2D: Node2D {
     fileprivate final func is_collide_with_areas_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_is_collide_with_areas_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_is_collide_with_areas_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -962,7 +962,7 @@ open class ShapeCast2D: Node2D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_collide_with_bodies, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShapeCast2D.method_set_collide_with_bodies, handle, pArgs, nil)
                 }
                 
             }
@@ -987,7 +987,7 @@ open class ShapeCast2D: Node2D {
     fileprivate final func is_collide_with_bodies_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_is_collide_with_bodies_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_is_collide_with_bodies_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1006,7 +1006,7 @@ open class ShapeCast2D: Node2D {
     fileprivate final func get_collision_result() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collision_result, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ShapeCast2D.method_get_collision_result, handle, nil, &_result.content)
         return _result
     }
     

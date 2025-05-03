@@ -73,7 +73,7 @@ open class DirectionalLight2D: Light2D {
         withUnsafePointer(to: pixels) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirectionalLight2D.method_set_max_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(DirectionalLight2D.method_set_max_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -98,7 +98,7 @@ open class DirectionalLight2D: Light2D {
     fileprivate final func get_max_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(DirectionalLight2D.method_get_max_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(DirectionalLight2D.method_get_max_distance, handle, nil, &_result)
         return _result
     }
     

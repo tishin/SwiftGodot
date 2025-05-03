@@ -58,7 +58,7 @@ open class CanvasModulate: Node2D {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasModulate.method_set_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasModulate.method_set_color, handle, pArgs, nil)
                 }
                 
             }
@@ -83,7 +83,7 @@ open class CanvasModulate: Node2D {
     fileprivate final func get_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(CanvasModulate.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasModulate.method_get_color, handle, nil, &_result)
         return _result
     }
     

@@ -69,7 +69,7 @@ open class VisualShaderNodeParticleAccelerator: VisualShaderNode {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeParticleAccelerator.method_set_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeParticleAccelerator.method_set_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -94,7 +94,7 @@ open class VisualShaderNodeParticleAccelerator: VisualShaderNode {
     fileprivate final func get_mode() -> VisualShaderNodeParticleAccelerator.Mode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeParticleAccelerator.method_get_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeParticleAccelerator.method_get_mode, handle, nil, &_result)
         return VisualShaderNodeParticleAccelerator.Mode (rawValue: _result)!
     }
     

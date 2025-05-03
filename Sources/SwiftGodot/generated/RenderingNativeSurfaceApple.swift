@@ -36,7 +36,7 @@ open class RenderingNativeSurfaceApple: RenderingNativeSurface {
     
     /// 
     public static func create(layer: UInt) -> RenderingNativeSurfaceApple? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -47,7 +47,7 @@ open class RenderingNativeSurfaceApple: RenderingNativeSurface {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_layer: GDExtensionMethodBindPtr = {
@@ -65,7 +65,7 @@ open class RenderingNativeSurfaceApple: RenderingNativeSurface {
     public final func getLayer() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(RenderingNativeSurfaceApple.method_get_layer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderingNativeSurfaceApple.method_get_layer, handle, nil, &_result)
         return _result
     }
     

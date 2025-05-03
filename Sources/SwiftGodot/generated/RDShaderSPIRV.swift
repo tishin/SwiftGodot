@@ -171,7 +171,7 @@ open class RDShaderSPIRV: Resource {
             withUnsafePointer(to: bytecode.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RDShaderSPIRV.method_set_stage_bytecode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RDShaderSPIRV.method_set_stage_bytecode, handle, pArgs, nil)
                     }
                     
                 }
@@ -202,7 +202,7 @@ open class RDShaderSPIRV: Resource {
         withUnsafePointer(to: stage.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDShaderSPIRV.method_get_stage_bytecode, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(RDShaderSPIRV.method_get_stage_bytecode, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -232,7 +232,7 @@ open class RDShaderSPIRV: Resource {
             withUnsafePointer(to: compileError.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RDShaderSPIRV.method_set_stage_compile_error, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RDShaderSPIRV.method_set_stage_compile_error, handle, pArgs, nil)
                     }
                     
                 }
@@ -263,7 +263,7 @@ open class RDShaderSPIRV: Resource {
         withUnsafePointer(to: stage.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDShaderSPIRV.method_get_stage_compile_error, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(RDShaderSPIRV.method_get_stage_compile_error, handle, pArgs, &_result.content)
                 }
                 
             }

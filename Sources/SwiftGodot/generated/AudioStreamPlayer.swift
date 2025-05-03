@@ -209,7 +209,7 @@ open class AudioStreamPlayer: Node {
         withUnsafePointer(to: stream?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_stream, handle, pArgs, nil)
                 }
                 
             }
@@ -233,9 +233,9 @@ open class AudioStreamPlayer: Node {
     @inline(__always)
     fileprivate final func get_stream() -> AudioStream? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_stream, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_stream, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_volume_db: GDExtensionMethodBindPtr = {
@@ -255,7 +255,7 @@ open class AudioStreamPlayer: Node {
         withUnsafePointer(to: volumeDb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_volume_db, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_volume_db, handle, pArgs, nil)
                 }
                 
             }
@@ -280,7 +280,7 @@ open class AudioStreamPlayer: Node {
     fileprivate final func get_volume_db() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_volume_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_volume_db, handle, nil, &_result)
         return _result
     }
     
@@ -301,7 +301,7 @@ open class AudioStreamPlayer: Node {
         withUnsafePointer(to: volumeLinear) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_volume_linear, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_volume_linear, handle, pArgs, nil)
                 }
                 
             }
@@ -326,7 +326,7 @@ open class AudioStreamPlayer: Node {
     fileprivate final func get_volume_linear() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_volume_linear, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_volume_linear, handle, nil, &_result)
         return _result
     }
     
@@ -347,7 +347,7 @@ open class AudioStreamPlayer: Node {
         withUnsafePointer(to: pitchScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_pitch_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_pitch_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -372,7 +372,7 @@ open class AudioStreamPlayer: Node {
     fileprivate final func get_pitch_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_pitch_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_pitch_scale, handle, nil, &_result)
         return _result
     }
     
@@ -393,7 +393,7 @@ open class AudioStreamPlayer: Node {
         withUnsafePointer(to: fromPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_play, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_play, handle, pArgs, nil)
                 }
                 
             }
@@ -420,7 +420,7 @@ open class AudioStreamPlayer: Node {
         withUnsafePointer(to: toPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_seek, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_seek, handle, pArgs, nil)
                 }
                 
             }
@@ -444,7 +444,7 @@ open class AudioStreamPlayer: Node {
     /// Stops all sounds from this node.
     public final func stop() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_stop, handle, nil, nil)
         
     }
     
@@ -463,7 +463,7 @@ open class AudioStreamPlayer: Node {
     fileprivate final func is_playing() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_is_playing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_is_playing, handle, nil, &_result)
         return _result
     }
     
@@ -487,7 +487,7 @@ open class AudioStreamPlayer: Node {
     public final func getPlaybackPosition() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_playback_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_playback_position, handle, nil, &_result)
         return _result
     }
     
@@ -508,7 +508,7 @@ open class AudioStreamPlayer: Node {
         withUnsafePointer(to: bus.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_bus, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_bus, handle, pArgs, nil)
                 }
                 
             }
@@ -533,7 +533,7 @@ open class AudioStreamPlayer: Node {
     fileprivate final func get_bus() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_bus, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_bus, handle, nil, &_result.content)
         return _result
     }
     
@@ -554,7 +554,7 @@ open class AudioStreamPlayer: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_autoplay, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_autoplay, handle, pArgs, nil)
                 }
                 
             }
@@ -579,7 +579,7 @@ open class AudioStreamPlayer: Node {
     fileprivate final func is_autoplay_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_is_autoplay_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_is_autoplay_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -600,7 +600,7 @@ open class AudioStreamPlayer: Node {
         withUnsafePointer(to: mixTarget.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_mix_target, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_mix_target, handle, pArgs, nil)
                 }
                 
             }
@@ -625,7 +625,7 @@ open class AudioStreamPlayer: Node {
     fileprivate final func get_mix_target() -> AudioStreamPlayer.MixTarget {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_mix_target, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_mix_target, handle, nil, &_result)
         return AudioStreamPlayer.MixTarget (rawValue: _result)!
     }
     
@@ -646,7 +646,7 @@ open class AudioStreamPlayer: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_playing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_playing, handle, pArgs, nil)
                 }
                 
             }
@@ -673,7 +673,7 @@ open class AudioStreamPlayer: Node {
         withUnsafePointer(to: pause) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_stream_paused, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_stream_paused, handle, pArgs, nil)
                 }
                 
             }
@@ -698,7 +698,7 @@ open class AudioStreamPlayer: Node {
     fileprivate final func get_stream_paused() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_stream_paused, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_stream_paused, handle, nil, &_result)
         return _result
     }
     
@@ -719,7 +719,7 @@ open class AudioStreamPlayer: Node {
         withUnsafePointer(to: maxPolyphony) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_max_polyphony, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_max_polyphony, handle, pArgs, nil)
                 }
                 
             }
@@ -744,7 +744,7 @@ open class AudioStreamPlayer: Node {
     fileprivate final func get_max_polyphony() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_max_polyphony, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_max_polyphony, handle, nil, &_result)
         return _result
     }
     
@@ -763,7 +763,7 @@ open class AudioStreamPlayer: Node {
     public final func hasStreamPlayback() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_has_stream_playback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_has_stream_playback, handle, nil, &_result)
         return _result
     }
     
@@ -781,9 +781,9 @@ open class AudioStreamPlayer: Node {
     /// Returns the latest ``AudioStreamPlayback`` of this node, usually the most recently created by ``play(fromPosition:)``. If no sounds are playing, this method fails and returns an empty playback.
     public final func getStreamPlayback() -> AudioStreamPlayback? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_stream_playback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_stream_playback, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_playback_type: GDExtensionMethodBindPtr = {
@@ -803,7 +803,7 @@ open class AudioStreamPlayer: Node {
         withUnsafePointer(to: playbackType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_playback_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlayer.method_set_playback_type, handle, pArgs, nil)
                 }
                 
             }
@@ -828,7 +828,7 @@ open class AudioStreamPlayer: Node {
     fileprivate final func get_playback_type() -> AudioServer.PlaybackType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_playback_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlayer.method_get_playback_type, handle, nil, &_result)
         return AudioServer.PlaybackType (rawValue: _result)!
     }
     

@@ -46,7 +46,7 @@ open class AudioListener2D: Node2D {
     /// 
     public final func makeCurrent() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AudioListener2D.method_make_current, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AudioListener2D.method_make_current, handle, nil, nil)
         
     }
     
@@ -64,7 +64,7 @@ open class AudioListener2D: Node2D {
     /// Disables the ``AudioListener2D``. If it's not set as current, this method will have no effect.
     public final func clearCurrent() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AudioListener2D.method_clear_current, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AudioListener2D.method_clear_current, handle, nil, nil)
         
     }
     
@@ -83,7 +83,7 @@ open class AudioListener2D: Node2D {
     public final func isCurrent() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioListener2D.method_is_current, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioListener2D.method_is_current, handle, nil, &_result)
         return _result
     }
     

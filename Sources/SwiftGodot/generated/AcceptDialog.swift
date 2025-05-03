@@ -116,9 +116,9 @@ open class AcceptDialog: Window {
     /// 
     public final func getOkButton() -> Button? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AcceptDialog.method_get_ok_button, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AcceptDialog.method_get_ok_button, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_label: GDExtensionMethodBindPtr = {
@@ -138,9 +138,9 @@ open class AcceptDialog: Window {
     /// 
     public final func getLabel() -> Label? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AcceptDialog.method_get_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AcceptDialog.method_get_label, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_hide_on_ok: GDExtensionMethodBindPtr = {
@@ -160,7 +160,7 @@ open class AcceptDialog: Window {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AcceptDialog.method_set_hide_on_ok, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AcceptDialog.method_set_hide_on_ok, handle, pArgs, nil)
                 }
                 
             }
@@ -185,7 +185,7 @@ open class AcceptDialog: Window {
     fileprivate final func get_hide_on_ok() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AcceptDialog.method_get_hide_on_ok, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AcceptDialog.method_get_hide_on_ok, handle, nil, &_result)
         return _result
     }
     
@@ -206,7 +206,7 @@ open class AcceptDialog: Window {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AcceptDialog.method_set_close_on_escape, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AcceptDialog.method_set_close_on_escape, handle, pArgs, nil)
                 }
                 
             }
@@ -231,7 +231,7 @@ open class AcceptDialog: Window {
     fileprivate final func get_close_on_escape() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AcceptDialog.method_get_close_on_escape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AcceptDialog.method_get_close_on_escape, handle, nil, &_result)
         return _result
     }
     
@@ -254,7 +254,7 @@ open class AcceptDialog: Window {
     /// 
     public final func addButton(text: String, right: Bool = false, action: String = "") -> Button? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let text = GString(text)
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: right) { pArg1 in
@@ -262,7 +262,7 @@ open class AcceptDialog: Window {
                 withUnsafePointer(to: action.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AcceptDialog.method_add_button, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(AcceptDialog.method_add_button, handle, pArgs, &_result)
                         }
                         
                     }
@@ -273,7 +273,7 @@ open class AcceptDialog: Window {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_add_cancel_button: GDExtensionMethodBindPtr = {
@@ -293,19 +293,19 @@ open class AcceptDialog: Window {
     /// 
     public final func addCancelButton(name: String) -> Button? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AcceptDialog.method_add_cancel_button, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AcceptDialog.method_add_cancel_button, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_remove_button: GDExtensionMethodBindPtr = {
@@ -325,7 +325,7 @@ open class AcceptDialog: Window {
         withUnsafePointer(to: button?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AcceptDialog.method_remove_button, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AcceptDialog.method_remove_button, handle, pArgs, nil)
                 }
                 
             }
@@ -352,7 +352,7 @@ open class AcceptDialog: Window {
         withUnsafePointer(to: lineEdit?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AcceptDialog.method_register_text_enter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AcceptDialog.method_register_text_enter, handle, pArgs, nil)
                 }
                 
             }
@@ -380,7 +380,7 @@ open class AcceptDialog: Window {
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AcceptDialog.method_set_text, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AcceptDialog.method_set_text, handle, pArgs, nil)
                 }
                 
             }
@@ -405,7 +405,7 @@ open class AcceptDialog: Window {
     fileprivate final func get_text() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(AcceptDialog.method_get_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AcceptDialog.method_get_text, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -426,7 +426,7 @@ open class AcceptDialog: Window {
         withUnsafePointer(to: autowrap) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AcceptDialog.method_set_autowrap, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AcceptDialog.method_set_autowrap, handle, pArgs, nil)
                 }
                 
             }
@@ -451,7 +451,7 @@ open class AcceptDialog: Window {
     fileprivate final func has_autowrap() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AcceptDialog.method_has_autowrap, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AcceptDialog.method_has_autowrap, handle, nil, &_result)
         return _result
     }
     
@@ -473,7 +473,7 @@ open class AcceptDialog: Window {
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AcceptDialog.method_set_ok_button_text, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AcceptDialog.method_set_ok_button_text, handle, pArgs, nil)
                 }
                 
             }
@@ -498,7 +498,7 @@ open class AcceptDialog: Window {
     fileprivate final func get_ok_button_text() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(AcceptDialog.method_get_ok_button_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AcceptDialog.method_get_ok_button_text, handle, nil, &_result.content)
         return _result.description
     }
     

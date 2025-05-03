@@ -70,7 +70,7 @@ open class SceneTreeTimer: RefCounted {
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTreeTimer.method_set_time_left, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneTreeTimer.method_set_time_left, handle, pArgs, nil)
                 }
                 
             }
@@ -95,7 +95,7 @@ open class SceneTreeTimer: RefCounted {
     fileprivate final func get_time_left() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SceneTreeTimer.method_get_time_left, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneTreeTimer.method_get_time_left, handle, nil, &_result)
         return _result
     }
     

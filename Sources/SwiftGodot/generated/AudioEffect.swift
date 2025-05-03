@@ -47,9 +47,9 @@ open class AudioEffect: Resource {
     @_documentation(visibility: public)
     open func _instantiate() -> AudioEffectInstance? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AudioEffect.method__instantiate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AudioEffect.method__instantiate, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
@@ -71,6 +71,6 @@ func _AudioEffect_proxy_instantiate (instance: UnsafeMutableRawPointer?, args: U
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? AudioEffect else { return }
     let ret = swiftObject._instantiate ()
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // AudioEffectInstance
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // AudioEffectInstance
 }
 

@@ -108,7 +108,7 @@ open class OccluderInstance3D: VisualInstance3D {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OccluderInstance3D.method_set_bake_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OccluderInstance3D.method_set_bake_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -133,7 +133,7 @@ open class OccluderInstance3D: VisualInstance3D {
     fileprivate final func get_bake_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(OccluderInstance3D.method_get_bake_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OccluderInstance3D.method_get_bake_mask, handle, nil, &_result)
         return _result
     }
     
@@ -155,7 +155,7 @@ open class OccluderInstance3D: VisualInstance3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OccluderInstance3D.method_set_bake_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(OccluderInstance3D.method_set_bake_mask_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -185,7 +185,7 @@ open class OccluderInstance3D: VisualInstance3D {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OccluderInstance3D.method_get_bake_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OccluderInstance3D.method_get_bake_mask_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -212,7 +212,7 @@ open class OccluderInstance3D: VisualInstance3D {
         withUnsafePointer(to: simplificationDistance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OccluderInstance3D.method_set_bake_simplification_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OccluderInstance3D.method_set_bake_simplification_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -237,7 +237,7 @@ open class OccluderInstance3D: VisualInstance3D {
     fileprivate final func get_bake_simplification_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OccluderInstance3D.method_get_bake_simplification_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OccluderInstance3D.method_get_bake_simplification_distance, handle, nil, &_result)
         return _result
     }
     
@@ -258,7 +258,7 @@ open class OccluderInstance3D: VisualInstance3D {
         withUnsafePointer(to: occluder?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OccluderInstance3D.method_set_occluder, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OccluderInstance3D.method_set_occluder, handle, pArgs, nil)
                 }
                 
             }
@@ -282,9 +282,9 @@ open class OccluderInstance3D: VisualInstance3D {
     @inline(__always)
     fileprivate final func get_occluder() -> Occluder3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(OccluderInstance3D.method_get_occluder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(OccluderInstance3D.method_get_occluder, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

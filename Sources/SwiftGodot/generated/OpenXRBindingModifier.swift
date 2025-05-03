@@ -42,7 +42,7 @@ open class OpenXRBindingModifier: Resource {
     open func _getDescription() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(OpenXRBindingModifier.method__get_description, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRBindingModifier.method__get_description, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -65,7 +65,7 @@ open class OpenXRBindingModifier: Resource {
     open func _getIpModification() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(OpenXRBindingModifier.method__get_ip_modification, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRBindingModifier.method__get_ip_modification, handle, nil, &_result.content)
         return _result
     }
     

@@ -63,7 +63,7 @@ open class ScrollBar: Range {
         withUnsafePointer(to: step) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScrollBar.method_set_custom_step, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScrollBar.method_set_custom_step, handle, pArgs, nil)
                 }
                 
             }
@@ -88,7 +88,7 @@ open class ScrollBar: Range {
     fileprivate final func get_custom_step() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ScrollBar.method_get_custom_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScrollBar.method_get_custom_step, handle, nil, &_result)
         return _result
     }
     

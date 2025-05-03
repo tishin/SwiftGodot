@@ -181,7 +181,7 @@ open class PhysicalSkyMaterial: Material {
         withUnsafePointer(to: rayleigh) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_rayleigh_coefficient, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_rayleigh_coefficient, handle, pArgs, nil)
                 }
                 
             }
@@ -206,7 +206,7 @@ open class PhysicalSkyMaterial: Material {
     fileprivate final func get_rayleigh_coefficient() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_rayleigh_coefficient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_rayleigh_coefficient, handle, nil, &_result)
         return _result
     }
     
@@ -227,7 +227,7 @@ open class PhysicalSkyMaterial: Material {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_rayleigh_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_rayleigh_color, handle, pArgs, nil)
                 }
                 
             }
@@ -252,7 +252,7 @@ open class PhysicalSkyMaterial: Material {
     fileprivate final func get_rayleigh_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_rayleigh_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_rayleigh_color, handle, nil, &_result)
         return _result
     }
     
@@ -273,7 +273,7 @@ open class PhysicalSkyMaterial: Material {
         withUnsafePointer(to: mie) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_mie_coefficient, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_mie_coefficient, handle, pArgs, nil)
                 }
                 
             }
@@ -298,7 +298,7 @@ open class PhysicalSkyMaterial: Material {
     fileprivate final func get_mie_coefficient() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_mie_coefficient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_mie_coefficient, handle, nil, &_result)
         return _result
     }
     
@@ -319,7 +319,7 @@ open class PhysicalSkyMaterial: Material {
         withUnsafePointer(to: eccentricity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_mie_eccentricity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_mie_eccentricity, handle, pArgs, nil)
                 }
                 
             }
@@ -344,7 +344,7 @@ open class PhysicalSkyMaterial: Material {
     fileprivate final func get_mie_eccentricity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_mie_eccentricity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_mie_eccentricity, handle, nil, &_result)
         return _result
     }
     
@@ -365,7 +365,7 @@ open class PhysicalSkyMaterial: Material {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_mie_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_mie_color, handle, pArgs, nil)
                 }
                 
             }
@@ -390,7 +390,7 @@ open class PhysicalSkyMaterial: Material {
     fileprivate final func get_mie_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_mie_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_mie_color, handle, nil, &_result)
         return _result
     }
     
@@ -411,7 +411,7 @@ open class PhysicalSkyMaterial: Material {
         withUnsafePointer(to: turbidity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_turbidity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_turbidity, handle, pArgs, nil)
                 }
                 
             }
@@ -436,7 +436,7 @@ open class PhysicalSkyMaterial: Material {
     fileprivate final func get_turbidity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_turbidity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_turbidity, handle, nil, &_result)
         return _result
     }
     
@@ -457,7 +457,7 @@ open class PhysicalSkyMaterial: Material {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_sun_disk_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_sun_disk_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -482,7 +482,7 @@ open class PhysicalSkyMaterial: Material {
     fileprivate final func get_sun_disk_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_sun_disk_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_sun_disk_scale, handle, nil, &_result)
         return _result
     }
     
@@ -503,7 +503,7 @@ open class PhysicalSkyMaterial: Material {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_ground_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_ground_color, handle, pArgs, nil)
                 }
                 
             }
@@ -528,7 +528,7 @@ open class PhysicalSkyMaterial: Material {
     fileprivate final func get_ground_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_ground_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_ground_color, handle, nil, &_result)
         return _result
     }
     
@@ -549,7 +549,7 @@ open class PhysicalSkyMaterial: Material {
         withUnsafePointer(to: multiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_energy_multiplier, handle, pArgs, nil)
                 }
                 
             }
@@ -574,7 +574,7 @@ open class PhysicalSkyMaterial: Material {
     fileprivate final func get_energy_multiplier() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_energy_multiplier, handle, nil, &_result)
         return _result
     }
     
@@ -595,7 +595,7 @@ open class PhysicalSkyMaterial: Material {
         withUnsafePointer(to: useDebanding) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_use_debanding, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_use_debanding, handle, pArgs, nil)
                 }
                 
             }
@@ -620,7 +620,7 @@ open class PhysicalSkyMaterial: Material {
     fileprivate final func get_use_debanding() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_use_debanding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_use_debanding, handle, nil, &_result)
         return _result
     }
     
@@ -641,7 +641,7 @@ open class PhysicalSkyMaterial: Material {
         withUnsafePointer(to: nightSky?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_night_sky, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_set_night_sky, handle, pArgs, nil)
                 }
                 
             }
@@ -665,9 +665,9 @@ open class PhysicalSkyMaterial: Material {
     @inline(__always)
     fileprivate final func get_night_sky() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_night_sky, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(PhysicalSkyMaterial.method_get_night_sky, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

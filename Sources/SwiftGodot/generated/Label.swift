@@ -304,7 +304,7 @@ open class Label: Control {
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_horizontal_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_horizontal_alignment, handle, pArgs, nil)
                 }
                 
             }
@@ -329,7 +329,7 @@ open class Label: Control {
     fileprivate final func get_horizontal_alignment() -> HorizontalAlignment {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Label.method_get_horizontal_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_horizontal_alignment, handle, nil, &_result)
         return HorizontalAlignment (rawValue: _result)!
     }
     
@@ -350,7 +350,7 @@ open class Label: Control {
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_vertical_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_vertical_alignment, handle, pArgs, nil)
                 }
                 
             }
@@ -375,7 +375,7 @@ open class Label: Control {
     fileprivate final func get_vertical_alignment() -> VerticalAlignment {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Label.method_get_vertical_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_vertical_alignment, handle, nil, &_result)
         return VerticalAlignment (rawValue: _result)!
     }
     
@@ -397,7 +397,7 @@ open class Label: Control {
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_text, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_text, handle, pArgs, nil)
                 }
                 
             }
@@ -422,7 +422,7 @@ open class Label: Control {
     fileprivate final func get_text() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Label.method_get_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Label.method_get_text, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -443,7 +443,7 @@ open class Label: Control {
         withUnsafePointer(to: settings?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_label_settings, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_label_settings, handle, pArgs, nil)
                 }
                 
             }
@@ -467,9 +467,9 @@ open class Label: Control {
     @inline(__always)
     fileprivate final func get_label_settings() -> LabelSettings? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Label.method_get_label_settings, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Label.method_get_label_settings, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_text_direction: GDExtensionMethodBindPtr = {
@@ -489,7 +489,7 @@ open class Label: Control {
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_text_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_text_direction, handle, pArgs, nil)
                 }
                 
             }
@@ -514,7 +514,7 @@ open class Label: Control {
     fileprivate final func get_text_direction() -> Control.TextDirection {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Label.method_get_text_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_text_direction, handle, nil, &_result)
         return Control.TextDirection (rawValue: _result)!
     }
     
@@ -536,7 +536,7 @@ open class Label: Control {
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_language, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_language, handle, pArgs, nil)
                 }
                 
             }
@@ -561,7 +561,7 @@ open class Label: Control {
     fileprivate final func get_language() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Label.method_get_language, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Label.method_get_language, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -583,7 +583,7 @@ open class Label: Control {
         withUnsafePointer(to: paragraphSeparator.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_paragraph_separator, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_paragraph_separator, handle, pArgs, nil)
                 }
                 
             }
@@ -608,7 +608,7 @@ open class Label: Control {
     fileprivate final func get_paragraph_separator() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Label.method_get_paragraph_separator, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Label.method_get_paragraph_separator, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -629,7 +629,7 @@ open class Label: Control {
         withUnsafePointer(to: autowrapMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_autowrap_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_autowrap_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -654,7 +654,7 @@ open class Label: Control {
     fileprivate final func get_autowrap_mode() -> TextServer.AutowrapMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Label.method_get_autowrap_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_autowrap_mode, handle, nil, &_result)
         return TextServer.AutowrapMode (rawValue: _result)!
     }
     
@@ -675,7 +675,7 @@ open class Label: Control {
         withUnsafePointer(to: justificationFlags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_justification_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_justification_flags, handle, pArgs, nil)
                 }
                 
             }
@@ -700,7 +700,7 @@ open class Label: Control {
     fileprivate final func get_justification_flags() -> TextServer.JustificationFlag {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: TextServer.JustificationFlag = TextServer.JustificationFlag ()
-        gi.object_method_bind_ptrcall(Label.method_get_justification_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_justification_flags, handle, nil, &_result)
         return _result
     }
     
@@ -721,7 +721,7 @@ open class Label: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_clip_text, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_clip_text, handle, pArgs, nil)
                 }
                 
             }
@@ -746,7 +746,7 @@ open class Label: Control {
     fileprivate final func is_clipping_text() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Label.method_is_clipping_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_is_clipping_text, handle, nil, &_result)
         return _result
     }
     
@@ -767,7 +767,7 @@ open class Label: Control {
         withUnsafePointer(to: tabStops.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_tab_stops, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_tab_stops, handle, pArgs, nil)
                 }
                 
             }
@@ -792,7 +792,7 @@ open class Label: Control {
     fileprivate final func get_tab_stops() -> PackedFloat32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
-        gi.object_method_bind_ptrcall(Label.method_get_tab_stops, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Label.method_get_tab_stops, handle, nil, &_result.content)
         return _result
     }
     
@@ -813,7 +813,7 @@ open class Label: Control {
         withUnsafePointer(to: overrunBehavior.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_text_overrun_behavior, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_text_overrun_behavior, handle, pArgs, nil)
                 }
                 
             }
@@ -838,7 +838,7 @@ open class Label: Control {
     fileprivate final func get_text_overrun_behavior() -> TextServer.OverrunBehavior {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Label.method_get_text_overrun_behavior, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_text_overrun_behavior, handle, nil, &_result)
         return TextServer.OverrunBehavior (rawValue: _result)!
     }
     
@@ -860,7 +860,7 @@ open class Label: Control {
         withUnsafePointer(to: char.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_ellipsis_char, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_ellipsis_char, handle, pArgs, nil)
                 }
                 
             }
@@ -885,7 +885,7 @@ open class Label: Control {
     fileprivate final func get_ellipsis_char() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Label.method_get_ellipsis_char, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Label.method_get_ellipsis_char, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -906,7 +906,7 @@ open class Label: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_uppercase, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_uppercase, handle, pArgs, nil)
                 }
                 
             }
@@ -931,7 +931,7 @@ open class Label: Control {
     fileprivate final func is_uppercase() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Label.method_is_uppercase, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_is_uppercase, handle, nil, &_result)
         return _result
     }
     
@@ -958,7 +958,7 @@ open class Label: Control {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_get_line_height, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Label.method_get_line_height, handle, pArgs, &_result)
                 }
                 
             }
@@ -983,7 +983,7 @@ open class Label: Control {
     public final func getLineCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Label.method_get_line_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_line_count, handle, nil, &_result)
         return _result
     }
     
@@ -1002,7 +1002,7 @@ open class Label: Control {
     public final func getVisibleLineCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Label.method_get_visible_line_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_visible_line_count, handle, nil, &_result)
         return _result
     }
     
@@ -1021,7 +1021,7 @@ open class Label: Control {
     public final func getTotalCharacterCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Label.method_get_total_character_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_total_character_count, handle, nil, &_result)
         return _result
     }
     
@@ -1042,7 +1042,7 @@ open class Label: Control {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_visible_characters, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_visible_characters, handle, pArgs, nil)
                 }
                 
             }
@@ -1067,7 +1067,7 @@ open class Label: Control {
     fileprivate final func get_visible_characters() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Label.method_get_visible_characters, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_visible_characters, handle, nil, &_result)
         return _result
     }
     
@@ -1086,7 +1086,7 @@ open class Label: Control {
     fileprivate final func get_visible_characters_behavior() -> TextServer.VisibleCharactersBehavior {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Label.method_get_visible_characters_behavior, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_visible_characters_behavior, handle, nil, &_result)
         return TextServer.VisibleCharactersBehavior (rawValue: _result)!
     }
     
@@ -1107,7 +1107,7 @@ open class Label: Control {
         withUnsafePointer(to: behavior.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_visible_characters_behavior, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_visible_characters_behavior, handle, pArgs, nil)
                 }
                 
             }
@@ -1134,7 +1134,7 @@ open class Label: Control {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_visible_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_visible_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -1159,7 +1159,7 @@ open class Label: Control {
     fileprivate final func get_visible_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Label.method_get_visible_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_visible_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -1180,7 +1180,7 @@ open class Label: Control {
         withUnsafePointer(to: linesSkipped) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_lines_skipped, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_lines_skipped, handle, pArgs, nil)
                 }
                 
             }
@@ -1205,7 +1205,7 @@ open class Label: Control {
     fileprivate final func get_lines_skipped() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Label.method_get_lines_skipped, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_lines_skipped, handle, nil, &_result)
         return _result
     }
     
@@ -1226,7 +1226,7 @@ open class Label: Control {
         withUnsafePointer(to: linesVisible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_max_lines_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_max_lines_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -1251,7 +1251,7 @@ open class Label: Control {
     fileprivate final func get_max_lines_visible() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Label.method_get_max_lines_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_max_lines_visible, handle, nil, &_result)
         return _result
     }
     
@@ -1272,7 +1272,7 @@ open class Label: Control {
         withUnsafePointer(to: parser.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_structured_text_bidi_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_structured_text_bidi_override, handle, pArgs, nil)
                 }
                 
             }
@@ -1297,7 +1297,7 @@ open class Label: Control {
     fileprivate final func get_structured_text_bidi_override() -> TextServer.StructuredTextParser {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Label.method_get_structured_text_bidi_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Label.method_get_structured_text_bidi_override, handle, nil, &_result)
         return TextServer.StructuredTextParser (rawValue: _result)!
     }
     
@@ -1318,7 +1318,7 @@ open class Label: Control {
         withUnsafePointer(to: args.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_set_structured_text_bidi_override_options, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Label.method_set_structured_text_bidi_override_options, handle, pArgs, nil)
                 }
                 
             }
@@ -1343,7 +1343,7 @@ open class Label: Control {
     fileprivate final func get_structured_text_bidi_override_options() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(Label.method_get_structured_text_bidi_override_options, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Label.method_get_structured_text_bidi_override_options, handle, nil, &_result.content)
         return _result
     }
     
@@ -1365,7 +1365,7 @@ open class Label: Control {
         withUnsafePointer(to: pos) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Label.method_get_character_bounds, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Label.method_get_character_bounds, handle, pArgs, &_result)
                 }
                 
             }

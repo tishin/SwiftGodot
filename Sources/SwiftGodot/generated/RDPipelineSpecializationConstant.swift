@@ -73,7 +73,7 @@ open class RDPipelineSpecializationConstant: RefCounted {
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineSpecializationConstant.method_set_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineSpecializationConstant.method_set_value, handle, pArgs, nil)
                 }
                 
             }
@@ -98,7 +98,7 @@ open class RDPipelineSpecializationConstant: RefCounted {
     fileprivate final func get_value() -> Variant? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        gi.object_method_bind_ptrcall(RDPipelineSpecializationConstant.method_get_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineSpecializationConstant.method_get_value, handle, nil, &_result)
         return Variant(takingOver: _result)
     }
     
@@ -119,7 +119,7 @@ open class RDPipelineSpecializationConstant: RefCounted {
         withUnsafePointer(to: constantId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineSpecializationConstant.method_set_constant_id, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineSpecializationConstant.method_set_constant_id, handle, pArgs, nil)
                 }
                 
             }
@@ -144,7 +144,7 @@ open class RDPipelineSpecializationConstant: RefCounted {
     fileprivate final func get_constant_id() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RDPipelineSpecializationConstant.method_get_constant_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineSpecializationConstant.method_get_constant_id, handle, nil, &_result)
         return _result
     }
     

@@ -54,7 +54,7 @@ open class PCKPacker: RefCounted {
                     withUnsafePointer(to: encryptDirectory) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(PCKPacker.method_pck_start, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(PCKPacker.method_pck_start, handle, pArgs, &_result)
                             }
                             
                         }
@@ -92,7 +92,7 @@ open class PCKPacker: RefCounted {
                 withUnsafePointer(to: encrypt) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(PCKPacker.method_add_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(PCKPacker.method_add_file, handle, pArgs, &_result)
                         }
                         
                     }
@@ -125,7 +125,7 @@ open class PCKPacker: RefCounted {
         withUnsafePointer(to: targetPath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PCKPacker.method_add_file_removal, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PCKPacker.method_add_file_removal, handle, pArgs, &_result)
                 }
                 
             }
@@ -153,7 +153,7 @@ open class PCKPacker: RefCounted {
         withUnsafePointer(to: verbose) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PCKPacker.method_flush, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PCKPacker.method_flush, handle, pArgs, &_result)
                 }
                 
             }

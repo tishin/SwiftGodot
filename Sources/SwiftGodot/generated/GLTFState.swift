@@ -399,7 +399,7 @@ open class GLTFState: Resource {
             withUnsafePointer(to: required) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GLTFState.method_add_used_extension, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GLTFState.method_add_used_extension, handle, pArgs, nil)
                     }
                     
                 }
@@ -430,7 +430,7 @@ open class GLTFState: Resource {
             withUnsafePointer(to: deduplication) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GLTFState.method_append_data_to_buffers, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(GLTFState.method_append_data_to_buffers, handle, pArgs, &_result)
                     }
                     
                 }
@@ -467,7 +467,7 @@ open class GLTFState: Resource {
                 withUnsafePointer(to: parentNodeIndex) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(GLTFState.method_append_gltf_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(GLTFState.method_append_gltf_node, handle, pArgs, &_result)
                         }
                         
                     }
@@ -496,7 +496,7 @@ open class GLTFState: Resource {
     fileprivate final func get_json() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(GLTFState.method_get_json, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_json, handle, nil, &_result.content)
         return _result
     }
     
@@ -517,7 +517,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: json.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_json, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_json, handle, pArgs, nil)
                 }
                 
             }
@@ -542,7 +542,7 @@ open class GLTFState: Resource {
     fileprivate final func get_major_version() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_major_version, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_major_version, handle, nil, &_result)
         return _result
     }
     
@@ -563,7 +563,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: majorVersion) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_major_version, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_major_version, handle, pArgs, nil)
                 }
                 
             }
@@ -588,7 +588,7 @@ open class GLTFState: Resource {
     fileprivate final func get_minor_version() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_minor_version, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_minor_version, handle, nil, &_result)
         return _result
     }
     
@@ -609,7 +609,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: minorVersion) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_minor_version, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_minor_version, handle, pArgs, nil)
                 }
                 
             }
@@ -634,7 +634,7 @@ open class GLTFState: Resource {
     fileprivate final func get_copyright() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(GLTFState.method_get_copyright, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_copyright, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -656,7 +656,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: copyright.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_copyright, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_copyright, handle, pArgs, nil)
                 }
                 
             }
@@ -681,7 +681,7 @@ open class GLTFState: Resource {
     fileprivate final func get_glb_data() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(GLTFState.method_get_glb_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_glb_data, handle, nil, &_result.content)
         return _result
     }
     
@@ -702,7 +702,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: glbData.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_glb_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_glb_data, handle, pArgs, nil)
                 }
                 
             }
@@ -727,7 +727,7 @@ open class GLTFState: Resource {
     fileprivate final func get_use_named_skin_binds() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GLTFState.method_get_use_named_skin_binds, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_use_named_skin_binds, handle, nil, &_result)
         return _result
     }
     
@@ -748,7 +748,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: useNamedSkinBinds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_use_named_skin_binds, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_use_named_skin_binds, handle, pArgs, nil)
                 }
                 
             }
@@ -774,7 +774,7 @@ open class GLTFState: Resource {
     fileprivate final func get_nodes() -> TypedArray<GLTFNode?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_nodes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_nodes, handle, nil, &_result)
         return TypedArray<GLTFNode?>(takingOver: _result)
     }
     
@@ -796,7 +796,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: nodes.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_nodes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_nodes, handle, pArgs, nil)
                 }
                 
             }
@@ -821,7 +821,7 @@ open class GLTFState: Resource {
     fileprivate final func get_buffers() -> TypedArray<PackedByteArray> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_buffers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_buffers, handle, nil, &_result)
         return TypedArray<PackedByteArray>(takingOver: _result)
     }
     
@@ -842,7 +842,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: buffers.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_buffers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_buffers, handle, pArgs, nil)
                 }
                 
             }
@@ -868,7 +868,7 @@ open class GLTFState: Resource {
     fileprivate final func get_buffer_views() -> TypedArray<GLTFBufferView?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_buffer_views, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_buffer_views, handle, nil, &_result)
         return TypedArray<GLTFBufferView?>(takingOver: _result)
     }
     
@@ -890,7 +890,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: bufferViews.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_buffer_views, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_buffer_views, handle, pArgs, nil)
                 }
                 
             }
@@ -916,7 +916,7 @@ open class GLTFState: Resource {
     fileprivate final func get_accessors() -> TypedArray<GLTFAccessor?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_accessors, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_accessors, handle, nil, &_result)
         return TypedArray<GLTFAccessor?>(takingOver: _result)
     }
     
@@ -938,7 +938,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: accessors.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_accessors, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_accessors, handle, pArgs, nil)
                 }
                 
             }
@@ -964,7 +964,7 @@ open class GLTFState: Resource {
     fileprivate final func get_meshes() -> TypedArray<GLTFMesh?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_meshes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_meshes, handle, nil, &_result)
         return TypedArray<GLTFMesh?>(takingOver: _result)
     }
     
@@ -986,7 +986,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: meshes.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_meshes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_meshes, handle, pArgs, nil)
                 }
                 
             }
@@ -1014,7 +1014,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_get_animation_players_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFState.method_get_animation_players_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -1038,18 +1038,18 @@ open class GLTFState: Resource {
     /// Returns the ``AnimationPlayer`` node with the given index. These nodes are only used during the export process when converting Godot ``AnimationPlayer`` nodes to glTF animations.
     public final func getAnimationPlayer(idx: Int32) -> AnimationPlayer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_get_animation_player, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFState.method_get_animation_player, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_materials: GDExtensionMethodBindPtr = {
@@ -1068,7 +1068,7 @@ open class GLTFState: Resource {
     fileprivate final func get_materials() -> TypedArray<Material?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_materials, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_materials, handle, nil, &_result)
         return TypedArray<Material?>(takingOver: _result)
     }
     
@@ -1090,7 +1090,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: materials.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_materials, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_materials, handle, pArgs, nil)
                 }
                 
             }
@@ -1115,7 +1115,7 @@ open class GLTFState: Resource {
     fileprivate final func get_scene_name() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(GLTFState.method_get_scene_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_scene_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1137,7 +1137,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: sceneName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_scene_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_scene_name, handle, pArgs, nil)
                 }
                 
             }
@@ -1162,7 +1162,7 @@ open class GLTFState: Resource {
     fileprivate final func get_base_path() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(GLTFState.method_get_base_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_base_path, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1184,7 +1184,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: basePath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_base_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_base_path, handle, pArgs, nil)
                 }
                 
             }
@@ -1209,7 +1209,7 @@ open class GLTFState: Resource {
     fileprivate final func get_filename() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(GLTFState.method_get_filename, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_filename, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1231,7 +1231,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: filename.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_filename, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_filename, handle, pArgs, nil)
                 }
                 
             }
@@ -1256,7 +1256,7 @@ open class GLTFState: Resource {
     fileprivate final func get_root_nodes() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(GLTFState.method_get_root_nodes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_root_nodes, handle, nil, &_result.content)
         return _result
     }
     
@@ -1277,7 +1277,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: rootNodes.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_root_nodes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_root_nodes, handle, pArgs, nil)
                 }
                 
             }
@@ -1303,7 +1303,7 @@ open class GLTFState: Resource {
     fileprivate final func get_textures() -> TypedArray<GLTFTexture?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_textures, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_textures, handle, nil, &_result)
         return TypedArray<GLTFTexture?>(takingOver: _result)
     }
     
@@ -1325,7 +1325,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: textures.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_textures, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_textures, handle, pArgs, nil)
                 }
                 
             }
@@ -1351,7 +1351,7 @@ open class GLTFState: Resource {
     fileprivate final func get_texture_samplers() -> TypedArray<GLTFTextureSampler?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_texture_samplers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_texture_samplers, handle, nil, &_result)
         return TypedArray<GLTFTextureSampler?>(takingOver: _result)
     }
     
@@ -1373,7 +1373,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: textureSamplers.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_texture_samplers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_texture_samplers, handle, pArgs, nil)
                 }
                 
             }
@@ -1399,7 +1399,7 @@ open class GLTFState: Resource {
     fileprivate final func get_images() -> TypedArray<Texture2D?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_images, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_images, handle, nil, &_result)
         return TypedArray<Texture2D?>(takingOver: _result)
     }
     
@@ -1421,7 +1421,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: images.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_images, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_images, handle, pArgs, nil)
                 }
                 
             }
@@ -1447,7 +1447,7 @@ open class GLTFState: Resource {
     fileprivate final func get_skins() -> TypedArray<GLTFSkin?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_skins, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_skins, handle, nil, &_result)
         return TypedArray<GLTFSkin?>(takingOver: _result)
     }
     
@@ -1469,7 +1469,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: skins.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_skins, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_skins, handle, pArgs, nil)
                 }
                 
             }
@@ -1495,7 +1495,7 @@ open class GLTFState: Resource {
     fileprivate final func get_cameras() -> TypedArray<GLTFCamera?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_cameras, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_cameras, handle, nil, &_result)
         return TypedArray<GLTFCamera?>(takingOver: _result)
     }
     
@@ -1517,7 +1517,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: cameras.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_cameras, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_cameras, handle, pArgs, nil)
                 }
                 
             }
@@ -1543,7 +1543,7 @@ open class GLTFState: Resource {
     fileprivate final func get_lights() -> TypedArray<GLTFLight?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_lights, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_lights, handle, nil, &_result)
         return TypedArray<GLTFLight?>(takingOver: _result)
     }
     
@@ -1565,7 +1565,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: lights.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_lights, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_lights, handle, pArgs, nil)
                 }
                 
             }
@@ -1591,7 +1591,7 @@ open class GLTFState: Resource {
     fileprivate final func get_unique_names() -> TypedArray<String> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_unique_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_unique_names, handle, nil, &_result)
         return TypedArray<String>(takingOver: _result)
     }
     
@@ -1613,7 +1613,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: uniqueNames.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_unique_names, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_unique_names, handle, pArgs, nil)
                 }
                 
             }
@@ -1639,7 +1639,7 @@ open class GLTFState: Resource {
     fileprivate final func get_unique_animation_names() -> TypedArray<String> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_unique_animation_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_unique_animation_names, handle, nil, &_result)
         return TypedArray<String>(takingOver: _result)
     }
     
@@ -1661,7 +1661,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: uniqueAnimationNames.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_unique_animation_names, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_unique_animation_names, handle, pArgs, nil)
                 }
                 
             }
@@ -1687,7 +1687,7 @@ open class GLTFState: Resource {
     fileprivate final func get_skeletons() -> TypedArray<GLTFSkeleton?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_skeletons, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_skeletons, handle, nil, &_result)
         return TypedArray<GLTFSkeleton?>(takingOver: _result)
     }
     
@@ -1709,7 +1709,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: skeletons.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_skeletons, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_skeletons, handle, pArgs, nil)
                 }
                 
             }
@@ -1734,7 +1734,7 @@ open class GLTFState: Resource {
     fileprivate final func get_create_animations() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GLTFState.method_get_create_animations, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_create_animations, handle, nil, &_result)
         return _result
     }
     
@@ -1755,7 +1755,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: createAnimations) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_create_animations, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_create_animations, handle, pArgs, nil)
                 }
                 
             }
@@ -1780,7 +1780,7 @@ open class GLTFState: Resource {
     fileprivate final func get_import_as_skeleton_bones() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GLTFState.method_get_import_as_skeleton_bones, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_import_as_skeleton_bones, handle, nil, &_result)
         return _result
     }
     
@@ -1801,7 +1801,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: importAsSkeletonBones) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_import_as_skeleton_bones, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_import_as_skeleton_bones, handle, pArgs, nil)
                 }
                 
             }
@@ -1827,7 +1827,7 @@ open class GLTFState: Resource {
     fileprivate final func get_animations() -> TypedArray<GLTFAnimation?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_animations, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_animations, handle, nil, &_result)
         return TypedArray<GLTFAnimation?>(takingOver: _result)
     }
     
@@ -1849,7 +1849,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: animations.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_animations, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_animations, handle, pArgs, nil)
                 }
                 
             }
@@ -1876,18 +1876,18 @@ open class GLTFState: Resource {
     /// 
     public final func getSceneNode(idx: Int32) -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_get_scene_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFState.method_get_scene_node, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_node_index: GDExtensionMethodBindPtr = {
@@ -1911,7 +1911,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: sceneNode?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_get_node_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFState.method_get_node_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -1942,7 +1942,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: extensionName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_get_additional_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFState.method_get_additional_data, handle, pArgs, &_result)
                 }
                 
             }
@@ -1973,7 +1973,7 @@ open class GLTFState: Resource {
             withUnsafePointer(to: additionalData.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GLTFState.method_set_additional_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GLTFState.method_set_additional_data, handle, pArgs, nil)
                     }
                     
                 }
@@ -2001,7 +2001,7 @@ open class GLTFState: Resource {
     fileprivate final func get_handle_binary_image() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_handle_binary_image, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_handle_binary_image, handle, nil, &_result)
         return _result
     }
     
@@ -2023,7 +2023,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: method) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_handle_binary_image, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_handle_binary_image, handle, pArgs, nil)
                 }
                 
             }
@@ -2050,7 +2050,7 @@ open class GLTFState: Resource {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFState.method_set_bake_fps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFState.method_set_bake_fps, handle, pArgs, nil)
                 }
                 
             }
@@ -2075,7 +2075,7 @@ open class GLTFState: Resource {
     fileprivate final func get_bake_fps() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GLTFState.method_get_bake_fps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFState.method_get_bake_fps, handle, nil, &_result)
         return _result
     }
     

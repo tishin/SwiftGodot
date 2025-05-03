@@ -44,7 +44,7 @@ open class AudioStreamGeneratorPlayback: AudioStreamPlaybackResampled {
         withUnsafePointer(to: frame) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamGeneratorPlayback.method_push_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioStreamGeneratorPlayback.method_push_frame, handle, pArgs, &_result)
                 }
                 
             }
@@ -72,7 +72,7 @@ open class AudioStreamGeneratorPlayback: AudioStreamPlaybackResampled {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamGeneratorPlayback.method_can_push_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioStreamGeneratorPlayback.method_can_push_buffer, handle, pArgs, &_result)
                 }
                 
             }
@@ -100,7 +100,7 @@ open class AudioStreamGeneratorPlayback: AudioStreamPlaybackResampled {
         withUnsafePointer(to: frames.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamGeneratorPlayback.method_push_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioStreamGeneratorPlayback.method_push_buffer, handle, pArgs, &_result)
                 }
                 
             }
@@ -125,7 +125,7 @@ open class AudioStreamGeneratorPlayback: AudioStreamPlaybackResampled {
     public final func getFramesAvailable() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamGeneratorPlayback.method_get_frames_available, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamGeneratorPlayback.method_get_frames_available, handle, nil, &_result)
         return _result
     }
     
@@ -144,7 +144,7 @@ open class AudioStreamGeneratorPlayback: AudioStreamPlaybackResampled {
     public final func getSkips() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamGeneratorPlayback.method_get_skips, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamGeneratorPlayback.method_get_skips, handle, nil, &_result)
         return _result
     }
     
@@ -162,7 +162,7 @@ open class AudioStreamGeneratorPlayback: AudioStreamPlaybackResampled {
     /// Clears the audio sample data buffer.
     public final func clearBuffer() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AudioStreamGeneratorPlayback.method_clear_buffer, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AudioStreamGeneratorPlayback.method_clear_buffer, handle, nil, nil)
         
     }
     

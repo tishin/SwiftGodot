@@ -124,7 +124,7 @@ open class FogMaterial: Material {
         withUnsafePointer(to: density) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FogMaterial.method_set_density, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FogMaterial.method_set_density, handle, pArgs, nil)
                 }
                 
             }
@@ -149,7 +149,7 @@ open class FogMaterial: Material {
     fileprivate final func get_density() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FogMaterial.method_get_density, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FogMaterial.method_get_density, handle, nil, &_result)
         return _result
     }
     
@@ -170,7 +170,7 @@ open class FogMaterial: Material {
         withUnsafePointer(to: albedo) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FogMaterial.method_set_albedo, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FogMaterial.method_set_albedo, handle, pArgs, nil)
                 }
                 
             }
@@ -195,7 +195,7 @@ open class FogMaterial: Material {
     fileprivate final func get_albedo() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(FogMaterial.method_get_albedo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FogMaterial.method_get_albedo, handle, nil, &_result)
         return _result
     }
     
@@ -216,7 +216,7 @@ open class FogMaterial: Material {
         withUnsafePointer(to: emission) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FogMaterial.method_set_emission, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FogMaterial.method_set_emission, handle, pArgs, nil)
                 }
                 
             }
@@ -241,7 +241,7 @@ open class FogMaterial: Material {
     fileprivate final func get_emission() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(FogMaterial.method_get_emission, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FogMaterial.method_get_emission, handle, nil, &_result)
         return _result
     }
     
@@ -262,7 +262,7 @@ open class FogMaterial: Material {
         withUnsafePointer(to: heightFalloff) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FogMaterial.method_set_height_falloff, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FogMaterial.method_set_height_falloff, handle, pArgs, nil)
                 }
                 
             }
@@ -287,7 +287,7 @@ open class FogMaterial: Material {
     fileprivate final func get_height_falloff() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FogMaterial.method_get_height_falloff, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FogMaterial.method_get_height_falloff, handle, nil, &_result)
         return _result
     }
     
@@ -308,7 +308,7 @@ open class FogMaterial: Material {
         withUnsafePointer(to: edgeFade) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FogMaterial.method_set_edge_fade, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FogMaterial.method_set_edge_fade, handle, pArgs, nil)
                 }
                 
             }
@@ -333,7 +333,7 @@ open class FogMaterial: Material {
     fileprivate final func get_edge_fade() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FogMaterial.method_get_edge_fade, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FogMaterial.method_get_edge_fade, handle, nil, &_result)
         return _result
     }
     
@@ -354,7 +354,7 @@ open class FogMaterial: Material {
         withUnsafePointer(to: densityTexture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FogMaterial.method_set_density_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FogMaterial.method_set_density_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -378,9 +378,9 @@ open class FogMaterial: Material {
     @inline(__always)
     fileprivate final func get_density_texture() -> Texture3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(FogMaterial.method_get_density_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(FogMaterial.method_get_density_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

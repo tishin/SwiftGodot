@@ -58,7 +58,7 @@ open class JSONRPC: Object {
             withUnsafePointer(to: target?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(JSONRPC.method_set_scope, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(JSONRPC.method_set_scope, handle, pArgs, nil)
                     }
                     
                 }
@@ -94,7 +94,7 @@ open class JSONRPC: Object {
             withUnsafePointer(to: recurse) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(JSONRPC.method_process_action, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(JSONRPC.method_process_action, handle, pArgs, &_result)
                     }
                     
                 }
@@ -125,7 +125,7 @@ open class JSONRPC: Object {
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(JSONRPC.method_process_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(JSONRPC.method_process_string, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -163,7 +163,7 @@ open class JSONRPC: Object {
                 withUnsafePointer(to: id.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(JSONRPC.method_make_request, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(JSONRPC.method_make_request, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -201,7 +201,7 @@ open class JSONRPC: Object {
             withUnsafePointer(to: id.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(JSONRPC.method_make_response, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(JSONRPC.method_make_response, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -238,7 +238,7 @@ open class JSONRPC: Object {
             withUnsafePointer(to: params.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(JSONRPC.method_make_notification, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(JSONRPC.method_make_notification, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -278,7 +278,7 @@ open class JSONRPC: Object {
                 withUnsafePointer(to: id.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(JSONRPC.method_make_response_error, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(JSONRPC.method_make_response_error, handle, pArgs, &_result.content)
                         }
                         
                     }

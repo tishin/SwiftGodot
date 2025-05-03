@@ -50,7 +50,7 @@ open class InstancePlaceholder: Node {
         withUnsafePointer(to: withOrder) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InstancePlaceholder.method_get_stored_values, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(InstancePlaceholder.method_get_stored_values, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -77,12 +77,12 @@ open class InstancePlaceholder: Node {
     /// 
     public final func createInstance(replace: Bool = false, customScene: PackedScene? = nil) -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: replace) { pArg0 in
             withUnsafePointer(to: customScene?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(InstancePlaceholder.method_create_instance, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(InstancePlaceholder.method_create_instance, handle, pArgs, &_result)
                     }
                     
                 }
@@ -91,7 +91,7 @@ open class InstancePlaceholder: Node {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_instance_path: GDExtensionMethodBindPtr = {
@@ -109,7 +109,7 @@ open class InstancePlaceholder: Node {
     public final func getInstancePath() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(InstancePlaceholder.method_get_instance_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(InstancePlaceholder.method_get_instance_path, handle, nil, &_result.content)
         return _result.description
     }
     

@@ -437,7 +437,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: feature.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_has_feature, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_has_feature, handle, pArgs, &_result)
                 }
                 
             }
@@ -462,7 +462,7 @@ open class TextServer: RefCounted {
     public final func getName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(TextServer.method_get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TextServer.method_get_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -481,7 +481,7 @@ open class TextServer: RefCounted {
     public final func getFeatures() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(TextServer.method_get_features, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextServer.method_get_features, handle, nil, &_result)
         return _result
     }
     
@@ -507,7 +507,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: filename.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_load_support_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_load_support_data, handle, pArgs, &_result)
                 }
                 
             }
@@ -532,7 +532,7 @@ open class TextServer: RefCounted {
     public final func getSupportDataFilename() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(TextServer.method_get_support_data_filename, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TextServer.method_get_support_data_filename, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -551,7 +551,7 @@ open class TextServer: RefCounted {
     public final func getSupportDataInfo() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(TextServer.method_get_support_data_info, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TextServer.method_get_support_data_info, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -577,7 +577,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: filename.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_save_support_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_save_support_data, handle, pArgs, &_result)
                 }
                 
             }
@@ -602,7 +602,7 @@ open class TextServer: RefCounted {
     public final func getSupportData() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(TextServer.method_get_support_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TextServer.method_get_support_data, handle, nil, &_result.content)
         return _result
     }
     
@@ -625,7 +625,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: locale.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_is_locale_right_to_left, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_is_locale_right_to_left, handle, pArgs, &_result)
                 }
                 
             }
@@ -654,7 +654,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_name_to_tag, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_name_to_tag, handle, pArgs, &_result)
                 }
                 
             }
@@ -682,7 +682,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: tag) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_tag_to_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_tag_to_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -710,7 +710,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_has, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_has, handle, pArgs, &_result)
                 }
                 
             }
@@ -737,7 +737,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_free_rid, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextServer.method_free_rid, handle, pArgs, nil)
                 }
                 
             }
@@ -762,7 +762,7 @@ open class TextServer: RefCounted {
     public final func createFont() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(TextServer.method_create_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TextServer.method_create_font, handle, nil, &_result.content)
         return _result
     }
     
@@ -784,7 +784,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_create_font_linked_variation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_create_font_linked_variation, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -812,7 +812,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: data.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_data, handle, pArgs, nil)
                     }
                     
                 }
@@ -842,7 +842,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: faceIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_face_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_face_index, handle, pArgs, nil)
                     }
                     
                 }
@@ -872,7 +872,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_face_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_face_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -900,7 +900,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_face_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_face_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -931,7 +931,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: style.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_style, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_style, handle, pArgs, nil)
                     }
                     
                 }
@@ -961,7 +961,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_style, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_style, handle, pArgs, &_result)
                 }
                 
             }
@@ -990,7 +990,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -1020,7 +1020,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1048,7 +1048,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_ot_name_strings, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_ot_name_strings, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1077,7 +1077,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_style_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_style_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -1107,7 +1107,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_style_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_style_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1138,7 +1138,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: weight) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_weight, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_weight, handle, pArgs, nil)
                     }
                     
                 }
@@ -1168,7 +1168,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_weight, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_weight, handle, pArgs, &_result)
                 }
                 
             }
@@ -1199,7 +1199,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: weight) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_stretch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_stretch, handle, pArgs, nil)
                     }
                     
                 }
@@ -1229,7 +1229,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_stretch, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_stretch, handle, pArgs, &_result)
                 }
                 
             }
@@ -1257,7 +1257,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: antialiasing.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_antialiasing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_antialiasing, handle, pArgs, nil)
                     }
                     
                 }
@@ -1287,7 +1287,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_antialiasing, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_antialiasing, handle, pArgs, &_result)
                 }
                 
             }
@@ -1315,7 +1315,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: disableEmbeddedBitmaps) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_disable_embedded_bitmaps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_disable_embedded_bitmaps, handle, pArgs, nil)
                     }
                     
                 }
@@ -1345,7 +1345,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_disable_embedded_bitmaps, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_disable_embedded_bitmaps, handle, pArgs, &_result)
                 }
                 
             }
@@ -1373,7 +1373,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: generateMipmaps) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_generate_mipmaps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_generate_mipmaps, handle, pArgs, nil)
                     }
                     
                 }
@@ -1403,7 +1403,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_generate_mipmaps, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_generate_mipmaps, handle, pArgs, &_result)
                 }
                 
             }
@@ -1434,7 +1434,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: msdf) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_multichannel_signed_distance_field, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_multichannel_signed_distance_field, handle, pArgs, nil)
                     }
                     
                 }
@@ -1464,7 +1464,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_is_multichannel_signed_distance_field, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_is_multichannel_signed_distance_field, handle, pArgs, &_result)
                 }
                 
             }
@@ -1492,7 +1492,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: msdfPixelRange) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_msdf_pixel_range, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_msdf_pixel_range, handle, pArgs, nil)
                     }
                     
                 }
@@ -1522,7 +1522,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_msdf_pixel_range, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_msdf_pixel_range, handle, pArgs, &_result)
                 }
                 
             }
@@ -1550,7 +1550,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: msdfSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_msdf_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_msdf_size, handle, pArgs, nil)
                     }
                     
                 }
@@ -1580,7 +1580,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_msdf_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_msdf_size, handle, pArgs, &_result)
                 }
                 
             }
@@ -1608,7 +1608,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: fixedSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_fixed_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_fixed_size, handle, pArgs, nil)
                     }
                     
                 }
@@ -1638,7 +1638,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_fixed_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_fixed_size, handle, pArgs, &_result)
                 }
                 
             }
@@ -1666,7 +1666,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: fixedSizeScaleMode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_fixed_size_scale_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_fixed_size_scale_mode, handle, pArgs, nil)
                     }
                     
                 }
@@ -1696,7 +1696,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_fixed_size_scale_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_fixed_size_scale_mode, handle, pArgs, &_result)
                 }
                 
             }
@@ -1724,7 +1724,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: allowSystemFallback) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_allow_system_fallback, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_allow_system_fallback, handle, pArgs, nil)
                     }
                     
                 }
@@ -1754,7 +1754,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_is_allow_system_fallback, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_is_allow_system_fallback, handle, pArgs, &_result)
                 }
                 
             }
@@ -1782,7 +1782,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: forceAutohinter) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_force_autohinter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_force_autohinter, handle, pArgs, nil)
                     }
                     
                 }
@@ -1812,7 +1812,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_is_force_autohinter, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_is_force_autohinter, handle, pArgs, &_result)
                 }
                 
             }
@@ -1840,7 +1840,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: hinting.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_hinting, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_hinting, handle, pArgs, nil)
                     }
                     
                 }
@@ -1870,7 +1870,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_hinting, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_hinting, handle, pArgs, &_result)
                 }
                 
             }
@@ -1898,7 +1898,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: subpixelPositioning.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_subpixel_positioning, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_subpixel_positioning, handle, pArgs, nil)
                     }
                     
                 }
@@ -1928,7 +1928,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_subpixel_positioning, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_subpixel_positioning, handle, pArgs, &_result)
                 }
                 
             }
@@ -1956,7 +1956,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: keepRoundingRemainders) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_keep_rounding_remainders, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_keep_rounding_remainders, handle, pArgs, nil)
                     }
                     
                 }
@@ -1986,7 +1986,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_keep_rounding_remainders, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_keep_rounding_remainders, handle, pArgs, &_result)
                 }
                 
             }
@@ -2014,7 +2014,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: strength) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_embolden, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_embolden, handle, pArgs, nil)
                     }
                     
                 }
@@ -2044,7 +2044,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_embolden, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_embolden, handle, pArgs, &_result)
                 }
                 
             }
@@ -2073,7 +2073,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: value) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_set_spacing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_set_spacing, handle, pArgs, nil)
                         }
                         
                     }
@@ -2106,7 +2106,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: spacing.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_get_spacing, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_get_spacing, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2136,7 +2136,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: baselineOffset) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_baseline_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_baseline_offset, handle, pArgs, nil)
                     }
                     
                 }
@@ -2166,7 +2166,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_baseline_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_baseline_offset, handle, pArgs, &_result)
                 }
                 
             }
@@ -2197,7 +2197,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_transform, handle, pArgs, nil)
                     }
                     
                 }
@@ -2227,7 +2227,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_transform, handle, pArgs, &_result)
                 }
                 
             }
@@ -2255,7 +2255,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: variationCoordinates.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_variation_coordinates, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_variation_coordinates, handle, pArgs, nil)
                     }
                     
                 }
@@ -2285,7 +2285,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_variation_coordinates, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_variation_coordinates, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2313,7 +2313,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: oversampling) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_oversampling, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_oversampling, handle, pArgs, nil)
                     }
                     
                 }
@@ -2343,7 +2343,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_oversampling, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_oversampling, handle, pArgs, &_result)
                 }
                 
             }
@@ -2371,7 +2371,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_size_cache_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_size_cache_list, handle, pArgs, &_result)
                 }
                 
             }
@@ -2398,7 +2398,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_clear_size_cache, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_clear_size_cache, handle, pArgs, nil)
                 }
                 
             }
@@ -2426,7 +2426,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_remove_size_cache, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_remove_size_cache, handle, pArgs, nil)
                     }
                     
                 }
@@ -2457,7 +2457,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: ascent) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_set_ascent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_set_ascent, handle, pArgs, nil)
                         }
                         
                     }
@@ -2490,7 +2490,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_get_ascent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_get_ascent, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2521,7 +2521,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: descent) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_set_descent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_set_descent, handle, pArgs, nil)
                         }
                         
                     }
@@ -2554,7 +2554,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_get_descent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_get_descent, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2585,7 +2585,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: underlinePosition) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_set_underline_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_set_underline_position, handle, pArgs, nil)
                         }
                         
                     }
@@ -2618,7 +2618,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_get_underline_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_get_underline_position, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2649,7 +2649,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: underlineThickness) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_set_underline_thickness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_set_underline_thickness, handle, pArgs, nil)
                         }
                         
                     }
@@ -2682,7 +2682,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_get_underline_thickness, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_get_underline_thickness, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2713,7 +2713,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: scale) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_set_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_set_scale, handle, pArgs, nil)
                         }
                         
                     }
@@ -2746,7 +2746,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_get_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_get_scale, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2777,7 +2777,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_get_texture_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_get_texture_count, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2810,7 +2810,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_clear_textures, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_clear_textures, handle, pArgs, nil)
                     }
                     
                 }
@@ -2844,7 +2844,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: textureIndex) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_remove_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_remove_texture, handle, pArgs, nil)
                         }
                         
                     }
@@ -2878,7 +2878,7 @@ open class TextServer: RefCounted {
                     withUnsafePointer(to: image?.handle) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextServer.method_font_set_texture_image, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TextServer.method_font_set_texture_image, handle, pArgs, nil)
                             }
                             
                         }
@@ -2908,13 +2908,13 @@ open class TextServer: RefCounted {
     /// Returns font cache texture image data.
     public final func fontGetTextureImage(fontRid: RID, size: Vector2i, textureIndex: Int) -> Image? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: textureIndex) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_get_texture_image, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_get_texture_image, handle, pArgs, &_result)
                         }
                         
                     }
@@ -2925,7 +2925,7 @@ open class TextServer: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_font_set_texture_offsets: GDExtensionMethodBindPtr = {
@@ -2948,7 +2948,7 @@ open class TextServer: RefCounted {
                     withUnsafePointer(to: offset.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextServer.method_font_set_texture_offsets, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TextServer.method_font_set_texture_offsets, handle, pArgs, nil)
                             }
                             
                         }
@@ -2984,7 +2984,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: textureIndex) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_get_texture_offsets, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_get_texture_offsets, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -3017,7 +3017,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_list, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -3050,7 +3050,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_clear_glyphs, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_clear_glyphs, handle, pArgs, nil)
                     }
                     
                 }
@@ -3084,7 +3084,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: glyph) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_remove_glyph, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_remove_glyph, handle, pArgs, nil)
                         }
                         
                     }
@@ -3121,7 +3121,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: glyph) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_advance, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_advance, handle, pArgs, &_result)
                         }
                         
                     }
@@ -3158,7 +3158,7 @@ open class TextServer: RefCounted {
                     withUnsafePointer(to: advance) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextServer.method_font_set_glyph_advance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TextServer.method_font_set_glyph_advance, handle, pArgs, nil)
                             }
                             
                         }
@@ -3194,7 +3194,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: glyph) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_offset, handle, pArgs, &_result)
                         }
                         
                     }
@@ -3228,7 +3228,7 @@ open class TextServer: RefCounted {
                     withUnsafePointer(to: offset) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextServer.method_font_set_glyph_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TextServer.method_font_set_glyph_offset, handle, pArgs, nil)
                             }
                             
                         }
@@ -3264,7 +3264,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: glyph) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_size, handle, pArgs, &_result)
                         }
                         
                     }
@@ -3298,7 +3298,7 @@ open class TextServer: RefCounted {
                     withUnsafePointer(to: glSize) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextServer.method_font_set_glyph_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TextServer.method_font_set_glyph_size, handle, pArgs, nil)
                             }
                             
                         }
@@ -3334,7 +3334,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: glyph) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_uv_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_uv_rect, handle, pArgs, &_result)
                         }
                         
                     }
@@ -3368,7 +3368,7 @@ open class TextServer: RefCounted {
                     withUnsafePointer(to: uvRect) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextServer.method_font_set_glyph_uv_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TextServer.method_font_set_glyph_uv_rect, handle, pArgs, nil)
                             }
                             
                         }
@@ -3404,7 +3404,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: glyph) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_texture_idx, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_texture_idx, handle, pArgs, &_result)
                         }
                         
                     }
@@ -3438,7 +3438,7 @@ open class TextServer: RefCounted {
                     withUnsafePointer(to: textureIdx) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextServer.method_font_set_glyph_texture_idx, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TextServer.method_font_set_glyph_texture_idx, handle, pArgs, nil)
                             }
                             
                         }
@@ -3477,7 +3477,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: glyph) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_texture_rid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_texture_rid, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -3514,7 +3514,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: glyph) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_texture_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_texture_size, handle, pArgs, &_result)
                         }
                         
                     }
@@ -3565,7 +3565,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: index) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_contours, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_contours, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -3598,7 +3598,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_get_kerning_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_get_kerning_list, handle, pArgs, &_result)
                     }
                     
                 }
@@ -3628,7 +3628,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_clear_kerning_map, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_clear_kerning_map, handle, pArgs, nil)
                     }
                     
                 }
@@ -3659,7 +3659,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: glyphPair) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_remove_kerning, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_remove_kerning, handle, pArgs, nil)
                         }
                         
                     }
@@ -3693,7 +3693,7 @@ open class TextServer: RefCounted {
                     withUnsafePointer(to: kerning) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextServer.method_font_set_kerning, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TextServer.method_font_set_kerning, handle, pArgs, nil)
                             }
                             
                         }
@@ -3729,7 +3729,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: glyphPair) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_get_kerning, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_get_kerning, handle, pArgs, &_result)
                         }
                         
                     }
@@ -3764,7 +3764,7 @@ open class TextServer: RefCounted {
                     withUnsafePointer(to: variationSelector) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(TextServer.method_font_get_glyph_index, handle, pArgs, &_result)
                             }
                             
                         }
@@ -3800,7 +3800,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: glyphIndex) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_get_char_from_glyph_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_get_char_from_glyph_index, handle, pArgs, &_result)
                         }
                         
                     }
@@ -3833,7 +3833,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: char) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_has_char, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_has_char, handle, pArgs, &_result)
                     }
                     
                 }
@@ -3863,7 +3863,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_supported_chars, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_supported_chars, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -3891,7 +3891,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_supported_glyphs, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_supported_glyphs, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -3921,7 +3921,7 @@ open class TextServer: RefCounted {
                     withUnsafePointer(to: end) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextServer.method_font_render_range, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TextServer.method_font_render_range, handle, pArgs, nil)
                             }
                             
                         }
@@ -3956,7 +3956,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: index) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_render_glyph, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_render_glyph, handle, pArgs, nil)
                         }
                         
                     }
@@ -3997,7 +3997,7 @@ open class TextServer: RefCounted {
                             withUnsafePointer(to: color) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(TextServer.method_font_draw_glyph, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(TextServer.method_font_draw_glyph, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -4045,7 +4045,7 @@ open class TextServer: RefCounted {
                                 withUnsafePointer(to: color) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(TextServer.method_font_draw_glyph_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                            gi.object_method_bind_ptrcall(TextServer.method_font_draw_glyph_outline, handle, pArgs, nil)
                                         }
                                         
                                     }
@@ -4087,7 +4087,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: language.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_is_language_supported, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_is_language_supported, handle, pArgs, &_result)
                     }
                     
                 }
@@ -4119,7 +4119,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: supported) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_set_language_support_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_set_language_support_override, handle, pArgs, nil)
                         }
                         
                     }
@@ -4153,7 +4153,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: language.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_get_language_support_override, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_get_language_support_override, handle, pArgs, &_result)
                     }
                     
                 }
@@ -4184,7 +4184,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: language.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_remove_language_support_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_remove_language_support_override, handle, pArgs, nil)
                     }
                     
                 }
@@ -4214,7 +4214,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_language_support_overrides, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_language_support_overrides, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -4244,7 +4244,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: script.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_is_script_supported, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_is_script_supported, handle, pArgs, &_result)
                     }
                     
                 }
@@ -4276,7 +4276,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: supported) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_font_set_script_support_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextServer.method_font_set_script_support_override, handle, pArgs, nil)
                         }
                         
                     }
@@ -4310,7 +4310,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: script.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_get_script_support_override, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_get_script_support_override, handle, pArgs, &_result)
                     }
                     
                 }
@@ -4341,7 +4341,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: script.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_remove_script_support_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_remove_script_support_override, handle, pArgs, nil)
                     }
                     
                 }
@@ -4371,7 +4371,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_script_support_overrides, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_script_support_overrides, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -4399,7 +4399,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: overrides.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_font_set_opentype_feature_overrides, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_font_set_opentype_feature_overrides, handle, pArgs, nil)
                     }
                     
                 }
@@ -4429,7 +4429,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_get_opentype_feature_overrides, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_get_opentype_feature_overrides, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -4457,7 +4457,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_supported_feature_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_supported_feature_list, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -4485,7 +4485,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: fontRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_supported_variation_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_supported_variation_list, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -4510,7 +4510,7 @@ open class TextServer: RefCounted {
     public final func fontGetGlobalOversampling() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(TextServer.method_font_get_global_oversampling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextServer.method_font_get_global_oversampling, handle, nil, &_result)
         return _result
     }
     
@@ -4534,7 +4534,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: oversampling) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_font_set_global_oversampling, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextServer.method_font_set_global_oversampling, handle, pArgs, nil)
                 }
                 
             }
@@ -4563,7 +4563,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_get_hex_code_box_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_get_hex_code_box_size, handle, pArgs, &_result)
                     }
                     
                 }
@@ -4596,7 +4596,7 @@ open class TextServer: RefCounted {
                         withUnsafePointer(to: color) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(TextServer.method_draw_hex_code_box, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(TextServer.method_draw_hex_code_box, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -4638,7 +4638,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: orientation.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_create_shaped_text, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(TextServer.method_create_shaped_text, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -4667,7 +4667,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_clear, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_clear, handle, pArgs, nil)
                 }
                 
             }
@@ -4698,7 +4698,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: direction.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_direction, handle, pArgs, nil)
                     }
                     
                 }
@@ -4728,7 +4728,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_direction, handle, pArgs, &_result)
                 }
                 
             }
@@ -4756,7 +4756,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_inferred_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_inferred_direction, handle, pArgs, &_result)
                 }
                 
             }
@@ -4787,7 +4787,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: override.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_bidi_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_bidi_override, handle, pArgs, nil)
                     }
                     
                 }
@@ -4818,7 +4818,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: punct.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_custom_punctuation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_custom_punctuation, handle, pArgs, nil)
                     }
                     
                 }
@@ -4848,7 +4848,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_custom_punctuation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_custom_punctuation, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -4876,7 +4876,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: char) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_custom_ellipsis, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_custom_ellipsis, handle, pArgs, nil)
                     }
                     
                 }
@@ -4906,7 +4906,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_custom_ellipsis, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_custom_ellipsis, handle, pArgs, &_result)
                 }
                 
             }
@@ -4937,7 +4937,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: orientation.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_orientation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_orientation, handle, pArgs, nil)
                     }
                     
                 }
@@ -4967,7 +4967,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_orientation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_orientation, handle, pArgs, &_result)
                 }
                 
             }
@@ -4995,7 +4995,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_preserve_invalid, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_preserve_invalid, handle, pArgs, nil)
                     }
                     
                 }
@@ -5028,7 +5028,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_preserve_invalid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_preserve_invalid, handle, pArgs, &_result)
                 }
                 
             }
@@ -5056,7 +5056,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_preserve_control, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_preserve_control, handle, pArgs, nil)
                     }
                     
                 }
@@ -5086,7 +5086,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_preserve_control, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_preserve_control, handle, pArgs, &_result)
                 }
                 
             }
@@ -5115,7 +5115,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: value) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_spacing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_set_spacing, handle, pArgs, nil)
                         }
                         
                     }
@@ -5148,7 +5148,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: spacing.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_spacing, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_spacing, handle, pArgs, &_result)
                     }
                     
                 }
@@ -5186,7 +5186,7 @@ open class TextServer: RefCounted {
                                 withUnsafePointer(to: meta.content) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_add_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_add_string, handle, pArgs, &_result)
                                         }
                                         
                                     }
@@ -5231,7 +5231,7 @@ open class TextServer: RefCounted {
                             withUnsafePointer(to: baseline) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_add_object, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_add_object, handle, pArgs, &_result)
                                     }
                                     
                                 }
@@ -5273,7 +5273,7 @@ open class TextServer: RefCounted {
                         withUnsafePointer(to: baseline) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_resize_object, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_resize_object, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -5309,7 +5309,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_get_span_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_get_span_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -5338,7 +5338,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_get_span_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_get_span_meta, handle, pArgs, &_result)
                     }
                     
                 }
@@ -5369,7 +5369,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_get_span_embedded_object, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_get_span_embedded_object, handle, pArgs, &_result)
                     }
                     
                 }
@@ -5402,7 +5402,7 @@ open class TextServer: RefCounted {
                         withUnsafePointer(to: opentypeFeatures.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(TextServer.method_shaped_set_span_update_font, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(TextServer.method_shaped_set_span_update_font, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -5440,7 +5440,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: length) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_substr, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_substr, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -5472,7 +5472,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_parent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_parent, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -5502,7 +5502,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: justificationFlags.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_fit_to_width, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_fit_to_width, handle, pArgs, &_result)
                         }
                         
                     }
@@ -5535,7 +5535,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: tabStops.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_tab_align, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_tab_align, handle, pArgs, &_result)
                     }
                     
                 }
@@ -5568,7 +5568,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_shape, handle, pArgs, &_result)
                 }
                 
             }
@@ -5596,7 +5596,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_is_ready, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_is_ready, handle, pArgs, &_result)
                 }
                 
             }
@@ -5624,7 +5624,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_has_visible_chars, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_has_visible_chars, handle, pArgs, &_result)
                 }
                 
             }
@@ -5652,7 +5652,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_glyphs, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_glyphs, handle, pArgs, &_result)
                 }
                 
             }
@@ -5680,7 +5680,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_sort_logical, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_sort_logical, handle, pArgs, &_result)
                 }
                 
             }
@@ -5708,7 +5708,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_glyph_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_glyph_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -5736,7 +5736,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_range, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_range, handle, pArgs, &_result)
                 }
                 
             }
@@ -5768,7 +5768,7 @@ open class TextServer: RefCounted {
                         withUnsafePointer(to: breakFlags.rawValue) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_line_breaks_adv, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_line_breaks_adv, handle, pArgs, &_result.content)
                                 }
                                 
                             }
@@ -5807,7 +5807,7 @@ open class TextServer: RefCounted {
                     withUnsafePointer(to: breakFlags.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_line_breaks, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_line_breaks, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -5843,7 +5843,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: skipGraphemeFlags.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_word_breaks, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_word_breaks, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -5875,7 +5875,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_trim_pos, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_trim_pos, handle, pArgs, &_result)
                 }
                 
             }
@@ -5903,7 +5903,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_ellipsis_pos, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_ellipsis_pos, handle, pArgs, &_result)
                 }
                 
             }
@@ -5931,7 +5931,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_ellipsis_glyphs, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_ellipsis_glyphs, handle, pArgs, &_result)
                 }
                 
             }
@@ -5959,7 +5959,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_ellipsis_glyph_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_ellipsis_glyph_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -5988,7 +5988,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: overrunTrimFlags.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_overrun_trim_to_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_overrun_trim_to_width, handle, pArgs, nil)
                         }
                         
                     }
@@ -6020,7 +6020,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_objects, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_objects, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -6049,7 +6049,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: key.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_object_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_object_rect, handle, pArgs, &_result)
                     }
                     
                 }
@@ -6080,7 +6080,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: key.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_object_range, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_object_range, handle, pArgs, &_result)
                     }
                     
                 }
@@ -6111,7 +6111,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: key.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_object_glyph, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_object_glyph, handle, pArgs, &_result)
                     }
                     
                 }
@@ -6141,7 +6141,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_size, handle, pArgs, &_result)
                 }
                 
             }
@@ -6172,7 +6172,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_ascent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_ascent, handle, pArgs, &_result)
                 }
                 
             }
@@ -6203,7 +6203,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_descent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_descent, handle, pArgs, &_result)
                 }
                 
             }
@@ -6231,7 +6231,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_width, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_width, handle, pArgs, &_result)
                 }
                 
             }
@@ -6259,7 +6259,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_underline_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_underline_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -6287,7 +6287,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_underline_thickness, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_underline_thickness, handle, pArgs, &_result)
                 }
                 
             }
@@ -6316,7 +6316,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_carets, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_carets, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -6348,7 +6348,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: end) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_selection, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_selection, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -6381,7 +6381,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: coords) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_hit_test_grapheme, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_hit_test_grapheme, handle, pArgs, &_result)
                     }
                     
                 }
@@ -6412,7 +6412,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: coords) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_hit_test_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_hit_test_position, handle, pArgs, &_result)
                     }
                     
                 }
@@ -6443,7 +6443,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: pos) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_grapheme_bounds, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_grapheme_bounds, handle, pArgs, &_result)
                     }
                     
                 }
@@ -6474,7 +6474,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: pos) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_next_grapheme_pos, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_next_grapheme_pos, handle, pArgs, &_result)
                     }
                     
                 }
@@ -6505,7 +6505,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: pos) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_prev_grapheme_pos, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_prev_grapheme_pos, handle, pArgs, &_result)
                     }
                     
                 }
@@ -6535,7 +6535,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: shaped.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_character_breaks, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_character_breaks, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -6564,7 +6564,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: pos) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_next_character_pos, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_next_character_pos, handle, pArgs, &_result)
                     }
                     
                 }
@@ -6595,7 +6595,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: pos) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_prev_character_pos, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_prev_character_pos, handle, pArgs, &_result)
                     }
                     
                 }
@@ -6626,7 +6626,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: pos) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_closest_character_pos, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_closest_character_pos, handle, pArgs, &_result)
                     }
                     
                 }
@@ -6660,7 +6660,7 @@ open class TextServer: RefCounted {
                             withUnsafePointer(to: color) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_draw, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(TextServer.method_shaped_text_draw, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -6703,7 +6703,7 @@ open class TextServer: RefCounted {
                                 withUnsafePointer(to: color) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_draw_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_draw_outline, handle, pArgs, nil)
                                         }
                                         
                                     }
@@ -6745,7 +6745,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: end) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_dominant_direction_in_range, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(TextServer.method_shaped_text_get_dominant_direction_in_range, handle, pArgs, &_result)
                         }
                         
                     }
@@ -6783,7 +6783,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: language.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_format_number, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(TextServer.method_format_number, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -6816,7 +6816,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: language.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_parse_number, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(TextServer.method_parse_number, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -6847,7 +6847,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_percent_sign, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_percent_sign, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -6882,7 +6882,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: charsPerLine) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_string_get_word_breaks, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(TextServer.method_string_get_word_breaks, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -6918,7 +6918,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: language.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_string_get_character_breaks, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(TextServer.method_string_get_character_breaks, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -6955,7 +6955,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: dict.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_is_confusable, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextServer.method_is_confusable, handle, pArgs, &_result)
                     }
                     
                 }
@@ -6989,7 +6989,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: string.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_spoof_check, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_spoof_check, handle, pArgs, &_result)
                 }
                 
             }
@@ -7021,7 +7021,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: string.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_strip_diacritics, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextServer.method_strip_diacritics, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -7067,7 +7067,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: string.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_is_valid_identifier, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_is_valid_identifier, handle, pArgs, &_result)
                 }
                 
             }
@@ -7095,7 +7095,7 @@ open class TextServer: RefCounted {
         withUnsafePointer(to: unicode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextServer.method_is_valid_letter, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextServer.method_is_valid_letter, handle, pArgs, &_result)
                 }
                 
             }
@@ -7131,7 +7131,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: language.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_string_to_upper, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(TextServer.method_string_to_upper, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -7169,7 +7169,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: language.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_string_to_lower, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(TextServer.method_string_to_lower, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -7207,7 +7207,7 @@ open class TextServer: RefCounted {
             withUnsafePointer(to: language.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextServer.method_string_to_title, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(TextServer.method_string_to_title, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -7240,7 +7240,7 @@ open class TextServer: RefCounted {
                 withUnsafePointer(to: text.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextServer.method_parse_structured_text, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(TextServer.method_parse_structured_text, handle, pArgs, &_result)
                         }
                         
                     }

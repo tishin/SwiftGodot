@@ -172,7 +172,7 @@ open class DirectionalLight3D: Light3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirectionalLight3D.method_set_shadow_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(DirectionalLight3D.method_set_shadow_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -197,7 +197,7 @@ open class DirectionalLight3D: Light3D {
     fileprivate final func get_shadow_mode() -> DirectionalLight3D.ShadowMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(DirectionalLight3D.method_get_shadow_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(DirectionalLight3D.method_get_shadow_mode, handle, nil, &_result)
         return DirectionalLight3D.ShadowMode (rawValue: _result)!
     }
     
@@ -218,7 +218,7 @@ open class DirectionalLight3D: Light3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirectionalLight3D.method_set_blend_splits, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(DirectionalLight3D.method_set_blend_splits, handle, pArgs, nil)
                 }
                 
             }
@@ -243,7 +243,7 @@ open class DirectionalLight3D: Light3D {
     fileprivate final func is_blend_splits_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(DirectionalLight3D.method_is_blend_splits_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(DirectionalLight3D.method_is_blend_splits_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -264,7 +264,7 @@ open class DirectionalLight3D: Light3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirectionalLight3D.method_set_sky_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(DirectionalLight3D.method_set_sky_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -289,7 +289,7 @@ open class DirectionalLight3D: Light3D {
     fileprivate final func get_sky_mode() -> DirectionalLight3D.SkyMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(DirectionalLight3D.method_get_sky_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(DirectionalLight3D.method_get_sky_mode, handle, nil, &_result)
         return DirectionalLight3D.SkyMode (rawValue: _result)!
     }
     

@@ -77,7 +77,7 @@ open class EditorExportPreset: RefCounted {
         withUnsafePointer(to: property.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPreset.method_has, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorExportPreset.method_has, handle, pArgs, &_result)
                 }
                 
             }
@@ -102,7 +102,7 @@ open class EditorExportPreset: RefCounted {
     public final func getFilesToExport() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_files_to_export, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_files_to_export, handle, nil, &_result.content)
         return _result
     }
     
@@ -121,7 +121,7 @@ open class EditorExportPreset: RefCounted {
     public final func getCustomizedFiles() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_customized_files, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_customized_files, handle, nil, &_result.content)
         return _result
     }
     
@@ -140,7 +140,7 @@ open class EditorExportPreset: RefCounted {
     public final func getCustomizedFilesCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_customized_files_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_customized_files_count, handle, nil, &_result)
         return _result
     }
     
@@ -163,7 +163,7 @@ open class EditorExportPreset: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPreset.method_has_export_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorExportPreset.method_has_export_file, handle, pArgs, &_result)
                 }
                 
             }
@@ -193,7 +193,7 @@ open class EditorExportPreset: RefCounted {
             withUnsafePointer(to: `default`.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_file_export_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_file_export_mode, handle, pArgs, &_result)
                     }
                     
                 }
@@ -220,7 +220,7 @@ open class EditorExportPreset: RefCounted {
     public final func getPresetName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_preset_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_preset_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -239,7 +239,7 @@ open class EditorExportPreset: RefCounted {
     public final func isRunnable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_is_runnable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_is_runnable, handle, nil, &_result)
         return _result
     }
     
@@ -258,7 +258,7 @@ open class EditorExportPreset: RefCounted {
     public final func areAdvancedOptionsEnabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_are_advanced_options_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_are_advanced_options_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -277,7 +277,7 @@ open class EditorExportPreset: RefCounted {
     public final func isDedicatedServer() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_is_dedicated_server, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_is_dedicated_server, handle, nil, &_result)
         return _result
     }
     
@@ -296,7 +296,7 @@ open class EditorExportPreset: RefCounted {
     public final func getExportFilter() -> EditorExportPreset.ExportFilter {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_export_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_export_filter, handle, nil, &_result)
         return EditorExportPreset.ExportFilter (rawValue: _result)!
     }
     
@@ -315,7 +315,7 @@ open class EditorExportPreset: RefCounted {
     public final func getIncludeFilter() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_include_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_include_filter, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -334,7 +334,7 @@ open class EditorExportPreset: RefCounted {
     public final func getExcludeFilter() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_exclude_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_exclude_filter, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -353,7 +353,7 @@ open class EditorExportPreset: RefCounted {
     public final func getCustomFeatures() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_custom_features, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_custom_features, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -372,7 +372,7 @@ open class EditorExportPreset: RefCounted {
     public final func getPatches() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_patches, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_patches, handle, nil, &_result.content)
         return _result
     }
     
@@ -391,7 +391,7 @@ open class EditorExportPreset: RefCounted {
     public final func getExportPath() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_export_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_export_path, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -410,7 +410,7 @@ open class EditorExportPreset: RefCounted {
     public final func getEncryptionInFilter() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_encryption_in_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_encryption_in_filter, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -429,7 +429,7 @@ open class EditorExportPreset: RefCounted {
     public final func getEncryptionExFilter() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_encryption_ex_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_encryption_ex_filter, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -448,7 +448,7 @@ open class EditorExportPreset: RefCounted {
     public final func getEncryptPck() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_encrypt_pck, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_encrypt_pck, handle, nil, &_result)
         return _result
     }
     
@@ -467,7 +467,7 @@ open class EditorExportPreset: RefCounted {
     public final func getEncryptDirectory() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_encrypt_directory, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_encrypt_directory, handle, nil, &_result)
         return _result
     }
     
@@ -486,7 +486,7 @@ open class EditorExportPreset: RefCounted {
     public final func getEncryptionKey() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_encryption_key, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_encryption_key, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -505,7 +505,7 @@ open class EditorExportPreset: RefCounted {
     public final func getScriptExportMode() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_script_export_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_script_export_mode, handle, nil, &_result)
         return _result
     }
     
@@ -529,7 +529,7 @@ open class EditorExportPreset: RefCounted {
             withUnsafePointer(to: envVar.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_or_env, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_or_env, handle, pArgs, &_result)
                     }
                     
                 }
@@ -563,7 +563,7 @@ open class EditorExportPreset: RefCounted {
             withUnsafePointer(to: windowsVersion) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_version, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(EditorExportPreset.method_get_version, handle, pArgs, &_result.content)
                     }
                     
                 }

@@ -53,7 +53,7 @@ open class OpenXRAPIExtension: RefCounted {
     public final func getInstance() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_instance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_instance, handle, nil, &_result)
         return _result
     }
     
@@ -72,7 +72,7 @@ open class OpenXRAPIExtension: RefCounted {
     public final func getSystemId() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_system_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_system_id, handle, nil, &_result)
         return _result
     }
     
@@ -91,7 +91,7 @@ open class OpenXRAPIExtension: RefCounted {
     public final func getSession() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_session, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_session, handle, nil, &_result)
         return _result
     }
     
@@ -113,7 +113,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: pose) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_transform_from_pose, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_transform_from_pose, handle, pArgs, &_result)
                 }
                 
             }
@@ -144,7 +144,7 @@ open class OpenXRAPIExtension: RefCounted {
                 withUnsafePointer(to: args.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_xr_result, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_xr_result, handle, pArgs, &_result)
                         }
                         
                     }
@@ -207,7 +207,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_instance_proc_addr, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_instance_proc_addr, handle, pArgs, &_result)
                 }
                 
             }
@@ -235,7 +235,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: result) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_error_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_error_string, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -263,7 +263,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: swapchainFormat) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_swapchain_format_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_swapchain_format_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -293,7 +293,7 @@ open class OpenXRAPIExtension: RefCounted {
                 withUnsafePointer(to: objectName.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_set_object_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_set_object_name, handle, pArgs, nil)
                         }
                         
                     }
@@ -325,7 +325,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: labelName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_begin_debug_label_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_begin_debug_label_region, handle, pArgs, nil)
                 }
                 
             }
@@ -349,7 +349,7 @@ open class OpenXRAPIExtension: RefCounted {
     /// Marks the end of a debug label region. Removes the latest debug label region added by calling ``beginDebugLabelRegion(labelName:)``.
     public final func endDebugLabelRegion() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_end_debug_label_region, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_end_debug_label_region, handle, nil, nil)
         
     }
     
@@ -371,7 +371,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: labelName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_insert_debug_label, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_insert_debug_label, handle, pArgs, nil)
                 }
                 
             }
@@ -396,7 +396,7 @@ open class OpenXRAPIExtension: RefCounted {
     public final func isInitialized() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_is_initialized, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_is_initialized, handle, nil, &_result)
         return _result
     }
     
@@ -415,7 +415,7 @@ open class OpenXRAPIExtension: RefCounted {
     public final func isRunning() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_is_running, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_is_running, handle, nil, &_result)
         return _result
     }
     
@@ -434,7 +434,7 @@ open class OpenXRAPIExtension: RefCounted {
     public final func getPlaySpace() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_play_space, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_play_space, handle, nil, &_result)
         return _result
     }
     
@@ -453,7 +453,7 @@ open class OpenXRAPIExtension: RefCounted {
     public final func getPredictedDisplayTime() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_predicted_display_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_predicted_display_time, handle, nil, &_result)
         return _result
     }
     
@@ -472,7 +472,7 @@ open class OpenXRAPIExtension: RefCounted {
     public final func getNextFrameTime() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_next_frame_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_next_frame_time, handle, nil, &_result)
         return _result
     }
     
@@ -491,7 +491,7 @@ open class OpenXRAPIExtension: RefCounted {
     public final func canRender() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_can_render, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_can_render, handle, nil, &_result)
         return _result
     }
     
@@ -515,7 +515,7 @@ open class OpenXRAPIExtension: RefCounted {
             withUnsafePointer(to: actionSet.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_find_action, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_find_action, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -545,7 +545,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_action_get_handle, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_action_get_handle, handle, pArgs, &_result)
                 }
                 
             }
@@ -573,7 +573,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: handIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_hand_tracker, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_hand_tracker, handle, pArgs, &_result)
                 }
                 
             }
@@ -600,7 +600,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: `extension`?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_register_composition_layer_provider, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_register_composition_layer_provider, handle, pArgs, nil)
                 }
                 
             }
@@ -627,7 +627,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: `extension`?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_unregister_composition_layer_provider, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_unregister_composition_layer_provider, handle, pArgs, nil)
                 }
                 
             }
@@ -654,7 +654,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: `extension`?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_register_projection_views_extension, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_register_projection_views_extension, handle, pArgs, nil)
                 }
                 
             }
@@ -681,7 +681,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: `extension`?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_unregister_projection_views_extension, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_unregister_projection_views_extension, handle, pArgs, nil)
                 }
                 
             }
@@ -709,7 +709,7 @@ open class OpenXRAPIExtension: RefCounted {
     public final func getRenderStateZNear() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_render_state_z_near, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_render_state_z_near, handle, nil, &_result)
         return _result
     }
     
@@ -731,7 +731,7 @@ open class OpenXRAPIExtension: RefCounted {
     public final func getRenderStateZFar() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_render_state_z_far, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_render_state_z_far, handle, nil, &_result)
         return _result
     }
     
@@ -752,7 +752,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: renderTarget.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_set_velocity_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_set_velocity_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -779,7 +779,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: renderTarget.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_set_velocity_depth_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_set_velocity_depth_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -806,7 +806,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: targetSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_set_velocity_target_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_set_velocity_target_size, handle, pArgs, nil)
                 }
                 
             }
@@ -831,7 +831,7 @@ open class OpenXRAPIExtension: RefCounted {
     public final func getSupportedSwapchainFormats() -> PackedInt64Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt64Array = PackedInt64Array ()
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_supported_swapchain_formats, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_supported_swapchain_formats, handle, nil, &_result.content)
         return _result
     }
     
@@ -859,7 +859,7 @@ open class OpenXRAPIExtension: RefCounted {
                                 withUnsafePointer(to: arraySize) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_openxr_swapchain_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                            gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_openxr_swapchain_create, handle, pArgs, &_result)
                                         }
                                         
                                     }
@@ -898,7 +898,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: swapchain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_openxr_swapchain_free, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_openxr_swapchain_free, handle, pArgs, nil)
                 }
                 
             }
@@ -926,7 +926,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: swapchain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_openxr_swapchain_get_swapchain, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_openxr_swapchain_get_swapchain, handle, pArgs, &_result)
                 }
                 
             }
@@ -953,7 +953,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: swapchain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_openxr_swapchain_acquire, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_openxr_swapchain_acquire, handle, pArgs, nil)
                 }
                 
             }
@@ -981,7 +981,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: swapchain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_openxr_swapchain_get_image, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_openxr_swapchain_get_image, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1008,7 +1008,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: swapchain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_openxr_swapchain_release, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_openxr_swapchain_release, handle, pArgs, nil)
                 }
                 
             }
@@ -1036,7 +1036,7 @@ open class OpenXRAPIExtension: RefCounted {
     public final func getProjectionLayer() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_projection_layer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_get_projection_layer, handle, nil, &_result)
         return _result
     }
     
@@ -1057,7 +1057,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: renderRegion) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_set_render_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_set_render_region, handle, pArgs, nil)
                 }
                 
             }
@@ -1084,7 +1084,7 @@ open class OpenXRAPIExtension: RefCounted {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_set_emulate_environment_blend_mode_alpha_blend, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_set_emulate_environment_blend_mode_alpha_blend, handle, pArgs, nil)
                 }
                 
             }
@@ -1109,7 +1109,7 @@ open class OpenXRAPIExtension: RefCounted {
     public final func isEnvironmentBlendModeAlphaSupported() -> OpenXRAPIExtension.OpenXRAlphaBlendModeSupport {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_is_environment_blend_mode_alpha_supported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAPIExtension.method_is_environment_blend_mode_alpha_supported, handle, nil, &_result)
         return OpenXRAPIExtension.OpenXRAlphaBlendModeSupport (rawValue: _result)!
     }
     

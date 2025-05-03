@@ -189,7 +189,7 @@ open class MultiMesh: Resource {
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiMesh.method_set_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiMesh.method_set_mesh, handle, pArgs, nil)
                 }
                 
             }
@@ -213,9 +213,9 @@ open class MultiMesh: Resource {
     @inline(__always)
     fileprivate final func get_mesh() -> Mesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(MultiMesh.method_get_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(MultiMesh.method_get_mesh, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_use_colors: GDExtensionMethodBindPtr = {
@@ -235,7 +235,7 @@ open class MultiMesh: Resource {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiMesh.method_set_use_colors, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiMesh.method_set_use_colors, handle, pArgs, nil)
                 }
                 
             }
@@ -260,7 +260,7 @@ open class MultiMesh: Resource {
     fileprivate final func is_using_colors() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(MultiMesh.method_is_using_colors, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiMesh.method_is_using_colors, handle, nil, &_result)
         return _result
     }
     
@@ -281,7 +281,7 @@ open class MultiMesh: Resource {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiMesh.method_set_use_custom_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiMesh.method_set_use_custom_data, handle, pArgs, nil)
                 }
                 
             }
@@ -306,7 +306,7 @@ open class MultiMesh: Resource {
     fileprivate final func is_using_custom_data() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(MultiMesh.method_is_using_custom_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiMesh.method_is_using_custom_data, handle, nil, &_result)
         return _result
     }
     
@@ -327,7 +327,7 @@ open class MultiMesh: Resource {
         withUnsafePointer(to: format.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiMesh.method_set_transform_format, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiMesh.method_set_transform_format, handle, pArgs, nil)
                 }
                 
             }
@@ -352,7 +352,7 @@ open class MultiMesh: Resource {
     fileprivate final func get_transform_format() -> MultiMesh.TransformFormat {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(MultiMesh.method_get_transform_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiMesh.method_get_transform_format, handle, nil, &_result)
         return MultiMesh.TransformFormat (rawValue: _result)!
     }
     
@@ -373,7 +373,7 @@ open class MultiMesh: Resource {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiMesh.method_set_instance_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiMesh.method_set_instance_count, handle, pArgs, nil)
                 }
                 
             }
@@ -398,7 +398,7 @@ open class MultiMesh: Resource {
     fileprivate final func get_instance_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MultiMesh.method_get_instance_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiMesh.method_get_instance_count, handle, nil, &_result)
         return _result
     }
     
@@ -419,7 +419,7 @@ open class MultiMesh: Resource {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiMesh.method_set_visible_instance_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiMesh.method_set_visible_instance_count, handle, pArgs, nil)
                 }
                 
             }
@@ -444,7 +444,7 @@ open class MultiMesh: Resource {
     fileprivate final func get_visible_instance_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MultiMesh.method_get_visible_instance_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiMesh.method_get_visible_instance_count, handle, nil, &_result)
         return _result
     }
     
@@ -465,7 +465,7 @@ open class MultiMesh: Resource {
         withUnsafePointer(to: quality.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiMesh.method_set_physics_interpolation_quality, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiMesh.method_set_physics_interpolation_quality, handle, pArgs, nil)
                 }
                 
             }
@@ -490,7 +490,7 @@ open class MultiMesh: Resource {
     fileprivate final func get_physics_interpolation_quality() -> MultiMesh.PhysicsInterpolationQuality {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(MultiMesh.method_get_physics_interpolation_quality, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiMesh.method_get_physics_interpolation_quality, handle, nil, &_result)
         return MultiMesh.PhysicsInterpolationQuality (rawValue: _result)!
     }
     
@@ -512,7 +512,7 @@ open class MultiMesh: Resource {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MultiMesh.method_set_instance_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MultiMesh.method_set_instance_transform, handle, pArgs, nil)
                     }
                     
                 }
@@ -542,7 +542,7 @@ open class MultiMesh: Resource {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MultiMesh.method_set_instance_transform_2d, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MultiMesh.method_set_instance_transform_2d, handle, pArgs, nil)
                     }
                     
                 }
@@ -572,7 +572,7 @@ open class MultiMesh: Resource {
         withUnsafePointer(to: instance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiMesh.method_get_instance_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MultiMesh.method_get_instance_transform, handle, pArgs, &_result)
                 }
                 
             }
@@ -600,7 +600,7 @@ open class MultiMesh: Resource {
         withUnsafePointer(to: instance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiMesh.method_get_instance_transform_2d, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MultiMesh.method_get_instance_transform_2d, handle, pArgs, &_result)
                 }
                 
             }
@@ -633,7 +633,7 @@ open class MultiMesh: Resource {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MultiMesh.method_set_instance_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MultiMesh.method_set_instance_color, handle, pArgs, nil)
                     }
                     
                 }
@@ -663,7 +663,7 @@ open class MultiMesh: Resource {
         withUnsafePointer(to: instance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiMesh.method_get_instance_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MultiMesh.method_get_instance_color, handle, pArgs, &_result)
                 }
                 
             }
@@ -698,7 +698,7 @@ open class MultiMesh: Resource {
             withUnsafePointer(to: customData) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MultiMesh.method_set_instance_custom_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MultiMesh.method_set_instance_custom_data, handle, pArgs, nil)
                     }
                     
                 }
@@ -728,7 +728,7 @@ open class MultiMesh: Resource {
         withUnsafePointer(to: instance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiMesh.method_get_instance_custom_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MultiMesh.method_get_instance_custom_data, handle, pArgs, &_result)
                 }
                 
             }
@@ -758,7 +758,7 @@ open class MultiMesh: Resource {
         withUnsafePointer(to: instance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiMesh.method_reset_instance_physics_interpolation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiMesh.method_reset_instance_physics_interpolation, handle, pArgs, nil)
                 }
                 
             }
@@ -785,7 +785,7 @@ open class MultiMesh: Resource {
         withUnsafePointer(to: aabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiMesh.method_set_custom_aabb, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiMesh.method_set_custom_aabb, handle, pArgs, nil)
                 }
                 
             }
@@ -810,7 +810,7 @@ open class MultiMesh: Resource {
     fileprivate final func get_custom_aabb() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(MultiMesh.method_get_custom_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiMesh.method_get_custom_aabb, handle, nil, &_result)
         return _result
     }
     
@@ -829,7 +829,7 @@ open class MultiMesh: Resource {
     public final func getAabb() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(MultiMesh.method_get_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiMesh.method_get_aabb, handle, nil, &_result)
         return _result
     }
     
@@ -848,7 +848,7 @@ open class MultiMesh: Resource {
     fileprivate final func get_buffer() -> PackedFloat32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
-        gi.object_method_bind_ptrcall(MultiMesh.method_get_buffer, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(MultiMesh.method_get_buffer, handle, nil, &_result.content)
         return _result
     }
     
@@ -869,7 +869,7 @@ open class MultiMesh: Resource {
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiMesh.method_set_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiMesh.method_set_buffer, handle, pArgs, nil)
                 }
                 
             }
@@ -902,7 +902,7 @@ open class MultiMesh: Resource {
             withUnsafePointer(to: bufferPrev.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MultiMesh.method_set_buffer_interpolated, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MultiMesh.method_set_buffer_interpolated, handle, pArgs, nil)
                     }
                     
                 }

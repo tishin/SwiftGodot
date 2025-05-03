@@ -26,7 +26,7 @@ open class Geometry3D: Object {
     /// The shared instance of this class
     public static var shared: Geometry3D {
         return withUnsafePointer(to: &Geometry3D.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -51,7 +51,7 @@ open class Geometry3D: Object {
         withUnsafePointer(to: planes.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_compute_convex_mesh_points, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_compute_convex_mesh_points, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -78,7 +78,7 @@ open class Geometry3D: Object {
         withUnsafePointer(to: extents) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_build_box_planes, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_build_box_planes, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -108,7 +108,7 @@ open class Geometry3D: Object {
                     withUnsafePointer(to: axis.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_build_cylinder_planes, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(method_build_cylinder_planes, shared.handle, pArgs, &_result)
                             }
                             
                         }
@@ -145,7 +145,7 @@ open class Geometry3D: Object {
                         withUnsafePointer(to: axis.rawValue) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_build_capsule_planes, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(method_build_capsule_planes, shared.handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -183,7 +183,7 @@ open class Geometry3D: Object {
                     withUnsafePointer(to: q2) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_get_closest_points_between_segments, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(method_get_closest_points_between_segments, shared.handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -218,7 +218,7 @@ open class Geometry3D: Object {
                 withUnsafePointer(to: s2) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_get_closest_point_to_segment, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_get_closest_point_to_segment, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -251,7 +251,7 @@ open class Geometry3D: Object {
                 withUnsafePointer(to: s2) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_get_closest_point_to_segment_uncapped, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_get_closest_point_to_segment_uncapped, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -288,7 +288,7 @@ open class Geometry3D: Object {
                     withUnsafePointer(to: c) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_get_triangle_barycentric_coords, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(method_get_triangle_barycentric_coords, shared.handle, pArgs, &_result)
                             }
                             
                         }
@@ -325,7 +325,7 @@ open class Geometry3D: Object {
                         withUnsafePointer(to: c) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_ray_intersects_triangle, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(method_ray_intersects_triangle, shared.handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -364,7 +364,7 @@ open class Geometry3D: Object {
                         withUnsafePointer(to: c) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_segment_intersects_triangle, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(method_segment_intersects_triangle, shared.handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -402,7 +402,7 @@ open class Geometry3D: Object {
                     withUnsafePointer(to: sphereRadius) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_segment_intersects_sphere, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(method_segment_intersects_sphere, shared.handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -438,7 +438,7 @@ open class Geometry3D: Object {
                     withUnsafePointer(to: radius) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_segment_intersects_cylinder, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(method_segment_intersects_cylinder, shared.handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -473,7 +473,7 @@ open class Geometry3D: Object {
                 withUnsafePointer(to: planes.array.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_segment_intersects_convex, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(method_segment_intersects_convex, shared.handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -505,7 +505,7 @@ open class Geometry3D: Object {
             withUnsafePointer(to: plane) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_clip_polygon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_clip_polygon, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -534,7 +534,7 @@ open class Geometry3D: Object {
         withUnsafePointer(to: points.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_tetrahedralize_delaunay, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_tetrahedralize_delaunay, shared.handle, pArgs, &_result.content)
                 }
                 
             }

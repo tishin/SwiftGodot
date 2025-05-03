@@ -65,7 +65,7 @@ open class ConvexPolygonShape3D: Shape3D {
         withUnsafePointer(to: points.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ConvexPolygonShape3D.method_set_points, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ConvexPolygonShape3D.method_set_points, handle, pArgs, nil)
                 }
                 
             }
@@ -90,7 +90,7 @@ open class ConvexPolygonShape3D: Shape3D {
     fileprivate final func get_points() -> PackedVector3Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
-        gi.object_method_bind_ptrcall(ConvexPolygonShape3D.method_get_points, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ConvexPolygonShape3D.method_get_points, handle, nil, &_result.content)
         return _result
     }
     

@@ -43,9 +43,9 @@ open class RenderData: Object {
     /// Returns the ``RenderSceneBuffers`` object managing the scene buffers for rendering this viewport.
     public final func getRenderSceneBuffers() -> RenderSceneBuffers? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(RenderData.method_get_render_scene_buffers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(RenderData.method_get_render_scene_buffers, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_render_scene_data: GDExtensionMethodBindPtr = {
@@ -62,9 +62,9 @@ open class RenderData: Object {
     /// Returns the ``RenderSceneData`` object managing this frames scene data.
     public final func getRenderSceneData() -> RenderSceneData? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(RenderData.method_get_render_scene_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(RenderData.method_get_render_scene_data, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_environment: GDExtensionMethodBindPtr = {
@@ -82,7 +82,7 @@ open class RenderData: Object {
     public final func getEnvironment() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(RenderData.method_get_environment, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RenderData.method_get_environment, handle, nil, &_result.content)
         return _result
     }
     
@@ -101,7 +101,7 @@ open class RenderData: Object {
     public final func getCameraAttributes() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(RenderData.method_get_camera_attributes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RenderData.method_get_camera_attributes, handle, nil, &_result.content)
         return _result
     }
     

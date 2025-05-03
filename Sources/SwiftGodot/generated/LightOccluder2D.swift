@@ -82,7 +82,7 @@ open class LightOccluder2D: Node2D {
         withUnsafePointer(to: polygon?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LightOccluder2D.method_set_occluder_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LightOccluder2D.method_set_occluder_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -106,9 +106,9 @@ open class LightOccluder2D: Node2D {
     @inline(__always)
     fileprivate final func get_occluder_polygon() -> OccluderPolygon2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(LightOccluder2D.method_get_occluder_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(LightOccluder2D.method_get_occluder_polygon, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_occluder_light_mask: GDExtensionMethodBindPtr = {
@@ -128,7 +128,7 @@ open class LightOccluder2D: Node2D {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LightOccluder2D.method_set_occluder_light_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LightOccluder2D.method_set_occluder_light_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -153,7 +153,7 @@ open class LightOccluder2D: Node2D {
     fileprivate final func get_occluder_light_mask() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(LightOccluder2D.method_get_occluder_light_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LightOccluder2D.method_get_occluder_light_mask, handle, nil, &_result)
         return _result
     }
     
@@ -174,7 +174,7 @@ open class LightOccluder2D: Node2D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LightOccluder2D.method_set_as_sdf_collision, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LightOccluder2D.method_set_as_sdf_collision, handle, pArgs, nil)
                 }
                 
             }
@@ -199,7 +199,7 @@ open class LightOccluder2D: Node2D {
     fileprivate final func is_set_as_sdf_collision() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(LightOccluder2D.method_is_set_as_sdf_collision, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LightOccluder2D.method_is_set_as_sdf_collision, handle, nil, &_result)
         return _result
     }
     

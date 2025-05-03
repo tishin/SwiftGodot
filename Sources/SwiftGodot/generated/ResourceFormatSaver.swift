@@ -54,7 +54,7 @@ open class ResourceFormatSaver: RefCounted {
                 withUnsafePointer(to: flags) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ResourceFormatSaver.method__save, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(ResourceFormatSaver.method__save, handle, pArgs, &_result)
                         }
                         
                     }
@@ -89,7 +89,7 @@ open class ResourceFormatSaver: RefCounted {
             withUnsafePointer(to: uid) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ResourceFormatSaver.method__set_uid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ResourceFormatSaver.method__set_uid, handle, pArgs, &_result)
                     }
                     
                 }
@@ -120,7 +120,7 @@ open class ResourceFormatSaver: RefCounted {
         withUnsafePointer(to: resource?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ResourceFormatSaver.method__recognize, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ResourceFormatSaver.method__recognize, handle, pArgs, &_result)
                 }
                 
             }
@@ -149,7 +149,7 @@ open class ResourceFormatSaver: RefCounted {
         withUnsafePointer(to: resource?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ResourceFormatSaver.method__get_recognized_extensions, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ResourceFormatSaver.method__get_recognized_extensions, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -183,7 +183,7 @@ open class ResourceFormatSaver: RefCounted {
             withUnsafePointer(to: path.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ResourceFormatSaver.method__recognize_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ResourceFormatSaver.method__recognize_path, handle, pArgs, &_result)
                     }
                     
                 }
@@ -222,9 +222,9 @@ func _ResourceFormatSaver_proxy_get_recognized_extensions (instance: UnsafeMutab
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? ResourceFormatSaver else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._getRecognizedExtensions (resource: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Resource)
+    let ret = swiftObject._getRecognizedExtensions (resource: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Resource)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
 }
@@ -234,9 +234,9 @@ func _ResourceFormatSaver_proxy_recognize (instance: UnsafeMutableRawPointer?, a
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? ResourceFormatSaver else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._recognize (resource: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Resource)
+    let ret = swiftObject._recognize (resource: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Resource)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
@@ -245,9 +245,9 @@ func _ResourceFormatSaver_proxy_recognize_path (instance: UnsafeMutableRawPointe
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? ResourceFormatSaver else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._recognizePath (resource: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Resource, path: GString.stringFromGStringPtr (ptr: args [1]!) ?? "")
+    let ret = swiftObject._recognizePath (resource: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Resource, path: GString.stringFromGStringPtr (ptr: args [1]!) ?? "")
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
@@ -256,9 +256,9 @@ func _ResourceFormatSaver_proxy_save (instance: UnsafeMutableRawPointer?, args: 
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? ResourceFormatSaver else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._save (resource: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Resource, path: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", flags: args [2]!.assumingMemoryBound (to: UInt32.self).pointee)
+    let ret = swiftObject._save (resource: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Resource, path: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", flags: args [2]!.assumingMemoryBound (to: UInt32.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 

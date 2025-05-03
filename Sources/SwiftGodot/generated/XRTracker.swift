@@ -95,7 +95,7 @@ open class XRTracker: RefCounted {
     fileprivate final func get_tracker_type() -> XRServer.TrackerType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(XRTracker.method_get_tracker_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRTracker.method_get_tracker_type, handle, nil, &_result)
         return XRServer.TrackerType (rawValue: _result)!
     }
     
@@ -116,7 +116,7 @@ open class XRTracker: RefCounted {
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRTracker.method_set_tracker_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRTracker.method_set_tracker_type, handle, pArgs, nil)
                 }
                 
             }
@@ -141,7 +141,7 @@ open class XRTracker: RefCounted {
     fileprivate final func get_tracker_name() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(XRTracker.method_get_tracker_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XRTracker.method_get_tracker_name, handle, nil, &_result.content)
         return _result
     }
     
@@ -162,7 +162,7 @@ open class XRTracker: RefCounted {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRTracker.method_set_tracker_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRTracker.method_set_tracker_name, handle, pArgs, nil)
                 }
                 
             }
@@ -187,7 +187,7 @@ open class XRTracker: RefCounted {
     fileprivate final func get_tracker_desc() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(XRTracker.method_get_tracker_desc, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XRTracker.method_get_tracker_desc, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -209,7 +209,7 @@ open class XRTracker: RefCounted {
         withUnsafePointer(to: description.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRTracker.method_set_tracker_desc, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRTracker.method_set_tracker_desc, handle, pArgs, nil)
                 }
                 
             }

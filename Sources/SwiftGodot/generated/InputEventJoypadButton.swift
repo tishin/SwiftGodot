@@ -81,7 +81,7 @@ open class InputEventJoypadButton: InputEvent {
         withUnsafePointer(to: buttonIndex.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventJoypadButton.method_set_button_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventJoypadButton.method_set_button_index, handle, pArgs, nil)
                 }
                 
             }
@@ -106,7 +106,7 @@ open class InputEventJoypadButton: InputEvent {
     fileprivate final func get_button_index() -> JoyButton {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(InputEventJoypadButton.method_get_button_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventJoypadButton.method_get_button_index, handle, nil, &_result)
         return JoyButton (rawValue: _result)!
     }
     
@@ -127,7 +127,7 @@ open class InputEventJoypadButton: InputEvent {
         withUnsafePointer(to: pressure) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventJoypadButton.method_set_pressure, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventJoypadButton.method_set_pressure, handle, pArgs, nil)
                 }
                 
             }
@@ -152,7 +152,7 @@ open class InputEventJoypadButton: InputEvent {
     fileprivate final func get_pressure() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(InputEventJoypadButton.method_get_pressure, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventJoypadButton.method_get_pressure, handle, nil, &_result)
         return _result
     }
     
@@ -173,7 +173,7 @@ open class InputEventJoypadButton: InputEvent {
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventJoypadButton.method_set_pressed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventJoypadButton.method_set_pressed, handle, pArgs, nil)
                 }
                 
             }

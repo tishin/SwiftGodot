@@ -962,7 +962,7 @@ open class Viewport: Node {
         withUnsafePointer(to: world2d?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_world_2d, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_world_2d, handle, pArgs, nil)
                 }
                 
             }
@@ -986,9 +986,9 @@ open class Viewport: Node {
     @inline(__always)
     fileprivate final func get_world_2d() -> World2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Viewport.method_get_world_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Viewport.method_get_world_2d, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_find_world_2d: GDExtensionMethodBindPtr = {
@@ -1005,9 +1005,9 @@ open class Viewport: Node {
     /// Returns the first valid ``World2D`` for this viewport, searching the ``world2d`` property of itself and any Viewport ancestor.
     public final func findWorld2d() -> World2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Viewport.method_find_world_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Viewport.method_find_world_2d, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_canvas_transform: GDExtensionMethodBindPtr = {
@@ -1027,7 +1027,7 @@ open class Viewport: Node {
         withUnsafePointer(to: xform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_canvas_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_canvas_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -1052,7 +1052,7 @@ open class Viewport: Node {
     fileprivate final func get_canvas_transform() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(Viewport.method_get_canvas_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_canvas_transform, handle, nil, &_result)
         return _result
     }
     
@@ -1073,7 +1073,7 @@ open class Viewport: Node {
         withUnsafePointer(to: xform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_global_canvas_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_global_canvas_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -1098,7 +1098,7 @@ open class Viewport: Node {
     fileprivate final func get_global_canvas_transform() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(Viewport.method_get_global_canvas_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_global_canvas_transform, handle, nil, &_result)
         return _result
     }
     
@@ -1120,7 +1120,7 @@ open class Viewport: Node {
     public final func getStretchTransform() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(Viewport.method_get_stretch_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_stretch_transform, handle, nil, &_result)
         return _result
     }
     
@@ -1139,7 +1139,7 @@ open class Viewport: Node {
     public final func getFinalTransform() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(Viewport.method_get_final_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_final_transform, handle, nil, &_result)
         return _result
     }
     
@@ -1158,7 +1158,7 @@ open class Viewport: Node {
     public final func getScreenTransform() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(Viewport.method_get_screen_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_screen_transform, handle, nil, &_result)
         return _result
     }
     
@@ -1177,7 +1177,7 @@ open class Viewport: Node {
     public final func getVisibleRect() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(Viewport.method_get_visible_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_visible_rect, handle, nil, &_result)
         return _result
     }
     
@@ -1198,7 +1198,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_transparent_background, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_transparent_background, handle, pArgs, nil)
                 }
                 
             }
@@ -1223,7 +1223,7 @@ open class Viewport: Node {
     fileprivate final func has_transparent_background() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_has_transparent_background, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_has_transparent_background, handle, nil, &_result)
         return _result
     }
     
@@ -1244,7 +1244,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_use_hdr_2d, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_use_hdr_2d, handle, pArgs, nil)
                 }
                 
             }
@@ -1269,7 +1269,7 @@ open class Viewport: Node {
     fileprivate final func is_using_hdr_2d() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_using_hdr_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_using_hdr_2d, handle, nil, &_result)
         return _result
     }
     
@@ -1290,7 +1290,7 @@ open class Viewport: Node {
         withUnsafePointer(to: msaa.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_msaa_2d, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_msaa_2d, handle, pArgs, nil)
                 }
                 
             }
@@ -1315,7 +1315,7 @@ open class Viewport: Node {
     fileprivate final func get_msaa_2d() -> Viewport.MSAA {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Viewport.method_get_msaa_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_msaa_2d, handle, nil, &_result)
         return Viewport.MSAA (rawValue: _result)!
     }
     
@@ -1336,7 +1336,7 @@ open class Viewport: Node {
         withUnsafePointer(to: msaa.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_msaa_3d, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_msaa_3d, handle, pArgs, nil)
                 }
                 
             }
@@ -1361,7 +1361,7 @@ open class Viewport: Node {
     fileprivate final func get_msaa_3d() -> Viewport.MSAA {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Viewport.method_get_msaa_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_msaa_3d, handle, nil, &_result)
         return Viewport.MSAA (rawValue: _result)!
     }
     
@@ -1382,7 +1382,7 @@ open class Viewport: Node {
         withUnsafePointer(to: screenSpaceAa.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_screen_space_aa, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_screen_space_aa, handle, pArgs, nil)
                 }
                 
             }
@@ -1407,7 +1407,7 @@ open class Viewport: Node {
     fileprivate final func get_screen_space_aa() -> Viewport.ScreenSpaceAA {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Viewport.method_get_screen_space_aa, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_screen_space_aa, handle, nil, &_result)
         return Viewport.ScreenSpaceAA (rawValue: _result)!
     }
     
@@ -1428,7 +1428,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_use_taa, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_use_taa, handle, pArgs, nil)
                 }
                 
             }
@@ -1453,7 +1453,7 @@ open class Viewport: Node {
     fileprivate final func is_using_taa() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_using_taa, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_using_taa, handle, nil, &_result)
         return _result
     }
     
@@ -1474,7 +1474,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_use_debanding, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_use_debanding, handle, pArgs, nil)
                 }
                 
             }
@@ -1499,7 +1499,7 @@ open class Viewport: Node {
     fileprivate final func is_using_debanding() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_using_debanding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_using_debanding, handle, nil, &_result)
         return _result
     }
     
@@ -1520,7 +1520,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_use_occlusion_culling, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_use_occlusion_culling, handle, pArgs, nil)
                 }
                 
             }
@@ -1545,7 +1545,7 @@ open class Viewport: Node {
     fileprivate final func is_using_occlusion_culling() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_using_occlusion_culling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_using_occlusion_culling, handle, nil, &_result)
         return _result
     }
     
@@ -1566,7 +1566,7 @@ open class Viewport: Node {
         withUnsafePointer(to: debugDraw.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_debug_draw, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_debug_draw, handle, pArgs, nil)
                 }
                 
             }
@@ -1591,7 +1591,7 @@ open class Viewport: Node {
     fileprivate final func get_debug_draw() -> Viewport.DebugDraw {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Viewport.method_get_debug_draw, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_debug_draw, handle, nil, &_result)
         return Viewport.DebugDraw (rawValue: _result)!
     }
     
@@ -1614,7 +1614,7 @@ open class Viewport: Node {
             withUnsafePointer(to: info.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Viewport.method_get_render_info, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Viewport.method_get_render_info, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1645,9 +1645,9 @@ open class Viewport: Node {
     /// 
     public final func getTexture() -> ViewportTexture? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Viewport.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Viewport.method_get_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_physics_object_picking: GDExtensionMethodBindPtr = {
@@ -1667,7 +1667,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_physics_object_picking, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_physics_object_picking, handle, pArgs, nil)
                 }
                 
             }
@@ -1692,7 +1692,7 @@ open class Viewport: Node {
     fileprivate final func get_physics_object_picking() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_get_physics_object_picking, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_physics_object_picking, handle, nil, &_result)
         return _result
     }
     
@@ -1713,7 +1713,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_physics_object_picking_sort, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_physics_object_picking_sort, handle, pArgs, nil)
                 }
                 
             }
@@ -1738,7 +1738,7 @@ open class Viewport: Node {
     fileprivate final func get_physics_object_picking_sort() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_get_physics_object_picking_sort, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_physics_object_picking_sort, handle, nil, &_result)
         return _result
     }
     
@@ -1759,7 +1759,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_physics_object_picking_first_only, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_physics_object_picking_first_only, handle, pArgs, nil)
                 }
                 
             }
@@ -1784,7 +1784,7 @@ open class Viewport: Node {
     fileprivate final func get_physics_object_picking_first_only() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_get_physics_object_picking_first_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_physics_object_picking_first_only, handle, nil, &_result)
         return _result
     }
     
@@ -1803,7 +1803,7 @@ open class Viewport: Node {
     public final func getViewportRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(Viewport.method_get_viewport_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Viewport.method_get_viewport_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -1825,7 +1825,7 @@ open class Viewport: Node {
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_push_text_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_push_text_input, handle, pArgs, nil)
                 }
                 
             }
@@ -1874,7 +1874,7 @@ open class Viewport: Node {
             withUnsafePointer(to: inLocalCoords) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Viewport.method_push_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Viewport.method_push_input, handle, pArgs, nil)
                     }
                     
                 }
@@ -1921,7 +1921,7 @@ open class Viewport: Node {
             withUnsafePointer(to: inLocalCoords) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Viewport.method_push_unhandled_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Viewport.method_push_unhandled_input, handle, pArgs, nil)
                     }
                     
                 }
@@ -1950,7 +1950,7 @@ open class Viewport: Node {
     /// 
     public final func notifyMouseEntered() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Viewport.method_notify_mouse_entered, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Viewport.method_notify_mouse_entered, handle, nil, nil)
         
     }
     
@@ -1971,7 +1971,7 @@ open class Viewport: Node {
     /// 
     public final func notifyMouseExited() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Viewport.method_notify_mouse_exited, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Viewport.method_notify_mouse_exited, handle, nil, nil)
         
     }
     
@@ -1990,7 +1990,7 @@ open class Viewport: Node {
     public final func getMousePosition() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Viewport.method_get_mouse_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_mouse_position, handle, nil, &_result)
         return _result
     }
     
@@ -2014,7 +2014,7 @@ open class Viewport: Node {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_warp_mouse, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_warp_mouse, handle, pArgs, nil)
                 }
                 
             }
@@ -2038,7 +2038,7 @@ open class Viewport: Node {
     /// Force instantly updating the display based on the current mouse cursor position. This includes updating the mouse cursor shape and sending necessary [signal Control.mouse_entered], [signal CollisionObject2D.mouse_entered], [signal CollisionObject3D.mouse_entered] and [signal Window.mouse_entered] signals and their respective `mouse_exited` counterparts.
     public final func updateMouseCursorState() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Viewport.method_update_mouse_cursor_state, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Viewport.method_update_mouse_cursor_state, handle, nil, nil)
         
     }
     
@@ -2056,7 +2056,7 @@ open class Viewport: Node {
     /// Cancels the drag operation that was previously started through ``Control/_getDragData(atPosition:)`` or forced with ``Control/forceDrag(data:preview:)``.
     public final func guiCancelDrag() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Viewport.method_gui_cancel_drag, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Viewport.method_gui_cancel_drag, handle, nil, nil)
         
     }
     
@@ -2075,7 +2075,7 @@ open class Viewport: Node {
     public final func guiGetDragData() -> Variant? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        gi.object_method_bind_ptrcall(Viewport.method_gui_get_drag_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_gui_get_drag_data, handle, nil, &_result)
         return Variant(takingOver: _result)
     }
     
@@ -2097,7 +2097,7 @@ open class Viewport: Node {
     public final func guiIsDragging() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_gui_is_dragging, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_gui_is_dragging, handle, nil, &_result)
         return _result
     }
     
@@ -2116,7 +2116,7 @@ open class Viewport: Node {
     public final func guiIsDragSuccessful() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_gui_is_drag_successful, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_gui_is_drag_successful, handle, nil, &_result)
         return _result
     }
     
@@ -2134,7 +2134,7 @@ open class Viewport: Node {
     /// Removes the focus from the currently focused ``Control`` within this viewport. If no ``Control`` has the focus, does nothing.
     public final func guiReleaseFocus() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Viewport.method_gui_release_focus, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Viewport.method_gui_release_focus, handle, nil, nil)
         
     }
     
@@ -2152,9 +2152,9 @@ open class Viewport: Node {
     /// Returns the currently focused ``Control`` within this viewport. If no ``Control`` is focused, returns `null`.
     public final func guiGetFocusOwner() -> Control? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Viewport.method_gui_get_focus_owner, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Viewport.method_gui_get_focus_owner, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_gui_get_hovered_control: GDExtensionMethodBindPtr = {
@@ -2174,9 +2174,9 @@ open class Viewport: Node {
     /// 
     public final func guiGetHoveredControl() -> Control? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Viewport.method_gui_get_hovered_control, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Viewport.method_gui_get_hovered_control, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_disable_input: GDExtensionMethodBindPtr = {
@@ -2196,7 +2196,7 @@ open class Viewport: Node {
         withUnsafePointer(to: disable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_disable_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_disable_input, handle, pArgs, nil)
                 }
                 
             }
@@ -2221,7 +2221,7 @@ open class Viewport: Node {
     fileprivate final func is_input_disabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_input_disabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_input_disabled, handle, nil, &_result)
         return _result
     }
     
@@ -2242,7 +2242,7 @@ open class Viewport: Node {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_positional_shadow_atlas_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_positional_shadow_atlas_size, handle, pArgs, nil)
                 }
                 
             }
@@ -2267,7 +2267,7 @@ open class Viewport: Node {
     fileprivate final func get_positional_shadow_atlas_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Viewport.method_get_positional_shadow_atlas_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_positional_shadow_atlas_size, handle, nil, &_result)
         return _result
     }
     
@@ -2288,7 +2288,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_positional_shadow_atlas_16_bits, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_positional_shadow_atlas_16_bits, handle, pArgs, nil)
                 }
                 
             }
@@ -2313,7 +2313,7 @@ open class Viewport: Node {
     fileprivate final func get_positional_shadow_atlas_16_bits() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_get_positional_shadow_atlas_16_bits, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_positional_shadow_atlas_16_bits, handle, nil, &_result)
         return _result
     }
     
@@ -2334,7 +2334,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_snap_controls_to_pixels, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_snap_controls_to_pixels, handle, pArgs, nil)
                 }
                 
             }
@@ -2359,7 +2359,7 @@ open class Viewport: Node {
     fileprivate final func is_snap_controls_to_pixels_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_snap_controls_to_pixels_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_snap_controls_to_pixels_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2380,7 +2380,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_snap_2d_transforms_to_pixel, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_snap_2d_transforms_to_pixel, handle, pArgs, nil)
                 }
                 
             }
@@ -2405,7 +2405,7 @@ open class Viewport: Node {
     fileprivate final func is_snap_2d_transforms_to_pixel_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_snap_2d_transforms_to_pixel_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_snap_2d_transforms_to_pixel_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2426,7 +2426,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_snap_2d_vertices_to_pixel, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_snap_2d_vertices_to_pixel, handle, pArgs, nil)
                 }
                 
             }
@@ -2451,7 +2451,7 @@ open class Viewport: Node {
     fileprivate final func is_snap_2d_vertices_to_pixel_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_snap_2d_vertices_to_pixel_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_snap_2d_vertices_to_pixel_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2474,7 +2474,7 @@ open class Viewport: Node {
             withUnsafePointer(to: subdiv.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Viewport.method_set_positional_shadow_atlas_quadrant_subdiv, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Viewport.method_set_positional_shadow_atlas_quadrant_subdiv, handle, pArgs, nil)
                     }
                     
                 }
@@ -2505,7 +2505,7 @@ open class Viewport: Node {
         withUnsafePointer(to: quadrant) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_get_positional_shadow_atlas_quadrant_subdiv, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Viewport.method_get_positional_shadow_atlas_quadrant_subdiv, handle, pArgs, &_result)
                 }
                 
             }
@@ -2532,7 +2532,7 @@ open class Viewport: Node {
     /// 
     public final func setInputAsHandled() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Viewport.method_set_input_as_handled, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Viewport.method_set_input_as_handled, handle, nil, nil)
         
     }
     
@@ -2556,7 +2556,7 @@ open class Viewport: Node {
     public final func isInputHandled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_input_handled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_input_handled, handle, nil, &_result)
         return _result
     }
     
@@ -2577,7 +2577,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_handle_input_locally, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_handle_input_locally, handle, pArgs, nil)
                 }
                 
             }
@@ -2602,7 +2602,7 @@ open class Viewport: Node {
     fileprivate final func is_handling_input_locally() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_handling_input_locally, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_handling_input_locally, handle, nil, &_result)
         return _result
     }
     
@@ -2623,7 +2623,7 @@ open class Viewport: Node {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_default_canvas_item_texture_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_default_canvas_item_texture_filter, handle, pArgs, nil)
                 }
                 
             }
@@ -2648,7 +2648,7 @@ open class Viewport: Node {
     fileprivate final func get_default_canvas_item_texture_filter() -> Viewport.DefaultCanvasItemTextureFilter {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Viewport.method_get_default_canvas_item_texture_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_default_canvas_item_texture_filter, handle, nil, &_result)
         return Viewport.DefaultCanvasItemTextureFilter (rawValue: _result)!
     }
     
@@ -2669,7 +2669,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_embedding_subwindows, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_embedding_subwindows, handle, pArgs, nil)
                 }
                 
             }
@@ -2694,7 +2694,7 @@ open class Viewport: Node {
     fileprivate final func is_embedding_subwindows() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_embedding_subwindows, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_embedding_subwindows, handle, nil, &_result)
         return _result
     }
     
@@ -2716,7 +2716,7 @@ open class Viewport: Node {
     public final func getEmbeddedSubwindows() -> TypedArray<Window?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Viewport.method_get_embedded_subwindows, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_embedded_subwindows, handle, nil, &_result)
         return TypedArray<Window?>(takingOver: _result)
     }
     
@@ -2737,7 +2737,7 @@ open class Viewport: Node {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_canvas_cull_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_canvas_cull_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -2762,7 +2762,7 @@ open class Viewport: Node {
     fileprivate final func get_canvas_cull_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(Viewport.method_get_canvas_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_canvas_cull_mask, handle, nil, &_result)
         return _result
     }
     
@@ -2784,7 +2784,7 @@ open class Viewport: Node {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Viewport.method_set_canvas_cull_mask_bit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Viewport.method_set_canvas_cull_mask_bit, handle, pArgs, nil)
                     }
                     
                 }
@@ -2814,7 +2814,7 @@ open class Viewport: Node {
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_get_canvas_cull_mask_bit, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Viewport.method_get_canvas_cull_mask_bit, handle, pArgs, &_result)
                 }
                 
             }
@@ -2841,7 +2841,7 @@ open class Viewport: Node {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_default_canvas_item_texture_repeat, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_default_canvas_item_texture_repeat, handle, pArgs, nil)
                 }
                 
             }
@@ -2866,7 +2866,7 @@ open class Viewport: Node {
     fileprivate final func get_default_canvas_item_texture_repeat() -> Viewport.DefaultCanvasItemTextureRepeat {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Viewport.method_get_default_canvas_item_texture_repeat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_default_canvas_item_texture_repeat, handle, nil, &_result)
         return Viewport.DefaultCanvasItemTextureRepeat (rawValue: _result)!
     }
     
@@ -2887,7 +2887,7 @@ open class Viewport: Node {
         withUnsafePointer(to: oversize.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_sdf_oversize, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_sdf_oversize, handle, pArgs, nil)
                 }
                 
             }
@@ -2912,7 +2912,7 @@ open class Viewport: Node {
     fileprivate final func get_sdf_oversize() -> Viewport.SDFOversize {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Viewport.method_get_sdf_oversize, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_sdf_oversize, handle, nil, &_result)
         return Viewport.SDFOversize (rawValue: _result)!
     }
     
@@ -2933,7 +2933,7 @@ open class Viewport: Node {
         withUnsafePointer(to: scale.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_sdf_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_sdf_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -2958,7 +2958,7 @@ open class Viewport: Node {
     fileprivate final func get_sdf_scale() -> Viewport.SDFScale {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Viewport.method_get_sdf_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_sdf_scale, handle, nil, &_result)
         return Viewport.SDFScale (rawValue: _result)!
     }
     
@@ -2979,7 +2979,7 @@ open class Viewport: Node {
         withUnsafePointer(to: pixels) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_mesh_lod_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_mesh_lod_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -3004,7 +3004,7 @@ open class Viewport: Node {
     fileprivate final func get_mesh_lod_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Viewport.method_get_mesh_lod_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_mesh_lod_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -3025,7 +3025,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_as_audio_listener_2d, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_as_audio_listener_2d, handle, pArgs, nil)
                 }
                 
             }
@@ -3050,7 +3050,7 @@ open class Viewport: Node {
     fileprivate final func is_audio_listener_2d() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_audio_listener_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_audio_listener_2d, handle, nil, &_result)
         return _result
     }
     
@@ -3068,9 +3068,9 @@ open class Viewport: Node {
     /// Returns the currently active 2D audio listener. Returns `null` if there are no active 2D audio listeners, in which case the active 2D camera will be treated as listener.
     public final func getAudioListener2d() -> AudioListener2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Viewport.method_get_audio_listener_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Viewport.method_get_audio_listener_2d, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_camera_2d: GDExtensionMethodBindPtr = {
@@ -3087,9 +3087,9 @@ open class Viewport: Node {
     /// Returns the currently active 2D camera. Returns `null` if there are no active cameras.
     public final func getCamera2d() -> Camera2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Viewport.method_get_camera_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Viewport.method_get_camera_2d, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_world_3d: GDExtensionMethodBindPtr = {
@@ -3109,7 +3109,7 @@ open class Viewport: Node {
         withUnsafePointer(to: world3d?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_world_3d, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_world_3d, handle, pArgs, nil)
                 }
                 
             }
@@ -3133,9 +3133,9 @@ open class Viewport: Node {
     @inline(__always)
     fileprivate final func get_world_3d() -> World3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Viewport.method_get_world_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Viewport.method_get_world_3d, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_find_world_3d: GDExtensionMethodBindPtr = {
@@ -3152,9 +3152,9 @@ open class Viewport: Node {
     /// Returns the first valid ``World3D`` for this viewport, searching the ``world3d`` property of itself and any Viewport ancestor.
     public final func findWorld3d() -> World3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Viewport.method_find_world_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Viewport.method_find_world_3d, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_use_own_world_3d: GDExtensionMethodBindPtr = {
@@ -3174,7 +3174,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_use_own_world_3d, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_use_own_world_3d, handle, pArgs, nil)
                 }
                 
             }
@@ -3199,7 +3199,7 @@ open class Viewport: Node {
     fileprivate final func is_using_own_world_3d() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_using_own_world_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_using_own_world_3d, handle, nil, &_result)
         return _result
     }
     
@@ -3217,9 +3217,9 @@ open class Viewport: Node {
     /// Returns the currently active 3D audio listener. Returns `null` if there are no active 3D audio listeners, in which case the active 3D camera will be treated as listener.
     public final func getAudioListener3d() -> AudioListener3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Viewport.method_get_audio_listener_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Viewport.method_get_audio_listener_3d, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_camera_3d: GDExtensionMethodBindPtr = {
@@ -3236,9 +3236,9 @@ open class Viewport: Node {
     /// Returns the currently active 3D camera.
     public final func getCamera3d() -> Camera3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Viewport.method_get_camera_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Viewport.method_get_camera_3d, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_as_audio_listener_3d: GDExtensionMethodBindPtr = {
@@ -3258,7 +3258,7 @@ open class Viewport: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_as_audio_listener_3d, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_as_audio_listener_3d, handle, pArgs, nil)
                 }
                 
             }
@@ -3283,7 +3283,7 @@ open class Viewport: Node {
     fileprivate final func is_audio_listener_3d() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_audio_listener_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_audio_listener_3d, handle, nil, &_result)
         return _result
     }
     
@@ -3304,7 +3304,7 @@ open class Viewport: Node {
         withUnsafePointer(to: disable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_disable_3d, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_disable_3d, handle, pArgs, nil)
                 }
                 
             }
@@ -3329,7 +3329,7 @@ open class Viewport: Node {
     fileprivate final func is_3d_disabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_3d_disabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_3d_disabled, handle, nil, &_result)
         return _result
     }
     
@@ -3350,7 +3350,7 @@ open class Viewport: Node {
         withUnsafePointer(to: use) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_use_xr, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_use_xr, handle, pArgs, nil)
                 }
                 
             }
@@ -3375,7 +3375,7 @@ open class Viewport: Node {
     fileprivate final func is_using_xr() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Viewport.method_is_using_xr, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_is_using_xr, handle, nil, &_result)
         return _result
     }
     
@@ -3396,7 +3396,7 @@ open class Viewport: Node {
         withUnsafePointer(to: scaling3dMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_scaling_3d_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_scaling_3d_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -3421,7 +3421,7 @@ open class Viewport: Node {
     fileprivate final func get_scaling_3d_mode() -> Viewport.Scaling3DMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Viewport.method_get_scaling_3d_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_scaling_3d_mode, handle, nil, &_result)
         return Viewport.Scaling3DMode (rawValue: _result)!
     }
     
@@ -3442,7 +3442,7 @@ open class Viewport: Node {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_scaling_3d_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_scaling_3d_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -3467,7 +3467,7 @@ open class Viewport: Node {
     fileprivate final func get_scaling_3d_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Viewport.method_get_scaling_3d_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_scaling_3d_scale, handle, nil, &_result)
         return _result
     }
     
@@ -3488,7 +3488,7 @@ open class Viewport: Node {
         withUnsafePointer(to: fsrSharpness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_fsr_sharpness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_fsr_sharpness, handle, pArgs, nil)
                 }
                 
             }
@@ -3513,7 +3513,7 @@ open class Viewport: Node {
     fileprivate final func get_fsr_sharpness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Viewport.method_get_fsr_sharpness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_fsr_sharpness, handle, nil, &_result)
         return _result
     }
     
@@ -3534,7 +3534,7 @@ open class Viewport: Node {
         withUnsafePointer(to: textureMipmapBias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_texture_mipmap_bias, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_texture_mipmap_bias, handle, pArgs, nil)
                 }
                 
             }
@@ -3559,7 +3559,7 @@ open class Viewport: Node {
     fileprivate final func get_texture_mipmap_bias() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Viewport.method_get_texture_mipmap_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_texture_mipmap_bias, handle, nil, &_result)
         return _result
     }
     
@@ -3580,7 +3580,7 @@ open class Viewport: Node {
         withUnsafePointer(to: anisotropicFilteringLevel.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_anisotropic_filtering_level, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_anisotropic_filtering_level, handle, pArgs, nil)
                 }
                 
             }
@@ -3605,7 +3605,7 @@ open class Viewport: Node {
     fileprivate final func get_anisotropic_filtering_level() -> Viewport.AnisotropicFiltering {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Viewport.method_get_anisotropic_filtering_level, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_anisotropic_filtering_level, handle, nil, &_result)
         return Viewport.AnisotropicFiltering (rawValue: _result)!
     }
     
@@ -3626,7 +3626,7 @@ open class Viewport: Node {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_vrs_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_vrs_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -3651,7 +3651,7 @@ open class Viewport: Node {
     fileprivate final func get_vrs_mode() -> Viewport.VRSMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Viewport.method_get_vrs_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_vrs_mode, handle, nil, &_result)
         return Viewport.VRSMode (rawValue: _result)!
     }
     
@@ -3672,7 +3672,7 @@ open class Viewport: Node {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_vrs_update_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_vrs_update_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -3697,7 +3697,7 @@ open class Viewport: Node {
     fileprivate final func get_vrs_update_mode() -> Viewport.VRSUpdateMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Viewport.method_get_vrs_update_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Viewport.method_get_vrs_update_mode, handle, nil, &_result)
         return Viewport.VRSUpdateMode (rawValue: _result)!
     }
     
@@ -3718,7 +3718,7 @@ open class Viewport: Node {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Viewport.method_set_vrs_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Viewport.method_set_vrs_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -3742,9 +3742,9 @@ open class Viewport: Node {
     @inline(__always)
     fileprivate final func get_vrs_texture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Viewport.method_get_vrs_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Viewport.method_get_vrs_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

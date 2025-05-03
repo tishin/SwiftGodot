@@ -201,7 +201,7 @@ open class Button: BaseButton {
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Button.method_set_text, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Button.method_set_text, handle, pArgs, nil)
                 }
                 
             }
@@ -226,7 +226,7 @@ open class Button: BaseButton {
     fileprivate final func get_text() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Button.method_get_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Button.method_get_text, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -247,7 +247,7 @@ open class Button: BaseButton {
         withUnsafePointer(to: overrunBehavior.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Button.method_set_text_overrun_behavior, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Button.method_set_text_overrun_behavior, handle, pArgs, nil)
                 }
                 
             }
@@ -272,7 +272,7 @@ open class Button: BaseButton {
     fileprivate final func get_text_overrun_behavior() -> TextServer.OverrunBehavior {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Button.method_get_text_overrun_behavior, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Button.method_get_text_overrun_behavior, handle, nil, &_result)
         return TextServer.OverrunBehavior (rawValue: _result)!
     }
     
@@ -293,7 +293,7 @@ open class Button: BaseButton {
         withUnsafePointer(to: autowrapMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Button.method_set_autowrap_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Button.method_set_autowrap_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -318,7 +318,7 @@ open class Button: BaseButton {
     fileprivate final func get_autowrap_mode() -> TextServer.AutowrapMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Button.method_get_autowrap_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Button.method_get_autowrap_mode, handle, nil, &_result)
         return TextServer.AutowrapMode (rawValue: _result)!
     }
     
@@ -339,7 +339,7 @@ open class Button: BaseButton {
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Button.method_set_text_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Button.method_set_text_direction, handle, pArgs, nil)
                 }
                 
             }
@@ -364,7 +364,7 @@ open class Button: BaseButton {
     fileprivate final func get_text_direction() -> Control.TextDirection {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Button.method_get_text_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Button.method_get_text_direction, handle, nil, &_result)
         return Control.TextDirection (rawValue: _result)!
     }
     
@@ -386,7 +386,7 @@ open class Button: BaseButton {
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Button.method_set_language, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Button.method_set_language, handle, pArgs, nil)
                 }
                 
             }
@@ -411,7 +411,7 @@ open class Button: BaseButton {
     fileprivate final func get_language() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Button.method_get_language, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Button.method_get_language, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -432,7 +432,7 @@ open class Button: BaseButton {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Button.method_set_button_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Button.method_set_button_icon, handle, pArgs, nil)
                 }
                 
             }
@@ -456,9 +456,9 @@ open class Button: BaseButton {
     @inline(__always)
     fileprivate final func get_button_icon() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Button.method_get_button_icon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Button.method_get_button_icon, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_flat: GDExtensionMethodBindPtr = {
@@ -478,7 +478,7 @@ open class Button: BaseButton {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Button.method_set_flat, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Button.method_set_flat, handle, pArgs, nil)
                 }
                 
             }
@@ -503,7 +503,7 @@ open class Button: BaseButton {
     fileprivate final func is_flat() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Button.method_is_flat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Button.method_is_flat, handle, nil, &_result)
         return _result
     }
     
@@ -524,7 +524,7 @@ open class Button: BaseButton {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Button.method_set_clip_text, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Button.method_set_clip_text, handle, pArgs, nil)
                 }
                 
             }
@@ -549,7 +549,7 @@ open class Button: BaseButton {
     fileprivate final func get_clip_text() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Button.method_get_clip_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Button.method_get_clip_text, handle, nil, &_result)
         return _result
     }
     
@@ -570,7 +570,7 @@ open class Button: BaseButton {
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Button.method_set_text_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Button.method_set_text_alignment, handle, pArgs, nil)
                 }
                 
             }
@@ -595,7 +595,7 @@ open class Button: BaseButton {
     fileprivate final func get_text_alignment() -> HorizontalAlignment {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Button.method_get_text_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Button.method_get_text_alignment, handle, nil, &_result)
         return HorizontalAlignment (rawValue: _result)!
     }
     
@@ -616,7 +616,7 @@ open class Button: BaseButton {
         withUnsafePointer(to: iconAlignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Button.method_set_icon_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Button.method_set_icon_alignment, handle, pArgs, nil)
                 }
                 
             }
@@ -641,7 +641,7 @@ open class Button: BaseButton {
     fileprivate final func get_icon_alignment() -> HorizontalAlignment {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Button.method_get_icon_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Button.method_get_icon_alignment, handle, nil, &_result)
         return HorizontalAlignment (rawValue: _result)!
     }
     
@@ -662,7 +662,7 @@ open class Button: BaseButton {
         withUnsafePointer(to: verticalIconAlignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Button.method_set_vertical_icon_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Button.method_set_vertical_icon_alignment, handle, pArgs, nil)
                 }
                 
             }
@@ -687,7 +687,7 @@ open class Button: BaseButton {
     fileprivate final func get_vertical_icon_alignment() -> VerticalAlignment {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Button.method_get_vertical_icon_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Button.method_get_vertical_icon_alignment, handle, nil, &_result)
         return VerticalAlignment (rawValue: _result)!
     }
     
@@ -708,7 +708,7 @@ open class Button: BaseButton {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Button.method_set_expand_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Button.method_set_expand_icon, handle, pArgs, nil)
                 }
                 
             }
@@ -733,7 +733,7 @@ open class Button: BaseButton {
     fileprivate final func is_expand_icon() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Button.method_is_expand_icon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Button.method_is_expand_icon, handle, nil, &_result)
         return _result
     }
     

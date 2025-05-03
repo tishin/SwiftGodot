@@ -26,7 +26,7 @@ open class EngineDebugger: Object {
     /// The shared instance of this class
     public static var shared: EngineDebugger {
         return withUnsafePointer(to: &EngineDebugger.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -48,7 +48,7 @@ open class EngineDebugger: Object {
     /// Returns `true` if the debugger is active otherwise `false`.
     public static func isActive() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_active, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_active, shared.handle, nil, &_result)
         return _result
     }
     
@@ -69,7 +69,7 @@ open class EngineDebugger: Object {
             withUnsafePointer(to: profiler?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_register_profiler, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_register_profiler, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -97,7 +97,7 @@ open class EngineDebugger: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_unregister_profiler, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_unregister_profiler, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -124,7 +124,7 @@ open class EngineDebugger: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_profiling, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_profiling, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -151,7 +151,7 @@ open class EngineDebugger: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_profiler, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_profiler, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -178,7 +178,7 @@ open class EngineDebugger: Object {
             withUnsafePointer(to: data.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_profiler_add_frame_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_profiler_add_frame_data, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -208,7 +208,7 @@ open class EngineDebugger: Object {
                 withUnsafePointer(to: arguments.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_profiler_enable, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_profiler_enable, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -244,7 +244,7 @@ open class EngineDebugger: Object {
             withUnsafePointer(to: callable.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_register_message_capture, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_register_message_capture, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -272,7 +272,7 @@ open class EngineDebugger: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_unregister_message_capture, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_unregister_message_capture, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -299,7 +299,7 @@ open class EngineDebugger: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_capture, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_capture, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -322,7 +322,7 @@ open class EngineDebugger: Object {
     
     /// Forces a processing loop of debugger events. The purpose of this method is just processing events every now and then when the script might get too busy, so that bugs like infinite loops can be caught.
     public static func linePoll() {
-        gi.object_method_bind_ptrcall(method_line_poll, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_line_poll, shared.handle, nil, nil)
         
     }
     
@@ -344,7 +344,7 @@ open class EngineDebugger: Object {
             withUnsafePointer(to: data.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_send_message, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_send_message, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -373,7 +373,7 @@ open class EngineDebugger: Object {
             withUnsafePointer(to: isErrorBreakpoint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_debug, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_debug, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -403,7 +403,7 @@ open class EngineDebugger: Object {
                 withUnsafePointer(to: isErrorBreakpoint) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_script_debug, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_script_debug, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -433,7 +433,7 @@ open class EngineDebugger: Object {
         withUnsafePointer(to: lines) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_lines_left, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_lines_left, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -457,7 +457,7 @@ open class EngineDebugger: Object {
     /// Returns the number of lines that remain.
     public static func getLinesLeft() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_lines_left, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_lines_left, shared.handle, nil, &_result)
         return _result
     }
     
@@ -477,7 +477,7 @@ open class EngineDebugger: Object {
         withUnsafePointer(to: depth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_depth, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_depth, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -501,7 +501,7 @@ open class EngineDebugger: Object {
     /// Returns the current debug depth.
     public static func getDepth() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_depth, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_depth, shared.handle, nil, &_result)
         return _result
     }
     
@@ -523,7 +523,7 @@ open class EngineDebugger: Object {
             withUnsafePointer(to: source.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_is_breakpoint, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_is_breakpoint, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -549,7 +549,7 @@ open class EngineDebugger: Object {
     /// Returns `true` if the debugger is skipping breakpoints otherwise `false`.
     public static func isSkippingBreakpoints() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_skipping_breakpoints, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_skipping_breakpoints, shared.handle, nil, &_result)
         return _result
     }
     
@@ -570,7 +570,7 @@ open class EngineDebugger: Object {
             withUnsafePointer(to: source.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_insert_breakpoint, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_insert_breakpoint, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -599,7 +599,7 @@ open class EngineDebugger: Object {
             withUnsafePointer(to: source.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_remove_breakpoint, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_remove_breakpoint, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -624,7 +624,7 @@ open class EngineDebugger: Object {
     
     /// Clears all breakpoints.
     public static func clearBreakpoints() {
-        gi.object_method_bind_ptrcall(method_clear_breakpoints, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_clear_breakpoints, shared.handle, nil, nil)
         
     }
     

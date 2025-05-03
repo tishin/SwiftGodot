@@ -94,7 +94,7 @@ open class RDPipelineColorBlendState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_set_enable_logic_op, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_set_enable_logic_op, handle, pArgs, nil)
                 }
                 
             }
@@ -119,7 +119,7 @@ open class RDPipelineColorBlendState: RefCounted {
     fileprivate final func get_enable_logic_op() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_get_enable_logic_op, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_get_enable_logic_op, handle, nil, &_result)
         return _result
     }
     
@@ -140,7 +140,7 @@ open class RDPipelineColorBlendState: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_set_logic_op, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_set_logic_op, handle, pArgs, nil)
                 }
                 
             }
@@ -165,7 +165,7 @@ open class RDPipelineColorBlendState: RefCounted {
     fileprivate final func get_logic_op() -> RenderingDevice.LogicOperation {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_get_logic_op, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_get_logic_op, handle, nil, &_result)
         return RenderingDevice.LogicOperation (rawValue: _result)!
     }
     
@@ -186,7 +186,7 @@ open class RDPipelineColorBlendState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_set_blend_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_set_blend_constant, handle, pArgs, nil)
                 }
                 
             }
@@ -211,7 +211,7 @@ open class RDPipelineColorBlendState: RefCounted {
     fileprivate final func get_blend_constant() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_get_blend_constant, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_get_blend_constant, handle, nil, &_result)
         return _result
     }
     
@@ -232,7 +232,7 @@ open class RDPipelineColorBlendState: RefCounted {
         withUnsafePointer(to: attachments.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_set_attachments, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_set_attachments, handle, pArgs, nil)
                 }
                 
             }
@@ -257,7 +257,7 @@ open class RDPipelineColorBlendState: RefCounted {
     fileprivate final func get_attachments() -> TypedArray<RDPipelineColorBlendStateAttachment?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_get_attachments, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineColorBlendState.method_get_attachments, handle, nil, &_result)
         return TypedArray<RDPipelineColorBlendStateAttachment?>(takingOver: _result)
     }
     

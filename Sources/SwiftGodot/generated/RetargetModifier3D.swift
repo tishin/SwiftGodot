@@ -123,7 +123,7 @@ open class RetargetModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: profile?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RetargetModifier3D.method_set_profile, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RetargetModifier3D.method_set_profile, handle, pArgs, nil)
                 }
                 
             }
@@ -147,9 +147,9 @@ open class RetargetModifier3D: SkeletonModifier3D {
     @inline(__always)
     fileprivate final func get_profile() -> SkeletonProfile? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(RetargetModifier3D.method_get_profile, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(RetargetModifier3D.method_get_profile, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_use_global_pose: GDExtensionMethodBindPtr = {
@@ -169,7 +169,7 @@ open class RetargetModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: useGlobalPose) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RetargetModifier3D.method_set_use_global_pose, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RetargetModifier3D.method_set_use_global_pose, handle, pArgs, nil)
                 }
                 
             }
@@ -194,7 +194,7 @@ open class RetargetModifier3D: SkeletonModifier3D {
     fileprivate final func is_using_global_pose() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RetargetModifier3D.method_is_using_global_pose, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RetargetModifier3D.method_is_using_global_pose, handle, nil, &_result)
         return _result
     }
     
@@ -215,7 +215,7 @@ open class RetargetModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: enableFlags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RetargetModifier3D.method_set_enable_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RetargetModifier3D.method_set_enable_flags, handle, pArgs, nil)
                 }
                 
             }
@@ -240,7 +240,7 @@ open class RetargetModifier3D: SkeletonModifier3D {
     fileprivate final func get_enable_flags() -> RetargetModifier3D.TransformFlag {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: RetargetModifier3D.TransformFlag = RetargetModifier3D.TransformFlag ()
-        gi.object_method_bind_ptrcall(RetargetModifier3D.method_get_enable_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RetargetModifier3D.method_get_enable_flags, handle, nil, &_result)
         return _result
     }
     
@@ -261,7 +261,7 @@ open class RetargetModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RetargetModifier3D.method_set_position_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RetargetModifier3D.method_set_position_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -286,7 +286,7 @@ open class RetargetModifier3D: SkeletonModifier3D {
     public final func isPositionEnabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RetargetModifier3D.method_is_position_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RetargetModifier3D.method_is_position_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -307,7 +307,7 @@ open class RetargetModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RetargetModifier3D.method_set_rotation_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RetargetModifier3D.method_set_rotation_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -332,7 +332,7 @@ open class RetargetModifier3D: SkeletonModifier3D {
     public final func isRotationEnabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RetargetModifier3D.method_is_rotation_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RetargetModifier3D.method_is_rotation_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -353,7 +353,7 @@ open class RetargetModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RetargetModifier3D.method_set_scale_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RetargetModifier3D.method_set_scale_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -378,7 +378,7 @@ open class RetargetModifier3D: SkeletonModifier3D {
     public final func isScaleEnabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RetargetModifier3D.method_is_scale_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RetargetModifier3D.method_is_scale_enabled, handle, nil, &_result)
         return _result
     }
     

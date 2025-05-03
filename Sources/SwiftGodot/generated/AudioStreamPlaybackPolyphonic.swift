@@ -59,7 +59,7 @@ open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
                             withUnsafePointer(to: bus.content) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(AudioStreamPlaybackPolyphonic.method_play_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                        gi.object_method_bind_ptrcall(AudioStreamPlaybackPolyphonic.method_play_stream, handle, pArgs, &_result)
                                     }
                                     
                                 }
@@ -97,7 +97,7 @@ open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
             withUnsafePointer(to: volumeDb) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamPlaybackPolyphonic.method_set_stream_volume, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioStreamPlaybackPolyphonic.method_set_stream_volume, handle, pArgs, nil)
                     }
                     
                 }
@@ -127,7 +127,7 @@ open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
             withUnsafePointer(to: pitchScale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamPlaybackPolyphonic.method_set_stream_pitch_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioStreamPlaybackPolyphonic.method_set_stream_pitch_scale, handle, pArgs, nil)
                     }
                     
                 }
@@ -157,7 +157,7 @@ open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
         withUnsafePointer(to: stream) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlaybackPolyphonic.method_is_stream_playing, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioStreamPlaybackPolyphonic.method_is_stream_playing, handle, pArgs, &_result)
                 }
                 
             }
@@ -184,7 +184,7 @@ open class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
         withUnsafePointer(to: stream) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlaybackPolyphonic.method_stop_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlaybackPolyphonic.method_stop_stream, handle, pArgs, nil)
                 }
                 
             }

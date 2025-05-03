@@ -61,7 +61,7 @@ open class VisualShaderNodeColorConstant: VisualShaderNodeConstant {
         withUnsafePointer(to: constant) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeColorConstant.method_set_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeColorConstant.method_set_constant, handle, pArgs, nil)
                 }
                 
             }
@@ -86,7 +86,7 @@ open class VisualShaderNodeColorConstant: VisualShaderNodeConstant {
     fileprivate final func get_constant() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeColorConstant.method_get_constant, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeColorConstant.method_get_constant, handle, nil, &_result)
         return _result
     }
     

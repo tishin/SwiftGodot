@@ -64,7 +64,7 @@ open class InputEvent: Resource {
         withUnsafePointer(to: device) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEvent.method_set_device, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEvent.method_set_device, handle, pArgs, nil)
                 }
                 
             }
@@ -89,7 +89,7 @@ open class InputEvent: Resource {
     fileprivate final func get_device() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(InputEvent.method_get_device, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEvent.method_get_device, handle, nil, &_result)
         return _result
     }
     
@@ -115,7 +115,7 @@ open class InputEvent: Resource {
             withUnsafePointer(to: exactMatch) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(InputEvent.method_is_action, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(InputEvent.method_is_action, handle, pArgs, &_result)
                     }
                     
                 }
@@ -152,7 +152,7 @@ open class InputEvent: Resource {
                 withUnsafePointer(to: exactMatch) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(InputEvent.method_is_action_pressed, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(InputEvent.method_is_action_pressed, handle, pArgs, &_result)
                         }
                         
                     }
@@ -188,7 +188,7 @@ open class InputEvent: Resource {
             withUnsafePointer(to: exactMatch) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(InputEvent.method_is_action_released, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(InputEvent.method_is_action_released, handle, pArgs, &_result)
                     }
                     
                 }
@@ -222,7 +222,7 @@ open class InputEvent: Resource {
             withUnsafePointer(to: exactMatch) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(InputEvent.method_get_action_strength, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(InputEvent.method_get_action_strength, handle, pArgs, &_result)
                     }
                     
                 }
@@ -249,7 +249,7 @@ open class InputEvent: Resource {
     public final func isCanceled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(InputEvent.method_is_canceled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEvent.method_is_canceled, handle, nil, &_result)
         return _result
     }
     
@@ -271,7 +271,7 @@ open class InputEvent: Resource {
     public final func isPressed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(InputEvent.method_is_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEvent.method_is_pressed, handle, nil, &_result)
         return _result
     }
     
@@ -290,7 +290,7 @@ open class InputEvent: Resource {
     public final func isReleased() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(InputEvent.method_is_released, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEvent.method_is_released, handle, nil, &_result)
         return _result
     }
     
@@ -312,7 +312,7 @@ open class InputEvent: Resource {
     public final func isEcho() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(InputEvent.method_is_echo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEvent.method_is_echo, handle, nil, &_result)
         return _result
     }
     
@@ -331,7 +331,7 @@ open class InputEvent: Resource {
     public final func asText() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(InputEvent.method_as_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(InputEvent.method_as_text, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -359,7 +359,7 @@ open class InputEvent: Resource {
             withUnsafePointer(to: exactMatch) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(InputEvent.method_is_match, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(InputEvent.method_is_match, handle, pArgs, &_result)
                     }
                     
                 }
@@ -386,7 +386,7 @@ open class InputEvent: Resource {
     public final func isActionType() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(InputEvent.method_is_action_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEvent.method_is_action_type, handle, nil, &_result)
         return _result
     }
     
@@ -411,7 +411,7 @@ open class InputEvent: Resource {
         withUnsafePointer(to: withEvent?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEvent.method_accumulate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(InputEvent.method_accumulate, handle, pArgs, &_result)
                 }
                 
             }
@@ -435,12 +435,12 @@ open class InputEvent: Resource {
     /// Returns a copy of the given input event which has been offset by `localOfs` and transformed by `xform`. Relevant for events of type ``InputEventMouseButton``, ``InputEventMouseMotion``, ``InputEventScreenTouch``, ``InputEventScreenDrag``, ``InputEventMagnifyGesture`` and ``InputEventPanGesture``.
     public final func xformedBy(xform: Transform2D, localOfs: Vector2 = Vector2 (x: 0, y: 0)) -> InputEvent? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: xform) { pArg0 in
             withUnsafePointer(to: localOfs) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(InputEvent.method_xformed_by, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(InputEvent.method_xformed_by, handle, pArgs, &_result)
                     }
                     
                 }
@@ -449,7 +449,7 @@ open class InputEvent: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

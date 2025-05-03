@@ -65,7 +65,7 @@ open class PlaceholderTexture2D: Texture2D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PlaceholderTexture2D.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PlaceholderTexture2D.method_set_size, handle, pArgs, nil)
                 }
                 
             }

@@ -90,7 +90,7 @@ open class ENetConnection: RefCounted {
                             withUnsafePointer(to: outBandwidth) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(ENetConnection.method_create_host_bound, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                        gi.object_method_bind_ptrcall(ENetConnection.method_create_host_bound, handle, pArgs, &_result)
                                     }
                                     
                                 }
@@ -136,7 +136,7 @@ open class ENetConnection: RefCounted {
                     withUnsafePointer(to: outBandwidth) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(ENetConnection.method_create_host, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(ENetConnection.method_create_host, handle, pArgs, &_result)
                             }
                             
                         }
@@ -166,7 +166,7 @@ open class ENetConnection: RefCounted {
     /// Destroys the host and all resources associated with it.
     public final func destroy() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ENetConnection.method_destroy, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ENetConnection.method_destroy, handle, nil, nil)
         
     }
     
@@ -187,7 +187,7 @@ open class ENetConnection: RefCounted {
     /// 
     public final func connectToHost(address: String, port: Int32, channels: Int32 = 0, data: Int32 = 0) -> ENetPacketPeer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let address = GString(address)
         withUnsafePointer(to: address.content) { pArg0 in
             withUnsafePointer(to: port) { pArg1 in
@@ -195,7 +195,7 @@ open class ENetConnection: RefCounted {
                     withUnsafePointer(to: data) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(ENetConnection.method_connect_to_host, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(ENetConnection.method_connect_to_host, handle, pArgs, &_result)
                             }
                             
                         }
@@ -208,7 +208,7 @@ open class ENetConnection: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_service: GDExtensionMethodBindPtr = {
@@ -234,7 +234,7 @@ open class ENetConnection: RefCounted {
         withUnsafePointer(to: timeout) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ENetConnection.method_service, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ENetConnection.method_service, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -258,7 +258,7 @@ open class ENetConnection: RefCounted {
     /// Sends any queued packets on the host specified to its designated peers.
     public final func flush() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ENetConnection.method_flush, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ENetConnection.method_flush, handle, nil, nil)
         
     }
     
@@ -280,7 +280,7 @@ open class ENetConnection: RefCounted {
             withUnsafePointer(to: outBandwidth) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ENetConnection.method_bandwidth_limit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ENetConnection.method_bandwidth_limit, handle, pArgs, nil)
                     }
                     
                 }
@@ -309,7 +309,7 @@ open class ENetConnection: RefCounted {
         withUnsafePointer(to: limit) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ENetConnection.method_channel_limit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ENetConnection.method_channel_limit, handle, pArgs, nil)
                 }
                 
             }
@@ -338,7 +338,7 @@ open class ENetConnection: RefCounted {
                 withUnsafePointer(to: flags) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ENetConnection.method_broadcast, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(ENetConnection.method_broadcast, handle, pArgs, nil)
                         }
                         
                     }
@@ -374,7 +374,7 @@ open class ENetConnection: RefCounted {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ENetConnection.method_compress, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ENetConnection.method_compress, handle, pArgs, nil)
                 }
                 
             }
@@ -402,7 +402,7 @@ open class ENetConnection: RefCounted {
         withUnsafePointer(to: serverOptions?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ENetConnection.method_dtls_server_setup, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ENetConnection.method_dtls_server_setup, handle, pArgs, &_result)
                 }
                 
             }
@@ -432,7 +432,7 @@ open class ENetConnection: RefCounted {
             withUnsafePointer(to: clientOptions?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ENetConnection.method_dtls_client_setup, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ENetConnection.method_dtls_client_setup, handle, pArgs, &_result)
                     }
                     
                 }
@@ -464,7 +464,7 @@ open class ENetConnection: RefCounted {
         withUnsafePointer(to: refuse) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ENetConnection.method_refuse_new_connections, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ENetConnection.method_refuse_new_connections, handle, pArgs, nil)
                 }
                 
             }
@@ -492,7 +492,7 @@ open class ENetConnection: RefCounted {
         withUnsafePointer(to: statistic.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ENetConnection.method_pop_statistic, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ENetConnection.method_pop_statistic, handle, pArgs, &_result)
                 }
                 
             }
@@ -517,7 +517,7 @@ open class ENetConnection: RefCounted {
     public final func getMaxChannels() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ENetConnection.method_get_max_channels, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ENetConnection.method_get_max_channels, handle, nil, &_result)
         return _result
     }
     
@@ -536,7 +536,7 @@ open class ENetConnection: RefCounted {
     public final func getLocalPort() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ENetConnection.method_get_local_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ENetConnection.method_get_local_port, handle, nil, &_result)
         return _result
     }
     
@@ -558,7 +558,7 @@ open class ENetConnection: RefCounted {
     public final func getPeers() -> TypedArray<ENetPacketPeer?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(ENetConnection.method_get_peers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ENetConnection.method_get_peers, handle, nil, &_result)
         return TypedArray<ENetPacketPeer?>(takingOver: _result)
     }
     
@@ -587,7 +587,7 @@ open class ENetConnection: RefCounted {
                 withUnsafePointer(to: packet.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ENetConnection.method_socket_send, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(ENetConnection.method_socket_send, handle, pArgs, nil)
                         }
                         
                     }

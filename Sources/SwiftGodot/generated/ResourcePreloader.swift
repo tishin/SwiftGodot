@@ -50,7 +50,7 @@ open class ResourcePreloader: Node {
             withUnsafePointer(to: resource?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ResourcePreloader.method_add_resource, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ResourcePreloader.method_add_resource, handle, pArgs, nil)
                     }
                     
                 }
@@ -79,7 +79,7 @@ open class ResourcePreloader: Node {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ResourcePreloader.method_remove_resource, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ResourcePreloader.method_remove_resource, handle, pArgs, nil)
                 }
                 
             }
@@ -107,7 +107,7 @@ open class ResourcePreloader: Node {
             withUnsafePointer(to: newname.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ResourcePreloader.method_rename_resource, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ResourcePreloader.method_rename_resource, handle, pArgs, nil)
                     }
                     
                 }
@@ -137,7 +137,7 @@ open class ResourcePreloader: Node {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ResourcePreloader.method_has_resource, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ResourcePreloader.method_has_resource, handle, pArgs, &_result)
                 }
                 
             }
@@ -161,18 +161,18 @@ open class ResourcePreloader: Node {
     /// Returns the resource associated to `name`.
     public final func getResource(name: StringName) -> Resource? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ResourcePreloader.method_get_resource, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ResourcePreloader.method_get_resource, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_resource_list: GDExtensionMethodBindPtr = {
@@ -190,7 +190,7 @@ open class ResourcePreloader: Node {
     public final func getResourceList() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(ResourcePreloader.method_get_resource_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ResourcePreloader.method_get_resource_list, handle, nil, &_result.content)
         return _result
     }
     

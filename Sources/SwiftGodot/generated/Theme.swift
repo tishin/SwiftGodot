@@ -115,7 +115,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: texture?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_set_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Theme.method_set_icon, handle, pArgs, nil)
                         }
                         
                     }
@@ -146,12 +146,12 @@ open class Theme: Resource {
     /// 
     public final func getIcon(name: StringName, themeType: StringName) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_get_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Theme.method_get_icon, handle, pArgs, &_result)
                     }
                     
                 }
@@ -160,7 +160,7 @@ open class Theme: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_has_icon: GDExtensionMethodBindPtr = {
@@ -185,7 +185,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_has_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Theme.method_has_icon, handle, pArgs, &_result)
                     }
                     
                 }
@@ -219,7 +219,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: themeType.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_rename_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Theme.method_rename_icon, handle, pArgs, nil)
                         }
                         
                     }
@@ -254,7 +254,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_clear_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Theme.method_clear_icon, handle, pArgs, nil)
                     }
                     
                 }
@@ -285,7 +285,7 @@ open class Theme: Resource {
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_get_icon_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Theme.method_get_icon_list, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -310,7 +310,7 @@ open class Theme: Resource {
     public final func getIconTypeList() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(Theme.method_get_icon_type_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Theme.method_get_icon_type_list, handle, nil, &_result.content)
         return _result
     }
     
@@ -333,7 +333,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: texture?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_set_stylebox, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Theme.method_set_stylebox, handle, pArgs, nil)
                         }
                         
                     }
@@ -364,12 +364,12 @@ open class Theme: Resource {
     /// 
     public final func getStylebox(name: StringName, themeType: StringName) -> StyleBox? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_get_stylebox, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Theme.method_get_stylebox, handle, pArgs, &_result)
                     }
                     
                 }
@@ -378,7 +378,7 @@ open class Theme: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_has_stylebox: GDExtensionMethodBindPtr = {
@@ -403,7 +403,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_has_stylebox, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Theme.method_has_stylebox, handle, pArgs, &_result)
                     }
                     
                 }
@@ -437,7 +437,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: themeType.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_rename_stylebox, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Theme.method_rename_stylebox, handle, pArgs, nil)
                         }
                         
                     }
@@ -472,7 +472,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_clear_stylebox, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Theme.method_clear_stylebox, handle, pArgs, nil)
                     }
                     
                 }
@@ -503,7 +503,7 @@ open class Theme: Resource {
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_get_stylebox_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Theme.method_get_stylebox_list, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -528,7 +528,7 @@ open class Theme: Resource {
     public final func getStyleboxTypeList() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(Theme.method_get_stylebox_type_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Theme.method_get_stylebox_type_list, handle, nil, &_result.content)
         return _result
     }
     
@@ -551,7 +551,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: font?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_set_font, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Theme.method_set_font, handle, pArgs, nil)
                         }
                         
                     }
@@ -584,12 +584,12 @@ open class Theme: Resource {
     /// 
     public final func getFont(name: StringName, themeType: StringName) -> Font? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_get_font, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Theme.method_get_font, handle, pArgs, &_result)
                     }
                     
                 }
@@ -598,7 +598,7 @@ open class Theme: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_has_font: GDExtensionMethodBindPtr = {
@@ -623,7 +623,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_has_font, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Theme.method_has_font, handle, pArgs, &_result)
                     }
                     
                 }
@@ -657,7 +657,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: themeType.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_rename_font, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Theme.method_rename_font, handle, pArgs, nil)
                         }
                         
                     }
@@ -692,7 +692,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_clear_font, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Theme.method_clear_font, handle, pArgs, nil)
                     }
                     
                 }
@@ -723,7 +723,7 @@ open class Theme: Resource {
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_get_font_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Theme.method_get_font_list, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -748,7 +748,7 @@ open class Theme: Resource {
     public final func getFontTypeList() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(Theme.method_get_font_type_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Theme.method_get_font_type_list, handle, nil, &_result.content)
         return _result
     }
     
@@ -771,7 +771,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: fontSize) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_set_font_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Theme.method_set_font_size, handle, pArgs, nil)
                         }
                         
                     }
@@ -809,7 +809,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_get_font_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Theme.method_get_font_size, handle, pArgs, &_result)
                     }
                     
                 }
@@ -843,7 +843,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_has_font_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Theme.method_has_font_size, handle, pArgs, &_result)
                     }
                     
                 }
@@ -877,7 +877,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: themeType.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_rename_font_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Theme.method_rename_font_size, handle, pArgs, nil)
                         }
                         
                     }
@@ -912,7 +912,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_clear_font_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Theme.method_clear_font_size, handle, pArgs, nil)
                     }
                     
                 }
@@ -943,7 +943,7 @@ open class Theme: Resource {
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_get_font_size_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Theme.method_get_font_size_list, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -968,7 +968,7 @@ open class Theme: Resource {
     public final func getFontSizeTypeList() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(Theme.method_get_font_size_type_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Theme.method_get_font_size_type_list, handle, nil, &_result.content)
         return _result
     }
     
@@ -991,7 +991,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: color) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_set_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Theme.method_set_color, handle, pArgs, nil)
                         }
                         
                     }
@@ -1027,7 +1027,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_get_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Theme.method_get_color, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1061,7 +1061,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_has_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Theme.method_has_color, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1095,7 +1095,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: themeType.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_rename_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Theme.method_rename_color, handle, pArgs, nil)
                         }
                         
                     }
@@ -1130,7 +1130,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_clear_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Theme.method_clear_color, handle, pArgs, nil)
                     }
                     
                 }
@@ -1161,7 +1161,7 @@ open class Theme: Resource {
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_get_color_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Theme.method_get_color_list, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1186,7 +1186,7 @@ open class Theme: Resource {
     public final func getColorTypeList() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(Theme.method_get_color_type_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Theme.method_get_color_type_list, handle, nil, &_result.content)
         return _result
     }
     
@@ -1209,7 +1209,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: constant) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_set_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Theme.method_set_constant, handle, pArgs, nil)
                         }
                         
                     }
@@ -1245,7 +1245,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_get_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Theme.method_get_constant, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1279,7 +1279,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_has_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Theme.method_has_constant, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1313,7 +1313,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: themeType.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_rename_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Theme.method_rename_constant, handle, pArgs, nil)
                         }
                         
                     }
@@ -1348,7 +1348,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_clear_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Theme.method_clear_constant, handle, pArgs, nil)
                     }
                     
                 }
@@ -1379,7 +1379,7 @@ open class Theme: Resource {
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_get_constant_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Theme.method_get_constant_list, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1404,7 +1404,7 @@ open class Theme: Resource {
     public final func getConstantTypeList() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(Theme.method_get_constant_type_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Theme.method_get_constant_type_list, handle, nil, &_result.content)
         return _result
     }
     
@@ -1425,7 +1425,7 @@ open class Theme: Resource {
         withUnsafePointer(to: baseScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_set_default_base_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Theme.method_set_default_base_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -1450,7 +1450,7 @@ open class Theme: Resource {
     fileprivate final func get_default_base_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Theme.method_get_default_base_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Theme.method_get_default_base_scale, handle, nil, &_result)
         return _result
     }
     
@@ -1472,7 +1472,7 @@ open class Theme: Resource {
     public final func hasDefaultBaseScale() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Theme.method_has_default_base_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Theme.method_has_default_base_scale, handle, nil, &_result)
         return _result
     }
     
@@ -1493,7 +1493,7 @@ open class Theme: Resource {
         withUnsafePointer(to: font?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_set_default_font, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Theme.method_set_default_font, handle, pArgs, nil)
                 }
                 
             }
@@ -1517,9 +1517,9 @@ open class Theme: Resource {
     @inline(__always)
     fileprivate final func get_default_font() -> Font? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Theme.method_get_default_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Theme.method_get_default_font, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_has_default_font: GDExtensionMethodBindPtr = {
@@ -1540,7 +1540,7 @@ open class Theme: Resource {
     public final func hasDefaultFont() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Theme.method_has_default_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Theme.method_has_default_font, handle, nil, &_result)
         return _result
     }
     
@@ -1561,7 +1561,7 @@ open class Theme: Resource {
         withUnsafePointer(to: fontSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_set_default_font_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Theme.method_set_default_font_size, handle, pArgs, nil)
                 }
                 
             }
@@ -1586,7 +1586,7 @@ open class Theme: Resource {
     fileprivate final func get_default_font_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Theme.method_get_default_font_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Theme.method_get_default_font_size, handle, nil, &_result)
         return _result
     }
     
@@ -1608,7 +1608,7 @@ open class Theme: Resource {
     public final func hasDefaultFontSize() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Theme.method_has_default_font_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Theme.method_has_default_font_size, handle, nil, &_result)
         return _result
     }
     
@@ -1637,7 +1637,7 @@ open class Theme: Resource {
                     withUnsafePointer(to: value.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Theme.method_set_theme_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(Theme.method_set_theme_item, handle, pArgs, nil)
                             }
                             
                         }
@@ -1678,7 +1678,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: themeType.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_get_theme_item, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Theme.method_get_theme_item, handle, pArgs, &_result)
                         }
                         
                     }
@@ -1717,7 +1717,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: themeType.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_has_theme_item, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Theme.method_has_theme_item, handle, pArgs, &_result)
                         }
                         
                     }
@@ -1756,7 +1756,7 @@ open class Theme: Resource {
                     withUnsafePointer(to: themeType.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Theme.method_rename_theme_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(Theme.method_rename_theme_item, handle, pArgs, nil)
                             }
                             
                         }
@@ -1796,7 +1796,7 @@ open class Theme: Resource {
                 withUnsafePointer(to: themeType.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Theme.method_clear_theme_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Theme.method_clear_theme_item, handle, pArgs, nil)
                         }
                         
                     }
@@ -1833,7 +1833,7 @@ open class Theme: Resource {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_get_theme_item_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Theme.method_get_theme_item_list, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1866,7 +1866,7 @@ open class Theme: Resource {
         withUnsafePointer(to: dataType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_get_theme_item_type_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Theme.method_get_theme_item_type_list, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1901,7 +1901,7 @@ open class Theme: Resource {
             withUnsafePointer(to: baseType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_set_type_variation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Theme.method_set_type_variation, handle, pArgs, nil)
                     }
                     
                 }
@@ -1932,7 +1932,7 @@ open class Theme: Resource {
             withUnsafePointer(to: baseType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Theme.method_is_type_variation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Theme.method_is_type_variation, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1961,7 +1961,7 @@ open class Theme: Resource {
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_clear_type_variation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Theme.method_clear_type_variation, handle, pArgs, nil)
                 }
                 
             }
@@ -1989,7 +1989,7 @@ open class Theme: Resource {
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_get_type_variation_base, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Theme.method_get_type_variation_base, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2017,7 +2017,7 @@ open class Theme: Resource {
         withUnsafePointer(to: baseType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_get_type_variation_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Theme.method_get_type_variation_list, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2047,7 +2047,7 @@ open class Theme: Resource {
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_add_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Theme.method_add_type, handle, pArgs, nil)
                 }
                 
             }
@@ -2074,7 +2074,7 @@ open class Theme: Resource {
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_remove_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Theme.method_remove_type, handle, pArgs, nil)
                 }
                 
             }
@@ -2099,7 +2099,7 @@ open class Theme: Resource {
     public final func getTypeList() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(Theme.method_get_type_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Theme.method_get_type_list, handle, nil, &_result.content)
         return _result
     }
     
@@ -2123,7 +2123,7 @@ open class Theme: Resource {
         withUnsafePointer(to: other?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Theme.method_merge_with, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Theme.method_merge_with, handle, pArgs, nil)
                 }
                 
             }
@@ -2147,7 +2147,7 @@ open class Theme: Resource {
     /// Removes all the theme properties defined on the theme resource.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Theme.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Theme.method_clear, handle, nil, nil)
         
     }
     

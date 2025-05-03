@@ -63,7 +63,7 @@ open class PlaceholderMesh: Mesh {
         withUnsafePointer(to: aabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PlaceholderMesh.method_set_aabb, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PlaceholderMesh.method_set_aabb, handle, pArgs, nil)
                 }
                 
             }

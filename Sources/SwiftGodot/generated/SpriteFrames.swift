@@ -46,7 +46,7 @@ open class SpriteFrames: Resource {
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteFrames.method_add_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteFrames.method_add_animation, handle, pArgs, nil)
                 }
                 
             }
@@ -74,7 +74,7 @@ open class SpriteFrames: Resource {
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteFrames.method_has_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpriteFrames.method_has_animation, handle, pArgs, &_result)
                 }
                 
             }
@@ -102,7 +102,7 @@ open class SpriteFrames: Resource {
             withUnsafePointer(to: animTo.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpriteFrames.method_duplicate_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpriteFrames.method_duplicate_animation, handle, pArgs, nil)
                     }
                     
                 }
@@ -131,7 +131,7 @@ open class SpriteFrames: Resource {
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteFrames.method_remove_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteFrames.method_remove_animation, handle, pArgs, nil)
                 }
                 
             }
@@ -159,7 +159,7 @@ open class SpriteFrames: Resource {
             withUnsafePointer(to: newname.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpriteFrames.method_rename_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpriteFrames.method_rename_animation, handle, pArgs, nil)
                     }
                     
                 }
@@ -186,7 +186,7 @@ open class SpriteFrames: Resource {
     public final func getAnimationNames() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(SpriteFrames.method_get_animation_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SpriteFrames.method_get_animation_names, handle, nil, &_result.content)
         return _result
     }
     
@@ -208,7 +208,7 @@ open class SpriteFrames: Resource {
             withUnsafePointer(to: fps) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpriteFrames.method_set_animation_speed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpriteFrames.method_set_animation_speed, handle, pArgs, nil)
                     }
                     
                 }
@@ -238,7 +238,7 @@ open class SpriteFrames: Resource {
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteFrames.method_get_animation_speed, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpriteFrames.method_get_animation_speed, handle, pArgs, &_result)
                 }
                 
             }
@@ -266,7 +266,7 @@ open class SpriteFrames: Resource {
             withUnsafePointer(to: loop) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpriteFrames.method_set_animation_loop, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpriteFrames.method_set_animation_loop, handle, pArgs, nil)
                     }
                     
                 }
@@ -296,7 +296,7 @@ open class SpriteFrames: Resource {
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteFrames.method_get_animation_loop, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpriteFrames.method_get_animation_loop, handle, pArgs, &_result)
                 }
                 
             }
@@ -326,7 +326,7 @@ open class SpriteFrames: Resource {
                     withUnsafePointer(to: atPosition) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(SpriteFrames.method_add_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(SpriteFrames.method_add_frame, handle, pArgs, nil)
                             }
                             
                         }
@@ -362,7 +362,7 @@ open class SpriteFrames: Resource {
                     withUnsafePointer(to: duration) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(SpriteFrames.method_set_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(SpriteFrames.method_set_frame, handle, pArgs, nil)
                             }
                             
                         }
@@ -396,7 +396,7 @@ open class SpriteFrames: Resource {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpriteFrames.method_remove_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpriteFrames.method_remove_frame, handle, pArgs, nil)
                     }
                     
                 }
@@ -426,7 +426,7 @@ open class SpriteFrames: Resource {
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteFrames.method_get_frame_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpriteFrames.method_get_frame_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -450,12 +450,12 @@ open class SpriteFrames: Resource {
     /// Returns the texture of the frame `idx` in the `anim` animation.
     public final func getFrameTexture(anim: StringName, idx: Int32) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpriteFrames.method_get_frame_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(SpriteFrames.method_get_frame_texture, handle, pArgs, &_result)
                     }
                     
                 }
@@ -464,7 +464,7 @@ open class SpriteFrames: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_frame_duration: GDExtensionMethodBindPtr = {
@@ -489,7 +489,7 @@ open class SpriteFrames: Resource {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpriteFrames.method_get_frame_duration, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(SpriteFrames.method_get_frame_duration, handle, pArgs, &_result)
                     }
                     
                 }
@@ -518,7 +518,7 @@ open class SpriteFrames: Resource {
         withUnsafePointer(to: anim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteFrames.method_clear, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteFrames.method_clear, handle, pArgs, nil)
                 }
                 
             }
@@ -542,7 +542,7 @@ open class SpriteFrames: Resource {
     /// Removes all animations. An empty `default` animation will be created.
     public final func clearAll() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SpriteFrames.method_clear_all, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SpriteFrames.method_clear_all, handle, nil, nil)
         
     }
     

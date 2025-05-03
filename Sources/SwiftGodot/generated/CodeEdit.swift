@@ -345,7 +345,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: replace) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method__confirm_code_completion, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method__confirm_code_completion, handle, pArgs, nil)
                 }
                 
             }
@@ -373,7 +373,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: force) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method__request_code_completion, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method__request_code_completion, handle, pArgs, nil)
                 }
                 
             }
@@ -405,7 +405,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: candidates.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method__filter_code_completion_candidates, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeEdit.method__filter_code_completion_candidates, handle, pArgs, &_result)
                 }
                 
             }
@@ -432,7 +432,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_indent_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_indent_size, handle, pArgs, nil)
                 }
                 
             }
@@ -457,7 +457,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func get_indent_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_indent_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_indent_size, handle, nil, &_result)
         return _result
     }
     
@@ -478,7 +478,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: useSpaces) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_indent_using_spaces, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_indent_using_spaces, handle, pArgs, nil)
                 }
                 
             }
@@ -503,7 +503,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func is_indent_using_spaces() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CodeEdit.method_is_indent_using_spaces, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_is_indent_using_spaces, handle, nil, &_result)
         return _result
     }
     
@@ -524,7 +524,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_auto_indent_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_auto_indent_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -549,7 +549,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func is_auto_indent_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CodeEdit.method_is_auto_indent_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_is_auto_indent_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -570,7 +570,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: prefixes.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_auto_indent_prefixes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_auto_indent_prefixes, handle, pArgs, nil)
                 }
                 
             }
@@ -595,7 +595,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func get_auto_indent_prefixes() -> TypedArray<String> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_auto_indent_prefixes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_auto_indent_prefixes, handle, nil, &_result)
         return TypedArray<String>(takingOver: _result)
     }
     
@@ -613,7 +613,7 @@ open class CodeEdit: TextEdit {
     /// If there is no selection, indentation is inserted at the caret. Otherwise, the selected lines are indented like ``indentLines()``. Equivalent to the ``ProjectSettings/input/uiTextIndent`` action. The indentation characters used depend on ``indentUseSpaces`` and ``indentSize``.
     public final func doIndent() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_do_indent, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_do_indent, handle, nil, nil)
         
     }
     
@@ -631,7 +631,7 @@ open class CodeEdit: TextEdit {
     /// Indents all lines that are selected or have a caret on them. Uses spaces or a tab depending on ``indentUseSpaces``. See ``unindentLines()``.
     public final func indentLines() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_indent_lines, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_indent_lines, handle, nil, nil)
         
     }
     
@@ -649,7 +649,7 @@ open class CodeEdit: TextEdit {
     /// Unindents all lines that are selected or have a caret on them. Uses spaces or a tab depending on ``indentUseSpaces``. Equivalent to the ``ProjectSettings/input/uiTextDedent`` action. See ``indentLines()``.
     public final func unindentLines() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_unindent_lines, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_unindent_lines, handle, nil, nil)
         
     }
     
@@ -674,7 +674,7 @@ open class CodeEdit: TextEdit {
             withUnsafePointer(to: toLine) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CodeEdit.method_convert_indent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CodeEdit.method_convert_indent, handle, pArgs, nil)
                     }
                     
                 }
@@ -703,7 +703,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_auto_brace_completion_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_auto_brace_completion_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -728,7 +728,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func is_auto_brace_completion_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CodeEdit.method_is_auto_brace_completion_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_is_auto_brace_completion_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -749,7 +749,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_highlight_matching_braces_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_highlight_matching_braces_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -774,7 +774,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func is_highlight_matching_braces_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CodeEdit.method_is_highlight_matching_braces_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_is_highlight_matching_braces_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -801,7 +801,7 @@ open class CodeEdit: TextEdit {
             withUnsafePointer(to: endKey.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CodeEdit.method_add_auto_brace_completion_pair, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CodeEdit.method_add_auto_brace_completion_pair, handle, pArgs, nil)
                     }
                     
                 }
@@ -830,7 +830,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: pairs.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_auto_brace_completion_pairs, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_auto_brace_completion_pairs, handle, pArgs, nil)
                 }
                 
             }
@@ -855,7 +855,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func get_auto_brace_completion_pairs() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_auto_brace_completion_pairs, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_auto_brace_completion_pairs, handle, nil, &_result.content)
         return _result
     }
     
@@ -878,7 +878,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: openKey.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_has_auto_brace_completion_open_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_has_auto_brace_completion_open_key, handle, pArgs, &_result)
                 }
                 
             }
@@ -907,7 +907,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: closeKey.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_has_auto_brace_completion_close_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_has_auto_brace_completion_close_key, handle, pArgs, &_result)
                 }
                 
             }
@@ -936,7 +936,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: openKey.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_get_auto_brace_completion_close_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_get_auto_brace_completion_close_key, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -963,7 +963,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_draw_breakpoints_gutter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_draw_breakpoints_gutter, handle, pArgs, nil)
                 }
                 
             }
@@ -988,7 +988,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func is_drawing_breakpoints_gutter() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CodeEdit.method_is_drawing_breakpoints_gutter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_is_drawing_breakpoints_gutter, handle, nil, &_result)
         return _result
     }
     
@@ -1009,7 +1009,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_draw_bookmarks_gutter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_draw_bookmarks_gutter, handle, pArgs, nil)
                 }
                 
             }
@@ -1034,7 +1034,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func is_drawing_bookmarks_gutter() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CodeEdit.method_is_drawing_bookmarks_gutter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_is_drawing_bookmarks_gutter, handle, nil, &_result)
         return _result
     }
     
@@ -1055,7 +1055,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_draw_executing_lines_gutter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_draw_executing_lines_gutter, handle, pArgs, nil)
                 }
                 
             }
@@ -1080,7 +1080,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func is_drawing_executing_lines_gutter() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CodeEdit.method_is_drawing_executing_lines_gutter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_is_drawing_executing_lines_gutter, handle, nil, &_result)
         return _result
     }
     
@@ -1102,7 +1102,7 @@ open class CodeEdit: TextEdit {
             withUnsafePointer(to: breakpointed) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CodeEdit.method_set_line_as_breakpoint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CodeEdit.method_set_line_as_breakpoint, handle, pArgs, nil)
                     }
                     
                 }
@@ -1132,7 +1132,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_is_line_breakpointed, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_is_line_breakpointed, handle, pArgs, &_result)
                 }
                 
             }
@@ -1156,7 +1156,7 @@ open class CodeEdit: TextEdit {
     /// Clears all breakpointed lines.
     public final func clearBreakpointedLines() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_clear_breakpointed_lines, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_clear_breakpointed_lines, handle, nil, nil)
         
     }
     
@@ -1175,7 +1175,7 @@ open class CodeEdit: TextEdit {
     public final func getBreakpointedLines() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_breakpointed_lines, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_breakpointed_lines, handle, nil, &_result.content)
         return _result
     }
     
@@ -1197,7 +1197,7 @@ open class CodeEdit: TextEdit {
             withUnsafePointer(to: bookmarked) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CodeEdit.method_set_line_as_bookmarked, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CodeEdit.method_set_line_as_bookmarked, handle, pArgs, nil)
                     }
                     
                 }
@@ -1227,7 +1227,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_is_line_bookmarked, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_is_line_bookmarked, handle, pArgs, &_result)
                 }
                 
             }
@@ -1251,7 +1251,7 @@ open class CodeEdit: TextEdit {
     /// Clears all bookmarked lines.
     public final func clearBookmarkedLines() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_clear_bookmarked_lines, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_clear_bookmarked_lines, handle, nil, nil)
         
     }
     
@@ -1270,7 +1270,7 @@ open class CodeEdit: TextEdit {
     public final func getBookmarkedLines() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_bookmarked_lines, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_bookmarked_lines, handle, nil, &_result.content)
         return _result
     }
     
@@ -1292,7 +1292,7 @@ open class CodeEdit: TextEdit {
             withUnsafePointer(to: executing) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CodeEdit.method_set_line_as_executing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CodeEdit.method_set_line_as_executing, handle, pArgs, nil)
                     }
                     
                 }
@@ -1322,7 +1322,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_is_line_executing, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_is_line_executing, handle, pArgs, &_result)
                 }
                 
             }
@@ -1346,7 +1346,7 @@ open class CodeEdit: TextEdit {
     /// Clears all executed lines.
     public final func clearExecutingLines() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_clear_executing_lines, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_clear_executing_lines, handle, nil, nil)
         
     }
     
@@ -1365,7 +1365,7 @@ open class CodeEdit: TextEdit {
     public final func getExecutingLines() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_executing_lines, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_executing_lines, handle, nil, &_result.content)
         return _result
     }
     
@@ -1386,7 +1386,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_draw_line_numbers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_draw_line_numbers, handle, pArgs, nil)
                 }
                 
             }
@@ -1411,7 +1411,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func is_draw_line_numbers_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CodeEdit.method_is_draw_line_numbers_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_is_draw_line_numbers_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1432,7 +1432,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_line_numbers_zero_padded, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_line_numbers_zero_padded, handle, pArgs, nil)
                 }
                 
             }
@@ -1457,7 +1457,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func is_line_numbers_zero_padded() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CodeEdit.method_is_line_numbers_zero_padded, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_is_line_numbers_zero_padded, handle, nil, &_result)
         return _result
     }
     
@@ -1478,7 +1478,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_draw_fold_gutter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_draw_fold_gutter, handle, pArgs, nil)
                 }
                 
             }
@@ -1503,7 +1503,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func is_drawing_fold_gutter() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CodeEdit.method_is_drawing_fold_gutter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_is_drawing_fold_gutter, handle, nil, &_result)
         return _result
     }
     
@@ -1524,7 +1524,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_line_folding_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_line_folding_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1549,7 +1549,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func is_line_folding_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CodeEdit.method_is_line_folding_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_is_line_folding_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1571,7 +1571,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_can_fold_line, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_can_fold_line, handle, pArgs, &_result)
                 }
                 
             }
@@ -1598,7 +1598,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_fold_line, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_fold_line, handle, pArgs, nil)
                 }
                 
             }
@@ -1625,7 +1625,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_unfold_line, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_unfold_line, handle, pArgs, nil)
                 }
                 
             }
@@ -1649,7 +1649,7 @@ open class CodeEdit: TextEdit {
     /// Folds all lines that are possible to be folded (see ``canFoldLine(_:)``).
     public final func foldAllLines() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_fold_all_lines, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_fold_all_lines, handle, nil, nil)
         
     }
     
@@ -1667,7 +1667,7 @@ open class CodeEdit: TextEdit {
     /// Unfolds all lines that are folded.
     public final func unfoldAllLines() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_unfold_all_lines, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_unfold_all_lines, handle, nil, nil)
         
     }
     
@@ -1688,7 +1688,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_toggle_foldable_line, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_toggle_foldable_line, handle, pArgs, nil)
                 }
                 
             }
@@ -1712,7 +1712,7 @@ open class CodeEdit: TextEdit {
     /// Toggle the folding of the code block on all lines with a caret on them.
     public final func toggleFoldableLinesAtCarets() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_toggle_foldable_lines_at_carets, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_toggle_foldable_lines_at_carets, handle, nil, nil)
         
     }
     
@@ -1734,7 +1734,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_is_line_folded, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_is_line_folded, handle, pArgs, &_result)
                 }
                 
             }
@@ -1759,7 +1759,7 @@ open class CodeEdit: TextEdit {
     public final func getFoldedLines() -> TypedArray<Int64> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_folded_lines, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_folded_lines, handle, nil, &_result)
         return TypedArray<Int64>(takingOver: _result)
     }
     
@@ -1784,7 +1784,7 @@ open class CodeEdit: TextEdit {
     /// 
     public final func createCodeRegion() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_create_code_region, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_create_code_region, handle, nil, nil)
         
     }
     
@@ -1803,7 +1803,7 @@ open class CodeEdit: TextEdit {
     public final func getCodeRegionStartTag() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_code_region_start_tag, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_code_region_start_tag, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1822,7 +1822,7 @@ open class CodeEdit: TextEdit {
     public final func getCodeRegionEndTag() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_code_region_end_tag, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_code_region_end_tag, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1846,7 +1846,7 @@ open class CodeEdit: TextEdit {
             withUnsafePointer(to: end.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CodeEdit.method_set_code_region_tags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CodeEdit.method_set_code_region_tags, handle, pArgs, nil)
                     }
                     
                 }
@@ -1876,7 +1876,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_is_line_code_region_start, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_is_line_code_region_start, handle, pArgs, &_result)
                 }
                 
             }
@@ -1904,7 +1904,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_is_line_code_region_end, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_is_line_code_region_end, handle, pArgs, &_result)
                 }
                 
             }
@@ -1938,7 +1938,7 @@ open class CodeEdit: TextEdit {
                 withUnsafePointer(to: lineOnly) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(CodeEdit.method_add_string_delimiter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(CodeEdit.method_add_string_delimiter, handle, pArgs, nil)
                         }
                         
                     }
@@ -1970,7 +1970,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: startKey.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_remove_string_delimiter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_remove_string_delimiter, handle, pArgs, nil)
                 }
                 
             }
@@ -1999,7 +1999,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: startKey.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_has_string_delimiter, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_has_string_delimiter, handle, pArgs, &_result)
                 }
                 
             }
@@ -2026,7 +2026,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: stringDelimiters.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_string_delimiters, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_string_delimiters, handle, pArgs, nil)
                 }
                 
             }
@@ -2050,7 +2050,7 @@ open class CodeEdit: TextEdit {
     /// Removes all string delimiters.
     public final func clearStringDelimiters() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_clear_string_delimiters, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_clear_string_delimiters, handle, nil, nil)
         
     }
     
@@ -2069,7 +2069,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func get_string_delimiters() -> TypedArray<String> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_string_delimiters, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_string_delimiters, handle, nil, &_result)
         return TypedArray<String>(takingOver: _result)
     }
     
@@ -2092,7 +2092,7 @@ open class CodeEdit: TextEdit {
             withUnsafePointer(to: column) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CodeEdit.method_is_in_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(CodeEdit.method_is_in_string, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2128,7 +2128,7 @@ open class CodeEdit: TextEdit {
                 withUnsafePointer(to: lineOnly) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(CodeEdit.method_add_comment_delimiter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(CodeEdit.method_add_comment_delimiter, handle, pArgs, nil)
                         }
                         
                     }
@@ -2160,7 +2160,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: startKey.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_remove_comment_delimiter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_remove_comment_delimiter, handle, pArgs, nil)
                 }
                 
             }
@@ -2189,7 +2189,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: startKey.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_has_comment_delimiter, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_has_comment_delimiter, handle, pArgs, &_result)
                 }
                 
             }
@@ -2216,7 +2216,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: commentDelimiters.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_comment_delimiters, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_comment_delimiters, handle, pArgs, nil)
                 }
                 
             }
@@ -2240,7 +2240,7 @@ open class CodeEdit: TextEdit {
     /// Removes all comment delimiters.
     public final func clearCommentDelimiters() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_clear_comment_delimiters, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_clear_comment_delimiters, handle, nil, nil)
         
     }
     
@@ -2259,7 +2259,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func get_comment_delimiters() -> TypedArray<String> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_comment_delimiters, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_comment_delimiters, handle, nil, &_result)
         return TypedArray<String>(takingOver: _result)
     }
     
@@ -2282,7 +2282,7 @@ open class CodeEdit: TextEdit {
             withUnsafePointer(to: column) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CodeEdit.method_is_in_comment, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(CodeEdit.method_is_in_comment, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2312,7 +2312,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: delimiterIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_get_delimiter_start_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_get_delimiter_start_key, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2340,7 +2340,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: delimiterIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_get_delimiter_end_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_get_delimiter_end_key, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2369,7 +2369,7 @@ open class CodeEdit: TextEdit {
             withUnsafePointer(to: column) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CodeEdit.method_get_delimiter_start_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(CodeEdit.method_get_delimiter_start_position, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2400,7 +2400,7 @@ open class CodeEdit: TextEdit {
             withUnsafePointer(to: column) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CodeEdit.method_get_delimiter_end_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(CodeEdit.method_get_delimiter_end_position, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2430,7 +2430,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: codeHint.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_code_hint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_code_hint, handle, pArgs, nil)
                 }
                 
             }
@@ -2457,7 +2457,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: drawBelow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_code_hint_draw_below, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_code_hint_draw_below, handle, pArgs, nil)
                 }
                 
             }
@@ -2482,7 +2482,7 @@ open class CodeEdit: TextEdit {
     public final func getTextForCodeCompletion() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_text_for_code_completion, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_text_for_code_completion, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -2503,7 +2503,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: force) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_request_code_completion, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_request_code_completion, handle, pArgs, nil)
                 }
                 
             }
@@ -2543,7 +2543,7 @@ open class CodeEdit: TextEdit {
                                 withUnsafePointer(to: location) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(CodeEdit.method_add_code_completion_option, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                            gi.object_method_bind_ptrcall(CodeEdit.method_add_code_completion_option, handle, pArgs, nil)
                                         }
                                         
                                     }
@@ -2585,7 +2585,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: force) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_update_code_completion_options, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_update_code_completion_options, handle, pArgs, nil)
                 }
                 
             }
@@ -2610,7 +2610,7 @@ open class CodeEdit: TextEdit {
     public final func getCodeCompletionOptions() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_code_completion_options, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_code_completion_options, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -2645,7 +2645,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_get_code_completion_option, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_get_code_completion_option, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2670,7 +2670,7 @@ open class CodeEdit: TextEdit {
     public final func getCodeCompletionSelectedIndex() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_code_completion_selected_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_code_completion_selected_index, handle, nil, &_result)
         return _result
     }
     
@@ -2691,7 +2691,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_code_completion_selected_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_code_completion_selected_index, handle, pArgs, nil)
                 }
                 
             }
@@ -2718,7 +2718,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: replace) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_confirm_code_completion, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_confirm_code_completion, handle, pArgs, nil)
                 }
                 
             }
@@ -2742,7 +2742,7 @@ open class CodeEdit: TextEdit {
     /// Cancels the autocomplete menu.
     public final func cancelCodeCompletion() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_cancel_code_completion, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_cancel_code_completion, handle, nil, nil)
         
     }
     
@@ -2763,7 +2763,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_code_completion_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_code_completion_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -2788,7 +2788,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func is_code_completion_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CodeEdit.method_is_code_completion_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_is_code_completion_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2809,7 +2809,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: prefixes.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_code_completion_prefixes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_code_completion_prefixes, handle, pArgs, nil)
                 }
                 
             }
@@ -2834,7 +2834,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func get_code_completion_prefixes() -> TypedArray<String> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_code_completion_prefixes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_code_completion_prefixes, handle, nil, &_result)
         return TypedArray<String>(takingOver: _result)
     }
     
@@ -2855,7 +2855,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: guidelineColumns.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_line_length_guidelines, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_line_length_guidelines, handle, pArgs, nil)
                 }
                 
             }
@@ -2880,7 +2880,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func get_line_length_guidelines() -> TypedArray<Int64> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_line_length_guidelines, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_line_length_guidelines, handle, nil, &_result)
         return TypedArray<Int64>(takingOver: _result)
     }
     
@@ -2901,7 +2901,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_symbol_lookup_on_click_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_symbol_lookup_on_click_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -2926,7 +2926,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func is_symbol_lookup_on_click_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CodeEdit.method_is_symbol_lookup_on_click_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_is_symbol_lookup_on_click_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2945,7 +2945,7 @@ open class CodeEdit: TextEdit {
     public final func getTextForSymbolLookup() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(CodeEdit.method_get_text_for_symbol_lookup, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CodeEdit.method_get_text_for_symbol_lookup, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -2968,7 +2968,7 @@ open class CodeEdit: TextEdit {
             withUnsafePointer(to: column) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CodeEdit.method_get_text_with_cursor_char, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(CodeEdit.method_get_text_with_cursor_char, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -2997,7 +2997,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: valid) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_symbol_lookup_word_as_valid, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_symbol_lookup_word_as_valid, handle, pArgs, nil)
                 }
                 
             }
@@ -3024,7 +3024,7 @@ open class CodeEdit: TextEdit {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeEdit.method_set_symbol_tooltip_on_hover_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeEdit.method_set_symbol_tooltip_on_hover_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -3049,7 +3049,7 @@ open class CodeEdit: TextEdit {
     fileprivate final func is_symbol_tooltip_on_hover_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CodeEdit.method_is_symbol_tooltip_on_hover_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeEdit.method_is_symbol_tooltip_on_hover_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -3067,7 +3067,7 @@ open class CodeEdit: TextEdit {
     /// Moves all lines up that are selected or have a caret on them.
     public final func moveLinesUp() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_move_lines_up, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_move_lines_up, handle, nil, nil)
         
     }
     
@@ -3085,7 +3085,7 @@ open class CodeEdit: TextEdit {
     /// Moves all lines down that are selected or have a caret on them.
     public final func moveLinesDown() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_move_lines_down, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_move_lines_down, handle, nil, nil)
         
     }
     
@@ -3103,7 +3103,7 @@ open class CodeEdit: TextEdit {
     /// Deletes all lines that are selected or have a caret on them.
     public final func deleteLines() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_delete_lines, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_delete_lines, handle, nil, nil)
         
     }
     
@@ -3121,7 +3121,7 @@ open class CodeEdit: TextEdit {
     /// Duplicates all selected text and duplicates all lines with a caret on them.
     public final func duplicateSelection() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_duplicate_selection, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_duplicate_selection, handle, nil, nil)
         
     }
     
@@ -3139,7 +3139,7 @@ open class CodeEdit: TextEdit {
     /// Duplicates all lines currently selected with any caret. Duplicates the entire line beneath the current one no matter where the caret is within the line.
     public final func duplicateLines() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeEdit.method_duplicate_lines, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeEdit.method_duplicate_lines, handle, nil, nil)
         
     }
     

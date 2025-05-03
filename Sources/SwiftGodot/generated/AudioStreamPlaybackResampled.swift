@@ -43,7 +43,7 @@ open class AudioStreamPlaybackResampled: AudioStreamPlayback {
             withUnsafePointer(to: frameCount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamPlaybackResampled.method__mix_resampled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AudioStreamPlaybackResampled.method__mix_resampled, handle, pArgs, &_result)
                     }
                     
                 }
@@ -71,7 +71,7 @@ open class AudioStreamPlaybackResampled: AudioStreamPlayback {
     open func _getStreamSamplingRate() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStreamPlaybackResampled.method__get_stream_sampling_rate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlaybackResampled.method__get_stream_sampling_rate, handle, nil, &_result)
         return _result
     }
     
@@ -89,7 +89,7 @@ open class AudioStreamPlaybackResampled: AudioStreamPlayback {
     /// 
     public final func beginResample() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AudioStreamPlaybackResampled.method_begin_resample, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AudioStreamPlaybackResampled.method_begin_resample, handle, nil, nil)
         
     }
     

@@ -58,7 +58,7 @@ open class Texture2DRD: Texture2D {
         withUnsafePointer(to: textureRdRid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Texture2DRD.method_set_texture_rd_rid, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Texture2DRD.method_set_texture_rd_rid, handle, pArgs, nil)
                 }
                 
             }
@@ -83,7 +83,7 @@ open class Texture2DRD: Texture2D {
     fileprivate final func get_texture_rd_rid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(Texture2DRD.method_get_texture_rd_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Texture2DRD.method_get_texture_rd_rid, handle, nil, &_result.content)
         return _result
     }
     

@@ -139,7 +139,7 @@ open class UPNPDevice: RefCounted {
     public final func isValidGateway() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(UPNPDevice.method_is_valid_gateway, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(UPNPDevice.method_is_valid_gateway, handle, nil, &_result)
         return _result
     }
     
@@ -158,7 +158,7 @@ open class UPNPDevice: RefCounted {
     public final func queryExternalAddress() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(UPNPDevice.method_query_external_address, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(UPNPDevice.method_query_external_address, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -186,7 +186,7 @@ open class UPNPDevice: RefCounted {
                         withUnsafePointer(to: duration) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(UPNPDevice.method_add_port_mapping, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(UPNPDevice.method_add_port_mapping, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -224,7 +224,7 @@ open class UPNPDevice: RefCounted {
             withUnsafePointer(to: proto.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(UPNPDevice.method_delete_port_mapping, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(UPNPDevice.method_delete_port_mapping, handle, pArgs, &_result)
                     }
                     
                 }
@@ -254,7 +254,7 @@ open class UPNPDevice: RefCounted {
         withUnsafePointer(to: url.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UPNPDevice.method_set_description_url, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UPNPDevice.method_set_description_url, handle, pArgs, nil)
                 }
                 
             }
@@ -279,7 +279,7 @@ open class UPNPDevice: RefCounted {
     fileprivate final func get_description_url() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(UPNPDevice.method_get_description_url, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(UPNPDevice.method_get_description_url, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -301,7 +301,7 @@ open class UPNPDevice: RefCounted {
         withUnsafePointer(to: type.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UPNPDevice.method_set_service_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UPNPDevice.method_set_service_type, handle, pArgs, nil)
                 }
                 
             }
@@ -326,7 +326,7 @@ open class UPNPDevice: RefCounted {
     fileprivate final func get_service_type() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(UPNPDevice.method_get_service_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(UPNPDevice.method_get_service_type, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -348,7 +348,7 @@ open class UPNPDevice: RefCounted {
         withUnsafePointer(to: url.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UPNPDevice.method_set_igd_control_url, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UPNPDevice.method_set_igd_control_url, handle, pArgs, nil)
                 }
                 
             }
@@ -373,7 +373,7 @@ open class UPNPDevice: RefCounted {
     fileprivate final func get_igd_control_url() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(UPNPDevice.method_get_igd_control_url, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(UPNPDevice.method_get_igd_control_url, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -395,7 +395,7 @@ open class UPNPDevice: RefCounted {
         withUnsafePointer(to: type.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UPNPDevice.method_set_igd_service_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UPNPDevice.method_set_igd_service_type, handle, pArgs, nil)
                 }
                 
             }
@@ -420,7 +420,7 @@ open class UPNPDevice: RefCounted {
     fileprivate final func get_igd_service_type() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(UPNPDevice.method_get_igd_service_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(UPNPDevice.method_get_igd_service_type, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -442,7 +442,7 @@ open class UPNPDevice: RefCounted {
         withUnsafePointer(to: addr.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UPNPDevice.method_set_igd_our_addr, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UPNPDevice.method_set_igd_our_addr, handle, pArgs, nil)
                 }
                 
             }
@@ -467,7 +467,7 @@ open class UPNPDevice: RefCounted {
     fileprivate final func get_igd_our_addr() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(UPNPDevice.method_get_igd_our_addr, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(UPNPDevice.method_get_igd_our_addr, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -488,7 +488,7 @@ open class UPNPDevice: RefCounted {
         withUnsafePointer(to: status.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UPNPDevice.method_set_igd_status, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UPNPDevice.method_set_igd_status, handle, pArgs, nil)
                 }
                 
             }
@@ -513,7 +513,7 @@ open class UPNPDevice: RefCounted {
     fileprivate final func get_igd_status() -> UPNPDevice.IGDStatus {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(UPNPDevice.method_get_igd_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(UPNPDevice.method_get_igd_status, handle, nil, &_result)
         return UPNPDevice.IGDStatus (rawValue: _result)!
     }
     

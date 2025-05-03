@@ -29,7 +29,7 @@ open class OS: Object {
     /// The shared instance of this class
     public static var shared: OS {
         return withUnsafePointer(to: &OS.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -148,7 +148,7 @@ open class OS: Object {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_entropy, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_entropy, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -172,7 +172,7 @@ open class OS: Object {
     /// Returns the list of certification authorities trusted by the operating system as a string of concatenated certificates in PEM format.
     public static func getSystemCaCertificates() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_system_ca_certificates, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_system_ca_certificates, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -197,7 +197,7 @@ open class OS: Object {
     /// 
     public static func getConnectedMidiInputs() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_connected_midi_inputs, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_connected_midi_inputs, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -221,7 +221,7 @@ open class OS: Object {
     /// > Note: On the Web platform, using MIDI input requires a browser permission to be granted first. This permission request is performed when calling ``openMidiInputs()``. The browser will refrain from processing MIDI input until the user accepts the permission request.
     /// 
     public static func openMidiInputs() {
-        gi.object_method_bind_ptrcall(method_open_midi_inputs, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_open_midi_inputs, shared.handle, nil, nil)
         
     }
     
@@ -241,7 +241,7 @@ open class OS: Object {
     /// > Note: This method is implemented on Linux, macOS, Windows, and Web.
     /// 
     public static func closeMidiInputs() {
-        gi.object_method_bind_ptrcall(method_close_midi_inputs, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_close_midi_inputs, shared.handle, nil, nil)
         
     }
     
@@ -264,7 +264,7 @@ open class OS: Object {
             withUnsafePointer(to: title.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_alert, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_alert, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -296,7 +296,7 @@ open class OS: Object {
         withUnsafePointer(to: message.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_crash, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_crash, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -322,7 +322,7 @@ open class OS: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_low_processor_usage_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_low_processor_usage_mode, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -346,7 +346,7 @@ open class OS: Object {
     @inline(__always)
     fileprivate static func is_in_low_processor_usage_mode() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_in_low_processor_usage_mode, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_in_low_processor_usage_mode, shared.handle, nil, &_result)
         return _result
     }
     
@@ -366,7 +366,7 @@ open class OS: Object {
         withUnsafePointer(to: usec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_low_processor_usage_mode_sleep_usec, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_low_processor_usage_mode_sleep_usec, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -390,7 +390,7 @@ open class OS: Object {
     @inline(__always)
     fileprivate static func get_low_processor_usage_mode_sleep_usec() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_low_processor_usage_mode_sleep_usec, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_low_processor_usage_mode_sleep_usec, shared.handle, nil, &_result)
         return _result
     }
     
@@ -410,7 +410,7 @@ open class OS: Object {
         withUnsafePointer(to: deltaSmoothingEnabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_delta_smoothing, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_delta_smoothing, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -434,7 +434,7 @@ open class OS: Object {
     @inline(__always)
     fileprivate static func is_delta_smoothing_enabled() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_delta_smoothing_enabled, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_delta_smoothing_enabled, shared.handle, nil, &_result)
         return _result
     }
     
@@ -452,7 +452,7 @@ open class OS: Object {
     /// Returns the number of _logical_ CPU cores available on the host machine. On CPUs with HyperThreading enabled, this number will be greater than the number of _physical_ CPU cores.
     public static func getProcessorCount() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_processor_count, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_processor_count, shared.handle, nil, &_result)
         return _result
     }
     
@@ -473,7 +473,7 @@ open class OS: Object {
     /// 
     public static func getProcessorName() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_processor_name, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_processor_name, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -494,7 +494,7 @@ open class OS: Object {
     /// 
     public static func getSystemFonts() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_system_fonts, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_system_fonts, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -526,7 +526,7 @@ open class OS: Object {
                     withUnsafePointer(to: italic) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_get_system_font_path, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(method_get_system_font_path, shared.handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -578,7 +578,7 @@ open class OS: Object {
                                 withUnsafePointer(to: italic) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(method_get_system_font_path_for_text, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                                            gi.object_method_bind_ptrcall(method_get_system_font_path_for_text, shared.handle, pArgs, &_result.content)
                                         }
                                         
                                     }
@@ -617,7 +617,7 @@ open class OS: Object {
     /// 
     public static func getExecutablePath() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_executable_path, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_executable_path, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -651,7 +651,7 @@ open class OS: Object {
         withUnsafePointer(to: bufferSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_read_string_from_stdin, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_read_string_from_stdin, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -689,7 +689,7 @@ open class OS: Object {
         withUnsafePointer(to: bufferSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_read_buffer_from_stdin, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_read_buffer_from_stdin, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -713,7 +713,7 @@ open class OS: Object {
     /// Returns type of the standard input device.
     public static func getStdinType() -> OS.StdHandleType {
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(method_get_stdin_type, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_stdin_type, shared.handle, nil, &_result)
         return OS.StdHandleType (rawValue: _result)!
     }
     
@@ -731,7 +731,7 @@ open class OS: Object {
     /// Returns type of the standard output device.
     public static func getStdoutType() -> OS.StdHandleType {
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(method_get_stdout_type, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_stdout_type, shared.handle, nil, &_result)
         return OS.StdHandleType (rawValue: _result)!
     }
     
@@ -749,7 +749,7 @@ open class OS: Object {
     /// Returns type of the standard error device.
     public static func getStderrType() -> OS.StdHandleType {
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(method_get_stderr_type, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_stderr_type, shared.handle, nil, &_result)
         return OS.StdHandleType (rawValue: _result)!
     }
     
@@ -800,7 +800,7 @@ open class OS: Object {
                         withUnsafePointer(to: openConsole) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_execute, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(method_execute, shared.handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -859,7 +859,7 @@ open class OS: Object {
                 withUnsafePointer(to: blocking) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_execute_with_pipe, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(method_execute_with_pipe, shared.handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -906,7 +906,7 @@ open class OS: Object {
                 withUnsafePointer(to: openConsole) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_create_process, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_create_process, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -944,7 +944,7 @@ open class OS: Object {
         withUnsafePointer(to: arguments.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_create_instance, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_create_instance, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -976,7 +976,7 @@ open class OS: Object {
         withUnsafePointer(to: pid) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_kill, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_kill, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1019,7 +1019,7 @@ open class OS: Object {
         withUnsafePointer(to: uri.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_shell_open, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_shell_open, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1055,7 +1055,7 @@ open class OS: Object {
             withUnsafePointer(to: openFolder) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_shell_show_in_file_manager, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_shell_show_in_file_manager, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1087,7 +1087,7 @@ open class OS: Object {
         withUnsafePointer(to: pid) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_process_running, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_process_running, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1121,7 +1121,7 @@ open class OS: Object {
         withUnsafePointer(to: pid) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_process_exit_code, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_process_exit_code, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1148,7 +1148,7 @@ open class OS: Object {
     /// 
     public static func getProcessId() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_process_id, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_process_id, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1173,7 +1173,7 @@ open class OS: Object {
         withUnsafePointer(to: variable.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_environment, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_environment, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1206,7 +1206,7 @@ open class OS: Object {
         withUnsafePointer(to: variable.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_environment, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_environment, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1238,7 +1238,7 @@ open class OS: Object {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_set_environment, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_set_environment, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1270,7 +1270,7 @@ open class OS: Object {
         withUnsafePointer(to: variable.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_unset_environment, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_unset_environment, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1313,7 +1313,7 @@ open class OS: Object {
     /// 
     public static func getName() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_name, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_name, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1338,7 +1338,7 @@ open class OS: Object {
     /// 
     public static func getDistributionName() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_distribution_name, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_distribution_name, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1367,7 +1367,7 @@ open class OS: Object {
     /// 
     public static func getVersion() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_version, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_version, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1388,7 +1388,7 @@ open class OS: Object {
     /// 
     public static func getVersionAlias() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_version_alias, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_version_alias, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1417,7 +1417,7 @@ open class OS: Object {
     /// 
     public static func getCmdlineArgs() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_cmdline_args, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_cmdline_args, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -1438,7 +1438,7 @@ open class OS: Object {
     /// 
     public static func getCmdlineUserArgs() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_cmdline_user_args, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_cmdline_user_args, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -1463,7 +1463,7 @@ open class OS: Object {
     /// 
     public static func getVideoAdapterDriverInfo() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_video_adapter_driver_info, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_video_adapter_driver_info, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -1491,7 +1491,7 @@ open class OS: Object {
             withUnsafePointer(to: arguments.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_set_restart_on_exit, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_set_restart_on_exit, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1517,7 +1517,7 @@ open class OS: Object {
     /// Returns `true` if the project will automatically restart when it exits for any reason, `false` otherwise. See also ``setRestartOnExit(restart:arguments:)`` and ``getRestartOnExitArguments()``.
     public static func isRestartOnExitSet() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_restart_on_exit_set, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_restart_on_exit_set, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1535,7 +1535,7 @@ open class OS: Object {
     /// Returns the list of command line arguments that will be used when the project automatically restarts using ``setRestartOnExit(restart:arguments:)``. See also ``isRestartOnExitSet()``.
     public static func getRestartOnExitArguments() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_restart_on_exit_arguments, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_restart_on_exit_arguments, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -1560,7 +1560,7 @@ open class OS: Object {
         withUnsafePointer(to: usec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_delay_usec, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_delay_usec, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1591,7 +1591,7 @@ open class OS: Object {
         withUnsafePointer(to: msec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_delay_msec, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_delay_msec, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1628,7 +1628,7 @@ open class OS: Object {
     /// 
     public static func getLocale() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_locale, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_locale, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1649,7 +1649,7 @@ open class OS: Object {
     /// 
     public static func getLocaleLanguage() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_locale_language, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_locale_language, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1670,7 +1670,7 @@ open class OS: Object {
     /// 
     public static func getModelName() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_model_name, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_model_name, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1688,7 +1688,7 @@ open class OS: Object {
     /// Returns `true` if the `user://` file system is persistent, that is, its state is the same after a player quits and starts the game again. Relevant to the Web platform, where this persistence may be unavailable.
     public static func isUserfsPersistent() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_userfs_persistent, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_userfs_persistent, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1706,7 +1706,7 @@ open class OS: Object {
     /// Returns `true` if the engine was executed with the `--verbose` or `-v` command line argument, or if ``ProjectSettings/debug/settings/stdout/verboseStdout`` is `true`. See also ``@GlobalScope.print_verbose``.
     public static func isStdoutVerbose() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_stdout_verbose, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_stdout_verbose, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1729,7 +1729,7 @@ open class OS: Object {
     /// 
     public static func isDebugBuild() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_debug_build, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_debug_build, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1747,7 +1747,7 @@ open class OS: Object {
     /// Returns the amount of static memory being used by the program in bytes. Only works in debug builds.
     public static func getStaticMemoryUsage() -> UInt {
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(method_get_static_memory_usage, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_static_memory_usage, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1765,7 +1765,7 @@ open class OS: Object {
     /// Returns the maximum amount of static memory used. Only works in debug builds.
     public static func getStaticMemoryPeakUsage() -> UInt {
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(method_get_static_memory_peak_usage, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_static_memory_peak_usage, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1794,7 +1794,7 @@ open class OS: Object {
     /// 
     public static func getMemoryInfo() -> VariantDictionary {
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(method_get_memory_info, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_memory_info, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -1825,7 +1825,7 @@ open class OS: Object {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_move_to_trash, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_move_to_trash, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1864,7 +1864,7 @@ open class OS: Object {
     /// 
     public static func getUserDataDir() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_user_data_dir, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_user_data_dir, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1891,7 +1891,7 @@ open class OS: Object {
             withUnsafePointer(to: sharedStorage) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_system_dir, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_get_system_dir, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1922,7 +1922,7 @@ open class OS: Object {
     /// 
     public static func getConfigDir() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_config_dir, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_config_dir, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1945,7 +1945,7 @@ open class OS: Object {
     /// 
     public static func getDataDir() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_data_dir, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_data_dir, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1968,7 +1968,7 @@ open class OS: Object {
     /// 
     public static func getCacheDir() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_cache_dir, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_cache_dir, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1986,7 +1986,7 @@ open class OS: Object {
     /// Returns the _global_ temporary data directory according to the operating system's standards.
     public static func getTempDir() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_temp_dir, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_temp_dir, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -2009,7 +2009,7 @@ open class OS: Object {
     /// 
     public static func getUniqueId() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_unique_id, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_unique_id, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -2033,7 +2033,7 @@ open class OS: Object {
         withUnsafePointer(to: code.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_keycode_string, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_keycode_string, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2061,7 +2061,7 @@ open class OS: Object {
         withUnsafePointer(to: code) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_keycode_unicode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_keycode_unicode, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2092,7 +2092,7 @@ open class OS: Object {
         withUnsafePointer(to: string.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_find_keycode_from_string, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_find_keycode_from_string, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2121,7 +2121,7 @@ open class OS: Object {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_use_file_access_save_and_swap, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_use_file_access_save_and_swap, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -2149,7 +2149,7 @@ open class OS: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_thread_name, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_set_thread_name, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2176,7 +2176,7 @@ open class OS: Object {
     /// 
     public static func getThreadCallerId() -> UInt {
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(method_get_thread_caller_id, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_thread_caller_id, shared.handle, nil, &_result)
         return _result
     }
     
@@ -2197,7 +2197,7 @@ open class OS: Object {
     /// 
     public static func getMainThreadId() -> UInt {
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(method_get_main_thread_id, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_main_thread_id, shared.handle, nil, &_result)
         return _result
     }
     
@@ -2224,7 +2224,7 @@ open class OS: Object {
         withUnsafePointer(to: tagName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_feature, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_feature, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2251,7 +2251,7 @@ open class OS: Object {
     /// 
     public static func isSandboxed() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_sandboxed, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_sandboxed, shared.handle, nil, &_result)
         return _result
     }
     
@@ -2284,7 +2284,7 @@ open class OS: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_request_permission, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_request_permission, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2313,7 +2313,7 @@ open class OS: Object {
     /// 
     public static func requestPermissions() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_request_permissions, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_request_permissions, shared.handle, nil, &_result)
         return _result
     }
     
@@ -2334,7 +2334,7 @@ open class OS: Object {
     /// 
     public static func getGrantedPermissions() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_granted_permissions, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_granted_permissions, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -2351,7 +2351,7 @@ open class OS: Object {
     
     /// On macOS (sandboxed applications only), this function clears list of user selected folders accessible to the application.
     public static func revokeGrantedPermissions() {
-        gi.object_method_bind_ptrcall(method_revoke_granted_permissions, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_revoke_granted_permissions, shared.handle, nil, nil)
         
     }
     

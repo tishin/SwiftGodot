@@ -40,7 +40,7 @@ open class AudioListener3D: Node3D {
     /// Enables the listener. This will override the current camera's listener.
     public final func makeCurrent() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AudioListener3D.method_make_current, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AudioListener3D.method_make_current, handle, nil, nil)
         
     }
     
@@ -58,7 +58,7 @@ open class AudioListener3D: Node3D {
     /// Disables the listener to use the current camera's listener instead.
     public final func clearCurrent() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AudioListener3D.method_clear_current, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AudioListener3D.method_clear_current, handle, nil, nil)
         
     }
     
@@ -80,7 +80,7 @@ open class AudioListener3D: Node3D {
     public final func isCurrent() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioListener3D.method_is_current, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioListener3D.method_is_current, handle, nil, &_result)
         return _result
     }
     
@@ -99,7 +99,7 @@ open class AudioListener3D: Node3D {
     public final func getListenerTransform() -> Transform3D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
-        gi.object_method_bind_ptrcall(AudioListener3D.method_get_listener_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioListener3D.method_get_listener_transform, handle, nil, &_result)
         return _result
     }
     

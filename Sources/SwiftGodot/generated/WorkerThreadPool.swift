@@ -35,7 +35,7 @@ open class WorkerThreadPool: Object {
     /// The shared instance of this class
     public static var shared: WorkerThreadPool {
         return withUnsafePointer(to: &WorkerThreadPool.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -68,7 +68,7 @@ open class WorkerThreadPool: Object {
                 withUnsafePointer(to: description.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_add_task, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_add_task, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -102,7 +102,7 @@ open class WorkerThreadPool: Object {
         withUnsafePointer(to: taskId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_task_completed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_task_completed, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -136,7 +136,7 @@ open class WorkerThreadPool: Object {
         withUnsafePointer(to: taskId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_wait_for_task_completion, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_wait_for_task_completion, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -175,7 +175,7 @@ open class WorkerThreadPool: Object {
                         withUnsafePointer(to: description.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_add_group_task, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(method_add_group_task, shared.handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -213,7 +213,7 @@ open class WorkerThreadPool: Object {
         withUnsafePointer(to: groupId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_group_task_completed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_group_task_completed, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -243,7 +243,7 @@ open class WorkerThreadPool: Object {
         withUnsafePointer(to: groupId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_group_processed_element_count, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_group_processed_element_count, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -269,7 +269,7 @@ open class WorkerThreadPool: Object {
         withUnsafePointer(to: groupId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_wait_for_group_task_completion, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_wait_for_group_task_completion, shared.handle, pArgs, nil)
                 }
                 
             }

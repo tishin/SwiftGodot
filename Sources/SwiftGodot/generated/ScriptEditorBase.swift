@@ -54,9 +54,9 @@ open class ScriptEditorBase: VBoxContainer {
     /// Returns the underlying ``Control`` used for editing scripts. For text scripts, this is a ``CodeEdit``.
     public final func getBaseEditor() -> Control? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ScriptEditorBase.method_get_base_editor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ScriptEditorBase.method_get_base_editor, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_add_syntax_highlighter: GDExtensionMethodBindPtr = {
@@ -76,7 +76,7 @@ open class ScriptEditorBase: VBoxContainer {
         withUnsafePointer(to: highlighter?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptEditorBase.method_add_syntax_highlighter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScriptEditorBase.method_add_syntax_highlighter, handle, pArgs, nil)
                 }
                 
             }

@@ -271,7 +271,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_buffer_view() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_buffer_view, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_buffer_view, handle, nil, &_result)
         return _result
     }
     
@@ -292,7 +292,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: bufferView) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_buffer_view, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_buffer_view, handle, pArgs, nil)
                 }
                 
             }
@@ -317,7 +317,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_byte_offset() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_byte_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_byte_offset, handle, nil, &_result)
         return _result
     }
     
@@ -338,7 +338,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: byteOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_byte_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_byte_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -363,7 +363,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_component_type() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_component_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_component_type, handle, nil, &_result)
         return _result
     }
     
@@ -384,7 +384,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: componentType) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_component_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_component_type, handle, pArgs, nil)
                 }
                 
             }
@@ -409,7 +409,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_normalized() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_normalized, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_normalized, handle, nil, &_result)
         return _result
     }
     
@@ -430,7 +430,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: normalized) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_normalized, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_normalized, handle, pArgs, nil)
                 }
                 
             }
@@ -455,7 +455,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_count, handle, nil, &_result)
         return _result
     }
     
@@ -476,7 +476,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_count, handle, pArgs, nil)
                 }
                 
             }
@@ -501,7 +501,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_accessor_type() -> GLTFAccessor.GLTFAccessorType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_accessor_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_accessor_type, handle, nil, &_result)
         return GLTFAccessor.GLTFAccessorType (rawValue: _result)!
     }
     
@@ -522,7 +522,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: accessorType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_accessor_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_accessor_type, handle, pArgs, nil)
                 }
                 
             }
@@ -547,7 +547,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_type() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_type, handle, nil, &_result)
         return _result
     }
     
@@ -568,7 +568,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: type) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_type, handle, pArgs, nil)
                 }
                 
             }
@@ -593,7 +593,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_min() -> PackedFloat64Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat64Array = PackedFloat64Array ()
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_min, handle, nil, &_result.content)
         return _result
     }
     
@@ -614,7 +614,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: min.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_min, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_min, handle, pArgs, nil)
                 }
                 
             }
@@ -639,7 +639,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_max() -> PackedFloat64Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat64Array = PackedFloat64Array ()
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_max, handle, nil, &_result.content)
         return _result
     }
     
@@ -660,7 +660,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: max.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_max, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_max, handle, pArgs, nil)
                 }
                 
             }
@@ -685,7 +685,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_sparse_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_count, handle, nil, &_result)
         return _result
     }
     
@@ -706,7 +706,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: sparseCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_sparse_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_sparse_count, handle, pArgs, nil)
                 }
                 
             }
@@ -731,7 +731,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_sparse_indices_buffer_view() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_indices_buffer_view, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_indices_buffer_view, handle, nil, &_result)
         return _result
     }
     
@@ -752,7 +752,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: sparseIndicesBufferView) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_sparse_indices_buffer_view, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_sparse_indices_buffer_view, handle, pArgs, nil)
                 }
                 
             }
@@ -777,7 +777,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_sparse_indices_byte_offset() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_indices_byte_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_indices_byte_offset, handle, nil, &_result)
         return _result
     }
     
@@ -798,7 +798,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: sparseIndicesByteOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_sparse_indices_byte_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_sparse_indices_byte_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -823,7 +823,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_sparse_indices_component_type() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_indices_component_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_indices_component_type, handle, nil, &_result)
         return _result
     }
     
@@ -844,7 +844,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: sparseIndicesComponentType) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_sparse_indices_component_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_sparse_indices_component_type, handle, pArgs, nil)
                 }
                 
             }
@@ -869,7 +869,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_sparse_values_buffer_view() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_values_buffer_view, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_values_buffer_view, handle, nil, &_result)
         return _result
     }
     
@@ -890,7 +890,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: sparseValuesBufferView) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_sparse_values_buffer_view, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_sparse_values_buffer_view, handle, pArgs, nil)
                 }
                 
             }
@@ -915,7 +915,7 @@ open class GLTFAccessor: Resource {
     fileprivate final func get_sparse_values_byte_offset() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_values_byte_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFAccessor.method_get_sparse_values_byte_offset, handle, nil, &_result)
         return _result
     }
     
@@ -936,7 +936,7 @@ open class GLTFAccessor: Resource {
         withUnsafePointer(to: sparseValuesByteOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_sparse_values_byte_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAccessor.method_set_sparse_values_byte_offset, handle, pArgs, nil)
                 }
                 
             }

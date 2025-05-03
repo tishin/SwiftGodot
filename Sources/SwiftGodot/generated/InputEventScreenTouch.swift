@@ -106,7 +106,7 @@ open class InputEventScreenTouch: InputEventFromWindow {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventScreenTouch.method_set_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventScreenTouch.method_set_index, handle, pArgs, nil)
                 }
                 
             }
@@ -131,7 +131,7 @@ open class InputEventScreenTouch: InputEventFromWindow {
     fileprivate final func get_index() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(InputEventScreenTouch.method_get_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventScreenTouch.method_get_index, handle, nil, &_result)
         return _result
     }
     
@@ -152,7 +152,7 @@ open class InputEventScreenTouch: InputEventFromWindow {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventScreenTouch.method_set_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventScreenTouch.method_set_position, handle, pArgs, nil)
                 }
                 
             }
@@ -177,7 +177,7 @@ open class InputEventScreenTouch: InputEventFromWindow {
     fileprivate final func get_position() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(InputEventScreenTouch.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventScreenTouch.method_get_position, handle, nil, &_result)
         return _result
     }
     
@@ -198,7 +198,7 @@ open class InputEventScreenTouch: InputEventFromWindow {
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventScreenTouch.method_set_pressed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventScreenTouch.method_set_pressed, handle, pArgs, nil)
                 }
                 
             }
@@ -225,7 +225,7 @@ open class InputEventScreenTouch: InputEventFromWindow {
         withUnsafePointer(to: canceled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventScreenTouch.method_set_canceled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventScreenTouch.method_set_canceled, handle, pArgs, nil)
                 }
                 
             }
@@ -252,7 +252,7 @@ open class InputEventScreenTouch: InputEventFromWindow {
         withUnsafePointer(to: doubleTap) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventScreenTouch.method_set_double_tap, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventScreenTouch.method_set_double_tap, handle, pArgs, nil)
                 }
                 
             }
@@ -277,7 +277,7 @@ open class InputEventScreenTouch: InputEventFromWindow {
     fileprivate final func is_double_tap() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(InputEventScreenTouch.method_is_double_tap, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventScreenTouch.method_is_double_tap, handle, nil, &_result)
         return _result
     }
     

@@ -109,7 +109,7 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_set_cull_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_set_cull_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -134,7 +134,7 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
     fileprivate final func get_cull_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_get_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_get_cull_mask, handle, nil, &_result)
         return _result
     }
     
@@ -155,7 +155,7 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_set_strength, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_set_strength, handle, pArgs, nil)
                 }
                 
             }
@@ -180,7 +180,7 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
     fileprivate final func get_strength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_get_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_get_strength, handle, nil, &_result)
         return _result
     }
     
@@ -201,7 +201,7 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
         withUnsafePointer(to: attenuation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_set_attenuation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_set_attenuation, handle, pArgs, nil)
                 }
                 
             }
@@ -226,7 +226,7 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
     fileprivate final func get_attenuation() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_get_attenuation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_get_attenuation, handle, nil, &_result)
         return _result
     }
     
@@ -247,7 +247,7 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_set_directionality, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_set_directionality, handle, pArgs, nil)
                 }
                 
             }
@@ -272,7 +272,7 @@ open class GPUParticlesAttractor3D: VisualInstance3D {
     fileprivate final func get_directionality() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_get_directionality, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticlesAttractor3D.method_get_directionality, handle, nil, &_result)
         return _result
     }
     

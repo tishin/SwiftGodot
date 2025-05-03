@@ -326,7 +326,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_material_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_material_override, handle, pArgs, nil)
                 }
                 
             }
@@ -350,9 +350,9 @@ open class GeometryInstance3D: VisualInstance3D {
     @inline(__always)
     fileprivate final func get_material_override() -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_material_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_material_override, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_material_overlay: GDExtensionMethodBindPtr = {
@@ -372,7 +372,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_material_overlay, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_material_overlay, handle, pArgs, nil)
                 }
                 
             }
@@ -396,9 +396,9 @@ open class GeometryInstance3D: VisualInstance3D {
     @inline(__always)
     fileprivate final func get_material_overlay() -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_material_overlay, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_material_overlay, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_cast_shadows_setting: GDExtensionMethodBindPtr = {
@@ -418,7 +418,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: shadowCastingSetting.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_cast_shadows_setting, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_cast_shadows_setting, handle, pArgs, nil)
                 }
                 
             }
@@ -443,7 +443,7 @@ open class GeometryInstance3D: VisualInstance3D {
     fileprivate final func get_cast_shadows_setting() -> GeometryInstance3D.ShadowCastingSetting {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_cast_shadows_setting, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_cast_shadows_setting, handle, nil, &_result)
         return GeometryInstance3D.ShadowCastingSetting (rawValue: _result)!
     }
     
@@ -464,7 +464,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: bias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_lod_bias, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_lod_bias, handle, pArgs, nil)
                 }
                 
             }
@@ -489,7 +489,7 @@ open class GeometryInstance3D: VisualInstance3D {
     fileprivate final func get_lod_bias() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_lod_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_lod_bias, handle, nil, &_result)
         return _result
     }
     
@@ -510,7 +510,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: transparency) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_transparency, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_transparency, handle, pArgs, nil)
                 }
                 
             }
@@ -535,7 +535,7 @@ open class GeometryInstance3D: VisualInstance3D {
     fileprivate final func get_transparency() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_transparency, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_transparency, handle, nil, &_result)
         return _result
     }
     
@@ -556,7 +556,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_visibility_range_end_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_visibility_range_end_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -581,7 +581,7 @@ open class GeometryInstance3D: VisualInstance3D {
     fileprivate final func get_visibility_range_end_margin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_end_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_end_margin, handle, nil, &_result)
         return _result
     }
     
@@ -602,7 +602,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_visibility_range_end, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_visibility_range_end, handle, pArgs, nil)
                 }
                 
             }
@@ -627,7 +627,7 @@ open class GeometryInstance3D: VisualInstance3D {
     fileprivate final func get_visibility_range_end() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_end, handle, nil, &_result)
         return _result
     }
     
@@ -648,7 +648,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_visibility_range_begin_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_visibility_range_begin_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -673,7 +673,7 @@ open class GeometryInstance3D: VisualInstance3D {
     fileprivate final func get_visibility_range_begin_margin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_begin_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_begin_margin, handle, nil, &_result)
         return _result
     }
     
@@ -694,7 +694,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_visibility_range_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_visibility_range_begin, handle, pArgs, nil)
                 }
                 
             }
@@ -719,7 +719,7 @@ open class GeometryInstance3D: VisualInstance3D {
     fileprivate final func get_visibility_range_begin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_begin, handle, nil, &_result)
         return _result
     }
     
@@ -740,7 +740,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_visibility_range_fade_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_visibility_range_fade_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -765,7 +765,7 @@ open class GeometryInstance3D: VisualInstance3D {
     fileprivate final func get_visibility_range_fade_mode() -> GeometryInstance3D.VisibilityRangeFadeMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_fade_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_visibility_range_fade_mode, handle, nil, &_result)
         return GeometryInstance3D.VisibilityRangeFadeMode (rawValue: _result)!
     }
     
@@ -794,7 +794,7 @@ open class GeometryInstance3D: VisualInstance3D {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_instance_shader_parameter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_instance_shader_parameter, handle, pArgs, nil)
                     }
                     
                 }
@@ -824,7 +824,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_instance_shader_parameter, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_instance_shader_parameter, handle, pArgs, &_result)
                 }
                 
             }
@@ -851,7 +851,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_extra_cull_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_extra_cull_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -876,7 +876,7 @@ open class GeometryInstance3D: VisualInstance3D {
     fileprivate final func get_extra_cull_margin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_extra_cull_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_extra_cull_margin, handle, nil, &_result)
         return _result
     }
     
@@ -897,7 +897,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_lightmap_texel_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_lightmap_texel_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -922,7 +922,7 @@ open class GeometryInstance3D: VisualInstance3D {
     fileprivate final func get_lightmap_texel_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_lightmap_texel_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_lightmap_texel_scale, handle, nil, &_result)
         return _result
     }
     
@@ -943,7 +943,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: scale.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_lightmap_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_lightmap_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -968,7 +968,7 @@ open class GeometryInstance3D: VisualInstance3D {
     fileprivate final func get_lightmap_scale() -> GeometryInstance3D.LightmapScale {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_lightmap_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_lightmap_scale, handle, nil, &_result)
         return GeometryInstance3D.LightmapScale (rawValue: _result)!
     }
     
@@ -989,7 +989,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_gi_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_gi_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -1014,7 +1014,7 @@ open class GeometryInstance3D: VisualInstance3D {
     fileprivate final func get_gi_mode() -> GeometryInstance3D.GIMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_gi_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_gi_mode, handle, nil, &_result)
         return GeometryInstance3D.GIMode (rawValue: _result)!
     }
     
@@ -1035,7 +1035,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: ignoreCulling) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_ignore_occlusion_culling, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_ignore_occlusion_culling, handle, pArgs, nil)
                 }
                 
             }
@@ -1060,7 +1060,7 @@ open class GeometryInstance3D: VisualInstance3D {
     fileprivate final func is_ignoring_occlusion_culling() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_is_ignoring_occlusion_culling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_is_ignoring_occlusion_culling, handle, nil, &_result)
         return _result
     }
     
@@ -1081,7 +1081,7 @@ open class GeometryInstance3D: VisualInstance3D {
         withUnsafePointer(to: aabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_custom_aabb, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GeometryInstance3D.method_set_custom_aabb, handle, pArgs, nil)
                 }
                 
             }
@@ -1106,7 +1106,7 @@ open class GeometryInstance3D: VisualInstance3D {
     fileprivate final func get_custom_aabb() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_custom_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GeometryInstance3D.method_get_custom_aabb, handle, nil, &_result)
         return _result
     }
     

@@ -94,7 +94,7 @@ open class DampedSpringJoint2D: Joint2D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_set_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_set_length, handle, pArgs, nil)
                 }
                 
             }
@@ -119,7 +119,7 @@ open class DampedSpringJoint2D: Joint2D {
     fileprivate final func get_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_get_length, handle, nil, &_result)
         return _result
     }
     
@@ -140,7 +140,7 @@ open class DampedSpringJoint2D: Joint2D {
         withUnsafePointer(to: restLength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_set_rest_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_set_rest_length, handle, pArgs, nil)
                 }
                 
             }
@@ -165,7 +165,7 @@ open class DampedSpringJoint2D: Joint2D {
     fileprivate final func get_rest_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_get_rest_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_get_rest_length, handle, nil, &_result)
         return _result
     }
     
@@ -186,7 +186,7 @@ open class DampedSpringJoint2D: Joint2D {
         withUnsafePointer(to: stiffness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_set_stiffness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_set_stiffness, handle, pArgs, nil)
                 }
                 
             }
@@ -211,7 +211,7 @@ open class DampedSpringJoint2D: Joint2D {
     fileprivate final func get_stiffness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_get_stiffness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_get_stiffness, handle, nil, &_result)
         return _result
     }
     
@@ -232,7 +232,7 @@ open class DampedSpringJoint2D: Joint2D {
         withUnsafePointer(to: damping) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_set_damping, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_set_damping, handle, pArgs, nil)
                 }
                 
             }
@@ -257,7 +257,7 @@ open class DampedSpringJoint2D: Joint2D {
     fileprivate final func get_damping() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_get_damping, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(DampedSpringJoint2D.method_get_damping, handle, nil, &_result)
         return _result
     }
     

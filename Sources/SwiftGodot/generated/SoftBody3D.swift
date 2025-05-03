@@ -200,7 +200,7 @@ open class SoftBody3D: MeshInstance3D {
     public final func getPhysicsRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(SoftBody3D.method_get_physics_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SoftBody3D.method_get_physics_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -221,7 +221,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: collisionMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_collision_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_collision_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -246,7 +246,7 @@ open class SoftBody3D: MeshInstance3D {
     fileprivate final func get_collision_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(SoftBody3D.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SoftBody3D.method_get_collision_mask, handle, nil, &_result)
         return _result
     }
     
@@ -267,7 +267,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: collisionLayer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_collision_layer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_collision_layer, handle, pArgs, nil)
                 }
                 
             }
@@ -292,7 +292,7 @@ open class SoftBody3D: MeshInstance3D {
     fileprivate final func get_collision_layer() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(SoftBody3D.method_get_collision_layer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SoftBody3D.method_get_collision_layer, handle, nil, &_result)
         return _result
     }
     
@@ -314,7 +314,7 @@ open class SoftBody3D: MeshInstance3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SoftBody3D.method_set_collision_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SoftBody3D.method_set_collision_mask_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -344,7 +344,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_get_collision_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_get_collision_mask_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -372,7 +372,7 @@ open class SoftBody3D: MeshInstance3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SoftBody3D.method_set_collision_layer_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SoftBody3D.method_set_collision_layer_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -402,7 +402,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_get_collision_layer_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_get_collision_layer_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -429,7 +429,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: parentCollisionIgnore.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_parent_collision_ignore, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_parent_collision_ignore, handle, pArgs, nil)
                 }
                 
             }
@@ -454,7 +454,7 @@ open class SoftBody3D: MeshInstance3D {
     fileprivate final func get_parent_collision_ignore() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(SoftBody3D.method_get_parent_collision_ignore, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SoftBody3D.method_get_parent_collision_ignore, handle, nil, &_result.content)
         return _result
     }
     
@@ -475,7 +475,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_disable_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_disable_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -500,7 +500,7 @@ open class SoftBody3D: MeshInstance3D {
     fileprivate final func get_disable_mode() -> SoftBody3D.DisableMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SoftBody3D.method_get_disable_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SoftBody3D.method_get_disable_mode, handle, nil, &_result)
         return SoftBody3D.DisableMode (rawValue: _result)!
     }
     
@@ -519,7 +519,7 @@ open class SoftBody3D: MeshInstance3D {
     public final func getCollisionExceptions() -> TypedArray<PhysicsBody3D?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(SoftBody3D.method_get_collision_exceptions, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SoftBody3D.method_get_collision_exceptions, handle, nil, &_result)
         return TypedArray<PhysicsBody3D?>(takingOver: _result)
     }
     
@@ -540,7 +540,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: body?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_add_collision_exception_with, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_add_collision_exception_with, handle, pArgs, nil)
                 }
                 
             }
@@ -567,7 +567,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: body?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_remove_collision_exception_with, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_remove_collision_exception_with, handle, pArgs, nil)
                 }
                 
             }
@@ -594,7 +594,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: simulationPrecision) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_simulation_precision, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_simulation_precision, handle, pArgs, nil)
                 }
                 
             }
@@ -619,7 +619,7 @@ open class SoftBody3D: MeshInstance3D {
     fileprivate final func get_simulation_precision() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SoftBody3D.method_get_simulation_precision, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SoftBody3D.method_get_simulation_precision, handle, nil, &_result)
         return _result
     }
     
@@ -640,7 +640,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: mass) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_total_mass, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_total_mass, handle, pArgs, nil)
                 }
                 
             }
@@ -665,7 +665,7 @@ open class SoftBody3D: MeshInstance3D {
     fileprivate final func get_total_mass() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SoftBody3D.method_get_total_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SoftBody3D.method_get_total_mass, handle, nil, &_result)
         return _result
     }
     
@@ -686,7 +686,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: linearStiffness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_linear_stiffness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_linear_stiffness, handle, pArgs, nil)
                 }
                 
             }
@@ -711,7 +711,7 @@ open class SoftBody3D: MeshInstance3D {
     fileprivate final func get_linear_stiffness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SoftBody3D.method_get_linear_stiffness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SoftBody3D.method_get_linear_stiffness, handle, nil, &_result)
         return _result
     }
     
@@ -732,7 +732,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: pressureCoefficient) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_pressure_coefficient, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_pressure_coefficient, handle, pArgs, nil)
                 }
                 
             }
@@ -757,7 +757,7 @@ open class SoftBody3D: MeshInstance3D {
     fileprivate final func get_pressure_coefficient() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SoftBody3D.method_get_pressure_coefficient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SoftBody3D.method_get_pressure_coefficient, handle, nil, &_result)
         return _result
     }
     
@@ -778,7 +778,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: dampingCoefficient) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_damping_coefficient, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_damping_coefficient, handle, pArgs, nil)
                 }
                 
             }
@@ -803,7 +803,7 @@ open class SoftBody3D: MeshInstance3D {
     fileprivate final func get_damping_coefficient() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SoftBody3D.method_get_damping_coefficient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SoftBody3D.method_get_damping_coefficient, handle, nil, &_result)
         return _result
     }
     
@@ -824,7 +824,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: dragCoefficient) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_drag_coefficient, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_drag_coefficient, handle, pArgs, nil)
                 }
                 
             }
@@ -849,7 +849,7 @@ open class SoftBody3D: MeshInstance3D {
     fileprivate final func get_drag_coefficient() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SoftBody3D.method_get_drag_coefficient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SoftBody3D.method_get_drag_coefficient, handle, nil, &_result)
         return _result
     }
     
@@ -871,7 +871,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: pointIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_get_point_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_get_point_transform, handle, pArgs, &_result)
                 }
                 
             }
@@ -901,7 +901,7 @@ open class SoftBody3D: MeshInstance3D {
                     withUnsafePointer(to: insertAt) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(SoftBody3D.method_set_point_pinned, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(SoftBody3D.method_set_point_pinned, handle, pArgs, nil)
                             }
                             
                         }
@@ -935,7 +935,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: pointIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_is_point_pinned, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_is_point_pinned, handle, pArgs, &_result)
                 }
                 
             }
@@ -962,7 +962,7 @@ open class SoftBody3D: MeshInstance3D {
         withUnsafePointer(to: rayPickable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_ray_pickable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SoftBody3D.method_set_ray_pickable, handle, pArgs, nil)
                 }
                 
             }
@@ -987,7 +987,7 @@ open class SoftBody3D: MeshInstance3D {
     fileprivate final func is_ray_pickable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SoftBody3D.method_is_ray_pickable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SoftBody3D.method_is_ray_pickable, handle, nil, &_result)
         return _result
     }
     

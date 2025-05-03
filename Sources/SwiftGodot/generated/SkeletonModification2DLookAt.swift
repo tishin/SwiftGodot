@@ -82,7 +82,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         withUnsafePointer(to: bone2dNodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_bone2d_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_bone2d_node, handle, pArgs, nil)
                 }
                 
             }
@@ -107,7 +107,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     fileprivate final func get_bone2d_node() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_bone2d_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_bone2d_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -128,7 +128,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_bone_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_bone_index, handle, pArgs, nil)
                 }
                 
             }
@@ -153,7 +153,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     fileprivate final func get_bone_index() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_bone_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_bone_index, handle, nil, &_result)
         return _result
     }
     
@@ -174,7 +174,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         withUnsafePointer(to: targetNodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_target_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_target_node, handle, pArgs, nil)
                 }
                 
             }
@@ -199,7 +199,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     fileprivate final func get_target_node() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_target_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_target_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -220,7 +220,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         withUnsafePointer(to: rotation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_additional_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_additional_rotation, handle, pArgs, nil)
                 }
                 
             }
@@ -245,7 +245,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     public final func getAdditionalRotation() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_additional_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_additional_rotation, handle, nil, &_result)
         return _result
     }
     
@@ -266,7 +266,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         withUnsafePointer(to: enableConstraint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_enable_constraint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_enable_constraint, handle, pArgs, nil)
                 }
                 
             }
@@ -291,7 +291,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     public final func getEnableConstraint() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_enable_constraint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_enable_constraint, handle, nil, &_result)
         return _result
     }
     
@@ -312,7 +312,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         withUnsafePointer(to: angleMin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_constraint_angle_min, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_constraint_angle_min, handle, pArgs, nil)
                 }
                 
             }
@@ -337,7 +337,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     public final func getConstraintAngleMin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_constraint_angle_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_constraint_angle_min, handle, nil, &_result)
         return _result
     }
     
@@ -358,7 +358,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         withUnsafePointer(to: angleMax) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_constraint_angle_max, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_constraint_angle_max, handle, pArgs, nil)
                 }
                 
             }
@@ -383,7 +383,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     public final func getConstraintAngleMax() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_constraint_angle_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_constraint_angle_max, handle, nil, &_result)
         return _result
     }
     
@@ -407,7 +407,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
         withUnsafePointer(to: invert) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_constraint_angle_invert, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_set_constraint_angle_invert, handle, pArgs, nil)
                 }
                 
             }
@@ -432,7 +432,7 @@ open class SkeletonModification2DLookAt: SkeletonModification2D {
     public final func getConstraintAngleInvert() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_constraint_angle_invert, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DLookAt.method_get_constraint_angle_invert, handle, nil, &_result)
         return _result
     }
     

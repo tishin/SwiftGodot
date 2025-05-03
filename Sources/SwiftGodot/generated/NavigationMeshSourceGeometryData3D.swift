@@ -83,7 +83,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         withUnsafePointer(to: vertices.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_set_vertices, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_set_vertices, handle, pArgs, nil)
                 }
                 
             }
@@ -109,7 +109,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     fileprivate final func get_vertices() -> PackedFloat32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
-        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_get_vertices, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_get_vertices, handle, nil, &_result.content)
         return _result
     }
     
@@ -134,7 +134,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         withUnsafePointer(to: indices.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_set_indices, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_set_indices, handle, pArgs, nil)
                 }
                 
             }
@@ -160,7 +160,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     fileprivate final func get_indices() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_get_indices, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_get_indices, handle, nil, &_result.content)
         return _result
     }
     
@@ -182,7 +182,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
             withUnsafePointer(to: indices.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_append_arrays, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_append_arrays, handle, pArgs, nil)
                     }
                     
                 }
@@ -208,7 +208,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     /// Clears the internal data.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_clear, handle, nil, nil)
         
     }
     
@@ -227,7 +227,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     public final func hasData() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_has_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_has_data, handle, nil, &_result)
         return _result
     }
     
@@ -249,7 +249,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
             withUnsafePointer(to: xform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_add_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_add_mesh, handle, pArgs, nil)
                     }
                     
                 }
@@ -279,7 +279,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
             withUnsafePointer(to: xform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_add_mesh_array, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_add_mesh_array, handle, pArgs, nil)
                     }
                     
                 }
@@ -309,7 +309,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
             withUnsafePointer(to: xform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_add_faces, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_add_faces, handle, pArgs, nil)
                     }
                     
                 }
@@ -338,7 +338,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         withUnsafePointer(to: otherGeometry?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_merge, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_merge, handle, pArgs, nil)
                 }
                 
             }
@@ -368,7 +368,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
                     withUnsafePointer(to: carve) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_add_projected_obstruction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_add_projected_obstruction, handle, pArgs, nil)
                             }
                             
                         }
@@ -398,7 +398,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     /// Clears all projected obstructions.
     public final func clearProjectedObstructions() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_clear_projected_obstructions, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_clear_projected_obstructions, handle, nil, nil)
         
     }
     
@@ -421,7 +421,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
         withUnsafePointer(to: projectedObstructions.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_set_projected_obstructions, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_set_projected_obstructions, handle, pArgs, nil)
                 }
                 
             }
@@ -456,7 +456,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     fileprivate final func get_projected_obstructions() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_get_projected_obstructions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_get_projected_obstructions, handle, nil, &_result.content)
         return _result
     }
     
@@ -475,7 +475,7 @@ open class NavigationMeshSourceGeometryData3D: Resource {
     public final func getBounds() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_get_bounds, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData3D.method_get_bounds, handle, nil, &_result)
         return _result
     }
     

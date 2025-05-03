@@ -46,7 +46,7 @@ open class BitMap: Resource {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BitMap.method_create, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BitMap.method_create, handle, pArgs, nil)
                 }
                 
             }
@@ -74,7 +74,7 @@ open class BitMap: Resource {
             withUnsafePointer(to: threshold) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(BitMap.method_create_from_image_alpha, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(BitMap.method_create_from_image_alpha, handle, pArgs, nil)
                     }
                     
                 }
@@ -104,7 +104,7 @@ open class BitMap: Resource {
             withUnsafePointer(to: bit) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(BitMap.method_set_bitv, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(BitMap.method_set_bitv, handle, pArgs, nil)
                     }
                     
                 }
@@ -135,7 +135,7 @@ open class BitMap: Resource {
                 withUnsafePointer(to: bit) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(BitMap.method_set_bit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(BitMap.method_set_bit, handle, pArgs, nil)
                         }
                         
                     }
@@ -167,7 +167,7 @@ open class BitMap: Resource {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BitMap.method_get_bitv, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(BitMap.method_get_bitv, handle, pArgs, &_result)
                 }
                 
             }
@@ -196,7 +196,7 @@ open class BitMap: Resource {
             withUnsafePointer(to: y) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(BitMap.method_get_bit, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(BitMap.method_get_bit, handle, pArgs, &_result)
                     }
                     
                 }
@@ -226,7 +226,7 @@ open class BitMap: Resource {
             withUnsafePointer(to: bit) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(BitMap.method_set_bit_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(BitMap.method_set_bit_rect, handle, pArgs, nil)
                     }
                     
                 }
@@ -253,7 +253,7 @@ open class BitMap: Resource {
     public final func getTrueBitCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(BitMap.method_get_true_bit_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BitMap.method_get_true_bit_count, handle, nil, &_result)
         return _result
     }
     
@@ -272,7 +272,7 @@ open class BitMap: Resource {
     public final func getSize() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(BitMap.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BitMap.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -293,7 +293,7 @@ open class BitMap: Resource {
         withUnsafePointer(to: newSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BitMap.method_resize, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BitMap.method_resize, handle, pArgs, nil)
                 }
                 
             }
@@ -321,7 +321,7 @@ open class BitMap: Resource {
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(BitMap.method_grow_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(BitMap.method_grow_mask, handle, pArgs, nil)
                     }
                     
                 }
@@ -347,9 +347,9 @@ open class BitMap: Resource {
     /// Returns an image of the same size as the bitmap and with a ``Image.Format`` of type ``Image/Format/l8``. `true` bits of the bitmap are being converted into white pixels, and `false` bits into black.
     public final func convertToImage() -> Image? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(BitMap.method_convert_to_image, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(BitMap.method_convert_to_image, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_opaque_to_polygons: GDExtensionMethodBindPtr = {
@@ -376,7 +376,7 @@ open class BitMap: Resource {
             withUnsafePointer(to: epsilon) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(BitMap.method_opaque_to_polygons, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(BitMap.method_opaque_to_polygons, handle, pArgs, &_result)
                     }
                     
                 }

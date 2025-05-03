@@ -63,7 +63,7 @@ open class Translation: Resource {
                     withUnsafePointer(to: context.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Translation.method__get_plural_message, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(Translation.method__get_plural_message, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -99,7 +99,7 @@ open class Translation: Resource {
             withUnsafePointer(to: context.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Translation.method__get_message, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Translation.method__get_message, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -129,7 +129,7 @@ open class Translation: Resource {
         withUnsafePointer(to: locale.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Translation.method_set_locale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Translation.method_set_locale, handle, pArgs, nil)
                 }
                 
             }
@@ -154,7 +154,7 @@ open class Translation: Resource {
     fileprivate final func get_locale() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Translation.method_get_locale, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Translation.method_get_locale, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -180,7 +180,7 @@ open class Translation: Resource {
                 withUnsafePointer(to: context.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Translation.method_add_message, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Translation.method_add_message, handle, pArgs, nil)
                         }
                         
                     }
@@ -216,7 +216,7 @@ open class Translation: Resource {
                 withUnsafePointer(to: context.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Translation.method_add_plural_message, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Translation.method_add_plural_message, handle, pArgs, nil)
                         }
                         
                     }
@@ -249,7 +249,7 @@ open class Translation: Resource {
             withUnsafePointer(to: context.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Translation.method_get_message, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Translation.method_get_message, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -285,7 +285,7 @@ open class Translation: Resource {
                     withUnsafePointer(to: context.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Translation.method_get_plural_message, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(Translation.method_get_plural_message, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -319,7 +319,7 @@ open class Translation: Resource {
             withUnsafePointer(to: context.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Translation.method_erase_message, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Translation.method_erase_message, handle, pArgs, nil)
                     }
                     
                 }
@@ -346,7 +346,7 @@ open class Translation: Resource {
     public final func getMessageList() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(Translation.method_get_message_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Translation.method_get_message_list, handle, nil, &_result.content)
         return _result
     }
     
@@ -365,7 +365,7 @@ open class Translation: Resource {
     public final func getTranslatedMessageList() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(Translation.method_get_translated_message_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Translation.method_get_translated_message_list, handle, nil, &_result.content)
         return _result
     }
     
@@ -384,7 +384,7 @@ open class Translation: Resource {
     public final func getMessageCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Translation.method_get_message_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Translation.method_get_message_count, handle, nil, &_result)
         return _result
     }
     

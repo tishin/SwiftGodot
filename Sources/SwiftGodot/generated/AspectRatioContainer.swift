@@ -117,7 +117,7 @@ open class AspectRatioContainer: Container {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AspectRatioContainer.method_set_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AspectRatioContainer.method_set_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -142,7 +142,7 @@ open class AspectRatioContainer: Container {
     fileprivate final func get_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AspectRatioContainer.method_get_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AspectRatioContainer.method_get_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -163,7 +163,7 @@ open class AspectRatioContainer: Container {
         withUnsafePointer(to: stretchMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AspectRatioContainer.method_set_stretch_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AspectRatioContainer.method_set_stretch_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -188,7 +188,7 @@ open class AspectRatioContainer: Container {
     fileprivate final func get_stretch_mode() -> AspectRatioContainer.StretchMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AspectRatioContainer.method_get_stretch_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AspectRatioContainer.method_get_stretch_mode, handle, nil, &_result)
         return AspectRatioContainer.StretchMode (rawValue: _result)!
     }
     
@@ -209,7 +209,7 @@ open class AspectRatioContainer: Container {
         withUnsafePointer(to: alignmentHorizontal.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AspectRatioContainer.method_set_alignment_horizontal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AspectRatioContainer.method_set_alignment_horizontal, handle, pArgs, nil)
                 }
                 
             }
@@ -234,7 +234,7 @@ open class AspectRatioContainer: Container {
     fileprivate final func get_alignment_horizontal() -> AspectRatioContainer.AlignmentMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AspectRatioContainer.method_get_alignment_horizontal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AspectRatioContainer.method_get_alignment_horizontal, handle, nil, &_result)
         return AspectRatioContainer.AlignmentMode (rawValue: _result)!
     }
     
@@ -255,7 +255,7 @@ open class AspectRatioContainer: Container {
         withUnsafePointer(to: alignmentVertical.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AspectRatioContainer.method_set_alignment_vertical, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AspectRatioContainer.method_set_alignment_vertical, handle, pArgs, nil)
                 }
                 
             }
@@ -280,7 +280,7 @@ open class AspectRatioContainer: Container {
     fileprivate final func get_alignment_vertical() -> AspectRatioContainer.AlignmentMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AspectRatioContainer.method_get_alignment_vertical, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AspectRatioContainer.method_get_alignment_vertical, handle, nil, &_result)
         return AspectRatioContainer.AlignmentMode (rawValue: _result)!
     }
     

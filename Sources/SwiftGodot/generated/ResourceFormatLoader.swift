@@ -60,7 +60,7 @@ open class ResourceFormatLoader: RefCounted {
     open func _getRecognizedExtensions() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_recognized_extensions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_recognized_extensions, handle, nil, &_result.content)
         return _result
     }
     
@@ -88,7 +88,7 @@ open class ResourceFormatLoader: RefCounted {
             withUnsafePointer(to: type.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ResourceFormatLoader.method__recognize_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ResourceFormatLoader.method__recognize_path, handle, pArgs, &_result)
                     }
                     
                 }
@@ -122,7 +122,7 @@ open class ResourceFormatLoader: RefCounted {
         withUnsafePointer(to: type.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__handles_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__handles_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -155,7 +155,7 @@ open class ResourceFormatLoader: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_resource_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_resource_type, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -185,7 +185,7 @@ open class ResourceFormatLoader: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_resource_script_class, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_resource_script_class, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -215,7 +215,7 @@ open class ResourceFormatLoader: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_resource_uid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_resource_uid, handle, pArgs, &_result)
                 }
                 
             }
@@ -249,7 +249,7 @@ open class ResourceFormatLoader: RefCounted {
             withUnsafePointer(to: addTypes) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_dependencies, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_dependencies, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -285,7 +285,7 @@ open class ResourceFormatLoader: RefCounted {
             withUnsafePointer(to: renames.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ResourceFormatLoader.method__rename_dependencies, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ResourceFormatLoader.method__rename_dependencies, handle, pArgs, &_result)
                     }
                     
                 }
@@ -317,7 +317,7 @@ open class ResourceFormatLoader: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__exists, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__exists, handle, pArgs, &_result)
                 }
                 
             }
@@ -347,7 +347,7 @@ open class ResourceFormatLoader: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_classes_used, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ResourceFormatLoader.method__get_classes_used, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -384,7 +384,7 @@ open class ResourceFormatLoader: RefCounted {
                     withUnsafePointer(to: cacheMode) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(ResourceFormatLoader.method__load, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(ResourceFormatLoader.method__load, handle, pArgs, &_result)
                             }
                             
                         }

@@ -241,7 +241,7 @@ open class Image: Resource {
     public final func getWidth() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Image.method_get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Image.method_get_width, handle, nil, &_result)
         return _result
     }
     
@@ -260,7 +260,7 @@ open class Image: Resource {
     public final func getHeight() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Image.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Image.method_get_height, handle, nil, &_result)
         return _result
     }
     
@@ -279,7 +279,7 @@ open class Image: Resource {
     public final func getSize() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(Image.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Image.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -298,7 +298,7 @@ open class Image: Resource {
     public final func hasMipmaps() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Image.method_has_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Image.method_has_mipmaps, handle, nil, &_result)
         return _result
     }
     
@@ -317,7 +317,7 @@ open class Image: Resource {
     public final func getFormat() -> Image.Format {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Image.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Image.method_get_format, handle, nil, &_result)
         return Image.Format (rawValue: _result)!
     }
     
@@ -336,7 +336,7 @@ open class Image: Resource {
     public final func getData() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(Image.method_get_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Image.method_get_data, handle, nil, &_result.content)
         return _result
     }
     
@@ -355,7 +355,7 @@ open class Image: Resource {
     public final func getDataSize() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(Image.method_get_data_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Image.method_get_data_size, handle, nil, &_result)
         return _result
     }
     
@@ -376,7 +376,7 @@ open class Image: Resource {
         withUnsafePointer(to: format.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_convert, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Image.method_convert, handle, pArgs, nil)
                 }
                 
             }
@@ -401,7 +401,7 @@ open class Image: Resource {
     public final func getMipmapCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Image.method_get_mipmap_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Image.method_get_mipmap_count, handle, nil, &_result)
         return _result
     }
     
@@ -423,7 +423,7 @@ open class Image: Resource {
         withUnsafePointer(to: mipmap) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_get_mipmap_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Image.method_get_mipmap_offset, handle, pArgs, &_result)
                 }
                 
             }
@@ -451,7 +451,7 @@ open class Image: Resource {
             withUnsafePointer(to: interpolation.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Image.method_resize_to_po2, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Image.method_resize_to_po2, handle, pArgs, nil)
                     }
                     
                 }
@@ -482,7 +482,7 @@ open class Image: Resource {
                 withUnsafePointer(to: interpolation.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Image.method_resize, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Image.method_resize, handle, pArgs, nil)
                         }
                         
                     }
@@ -510,7 +510,7 @@ open class Image: Resource {
     /// Shrinks the image by a factor of 2 on each axis (this divides the pixel count by 4).
     public final func shrinkX2() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Image.method_shrink_x2, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Image.method_shrink_x2, handle, nil, nil)
         
     }
     
@@ -532,7 +532,7 @@ open class Image: Resource {
             withUnsafePointer(to: height) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Image.method_crop, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Image.method_crop, handle, pArgs, nil)
                     }
                     
                 }
@@ -558,7 +558,7 @@ open class Image: Resource {
     /// Flips the image horizontally.
     public final func flipX() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Image.method_flip_x, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Image.method_flip_x, handle, nil, nil)
         
     }
     
@@ -576,7 +576,7 @@ open class Image: Resource {
     /// Flips the image vertically.
     public final func flipY() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Image.method_flip_y, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Image.method_flip_y, handle, nil, nil)
         
     }
     
@@ -601,7 +601,7 @@ open class Image: Resource {
         withUnsafePointer(to: renormalize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_generate_mipmaps, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Image.method_generate_mipmaps, handle, pArgs, &_result)
                 }
                 
             }
@@ -625,7 +625,7 @@ open class Image: Resource {
     /// Removes the image's mipmaps.
     public final func clearMipmaps() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Image.method_clear_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Image.method_clear_mipmaps, handle, nil, nil)
         
     }
     
@@ -642,7 +642,7 @@ open class Image: Resource {
     
     /// Creates an empty image of given size and format. See ``Image/Format`` constants. If `useMipmaps` is `true`, then generate mipmaps for this image. See the ``generateMipmaps(renormalize:)``.
     public static func create(width: Int32, height: Int32, useMipmaps: Bool, format: Image.Format) -> Image? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: height) { pArg1 in
                 withUnsafePointer(to: useMipmaps) { pArg2 in
@@ -662,7 +662,7 @@ open class Image: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_create_empty: GDExtensionMethodBindPtr = {
@@ -678,7 +678,7 @@ open class Image: Resource {
     
     /// Creates an empty image of given size and format. See ``Image/Format`` constants. If `useMipmaps` is `true`, then generate mipmaps for this image. See the ``generateMipmaps(renormalize:)``.
     public static func createEmpty(width: Int32, height: Int32, useMipmaps: Bool, format: Image.Format) -> Image? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: height) { pArg1 in
                 withUnsafePointer(to: useMipmaps) { pArg2 in
@@ -698,7 +698,7 @@ open class Image: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_create_from_data: GDExtensionMethodBindPtr = {
@@ -714,7 +714,7 @@ open class Image: Resource {
     
     /// Creates a new image of given size and format. See ``Image/Format`` constants. Fills the image with the given raw data. If `useMipmaps` is `true` then loads mipmaps for this image from `data`. See ``generateMipmaps(renormalize:)``.
     public static func createFromData(width: Int32, height: Int32, useMipmaps: Bool, format: Image.Format, data: PackedByteArray) -> Image? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: height) { pArg1 in
                 withUnsafePointer(to: useMipmaps) { pArg2 in
@@ -737,7 +737,7 @@ open class Image: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_data: GDExtensionMethodBindPtr = {
@@ -761,7 +761,7 @@ open class Image: Resource {
                         withUnsafePointer(to: data.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(Image.method_set_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(Image.method_set_data, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -794,7 +794,7 @@ open class Image: Resource {
     public final func isEmpty() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Image.method_is_empty, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Image.method_is_empty, handle, nil, &_result)
         return _result
     }
     
@@ -822,7 +822,7 @@ open class Image: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_load, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Image.method_load, handle, pArgs, &_result)
                 }
                 
             }
@@ -845,7 +845,7 @@ open class Image: Resource {
     
     /// Creates a new ``Image`` and loads data from the specified file.
     public static func loadFromFile(path: String) -> Image? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -857,7 +857,7 @@ open class Image: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_save_png: GDExtensionMethodBindPtr = {
@@ -879,7 +879,7 @@ open class Image: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_save_png, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Image.method_save_png, handle, pArgs, &_result)
                 }
                 
             }
@@ -904,7 +904,7 @@ open class Image: Resource {
     public final func savePngToBuffer() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(Image.method_save_png_to_buffer, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Image.method_save_png_to_buffer, handle, nil, &_result.content)
         return _result
     }
     
@@ -931,7 +931,7 @@ open class Image: Resource {
             withUnsafePointer(to: quality) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Image.method_save_jpg, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Image.method_save_jpg, handle, pArgs, &_result)
                     }
                     
                 }
@@ -964,7 +964,7 @@ open class Image: Resource {
         withUnsafePointer(to: quality) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_save_jpg_to_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Image.method_save_jpg_to_buffer, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -997,7 +997,7 @@ open class Image: Resource {
             withUnsafePointer(to: grayscale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Image.method_save_exr, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Image.method_save_exr, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1030,7 +1030,7 @@ open class Image: Resource {
         withUnsafePointer(to: grayscale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_save_exr_to_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Image.method_save_exr_to_buffer, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1064,7 +1064,7 @@ open class Image: Resource {
                 withUnsafePointer(to: quality) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Image.method_save_webp, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Image.method_save_webp, handle, pArgs, &_result)
                         }
                         
                     }
@@ -1100,7 +1100,7 @@ open class Image: Resource {
             withUnsafePointer(to: quality) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Image.method_save_webp_to_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Image.method_save_webp_to_buffer, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1127,7 +1127,7 @@ open class Image: Resource {
     public final func detectAlpha() -> Image.AlphaMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Image.method_detect_alpha, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Image.method_detect_alpha, handle, nil, &_result)
         return Image.AlphaMode (rawValue: _result)!
     }
     
@@ -1146,7 +1146,7 @@ open class Image: Resource {
     public final func isInvisible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Image.method_is_invisible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Image.method_is_invisible, handle, nil, &_result)
         return _result
     }
     
@@ -1168,7 +1168,7 @@ open class Image: Resource {
         withUnsafePointer(to: source.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_detect_used_channels, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Image.method_detect_used_channels, handle, pArgs, &_result)
                 }
                 
             }
@@ -1203,7 +1203,7 @@ open class Image: Resource {
                 withUnsafePointer(to: astcFormat.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Image.method_compress, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Image.method_compress, handle, pArgs, &_result)
                         }
                         
                     }
@@ -1242,7 +1242,7 @@ open class Image: Resource {
                 withUnsafePointer(to: astcFormat.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Image.method_compress_from_channels, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Image.method_compress_from_channels, handle, pArgs, &_result)
                         }
                         
                     }
@@ -1274,7 +1274,7 @@ open class Image: Resource {
     public final func decompress() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Image.method_decompress, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Image.method_decompress, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -1293,7 +1293,7 @@ open class Image: Resource {
     public final func isCompressed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Image.method_is_compressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Image.method_is_compressed, handle, nil, &_result)
         return _result
     }
     
@@ -1314,7 +1314,7 @@ open class Image: Resource {
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_rotate_90, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Image.method_rotate_90, handle, pArgs, nil)
                 }
                 
             }
@@ -1338,7 +1338,7 @@ open class Image: Resource {
     /// Rotates the image by `180` degrees. The width and height of the image must be greater than `1`.
     public final func rotate180() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Image.method_rotate_180, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Image.method_rotate_180, handle, nil, nil)
         
     }
     
@@ -1356,7 +1356,7 @@ open class Image: Resource {
     /// Blends low-alpha pixels with nearby pixels.
     public final func fixAlphaEdges() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Image.method_fix_alpha_edges, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Image.method_fix_alpha_edges, handle, nil, nil)
         
     }
     
@@ -1374,7 +1374,7 @@ open class Image: Resource {
     /// Multiplies color values with alpha values. Resulting color values for a pixel are `(color * alpha)/256`. See also ``CanvasItemMaterial/blendMode``.
     public final func premultiplyAlpha() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Image.method_premultiply_alpha, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Image.method_premultiply_alpha, handle, nil, nil)
         
     }
     
@@ -1392,7 +1392,7 @@ open class Image: Resource {
     /// Converts the raw data from the sRGB colorspace to a linear scale. Only works on images with ``Format/rgb8`` or ``Format/rgba8`` formats.
     public final func srgbToLinear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Image.method_srgb_to_linear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Image.method_srgb_to_linear, handle, nil, nil)
         
     }
     
@@ -1410,7 +1410,7 @@ open class Image: Resource {
     /// Converts the entire image from the linear colorspace to the sRGB colorspace. Only works on images with ``Format/rgb8`` or ``Format/rgba8`` formats.
     public final func linearToSrgb() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Image.method_linear_to_srgb, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Image.method_linear_to_srgb, handle, nil, nil)
         
     }
     
@@ -1428,7 +1428,7 @@ open class Image: Resource {
     /// Converts the image's data to represent coordinates on a 3D plane. This is used when the image represents a normal map. A normal map can add lots of detail to a 3D surface without increasing the polygon count.
     public final func normalMapToXy() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Image.method_normal_map_to_xy, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Image.method_normal_map_to_xy, handle, nil, nil)
         
     }
     
@@ -1446,9 +1446,9 @@ open class Image: Resource {
     /// Converts a standard RGBE (Red Green Blue Exponent) image to an sRGB image.
     public final func rgbeToSrgb() -> Image? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Image.method_rgbe_to_srgb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Image.method_rgbe_to_srgb, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_bump_map_to_normal_map: GDExtensionMethodBindPtr = {
@@ -1468,7 +1468,7 @@ open class Image: Resource {
         withUnsafePointer(to: bumpScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_bump_map_to_normal_map, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Image.method_bump_map_to_normal_map, handle, pArgs, nil)
                 }
                 
             }
@@ -1500,7 +1500,7 @@ open class Image: Resource {
             withUnsafePointer(to: useLuma) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Image.method_compute_image_metrics, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Image.method_compute_image_metrics, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1534,7 +1534,7 @@ open class Image: Resource {
                 withUnsafePointer(to: dst) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Image.method_blit_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Image.method_blit_rect, handle, pArgs, nil)
                         }
                         
                     }
@@ -1568,7 +1568,7 @@ open class Image: Resource {
                     withUnsafePointer(to: dst) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Image.method_blit_rect_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(Image.method_blit_rect_mask, handle, pArgs, nil)
                             }
                             
                         }
@@ -1603,7 +1603,7 @@ open class Image: Resource {
                 withUnsafePointer(to: dst) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Image.method_blend_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Image.method_blend_rect, handle, pArgs, nil)
                         }
                         
                     }
@@ -1637,7 +1637,7 @@ open class Image: Resource {
                     withUnsafePointer(to: dst) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Image.method_blend_rect_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(Image.method_blend_rect_mask, handle, pArgs, nil)
                             }
                             
                         }
@@ -1670,7 +1670,7 @@ open class Image: Resource {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_fill, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Image.method_fill, handle, pArgs, nil)
                 }
                 
             }
@@ -1698,7 +1698,7 @@ open class Image: Resource {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Image.method_fill_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Image.method_fill_rect, handle, pArgs, nil)
                     }
                     
                 }
@@ -1725,7 +1725,7 @@ open class Image: Resource {
     public final func getUsedRect() -> Rect2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2i = Rect2i ()
-        gi.object_method_bind_ptrcall(Image.method_get_used_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Image.method_get_used_rect, handle, nil, &_result)
         return _result
     }
     
@@ -1743,18 +1743,18 @@ open class Image: Resource {
     /// Returns a new ``Image`` that is a copy of this ``Image``'s area specified with `region`.
     public final func getRegion(_ region: Rect2i) -> Image? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: region) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_get_region, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Image.method_get_region, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_copy_from: GDExtensionMethodBindPtr = {
@@ -1774,7 +1774,7 @@ open class Image: Resource {
         withUnsafePointer(to: src?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_copy_from, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Image.method_copy_from, handle, pArgs, nil)
                 }
                 
             }
@@ -1805,7 +1805,7 @@ open class Image: Resource {
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_get_pixelv, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Image.method_get_pixelv, handle, pArgs, &_result)
                 }
                 
             }
@@ -1837,7 +1837,7 @@ open class Image: Resource {
             withUnsafePointer(to: y) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Image.method_get_pixel, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Image.method_get_pixel, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1870,7 +1870,7 @@ open class Image: Resource {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Image.method_set_pixelv, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Image.method_set_pixelv, handle, pArgs, nil)
                     }
                     
                 }
@@ -1904,7 +1904,7 @@ open class Image: Resource {
                 withUnsafePointer(to: color) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Image.method_set_pixel, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Image.method_set_pixel, handle, pArgs, nil)
                         }
                         
                     }
@@ -1937,7 +1937,7 @@ open class Image: Resource {
                 withUnsafePointer(to: saturation) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Image.method_adjust_bcs, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Image.method_adjust_bcs, handle, pArgs, nil)
                         }
                         
                     }
@@ -1969,7 +1969,7 @@ open class Image: Resource {
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_load_png_from_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Image.method_load_png_from_buffer, handle, pArgs, &_result)
                 }
                 
             }
@@ -1997,7 +1997,7 @@ open class Image: Resource {
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_load_jpg_from_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Image.method_load_jpg_from_buffer, handle, pArgs, &_result)
                 }
                 
             }
@@ -2025,7 +2025,7 @@ open class Image: Resource {
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_load_webp_from_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Image.method_load_webp_from_buffer, handle, pArgs, &_result)
                 }
                 
             }
@@ -2056,7 +2056,7 @@ open class Image: Resource {
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_load_tga_from_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Image.method_load_tga_from_buffer, handle, pArgs, &_result)
                 }
                 
             }
@@ -2089,7 +2089,7 @@ open class Image: Resource {
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_load_bmp_from_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Image.method_load_bmp_from_buffer, handle, pArgs, &_result)
                 }
                 
             }
@@ -2122,7 +2122,7 @@ open class Image: Resource {
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Image.method_load_ktx_from_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Image.method_load_ktx_from_buffer, handle, pArgs, &_result)
                 }
                 
             }
@@ -2156,7 +2156,7 @@ open class Image: Resource {
             withUnsafePointer(to: scale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Image.method_load_svg_from_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Image.method_load_svg_from_buffer, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2191,7 +2191,7 @@ open class Image: Resource {
             withUnsafePointer(to: scale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Image.method_load_svg_from_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Image.method_load_svg_from_string, handle, pArgs, &_result)
                     }
                     
                 }

@@ -87,7 +87,7 @@ open class CanvasGroup: Node2D {
         withUnsafePointer(to: fitMargin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasGroup.method_set_fit_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasGroup.method_set_fit_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -112,7 +112,7 @@ open class CanvasGroup: Node2D {
     fileprivate final func get_fit_margin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CanvasGroup.method_get_fit_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasGroup.method_get_fit_margin, handle, nil, &_result)
         return _result
     }
     
@@ -133,7 +133,7 @@ open class CanvasGroup: Node2D {
         withUnsafePointer(to: clearMargin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasGroup.method_set_clear_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasGroup.method_set_clear_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -158,7 +158,7 @@ open class CanvasGroup: Node2D {
     fileprivate final func get_clear_margin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CanvasGroup.method_get_clear_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasGroup.method_get_clear_margin, handle, nil, &_result)
         return _result
     }
     
@@ -179,7 +179,7 @@ open class CanvasGroup: Node2D {
         withUnsafePointer(to: useMipmaps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasGroup.method_set_use_mipmaps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasGroup.method_set_use_mipmaps, handle, pArgs, nil)
                 }
                 
             }
@@ -204,7 +204,7 @@ open class CanvasGroup: Node2D {
     fileprivate final func is_using_mipmaps() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CanvasGroup.method_is_using_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasGroup.method_is_using_mipmaps, handle, nil, &_result)
         return _result
     }
     

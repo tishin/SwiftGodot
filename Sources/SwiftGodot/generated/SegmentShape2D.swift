@@ -70,7 +70,7 @@ open class SegmentShape2D: Shape2D {
         withUnsafePointer(to: a) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SegmentShape2D.method_set_a, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SegmentShape2D.method_set_a, handle, pArgs, nil)
                 }
                 
             }
@@ -95,7 +95,7 @@ open class SegmentShape2D: Shape2D {
     fileprivate final func get_a() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(SegmentShape2D.method_get_a, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SegmentShape2D.method_get_a, handle, nil, &_result)
         return _result
     }
     
@@ -116,7 +116,7 @@ open class SegmentShape2D: Shape2D {
         withUnsafePointer(to: b) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SegmentShape2D.method_set_b, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SegmentShape2D.method_set_b, handle, pArgs, nil)
                 }
                 
             }
@@ -141,7 +141,7 @@ open class SegmentShape2D: Shape2D {
     fileprivate final func get_b() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(SegmentShape2D.method_get_b, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SegmentShape2D.method_get_b, handle, nil, &_result)
         return _result
     }
     

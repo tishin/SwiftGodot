@@ -85,7 +85,7 @@ open class AudioEffectHardLimiter: AudioEffect {
         withUnsafePointer(to: ceiling) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectHardLimiter.method_set_ceiling_db, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectHardLimiter.method_set_ceiling_db, handle, pArgs, nil)
                 }
                 
             }
@@ -110,7 +110,7 @@ open class AudioEffectHardLimiter: AudioEffect {
     fileprivate final func get_ceiling_db() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectHardLimiter.method_get_ceiling_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectHardLimiter.method_get_ceiling_db, handle, nil, &_result)
         return _result
     }
     
@@ -131,7 +131,7 @@ open class AudioEffectHardLimiter: AudioEffect {
         withUnsafePointer(to: pPreGain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectHardLimiter.method_set_pre_gain_db, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectHardLimiter.method_set_pre_gain_db, handle, pArgs, nil)
                 }
                 
             }
@@ -156,7 +156,7 @@ open class AudioEffectHardLimiter: AudioEffect {
     fileprivate final func get_pre_gain_db() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectHardLimiter.method_get_pre_gain_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectHardLimiter.method_get_pre_gain_db, handle, nil, &_result)
         return _result
     }
     
@@ -177,7 +177,7 @@ open class AudioEffectHardLimiter: AudioEffect {
         withUnsafePointer(to: pRelease) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectHardLimiter.method_set_release, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectHardLimiter.method_set_release, handle, pArgs, nil)
                 }
                 
             }
@@ -202,7 +202,7 @@ open class AudioEffectHardLimiter: AudioEffect {
     fileprivate final func get_release() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectHardLimiter.method_get_release, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectHardLimiter.method_get_release, handle, nil, &_result)
         return _result
     }
     

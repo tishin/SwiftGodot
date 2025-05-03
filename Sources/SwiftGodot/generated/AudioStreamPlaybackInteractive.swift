@@ -43,7 +43,7 @@ open class AudioStreamPlaybackInteractive: AudioStreamPlayback {
         withUnsafePointer(to: clipName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlaybackInteractive.method_switch_to_clip_by_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlaybackInteractive.method_switch_to_clip_by_name, handle, pArgs, nil)
                 }
                 
             }
@@ -70,7 +70,7 @@ open class AudioStreamPlaybackInteractive: AudioStreamPlayback {
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlaybackInteractive.method_switch_to_clip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlaybackInteractive.method_switch_to_clip, handle, pArgs, nil)
                 }
                 
             }
@@ -98,7 +98,7 @@ open class AudioStreamPlaybackInteractive: AudioStreamPlayback {
     public final func getCurrentClipIndex() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamPlaybackInteractive.method_get_current_clip_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlaybackInteractive.method_get_current_clip_index, handle, nil, &_result)
         return _result
     }
     

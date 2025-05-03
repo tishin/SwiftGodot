@@ -48,7 +48,7 @@ open class EngineProfiler: RefCounted {
             withUnsafePointer(to: options.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EngineProfiler.method__toggle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EngineProfiler.method__toggle, handle, pArgs, nil)
                     }
                     
                 }
@@ -78,7 +78,7 @@ open class EngineProfiler: RefCounted {
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EngineProfiler.method__add_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EngineProfiler.method__add_frame, handle, pArgs, nil)
                 }
                 
             }
@@ -109,7 +109,7 @@ open class EngineProfiler: RefCounted {
                     withUnsafePointer(to: physicsFrameTime) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EngineProfiler.method__tick, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(EngineProfiler.method__tick, handle, pArgs, nil)
                             }
                             
                         }

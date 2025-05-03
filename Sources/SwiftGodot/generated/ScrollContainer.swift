@@ -179,7 +179,7 @@ open class ScrollContainer: Container {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_h_scroll, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_h_scroll, handle, pArgs, nil)
                 }
                 
             }
@@ -204,7 +204,7 @@ open class ScrollContainer: Container {
     fileprivate final func get_h_scroll() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ScrollContainer.method_get_h_scroll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScrollContainer.method_get_h_scroll, handle, nil, &_result)
         return _result
     }
     
@@ -225,7 +225,7 @@ open class ScrollContainer: Container {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_v_scroll, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_v_scroll, handle, pArgs, nil)
                 }
                 
             }
@@ -250,7 +250,7 @@ open class ScrollContainer: Container {
     fileprivate final func get_v_scroll() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ScrollContainer.method_get_v_scroll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScrollContainer.method_get_v_scroll, handle, nil, &_result)
         return _result
     }
     
@@ -271,7 +271,7 @@ open class ScrollContainer: Container {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_horizontal_custom_step, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_horizontal_custom_step, handle, pArgs, nil)
                 }
                 
             }
@@ -296,7 +296,7 @@ open class ScrollContainer: Container {
     fileprivate final func get_horizontal_custom_step() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ScrollContainer.method_get_horizontal_custom_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScrollContainer.method_get_horizontal_custom_step, handle, nil, &_result)
         return _result
     }
     
@@ -317,7 +317,7 @@ open class ScrollContainer: Container {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_vertical_custom_step, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_vertical_custom_step, handle, pArgs, nil)
                 }
                 
             }
@@ -342,7 +342,7 @@ open class ScrollContainer: Container {
     fileprivate final func get_vertical_custom_step() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ScrollContainer.method_get_vertical_custom_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScrollContainer.method_get_vertical_custom_step, handle, nil, &_result)
         return _result
     }
     
@@ -363,7 +363,7 @@ open class ScrollContainer: Container {
         withUnsafePointer(to: enable.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_horizontal_scroll_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_horizontal_scroll_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -388,7 +388,7 @@ open class ScrollContainer: Container {
     fileprivate final func get_horizontal_scroll_mode() -> ScrollContainer.ScrollMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ScrollContainer.method_get_horizontal_scroll_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScrollContainer.method_get_horizontal_scroll_mode, handle, nil, &_result)
         return ScrollContainer.ScrollMode (rawValue: _result)!
     }
     
@@ -409,7 +409,7 @@ open class ScrollContainer: Container {
         withUnsafePointer(to: enable.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_vertical_scroll_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_vertical_scroll_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -434,7 +434,7 @@ open class ScrollContainer: Container {
     fileprivate final func get_vertical_scroll_mode() -> ScrollContainer.ScrollMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ScrollContainer.method_get_vertical_scroll_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScrollContainer.method_get_vertical_scroll_mode, handle, nil, &_result)
         return ScrollContainer.ScrollMode (rawValue: _result)!
     }
     
@@ -455,7 +455,7 @@ open class ScrollContainer: Container {
         withUnsafePointer(to: deadzone) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_deadzone, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_deadzone, handle, pArgs, nil)
                 }
                 
             }
@@ -480,7 +480,7 @@ open class ScrollContainer: Container {
     fileprivate final func get_deadzone() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ScrollContainer.method_get_deadzone, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScrollContainer.method_get_deadzone, handle, nil, &_result)
         return _result
     }
     
@@ -501,7 +501,7 @@ open class ScrollContainer: Container {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_follow_focus, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_follow_focus, handle, pArgs, nil)
                 }
                 
             }
@@ -526,7 +526,7 @@ open class ScrollContainer: Container {
     fileprivate final func is_following_focus() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ScrollContainer.method_is_following_focus, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScrollContainer.method_is_following_focus, handle, nil, &_result)
         return _result
     }
     
@@ -547,9 +547,9 @@ open class ScrollContainer: Container {
     /// 
     public final func getHScrollBar() -> HScrollBar? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ScrollContainer.method_get_h_scroll_bar, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ScrollContainer.method_get_h_scroll_bar, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_v_scroll_bar: GDExtensionMethodBindPtr = {
@@ -569,9 +569,9 @@ open class ScrollContainer: Container {
     /// 
     public final func getVScrollBar() -> VScrollBar? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ScrollContainer.method_get_v_scroll_bar, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ScrollContainer.method_get_v_scroll_bar, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_ensure_control_visible: GDExtensionMethodBindPtr = {
@@ -594,7 +594,7 @@ open class ScrollContainer: Container {
         withUnsafePointer(to: control?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScrollContainer.method_ensure_control_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScrollContainer.method_ensure_control_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -621,7 +621,7 @@ open class ScrollContainer: Container {
         withUnsafePointer(to: draw) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_draw_focus_border, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScrollContainer.method_set_draw_focus_border, handle, pArgs, nil)
                 }
                 
             }
@@ -646,7 +646,7 @@ open class ScrollContainer: Container {
     fileprivate final func get_draw_focus_border() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ScrollContainer.method_get_draw_focus_border, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScrollContainer.method_get_draw_focus_border, handle, nil, &_result)
         return _result
     }
     

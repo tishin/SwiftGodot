@@ -127,7 +127,7 @@ open class VisualShaderNodeFloatFunc: VisualShaderNode {
         withUnsafePointer(to: `func`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeFloatFunc.method_set_function, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeFloatFunc.method_set_function, handle, pArgs, nil)
                 }
                 
             }
@@ -152,7 +152,7 @@ open class VisualShaderNodeFloatFunc: VisualShaderNode {
     fileprivate final func get_function() -> VisualShaderNodeFloatFunc.Function {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeFloatFunc.method_get_function, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeFloatFunc.method_get_function, handle, nil, &_result)
         return VisualShaderNodeFloatFunc.Function (rawValue: _result)!
     }
     

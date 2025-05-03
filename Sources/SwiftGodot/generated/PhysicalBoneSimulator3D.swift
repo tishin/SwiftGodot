@@ -41,7 +41,7 @@ open class PhysicalBoneSimulator3D: SkeletonModifier3D {
     public final func isSimulatingPhysics() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PhysicalBoneSimulator3D.method_is_simulating_physics, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalBoneSimulator3D.method_is_simulating_physics, handle, nil, &_result)
         return _result
     }
     
@@ -59,7 +59,7 @@ open class PhysicalBoneSimulator3D: SkeletonModifier3D {
     /// Tells the ``PhysicalBone3D`` nodes in the Skeleton to stop simulating.
     public final func physicalBonesStopSimulation() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(PhysicalBoneSimulator3D.method_physical_bones_stop_simulation, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(PhysicalBoneSimulator3D.method_physical_bones_stop_simulation, handle, nil, nil)
         
     }
     
@@ -83,7 +83,7 @@ open class PhysicalBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: bones.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalBoneSimulator3D.method_physical_bones_start_simulation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalBoneSimulator3D.method_physical_bones_start_simulation, handle, pArgs, nil)
                 }
                 
             }
@@ -113,7 +113,7 @@ open class PhysicalBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: exception.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalBoneSimulator3D.method_physical_bones_add_collision_exception, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalBoneSimulator3D.method_physical_bones_add_collision_exception, handle, pArgs, nil)
                 }
                 
             }
@@ -143,7 +143,7 @@ open class PhysicalBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: exception.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalBoneSimulator3D.method_physical_bones_remove_collision_exception, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalBoneSimulator3D.method_physical_bones_remove_collision_exception, handle, pArgs, nil)
                 }
                 
             }

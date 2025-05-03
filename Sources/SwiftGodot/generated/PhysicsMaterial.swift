@@ -97,7 +97,7 @@ open class PhysicsMaterial: Resource {
         withUnsafePointer(to: friction) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsMaterial.method_set_friction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsMaterial.method_set_friction, handle, pArgs, nil)
                 }
                 
             }
@@ -122,7 +122,7 @@ open class PhysicsMaterial: Resource {
     fileprivate final func get_friction() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicsMaterial.method_get_friction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsMaterial.method_get_friction, handle, nil, &_result)
         return _result
     }
     
@@ -143,7 +143,7 @@ open class PhysicsMaterial: Resource {
         withUnsafePointer(to: rough) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsMaterial.method_set_rough, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsMaterial.method_set_rough, handle, pArgs, nil)
                 }
                 
             }
@@ -168,7 +168,7 @@ open class PhysicsMaterial: Resource {
     fileprivate final func is_rough() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PhysicsMaterial.method_is_rough, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsMaterial.method_is_rough, handle, nil, &_result)
         return _result
     }
     
@@ -189,7 +189,7 @@ open class PhysicsMaterial: Resource {
         withUnsafePointer(to: bounce) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsMaterial.method_set_bounce, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsMaterial.method_set_bounce, handle, pArgs, nil)
                 }
                 
             }
@@ -214,7 +214,7 @@ open class PhysicsMaterial: Resource {
     fileprivate final func get_bounce() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicsMaterial.method_get_bounce, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsMaterial.method_get_bounce, handle, nil, &_result)
         return _result
     }
     
@@ -235,7 +235,7 @@ open class PhysicsMaterial: Resource {
         withUnsafePointer(to: absorbent) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsMaterial.method_set_absorbent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsMaterial.method_set_absorbent, handle, pArgs, nil)
                 }
                 
             }
@@ -260,7 +260,7 @@ open class PhysicsMaterial: Resource {
     fileprivate final func is_absorbent() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PhysicsMaterial.method_is_absorbent, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsMaterial.method_is_absorbent, handle, nil, &_result)
         return _result
     }
     

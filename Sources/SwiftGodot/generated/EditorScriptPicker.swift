@@ -61,7 +61,7 @@ open class EditorScriptPicker: EditorResourcePicker {
         withUnsafePointer(to: ownerNode?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorScriptPicker.method_set_script_owner, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorScriptPicker.method_set_script_owner, handle, pArgs, nil)
                 }
                 
             }
@@ -85,9 +85,9 @@ open class EditorScriptPicker: EditorResourcePicker {
     @inline(__always)
     fileprivate final func get_script_owner() -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorScriptPicker.method_get_script_owner, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorScriptPicker.method_get_script_owner, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

@@ -109,7 +109,7 @@ open class SphereMesh: PrimitiveMesh {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SphereMesh.method_set_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SphereMesh.method_set_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -134,7 +134,7 @@ open class SphereMesh: PrimitiveMesh {
     fileprivate final func get_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SphereMesh.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SphereMesh.method_get_radius, handle, nil, &_result)
         return _result
     }
     
@@ -155,7 +155,7 @@ open class SphereMesh: PrimitiveMesh {
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SphereMesh.method_set_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SphereMesh.method_set_height, handle, pArgs, nil)
                 }
                 
             }
@@ -180,7 +180,7 @@ open class SphereMesh: PrimitiveMesh {
     fileprivate final func get_height() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SphereMesh.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SphereMesh.method_get_height, handle, nil, &_result)
         return _result
     }
     
@@ -201,7 +201,7 @@ open class SphereMesh: PrimitiveMesh {
         withUnsafePointer(to: radialSegments) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SphereMesh.method_set_radial_segments, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SphereMesh.method_set_radial_segments, handle, pArgs, nil)
                 }
                 
             }
@@ -226,7 +226,7 @@ open class SphereMesh: PrimitiveMesh {
     fileprivate final func get_radial_segments() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SphereMesh.method_get_radial_segments, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SphereMesh.method_get_radial_segments, handle, nil, &_result)
         return _result
     }
     
@@ -247,7 +247,7 @@ open class SphereMesh: PrimitiveMesh {
         withUnsafePointer(to: rings) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SphereMesh.method_set_rings, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SphereMesh.method_set_rings, handle, pArgs, nil)
                 }
                 
             }
@@ -272,7 +272,7 @@ open class SphereMesh: PrimitiveMesh {
     fileprivate final func get_rings() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SphereMesh.method_get_rings, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SphereMesh.method_get_rings, handle, nil, &_result)
         return _result
     }
     
@@ -293,7 +293,7 @@ open class SphereMesh: PrimitiveMesh {
         withUnsafePointer(to: isHemisphere) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SphereMesh.method_set_is_hemisphere, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SphereMesh.method_set_is_hemisphere, handle, pArgs, nil)
                 }
                 
             }
@@ -318,7 +318,7 @@ open class SphereMesh: PrimitiveMesh {
     fileprivate final func get_is_hemisphere() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SphereMesh.method_get_is_hemisphere, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SphereMesh.method_get_is_hemisphere, handle, nil, &_result)
         return _result
     }
     

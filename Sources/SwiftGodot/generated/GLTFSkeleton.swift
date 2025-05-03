@@ -85,7 +85,7 @@ open class GLTFSkeleton: Resource {
     fileprivate final func get_joints() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(GLTFSkeleton.method_get_joints, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFSkeleton.method_get_joints, handle, nil, &_result.content)
         return _result
     }
     
@@ -106,7 +106,7 @@ open class GLTFSkeleton: Resource {
         withUnsafePointer(to: joints.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkeleton.method_set_joints, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSkeleton.method_set_joints, handle, pArgs, nil)
                 }
                 
             }
@@ -131,7 +131,7 @@ open class GLTFSkeleton: Resource {
     fileprivate final func get_roots() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(GLTFSkeleton.method_get_roots, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFSkeleton.method_get_roots, handle, nil, &_result.content)
         return _result
     }
     
@@ -152,7 +152,7 @@ open class GLTFSkeleton: Resource {
         withUnsafePointer(to: roots.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkeleton.method_set_roots, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSkeleton.method_set_roots, handle, pArgs, nil)
                 }
                 
             }
@@ -176,9 +176,9 @@ open class GLTFSkeleton: Resource {
     /// 
     public final func getGodotSkeleton() -> Skeleton3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GLTFSkeleton.method_get_godot_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GLTFSkeleton.method_get_godot_skeleton, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_unique_names: GDExtensionMethodBindPtr = {
@@ -197,7 +197,7 @@ open class GLTFSkeleton: Resource {
     fileprivate final func get_unique_names() -> TypedArray<String> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFSkeleton.method_get_unique_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFSkeleton.method_get_unique_names, handle, nil, &_result)
         return TypedArray<String>(takingOver: _result)
     }
     
@@ -219,7 +219,7 @@ open class GLTFSkeleton: Resource {
         withUnsafePointer(to: uniqueNames.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkeleton.method_set_unique_names, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSkeleton.method_set_unique_names, handle, pArgs, nil)
                 }
                 
             }
@@ -245,7 +245,7 @@ open class GLTFSkeleton: Resource {
     fileprivate final func get_godot_bone_node() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(GLTFSkeleton.method_get_godot_bone_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFSkeleton.method_get_godot_bone_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -267,7 +267,7 @@ open class GLTFSkeleton: Resource {
         withUnsafePointer(to: godotBoneNode.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkeleton.method_set_godot_bone_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSkeleton.method_set_godot_bone_node, handle, pArgs, nil)
                 }
                 
             }
@@ -292,7 +292,7 @@ open class GLTFSkeleton: Resource {
     public final func getBoneAttachmentCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFSkeleton.method_get_bone_attachment_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFSkeleton.method_get_bone_attachment_count, handle, nil, &_result)
         return _result
     }
     
@@ -310,18 +310,18 @@ open class GLTFSkeleton: Resource {
     /// 
     public final func getBoneAttachment(idx: Int32) -> BoneAttachment3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkeleton.method_get_bone_attachment, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFSkeleton.method_get_bone_attachment, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

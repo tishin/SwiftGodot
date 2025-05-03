@@ -62,7 +62,7 @@ open class RDShaderFile: Resource {
             withUnsafePointer(to: version.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RDShaderFile.method_set_bytecode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RDShaderFile.method_set_bytecode, handle, pArgs, nil)
                     }
                     
                 }
@@ -88,18 +88,18 @@ open class RDShaderFile: Resource {
     /// Returns the SPIR-V intermediate representation for the specified shader `version`.
     public final func getSpirv(version: StringName = StringName ("")) -> RDShaderSPIRV? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: version.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDShaderFile.method_get_spirv, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RDShaderFile.method_get_spirv, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_version_list: GDExtensionMethodBindPtr = {
@@ -117,7 +117,7 @@ open class RDShaderFile: Resource {
     public final func getVersionList() -> TypedArray<StringName> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(RDShaderFile.method_get_version_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDShaderFile.method_get_version_list, handle, nil, &_result)
         return TypedArray<StringName>(takingOver: _result)
     }
     
@@ -139,7 +139,7 @@ open class RDShaderFile: Resource {
         withUnsafePointer(to: error.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDShaderFile.method_set_base_error, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDShaderFile.method_set_base_error, handle, pArgs, nil)
                 }
                 
             }
@@ -164,7 +164,7 @@ open class RDShaderFile: Resource {
     fileprivate final func get_base_error() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(RDShaderFile.method_get_base_error, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RDShaderFile.method_get_base_error, handle, nil, &_result.content)
         return _result.description
     }
     

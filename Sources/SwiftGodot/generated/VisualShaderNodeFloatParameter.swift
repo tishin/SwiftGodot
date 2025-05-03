@@ -129,7 +129,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
         withUnsafePointer(to: hint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_set_hint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_set_hint, handle, pArgs, nil)
                 }
                 
             }
@@ -154,7 +154,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     fileprivate final func get_hint() -> VisualShaderNodeFloatParameter.Hint {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_hint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_hint, handle, nil, &_result)
         return VisualShaderNodeFloatParameter.Hint (rawValue: _result)!
     }
     
@@ -175,7 +175,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_set_min, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_set_min, handle, pArgs, nil)
                 }
                 
             }
@@ -200,7 +200,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     fileprivate final func get_min() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_min, handle, nil, &_result)
         return _result
     }
     
@@ -221,7 +221,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_set_max, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_set_max, handle, pArgs, nil)
                 }
                 
             }
@@ -246,7 +246,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     fileprivate final func get_max() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_max, handle, nil, &_result)
         return _result
     }
     
@@ -267,7 +267,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_set_step, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_set_step, handle, pArgs, nil)
                 }
                 
             }
@@ -292,7 +292,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     fileprivate final func get_step() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_step, handle, nil, &_result)
         return _result
     }
     
@@ -313,7 +313,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_set_default_value_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_set_default_value_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -338,7 +338,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     fileprivate final func is_default_value_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_is_default_value_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_is_default_value_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -359,7 +359,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_set_default_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_set_default_value, handle, pArgs, nil)
                 }
                 
             }
@@ -384,7 +384,7 @@ open class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
     fileprivate final func get_default_value() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_default_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeFloatParameter.method_get_default_value, handle, nil, &_result)
         return _result
     }
     

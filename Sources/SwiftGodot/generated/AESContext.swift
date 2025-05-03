@@ -60,7 +60,7 @@ open class AESContext: RefCounted {
                 withUnsafePointer(to: iv.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AESContext.method_start, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(AESContext.method_start, handle, pArgs, &_result)
                         }
                         
                     }
@@ -95,7 +95,7 @@ open class AESContext: RefCounted {
         withUnsafePointer(to: src.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AESContext.method_update, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(AESContext.method_update, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -123,7 +123,7 @@ open class AESContext: RefCounted {
     public final func getIvState() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(AESContext.method_get_iv_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AESContext.method_get_iv_state, handle, nil, &_result.content)
         return _result
     }
     
@@ -141,7 +141,7 @@ open class AESContext: RefCounted {
     /// Close this AES context so it can be started again. See ``start(mode:key:iv:)``.
     public final func finish() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AESContext.method_finish, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AESContext.method_finish, handle, nil, nil)
         
     }
     

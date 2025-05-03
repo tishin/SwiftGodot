@@ -51,7 +51,7 @@ open class SyntaxHighlighter: Resource {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SyntaxHighlighter.method__get_line_syntax_highlighting, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SyntaxHighlighter.method__get_line_syntax_highlighting, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -76,7 +76,7 @@ open class SyntaxHighlighter: Resource {
     @_documentation(visibility: public)
     open func _clearHighlightingCache() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SyntaxHighlighter.method__clear_highlighting_cache, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SyntaxHighlighter.method__clear_highlighting_cache, handle, nil, nil)
         
     }
     
@@ -95,7 +95,7 @@ open class SyntaxHighlighter: Resource {
     @_documentation(visibility: public)
     open func _updateCache() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SyntaxHighlighter.method__update_cache, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SyntaxHighlighter.method__update_cache, handle, nil, nil)
         
     }
     
@@ -122,7 +122,7 @@ open class SyntaxHighlighter: Resource {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SyntaxHighlighter.method_get_line_syntax_highlighting, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SyntaxHighlighter.method_get_line_syntax_highlighting, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -149,7 +149,7 @@ open class SyntaxHighlighter: Resource {
     /// 
     public final func updateCache() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SyntaxHighlighter.method_update_cache, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SyntaxHighlighter.method_update_cache, handle, nil, nil)
         
     }
     
@@ -170,7 +170,7 @@ open class SyntaxHighlighter: Resource {
     /// 
     public final func clearHighlightingCache() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SyntaxHighlighter.method_clear_highlighting_cache, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SyntaxHighlighter.method_clear_highlighting_cache, handle, nil, nil)
         
     }
     
@@ -188,9 +188,9 @@ open class SyntaxHighlighter: Resource {
     /// Returns the associated ``TextEdit`` node.
     public final func getTextEdit() -> TextEdit? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(SyntaxHighlighter.method_get_text_edit, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(SyntaxHighlighter.method_get_text_edit, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {

@@ -152,7 +152,7 @@ open class XRInterface: RefCounted {
     public final func getName() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(XRInterface.method_get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XRInterface.method_get_name, handle, nil, &_result.content)
         return _result
     }
     
@@ -171,7 +171,7 @@ open class XRInterface: RefCounted {
     public final func getCapabilities() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(XRInterface.method_get_capabilities, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRInterface.method_get_capabilities, handle, nil, &_result)
         return _result
     }
     
@@ -190,7 +190,7 @@ open class XRInterface: RefCounted {
     fileprivate final func is_primary() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XRInterface.method_is_primary, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRInterface.method_is_primary, handle, nil, &_result)
         return _result
     }
     
@@ -211,7 +211,7 @@ open class XRInterface: RefCounted {
         withUnsafePointer(to: primary) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRInterface.method_set_primary, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRInterface.method_set_primary, handle, pArgs, nil)
                 }
                 
             }
@@ -236,7 +236,7 @@ open class XRInterface: RefCounted {
     public final func isInitialized() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XRInterface.method_is_initialized, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRInterface.method_is_initialized, handle, nil, &_result)
         return _result
     }
     
@@ -264,7 +264,7 @@ open class XRInterface: RefCounted {
     public final func initialize() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XRInterface.method_initialize, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRInterface.method_initialize, handle, nil, &_result)
         return _result
     }
     
@@ -282,7 +282,7 @@ open class XRInterface: RefCounted {
     /// Turns the interface off.
     public final func uninitialize() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(XRInterface.method_uninitialize, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(XRInterface.method_uninitialize, handle, nil, nil)
         
     }
     
@@ -304,7 +304,7 @@ open class XRInterface: RefCounted {
     public final func getSystemInfo() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(XRInterface.method_get_system_info, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XRInterface.method_get_system_info, handle, nil, &_result.content)
         return _result
     }
     
@@ -323,7 +323,7 @@ open class XRInterface: RefCounted {
     public final func getTrackingStatus() -> XRInterface.TrackingStatus {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(XRInterface.method_get_tracking_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRInterface.method_get_tracking_status, handle, nil, &_result)
         return XRInterface.TrackingStatus (rawValue: _result)!
     }
     
@@ -342,7 +342,7 @@ open class XRInterface: RefCounted {
     public final func getRenderTargetSize() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(XRInterface.method_get_render_target_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRInterface.method_get_render_target_size, handle, nil, &_result)
         return _result
     }
     
@@ -361,7 +361,7 @@ open class XRInterface: RefCounted {
     public final func getViewCount() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(XRInterface.method_get_view_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRInterface.method_get_view_count, handle, nil, &_result)
         return _result
     }
     
@@ -401,7 +401,7 @@ open class XRInterface: RefCounted {
                             withUnsafePointer(to: delaySec) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(XRInterface.method_trigger_haptic_pulse, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(XRInterface.method_trigger_haptic_pulse, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -439,7 +439,7 @@ open class XRInterface: RefCounted {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRInterface.method_supports_play_area_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRInterface.method_supports_play_area_mode, handle, pArgs, &_result)
                 }
                 
             }
@@ -464,7 +464,7 @@ open class XRInterface: RefCounted {
     fileprivate final func get_play_area_mode() -> XRInterface.PlayAreaMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(XRInterface.method_get_play_area_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRInterface.method_get_play_area_mode, handle, nil, &_result)
         return XRInterface.PlayAreaMode (rawValue: _result)!
     }
     
@@ -490,7 +490,7 @@ open class XRInterface: RefCounted {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRInterface.method_set_play_area_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRInterface.method_set_play_area_mode, handle, pArgs, &_result)
                 }
                 
             }
@@ -515,7 +515,7 @@ open class XRInterface: RefCounted {
     public final func getPlayArea() -> PackedVector3Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
-        gi.object_method_bind_ptrcall(XRInterface.method_get_play_area, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XRInterface.method_get_play_area, handle, nil, &_result.content)
         return _result
     }
     
@@ -534,7 +534,7 @@ open class XRInterface: RefCounted {
     fileprivate final func get_anchor_detection_is_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XRInterface.method_get_anchor_detection_is_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRInterface.method_get_anchor_detection_is_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -555,7 +555,7 @@ open class XRInterface: RefCounted {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRInterface.method_set_anchor_detection_is_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRInterface.method_set_anchor_detection_is_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -580,7 +580,7 @@ open class XRInterface: RefCounted {
     public final func getCameraFeedId() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(XRInterface.method_get_camera_feed_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRInterface.method_get_camera_feed_id, handle, nil, &_result)
         return _result
     }
     
@@ -599,7 +599,7 @@ open class XRInterface: RefCounted {
     public final func isPassthroughSupported() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XRInterface.method_is_passthrough_supported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRInterface.method_is_passthrough_supported, handle, nil, &_result)
         return _result
     }
     
@@ -618,7 +618,7 @@ open class XRInterface: RefCounted {
     public final func isPassthroughEnabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XRInterface.method_is_passthrough_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRInterface.method_is_passthrough_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -640,7 +640,7 @@ open class XRInterface: RefCounted {
     public final func startPassthrough() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XRInterface.method_start_passthrough, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRInterface.method_start_passthrough, handle, nil, &_result)
         return _result
     }
     
@@ -658,7 +658,7 @@ open class XRInterface: RefCounted {
     /// Stops passthrough.
     public final func stopPassthrough() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(XRInterface.method_stop_passthrough, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(XRInterface.method_stop_passthrough, handle, nil, nil)
         
     }
     
@@ -686,7 +686,7 @@ open class XRInterface: RefCounted {
             withUnsafePointer(to: camTransform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(XRInterface.method_get_transform_for_view, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(XRInterface.method_get_transform_for_view, handle, pArgs, &_result)
                     }
                     
                 }
@@ -719,7 +719,7 @@ open class XRInterface: RefCounted {
                     withUnsafePointer(to: far) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(XRInterface.method_get_projection_for_view, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(XRInterface.method_get_projection_for_view, handle, pArgs, &_result)
                             }
                             
                         }
@@ -750,7 +750,7 @@ open class XRInterface: RefCounted {
     public final func getSupportedEnvironmentBlendModes() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(XRInterface.method_get_supported_environment_blend_modes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XRInterface.method_get_supported_environment_blend_modes, handle, nil, &_result.content)
         return _result
     }
     
@@ -778,7 +778,7 @@ open class XRInterface: RefCounted {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRInterface.method_set_environment_blend_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRInterface.method_set_environment_blend_mode, handle, pArgs, &_result)
                 }
                 
             }
@@ -803,7 +803,7 @@ open class XRInterface: RefCounted {
     fileprivate final func get_environment_blend_mode() -> XRInterface.EnvironmentBlendMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(XRInterface.method_get_environment_blend_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRInterface.method_get_environment_blend_mode, handle, nil, &_result)
         return XRInterface.EnvironmentBlendMode (rawValue: _result)!
     }
     

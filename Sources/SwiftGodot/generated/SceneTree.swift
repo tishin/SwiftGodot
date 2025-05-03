@@ -237,9 +237,9 @@ open class SceneTree: MainLoop {
     @inline(__always)
     fileprivate final func get_root() -> Window? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(SceneTree.method_get_root, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(SceneTree.method_get_root, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_has_group: GDExtensionMethodBindPtr = {
@@ -260,7 +260,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_has_group, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneTree.method_has_group, handle, pArgs, &_result)
                 }
                 
             }
@@ -285,7 +285,7 @@ open class SceneTree: MainLoop {
     fileprivate final func is_auto_accept_quit() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SceneTree.method_is_auto_accept_quit, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneTree.method_is_auto_accept_quit, handle, nil, &_result)
         return _result
     }
     
@@ -306,7 +306,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_set_auto_accept_quit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneTree.method_set_auto_accept_quit, handle, pArgs, nil)
                 }
                 
             }
@@ -331,7 +331,7 @@ open class SceneTree: MainLoop {
     fileprivate final func is_quit_on_go_back() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SceneTree.method_is_quit_on_go_back, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneTree.method_is_quit_on_go_back, handle, nil, &_result)
         return _result
     }
     
@@ -352,7 +352,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_set_quit_on_go_back, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneTree.method_set_quit_on_go_back, handle, pArgs, nil)
                 }
                 
             }
@@ -379,7 +379,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_set_debug_collisions_hint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneTree.method_set_debug_collisions_hint, handle, pArgs, nil)
                 }
                 
             }
@@ -404,7 +404,7 @@ open class SceneTree: MainLoop {
     fileprivate final func is_debugging_collisions_hint() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SceneTree.method_is_debugging_collisions_hint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneTree.method_is_debugging_collisions_hint, handle, nil, &_result)
         return _result
     }
     
@@ -425,7 +425,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_set_debug_paths_hint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneTree.method_set_debug_paths_hint, handle, pArgs, nil)
                 }
                 
             }
@@ -450,7 +450,7 @@ open class SceneTree: MainLoop {
     fileprivate final func is_debugging_paths_hint() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SceneTree.method_is_debugging_paths_hint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneTree.method_is_debugging_paths_hint, handle, nil, &_result)
         return _result
     }
     
@@ -471,7 +471,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_set_debug_navigation_hint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneTree.method_set_debug_navigation_hint, handle, pArgs, nil)
                 }
                 
             }
@@ -496,7 +496,7 @@ open class SceneTree: MainLoop {
     fileprivate final func is_debugging_navigation_hint() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SceneTree.method_is_debugging_navigation_hint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneTree.method_is_debugging_navigation_hint, handle, nil, &_result)
         return _result
     }
     
@@ -517,7 +517,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: scene?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_set_edited_scene_root, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneTree.method_set_edited_scene_root, handle, pArgs, nil)
                 }
                 
             }
@@ -541,9 +541,9 @@ open class SceneTree: MainLoop {
     @inline(__always)
     fileprivate final func get_edited_scene_root() -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(SceneTree.method_get_edited_scene_root, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(SceneTree.method_get_edited_scene_root, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_pause: GDExtensionMethodBindPtr = {
@@ -563,7 +563,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_set_pause, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneTree.method_set_pause, handle, pArgs, nil)
                 }
                 
             }
@@ -588,7 +588,7 @@ open class SceneTree: MainLoop {
     fileprivate final func is_paused() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SceneTree.method_is_paused, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneTree.method_is_paused, handle, nil, &_result)
         return _result
     }
     
@@ -617,14 +617,14 @@ open class SceneTree: MainLoop {
     /// 
     public final func createTimer(timeSec: Double, processAlways: Bool = true, processInPhysics: Bool = false, ignoreTimeScale: Bool = false) -> SceneTreeTimer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: timeSec) { pArg0 in
             withUnsafePointer(to: processAlways) { pArg1 in
                 withUnsafePointer(to: processInPhysics) { pArg2 in
                     withUnsafePointer(to: ignoreTimeScale) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(SceneTree.method_create_timer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(SceneTree.method_create_timer, handle, pArgs, &_result)
                             }
                             
                         }
@@ -637,7 +637,7 @@ open class SceneTree: MainLoop {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_create_tween: GDExtensionMethodBindPtr = {
@@ -657,9 +657,9 @@ open class SceneTree: MainLoop {
     /// 
     public final func createTween() -> Tween? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(SceneTree.method_create_tween, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(SceneTree.method_create_tween, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_processed_tweens: GDExtensionMethodBindPtr = {
@@ -677,7 +677,7 @@ open class SceneTree: MainLoop {
     public final func getProcessedTweens() -> TypedArray<Tween?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(SceneTree.method_get_processed_tweens, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneTree.method_get_processed_tweens, handle, nil, &_result)
         return TypedArray<Tween?>(takingOver: _result)
     }
     
@@ -696,7 +696,7 @@ open class SceneTree: MainLoop {
     public final func getNodeCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SceneTree.method_get_node_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneTree.method_get_node_count, handle, nil, &_result)
         return _result
     }
     
@@ -715,7 +715,7 @@ open class SceneTree: MainLoop {
     public final func getFrame() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(SceneTree.method_get_frame, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneTree.method_get_frame, handle, nil, &_result)
         return _result
     }
     
@@ -741,7 +741,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: exitCode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_quit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneTree.method_quit, handle, pArgs, nil)
                 }
                 
             }
@@ -768,7 +768,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_set_physics_interpolation_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneTree.method_set_physics_interpolation_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -793,7 +793,7 @@ open class SceneTree: MainLoop {
     fileprivate final func is_physics_interpolation_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SceneTree.method_is_physics_interpolation_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneTree.method_is_physics_interpolation_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -814,7 +814,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: obj?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_queue_delete, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneTree.method_queue_delete, handle, pArgs, nil)
                 }
                 
             }
@@ -851,7 +851,7 @@ open class SceneTree: MainLoop {
                     if arguments.isEmpty {
                         withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                                gi.object_method_bind_call(SceneTree.method_call_group_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, 3, &_result, nil)
+                                gi.object_method_bind_call(SceneTree.method_call_group_flags, handle, pArgs, 3, &_result, nil)
                             }
                             
                         }
@@ -880,7 +880,7 @@ open class SceneTree: MainLoop {
                                     pArgsBuffer.initializeElement(at: 3 + i, to: contentsPtr + i)
                                 }
                             
-                                gi.object_method_bind_call(SceneTree.method_call_group_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, Int64(3 + arguments.count), &_result, nil)
+                                gi.object_method_bind_call(SceneTree.method_call_group_flags, handle, pArgs, Int64(3 + arguments.count), &_result, nil)
                             }                           
                         }
                         
@@ -913,7 +913,7 @@ open class SceneTree: MainLoop {
                 withUnsafePointer(to: notification) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(SceneTree.method_notify_group_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(SceneTree.method_notify_group_flags, handle, pArgs, nil)
                         }
                         
                     }
@@ -951,7 +951,7 @@ open class SceneTree: MainLoop {
                     withUnsafePointer(to: value.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(SceneTree.method_set_group_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(SceneTree.method_set_group_flags, handle, pArgs, nil)
                             }
                             
                         }
@@ -994,7 +994,7 @@ open class SceneTree: MainLoop {
                 if arguments.isEmpty {
                     withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                            gi.object_method_bind_call(SceneTree.method_call_group, UnsafeMutableRawPointer(mutating: handle), pArgs, 2, &_result, nil)
+                            gi.object_method_bind_call(SceneTree.method_call_group, handle, pArgs, 2, &_result, nil)
                         }
                         
                     }
@@ -1022,7 +1022,7 @@ open class SceneTree: MainLoop {
                                 pArgsBuffer.initializeElement(at: 2 + i, to: contentsPtr + i)
                             }
                         
-                            gi.object_method_bind_call(SceneTree.method_call_group, UnsafeMutableRawPointer(mutating: handle), pArgs, Int64(2 + arguments.count), &_result, nil)
+                            gi.object_method_bind_call(SceneTree.method_call_group, handle, pArgs, Int64(2 + arguments.count), &_result, nil)
                         }                           
                     }
                     
@@ -1055,7 +1055,7 @@ open class SceneTree: MainLoop {
             withUnsafePointer(to: notification) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SceneTree.method_notify_group, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SceneTree.method_notify_group, handle, pArgs, nil)
                     }
                     
                 }
@@ -1092,7 +1092,7 @@ open class SceneTree: MainLoop {
                 withUnsafePointer(to: value.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(SceneTree.method_set_group, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(SceneTree.method_set_group, handle, pArgs, nil)
                         }
                         
                     }
@@ -1124,7 +1124,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: group.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_get_nodes_in_group, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneTree.method_get_nodes_in_group, handle, pArgs, &_result)
                 }
                 
             }
@@ -1148,18 +1148,18 @@ open class SceneTree: MainLoop {
     /// Returns the first ``Node`` found inside the tree, that has been added to the given `group`, in scene hierarchy order. Returns `null` if no match is found. See also ``getNodesInGroup(_:)``.
     public final func getFirstNodeInGroup(_ group: StringName) -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: group.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_get_first_node_in_group, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneTree.method_get_first_node_in_group, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_node_count_in_group: GDExtensionMethodBindPtr = {
@@ -1180,7 +1180,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: group.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_get_node_count_in_group, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneTree.method_get_node_count_in_group, handle, pArgs, &_result)
                 }
                 
             }
@@ -1207,7 +1207,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: childNode?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_set_current_scene, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneTree.method_set_current_scene, handle, pArgs, nil)
                 }
                 
             }
@@ -1231,9 +1231,9 @@ open class SceneTree: MainLoop {
     @inline(__always)
     fileprivate final func get_current_scene() -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(SceneTree.method_get_current_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(SceneTree.method_get_current_scene, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_change_scene_to_file: GDExtensionMethodBindPtr = {
@@ -1260,7 +1260,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_change_scene_to_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneTree.method_change_scene_to_file, handle, pArgs, &_result)
                 }
                 
             }
@@ -1299,7 +1299,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: packedScene?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_change_scene_to_packed, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneTree.method_change_scene_to_packed, handle, pArgs, &_result)
                 }
                 
             }
@@ -1327,7 +1327,7 @@ open class SceneTree: MainLoop {
     public final func reloadCurrentScene() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SceneTree.method_reload_current_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneTree.method_reload_current_scene, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -1345,7 +1345,7 @@ open class SceneTree: MainLoop {
     /// If a current scene is loaded, calling this method will unload it.
     public final func unloadCurrentScene() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SceneTree.method_unload_current_scene, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SceneTree.method_unload_current_scene, handle, nil, nil)
         
     }
     
@@ -1370,7 +1370,7 @@ open class SceneTree: MainLoop {
             withUnsafePointer(to: rootPath.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SceneTree.method_set_multiplayer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SceneTree.method_set_multiplayer, handle, pArgs, nil)
                     }
                     
                 }
@@ -1396,18 +1396,18 @@ open class SceneTree: MainLoop {
     /// Searches for the ``MultiplayerAPI`` configured for the given path, if one does not exist it searches the parent paths until one is found. If the path is empty, or none is found, the default one is returned. See ``setMultiplayer(_:rootPath:)``.
     public final func getMultiplayer(forPath: NodePath = NodePath("")) -> MultiplayerAPI? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: forPath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_get_multiplayer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneTree.method_get_multiplayer, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_multiplayer_poll_enabled: GDExtensionMethodBindPtr = {
@@ -1427,7 +1427,7 @@ open class SceneTree: MainLoop {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneTree.method_set_multiplayer_poll_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneTree.method_set_multiplayer_poll_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1452,7 +1452,7 @@ open class SceneTree: MainLoop {
     fileprivate final func is_multiplayer_poll_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SceneTree.method_is_multiplayer_poll_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneTree.method_is_multiplayer_poll_enabled, handle, nil, &_result)
         return _result
     }
     

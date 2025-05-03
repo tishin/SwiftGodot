@@ -86,7 +86,7 @@ open class DirAccess: RefCounted {
     /// Returns `null` if opening the directory failed. You can use ``getOpenError()`` to check the error that occurred.
     /// 
     public static func open(path: String) -> DirAccess? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -98,7 +98,7 @@ open class DirAccess: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_open_error: GDExtensionMethodBindPtr = {
@@ -139,7 +139,7 @@ open class DirAccess: RefCounted {
     /// Returns `null` if opening the directory failed. You can use ``getOpenError()`` to check the error that occurred.
     /// 
     public static func createTemp(prefix: String = "", keep: Bool = false) -> DirAccess? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let prefix = GString(prefix)
         withUnsafePointer(to: prefix.content) { pArg0 in
             withUnsafePointer(to: keep) { pArg1 in
@@ -154,7 +154,7 @@ open class DirAccess: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_list_dir_begin: GDExtensionMethodBindPtr = {
@@ -177,7 +177,7 @@ open class DirAccess: RefCounted {
     public final func listDirBegin() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(DirAccess.method_list_dir_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(DirAccess.method_list_dir_begin, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -199,7 +199,7 @@ open class DirAccess: RefCounted {
     public final func getNext() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(DirAccess.method_get_next, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(DirAccess.method_get_next, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -218,7 +218,7 @@ open class DirAccess: RefCounted {
     public final func currentIsDir() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(DirAccess.method_current_is_dir, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(DirAccess.method_current_is_dir, handle, nil, &_result)
         return _result
     }
     
@@ -236,7 +236,7 @@ open class DirAccess: RefCounted {
     /// Closes the current stream opened with ``listDirBegin()`` (whether it has been fully processed with ``getNext()`` does not matter).
     public final func listDirEnd() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(DirAccess.method_list_dir_end, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(DirAccess.method_list_dir_end, handle, nil, nil)
         
     }
     
@@ -260,7 +260,7 @@ open class DirAccess: RefCounted {
     public final func getFiles() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(DirAccess.method_get_files, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(DirAccess.method_get_files, handle, nil, &_result.content)
         return _result
     }
     
@@ -317,7 +317,7 @@ open class DirAccess: RefCounted {
     public final func getDirectories() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(DirAccess.method_get_directories, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(DirAccess.method_get_directories, handle, nil, &_result.content)
         return _result
     }
     
@@ -428,7 +428,7 @@ open class DirAccess: RefCounted {
     public final func getCurrentDrive() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(DirAccess.method_get_current_drive, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(DirAccess.method_get_current_drive, handle, nil, &_result)
         return _result
     }
     
@@ -456,7 +456,7 @@ open class DirAccess: RefCounted {
         withUnsafePointer(to: toDir.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirAccess.method_change_dir, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(DirAccess.method_change_dir, handle, pArgs, &_result)
                 }
                 
             }
@@ -484,7 +484,7 @@ open class DirAccess: RefCounted {
         withUnsafePointer(to: includeDrive) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirAccess.method_get_current_dir, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(DirAccess.method_get_current_dir, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -516,7 +516,7 @@ open class DirAccess: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirAccess.method_make_dir, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(DirAccess.method_make_dir, handle, pArgs, &_result)
                 }
                 
             }
@@ -576,7 +576,7 @@ open class DirAccess: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirAccess.method_make_dir_recursive, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(DirAccess.method_make_dir_recursive, handle, pArgs, &_result)
                 }
                 
             }
@@ -638,7 +638,7 @@ open class DirAccess: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirAccess.method_file_exists, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(DirAccess.method_file_exists, handle, pArgs, &_result)
                 }
                 
             }
@@ -670,7 +670,7 @@ open class DirAccess: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirAccess.method_dir_exists, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(DirAccess.method_dir_exists, handle, pArgs, &_result)
                 }
                 
             }
@@ -726,7 +726,7 @@ open class DirAccess: RefCounted {
     public final func getSpaceLeft() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(DirAccess.method_get_space_left, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(DirAccess.method_get_space_left, handle, nil, &_result)
         return _result
     }
     
@@ -757,7 +757,7 @@ open class DirAccess: RefCounted {
                 withUnsafePointer(to: chmodFlags) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(DirAccess.method_copy, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(DirAccess.method_copy, handle, pArgs, &_result)
                         }
                         
                     }
@@ -830,7 +830,7 @@ open class DirAccess: RefCounted {
             withUnsafePointer(to: to.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(DirAccess.method_rename, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(DirAccess.method_rename, handle, pArgs, &_result)
                     }
                     
                 }
@@ -898,7 +898,7 @@ open class DirAccess: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirAccess.method_remove, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(DirAccess.method_remove, handle, pArgs, &_result)
                 }
                 
             }
@@ -958,7 +958,7 @@ open class DirAccess: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirAccess.method_is_link, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(DirAccess.method_is_link, handle, pArgs, &_result)
                 }
                 
             }
@@ -990,7 +990,7 @@ open class DirAccess: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirAccess.method_read_link, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(DirAccess.method_read_link, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1026,7 +1026,7 @@ open class DirAccess: RefCounted {
             withUnsafePointer(to: target.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(DirAccess.method_create_link, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(DirAccess.method_create_link, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1060,7 +1060,7 @@ open class DirAccess: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirAccess.method_is_bundle, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(DirAccess.method_is_bundle, handle, pArgs, &_result)
                 }
                 
             }
@@ -1087,7 +1087,7 @@ open class DirAccess: RefCounted {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirAccess.method_set_include_navigational, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(DirAccess.method_set_include_navigational, handle, pArgs, nil)
                 }
                 
             }
@@ -1112,7 +1112,7 @@ open class DirAccess: RefCounted {
     fileprivate final func get_include_navigational() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(DirAccess.method_get_include_navigational, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(DirAccess.method_get_include_navigational, handle, nil, &_result)
         return _result
     }
     
@@ -1133,7 +1133,7 @@ open class DirAccess: RefCounted {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirAccess.method_set_include_hidden, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(DirAccess.method_set_include_hidden, handle, pArgs, nil)
                 }
                 
             }
@@ -1158,7 +1158,7 @@ open class DirAccess: RefCounted {
     fileprivate final func get_include_hidden() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(DirAccess.method_get_include_hidden, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(DirAccess.method_get_include_hidden, handle, nil, &_result)
         return _result
     }
     
@@ -1184,7 +1184,7 @@ open class DirAccess: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DirAccess.method_is_case_sensitive, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(DirAccess.method_is_case_sensitive, handle, pArgs, &_result)
                 }
                 
             }

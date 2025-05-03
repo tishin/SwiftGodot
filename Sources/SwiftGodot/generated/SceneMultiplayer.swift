@@ -169,7 +169,7 @@ open class SceneMultiplayer: MultiplayerAPI {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_root_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_root_path, handle, pArgs, nil)
                 }
                 
             }
@@ -194,7 +194,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     fileprivate final func get_root_path() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_root_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_root_path, handle, nil, &_result.content)
         return _result
     }
     
@@ -212,7 +212,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     /// Clears the current SceneMultiplayer network state (you shouldn't call this unless you know what you are doing).
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SceneMultiplayer.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SceneMultiplayer.method_clear, handle, nil, nil)
         
     }
     
@@ -233,7 +233,7 @@ open class SceneMultiplayer: MultiplayerAPI {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_disconnect_peer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_disconnect_peer, handle, pArgs, nil)
                 }
                 
             }
@@ -258,7 +258,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     public final func getAuthenticatingPeers() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_authenticating_peers, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_authenticating_peers, handle, nil, &_result.content)
         return _result
     }
     
@@ -281,7 +281,7 @@ open class SceneMultiplayer: MultiplayerAPI {
             withUnsafePointer(to: data.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SceneMultiplayer.method_send_auth, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(SceneMultiplayer.method_send_auth, handle, pArgs, &_result)
                     }
                     
                 }
@@ -314,7 +314,7 @@ open class SceneMultiplayer: MultiplayerAPI {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_complete_auth, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_complete_auth, handle, pArgs, &_result)
                 }
                 
             }
@@ -341,7 +341,7 @@ open class SceneMultiplayer: MultiplayerAPI {
         withUnsafePointer(to: callback.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_auth_callback, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_auth_callback, handle, pArgs, nil)
                 }
                 
             }
@@ -366,7 +366,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     fileprivate final func get_auth_callback() -> Callable {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: Callable = Callable ()
-        gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_auth_callback, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_auth_callback, handle, nil, &_result.content)
         return _result
     }
     
@@ -387,7 +387,7 @@ open class SceneMultiplayer: MultiplayerAPI {
         withUnsafePointer(to: timeout) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_auth_timeout, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_auth_timeout, handle, pArgs, nil)
                 }
                 
             }
@@ -412,7 +412,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     fileprivate final func get_auth_timeout() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_auth_timeout, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_auth_timeout, handle, nil, &_result)
         return _result
     }
     
@@ -433,7 +433,7 @@ open class SceneMultiplayer: MultiplayerAPI {
         withUnsafePointer(to: refuse) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_refuse_new_connections, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_refuse_new_connections, handle, pArgs, nil)
                 }
                 
             }
@@ -458,7 +458,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     fileprivate final func is_refusing_new_connections() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SceneMultiplayer.method_is_refusing_new_connections, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneMultiplayer.method_is_refusing_new_connections, handle, nil, &_result)
         return _result
     }
     
@@ -479,7 +479,7 @@ open class SceneMultiplayer: MultiplayerAPI {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_allow_object_decoding, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_allow_object_decoding, handle, pArgs, nil)
                 }
                 
             }
@@ -504,7 +504,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     fileprivate final func is_object_decoding_allowed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SceneMultiplayer.method_is_object_decoding_allowed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneMultiplayer.method_is_object_decoding_allowed, handle, nil, &_result)
         return _result
     }
     
@@ -525,7 +525,7 @@ open class SceneMultiplayer: MultiplayerAPI {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_server_relay_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_server_relay_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -550,7 +550,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     fileprivate final func is_server_relay_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SceneMultiplayer.method_is_server_relay_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneMultiplayer.method_is_server_relay_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -575,7 +575,7 @@ open class SceneMultiplayer: MultiplayerAPI {
                     withUnsafePointer(to: channel) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(SceneMultiplayer.method_send_bytes, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(SceneMultiplayer.method_send_bytes, handle, pArgs, &_result)
                             }
                             
                         }
@@ -606,7 +606,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     fileprivate final func get_max_sync_packet_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_max_sync_packet_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_max_sync_packet_size, handle, nil, &_result)
         return _result
     }
     
@@ -627,7 +627,7 @@ open class SceneMultiplayer: MultiplayerAPI {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_max_sync_packet_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_max_sync_packet_size, handle, pArgs, nil)
                 }
                 
             }
@@ -652,7 +652,7 @@ open class SceneMultiplayer: MultiplayerAPI {
     fileprivate final func get_max_delta_packet_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_max_delta_packet_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneMultiplayer.method_get_max_delta_packet_size, handle, nil, &_result)
         return _result
     }
     
@@ -673,7 +673,7 @@ open class SceneMultiplayer: MultiplayerAPI {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_max_delta_packet_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneMultiplayer.method_set_max_delta_packet_size, handle, pArgs, nil)
                 }
                 
             }

@@ -87,7 +87,7 @@ open class Material: Resource {
     open func _getShaderRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: RID = RID ()
-        gi.object_method_bind_ptrcall(Material.method__get_shader_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Material.method__get_shader_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -107,7 +107,7 @@ open class Material: Resource {
     open func _getShaderMode() -> Shader.Mode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Material.method__get_shader_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Material.method__get_shader_mode, handle, nil, &_result)
         return Shader.Mode (rawValue: _result)!
     }
     
@@ -127,7 +127,7 @@ open class Material: Resource {
     open func _canDoNextPass() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Material.method__can_do_next_pass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Material.method__can_do_next_pass, handle, nil, &_result)
         return _result
     }
     
@@ -147,7 +147,7 @@ open class Material: Resource {
     open func _canUseRenderPriority() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Material.method__can_use_render_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Material.method__can_use_render_priority, handle, nil, &_result)
         return _result
     }
     
@@ -168,7 +168,7 @@ open class Material: Resource {
         withUnsafePointer(to: nextPass?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Material.method_set_next_pass, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Material.method_set_next_pass, handle, pArgs, nil)
                 }
                 
             }
@@ -192,9 +192,9 @@ open class Material: Resource {
     @inline(__always)
     fileprivate final func get_next_pass() -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Material.method_get_next_pass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Material.method_get_next_pass, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_render_priority: GDExtensionMethodBindPtr = {
@@ -214,7 +214,7 @@ open class Material: Resource {
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Material.method_set_render_priority, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Material.method_set_render_priority, handle, pArgs, nil)
                 }
                 
             }
@@ -239,7 +239,7 @@ open class Material: Resource {
     fileprivate final func get_render_priority() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Material.method_get_render_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Material.method_get_render_priority, handle, nil, &_result)
         return _result
     }
     
@@ -257,7 +257,7 @@ open class Material: Resource {
     /// Only available when running in the editor. Opens a popup that visualizes the generated shader code, including all variants and internal shader code. See also ``Shader/inspectNativeShaderCode()``.
     public final func inspectNativeShaderCode() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Material.method_inspect_native_shader_code, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Material.method_inspect_native_shader_code, handle, nil, nil)
         
     }
     
@@ -275,9 +275,9 @@ open class Material: Resource {
     /// Creates a placeholder version of this resource (``PlaceholderMaterial``).
     public final func createPlaceholder() -> Resource? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Material.method_create_placeholder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Material.method_create_placeholder, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {

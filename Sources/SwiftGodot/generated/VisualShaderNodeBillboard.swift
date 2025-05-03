@@ -83,7 +83,7 @@ open class VisualShaderNodeBillboard: VisualShaderNode {
         withUnsafePointer(to: billboardType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeBillboard.method_set_billboard_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeBillboard.method_set_billboard_type, handle, pArgs, nil)
                 }
                 
             }
@@ -108,7 +108,7 @@ open class VisualShaderNodeBillboard: VisualShaderNode {
     fileprivate final func get_billboard_type() -> VisualShaderNodeBillboard.BillboardType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeBillboard.method_get_billboard_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeBillboard.method_get_billboard_type, handle, nil, &_result)
         return VisualShaderNodeBillboard.BillboardType (rawValue: _result)!
     }
     
@@ -129,7 +129,7 @@ open class VisualShaderNodeBillboard: VisualShaderNode {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeBillboard.method_set_keep_scale_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeBillboard.method_set_keep_scale_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -154,7 +154,7 @@ open class VisualShaderNodeBillboard: VisualShaderNode {
     fileprivate final func is_keep_scale_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VisualShaderNodeBillboard.method_is_keep_scale_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeBillboard.method_is_keep_scale_enabled, handle, nil, &_result)
         return _result
     }
     

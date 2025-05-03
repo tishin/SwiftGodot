@@ -59,7 +59,7 @@ open class EditorToaster: HBoxContainer {
                 withUnsafePointer(to: tooltip.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorToaster.method_push_toast, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorToaster.method_push_toast, handle, pArgs, nil)
                         }
                         
                     }

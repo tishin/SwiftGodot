@@ -111,9 +111,9 @@ open class PhysicalBone2D: RigidBody2D {
     /// Returns the first ``Joint2D`` child node, if one exists. This is mainly a helper function to make it easier to get the ``Joint2D`` that the ``PhysicalBone2D`` is autoconfiguring.
     public final func getJoint() -> Joint2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(PhysicalBone2D.method_get_joint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(PhysicalBone2D.method_get_joint, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_auto_configure_joint: GDExtensionMethodBindPtr = {
@@ -131,7 +131,7 @@ open class PhysicalBone2D: RigidBody2D {
     fileprivate final func get_auto_configure_joint() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PhysicalBone2D.method_get_auto_configure_joint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalBone2D.method_get_auto_configure_joint, handle, nil, &_result)
         return _result
     }
     
@@ -152,7 +152,7 @@ open class PhysicalBone2D: RigidBody2D {
         withUnsafePointer(to: autoConfigureJoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalBone2D.method_set_auto_configure_joint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalBone2D.method_set_auto_configure_joint, handle, pArgs, nil)
                 }
                 
             }
@@ -179,7 +179,7 @@ open class PhysicalBone2D: RigidBody2D {
         withUnsafePointer(to: simulatePhysics) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalBone2D.method_set_simulate_physics, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalBone2D.method_set_simulate_physics, handle, pArgs, nil)
                 }
                 
             }
@@ -204,7 +204,7 @@ open class PhysicalBone2D: RigidBody2D {
     fileprivate final func get_simulate_physics() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PhysicalBone2D.method_get_simulate_physics, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalBone2D.method_get_simulate_physics, handle, nil, &_result)
         return _result
     }
     
@@ -223,7 +223,7 @@ open class PhysicalBone2D: RigidBody2D {
     public final func isSimulatingPhysics() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PhysicalBone2D.method_is_simulating_physics, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalBone2D.method_is_simulating_physics, handle, nil, &_result)
         return _result
     }
     
@@ -244,7 +244,7 @@ open class PhysicalBone2D: RigidBody2D {
         withUnsafePointer(to: nodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalBone2D.method_set_bone2d_nodepath, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalBone2D.method_set_bone2d_nodepath, handle, pArgs, nil)
                 }
                 
             }
@@ -269,7 +269,7 @@ open class PhysicalBone2D: RigidBody2D {
     fileprivate final func get_bone2d_nodepath() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(PhysicalBone2D.method_get_bone2d_nodepath, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(PhysicalBone2D.method_get_bone2d_nodepath, handle, nil, &_result.content)
         return _result
     }
     
@@ -290,7 +290,7 @@ open class PhysicalBone2D: RigidBody2D {
         withUnsafePointer(to: boneIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalBone2D.method_set_bone2d_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalBone2D.method_set_bone2d_index, handle, pArgs, nil)
                 }
                 
             }
@@ -315,7 +315,7 @@ open class PhysicalBone2D: RigidBody2D {
     fileprivate final func get_bone2d_index() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PhysicalBone2D.method_get_bone2d_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalBone2D.method_get_bone2d_index, handle, nil, &_result)
         return _result
     }
     
@@ -336,7 +336,7 @@ open class PhysicalBone2D: RigidBody2D {
         withUnsafePointer(to: followBone) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicalBone2D.method_set_follow_bone_when_simulating, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicalBone2D.method_set_follow_bone_when_simulating, handle, pArgs, nil)
                 }
                 
             }
@@ -361,7 +361,7 @@ open class PhysicalBone2D: RigidBody2D {
     fileprivate final func get_follow_bone_when_simulating() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PhysicalBone2D.method_get_follow_bone_when_simulating, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicalBone2D.method_get_follow_bone_when_simulating, handle, nil, &_result)
         return _result
     }
     

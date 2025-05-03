@@ -54,7 +54,7 @@ open class Mutex: RefCounted {
     /// 
     public final func lock() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Mutex.method_lock, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Mutex.method_lock, handle, nil, nil)
         
     }
     
@@ -76,7 +76,7 @@ open class Mutex: RefCounted {
     public final func tryLock() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Mutex.method_try_lock, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Mutex.method_try_lock, handle, nil, &_result)
         return _result
     }
     
@@ -99,7 +99,7 @@ open class Mutex: RefCounted {
     /// 
     public final func unlock() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Mutex.method_unlock, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Mutex.method_unlock, handle, nil, nil)
         
     }
     

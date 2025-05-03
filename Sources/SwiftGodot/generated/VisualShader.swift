@@ -118,7 +118,7 @@ open class VisualShader: Shader {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShader.method_set_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShader.method_set_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -148,7 +148,7 @@ open class VisualShader: Shader {
                     withUnsafePointer(to: id) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(VisualShader.method_add_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(VisualShader.method_add_node, handle, pArgs, nil)
                             }
                             
                         }
@@ -178,12 +178,12 @@ open class VisualShader: Shader {
     /// Returns the shader node instance with specified `type` and `id`.
     public final func getNode(type: VisualShader.GType, id: Int32) -> VisualShaderNode? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(VisualShader.method_get_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(VisualShader.method_get_node, handle, pArgs, &_result)
                     }
                     
                 }
@@ -192,7 +192,7 @@ open class VisualShader: Shader {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_node_position: GDExtensionMethodBindPtr = {
@@ -214,7 +214,7 @@ open class VisualShader: Shader {
                 withUnsafePointer(to: position) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(VisualShader.method_set_node_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(VisualShader.method_set_node_position, handle, pArgs, nil)
                         }
                         
                     }
@@ -247,7 +247,7 @@ open class VisualShader: Shader {
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(VisualShader.method_get_node_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(VisualShader.method_get_node_position, handle, pArgs, &_result)
                     }
                     
                 }
@@ -277,7 +277,7 @@ open class VisualShader: Shader {
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShader.method_get_node_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(VisualShader.method_get_node_list, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -305,7 +305,7 @@ open class VisualShader: Shader {
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShader.method_get_valid_node_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(VisualShader.method_get_valid_node_id, handle, pArgs, &_result)
                 }
                 
             }
@@ -333,7 +333,7 @@ open class VisualShader: Shader {
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(VisualShader.method_remove_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(VisualShader.method_remove_node, handle, pArgs, nil)
                     }
                     
                 }
@@ -364,7 +364,7 @@ open class VisualShader: Shader {
                 withUnsafePointer(to: newClass.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(VisualShader.method_replace_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(VisualShader.method_replace_node, handle, pArgs, nil)
                         }
                         
                     }
@@ -400,7 +400,7 @@ open class VisualShader: Shader {
                         withUnsafePointer(to: toPort) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(VisualShader.method_is_node_connection, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(VisualShader.method_is_node_connection, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -440,7 +440,7 @@ open class VisualShader: Shader {
                         withUnsafePointer(to: toPort) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(VisualShader.method_can_connect_nodes, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(VisualShader.method_can_connect_nodes, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -480,7 +480,7 @@ open class VisualShader: Shader {
                         withUnsafePointer(to: toPort) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(VisualShader.method_connect_nodes, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(VisualShader.method_connect_nodes, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -519,7 +519,7 @@ open class VisualShader: Shader {
                         withUnsafePointer(to: toPort) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(VisualShader.method_disconnect_nodes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(VisualShader.method_disconnect_nodes, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -558,7 +558,7 @@ open class VisualShader: Shader {
                         withUnsafePointer(to: toPort) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(VisualShader.method_connect_nodes_forced, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(VisualShader.method_connect_nodes_forced, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -594,7 +594,7 @@ open class VisualShader: Shader {
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShader.method_get_node_connections, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(VisualShader.method_get_node_connections, handle, pArgs, &_result)
                 }
                 
             }
@@ -621,7 +621,7 @@ open class VisualShader: Shader {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShader.method_set_graph_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShader.method_set_graph_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -646,7 +646,7 @@ open class VisualShader: Shader {
     fileprivate final func get_graph_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(VisualShader.method_get_graph_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShader.method_get_graph_offset, handle, nil, &_result)
         return _result
     }
     
@@ -669,7 +669,7 @@ open class VisualShader: Shader {
                 withUnsafePointer(to: frame) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(VisualShader.method_attach_node_to_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(VisualShader.method_attach_node_to_frame, handle, pArgs, nil)
                         }
                         
                     }
@@ -701,7 +701,7 @@ open class VisualShader: Shader {
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(VisualShader.method_detach_node_from_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(VisualShader.method_detach_node_from_frame, handle, pArgs, nil)
                     }
                     
                 }
@@ -733,7 +733,7 @@ open class VisualShader: Shader {
                 withUnsafePointer(to: type.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(VisualShader.method_add_varying, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(VisualShader.method_add_varying, handle, pArgs, nil)
                         }
                         
                     }
@@ -765,7 +765,7 @@ open class VisualShader: Shader {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShader.method_remove_varying, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShader.method_remove_varying, handle, pArgs, nil)
                 }
                 
             }
@@ -794,7 +794,7 @@ open class VisualShader: Shader {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShader.method_has_varying, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(VisualShader.method_has_varying, handle, pArgs, &_result)
                 }
                 
             }

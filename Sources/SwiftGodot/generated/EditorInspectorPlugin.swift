@@ -58,7 +58,7 @@ open class EditorInspectorPlugin: RefCounted {
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInspectorPlugin.method__can_handle, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorInspectorPlugin.method__can_handle, handle, pArgs, &_result)
                 }
                 
             }
@@ -86,7 +86,7 @@ open class EditorInspectorPlugin: RefCounted {
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInspectorPlugin.method__parse_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorInspectorPlugin.method__parse_begin, handle, pArgs, nil)
                 }
                 
             }
@@ -116,7 +116,7 @@ open class EditorInspectorPlugin: RefCounted {
             withUnsafePointer(to: category.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorInspectorPlugin.method__parse_category, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorInspectorPlugin.method__parse_category, handle, pArgs, nil)
                     }
                     
                 }
@@ -148,7 +148,7 @@ open class EditorInspectorPlugin: RefCounted {
             withUnsafePointer(to: group.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorInspectorPlugin.method__parse_group, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorInspectorPlugin.method__parse_group, handle, pArgs, nil)
                     }
                     
                 }
@@ -187,7 +187,7 @@ open class EditorInspectorPlugin: RefCounted {
                                 withUnsafePointer(to: wide) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(EditorInspectorPlugin.method__parse_property, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                            gi.object_method_bind_ptrcall(EditorInspectorPlugin.method__parse_property, handle, pArgs, &_result)
                                         }
                                         
                                     }
@@ -227,7 +227,7 @@ open class EditorInspectorPlugin: RefCounted {
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInspectorPlugin.method__parse_end, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorInspectorPlugin.method__parse_end, handle, pArgs, nil)
                 }
                 
             }
@@ -254,7 +254,7 @@ open class EditorInspectorPlugin: RefCounted {
         withUnsafePointer(to: control?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInspectorPlugin.method_add_custom_control, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorInspectorPlugin.method_add_custom_control, handle, pArgs, nil)
                 }
                 
             }
@@ -291,7 +291,7 @@ open class EditorInspectorPlugin: RefCounted {
                     withUnsafePointer(to: label.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorInspectorPlugin.method_add_property_editor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(EditorInspectorPlugin.method_add_property_editor, handle, pArgs, nil)
                             }
                             
                         }
@@ -327,7 +327,7 @@ open class EditorInspectorPlugin: RefCounted {
                 withUnsafePointer(to: editor?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorInspectorPlugin.method_add_property_editor_for_multiple_properties, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorInspectorPlugin.method_add_property_editor_for_multiple_properties, handle, pArgs, nil)
                         }
                         
                     }
@@ -370,9 +370,9 @@ func _EditorInspectorPlugin_proxy_can_handle (instance: UnsafeMutableRawPointer?
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorInspectorPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._canHandle (object: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object)
+    let ret = swiftObject._canHandle (object: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Object)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
@@ -381,9 +381,9 @@ func _EditorInspectorPlugin_proxy_parse_begin (instance: UnsafeMutableRawPointer
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorInspectorPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._parseBegin (object: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object)
+    swiftObject._parseBegin (object: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Object)
 }
 
 func _EditorInspectorPlugin_proxy_parse_category (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -391,9 +391,9 @@ func _EditorInspectorPlugin_proxy_parse_category (instance: UnsafeMutableRawPoin
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorInspectorPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._parseCategory (object: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, category: GString.stringFromGStringPtr (ptr: args [1]!) ?? "")
+    swiftObject._parseCategory (object: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, category: GString.stringFromGStringPtr (ptr: args [1]!) ?? "")
 }
 
 func _EditorInspectorPlugin_proxy_parse_end (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -401,9 +401,9 @@ func _EditorInspectorPlugin_proxy_parse_end (instance: UnsafeMutableRawPointer?,
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorInspectorPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._parseEnd (object: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object)
+    swiftObject._parseEnd (object: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Object)
 }
 
 func _EditorInspectorPlugin_proxy_parse_group (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -411,9 +411,9 @@ func _EditorInspectorPlugin_proxy_parse_group (instance: UnsafeMutableRawPointer
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorInspectorPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._parseGroup (object: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, group: GString.stringFromGStringPtr (ptr: args [1]!) ?? "")
+    swiftObject._parseGroup (object: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, group: GString.stringFromGStringPtr (ptr: args [1]!) ?? "")
 }
 
 func _EditorInspectorPlugin_proxy_parse_property (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -421,9 +421,9 @@ func _EditorInspectorPlugin_proxy_parse_property (instance: UnsafeMutableRawPoin
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorInspectorPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._parseProperty (object: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, type: args [1]!.assumingMemoryBound (to: Variant.GType.self).pointee, name: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", hintType: args [3]!.assumingMemoryBound (to: PropertyHint.self).pointee, hintString: GString.stringFromGStringPtr (ptr: args [4]!) ?? "", usageFlags: args [5]!.assumingMemoryBound (to: PropertyUsageFlags.self).pointee, wide: args [6]!.assumingMemoryBound (to: Bool.self).pointee)
+    let ret = swiftObject._parseProperty (object: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, type: args [1]!.assumingMemoryBound (to: Variant.GType.self).pointee, name: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", hintType: args [3]!.assumingMemoryBound (to: PropertyHint.self).pointee, hintString: GString.stringFromGStringPtr (ptr: args [4]!) ?? "", usageFlags: args [5]!.assumingMemoryBound (to: PropertyUsageFlags.self).pointee, wide: args [6]!.assumingMemoryBound (to: Bool.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 

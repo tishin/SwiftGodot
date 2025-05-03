@@ -50,7 +50,7 @@ open class RichTextEffect: Resource {
         withUnsafePointer(to: charFx?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextEffect.method__process_custom_fx, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RichTextEffect.method__process_custom_fx, handle, pArgs, &_result)
                 }
                 
             }
@@ -79,9 +79,9 @@ func _RichTextEffect_proxy_process_custom_fx (instance: UnsafeMutableRawPointer?
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? RichTextEffect else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._processCustomFx (charFx: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? CharFXTransform)
+    let ret = swiftObject._processCustomFx (charFx: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? CharFXTransform)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 

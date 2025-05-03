@@ -46,7 +46,7 @@ open class EditorResourcePreviewGenerator: RefCounted {
         withUnsafePointer(to: type.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorResourcePreviewGenerator.method__handles, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorResourcePreviewGenerator.method__handles, handle, pArgs, &_result)
                 }
                 
             }
@@ -78,13 +78,13 @@ open class EditorResourcePreviewGenerator: RefCounted {
     @_documentation(visibility: public)
     open func _generate(resource: Resource?, size: Vector2i, metadata: VariantDictionary) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: resource?.handle) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: metadata.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorResourcePreviewGenerator.method__generate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(EditorResourcePreviewGenerator.method__generate, handle, pArgs, &_result)
                         }
                         
                     }
@@ -95,7 +95,7 @@ open class EditorResourcePreviewGenerator: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__generate_from_path: GDExtensionMethodBindPtr = {
@@ -120,14 +120,14 @@ open class EditorResourcePreviewGenerator: RefCounted {
     @_documentation(visibility: public)
     open func _generateFromPath(_ path: String, size: Vector2i, metadata: VariantDictionary) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: metadata.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorResourcePreviewGenerator.method__generate_from_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(EditorResourcePreviewGenerator.method__generate_from_path, handle, pArgs, &_result)
                         }
                         
                     }
@@ -138,7 +138,7 @@ open class EditorResourcePreviewGenerator: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__generate_small_preview_automatically: GDExtensionMethodBindPtr = {
@@ -160,7 +160,7 @@ open class EditorResourcePreviewGenerator: RefCounted {
     open func _generateSmallPreviewAutomatically() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorResourcePreviewGenerator.method__generate_small_preview_automatically, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorResourcePreviewGenerator.method__generate_small_preview_automatically, handle, nil, &_result)
         return _result
     }
     
@@ -183,7 +183,7 @@ open class EditorResourcePreviewGenerator: RefCounted {
     open func _canGenerateSmallPreview() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorResourcePreviewGenerator.method__can_generate_small_preview, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorResourcePreviewGenerator.method__can_generate_small_preview, handle, nil, &_result)
         return _result
     }
     
@@ -222,10 +222,10 @@ func _EditorResourcePreviewGenerator_proxy_generate (instance: UnsafeMutableRawP
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorResourcePreviewGenerator else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._generate (resource: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Resource, size: args [1]!.assumingMemoryBound (to: Vector2i.self).pointee, metadata: VariantDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee))
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Texture2D
+    let ret = swiftObject._generate (resource: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Resource, size: args [1]!.assumingMemoryBound (to: Vector2i.self).pointee, metadata: VariantDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee))
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // Texture2D
 }
 
 func _EditorResourcePreviewGenerator_proxy_generate_from_path (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -234,7 +234,7 @@ func _EditorResourcePreviewGenerator_proxy_generate_from_path (instance: UnsafeM
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorResourcePreviewGenerator else { return }
     let ret = swiftObject._generateFromPath (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", size: args [1]!.assumingMemoryBound (to: Vector2i.self).pointee, metadata: VariantDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee))
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Texture2D
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // Texture2D
 }
 
 func _EditorResourcePreviewGenerator_proxy_generate_small_preview_automatically (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {

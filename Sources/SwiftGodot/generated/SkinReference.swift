@@ -50,7 +50,7 @@ open class SkinReference: RefCounted {
     public final func getSkeleton() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(SkinReference.method_get_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SkinReference.method_get_skeleton, handle, nil, &_result.content)
         return _result
     }
     
@@ -71,9 +71,9 @@ open class SkinReference: RefCounted {
     /// 
     public final func getSkin() -> Skin? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(SkinReference.method_get_skin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(SkinReference.method_get_skin, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

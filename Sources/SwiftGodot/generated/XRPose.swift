@@ -139,7 +139,7 @@ open class XRPose: RefCounted {
         withUnsafePointer(to: hasTrackingData) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRPose.method_set_has_tracking_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRPose.method_set_has_tracking_data, handle, pArgs, nil)
                 }
                 
             }
@@ -164,7 +164,7 @@ open class XRPose: RefCounted {
     fileprivate final func get_has_tracking_data() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XRPose.method_get_has_tracking_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRPose.method_get_has_tracking_data, handle, nil, &_result)
         return _result
     }
     
@@ -185,7 +185,7 @@ open class XRPose: RefCounted {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRPose.method_set_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRPose.method_set_name, handle, pArgs, nil)
                 }
                 
             }
@@ -210,7 +210,7 @@ open class XRPose: RefCounted {
     fileprivate final func get_name() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(XRPose.method_get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XRPose.method_get_name, handle, nil, &_result.content)
         return _result
     }
     
@@ -231,7 +231,7 @@ open class XRPose: RefCounted {
         withUnsafePointer(to: transform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRPose.method_set_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRPose.method_set_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -256,7 +256,7 @@ open class XRPose: RefCounted {
     fileprivate final func get_transform() -> Transform3D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
-        gi.object_method_bind_ptrcall(XRPose.method_get_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRPose.method_get_transform, handle, nil, &_result)
         return _result
     }
     
@@ -275,7 +275,7 @@ open class XRPose: RefCounted {
     public final func getAdjustedTransform() -> Transform3D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
-        gi.object_method_bind_ptrcall(XRPose.method_get_adjusted_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRPose.method_get_adjusted_transform, handle, nil, &_result)
         return _result
     }
     
@@ -296,7 +296,7 @@ open class XRPose: RefCounted {
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRPose.method_set_linear_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRPose.method_set_linear_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -321,7 +321,7 @@ open class XRPose: RefCounted {
     fileprivate final func get_linear_velocity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(XRPose.method_get_linear_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRPose.method_get_linear_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -342,7 +342,7 @@ open class XRPose: RefCounted {
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRPose.method_set_angular_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRPose.method_set_angular_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -367,7 +367,7 @@ open class XRPose: RefCounted {
     fileprivate final func get_angular_velocity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(XRPose.method_get_angular_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRPose.method_get_angular_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -388,7 +388,7 @@ open class XRPose: RefCounted {
         withUnsafePointer(to: trackingConfidence.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRPose.method_set_tracking_confidence, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRPose.method_set_tracking_confidence, handle, pArgs, nil)
                 }
                 
             }
@@ -413,7 +413,7 @@ open class XRPose: RefCounted {
     fileprivate final func get_tracking_confidence() -> XRPose.TrackingConfidence {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(XRPose.method_get_tracking_confidence, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRPose.method_get_tracking_confidence, handle, nil, &_result)
         return XRPose.TrackingConfidence (rawValue: _result)!
     }
     

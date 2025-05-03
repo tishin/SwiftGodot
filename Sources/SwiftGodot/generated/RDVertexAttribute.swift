@@ -106,7 +106,7 @@ open class RDVertexAttribute: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDVertexAttribute.method_set_location, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDVertexAttribute.method_set_location, handle, pArgs, nil)
                 }
                 
             }
@@ -131,7 +131,7 @@ open class RDVertexAttribute: RefCounted {
     fileprivate final func get_location() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_location, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_location, handle, nil, &_result)
         return _result
     }
     
@@ -152,7 +152,7 @@ open class RDVertexAttribute: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDVertexAttribute.method_set_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDVertexAttribute.method_set_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -177,7 +177,7 @@ open class RDVertexAttribute: RefCounted {
     fileprivate final func get_offset() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_offset, handle, nil, &_result)
         return _result
     }
     
@@ -198,7 +198,7 @@ open class RDVertexAttribute: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDVertexAttribute.method_set_format, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDVertexAttribute.method_set_format, handle, pArgs, nil)
                 }
                 
             }
@@ -223,7 +223,7 @@ open class RDVertexAttribute: RefCounted {
     fileprivate final func get_format() -> RenderingDevice.DataFormat {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_format, handle, nil, &_result)
         return RenderingDevice.DataFormat (rawValue: _result)!
     }
     
@@ -244,7 +244,7 @@ open class RDVertexAttribute: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDVertexAttribute.method_set_stride, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDVertexAttribute.method_set_stride, handle, pArgs, nil)
                 }
                 
             }
@@ -269,7 +269,7 @@ open class RDVertexAttribute: RefCounted {
     fileprivate final func get_stride() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_stride, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_stride, handle, nil, &_result)
         return _result
     }
     
@@ -290,7 +290,7 @@ open class RDVertexAttribute: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDVertexAttribute.method_set_frequency, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDVertexAttribute.method_set_frequency, handle, pArgs, nil)
                 }
                 
             }
@@ -315,7 +315,7 @@ open class RDVertexAttribute: RefCounted {
     fileprivate final func get_frequency() -> RenderingDevice.VertexFrequency {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_frequency, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDVertexAttribute.method_get_frequency, handle, nil, &_result)
         return RenderingDevice.VertexFrequency (rawValue: _result)!
     }
     

@@ -41,7 +41,7 @@ open class EditorFileSystemDirectory: Object {
     public final func getSubdirCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_subdir_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_subdir_count, handle, nil, &_result)
         return _result
     }
     
@@ -59,18 +59,18 @@ open class EditorFileSystemDirectory: Object {
     /// Returns the subdirectory at index `idx`.
     public final func getSubdir(idx: Int32) -> EditorFileSystemDirectory? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_subdir, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_subdir, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_file_count: GDExtensionMethodBindPtr = {
@@ -88,7 +88,7 @@ open class EditorFileSystemDirectory: Object {
     public final func getFileCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file_count, handle, nil, &_result)
         return _result
     }
     
@@ -110,7 +110,7 @@ open class EditorFileSystemDirectory: Object {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -138,7 +138,7 @@ open class EditorFileSystemDirectory: Object {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file_path, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -166,7 +166,7 @@ open class EditorFileSystemDirectory: Object {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file_type, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -194,7 +194,7 @@ open class EditorFileSystemDirectory: Object {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file_script_class_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file_script_class_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -222,7 +222,7 @@ open class EditorFileSystemDirectory: Object {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file_script_class_extends, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file_script_class_extends, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -250,7 +250,7 @@ open class EditorFileSystemDirectory: Object {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file_import_is_valid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_file_import_is_valid, handle, pArgs, &_result)
                 }
                 
             }
@@ -275,7 +275,7 @@ open class EditorFileSystemDirectory: Object {
     public final func getName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -294,7 +294,7 @@ open class EditorFileSystemDirectory: Object {
     public final func getPath() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_path, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -312,9 +312,9 @@ open class EditorFileSystemDirectory: Object {
     /// Returns the parent directory for this directory or `null` if called on a directory at `res://` or `user://`.
     public final func getParent() -> EditorFileSystemDirectory? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_parent, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_get_parent, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_find_file_index: GDExtensionMethodBindPtr = {
@@ -336,7 +336,7 @@ open class EditorFileSystemDirectory: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_find_file_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_find_file_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -365,7 +365,7 @@ open class EditorFileSystemDirectory: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_find_dir_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorFileSystemDirectory.method_find_dir_index, handle, pArgs, &_result)
                 }
                 
             }

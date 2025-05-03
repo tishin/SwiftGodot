@@ -158,7 +158,7 @@ open class Timer: Node {
         withUnsafePointer(to: timeSec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Timer.method_set_wait_time, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Timer.method_set_wait_time, handle, pArgs, nil)
                 }
                 
             }
@@ -183,7 +183,7 @@ open class Timer: Node {
     fileprivate final func get_wait_time() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Timer.method_get_wait_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Timer.method_get_wait_time, handle, nil, &_result)
         return _result
     }
     
@@ -204,7 +204,7 @@ open class Timer: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Timer.method_set_one_shot, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Timer.method_set_one_shot, handle, pArgs, nil)
                 }
                 
             }
@@ -229,7 +229,7 @@ open class Timer: Node {
     fileprivate final func is_one_shot() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Timer.method_is_one_shot, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Timer.method_is_one_shot, handle, nil, &_result)
         return _result
     }
     
@@ -250,7 +250,7 @@ open class Timer: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Timer.method_set_autostart, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Timer.method_set_autostart, handle, pArgs, nil)
                 }
                 
             }
@@ -275,7 +275,7 @@ open class Timer: Node {
     fileprivate final func has_autostart() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Timer.method_has_autostart, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Timer.method_has_autostart, handle, nil, &_result)
         return _result
     }
     
@@ -299,7 +299,7 @@ open class Timer: Node {
         withUnsafePointer(to: timeSec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Timer.method_start, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Timer.method_start, handle, pArgs, nil)
                 }
                 
             }
@@ -323,7 +323,7 @@ open class Timer: Node {
     /// Stops the timer.
     public final func stop() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Timer.method_stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Timer.method_stop, handle, nil, nil)
         
     }
     
@@ -344,7 +344,7 @@ open class Timer: Node {
         withUnsafePointer(to: paused) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Timer.method_set_paused, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Timer.method_set_paused, handle, pArgs, nil)
                 }
                 
             }
@@ -369,7 +369,7 @@ open class Timer: Node {
     fileprivate final func is_paused() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Timer.method_is_paused, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Timer.method_is_paused, handle, nil, &_result)
         return _result
     }
     
@@ -390,7 +390,7 @@ open class Timer: Node {
         withUnsafePointer(to: ignore) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Timer.method_set_ignore_time_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Timer.method_set_ignore_time_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -415,7 +415,7 @@ open class Timer: Node {
     fileprivate final func is_ignoring_time_scale() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Timer.method_is_ignoring_time_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Timer.method_is_ignoring_time_scale, handle, nil, &_result)
         return _result
     }
     
@@ -434,7 +434,7 @@ open class Timer: Node {
     public final func isStopped() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Timer.method_is_stopped, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Timer.method_is_stopped, handle, nil, &_result)
         return _result
     }
     
@@ -453,7 +453,7 @@ open class Timer: Node {
     fileprivate final func get_time_left() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Timer.method_get_time_left, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Timer.method_get_time_left, handle, nil, &_result)
         return _result
     }
     
@@ -474,7 +474,7 @@ open class Timer: Node {
         withUnsafePointer(to: callback.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Timer.method_set_timer_process_callback, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Timer.method_set_timer_process_callback, handle, pArgs, nil)
                 }
                 
             }
@@ -499,7 +499,7 @@ open class Timer: Node {
     fileprivate final func get_timer_process_callback() -> Timer.TimerProcessCallback {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Timer.method_get_timer_process_callback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Timer.method_get_timer_process_callback, handle, nil, &_result)
         return Timer.TimerProcessCallback (rawValue: _result)!
     }
     

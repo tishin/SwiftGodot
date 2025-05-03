@@ -97,7 +97,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         withUnsafePointer(to: targetNodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_target_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_target_node, handle, pArgs, nil)
                 }
                 
             }
@@ -122,7 +122,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     fileprivate final func get_target_node() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_target_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_target_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -143,7 +143,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         withUnsafePointer(to: minimumDistance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_target_minimum_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_target_minimum_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -168,7 +168,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     fileprivate final func get_target_minimum_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_target_minimum_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_target_minimum_distance, handle, nil, &_result)
         return _result
     }
     
@@ -189,7 +189,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         withUnsafePointer(to: maximumDistance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_target_maximum_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_target_maximum_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -214,7 +214,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     fileprivate final func get_target_maximum_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_target_maximum_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_target_maximum_distance, handle, nil, &_result)
         return _result
     }
     
@@ -235,7 +235,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         withUnsafePointer(to: flipDirection) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_flip_bend_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_flip_bend_direction, handle, pArgs, nil)
                 }
                 
             }
@@ -260,7 +260,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     fileprivate final func get_flip_bend_direction() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_flip_bend_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_flip_bend_direction, handle, nil, &_result)
         return _result
     }
     
@@ -281,7 +281,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         withUnsafePointer(to: bone2dNode.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_joint_one_bone2d_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_joint_one_bone2d_node, handle, pArgs, nil)
                 }
                 
             }
@@ -306,7 +306,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     public final func getJointOneBone2dNode() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_joint_one_bone2d_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_joint_one_bone2d_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -327,7 +327,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_joint_one_bone_idx, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_joint_one_bone_idx, handle, pArgs, nil)
                 }
                 
             }
@@ -352,7 +352,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     public final func getJointOneBoneIdx() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_joint_one_bone_idx, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_joint_one_bone_idx, handle, nil, &_result)
         return _result
     }
     
@@ -373,7 +373,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         withUnsafePointer(to: bone2dNode.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_joint_two_bone2d_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_joint_two_bone2d_node, handle, pArgs, nil)
                 }
                 
             }
@@ -398,7 +398,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     public final func getJointTwoBone2dNode() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_joint_two_bone2d_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_joint_two_bone2d_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -419,7 +419,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_joint_two_bone_idx, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_set_joint_two_bone_idx, handle, pArgs, nil)
                 }
                 
             }
@@ -444,7 +444,7 @@ open class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
     public final func getJointTwoBoneIdx() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_joint_two_bone_idx, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DTwoBoneIK.method_get_joint_two_bone_idx, handle, nil, &_result)
         return _result
     }
     

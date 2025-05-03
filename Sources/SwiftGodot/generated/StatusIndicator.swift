@@ -104,7 +104,7 @@ open class StatusIndicator: Node {
         withUnsafePointer(to: tooltip.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StatusIndicator.method_set_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StatusIndicator.method_set_tooltip, handle, pArgs, nil)
                 }
                 
             }
@@ -129,7 +129,7 @@ open class StatusIndicator: Node {
     fileprivate final func get_tooltip() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(StatusIndicator.method_get_tooltip, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(StatusIndicator.method_get_tooltip, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -150,7 +150,7 @@ open class StatusIndicator: Node {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StatusIndicator.method_set_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StatusIndicator.method_set_icon, handle, pArgs, nil)
                 }
                 
             }
@@ -174,9 +174,9 @@ open class StatusIndicator: Node {
     @inline(__always)
     fileprivate final func get_icon() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(StatusIndicator.method_get_icon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(StatusIndicator.method_get_icon, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_visible: GDExtensionMethodBindPtr = {
@@ -196,7 +196,7 @@ open class StatusIndicator: Node {
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StatusIndicator.method_set_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StatusIndicator.method_set_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -221,7 +221,7 @@ open class StatusIndicator: Node {
     fileprivate final func is_visible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(StatusIndicator.method_is_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StatusIndicator.method_is_visible, handle, nil, &_result)
         return _result
     }
     
@@ -242,7 +242,7 @@ open class StatusIndicator: Node {
         withUnsafePointer(to: menu.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StatusIndicator.method_set_menu, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StatusIndicator.method_set_menu, handle, pArgs, nil)
                 }
                 
             }
@@ -267,7 +267,7 @@ open class StatusIndicator: Node {
     fileprivate final func get_menu() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(StatusIndicator.method_get_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(StatusIndicator.method_get_menu, handle, nil, &_result.content)
         return _result
     }
     
@@ -286,7 +286,7 @@ open class StatusIndicator: Node {
     public final func getRect() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(StatusIndicator.method_get_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StatusIndicator.method_get_rect, handle, nil, &_result)
         return _result
     }
     

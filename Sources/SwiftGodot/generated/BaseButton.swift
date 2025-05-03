@@ -207,7 +207,7 @@ open class BaseButton: Control {
     @_documentation(visibility: public)
     open func _pressed() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(BaseButton.method__pressed, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(BaseButton.method__pressed, handle, nil, nil)
         
     }
     
@@ -229,7 +229,7 @@ open class BaseButton: Control {
         withUnsafePointer(to: toggledOn) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseButton.method__toggled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseButton.method__toggled, handle, pArgs, nil)
                 }
                 
             }
@@ -256,7 +256,7 @@ open class BaseButton: Control {
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseButton.method_set_pressed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseButton.method_set_pressed, handle, pArgs, nil)
                 }
                 
             }
@@ -281,7 +281,7 @@ open class BaseButton: Control {
     fileprivate final func is_pressed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BaseButton.method_is_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseButton.method_is_pressed, handle, nil, &_result)
         return _result
     }
     
@@ -305,7 +305,7 @@ open class BaseButton: Control {
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseButton.method_set_pressed_no_signal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseButton.method_set_pressed_no_signal, handle, pArgs, nil)
                 }
                 
             }
@@ -330,7 +330,7 @@ open class BaseButton: Control {
     public final func isHovered() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BaseButton.method_is_hovered, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseButton.method_is_hovered, handle, nil, &_result)
         return _result
     }
     
@@ -351,7 +351,7 @@ open class BaseButton: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseButton.method_set_toggle_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseButton.method_set_toggle_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -376,7 +376,7 @@ open class BaseButton: Control {
     fileprivate final func is_toggle_mode() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BaseButton.method_is_toggle_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseButton.method_is_toggle_mode, handle, nil, &_result)
         return _result
     }
     
@@ -397,7 +397,7 @@ open class BaseButton: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseButton.method_set_shortcut_in_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseButton.method_set_shortcut_in_tooltip, handle, pArgs, nil)
                 }
                 
             }
@@ -422,7 +422,7 @@ open class BaseButton: Control {
     fileprivate final func is_shortcut_in_tooltip_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BaseButton.method_is_shortcut_in_tooltip_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseButton.method_is_shortcut_in_tooltip_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -443,7 +443,7 @@ open class BaseButton: Control {
         withUnsafePointer(to: disabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseButton.method_set_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseButton.method_set_disabled, handle, pArgs, nil)
                 }
                 
             }
@@ -468,7 +468,7 @@ open class BaseButton: Control {
     fileprivate final func is_disabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BaseButton.method_is_disabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseButton.method_is_disabled, handle, nil, &_result)
         return _result
     }
     
@@ -489,7 +489,7 @@ open class BaseButton: Control {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseButton.method_set_action_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseButton.method_set_action_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -514,7 +514,7 @@ open class BaseButton: Control {
     fileprivate final func get_action_mode() -> BaseButton.ActionMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseButton.method_get_action_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseButton.method_get_action_mode, handle, nil, &_result)
         return BaseButton.ActionMode (rawValue: _result)!
     }
     
@@ -535,7 +535,7 @@ open class BaseButton: Control {
         withUnsafePointer(to: mask.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseButton.method_set_button_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseButton.method_set_button_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -560,7 +560,7 @@ open class BaseButton: Control {
     fileprivate final func get_button_mask() -> MouseButtonMask {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: MouseButtonMask = MouseButtonMask ()
-        gi.object_method_bind_ptrcall(BaseButton.method_get_button_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseButton.method_get_button_mask, handle, nil, &_result)
         return _result
     }
     
@@ -579,7 +579,7 @@ open class BaseButton: Control {
     public final func getDrawMode() -> BaseButton.DrawMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseButton.method_get_draw_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseButton.method_get_draw_mode, handle, nil, &_result)
         return BaseButton.DrawMode (rawValue: _result)!
     }
     
@@ -600,7 +600,7 @@ open class BaseButton: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseButton.method_set_keep_pressed_outside, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseButton.method_set_keep_pressed_outside, handle, pArgs, nil)
                 }
                 
             }
@@ -625,7 +625,7 @@ open class BaseButton: Control {
     fileprivate final func is_keep_pressed_outside() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BaseButton.method_is_keep_pressed_outside, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseButton.method_is_keep_pressed_outside, handle, nil, &_result)
         return _result
     }
     
@@ -646,7 +646,7 @@ open class BaseButton: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseButton.method_set_shortcut_feedback, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseButton.method_set_shortcut_feedback, handle, pArgs, nil)
                 }
                 
             }
@@ -671,7 +671,7 @@ open class BaseButton: Control {
     fileprivate final func is_shortcut_feedback() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BaseButton.method_is_shortcut_feedback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseButton.method_is_shortcut_feedback, handle, nil, &_result)
         return _result
     }
     
@@ -692,7 +692,7 @@ open class BaseButton: Control {
         withUnsafePointer(to: shortcut?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseButton.method_set_shortcut, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseButton.method_set_shortcut, handle, pArgs, nil)
                 }
                 
             }
@@ -716,9 +716,9 @@ open class BaseButton: Control {
     @inline(__always)
     fileprivate final func get_shortcut() -> Shortcut? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(BaseButton.method_get_shortcut, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(BaseButton.method_get_shortcut, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_button_group: GDExtensionMethodBindPtr = {
@@ -738,7 +738,7 @@ open class BaseButton: Control {
         withUnsafePointer(to: buttonGroup?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseButton.method_set_button_group, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseButton.method_set_button_group, handle, pArgs, nil)
                 }
                 
             }
@@ -762,9 +762,9 @@ open class BaseButton: Control {
     @inline(__always)
     fileprivate final func get_button_group() -> ButtonGroup? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(BaseButton.method_get_button_group, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(BaseButton.method_get_button_group, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {

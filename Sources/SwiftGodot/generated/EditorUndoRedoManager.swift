@@ -84,7 +84,7 @@ open class EditorUndoRedoManager: Object {
                     withUnsafePointer(to: backwardUndoOps) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_create_action, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_create_action, handle, pArgs, nil)
                             }
                             
                         }
@@ -117,7 +117,7 @@ open class EditorUndoRedoManager: Object {
         withUnsafePointer(to: execute) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_commit_action, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_commit_action, handle, pArgs, nil)
                 }
                 
             }
@@ -142,7 +142,7 @@ open class EditorUndoRedoManager: Object {
     public final func isCommittingAction() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_is_committing_action, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_is_committing_action, handle, nil, &_result)
         return _result
     }
     
@@ -163,7 +163,7 @@ open class EditorUndoRedoManager: Object {
     /// 
     public final func forceFixedHistory() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_force_fixed_history, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_force_fixed_history, handle, nil, nil)
         
     }
     
@@ -192,7 +192,7 @@ open class EditorUndoRedoManager: Object {
                 if arguments.isEmpty {
                     withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                            gi.object_method_bind_call(EditorUndoRedoManager.method_add_do_method, UnsafeMutableRawPointer(mutating: handle), pArgs, 2, &_result, nil)
+                            gi.object_method_bind_call(EditorUndoRedoManager.method_add_do_method, handle, pArgs, 2, &_result, nil)
                         }
                         
                     }
@@ -220,7 +220,7 @@ open class EditorUndoRedoManager: Object {
                                 pArgsBuffer.initializeElement(at: 2 + i, to: contentsPtr + i)
                             }
                         
-                            gi.object_method_bind_call(EditorUndoRedoManager.method_add_do_method, UnsafeMutableRawPointer(mutating: handle), pArgs, Int64(2 + arguments.count), &_result, nil)
+                            gi.object_method_bind_call(EditorUndoRedoManager.method_add_do_method, handle, pArgs, Int64(2 + arguments.count), &_result, nil)
                         }                           
                     }
                     
@@ -257,7 +257,7 @@ open class EditorUndoRedoManager: Object {
                 if arguments.isEmpty {
                     withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                            gi.object_method_bind_call(EditorUndoRedoManager.method_add_undo_method, UnsafeMutableRawPointer(mutating: handle), pArgs, 2, &_result, nil)
+                            gi.object_method_bind_call(EditorUndoRedoManager.method_add_undo_method, handle, pArgs, 2, &_result, nil)
                         }
                         
                     }
@@ -285,7 +285,7 @@ open class EditorUndoRedoManager: Object {
                                 pArgsBuffer.initializeElement(at: 2 + i, to: contentsPtr + i)
                             }
                         
-                            gi.object_method_bind_call(EditorUndoRedoManager.method_add_undo_method, UnsafeMutableRawPointer(mutating: handle), pArgs, Int64(2 + arguments.count), &_result, nil)
+                            gi.object_method_bind_call(EditorUndoRedoManager.method_add_undo_method, handle, pArgs, Int64(2 + arguments.count), &_result, nil)
                         }                           
                     }
                     
@@ -319,7 +319,7 @@ open class EditorUndoRedoManager: Object {
                 withUnsafePointer(to: value.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_add_do_property, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_add_do_property, handle, pArgs, nil)
                         }
                         
                     }
@@ -355,7 +355,7 @@ open class EditorUndoRedoManager: Object {
                 withUnsafePointer(to: value.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_add_undo_property, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_add_undo_property, handle, pArgs, nil)
                         }
                         
                     }
@@ -386,7 +386,7 @@ open class EditorUndoRedoManager: Object {
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_add_do_reference, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_add_do_reference, handle, pArgs, nil)
                 }
                 
             }
@@ -413,7 +413,7 @@ open class EditorUndoRedoManager: Object {
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_add_undo_reference, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_add_undo_reference, handle, pArgs, nil)
                 }
                 
             }
@@ -441,7 +441,7 @@ open class EditorUndoRedoManager: Object {
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_get_object_history_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_get_object_history_id, handle, pArgs, &_result)
                 }
                 
             }
@@ -470,18 +470,18 @@ open class EditorUndoRedoManager: Object {
     /// 
     public final func getHistoryUndoRedo(id: Int32) -> UndoRedo? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_get_history_undo_redo, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_get_history_undo_redo, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_clear_history: GDExtensionMethodBindPtr = {
@@ -507,7 +507,7 @@ open class EditorUndoRedoManager: Object {
             withUnsafePointer(to: increaseVersion) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_clear_history, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorUndoRedoManager.method_clear_history, handle, pArgs, nil)
                     }
                     
                 }

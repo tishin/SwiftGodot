@@ -63,7 +63,7 @@ open class ShaderMaterial: Material {
         withUnsafePointer(to: shader?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShaderMaterial.method_set_shader, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShaderMaterial.method_set_shader, handle, pArgs, nil)
                 }
                 
             }
@@ -87,9 +87,9 @@ open class ShaderMaterial: Material {
     @inline(__always)
     fileprivate final func get_shader() -> Shader? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ShaderMaterial.method_get_shader, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ShaderMaterial.method_get_shader, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_shader_parameter: GDExtensionMethodBindPtr = {
@@ -115,7 +115,7 @@ open class ShaderMaterial: Material {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ShaderMaterial.method_set_shader_parameter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ShaderMaterial.method_set_shader_parameter, handle, pArgs, nil)
                     }
                     
                 }
@@ -145,7 +145,7 @@ open class ShaderMaterial: Material {
         withUnsafePointer(to: param.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShaderMaterial.method_get_shader_parameter, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ShaderMaterial.method_get_shader_parameter, handle, pArgs, &_result)
                 }
                 
             }

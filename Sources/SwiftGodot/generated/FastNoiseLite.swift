@@ -382,7 +382,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_noise_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_noise_type, handle, pArgs, nil)
                 }
                 
             }
@@ -407,7 +407,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_noise_type() -> FastNoiseLite.NoiseType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_noise_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_noise_type, handle, nil, &_result)
         return FastNoiseLite.NoiseType (rawValue: _result)!
     }
     
@@ -428,7 +428,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: seed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_seed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_seed, handle, pArgs, nil)
                 }
                 
             }
@@ -453,7 +453,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_seed() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_seed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_seed, handle, nil, &_result)
         return _result
     }
     
@@ -474,7 +474,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: freq) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_frequency, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_frequency, handle, pArgs, nil)
                 }
                 
             }
@@ -499,7 +499,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_frequency() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_frequency, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_frequency, handle, nil, &_result)
         return _result
     }
     
@@ -520,7 +520,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -545,7 +545,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_offset() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_offset, handle, nil, &_result)
         return _result
     }
     
@@ -566,7 +566,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_fractal_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_fractal_type, handle, pArgs, nil)
                 }
                 
             }
@@ -591,7 +591,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_fractal_type() -> FastNoiseLite.FractalType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_type, handle, nil, &_result)
         return FastNoiseLite.FractalType (rawValue: _result)!
     }
     
@@ -612,7 +612,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: octaveCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_fractal_octaves, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_fractal_octaves, handle, pArgs, nil)
                 }
                 
             }
@@ -637,7 +637,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_fractal_octaves() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_octaves, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_octaves, handle, nil, &_result)
         return _result
     }
     
@@ -658,7 +658,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: lacunarity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_fractal_lacunarity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_fractal_lacunarity, handle, pArgs, nil)
                 }
                 
             }
@@ -683,7 +683,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_fractal_lacunarity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_lacunarity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_lacunarity, handle, nil, &_result)
         return _result
     }
     
@@ -704,7 +704,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: gain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_fractal_gain, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_fractal_gain, handle, pArgs, nil)
                 }
                 
             }
@@ -729,7 +729,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_fractal_gain() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_gain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_gain, handle, nil, &_result)
         return _result
     }
     
@@ -750,7 +750,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: weightedStrength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_fractal_weighted_strength, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_fractal_weighted_strength, handle, pArgs, nil)
                 }
                 
             }
@@ -775,7 +775,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_fractal_weighted_strength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_weighted_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_weighted_strength, handle, nil, &_result)
         return _result
     }
     
@@ -796,7 +796,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: pingPongStrength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_fractal_ping_pong_strength, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_fractal_ping_pong_strength, handle, pArgs, nil)
                 }
                 
             }
@@ -821,7 +821,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_fractal_ping_pong_strength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_ping_pong_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_fractal_ping_pong_strength, handle, nil, &_result)
         return _result
     }
     
@@ -842,7 +842,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: `func`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_cellular_distance_function, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_cellular_distance_function, handle, pArgs, nil)
                 }
                 
             }
@@ -867,7 +867,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_cellular_distance_function() -> FastNoiseLite.CellularDistanceFunction {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_cellular_distance_function, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_cellular_distance_function, handle, nil, &_result)
         return FastNoiseLite.CellularDistanceFunction (rawValue: _result)!
     }
     
@@ -888,7 +888,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: jitter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_cellular_jitter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_cellular_jitter, handle, pArgs, nil)
                 }
                 
             }
@@ -913,7 +913,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_cellular_jitter() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_cellular_jitter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_cellular_jitter, handle, nil, &_result)
         return _result
     }
     
@@ -934,7 +934,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: ret.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_cellular_return_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_cellular_return_type, handle, pArgs, nil)
                 }
                 
             }
@@ -959,7 +959,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_cellular_return_type() -> FastNoiseLite.CellularReturnType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_cellular_return_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_cellular_return_type, handle, nil, &_result)
         return FastNoiseLite.CellularReturnType (rawValue: _result)!
     }
     
@@ -980,7 +980,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: domainWarpEnabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1005,7 +1005,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func is_domain_warp_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_is_domain_warp_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_is_domain_warp_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1026,7 +1026,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: domainWarpType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_type, handle, pArgs, nil)
                 }
                 
             }
@@ -1051,7 +1051,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_domain_warp_type() -> FastNoiseLite.DomainWarpType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_type, handle, nil, &_result)
         return FastNoiseLite.DomainWarpType (rawValue: _result)!
     }
     
@@ -1072,7 +1072,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: domainWarpAmplitude) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_amplitude, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_amplitude, handle, pArgs, nil)
                 }
                 
             }
@@ -1097,7 +1097,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_domain_warp_amplitude() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_amplitude, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_amplitude, handle, nil, &_result)
         return _result
     }
     
@@ -1118,7 +1118,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: domainWarpFrequency) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_frequency, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_frequency, handle, pArgs, nil)
                 }
                 
             }
@@ -1143,7 +1143,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_domain_warp_frequency() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_frequency, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_frequency, handle, nil, &_result)
         return _result
     }
     
@@ -1164,7 +1164,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: domainWarpFractalType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_fractal_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_fractal_type, handle, pArgs, nil)
                 }
                 
             }
@@ -1189,7 +1189,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_domain_warp_fractal_type() -> FastNoiseLite.DomainWarpFractalType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_fractal_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_fractal_type, handle, nil, &_result)
         return FastNoiseLite.DomainWarpFractalType (rawValue: _result)!
     }
     
@@ -1210,7 +1210,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: domainWarpOctaveCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_fractal_octaves, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_fractal_octaves, handle, pArgs, nil)
                 }
                 
             }
@@ -1235,7 +1235,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_domain_warp_fractal_octaves() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_fractal_octaves, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_fractal_octaves, handle, nil, &_result)
         return _result
     }
     
@@ -1256,7 +1256,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: domainWarpLacunarity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_fractal_lacunarity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_fractal_lacunarity, handle, pArgs, nil)
                 }
                 
             }
@@ -1281,7 +1281,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_domain_warp_fractal_lacunarity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_fractal_lacunarity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_fractal_lacunarity, handle, nil, &_result)
         return _result
     }
     
@@ -1302,7 +1302,7 @@ open class FastNoiseLite: Noise {
         withUnsafePointer(to: domainWarpGain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_fractal_gain, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FastNoiseLite.method_set_domain_warp_fractal_gain, handle, pArgs, nil)
                 }
                 
             }
@@ -1327,7 +1327,7 @@ open class FastNoiseLite: Noise {
     fileprivate final func get_domain_warp_fractal_gain() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_fractal_gain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FastNoiseLite.method_get_domain_warp_fractal_gain, handle, nil, &_result)
         return _result
     }
     

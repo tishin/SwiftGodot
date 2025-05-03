@@ -58,7 +58,7 @@ open class RegEx: RefCounted {
     
     /// Creates and compiles a new ``RegEx`` object. See also ``compile(pattern:showError:)``.
     public static func createFromString(pattern: String, showError: Bool = true) -> RegEx? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let pattern = GString(pattern)
         withUnsafePointer(to: pattern.content) { pArg0 in
             withUnsafePointer(to: showError) { pArg1 in
@@ -73,7 +73,7 @@ open class RegEx: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_clear: GDExtensionMethodBindPtr = {
@@ -90,7 +90,7 @@ open class RegEx: RefCounted {
     /// This method resets the state of the object, as if it was freshly created. Namely, it unassigns the regular expression of this object.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RegEx.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RegEx.method_clear, handle, nil, nil)
         
     }
     
@@ -114,7 +114,7 @@ open class RegEx: RefCounted {
             withUnsafePointer(to: showError) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RegEx.method_compile, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(RegEx.method_compile, handle, pArgs, &_result)
                     }
                     
                 }
@@ -143,14 +143,14 @@ open class RegEx: RefCounted {
     /// 
     public final func search(subject: String, offset: Int32 = 0, end: Int32 = -1) -> RegExMatch? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let subject = GString(subject)
         withUnsafePointer(to: subject.content) { pArg0 in
             withUnsafePointer(to: offset) { pArg1 in
                 withUnsafePointer(to: end) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RegEx.method_search, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(RegEx.method_search, handle, pArgs, &_result)
                         }
                         
                     }
@@ -161,7 +161,7 @@ open class RegEx: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_search_all: GDExtensionMethodBindPtr = {
@@ -188,7 +188,7 @@ open class RegEx: RefCounted {
                 withUnsafePointer(to: end) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RegEx.method_search_all, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(RegEx.method_search_all, handle, pArgs, &_result)
                         }
                         
                     }
@@ -229,7 +229,7 @@ open class RegEx: RefCounted {
                         withUnsafePointer(to: end) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(RegEx.method_sub, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                    gi.object_method_bind_ptrcall(RegEx.method_sub, handle, pArgs, &_result.content)
                                 }
                                 
                             }
@@ -262,7 +262,7 @@ open class RegEx: RefCounted {
     public final func isValid() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RegEx.method_is_valid, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RegEx.method_is_valid, handle, nil, &_result)
         return _result
     }
     
@@ -281,7 +281,7 @@ open class RegEx: RefCounted {
     public final func getPattern() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(RegEx.method_get_pattern, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RegEx.method_get_pattern, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -300,7 +300,7 @@ open class RegEx: RefCounted {
     public final func getGroupCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RegEx.method_get_group_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RegEx.method_get_group_count, handle, nil, &_result)
         return _result
     }
     
@@ -319,7 +319,7 @@ open class RegEx: RefCounted {
     public final func getNames() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(RegEx.method_get_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RegEx.method_get_names, handle, nil, &_result.content)
         return _result
     }
     

@@ -84,7 +84,7 @@ open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisibleOnScreenEnabler2D.method_set_enable_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisibleOnScreenEnabler2D.method_set_enable_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -109,7 +109,7 @@ open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
     fileprivate final func get_enable_mode() -> VisibleOnScreenEnabler2D.EnableMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisibleOnScreenEnabler2D.method_get_enable_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisibleOnScreenEnabler2D.method_get_enable_mode, handle, nil, &_result)
         return VisibleOnScreenEnabler2D.EnableMode (rawValue: _result)!
     }
     
@@ -130,7 +130,7 @@ open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisibleOnScreenEnabler2D.method_set_enable_node_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisibleOnScreenEnabler2D.method_set_enable_node_path, handle, pArgs, nil)
                 }
                 
             }
@@ -155,7 +155,7 @@ open class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
     fileprivate final func get_enable_node_path() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(VisibleOnScreenEnabler2D.method_get_enable_node_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisibleOnScreenEnabler2D.method_get_enable_node_path, handle, nil, &_result.content)
         return _result
     }
     

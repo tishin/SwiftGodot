@@ -35,7 +35,7 @@ open class TextServerManager: Object {
     /// The shared instance of this class
     public static var shared: TextServerManager {
         return withUnsafePointer(to: &TextServerManager.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -59,7 +59,7 @@ open class TextServerManager: Object {
         withUnsafePointer(to: interface?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_add_interface, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_add_interface, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -83,7 +83,7 @@ open class TextServerManager: Object {
     /// Returns the number of interfaces currently registered.
     public static func getInterfaceCount() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_interface_count, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_interface_count, shared.handle, nil, &_result)
         return _result
     }
     
@@ -103,7 +103,7 @@ open class TextServerManager: Object {
         withUnsafePointer(to: interface?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_remove_interface, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_remove_interface, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -126,18 +126,18 @@ open class TextServerManager: Object {
     
     /// Returns the interface registered at a given index.
     public static func getInterface(idx: Int32) -> TextServer? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_interface, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_interface, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_interfaces: GDExtensionMethodBindPtr = {
@@ -154,7 +154,7 @@ open class TextServerManager: Object {
     /// Returns a list of available interfaces, with the index and name of each interface.
     public static func getInterfaces() -> TypedArray<VariantDictionary> {
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(method_get_interfaces, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_interfaces, shared.handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -171,19 +171,19 @@ open class TextServerManager: Object {
     
     /// Finds an interface by its `name`.
     public static func findInterface(name: String) -> TextServer? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_find_interface, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_find_interface, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_primary_interface: GDExtensionMethodBindPtr = {
@@ -202,7 +202,7 @@ open class TextServerManager: Object {
         withUnsafePointer(to: index?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_primary_interface, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_primary_interface, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -225,9 +225,9 @@ open class TextServerManager: Object {
     
     /// Returns the primary ``TextServer`` interface currently in use.
     public static func getPrimaryInterface() -> TextServer? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(method_get_primary_interface, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(method_get_primary_interface, shared.handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

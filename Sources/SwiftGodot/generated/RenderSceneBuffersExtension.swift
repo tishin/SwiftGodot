@@ -44,7 +44,7 @@ open class RenderSceneBuffersExtension: RenderSceneBuffers {
         withUnsafePointer(to: config?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderSceneBuffersExtension.method__configure, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RenderSceneBuffersExtension.method__configure, handle, pArgs, nil)
                 }
                 
             }
@@ -72,7 +72,7 @@ open class RenderSceneBuffersExtension: RenderSceneBuffers {
         withUnsafePointer(to: fsrSharpness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderSceneBuffersExtension.method__set_fsr_sharpness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RenderSceneBuffersExtension.method__set_fsr_sharpness, handle, pArgs, nil)
                 }
                 
             }
@@ -100,7 +100,7 @@ open class RenderSceneBuffersExtension: RenderSceneBuffers {
         withUnsafePointer(to: textureMipmapBias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderSceneBuffersExtension.method__set_texture_mipmap_bias, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RenderSceneBuffersExtension.method__set_texture_mipmap_bias, handle, pArgs, nil)
                 }
                 
             }
@@ -128,7 +128,7 @@ open class RenderSceneBuffersExtension: RenderSceneBuffers {
         withUnsafePointer(to: anisotropicFilteringLevel) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderSceneBuffersExtension.method__set_anisotropic_filtering_level, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RenderSceneBuffersExtension.method__set_anisotropic_filtering_level, handle, pArgs, nil)
                 }
                 
             }
@@ -156,7 +156,7 @@ open class RenderSceneBuffersExtension: RenderSceneBuffers {
         withUnsafePointer(to: useDebanding) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderSceneBuffersExtension.method__set_use_debanding, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RenderSceneBuffersExtension.method__set_use_debanding, handle, pArgs, nil)
                 }
                 
             }
@@ -193,9 +193,9 @@ func _RenderSceneBuffersExtension_proxy_configure (instance: UnsafeMutableRawPoi
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? RenderSceneBuffersExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._configure (config: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? RenderSceneBuffersConfiguration)
+    swiftObject._configure (config: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? RenderSceneBuffersConfiguration)
 }
 
 func _RenderSceneBuffersExtension_proxy_set_anisotropic_filtering_level (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {

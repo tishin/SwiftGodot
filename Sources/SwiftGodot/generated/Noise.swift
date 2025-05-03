@@ -49,7 +49,7 @@ open class Noise: Resource {
         withUnsafePointer(to: x) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Noise.method_get_noise_1d, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Noise.method_get_noise_1d, handle, pArgs, &_result)
                 }
                 
             }
@@ -78,7 +78,7 @@ open class Noise: Resource {
             withUnsafePointer(to: y) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Noise.method_get_noise_2d, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Noise.method_get_noise_2d, handle, pArgs, &_result)
                     }
                     
                 }
@@ -108,7 +108,7 @@ open class Noise: Resource {
         withUnsafePointer(to: v) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Noise.method_get_noise_2dv, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Noise.method_get_noise_2dv, handle, pArgs, &_result)
                 }
                 
             }
@@ -138,7 +138,7 @@ open class Noise: Resource {
                 withUnsafePointer(to: z) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Noise.method_get_noise_3d, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Noise.method_get_noise_3d, handle, pArgs, &_result)
                         }
                         
                     }
@@ -170,7 +170,7 @@ open class Noise: Resource {
         withUnsafePointer(to: v) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Noise.method_get_noise_3dv, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Noise.method_get_noise_3dv, handle, pArgs, &_result)
                 }
                 
             }
@@ -197,7 +197,7 @@ open class Noise: Resource {
     /// 
     public final func getImage(width: Int32, height: Int32, invert: Bool = false, in3dSpace: Bool = false, normalize: Bool = true) -> Image? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: height) { pArg1 in
                 withUnsafePointer(to: invert) { pArg2 in
@@ -205,7 +205,7 @@ open class Noise: Resource {
                         withUnsafePointer(to: normalize) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(Noise.method_get_image, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(Noise.method_get_image, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -220,7 +220,7 @@ open class Noise: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_seamless_image: GDExtensionMethodBindPtr = {
@@ -240,7 +240,7 @@ open class Noise: Resource {
     /// 
     public final func getSeamlessImage(width: Int32, height: Int32, invert: Bool = false, in3dSpace: Bool = false, skirt: Double = 0.1, normalize: Bool = true) -> Image? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: height) { pArg1 in
                 withUnsafePointer(to: invert) { pArg2 in
@@ -249,7 +249,7 @@ open class Noise: Resource {
                             withUnsafePointer(to: normalize) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(Noise.method_get_seamless_image, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                        gi.object_method_bind_ptrcall(Noise.method_get_seamless_image, handle, pArgs, &_result)
                                     }
                                     
                                 }
@@ -266,7 +266,7 @@ open class Noise: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_image_3d: GDExtensionMethodBindPtr = {
@@ -294,7 +294,7 @@ open class Noise: Resource {
                         withUnsafePointer(to: normalize) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(Noise.method_get_image_3d, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(Noise.method_get_image_3d, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -338,7 +338,7 @@ open class Noise: Resource {
                             withUnsafePointer(to: normalize) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(Noise.method_get_seamless_image_3d, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                        gi.object_method_bind_ptrcall(Noise.method_get_seamless_image_3d, handle, pArgs, &_result)
                                     }
                                     
                                 }

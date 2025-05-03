@@ -55,7 +55,7 @@ open class MovieWriter: Object {
     open func _getAudioMixRate() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(MovieWriter.method__get_audio_mix_rate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MovieWriter.method__get_audio_mix_rate, handle, nil, &_result)
         return _result
     }
     
@@ -75,7 +75,7 @@ open class MovieWriter: Object {
     open func _getAudioSpeakerMode() -> AudioServer.SpeakerMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(MovieWriter.method__get_audio_speaker_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MovieWriter.method__get_audio_speaker_mode, handle, nil, &_result)
         return AudioServer.SpeakerMode (rawValue: _result)!
     }
     
@@ -100,7 +100,7 @@ open class MovieWriter: Object {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MovieWriter.method__handles_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MovieWriter.method__handles_file, handle, pArgs, &_result)
                 }
                 
             }
@@ -132,7 +132,7 @@ open class MovieWriter: Object {
                 withUnsafePointer(to: basePath.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(MovieWriter.method__write_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(MovieWriter.method__write_begin, handle, pArgs, &_result)
                         }
                         
                     }
@@ -166,7 +166,7 @@ open class MovieWriter: Object {
             withUnsafePointer(to: audioFrameBlock) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MovieWriter.method__write_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(MovieWriter.method__write_frame, handle, pArgs, &_result)
                     }
                     
                 }
@@ -196,7 +196,7 @@ open class MovieWriter: Object {
     @_documentation(visibility: public)
     open func _writeEnd() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(MovieWriter.method__write_end, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(MovieWriter.method__write_end, handle, nil, nil)
         
     }
     
@@ -299,9 +299,9 @@ func _MovieWriter_proxy_write_frame (instance: UnsafeMutableRawPointer?, args: U
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? MovieWriter else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._writeFrame (frameImage: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Image, audioFrameBlock: args [1]!.assumingMemoryBound (to: OpaquePointer?.self).pointee)
+    let ret = swiftObject._writeFrame (frameImage: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Image, audioFrameBlock: args [1]!.assumingMemoryBound (to: OpaquePointer?.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 

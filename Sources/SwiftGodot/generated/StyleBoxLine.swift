@@ -106,7 +106,7 @@ open class StyleBoxLine: StyleBox {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxLine.method_set_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxLine.method_set_color, handle, pArgs, nil)
                 }
                 
             }
@@ -131,7 +131,7 @@ open class StyleBoxLine: StyleBox {
     fileprivate final func get_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(StyleBoxLine.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxLine.method_get_color, handle, nil, &_result)
         return _result
     }
     
@@ -152,7 +152,7 @@ open class StyleBoxLine: StyleBox {
         withUnsafePointer(to: thickness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxLine.method_set_thickness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxLine.method_set_thickness, handle, pArgs, nil)
                 }
                 
             }
@@ -177,7 +177,7 @@ open class StyleBoxLine: StyleBox {
     fileprivate final func get_thickness() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(StyleBoxLine.method_get_thickness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxLine.method_get_thickness, handle, nil, &_result)
         return _result
     }
     
@@ -198,7 +198,7 @@ open class StyleBoxLine: StyleBox {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxLine.method_set_grow_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxLine.method_set_grow_begin, handle, pArgs, nil)
                 }
                 
             }
@@ -223,7 +223,7 @@ open class StyleBoxLine: StyleBox {
     fileprivate final func get_grow_begin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(StyleBoxLine.method_get_grow_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxLine.method_get_grow_begin, handle, nil, &_result)
         return _result
     }
     
@@ -244,7 +244,7 @@ open class StyleBoxLine: StyleBox {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxLine.method_set_grow_end, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxLine.method_set_grow_end, handle, pArgs, nil)
                 }
                 
             }
@@ -269,7 +269,7 @@ open class StyleBoxLine: StyleBox {
     fileprivate final func get_grow_end() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(StyleBoxLine.method_get_grow_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxLine.method_get_grow_end, handle, nil, &_result)
         return _result
     }
     
@@ -290,7 +290,7 @@ open class StyleBoxLine: StyleBox {
         withUnsafePointer(to: vertical) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxLine.method_set_vertical, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxLine.method_set_vertical, handle, pArgs, nil)
                 }
                 
             }
@@ -315,7 +315,7 @@ open class StyleBoxLine: StyleBox {
     fileprivate final func is_vertical() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(StyleBoxLine.method_is_vertical, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxLine.method_is_vertical, handle, nil, &_result)
         return _result
     }
     

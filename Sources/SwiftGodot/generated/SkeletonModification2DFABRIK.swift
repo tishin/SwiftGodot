@@ -79,7 +79,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         withUnsafePointer(to: targetNodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_set_target_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_set_target_node, handle, pArgs, nil)
                 }
                 
             }
@@ -104,7 +104,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     fileprivate final func get_target_node() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_get_target_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_get_target_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -125,7 +125,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_set_fabrik_data_chain_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_set_fabrik_data_chain_length, handle, pArgs, nil)
                 }
                 
             }
@@ -150,7 +150,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
     fileprivate final func get_fabrik_data_chain_length() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_get_fabrik_data_chain_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_get_fabrik_data_chain_length, handle, nil, &_result)
         return _result
     }
     
@@ -172,7 +172,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
             withUnsafePointer(to: bone2dNodepath.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_set_fabrik_joint_bone2d_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_set_fabrik_joint_bone2d_node, handle, pArgs, nil)
                     }
                     
                 }
@@ -202,7 +202,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_get_fabrik_joint_bone2d_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_get_fabrik_joint_bone2d_node, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -230,7 +230,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
             withUnsafePointer(to: boneIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_set_fabrik_joint_bone_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_set_fabrik_joint_bone_index, handle, pArgs, nil)
                     }
                     
                 }
@@ -260,7 +260,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_get_fabrik_joint_bone_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_get_fabrik_joint_bone_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -288,7 +288,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
             withUnsafePointer(to: magnetPosition) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_set_fabrik_joint_magnet_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_set_fabrik_joint_magnet_position, handle, pArgs, nil)
                     }
                     
                 }
@@ -318,7 +318,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_get_fabrik_joint_magnet_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_get_fabrik_joint_magnet_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -349,7 +349,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
             withUnsafePointer(to: useTargetRotation) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_set_fabrik_joint_use_target_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_set_fabrik_joint_use_target_rotation, handle, pArgs, nil)
                     }
                     
                 }
@@ -379,7 +379,7 @@ open class SkeletonModification2DFABRIK: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_get_fabrik_joint_use_target_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DFABRIK.method_get_fabrik_joint_use_target_rotation, handle, pArgs, &_result)
                 }
                 
             }

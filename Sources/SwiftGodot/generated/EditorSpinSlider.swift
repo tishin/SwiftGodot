@@ -131,7 +131,7 @@ open class EditorSpinSlider: Range {
         withUnsafePointer(to: label.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSpinSlider.method_set_label, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorSpinSlider.method_set_label, handle, pArgs, nil)
                 }
                 
             }
@@ -156,7 +156,7 @@ open class EditorSpinSlider: Range {
     fileprivate final func get_label() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorSpinSlider.method_get_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorSpinSlider.method_get_label, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -178,7 +178,7 @@ open class EditorSpinSlider: Range {
         withUnsafePointer(to: suffix.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSpinSlider.method_set_suffix, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorSpinSlider.method_set_suffix, handle, pArgs, nil)
                 }
                 
             }
@@ -203,7 +203,7 @@ open class EditorSpinSlider: Range {
     fileprivate final func get_suffix() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorSpinSlider.method_get_suffix, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorSpinSlider.method_get_suffix, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -224,7 +224,7 @@ open class EditorSpinSlider: Range {
         withUnsafePointer(to: readOnly) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSpinSlider.method_set_read_only, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorSpinSlider.method_set_read_only, handle, pArgs, nil)
                 }
                 
             }
@@ -249,7 +249,7 @@ open class EditorSpinSlider: Range {
     fileprivate final func is_read_only() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorSpinSlider.method_is_read_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorSpinSlider.method_is_read_only, handle, nil, &_result)
         return _result
     }
     
@@ -270,7 +270,7 @@ open class EditorSpinSlider: Range {
         withUnsafePointer(to: flat) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSpinSlider.method_set_flat, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorSpinSlider.method_set_flat, handle, pArgs, nil)
                 }
                 
             }
@@ -295,7 +295,7 @@ open class EditorSpinSlider: Range {
     fileprivate final func is_flat() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorSpinSlider.method_is_flat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorSpinSlider.method_is_flat, handle, nil, &_result)
         return _result
     }
     
@@ -316,7 +316,7 @@ open class EditorSpinSlider: Range {
         withUnsafePointer(to: hideSlider) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSpinSlider.method_set_hide_slider, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorSpinSlider.method_set_hide_slider, handle, pArgs, nil)
                 }
                 
             }
@@ -341,7 +341,7 @@ open class EditorSpinSlider: Range {
     fileprivate final func is_hiding_slider() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorSpinSlider.method_is_hiding_slider, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorSpinSlider.method_is_hiding_slider, handle, nil, &_result)
         return _result
     }
     
@@ -362,7 +362,7 @@ open class EditorSpinSlider: Range {
         withUnsafePointer(to: editingInteger) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSpinSlider.method_set_editing_integer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorSpinSlider.method_set_editing_integer, handle, pArgs, nil)
                 }
                 
             }
@@ -387,7 +387,7 @@ open class EditorSpinSlider: Range {
     fileprivate final func is_editing_integer() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorSpinSlider.method_is_editing_integer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorSpinSlider.method_is_editing_integer, handle, nil, &_result)
         return _result
     }
     

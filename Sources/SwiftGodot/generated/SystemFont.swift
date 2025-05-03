@@ -247,7 +247,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: antialiasing.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_antialiasing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_antialiasing, handle, pArgs, nil)
                 }
                 
             }
@@ -272,7 +272,7 @@ open class SystemFont: Font {
     fileprivate final func get_antialiasing() -> TextServer.FontAntialiasing {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SystemFont.method_get_antialiasing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SystemFont.method_get_antialiasing, handle, nil, &_result)
         return TextServer.FontAntialiasing (rawValue: _result)!
     }
     
@@ -293,7 +293,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: disableEmbeddedBitmaps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_disable_embedded_bitmaps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_disable_embedded_bitmaps, handle, pArgs, nil)
                 }
                 
             }
@@ -318,7 +318,7 @@ open class SystemFont: Font {
     fileprivate final func get_disable_embedded_bitmaps() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SystemFont.method_get_disable_embedded_bitmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SystemFont.method_get_disable_embedded_bitmaps, handle, nil, &_result)
         return _result
     }
     
@@ -339,7 +339,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: generateMipmaps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_generate_mipmaps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_generate_mipmaps, handle, pArgs, nil)
                 }
                 
             }
@@ -364,7 +364,7 @@ open class SystemFont: Font {
     fileprivate final func get_generate_mipmaps() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SystemFont.method_get_generate_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SystemFont.method_get_generate_mipmaps, handle, nil, &_result)
         return _result
     }
     
@@ -385,7 +385,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: allowSystemFallback) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_allow_system_fallback, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_allow_system_fallback, handle, pArgs, nil)
                 }
                 
             }
@@ -410,7 +410,7 @@ open class SystemFont: Font {
     fileprivate final func is_allow_system_fallback() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SystemFont.method_is_allow_system_fallback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SystemFont.method_is_allow_system_fallback, handle, nil, &_result)
         return _result
     }
     
@@ -431,7 +431,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: forceAutohinter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_force_autohinter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_force_autohinter, handle, pArgs, nil)
                 }
                 
             }
@@ -456,7 +456,7 @@ open class SystemFont: Font {
     fileprivate final func is_force_autohinter() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SystemFont.method_is_force_autohinter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SystemFont.method_is_force_autohinter, handle, nil, &_result)
         return _result
     }
     
@@ -477,7 +477,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: hinting.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_hinting, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_hinting, handle, pArgs, nil)
                 }
                 
             }
@@ -502,7 +502,7 @@ open class SystemFont: Font {
     fileprivate final func get_hinting() -> TextServer.Hinting {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SystemFont.method_get_hinting, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SystemFont.method_get_hinting, handle, nil, &_result)
         return TextServer.Hinting (rawValue: _result)!
     }
     
@@ -523,7 +523,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: subpixelPositioning.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_subpixel_positioning, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_subpixel_positioning, handle, pArgs, nil)
                 }
                 
             }
@@ -548,7 +548,7 @@ open class SystemFont: Font {
     fileprivate final func get_subpixel_positioning() -> TextServer.SubpixelPositioning {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SystemFont.method_get_subpixel_positioning, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SystemFont.method_get_subpixel_positioning, handle, nil, &_result)
         return TextServer.SubpixelPositioning (rawValue: _result)!
     }
     
@@ -569,7 +569,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: keepRoundingRemainders) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_keep_rounding_remainders, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_keep_rounding_remainders, handle, pArgs, nil)
                 }
                 
             }
@@ -594,7 +594,7 @@ open class SystemFont: Font {
     fileprivate final func get_keep_rounding_remainders() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SystemFont.method_get_keep_rounding_remainders, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SystemFont.method_get_keep_rounding_remainders, handle, nil, &_result)
         return _result
     }
     
@@ -615,7 +615,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: msdf) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_multichannel_signed_distance_field, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_multichannel_signed_distance_field, handle, pArgs, nil)
                 }
                 
             }
@@ -640,7 +640,7 @@ open class SystemFont: Font {
     fileprivate final func is_multichannel_signed_distance_field() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SystemFont.method_is_multichannel_signed_distance_field, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SystemFont.method_is_multichannel_signed_distance_field, handle, nil, &_result)
         return _result
     }
     
@@ -661,7 +661,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: msdfPixelRange) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_msdf_pixel_range, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_msdf_pixel_range, handle, pArgs, nil)
                 }
                 
             }
@@ -686,7 +686,7 @@ open class SystemFont: Font {
     fileprivate final func get_msdf_pixel_range() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SystemFont.method_get_msdf_pixel_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SystemFont.method_get_msdf_pixel_range, handle, nil, &_result)
         return _result
     }
     
@@ -707,7 +707,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: msdfSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_msdf_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_msdf_size, handle, pArgs, nil)
                 }
                 
             }
@@ -732,7 +732,7 @@ open class SystemFont: Font {
     fileprivate final func get_msdf_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SystemFont.method_get_msdf_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SystemFont.method_get_msdf_size, handle, nil, &_result)
         return _result
     }
     
@@ -753,7 +753,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: oversampling) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_oversampling, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_oversampling, handle, pArgs, nil)
                 }
                 
             }
@@ -778,7 +778,7 @@ open class SystemFont: Font {
     fileprivate final func get_oversampling() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SystemFont.method_get_oversampling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SystemFont.method_get_oversampling, handle, nil, &_result)
         return _result
     }
     
@@ -797,7 +797,7 @@ open class SystemFont: Font {
     fileprivate final func get_font_names() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(SystemFont.method_get_font_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SystemFont.method_get_font_names, handle, nil, &_result.content)
         return _result
     }
     
@@ -818,7 +818,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: names.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_font_names, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_font_names, handle, pArgs, nil)
                 }
                 
             }
@@ -843,7 +843,7 @@ open class SystemFont: Font {
     fileprivate final func get_font_italic() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SystemFont.method_get_font_italic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SystemFont.method_get_font_italic, handle, nil, &_result)
         return _result
     }
     
@@ -864,7 +864,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: italic) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_font_italic, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_font_italic, handle, pArgs, nil)
                 }
                 
             }
@@ -891,7 +891,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: weight) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_font_weight, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_font_weight, handle, pArgs, nil)
                 }
                 
             }
@@ -918,7 +918,7 @@ open class SystemFont: Font {
         withUnsafePointer(to: stretch) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SystemFont.method_set_font_stretch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SystemFont.method_set_font_stretch, handle, pArgs, nil)
                 }
                 
             }

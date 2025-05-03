@@ -139,7 +139,7 @@ open class SubViewport: Viewport {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SubViewport.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SubViewport.method_set_size, handle, pArgs, nil)
                 }
                 
             }
@@ -164,7 +164,7 @@ open class SubViewport: Viewport {
     fileprivate final func get_size() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(SubViewport.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SubViewport.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -185,7 +185,7 @@ open class SubViewport: Viewport {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SubViewport.method_set_size_2d_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SubViewport.method_set_size_2d_override, handle, pArgs, nil)
                 }
                 
             }
@@ -210,7 +210,7 @@ open class SubViewport: Viewport {
     fileprivate final func get_size_2d_override() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(SubViewport.method_get_size_2d_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SubViewport.method_get_size_2d_override, handle, nil, &_result)
         return _result
     }
     
@@ -231,7 +231,7 @@ open class SubViewport: Viewport {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SubViewport.method_set_size_2d_override_stretch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SubViewport.method_set_size_2d_override_stretch, handle, pArgs, nil)
                 }
                 
             }
@@ -256,7 +256,7 @@ open class SubViewport: Viewport {
     fileprivate final func is_size_2d_override_stretch_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SubViewport.method_is_size_2d_override_stretch_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SubViewport.method_is_size_2d_override_stretch_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -277,7 +277,7 @@ open class SubViewport: Viewport {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SubViewport.method_set_update_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SubViewport.method_set_update_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -302,7 +302,7 @@ open class SubViewport: Viewport {
     fileprivate final func get_update_mode() -> SubViewport.UpdateMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SubViewport.method_get_update_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SubViewport.method_get_update_mode, handle, nil, &_result)
         return SubViewport.UpdateMode (rawValue: _result)!
     }
     
@@ -323,7 +323,7 @@ open class SubViewport: Viewport {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SubViewport.method_set_clear_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SubViewport.method_set_clear_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -348,7 +348,7 @@ open class SubViewport: Viewport {
     fileprivate final func get_clear_mode() -> SubViewport.ClearMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SubViewport.method_get_clear_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SubViewport.method_get_clear_mode, handle, nil, &_result)
         return SubViewport.ClearMode (rawValue: _result)!
     }
     

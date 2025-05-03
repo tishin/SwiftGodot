@@ -45,7 +45,7 @@ open class ImageFormatLoaderExtension: ImageFormatLoader {
     open func _getRecognizedExtensions() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(ImageFormatLoaderExtension.method__get_recognized_extensions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ImageFormatLoaderExtension.method__get_recognized_extensions, handle, nil, &_result.content)
         return _result
     }
     
@@ -71,7 +71,7 @@ open class ImageFormatLoaderExtension: ImageFormatLoader {
                     withUnsafePointer(to: scale) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(ImageFormatLoaderExtension.method__load_image, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(ImageFormatLoaderExtension.method__load_image, handle, pArgs, &_result)
                             }
                             
                         }
@@ -101,7 +101,7 @@ open class ImageFormatLoaderExtension: ImageFormatLoader {
     /// Add this format loader to the engine, allowing it to recognize the file extensions returned by ``_getRecognizedExtensions()``.
     public final func addFormatLoader() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ImageFormatLoaderExtension.method_add_format_loader, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ImageFormatLoaderExtension.method_add_format_loader, handle, nil, nil)
         
     }
     
@@ -119,7 +119,7 @@ open class ImageFormatLoaderExtension: ImageFormatLoader {
     /// Remove this format loader from the engine.
     public final func removeFormatLoader() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ImageFormatLoaderExtension.method_remove_format_loader, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ImageFormatLoaderExtension.method_remove_format_loader, handle, nil, nil)
         
     }
     
@@ -153,10 +153,10 @@ func _ImageFormatLoaderExtension_proxy_load_image (instance: UnsafeMutableRawPoi
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? ImageFormatLoaderExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._loadImage (resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Image, fileaccess: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? FileAccess, flags: args [2]!.assumingMemoryBound (to: ImageFormatLoader.LoaderFlags.self).pointee, scale: args [3]!.assumingMemoryBound (to: Double.self).pointee)
+    let ret = swiftObject._loadImage (resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Image, fileaccess: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? FileAccess, flags: args [2]!.assumingMemoryBound (to: ImageFormatLoader.LoaderFlags.self).pointee, scale: args [3]!.assumingMemoryBound (to: Double.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 

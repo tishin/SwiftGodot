@@ -114,7 +114,7 @@ open class RDFramebufferPass: RefCounted {
         withUnsafePointer(to: pMember.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDFramebufferPass.method_set_color_attachments, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDFramebufferPass.method_set_color_attachments, handle, pArgs, nil)
                 }
                 
             }
@@ -139,7 +139,7 @@ open class RDFramebufferPass: RefCounted {
     fileprivate final func get_color_attachments() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_color_attachments, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_color_attachments, handle, nil, &_result.content)
         return _result
     }
     
@@ -160,7 +160,7 @@ open class RDFramebufferPass: RefCounted {
         withUnsafePointer(to: pMember.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDFramebufferPass.method_set_input_attachments, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDFramebufferPass.method_set_input_attachments, handle, pArgs, nil)
                 }
                 
             }
@@ -185,7 +185,7 @@ open class RDFramebufferPass: RefCounted {
     fileprivate final func get_input_attachments() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_input_attachments, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_input_attachments, handle, nil, &_result.content)
         return _result
     }
     
@@ -206,7 +206,7 @@ open class RDFramebufferPass: RefCounted {
         withUnsafePointer(to: pMember.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDFramebufferPass.method_set_resolve_attachments, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDFramebufferPass.method_set_resolve_attachments, handle, pArgs, nil)
                 }
                 
             }
@@ -231,7 +231,7 @@ open class RDFramebufferPass: RefCounted {
     fileprivate final func get_resolve_attachments() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_resolve_attachments, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_resolve_attachments, handle, nil, &_result.content)
         return _result
     }
     
@@ -252,7 +252,7 @@ open class RDFramebufferPass: RefCounted {
         withUnsafePointer(to: pMember.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDFramebufferPass.method_set_preserve_attachments, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDFramebufferPass.method_set_preserve_attachments, handle, pArgs, nil)
                 }
                 
             }
@@ -277,7 +277,7 @@ open class RDFramebufferPass: RefCounted {
     fileprivate final func get_preserve_attachments() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_preserve_attachments, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_preserve_attachments, handle, nil, &_result.content)
         return _result
     }
     
@@ -298,7 +298,7 @@ open class RDFramebufferPass: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDFramebufferPass.method_set_depth_attachment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDFramebufferPass.method_set_depth_attachment, handle, pArgs, nil)
                 }
                 
             }
@@ -323,7 +323,7 @@ open class RDFramebufferPass: RefCounted {
     fileprivate final func get_depth_attachment() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_depth_attachment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDFramebufferPass.method_get_depth_attachment, handle, nil, &_result)
         return _result
     }
     

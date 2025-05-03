@@ -91,7 +91,7 @@ open class OccluderPolygon2D: Resource {
         withUnsafePointer(to: closed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OccluderPolygon2D.method_set_closed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OccluderPolygon2D.method_set_closed, handle, pArgs, nil)
                 }
                 
             }
@@ -116,7 +116,7 @@ open class OccluderPolygon2D: Resource {
     fileprivate final func is_closed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OccluderPolygon2D.method_is_closed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OccluderPolygon2D.method_is_closed, handle, nil, &_result)
         return _result
     }
     
@@ -137,7 +137,7 @@ open class OccluderPolygon2D: Resource {
         withUnsafePointer(to: cullMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OccluderPolygon2D.method_set_cull_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OccluderPolygon2D.method_set_cull_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -162,7 +162,7 @@ open class OccluderPolygon2D: Resource {
     fileprivate final func get_cull_mode() -> OccluderPolygon2D.CullMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(OccluderPolygon2D.method_get_cull_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OccluderPolygon2D.method_get_cull_mode, handle, nil, &_result)
         return OccluderPolygon2D.CullMode (rawValue: _result)!
     }
     
@@ -183,7 +183,7 @@ open class OccluderPolygon2D: Resource {
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OccluderPolygon2D.method_set_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OccluderPolygon2D.method_set_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -208,7 +208,7 @@ open class OccluderPolygon2D: Resource {
     fileprivate final func get_polygon() -> PackedVector2Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
-        gi.object_method_bind_ptrcall(OccluderPolygon2D.method_get_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OccluderPolygon2D.method_get_polygon, handle, nil, &_result.content)
         return _result
     }
     

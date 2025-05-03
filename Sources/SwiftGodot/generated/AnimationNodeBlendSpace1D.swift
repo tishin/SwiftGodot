@@ -137,7 +137,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
                 withUnsafePointer(to: atIndex) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_add_blend_point, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_add_blend_point, handle, pArgs, nil)
                         }
                         
                     }
@@ -169,7 +169,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
             withUnsafePointer(to: pos) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_blend_point_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_blend_point_position, handle, pArgs, nil)
                     }
                     
                 }
@@ -199,7 +199,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_blend_point_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_blend_point_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -227,7 +227,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
             withUnsafePointer(to: node?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_blend_point_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_blend_point_node, handle, pArgs, nil)
                     }
                     
                 }
@@ -253,18 +253,18 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     /// Returns the ``AnimationNode`` referenced by the point at index `point`.
     public final func getBlendPointNode(point: Int32) -> AnimationRootNode? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_blend_point_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_blend_point_node, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_remove_blend_point: GDExtensionMethodBindPtr = {
@@ -284,7 +284,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_remove_blend_point, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_remove_blend_point, handle, pArgs, nil)
                 }
                 
             }
@@ -309,7 +309,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     public final func getBlendPointCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_blend_point_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_blend_point_count, handle, nil, &_result)
         return _result
     }
     
@@ -330,7 +330,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         withUnsafePointer(to: minSpace) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_min_space, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_min_space, handle, pArgs, nil)
                 }
                 
             }
@@ -355,7 +355,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     fileprivate final func get_min_space() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_min_space, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_min_space, handle, nil, &_result)
         return _result
     }
     
@@ -376,7 +376,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         withUnsafePointer(to: maxSpace) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_max_space, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_max_space, handle, pArgs, nil)
                 }
                 
             }
@@ -401,7 +401,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     fileprivate final func get_max_space() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_max_space, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_max_space, handle, nil, &_result)
         return _result
     }
     
@@ -422,7 +422,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         withUnsafePointer(to: snap) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_snap, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_snap, handle, pArgs, nil)
                 }
                 
             }
@@ -447,7 +447,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     fileprivate final func get_snap() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_snap, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_snap, handle, nil, &_result)
         return _result
     }
     
@@ -469,7 +469,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_value_label, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_value_label, handle, pArgs, nil)
                 }
                 
             }
@@ -494,7 +494,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     fileprivate final func get_value_label() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_value_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_value_label, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -515,7 +515,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_blend_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_blend_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -540,7 +540,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     fileprivate final func get_blend_mode() -> AnimationNodeBlendSpace1D.BlendMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_blend_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_get_blend_mode, handle, nil, &_result)
         return AnimationNodeBlendSpace1D.BlendMode (rawValue: _result)!
     }
     
@@ -561,7 +561,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_use_sync, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_set_use_sync, handle, pArgs, nil)
                 }
                 
             }
@@ -586,7 +586,7 @@ open class AnimationNodeBlendSpace1D: AnimationRootNode {
     fileprivate final func is_using_sync() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_is_using_sync, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeBlendSpace1D.method_is_using_sync, handle, nil, &_result)
         return _result
     }
     

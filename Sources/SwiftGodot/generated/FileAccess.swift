@@ -154,7 +154,7 @@ open class FileAccess: RefCounted {
     /// Returns `null` if opening the file failed. You can use ``getOpenError()`` to check the error that occurred.
     /// 
     public static func open(path: String, flags: FileAccess.ModeFlags) -> FileAccess? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: flags.rawValue) { pArg1 in
@@ -169,7 +169,7 @@ open class FileAccess: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_open_encrypted: GDExtensionMethodBindPtr = {
@@ -190,7 +190,7 @@ open class FileAccess: RefCounted {
     /// Returns `null` if opening the file failed. You can use ``getOpenError()`` to check the error that occurred.
     /// 
     public static func openEncrypted(path: String, modeFlags: FileAccess.ModeFlags, key: PackedByteArray, iv: PackedByteArray = PackedByteArray()) -> FileAccess? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: modeFlags.rawValue) { pArg1 in
@@ -211,7 +211,7 @@ open class FileAccess: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_open_encrypted_with_pass: GDExtensionMethodBindPtr = {
@@ -230,7 +230,7 @@ open class FileAccess: RefCounted {
     /// Returns `null` if opening the file failed. You can use ``getOpenError()`` to check the error that occurred.
     /// 
     public static func openEncryptedWithPass(path: String, modeFlags: FileAccess.ModeFlags, pass: String) -> FileAccess? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: modeFlags.rawValue) { pArg1 in
@@ -249,7 +249,7 @@ open class FileAccess: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_open_compressed: GDExtensionMethodBindPtr = {
@@ -270,7 +270,7 @@ open class FileAccess: RefCounted {
     /// Returns `null` if opening the file failed. You can use ``getOpenError()`` to check the error that occurred.
     /// 
     public static func openCompressed(path: String, modeFlags: FileAccess.ModeFlags, compressionMode: FileAccess.CompressionMode = .fastlz) -> FileAccess? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: modeFlags.rawValue) { pArg1 in
@@ -288,7 +288,7 @@ open class FileAccess: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_open_error: GDExtensionMethodBindPtr = {
@@ -331,7 +331,7 @@ open class FileAccess: RefCounted {
     /// Returns `null` if opening the file failed. You can use ``getOpenError()`` to check the error that occurred.
     /// 
     public static func createTemp(modeFlags: Int32, prefix: String = "", `extension`: String = "", keep: Bool = false) -> FileAccess? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: modeFlags) { pArg0 in
             let prefix = GString(prefix)
             withUnsafePointer(to: prefix.content) { pArg1 in
@@ -353,7 +353,7 @@ open class FileAccess: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_file_as_bytes: GDExtensionMethodBindPtr = {
@@ -436,7 +436,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_resize, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileAccess.method_resize, handle, pArgs, &_result)
                 }
                 
             }
@@ -463,7 +463,7 @@ open class FileAccess: RefCounted {
     /// 
     public final func flush() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(FileAccess.method_flush, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(FileAccess.method_flush, handle, nil, nil)
         
     }
     
@@ -482,7 +482,7 @@ open class FileAccess: RefCounted {
     public final func getPath() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(FileAccess.method_get_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_path, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -501,7 +501,7 @@ open class FileAccess: RefCounted {
     public final func getPathAbsolute() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(FileAccess.method_get_path_absolute, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_path_absolute, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -520,7 +520,7 @@ open class FileAccess: RefCounted {
     public final func isOpen() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FileAccess.method_is_open, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileAccess.method_is_open, handle, nil, &_result)
         return _result
     }
     
@@ -541,7 +541,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_seek, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileAccess.method_seek, handle, pArgs, nil)
                 }
                 
             }
@@ -571,7 +571,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_seek_end, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileAccess.method_seek_end, handle, pArgs, nil)
                 }
                 
             }
@@ -596,7 +596,7 @@ open class FileAccess: RefCounted {
     public final func getPosition() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(FileAccess.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_position, handle, nil, &_result)
         return _result
     }
     
@@ -615,7 +615,7 @@ open class FileAccess: RefCounted {
     public final func getLength() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(FileAccess.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_length, handle, nil, &_result)
         return _result
     }
     
@@ -637,7 +637,7 @@ open class FileAccess: RefCounted {
     public final func eofReached() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FileAccess.method_eof_reached, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileAccess.method_eof_reached, handle, nil, &_result)
         return _result
     }
     
@@ -656,7 +656,7 @@ open class FileAccess: RefCounted {
     public final func get8() -> UInt8 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt8 = 0
-        gi.object_method_bind_ptrcall(FileAccess.method_get_8, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_8, handle, nil, &_result)
         return _result
     }
     
@@ -675,7 +675,7 @@ open class FileAccess: RefCounted {
     public final func get16() -> UInt16 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt16 = 0
-        gi.object_method_bind_ptrcall(FileAccess.method_get_16, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_16, handle, nil, &_result)
         return _result
     }
     
@@ -694,7 +694,7 @@ open class FileAccess: RefCounted {
     public final func get32() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(FileAccess.method_get_32, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_32, handle, nil, &_result)
         return _result
     }
     
@@ -713,7 +713,7 @@ open class FileAccess: RefCounted {
     public final func get64() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(FileAccess.method_get_64, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_64, handle, nil, &_result)
         return _result
     }
     
@@ -732,7 +732,7 @@ open class FileAccess: RefCounted {
     public final func getHalf() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FileAccess.method_get_half, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_half, handle, nil, &_result)
         return _result
     }
     
@@ -751,7 +751,7 @@ open class FileAccess: RefCounted {
     public final func getFloat() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FileAccess.method_get_float, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_float, handle, nil, &_result)
         return _result
     }
     
@@ -770,7 +770,7 @@ open class FileAccess: RefCounted {
     public final func getDouble() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FileAccess.method_get_double, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_double, handle, nil, &_result)
         return _result
     }
     
@@ -789,7 +789,7 @@ open class FileAccess: RefCounted {
     public final func getReal() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FileAccess.method_get_real, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_real, handle, nil, &_result)
         return _result
     }
     
@@ -811,7 +811,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_get_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(FileAccess.method_get_buffer, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -839,7 +839,7 @@ open class FileAccess: RefCounted {
     public final func getLine() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(FileAccess.method_get_line, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_line, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -869,7 +869,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: delim.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_get_csv_line, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(FileAccess.method_get_csv_line, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -900,7 +900,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: skipCr) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_get_as_text, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(FileAccess.method_get_as_text, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -981,7 +981,7 @@ open class FileAccess: RefCounted {
     fileprivate final func is_big_endian() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FileAccess.method_is_big_endian, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileAccess.method_is_big_endian, handle, nil, &_result)
         return _result
     }
     
@@ -1002,7 +1002,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: bigEndian) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_set_big_endian, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileAccess.method_set_big_endian, handle, pArgs, nil)
                 }
                 
             }
@@ -1027,7 +1027,7 @@ open class FileAccess: RefCounted {
     public final func getError() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FileAccess.method_get_error, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_error, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -1054,7 +1054,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: allowObjects) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_get_var, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileAccess.method_get_var, handle, pArgs, &_result)
                 }
                 
             }
@@ -1089,7 +1089,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_8, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_8, handle, pArgs, &_result)
                 }
                 
             }
@@ -1124,7 +1124,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_16, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_16, handle, pArgs, &_result)
                 }
                 
             }
@@ -1159,7 +1159,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_32, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_32, handle, pArgs, &_result)
                 }
                 
             }
@@ -1192,7 +1192,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_64, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_64, handle, pArgs, &_result)
                 }
                 
             }
@@ -1220,7 +1220,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_half, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_half, handle, pArgs, &_result)
                 }
                 
             }
@@ -1251,7 +1251,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_float, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_float, handle, pArgs, &_result)
                 }
                 
             }
@@ -1282,7 +1282,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_double, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_double, handle, pArgs, &_result)
                 }
                 
             }
@@ -1313,7 +1313,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_real, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_real, handle, pArgs, &_result)
                 }
                 
             }
@@ -1344,7 +1344,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_buffer, handle, pArgs, &_result)
                 }
                 
             }
@@ -1376,7 +1376,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: line.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_line, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_line, handle, pArgs, &_result)
                 }
                 
             }
@@ -1411,7 +1411,7 @@ open class FileAccess: RefCounted {
             withUnsafePointer(to: delim.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FileAccess.method_store_csv_line, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(FileAccess.method_store_csv_line, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1447,7 +1447,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: string.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_string, handle, pArgs, &_result)
                 }
                 
             }
@@ -1483,7 +1483,7 @@ open class FileAccess: RefCounted {
             withUnsafePointer(to: fullObjects) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FileAccess.method_store_var, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(FileAccess.method_store_var, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1519,7 +1519,7 @@ open class FileAccess: RefCounted {
         withUnsafePointer(to: string.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileAccess.method_store_pascal_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileAccess.method_store_pascal_string, handle, pArgs, &_result)
                 }
                 
             }
@@ -1547,7 +1547,7 @@ open class FileAccess: RefCounted {
     public final func getPascalString() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(FileAccess.method_get_pascal_string, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FileAccess.method_get_pascal_string, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1568,7 +1568,7 @@ open class FileAccess: RefCounted {
     /// 
     public final func close() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(FileAccess.method_close, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(FileAccess.method_close, handle, nil, nil)
         
     }
     

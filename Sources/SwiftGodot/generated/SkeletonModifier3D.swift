@@ -99,7 +99,7 @@ open class SkeletonModifier3D: Node3D {
     @_documentation(visibility: public)
     open func _processModification() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SkeletonModifier3D.method__process_modification, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SkeletonModifier3D.method__process_modification, handle, nil, nil)
         
     }
     
@@ -117,9 +117,9 @@ open class SkeletonModifier3D: Node3D {
     /// Get parent ``Skeleton3D`` node if found.
     public final func getSkeleton() -> Skeleton3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(SkeletonModifier3D.method_get_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(SkeletonModifier3D.method_get_skeleton, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_active: GDExtensionMethodBindPtr = {
@@ -139,7 +139,7 @@ open class SkeletonModifier3D: Node3D {
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModifier3D.method_set_active, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModifier3D.method_set_active, handle, pArgs, nil)
                 }
                 
             }
@@ -164,7 +164,7 @@ open class SkeletonModifier3D: Node3D {
     fileprivate final func is_active() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SkeletonModifier3D.method_is_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModifier3D.method_is_active, handle, nil, &_result)
         return _result
     }
     
@@ -185,7 +185,7 @@ open class SkeletonModifier3D: Node3D {
         withUnsafePointer(to: influence) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModifier3D.method_set_influence, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModifier3D.method_set_influence, handle, pArgs, nil)
                 }
                 
             }
@@ -210,7 +210,7 @@ open class SkeletonModifier3D: Node3D {
     fileprivate final func get_influence() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SkeletonModifier3D.method_get_influence, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModifier3D.method_get_influence, handle, nil, &_result)
         return _result
     }
     

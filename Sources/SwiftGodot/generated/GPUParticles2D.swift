@@ -422,7 +422,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: emitting) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_emitting, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_emitting, handle, pArgs, nil)
                 }
                 
             }
@@ -449,7 +449,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_amount, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_amount, handle, pArgs, nil)
                 }
                 
             }
@@ -476,7 +476,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: secs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_lifetime, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_lifetime, handle, pArgs, nil)
                 }
                 
             }
@@ -503,7 +503,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: secs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_one_shot, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_one_shot, handle, pArgs, nil)
                 }
                 
             }
@@ -530,7 +530,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: secs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_pre_process_time, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_pre_process_time, handle, pArgs, nil)
                 }
                 
             }
@@ -557,7 +557,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_explosiveness_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_explosiveness_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -584,7 +584,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_randomness_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_randomness_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -611,7 +611,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: visibilityRect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_visibility_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_visibility_rect, handle, pArgs, nil)
                 }
                 
             }
@@ -638,7 +638,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_use_local_coordinates, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_use_local_coordinates, handle, pArgs, nil)
                 }
                 
             }
@@ -665,7 +665,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: fps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_fixed_fps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_fixed_fps, handle, pArgs, nil)
                 }
                 
             }
@@ -692,7 +692,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_fractional_delta, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_fractional_delta, handle, pArgs, nil)
                 }
                 
             }
@@ -719,7 +719,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_interpolate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_interpolate, handle, pArgs, nil)
                 }
                 
             }
@@ -746,7 +746,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_process_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_process_material, handle, pArgs, nil)
                 }
                 
             }
@@ -773,7 +773,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_speed_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_speed_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -800,7 +800,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_collision_base_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_collision_base_size, handle, pArgs, nil)
                 }
                 
             }
@@ -827,7 +827,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: interp) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_interp_to_end, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_interp_to_end, handle, pArgs, nil)
                 }
                 
             }
@@ -857,7 +857,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: processTime) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_request_particles_process, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_request_particles_process, handle, pArgs, nil)
                 }
                 
             }
@@ -882,7 +882,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func is_emitting() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_is_emitting, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_is_emitting, handle, nil, &_result)
         return _result
     }
     
@@ -901,7 +901,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_amount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_amount, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_amount, handle, nil, &_result)
         return _result
     }
     
@@ -920,7 +920,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_lifetime() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_lifetime, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_lifetime, handle, nil, &_result)
         return _result
     }
     
@@ -939,7 +939,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_one_shot() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_one_shot, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_one_shot, handle, nil, &_result)
         return _result
     }
     
@@ -958,7 +958,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_pre_process_time() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_pre_process_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_pre_process_time, handle, nil, &_result)
         return _result
     }
     
@@ -977,7 +977,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_explosiveness_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_explosiveness_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_explosiveness_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -996,7 +996,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_randomness_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_randomness_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_randomness_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -1015,7 +1015,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_visibility_rect() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_visibility_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_visibility_rect, handle, nil, &_result)
         return _result
     }
     
@@ -1034,7 +1034,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_use_local_coordinates() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_use_local_coordinates, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_use_local_coordinates, handle, nil, &_result)
         return _result
     }
     
@@ -1053,7 +1053,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_fixed_fps() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_fixed_fps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_fixed_fps, handle, nil, &_result)
         return _result
     }
     
@@ -1072,7 +1072,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_fractional_delta() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_fractional_delta, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_fractional_delta, handle, nil, &_result)
         return _result
     }
     
@@ -1091,7 +1091,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_interpolate() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_interpolate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_interpolate, handle, nil, &_result)
         return _result
     }
     
@@ -1109,9 +1109,9 @@ open class GPUParticles2D: Node2D {
     @inline(__always)
     fileprivate final func get_process_material() -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_process_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_process_material, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_speed_scale: GDExtensionMethodBindPtr = {
@@ -1129,7 +1129,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_speed_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_speed_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_speed_scale, handle, nil, &_result)
         return _result
     }
     
@@ -1148,7 +1148,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_collision_base_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_collision_base_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_collision_base_size, handle, nil, &_result)
         return _result
     }
     
@@ -1167,7 +1167,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_interp_to_end() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_interp_to_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_interp_to_end, handle, nil, &_result)
         return _result
     }
     
@@ -1188,7 +1188,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: order.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_draw_order, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_draw_order, handle, pArgs, nil)
                 }
                 
             }
@@ -1213,7 +1213,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_draw_order() -> GPUParticles2D.DrawOrder {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_draw_order, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_draw_order, handle, nil, &_result)
         return GPUParticles2D.DrawOrder (rawValue: _result)!
     }
     
@@ -1234,7 +1234,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -1258,9 +1258,9 @@ open class GPUParticles2D: Node2D {
     @inline(__always)
     fileprivate final func get_texture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_capture_rect: GDExtensionMethodBindPtr = {
@@ -1281,7 +1281,7 @@ open class GPUParticles2D: Node2D {
     public final func captureRect() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_capture_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_capture_rect, handle, nil, &_result)
         return _result
     }
     
@@ -1307,7 +1307,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: keepSeed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_restart, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_restart, handle, pArgs, nil)
                 }
                 
             }
@@ -1334,7 +1334,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_sub_emitter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_sub_emitter, handle, pArgs, nil)
                 }
                 
             }
@@ -1359,7 +1359,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_sub_emitter() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_sub_emitter, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_sub_emitter, handle, nil, &_result.content)
         return _result
     }
     
@@ -1389,7 +1389,7 @@ open class GPUParticles2D: Node2D {
                         withUnsafePointer(to: flags) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(GPUParticles2D.method_emit_particle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(GPUParticles2D.method_emit_particle, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -1424,7 +1424,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_trail_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_trail_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1451,7 +1451,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: secs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_trail_lifetime, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_trail_lifetime, handle, pArgs, nil)
                 }
                 
             }
@@ -1476,7 +1476,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func is_trail_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_is_trail_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_is_trail_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1495,7 +1495,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_trail_lifetime() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_trail_lifetime, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_trail_lifetime, handle, nil, &_result)
         return _result
     }
     
@@ -1516,7 +1516,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: sections) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_trail_sections, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_trail_sections, handle, pArgs, nil)
                 }
                 
             }
@@ -1541,7 +1541,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_trail_sections() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_trail_sections, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_trail_sections, handle, nil, &_result)
         return _result
     }
     
@@ -1562,7 +1562,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: subdivisions) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_trail_section_subdivisions, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_trail_section_subdivisions, handle, pArgs, nil)
                 }
                 
             }
@@ -1587,7 +1587,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_trail_section_subdivisions() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_trail_section_subdivisions, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_trail_section_subdivisions, handle, nil, &_result)
         return _result
     }
     
@@ -1608,7 +1608,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: particles?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_convert_from_particles, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_convert_from_particles, handle, pArgs, nil)
                 }
                 
             }
@@ -1635,7 +1635,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_amount_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_amount_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -1660,7 +1660,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_amount_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_amount_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_amount_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -1681,7 +1681,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: useFixedSeed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_use_fixed_seed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_use_fixed_seed, handle, pArgs, nil)
                 }
                 
             }
@@ -1706,7 +1706,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_use_fixed_seed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_use_fixed_seed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_use_fixed_seed, handle, nil, &_result)
         return _result
     }
     
@@ -1727,7 +1727,7 @@ open class GPUParticles2D: Node2D {
         withUnsafePointer(to: seed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_seed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticles2D.method_set_seed, handle, pArgs, nil)
                 }
                 
             }
@@ -1752,7 +1752,7 @@ open class GPUParticles2D: Node2D {
     fileprivate final func get_seed() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_seed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticles2D.method_get_seed, handle, nil, &_result)
         return _result
     }
     

@@ -47,7 +47,7 @@ open class PhysicsDirectSpaceState2DExtension: PhysicsDirectSpaceState2D {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectSpaceState2DExtension.method_is_body_excluded_from_query, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PhysicsDirectSpaceState2DExtension.method_is_body_excluded_from_query, handle, pArgs, &_result)
                 }
                 
             }

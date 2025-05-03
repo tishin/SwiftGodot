@@ -44,7 +44,7 @@ open class OpenXRInteractionProfileEditorBase: HBoxContainer {
             withUnsafePointer(to: interactionProfile?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OpenXRInteractionProfileEditorBase.method_setup, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(OpenXRInteractionProfileEditorBase.method_setup, handle, pArgs, nil)
                     }
                     
                 }

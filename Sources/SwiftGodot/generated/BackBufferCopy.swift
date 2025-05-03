@@ -82,7 +82,7 @@ open class BackBufferCopy: Node2D {
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BackBufferCopy.method_set_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BackBufferCopy.method_set_rect, handle, pArgs, nil)
                 }
                 
             }
@@ -107,7 +107,7 @@ open class BackBufferCopy: Node2D {
     fileprivate final func get_rect() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(BackBufferCopy.method_get_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BackBufferCopy.method_get_rect, handle, nil, &_result)
         return _result
     }
     
@@ -128,7 +128,7 @@ open class BackBufferCopy: Node2D {
         withUnsafePointer(to: copyMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BackBufferCopy.method_set_copy_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BackBufferCopy.method_set_copy_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -153,7 +153,7 @@ open class BackBufferCopy: Node2D {
     fileprivate final func get_copy_mode() -> BackBufferCopy.CopyMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BackBufferCopy.method_get_copy_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BackBufferCopy.method_get_copy_mode, handle, nil, &_result)
         return BackBufferCopy.CopyMode (rawValue: _result)!
     }
     

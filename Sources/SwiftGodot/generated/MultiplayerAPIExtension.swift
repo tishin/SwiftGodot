@@ -49,7 +49,7 @@ open class MultiplayerAPIExtension: MultiplayerAPI {
     open func _poll() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__poll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__poll, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -71,7 +71,7 @@ open class MultiplayerAPIExtension: MultiplayerAPI {
         withUnsafePointer(to: multiplayerPeer?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__set_multiplayer_peer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__set_multiplayer_peer, handle, pArgs, nil)
                 }
                 
             }
@@ -96,9 +96,9 @@ open class MultiplayerAPIExtension: MultiplayerAPI {
     @_documentation(visibility: public)
     open func _getMultiplayerPeer() -> MultiplayerPeer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__get_multiplayer_peer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__get_multiplayer_peer, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__get_unique_id: GDExtensionMethodBindPtr = {
@@ -117,7 +117,7 @@ open class MultiplayerAPIExtension: MultiplayerAPI {
     open func _getUniqueId() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__get_unique_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__get_unique_id, handle, nil, &_result)
         return _result
     }
     
@@ -137,7 +137,7 @@ open class MultiplayerAPIExtension: MultiplayerAPI {
     open func _getPeerIds() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__get_peer_ids, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__get_peer_ids, handle, nil, &_result.content)
         return _result
     }
     
@@ -163,7 +163,7 @@ open class MultiplayerAPIExtension: MultiplayerAPI {
                     withUnsafePointer(to: args.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__rpc, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__rpc, handle, pArgs, &_result)
                             }
                             
                         }
@@ -195,7 +195,7 @@ open class MultiplayerAPIExtension: MultiplayerAPI {
     open func _getRemoteSenderId() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__get_remote_sender_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__get_remote_sender_id, handle, nil, &_result)
         return _result
     }
     
@@ -219,7 +219,7 @@ open class MultiplayerAPIExtension: MultiplayerAPI {
             withUnsafePointer(to: configuration.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__object_configuration_add, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__object_configuration_add, handle, pArgs, &_result)
                     }
                     
                 }
@@ -251,7 +251,7 @@ open class MultiplayerAPIExtension: MultiplayerAPI {
             withUnsafePointer(to: configuration.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__object_configuration_remove, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(MultiplayerAPIExtension.method__object_configuration_remove, handle, pArgs, &_result)
                     }
                     
                 }
@@ -298,7 +298,7 @@ func _MultiplayerAPIExtension_proxy_get_multiplayer_peer (instance: UnsafeMutabl
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? MultiplayerAPIExtension else { return }
     let ret = swiftObject._getMultiplayerPeer ()
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // MultiplayerPeer
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // MultiplayerPeer
 }
 
 func _MultiplayerAPIExtension_proxy_get_peer_ids (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -331,9 +331,9 @@ func _MultiplayerAPIExtension_proxy_object_configuration_add (instance: UnsafeMu
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? MultiplayerAPIExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._objectConfigurationAdd (object: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, configuration: args [1]!.assumingMemoryBound (to: Variant.self).pointee)
+    let ret = swiftObject._objectConfigurationAdd (object: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, configuration: args [1]!.assumingMemoryBound (to: Variant.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -342,9 +342,9 @@ func _MultiplayerAPIExtension_proxy_object_configuration_remove (instance: Unsaf
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? MultiplayerAPIExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._objectConfigurationRemove (object: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, configuration: args [1]!.assumingMemoryBound (to: Variant.self).pointee)
+    let ret = swiftObject._objectConfigurationRemove (object: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, configuration: args [1]!.assumingMemoryBound (to: Variant.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -361,9 +361,9 @@ func _MultiplayerAPIExtension_proxy_rpc (instance: UnsafeMutableRawPointer?, arg
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? MultiplayerAPIExtension else { return }
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._rpc (peer: args [0]!.assumingMemoryBound (to: Int32.self).pointee, object: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? Object, method: StringName (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee), args: VariantArray (content: args [3]!.assumingMemoryBound (to: Int64.self).pointee))
+    let ret = swiftObject._rpc (peer: args [0]!.assumingMemoryBound (to: Int32.self).pointee, object: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? Object, method: StringName (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee), args: VariantArray (content: args [3]!.assumingMemoryBound (to: Int64.self).pointee))
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -372,8 +372,8 @@ func _MultiplayerAPIExtension_proxy_set_multiplayer_peer (instance: UnsafeMutabl
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? MultiplayerAPIExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._setMultiplayerPeer (resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? MultiplayerPeer)
+    swiftObject._setMultiplayerPeer (resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? MultiplayerPeer)
 }
 

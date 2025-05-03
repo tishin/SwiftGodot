@@ -105,7 +105,7 @@ open class AudioStreamRandomizer: AudioStream {
                 withUnsafePointer(to: weight) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_add_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_add_stream, handle, pArgs, nil)
                         }
                         
                     }
@@ -137,7 +137,7 @@ open class AudioStreamRandomizer: AudioStream {
             withUnsafePointer(to: indexTo) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_move_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_move_stream, handle, pArgs, nil)
                     }
                     
                 }
@@ -166,7 +166,7 @@ open class AudioStreamRandomizer: AudioStream {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_remove_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_remove_stream, handle, pArgs, nil)
                 }
                 
             }
@@ -194,7 +194,7 @@ open class AudioStreamRandomizer: AudioStream {
             withUnsafePointer(to: stream?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_set_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_set_stream, handle, pArgs, nil)
                     }
                     
                 }
@@ -220,18 +220,18 @@ open class AudioStreamRandomizer: AudioStream {
     /// Returns the stream at the specified index.
     public final func getStream(index: Int32) -> AudioStream? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_get_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_get_stream, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_stream_probability_weight: GDExtensionMethodBindPtr = {
@@ -252,7 +252,7 @@ open class AudioStreamRandomizer: AudioStream {
             withUnsafePointer(to: weight) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_set_stream_probability_weight, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_set_stream_probability_weight, handle, pArgs, nil)
                     }
                     
                 }
@@ -282,7 +282,7 @@ open class AudioStreamRandomizer: AudioStream {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_get_stream_probability_weight, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_get_stream_probability_weight, handle, pArgs, &_result)
                 }
                 
             }
@@ -309,7 +309,7 @@ open class AudioStreamRandomizer: AudioStream {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_set_streams_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_set_streams_count, handle, pArgs, nil)
                 }
                 
             }
@@ -334,7 +334,7 @@ open class AudioStreamRandomizer: AudioStream {
     fileprivate final func get_streams_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_get_streams_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_get_streams_count, handle, nil, &_result)
         return _result
     }
     
@@ -355,7 +355,7 @@ open class AudioStreamRandomizer: AudioStream {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_set_random_pitch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_set_random_pitch, handle, pArgs, nil)
                 }
                 
             }
@@ -380,7 +380,7 @@ open class AudioStreamRandomizer: AudioStream {
     fileprivate final func get_random_pitch() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_get_random_pitch, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_get_random_pitch, handle, nil, &_result)
         return _result
     }
     
@@ -401,7 +401,7 @@ open class AudioStreamRandomizer: AudioStream {
         withUnsafePointer(to: dbOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_set_random_volume_offset_db, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_set_random_volume_offset_db, handle, pArgs, nil)
                 }
                 
             }
@@ -426,7 +426,7 @@ open class AudioStreamRandomizer: AudioStream {
     fileprivate final func get_random_volume_offset_db() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_get_random_volume_offset_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_get_random_volume_offset_db, handle, nil, &_result)
         return _result
     }
     
@@ -447,7 +447,7 @@ open class AudioStreamRandomizer: AudioStream {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_set_playback_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_set_playback_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -472,7 +472,7 @@ open class AudioStreamRandomizer: AudioStream {
     fileprivate final func get_playback_mode() -> AudioStreamRandomizer.PlaybackMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_get_playback_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamRandomizer.method_get_playback_mode, handle, nil, &_result)
         return AudioStreamRandomizer.PlaybackMode (rawValue: _result)!
     }
     

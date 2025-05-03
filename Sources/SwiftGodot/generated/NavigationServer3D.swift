@@ -48,7 +48,7 @@ open class NavigationServer3D: Object {
     /// The shared instance of this class
     public static var shared: NavigationServer3D {
         return withUnsafePointer(to: &NavigationServer3D.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -93,7 +93,7 @@ open class NavigationServer3D: Object {
     /// Returns all created navigation map ``RID``s on the NavigationServer. This returns both 2D and 3D created navigation maps as there is technically no distinction between them.
     public static func getMaps() -> TypedArray<RID> {
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(method_get_maps, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_maps, shared.handle, nil, &_result)
         return TypedArray<RID>(takingOver: _result)
     }
     
@@ -111,7 +111,7 @@ open class NavigationServer3D: Object {
     /// Create a new map.
     public static func mapCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_map_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_map_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -132,7 +132,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: active) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_map_set_active, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_map_set_active, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -161,7 +161,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_is_active, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_map_is_active, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -188,7 +188,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: up) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_map_set_up, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_map_set_up, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -217,7 +217,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_get_up, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_map_get_up, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -244,7 +244,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: cellSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_map_set_cell_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_map_set_cell_size, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -273,7 +273,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_get_cell_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_map_get_cell_size, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -300,7 +300,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: cellHeight) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_map_set_cell_height, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_map_set_cell_height, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -329,7 +329,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_get_cell_height, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_map_get_cell_height, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -356,7 +356,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: scale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_map_set_merge_rasterizer_cell_scale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_map_set_merge_rasterizer_cell_scale, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -385,7 +385,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_get_merge_rasterizer_cell_scale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_map_get_merge_rasterizer_cell_scale, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -412,7 +412,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_map_set_use_edge_connections, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_map_set_use_edge_connections, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -441,7 +441,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_get_use_edge_connections, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_map_get_use_edge_connections, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -468,7 +468,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: margin) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_map_set_edge_connection_margin, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_map_set_edge_connection_margin, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -497,7 +497,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_get_edge_connection_margin, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_map_get_edge_connection_margin, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -524,7 +524,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: radius) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_map_set_link_connection_radius, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_map_set_link_connection_radius, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -553,7 +553,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_get_link_connection_radius, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_map_get_link_connection_radius, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -584,7 +584,7 @@ open class NavigationServer3D: Object {
                         withUnsafePointer(to: navigationLayers) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_map_get_path, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                                    gi.object_method_bind_ptrcall(method_map_get_path, shared.handle, pArgs, &_result.content)
                                 }
                                 
                             }
@@ -625,7 +625,7 @@ open class NavigationServer3D: Object {
                     withUnsafePointer(to: useCollision) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_map_get_closest_point_to_segment, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(method_map_get_closest_point_to_segment, shared.handle, pArgs, &_result)
                             }
                             
                         }
@@ -659,7 +659,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: toPoint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_map_get_closest_point, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_map_get_closest_point, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -689,7 +689,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: toPoint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_map_get_closest_point_normal, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_map_get_closest_point_normal, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -719,7 +719,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: toPoint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_map_get_closest_point_owner, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_map_get_closest_point_owner, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -748,7 +748,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_get_links, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_map_get_links, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -775,7 +775,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_get_regions, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_map_get_regions, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -802,7 +802,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_get_agents, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_map_get_agents, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -829,7 +829,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_get_obstacles, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_map_get_obstacles, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -862,7 +862,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_force_update, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_map_force_update, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -892,7 +892,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_get_iteration_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_map_get_iteration_id, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -919,7 +919,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_map_set_use_async_iterations, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_map_set_use_async_iterations, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -948,7 +948,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_map_get_use_async_iterations, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_map_get_use_async_iterations, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -982,7 +982,7 @@ open class NavigationServer3D: Object {
                 withUnsafePointer(to: uniformly) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_map_get_random_point, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_map_get_random_point, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -1014,7 +1014,7 @@ open class NavigationServer3D: Object {
                 withUnsafePointer(to: callback.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_query_path, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_query_path, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1042,7 +1042,7 @@ open class NavigationServer3D: Object {
     /// Creates a new region.
     public static func regionCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_region_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_region_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -1063,7 +1063,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_set_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_region_set_enabled, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1092,7 +1092,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: region.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_region_get_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_region_get_enabled, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1119,7 +1119,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_set_use_edge_connections, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_region_set_use_edge_connections, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1148,7 +1148,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: region.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_region_get_use_edge_connections, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_region_get_use_edge_connections, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1175,7 +1175,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: enterCost) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_set_enter_cost, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_region_set_enter_cost, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1204,7 +1204,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: region.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_region_get_enter_cost, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_region_get_enter_cost, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1231,7 +1231,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: travelCost) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_set_travel_cost, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_region_set_travel_cost, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1260,7 +1260,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: region.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_region_get_travel_cost, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_region_get_travel_cost, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1287,7 +1287,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: ownerId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_set_owner_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_region_set_owner_id, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1316,7 +1316,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: region.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_region_get_owner_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_region_get_owner_id, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1349,7 +1349,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: point) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_owns_point, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_region_owns_point, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1378,7 +1378,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: map.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_set_map, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_region_set_map, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1407,7 +1407,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: region.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_region_get_map, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_region_get_map, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1434,7 +1434,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: navigationLayers) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_set_navigation_layers, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_region_set_navigation_layers, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1463,7 +1463,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: region.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_region_get_navigation_layers, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_region_get_navigation_layers, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1490,7 +1490,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_set_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_region_set_transform, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1519,7 +1519,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: region.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_region_get_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_region_get_transform, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1546,7 +1546,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: navigationMesh?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_set_navigation_mesh, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_region_set_navigation_mesh, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1575,7 +1575,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: rootNode?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_bake_navigation_mesh, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_region_bake_navigation_mesh, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1604,7 +1604,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: region.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_region_get_connections_count, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_region_get_connections_count, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1632,7 +1632,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: connection) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_get_connection_pathway_start, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_region_get_connection_pathway_start, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1662,7 +1662,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: connection) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_get_connection_pathway_end, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_region_get_connection_pathway_end, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1697,7 +1697,7 @@ open class NavigationServer3D: Object {
                     withUnsafePointer(to: useCollision) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_region_get_closest_point_to_segment, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(method_region_get_closest_point_to_segment, shared.handle, pArgs, &_result)
                             }
                             
                         }
@@ -1731,7 +1731,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: toPoint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_get_closest_point, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_region_get_closest_point, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1761,7 +1761,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: toPoint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_region_get_closest_point_normal, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_region_get_closest_point_normal, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1797,7 +1797,7 @@ open class NavigationServer3D: Object {
                 withUnsafePointer(to: uniformly) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_region_get_random_point, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_region_get_random_point, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -1828,7 +1828,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: region.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_region_get_bounds, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_region_get_bounds, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1852,7 +1852,7 @@ open class NavigationServer3D: Object {
     /// Create a new link between two positions on a map.
     public static func linkCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_link_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_link_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -1873,7 +1873,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: map.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_link_set_map, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_link_set_map, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1902,7 +1902,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: link.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_link_get_map, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_link_get_map, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1929,7 +1929,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_link_set_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_link_set_enabled, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1958,7 +1958,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: link.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_link_get_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_link_get_enabled, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1985,7 +1985,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: bidirectional) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_link_set_bidirectional, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_link_set_bidirectional, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2014,7 +2014,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: link.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_link_is_bidirectional, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_link_is_bidirectional, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2041,7 +2041,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: navigationLayers) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_link_set_navigation_layers, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_link_set_navigation_layers, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2070,7 +2070,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: link.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_link_get_navigation_layers, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_link_get_navigation_layers, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2097,7 +2097,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_link_set_start_position, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_link_set_start_position, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2126,7 +2126,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: link.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_link_get_start_position, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_link_get_start_position, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2153,7 +2153,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_link_set_end_position, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_link_set_end_position, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2182,7 +2182,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: link.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_link_get_end_position, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_link_get_end_position, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2209,7 +2209,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: enterCost) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_link_set_enter_cost, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_link_set_enter_cost, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2238,7 +2238,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: link.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_link_get_enter_cost, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_link_get_enter_cost, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2265,7 +2265,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: travelCost) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_link_set_travel_cost, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_link_set_travel_cost, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2294,7 +2294,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: link.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_link_get_travel_cost, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_link_get_travel_cost, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2321,7 +2321,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: ownerId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_link_set_owner_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_link_set_owner_id, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2350,7 +2350,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: link.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_link_get_owner_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_link_get_owner_id, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2374,7 +2374,7 @@ open class NavigationServer3D: Object {
     /// Creates the agent.
     public static func agentCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_agent_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_agent_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -2395,7 +2395,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_avoidance_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_avoidance_enabled, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2424,7 +2424,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_avoidance_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_avoidance_enabled, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2456,7 +2456,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_use_3d_avoidance, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_use_3d_avoidance, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2485,7 +2485,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_use_3d_avoidance, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_use_3d_avoidance, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2512,7 +2512,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: map.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_map, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_map, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2541,7 +2541,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_map, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_agent_get_map, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2568,7 +2568,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: paused) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_paused, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_paused, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2597,7 +2597,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_paused, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_paused, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2624,7 +2624,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: distance) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_neighbor_distance, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_neighbor_distance, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2653,7 +2653,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_neighbor_distance, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_neighbor_distance, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2680,7 +2680,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: count) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_max_neighbors, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_max_neighbors, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2709,7 +2709,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_max_neighbors, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_max_neighbors, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2736,7 +2736,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: timeHorizon) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_time_horizon_agents, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_time_horizon_agents, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2765,7 +2765,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_time_horizon_agents, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_time_horizon_agents, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2792,7 +2792,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: timeHorizon) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_time_horizon_obstacles, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_time_horizon_obstacles, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2821,7 +2821,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_time_horizon_obstacles, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_time_horizon_obstacles, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2848,7 +2848,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: radius) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_radius, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_radius, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2877,7 +2877,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_radius, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_radius, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2904,7 +2904,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: height) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_height, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_height, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2933,7 +2933,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_height, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_height, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2960,7 +2960,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: maxSpeed) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_max_speed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_max_speed, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2989,7 +2989,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_max_speed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_max_speed, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3016,7 +3016,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: velocity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_velocity_forced, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_velocity_forced, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3045,7 +3045,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: velocity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_velocity, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_velocity, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3074,7 +3074,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_velocity, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_velocity, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3101,7 +3101,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_position, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_position, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3130,7 +3130,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_position, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_position, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3157,7 +3157,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_is_map_changed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_is_map_changed, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3187,7 +3187,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: callback.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_avoidance_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_avoidance_callback, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3216,7 +3216,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_has_avoidance_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_has_avoidance_callback, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3243,7 +3243,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: layers) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_avoidance_layers, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_avoidance_layers, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3272,7 +3272,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_avoidance_layers, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_avoidance_layers, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3299,7 +3299,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: mask) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_avoidance_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_avoidance_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3328,7 +3328,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_avoidance_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_avoidance_mask, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3358,7 +3358,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: priority) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_agent_set_avoidance_priority, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_agent_set_avoidance_priority, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3387,7 +3387,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: agent.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_agent_get_avoidance_priority, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_agent_get_avoidance_priority, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3411,7 +3411,7 @@ open class NavigationServer3D: Object {
     /// Creates a new obstacle.
     public static func obstacleCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_obstacle_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_obstacle_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -3432,7 +3432,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_obstacle_set_avoidance_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_obstacle_set_avoidance_enabled, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3461,7 +3461,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: obstacle.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_obstacle_get_avoidance_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_obstacle_get_avoidance_enabled, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3488,7 +3488,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_obstacle_set_use_3d_avoidance, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_obstacle_set_use_3d_avoidance, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3517,7 +3517,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: obstacle.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_obstacle_get_use_3d_avoidance, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_obstacle_get_use_3d_avoidance, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3544,7 +3544,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: map.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_obstacle_set_map, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_obstacle_set_map, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3573,7 +3573,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: obstacle.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_obstacle_get_map, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_obstacle_get_map, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -3600,7 +3600,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: paused) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_obstacle_set_paused, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_obstacle_set_paused, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3629,7 +3629,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: obstacle.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_obstacle_get_paused, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_obstacle_get_paused, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3656,7 +3656,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: radius) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_obstacle_set_radius, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_obstacle_set_radius, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3685,7 +3685,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: obstacle.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_obstacle_get_radius, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_obstacle_get_radius, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3712,7 +3712,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: height) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_obstacle_set_height, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_obstacle_set_height, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3741,7 +3741,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: obstacle.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_obstacle_get_height, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_obstacle_get_height, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3768,7 +3768,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: velocity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_obstacle_set_velocity, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_obstacle_set_velocity, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3797,7 +3797,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: obstacle.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_obstacle_get_velocity, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_obstacle_get_velocity, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3824,7 +3824,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_obstacle_set_position, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_obstacle_set_position, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3853,7 +3853,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: obstacle.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_obstacle_get_position, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_obstacle_get_position, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3880,7 +3880,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: vertices.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_obstacle_set_vertices, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_obstacle_set_vertices, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3909,7 +3909,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: obstacle.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_obstacle_get_vertices, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_obstacle_get_vertices, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -3936,7 +3936,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: layers) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_obstacle_set_avoidance_layers, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_obstacle_set_avoidance_layers, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3965,7 +3965,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: obstacle.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_obstacle_get_avoidance_layers, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_obstacle_get_avoidance_layers, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3999,7 +3999,7 @@ open class NavigationServer3D: Object {
                     withUnsafePointer(to: callback.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_parse_source_geometry_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_parse_source_geometry_data, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -4033,7 +4033,7 @@ open class NavigationServer3D: Object {
                 withUnsafePointer(to: callback.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_bake_from_source_geometry_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_bake_from_source_geometry_data, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -4065,7 +4065,7 @@ open class NavigationServer3D: Object {
                 withUnsafePointer(to: callback.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_bake_from_source_geometry_data_async, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_bake_from_source_geometry_data_async, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -4096,7 +4096,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: navigationMesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_baking_navigation_mesh, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_baking_navigation_mesh, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4120,7 +4120,7 @@ open class NavigationServer3D: Object {
     /// Creates a new source geometry parser. If a ``Callable`` is set for the parser with ``sourceGeometryParserSetCallback(parser:callback:)`` the callback will be called for every single node that gets parsed whenever ``parseSourceGeometryData(navigationMesh:sourceGeometryData:rootNode:callback:)`` is used.
     public static func sourceGeometryParserCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_source_geometry_parser_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_source_geometry_parser_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -4148,7 +4148,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: callback.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_source_geometry_parser_set_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_source_geometry_parser_set_callback, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4181,7 +4181,7 @@ open class NavigationServer3D: Object {
             withUnsafePointer(to: epsilon) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_simplify_path, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_simplify_path, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -4209,7 +4209,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_free_rid, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_free_rid, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -4235,7 +4235,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_active, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_active, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -4261,7 +4261,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_debug_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_debug_enabled, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -4285,7 +4285,7 @@ open class NavigationServer3D: Object {
     /// Returns `true` when the NavigationServer has debug enabled.
     public static func getDebugEnabled() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_get_debug_enabled, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_debug_enabled, shared.handle, nil, &_result)
         return _result
     }
     
@@ -4306,7 +4306,7 @@ open class NavigationServer3D: Object {
         withUnsafePointer(to: processInfo.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_process_info, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_process_info, shared.handle, pArgs, &_result)
                 }
                 
             }

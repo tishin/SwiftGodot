@@ -152,7 +152,7 @@ open class CanvasItemMaterial: Material {
         withUnsafePointer(to: blendMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItemMaterial.method_set_blend_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItemMaterial.method_set_blend_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -177,7 +177,7 @@ open class CanvasItemMaterial: Material {
     fileprivate final func get_blend_mode() -> CanvasItemMaterial.BlendMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_blend_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_blend_mode, handle, nil, &_result)
         return CanvasItemMaterial.BlendMode (rawValue: _result)!
     }
     
@@ -198,7 +198,7 @@ open class CanvasItemMaterial: Material {
         withUnsafePointer(to: lightMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItemMaterial.method_set_light_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItemMaterial.method_set_light_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -223,7 +223,7 @@ open class CanvasItemMaterial: Material {
     fileprivate final func get_light_mode() -> CanvasItemMaterial.LightMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_light_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_light_mode, handle, nil, &_result)
         return CanvasItemMaterial.LightMode (rawValue: _result)!
     }
     
@@ -244,7 +244,7 @@ open class CanvasItemMaterial: Material {
         withUnsafePointer(to: particlesAnim) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItemMaterial.method_set_particles_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItemMaterial.method_set_particles_animation, handle, pArgs, nil)
                 }
                 
             }
@@ -269,7 +269,7 @@ open class CanvasItemMaterial: Material {
     fileprivate final func get_particles_animation() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_particles_animation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_particles_animation, handle, nil, &_result)
         return _result
     }
     
@@ -290,7 +290,7 @@ open class CanvasItemMaterial: Material {
         withUnsafePointer(to: frames) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItemMaterial.method_set_particles_anim_h_frames, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItemMaterial.method_set_particles_anim_h_frames, handle, pArgs, nil)
                 }
                 
             }
@@ -315,7 +315,7 @@ open class CanvasItemMaterial: Material {
     fileprivate final func get_particles_anim_h_frames() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_particles_anim_h_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_particles_anim_h_frames, handle, nil, &_result)
         return _result
     }
     
@@ -336,7 +336,7 @@ open class CanvasItemMaterial: Material {
         withUnsafePointer(to: frames) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItemMaterial.method_set_particles_anim_v_frames, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItemMaterial.method_set_particles_anim_v_frames, handle, pArgs, nil)
                 }
                 
             }
@@ -361,7 +361,7 @@ open class CanvasItemMaterial: Material {
     fileprivate final func get_particles_anim_v_frames() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_particles_anim_v_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_particles_anim_v_frames, handle, nil, &_result)
         return _result
     }
     
@@ -382,7 +382,7 @@ open class CanvasItemMaterial: Material {
         withUnsafePointer(to: loop) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItemMaterial.method_set_particles_anim_loop, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItemMaterial.method_set_particles_anim_loop, handle, pArgs, nil)
                 }
                 
             }
@@ -407,7 +407,7 @@ open class CanvasItemMaterial: Material {
     fileprivate final func get_particles_anim_loop() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_particles_anim_loop, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItemMaterial.method_get_particles_anim_loop, handle, nil, &_result)
         return _result
     }
     

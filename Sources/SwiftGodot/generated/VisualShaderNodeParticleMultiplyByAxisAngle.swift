@@ -58,7 +58,7 @@ open class VisualShaderNodeParticleMultiplyByAxisAngle: VisualShaderNode {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeParticleMultiplyByAxisAngle.method_set_degrees_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeParticleMultiplyByAxisAngle.method_set_degrees_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -83,7 +83,7 @@ open class VisualShaderNodeParticleMultiplyByAxisAngle: VisualShaderNode {
     fileprivate final func is_degrees_mode() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VisualShaderNodeParticleMultiplyByAxisAngle.method_is_degrees_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeParticleMultiplyByAxisAngle.method_is_degrees_mode, handle, nil, &_result)
         return _result
     }
     

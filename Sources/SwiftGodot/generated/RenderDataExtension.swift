@@ -41,9 +41,9 @@ open class RenderDataExtension: RenderData {
     @_documentation(visibility: public)
     open func _getRenderSceneBuffers() -> RenderSceneBuffers? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(RenderDataExtension.method__get_render_scene_buffers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(RenderDataExtension.method__get_render_scene_buffers, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__get_render_scene_data: GDExtensionMethodBindPtr = {
@@ -61,9 +61,9 @@ open class RenderDataExtension: RenderData {
     @_documentation(visibility: public)
     open func _getRenderSceneData() -> RenderSceneData? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(RenderDataExtension.method__get_render_scene_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(RenderDataExtension.method__get_render_scene_data, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__get_environment: GDExtensionMethodBindPtr = {
@@ -82,7 +82,7 @@ open class RenderDataExtension: RenderData {
     open func _getEnvironment() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: RID = RID ()
-        gi.object_method_bind_ptrcall(RenderDataExtension.method__get_environment, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RenderDataExtension.method__get_environment, handle, nil, &_result.content)
         return _result
     }
     
@@ -102,7 +102,7 @@ open class RenderDataExtension: RenderData {
     open func _getCameraAttributes() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: RID = RID ()
-        gi.object_method_bind_ptrcall(RenderDataExtension.method__get_camera_attributes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RenderDataExtension.method__get_camera_attributes, handle, nil, &_result.content)
         return _result
     }
     
@@ -149,7 +149,7 @@ func _RenderDataExtension_proxy_get_render_scene_buffers (instance: UnsafeMutabl
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? RenderDataExtension else { return }
     let ret = swiftObject._getRenderSceneBuffers ()
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // RenderSceneBuffers
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // RenderSceneBuffers
 }
 
 func _RenderDataExtension_proxy_get_render_scene_data (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -157,6 +157,6 @@ func _RenderDataExtension_proxy_get_render_scene_data (instance: UnsafeMutableRa
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? RenderDataExtension else { return }
     let ret = swiftObject._getRenderSceneData ()
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // RenderSceneData
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // RenderSceneData
 }
 

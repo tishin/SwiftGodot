@@ -100,7 +100,7 @@ open class CollisionShape3D: Node3D {
         withUnsafePointer(to: resource?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionShape3D.method_resource_changed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionShape3D.method_resource_changed, handle, pArgs, nil)
                 }
                 
             }
@@ -127,7 +127,7 @@ open class CollisionShape3D: Node3D {
         withUnsafePointer(to: shape?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionShape3D.method_set_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionShape3D.method_set_shape, handle, pArgs, nil)
                 }
                 
             }
@@ -151,9 +151,9 @@ open class CollisionShape3D: Node3D {
     @inline(__always)
     fileprivate final func get_shape() -> Shape3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CollisionShape3D.method_get_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CollisionShape3D.method_get_shape, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_disabled: GDExtensionMethodBindPtr = {
@@ -173,7 +173,7 @@ open class CollisionShape3D: Node3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionShape3D.method_set_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionShape3D.method_set_disabled, handle, pArgs, nil)
                 }
                 
             }
@@ -198,7 +198,7 @@ open class CollisionShape3D: Node3D {
     fileprivate final func is_disabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CollisionShape3D.method_is_disabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CollisionShape3D.method_is_disabled, handle, nil, &_result)
         return _result
     }
     
@@ -216,7 +216,7 @@ open class CollisionShape3D: Node3D {
     /// Sets the collision shape's shape to the addition of all its convexed ``MeshInstance3D`` siblings geometry.
     public final func makeConvexFromSiblings() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CollisionShape3D.method_make_convex_from_siblings, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CollisionShape3D.method_make_convex_from_siblings, handle, nil, nil)
         
     }
     
@@ -237,7 +237,7 @@ open class CollisionShape3D: Node3D {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionShape3D.method_set_debug_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionShape3D.method_set_debug_color, handle, pArgs, nil)
                 }
                 
             }
@@ -262,7 +262,7 @@ open class CollisionShape3D: Node3D {
     fileprivate final func get_debug_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(CollisionShape3D.method_get_debug_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CollisionShape3D.method_get_debug_color, handle, nil, &_result)
         return _result
     }
     
@@ -283,7 +283,7 @@ open class CollisionShape3D: Node3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionShape3D.method_set_enable_debug_fill, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionShape3D.method_set_enable_debug_fill, handle, pArgs, nil)
                 }
                 
             }
@@ -308,7 +308,7 @@ open class CollisionShape3D: Node3D {
     fileprivate final func get_enable_debug_fill() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CollisionShape3D.method_get_enable_debug_fill, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CollisionShape3D.method_get_enable_debug_fill, handle, nil, &_result)
         return _result
     }
     

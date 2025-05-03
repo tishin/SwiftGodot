@@ -191,7 +191,7 @@ open class VideoStreamPlayer: Control {
         withUnsafePointer(to: stream?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_stream, handle, pArgs, nil)
                 }
                 
             }
@@ -215,9 +215,9 @@ open class VideoStreamPlayer: Control {
     @inline(__always)
     fileprivate final func get_stream() -> VideoStream? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_stream, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_stream, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_play: GDExtensionMethodBindPtr = {
@@ -234,7 +234,7 @@ open class VideoStreamPlayer: Control {
     /// Starts the video playback from the beginning. If the video is paused, this will not unpause the video.
     public final func play() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_play, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_play, handle, nil, nil)
         
     }
     
@@ -255,7 +255,7 @@ open class VideoStreamPlayer: Control {
     /// 
     public final func stop() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_stop, handle, nil, nil)
         
     }
     
@@ -277,7 +277,7 @@ open class VideoStreamPlayer: Control {
     public final func isPlaying() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_is_playing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_is_playing, handle, nil, &_result)
         return _result
     }
     
@@ -298,7 +298,7 @@ open class VideoStreamPlayer: Control {
         withUnsafePointer(to: paused) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_paused, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_paused, handle, pArgs, nil)
                 }
                 
             }
@@ -323,7 +323,7 @@ open class VideoStreamPlayer: Control {
     fileprivate final func is_paused() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_is_paused, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_is_paused, handle, nil, &_result)
         return _result
     }
     
@@ -344,7 +344,7 @@ open class VideoStreamPlayer: Control {
         withUnsafePointer(to: loop) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_loop, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_loop, handle, pArgs, nil)
                 }
                 
             }
@@ -369,7 +369,7 @@ open class VideoStreamPlayer: Control {
     fileprivate final func has_loop() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_has_loop, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_has_loop, handle, nil, &_result)
         return _result
     }
     
@@ -390,7 +390,7 @@ open class VideoStreamPlayer: Control {
         withUnsafePointer(to: volume) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_volume, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_volume, handle, pArgs, nil)
                 }
                 
             }
@@ -415,7 +415,7 @@ open class VideoStreamPlayer: Control {
     fileprivate final func get_volume() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_volume, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_volume, handle, nil, &_result)
         return _result
     }
     
@@ -436,7 +436,7 @@ open class VideoStreamPlayer: Control {
         withUnsafePointer(to: db) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_volume_db, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_volume_db, handle, pArgs, nil)
                 }
                 
             }
@@ -461,7 +461,7 @@ open class VideoStreamPlayer: Control {
     fileprivate final func get_volume_db() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_volume_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_volume_db, handle, nil, &_result)
         return _result
     }
     
@@ -482,7 +482,7 @@ open class VideoStreamPlayer: Control {
         withUnsafePointer(to: track) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_audio_track, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_audio_track, handle, pArgs, nil)
                 }
                 
             }
@@ -507,7 +507,7 @@ open class VideoStreamPlayer: Control {
     fileprivate final func get_audio_track() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_audio_track, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_audio_track, handle, nil, &_result)
         return _result
     }
     
@@ -526,7 +526,7 @@ open class VideoStreamPlayer: Control {
     public final func getStreamName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_stream_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_stream_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -548,7 +548,7 @@ open class VideoStreamPlayer: Control {
     public final func getStreamLength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_stream_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_stream_length, handle, nil, &_result)
         return _result
     }
     
@@ -569,7 +569,7 @@ open class VideoStreamPlayer: Control {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_stream_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_stream_position, handle, pArgs, nil)
                 }
                 
             }
@@ -594,7 +594,7 @@ open class VideoStreamPlayer: Control {
     fileprivate final func get_stream_position() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_stream_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_stream_position, handle, nil, &_result)
         return _result
     }
     
@@ -615,7 +615,7 @@ open class VideoStreamPlayer: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_autoplay, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_autoplay, handle, pArgs, nil)
                 }
                 
             }
@@ -640,7 +640,7 @@ open class VideoStreamPlayer: Control {
     fileprivate final func has_autoplay() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_has_autoplay, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_has_autoplay, handle, nil, &_result)
         return _result
     }
     
@@ -661,7 +661,7 @@ open class VideoStreamPlayer: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_expand, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_expand, handle, pArgs, nil)
                 }
                 
             }
@@ -686,7 +686,7 @@ open class VideoStreamPlayer: Control {
     fileprivate final func has_expand() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_has_expand, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_has_expand, handle, nil, &_result)
         return _result
     }
     
@@ -707,7 +707,7 @@ open class VideoStreamPlayer: Control {
         withUnsafePointer(to: msec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_buffering_msec, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_buffering_msec, handle, pArgs, nil)
                 }
                 
             }
@@ -732,7 +732,7 @@ open class VideoStreamPlayer: Control {
     fileprivate final func get_buffering_msec() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_buffering_msec, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_buffering_msec, handle, nil, &_result)
         return _result
     }
     
@@ -753,7 +753,7 @@ open class VideoStreamPlayer: Control {
         withUnsafePointer(to: bus.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_bus, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayer.method_set_bus, handle, pArgs, nil)
                 }
                 
             }
@@ -778,7 +778,7 @@ open class VideoStreamPlayer: Control {
     fileprivate final func get_bus() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_bus, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_bus, handle, nil, &_result.content)
         return _result
     }
     
@@ -796,9 +796,9 @@ open class VideoStreamPlayer: Control {
     /// Returns the current frame as a ``Texture2D``.
     public final func getVideoTexture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_video_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(VideoStreamPlayer.method_get_video_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

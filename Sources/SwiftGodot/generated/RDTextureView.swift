@@ -106,7 +106,7 @@ open class RDTextureView: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureView.method_set_format_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureView.method_set_format_override, handle, pArgs, nil)
                 }
                 
             }
@@ -131,7 +131,7 @@ open class RDTextureView: RefCounted {
     fileprivate final func get_format_override() -> RenderingDevice.DataFormat {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDTextureView.method_get_format_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureView.method_get_format_override, handle, nil, &_result)
         return RenderingDevice.DataFormat (rawValue: _result)!
     }
     
@@ -152,7 +152,7 @@ open class RDTextureView: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureView.method_set_swizzle_r, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureView.method_set_swizzle_r, handle, pArgs, nil)
                 }
                 
             }
@@ -177,7 +177,7 @@ open class RDTextureView: RefCounted {
     fileprivate final func get_swizzle_r() -> RenderingDevice.TextureSwizzle {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDTextureView.method_get_swizzle_r, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureView.method_get_swizzle_r, handle, nil, &_result)
         return RenderingDevice.TextureSwizzle (rawValue: _result)!
     }
     
@@ -198,7 +198,7 @@ open class RDTextureView: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureView.method_set_swizzle_g, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureView.method_set_swizzle_g, handle, pArgs, nil)
                 }
                 
             }
@@ -223,7 +223,7 @@ open class RDTextureView: RefCounted {
     fileprivate final func get_swizzle_g() -> RenderingDevice.TextureSwizzle {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDTextureView.method_get_swizzle_g, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureView.method_get_swizzle_g, handle, nil, &_result)
         return RenderingDevice.TextureSwizzle (rawValue: _result)!
     }
     
@@ -244,7 +244,7 @@ open class RDTextureView: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureView.method_set_swizzle_b, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureView.method_set_swizzle_b, handle, pArgs, nil)
                 }
                 
             }
@@ -269,7 +269,7 @@ open class RDTextureView: RefCounted {
     fileprivate final func get_swizzle_b() -> RenderingDevice.TextureSwizzle {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDTextureView.method_get_swizzle_b, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureView.method_get_swizzle_b, handle, nil, &_result)
         return RenderingDevice.TextureSwizzle (rawValue: _result)!
     }
     
@@ -290,7 +290,7 @@ open class RDTextureView: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureView.method_set_swizzle_a, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureView.method_set_swizzle_a, handle, pArgs, nil)
                 }
                 
             }
@@ -315,7 +315,7 @@ open class RDTextureView: RefCounted {
     fileprivate final func get_swizzle_a() -> RenderingDevice.TextureSwizzle {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDTextureView.method_get_swizzle_a, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureView.method_get_swizzle_a, handle, nil, &_result)
         return RenderingDevice.TextureSwizzle (rawValue: _result)!
     }
     

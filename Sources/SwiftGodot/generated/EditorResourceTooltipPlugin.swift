@@ -49,7 +49,7 @@ open class EditorResourceTooltipPlugin: RefCounted {
         withUnsafePointer(to: type.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorResourceTooltipPlugin.method__handles, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorResourceTooltipPlugin.method__handles, handle, pArgs, &_result)
                 }
                 
             }
@@ -83,14 +83,14 @@ open class EditorResourceTooltipPlugin: RefCounted {
     @_documentation(visibility: public)
     open func _makeTooltipForPath(_ path: String, metadata: VariantDictionary, base: Control?) -> Control? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: metadata.content) { pArg1 in
                 withUnsafePointer(to: base?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorResourceTooltipPlugin.method__make_tooltip_for_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(EditorResourceTooltipPlugin.method__make_tooltip_for_path, handle, pArgs, &_result)
                         }
                         
                     }
@@ -101,7 +101,7 @@ open class EditorResourceTooltipPlugin: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_request_thumbnail: GDExtensionMethodBindPtr = {
@@ -123,7 +123,7 @@ open class EditorResourceTooltipPlugin: RefCounted {
             withUnsafePointer(to: control?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorResourceTooltipPlugin.method_request_thumbnail, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorResourceTooltipPlugin.method_request_thumbnail, handle, pArgs, nil)
                     }
                     
                 }
@@ -165,9 +165,9 @@ func _EditorResourceTooltipPlugin_proxy_make_tooltip_for_path (instance: UnsafeM
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorResourceTooltipPlugin else { return }
-    let resolved_2 = args [2]!.load (as: UnsafeRawPointer?.self)
+    let resolved_2 = args [2]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._makeTooltipForPath (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", metadata: VariantDictionary (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee), base: resolved_2 == nil ? nil : lookupObject (nativeHandle: resolved_2!, ownsRef: false) as? Control)
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Control
+    let ret = swiftObject._makeTooltipForPath (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", metadata: VariantDictionary (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee), base: resolved_2 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_2!, ownsRef: false) as? Control)
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // Control
 }
 

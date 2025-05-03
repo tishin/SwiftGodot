@@ -52,7 +52,7 @@ open class ImageTexture: Texture2D {
     
     /// Creates a new ``ImageTexture`` and initializes it by allocating and setting the data from an ``Image``.
     public static func createFromImage(_ image: Image?) -> ImageTexture? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: image?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -63,7 +63,7 @@ open class ImageTexture: Texture2D {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_format: GDExtensionMethodBindPtr = {
@@ -81,7 +81,7 @@ open class ImageTexture: Texture2D {
     public final func getFormat() -> Image.Format {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ImageTexture.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ImageTexture.method_get_format, handle, nil, &_result)
         return Image.Format (rawValue: _result)!
     }
     
@@ -105,7 +105,7 @@ open class ImageTexture: Texture2D {
         withUnsafePointer(to: image?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImageTexture.method_set_image, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImageTexture.method_set_image, handle, pArgs, nil)
                 }
                 
             }
@@ -137,7 +137,7 @@ open class ImageTexture: Texture2D {
         withUnsafePointer(to: image?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImageTexture.method_update, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImageTexture.method_update, handle, pArgs, nil)
                 }
                 
             }
@@ -164,7 +164,7 @@ open class ImageTexture: Texture2D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImageTexture.method_set_size_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImageTexture.method_set_size_override, handle, pArgs, nil)
                 }
                 
             }

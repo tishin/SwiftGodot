@@ -93,7 +93,7 @@ open class XRNode3D: Node3D {
         withUnsafePointer(to: trackerName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRNode3D.method_set_tracker, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRNode3D.method_set_tracker, handle, pArgs, nil)
                 }
                 
             }
@@ -118,7 +118,7 @@ open class XRNode3D: Node3D {
     fileprivate final func get_tracker() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(XRNode3D.method_get_tracker, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XRNode3D.method_get_tracker, handle, nil, &_result.content)
         return _result
     }
     
@@ -139,7 +139,7 @@ open class XRNode3D: Node3D {
         withUnsafePointer(to: pose.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRNode3D.method_set_pose_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRNode3D.method_set_pose_name, handle, pArgs, nil)
                 }
                 
             }
@@ -164,7 +164,7 @@ open class XRNode3D: Node3D {
     fileprivate final func get_pose_name() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(XRNode3D.method_get_pose_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XRNode3D.method_get_pose_name, handle, nil, &_result.content)
         return _result
     }
     
@@ -185,7 +185,7 @@ open class XRNode3D: Node3D {
         withUnsafePointer(to: show) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRNode3D.method_set_show_when_tracked, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRNode3D.method_set_show_when_tracked, handle, pArgs, nil)
                 }
                 
             }
@@ -210,7 +210,7 @@ open class XRNode3D: Node3D {
     fileprivate final func get_show_when_tracked() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XRNode3D.method_get_show_when_tracked, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRNode3D.method_get_show_when_tracked, handle, nil, &_result)
         return _result
     }
     
@@ -229,7 +229,7 @@ open class XRNode3D: Node3D {
     public final func getIsActive() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XRNode3D.method_get_is_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRNode3D.method_get_is_active, handle, nil, &_result)
         return _result
     }
     
@@ -248,7 +248,7 @@ open class XRNode3D: Node3D {
     public final func getHasTrackingData() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XRNode3D.method_get_has_tracking_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRNode3D.method_get_has_tracking_data, handle, nil, &_result)
         return _result
     }
     
@@ -266,9 +266,9 @@ open class XRNode3D: Node3D {
     /// Returns the ``XRPose`` containing the current state of the pose being tracked. This gives access to additional properties of this pose.
     public final func getPose() -> XRPose? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(XRNode3D.method_get_pose, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(XRNode3D.method_get_pose, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_trigger_haptic_pulse: GDExtensionMethodBindPtr = {
@@ -304,7 +304,7 @@ open class XRNode3D: Node3D {
                         withUnsafePointer(to: delaySec) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(XRNode3D.method_trigger_haptic_pulse, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(XRNode3D.method_trigger_haptic_pulse, handle, pArgs, nil)
                                 }
                                 
                             }

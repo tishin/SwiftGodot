@@ -59,7 +59,7 @@ open class ZIPPacker: RefCounted {
             withUnsafePointer(to: append.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ZIPPacker.method_open, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ZIPPacker.method_open, handle, pArgs, &_result)
                     }
                     
                 }
@@ -93,7 +93,7 @@ open class ZIPPacker: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ZIPPacker.method_start_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ZIPPacker.method_start_file, handle, pArgs, &_result)
                 }
                 
             }
@@ -124,7 +124,7 @@ open class ZIPPacker: RefCounted {
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ZIPPacker.method_write_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ZIPPacker.method_write_file, handle, pArgs, &_result)
                 }
                 
             }
@@ -152,7 +152,7 @@ open class ZIPPacker: RefCounted {
     public final func closeFile() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ZIPPacker.method_close_file, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ZIPPacker.method_close_file, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -171,7 +171,7 @@ open class ZIPPacker: RefCounted {
     public final func close() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ZIPPacker.method_close, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ZIPPacker.method_close, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     

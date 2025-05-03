@@ -799,7 +799,7 @@ open class AudioStreamPlaylist: AudioStream {
         withUnsafePointer(to: streamCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_set_stream_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_set_stream_count, handle, pArgs, nil)
                 }
                 
             }
@@ -824,7 +824,7 @@ open class AudioStreamPlaylist: AudioStream {
     fileprivate final func get_stream_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_get_stream_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_get_stream_count, handle, nil, &_result)
         return _result
     }
     
@@ -843,7 +843,7 @@ open class AudioStreamPlaylist: AudioStream {
     public final func getBpm() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_get_bpm, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_get_bpm, handle, nil, &_result)
         return _result
     }
     
@@ -866,7 +866,7 @@ open class AudioStreamPlaylist: AudioStream {
             withUnsafePointer(to: audioStream?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_set_list_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_set_list_stream, handle, pArgs, nil)
                     }
                     
                 }
@@ -893,18 +893,18 @@ open class AudioStreamPlaylist: AudioStream {
     /// Returns the stream at playback position index.
     fileprivate final func get_list_stream(_ streamIndex: Int32) -> AudioStream? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: streamIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_get_list_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_get_list_stream, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_shuffle: GDExtensionMethodBindPtr = {
@@ -924,7 +924,7 @@ open class AudioStreamPlaylist: AudioStream {
         withUnsafePointer(to: shuffle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_set_shuffle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_set_shuffle, handle, pArgs, nil)
                 }
                 
             }
@@ -949,7 +949,7 @@ open class AudioStreamPlaylist: AudioStream {
     fileprivate final func get_shuffle() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_get_shuffle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_get_shuffle, handle, nil, &_result)
         return _result
     }
     
@@ -970,7 +970,7 @@ open class AudioStreamPlaylist: AudioStream {
         withUnsafePointer(to: dec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_set_fade_time, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_set_fade_time, handle, pArgs, nil)
                 }
                 
             }
@@ -995,7 +995,7 @@ open class AudioStreamPlaylist: AudioStream {
     fileprivate final func get_fade_time() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_get_fade_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_get_fade_time, handle, nil, &_result)
         return _result
     }
     
@@ -1016,7 +1016,7 @@ open class AudioStreamPlaylist: AudioStream {
         withUnsafePointer(to: loop) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_set_loop, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_set_loop, handle, pArgs, nil)
                 }
                 
             }
@@ -1041,7 +1041,7 @@ open class AudioStreamPlaylist: AudioStream {
     fileprivate final func has_loop() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_has_loop, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPlaylist.method_has_loop, handle, nil, &_result)
         return _result
     }
     

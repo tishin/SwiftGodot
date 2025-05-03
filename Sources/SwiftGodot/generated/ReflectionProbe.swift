@@ -266,7 +266,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: intensity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_intensity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_intensity, handle, pArgs, nil)
                 }
                 
             }
@@ -291,7 +291,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func get_intensity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_intensity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_intensity, handle, nil, &_result)
         return _result
     }
     
@@ -312,7 +312,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: blendDistance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_blend_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_blend_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -337,7 +337,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func get_blend_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_blend_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_blend_distance, handle, nil, &_result)
         return _result
     }
     
@@ -358,7 +358,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: ambient.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_ambient_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_ambient_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -383,7 +383,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func get_ambient_mode() -> ReflectionProbe.AmbientMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_ambient_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_ambient_mode, handle, nil, &_result)
         return ReflectionProbe.AmbientMode (rawValue: _result)!
     }
     
@@ -404,7 +404,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: ambient) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_ambient_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_ambient_color, handle, pArgs, nil)
                 }
                 
             }
@@ -429,7 +429,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func get_ambient_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_ambient_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_ambient_color, handle, nil, &_result)
         return _result
     }
     
@@ -450,7 +450,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: ambientEnergy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_ambient_color_energy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_ambient_color_energy, handle, pArgs, nil)
                 }
                 
             }
@@ -475,7 +475,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func get_ambient_color_energy() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_ambient_color_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_ambient_color_energy, handle, nil, &_result)
         return _result
     }
     
@@ -496,7 +496,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: maxDistance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_max_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_max_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -521,7 +521,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func get_max_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_max_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_max_distance, handle, nil, &_result)
         return _result
     }
     
@@ -542,7 +542,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_mesh_lod_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_mesh_lod_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -567,7 +567,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func get_mesh_lod_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_mesh_lod_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_mesh_lod_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -588,7 +588,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_size, handle, pArgs, nil)
                 }
                 
             }
@@ -613,7 +613,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func get_size() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -634,7 +634,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: originOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_origin_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_origin_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -659,7 +659,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func get_origin_offset() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_origin_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_origin_offset, handle, nil, &_result)
         return _result
     }
     
@@ -680,7 +680,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_as_interior, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_as_interior, handle, pArgs, nil)
                 }
                 
             }
@@ -705,7 +705,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func is_set_as_interior() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_is_set_as_interior, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_is_set_as_interior, handle, nil, &_result)
         return _result
     }
     
@@ -726,7 +726,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_enable_box_projection, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_enable_box_projection, handle, pArgs, nil)
                 }
                 
             }
@@ -751,7 +751,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func is_box_projection_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_is_box_projection_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_is_box_projection_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -772,7 +772,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_enable_shadows, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_enable_shadows, handle, pArgs, nil)
                 }
                 
             }
@@ -797,7 +797,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func are_shadows_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_are_shadows_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_are_shadows_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -818,7 +818,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: layers) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_cull_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_cull_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -843,7 +843,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func get_cull_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_cull_mask, handle, nil, &_result)
         return _result
     }
     
@@ -864,7 +864,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: layers) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_reflection_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_reflection_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -889,7 +889,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func get_reflection_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_reflection_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_reflection_mask, handle, nil, &_result)
         return _result
     }
     
@@ -910,7 +910,7 @@ open class ReflectionProbe: VisualInstance3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_update_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReflectionProbe.method_set_update_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -935,7 +935,7 @@ open class ReflectionProbe: VisualInstance3D {
     fileprivate final func get_update_mode() -> ReflectionProbe.UpdateMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_update_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReflectionProbe.method_get_update_mode, handle, nil, &_result)
         return ReflectionProbe.UpdateMode (rawValue: _result)!
     }
     

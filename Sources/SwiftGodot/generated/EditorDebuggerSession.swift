@@ -56,7 +56,7 @@ open class EditorDebuggerSession: RefCounted {
             withUnsafePointer(to: data.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorDebuggerSession.method_send_message, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorDebuggerSession.method_send_message, handle, pArgs, nil)
                     }
                     
                 }
@@ -88,7 +88,7 @@ open class EditorDebuggerSession: RefCounted {
                 withUnsafePointer(to: data.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorDebuggerSession.method_toggle_profiler, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorDebuggerSession.method_toggle_profiler, handle, pArgs, nil)
                         }
                         
                     }
@@ -117,7 +117,7 @@ open class EditorDebuggerSession: RefCounted {
     public final func isBreaked() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorDebuggerSession.method_is_breaked, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorDebuggerSession.method_is_breaked, handle, nil, &_result)
         return _result
     }
     
@@ -136,7 +136,7 @@ open class EditorDebuggerSession: RefCounted {
     public final func isDebuggable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorDebuggerSession.method_is_debuggable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorDebuggerSession.method_is_debuggable, handle, nil, &_result)
         return _result
     }
     
@@ -155,7 +155,7 @@ open class EditorDebuggerSession: RefCounted {
     public final func isActive() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorDebuggerSession.method_is_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorDebuggerSession.method_is_active, handle, nil, &_result)
         return _result
     }
     
@@ -176,7 +176,7 @@ open class EditorDebuggerSession: RefCounted {
         withUnsafePointer(to: control?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorDebuggerSession.method_add_session_tab, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorDebuggerSession.method_add_session_tab, handle, pArgs, nil)
                 }
                 
             }
@@ -203,7 +203,7 @@ open class EditorDebuggerSession: RefCounted {
         withUnsafePointer(to: control?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorDebuggerSession.method_remove_session_tab, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorDebuggerSession.method_remove_session_tab, handle, pArgs, nil)
                 }
                 
             }
@@ -233,7 +233,7 @@ open class EditorDebuggerSession: RefCounted {
                 withUnsafePointer(to: enabled) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorDebuggerSession.method_set_breakpoint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorDebuggerSession.method_set_breakpoint, handle, pArgs, nil)
                         }
                         
                     }

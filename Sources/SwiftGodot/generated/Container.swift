@@ -56,7 +56,7 @@ open class Container: Control {
     open func _getAllowedSizeFlagsHorizontal() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(Container.method__get_allowed_size_flags_horizontal, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Container.method__get_allowed_size_flags_horizontal, handle, nil, &_result.content)
         return _result
     }
     
@@ -79,7 +79,7 @@ open class Container: Control {
     open func _getAllowedSizeFlagsVertical() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(Container.method__get_allowed_size_flags_vertical, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Container.method__get_allowed_size_flags_vertical, handle, nil, &_result.content)
         return _result
     }
     
@@ -97,7 +97,7 @@ open class Container: Control {
     /// Queue resort of the contained children. This is called automatically anyway, but can be called upon request.
     public final func queueSort() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Container.method_queue_sort, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Container.method_queue_sort, handle, nil, nil)
         
     }
     
@@ -119,7 +119,7 @@ open class Container: Control {
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Container.method_fit_child_in_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Container.method_fit_child_in_rect, handle, pArgs, nil)
                     }
                     
                 }

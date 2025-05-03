@@ -102,7 +102,7 @@ open class SubViewportContainer: Container {
         withUnsafePointer(to: event?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SubViewportContainer.method__propagate_input_event, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SubViewportContainer.method__propagate_input_event, handle, pArgs, &_result)
                 }
                 
             }
@@ -129,7 +129,7 @@ open class SubViewportContainer: Container {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SubViewportContainer.method_set_stretch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SubViewportContainer.method_set_stretch, handle, pArgs, nil)
                 }
                 
             }
@@ -154,7 +154,7 @@ open class SubViewportContainer: Container {
     fileprivate final func is_stretch_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SubViewportContainer.method_is_stretch_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SubViewportContainer.method_is_stretch_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -175,7 +175,7 @@ open class SubViewportContainer: Container {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SubViewportContainer.method_set_stretch_shrink, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SubViewportContainer.method_set_stretch_shrink, handle, pArgs, nil)
                 }
                 
             }
@@ -200,7 +200,7 @@ open class SubViewportContainer: Container {
     fileprivate final func get_stretch_shrink() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SubViewportContainer.method_get_stretch_shrink, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SubViewportContainer.method_get_stretch_shrink, handle, nil, &_result)
         return _result
     }
     
@@ -221,7 +221,7 @@ open class SubViewportContainer: Container {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SubViewportContainer.method_set_mouse_target, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SubViewportContainer.method_set_mouse_target, handle, pArgs, nil)
                 }
                 
             }
@@ -246,7 +246,7 @@ open class SubViewportContainer: Container {
     fileprivate final func is_mouse_target_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SubViewportContainer.method_is_mouse_target_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SubViewportContainer.method_is_mouse_target_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -269,9 +269,9 @@ func _SubViewportContainer_proxy_propagate_input_event (instance: UnsafeMutableR
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? SubViewportContainer else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._propagateInputEvent (resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? InputEvent)
+    let ret = swiftObject._propagateInputEvent (resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? InputEvent)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 

@@ -82,7 +82,7 @@ open class VisualShaderNodeParameter: VisualShaderNode {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeParameter.method_set_parameter_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeParameter.method_set_parameter_name, handle, pArgs, nil)
                 }
                 
             }
@@ -107,7 +107,7 @@ open class VisualShaderNodeParameter: VisualShaderNode {
     fileprivate final func get_parameter_name() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeParameter.method_get_parameter_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualShaderNodeParameter.method_get_parameter_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -128,7 +128,7 @@ open class VisualShaderNodeParameter: VisualShaderNode {
         withUnsafePointer(to: qualifier.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeParameter.method_set_qualifier, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeParameter.method_set_qualifier, handle, pArgs, nil)
                 }
                 
             }
@@ -153,7 +153,7 @@ open class VisualShaderNodeParameter: VisualShaderNode {
     fileprivate final func get_qualifier() -> VisualShaderNodeParameter.Qualifier {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeParameter.method_get_qualifier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeParameter.method_get_qualifier, handle, nil, &_result)
         return VisualShaderNodeParameter.Qualifier (rawValue: _result)!
     }
     

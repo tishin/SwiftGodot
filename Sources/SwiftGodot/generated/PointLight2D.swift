@@ -94,7 +94,7 @@ open class PointLight2D: Light2D {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PointLight2D.method_set_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PointLight2D.method_set_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -118,9 +118,9 @@ open class PointLight2D: Light2D {
     @inline(__always)
     fileprivate final func get_texture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(PointLight2D.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(PointLight2D.method_get_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_texture_offset: GDExtensionMethodBindPtr = {
@@ -140,7 +140,7 @@ open class PointLight2D: Light2D {
         withUnsafePointer(to: textureOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PointLight2D.method_set_texture_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PointLight2D.method_set_texture_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -165,7 +165,7 @@ open class PointLight2D: Light2D {
     fileprivate final func get_texture_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(PointLight2D.method_get_texture_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PointLight2D.method_get_texture_offset, handle, nil, &_result)
         return _result
     }
     
@@ -186,7 +186,7 @@ open class PointLight2D: Light2D {
         withUnsafePointer(to: textureScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PointLight2D.method_set_texture_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PointLight2D.method_set_texture_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -211,7 +211,7 @@ open class PointLight2D: Light2D {
     fileprivate final func get_texture_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PointLight2D.method_get_texture_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PointLight2D.method_get_texture_scale, handle, nil, &_result)
         return _result
     }
     

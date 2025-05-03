@@ -118,7 +118,7 @@ open class PlaneMesh: PrimitiveMesh {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PlaneMesh.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PlaneMesh.method_set_size, handle, pArgs, nil)
                 }
                 
             }
@@ -143,7 +143,7 @@ open class PlaneMesh: PrimitiveMesh {
     fileprivate final func get_size() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(PlaneMesh.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PlaneMesh.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -164,7 +164,7 @@ open class PlaneMesh: PrimitiveMesh {
         withUnsafePointer(to: subdivide) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PlaneMesh.method_set_subdivide_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PlaneMesh.method_set_subdivide_width, handle, pArgs, nil)
                 }
                 
             }
@@ -189,7 +189,7 @@ open class PlaneMesh: PrimitiveMesh {
     fileprivate final func get_subdivide_width() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PlaneMesh.method_get_subdivide_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PlaneMesh.method_get_subdivide_width, handle, nil, &_result)
         return _result
     }
     
@@ -210,7 +210,7 @@ open class PlaneMesh: PrimitiveMesh {
         withUnsafePointer(to: subdivide) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PlaneMesh.method_set_subdivide_depth, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PlaneMesh.method_set_subdivide_depth, handle, pArgs, nil)
                 }
                 
             }
@@ -235,7 +235,7 @@ open class PlaneMesh: PrimitiveMesh {
     fileprivate final func get_subdivide_depth() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PlaneMesh.method_get_subdivide_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PlaneMesh.method_get_subdivide_depth, handle, nil, &_result)
         return _result
     }
     
@@ -256,7 +256,7 @@ open class PlaneMesh: PrimitiveMesh {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PlaneMesh.method_set_center_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PlaneMesh.method_set_center_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -281,7 +281,7 @@ open class PlaneMesh: PrimitiveMesh {
     fileprivate final func get_center_offset() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(PlaneMesh.method_get_center_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PlaneMesh.method_get_center_offset, handle, nil, &_result)
         return _result
     }
     
@@ -302,7 +302,7 @@ open class PlaneMesh: PrimitiveMesh {
         withUnsafePointer(to: orientation.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PlaneMesh.method_set_orientation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PlaneMesh.method_set_orientation, handle, pArgs, nil)
                 }
                 
             }
@@ -327,7 +327,7 @@ open class PlaneMesh: PrimitiveMesh {
     fileprivate final func get_orientation() -> PlaneMesh.Orientation {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(PlaneMesh.method_get_orientation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PlaneMesh.method_get_orientation, handle, nil, &_result)
         return PlaneMesh.Orientation (rawValue: _result)!
     }
     

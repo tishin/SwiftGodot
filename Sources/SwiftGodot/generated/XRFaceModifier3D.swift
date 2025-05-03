@@ -75,7 +75,7 @@ open class XRFaceModifier3D: Node3D {
         withUnsafePointer(to: trackerName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRFaceModifier3D.method_set_face_tracker, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRFaceModifier3D.method_set_face_tracker, handle, pArgs, nil)
                 }
                 
             }
@@ -100,7 +100,7 @@ open class XRFaceModifier3D: Node3D {
     fileprivate final func get_face_tracker() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(XRFaceModifier3D.method_get_face_tracker, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XRFaceModifier3D.method_get_face_tracker, handle, nil, &_result.content)
         return _result
     }
     
@@ -121,7 +121,7 @@ open class XRFaceModifier3D: Node3D {
         withUnsafePointer(to: target.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRFaceModifier3D.method_set_target, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRFaceModifier3D.method_set_target, handle, pArgs, nil)
                 }
                 
             }
@@ -146,7 +146,7 @@ open class XRFaceModifier3D: Node3D {
     fileprivate final func get_target() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(XRFaceModifier3D.method_get_target, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XRFaceModifier3D.method_get_target, handle, nil, &_result.content)
         return _result
     }
     

@@ -53,7 +53,7 @@ open class AnimationLibrary: Resource {
             withUnsafePointer(to: animation?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationLibrary.method_add_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AnimationLibrary.method_add_animation, handle, pArgs, &_result)
                     }
                     
                 }
@@ -82,7 +82,7 @@ open class AnimationLibrary: Resource {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationLibrary.method_remove_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationLibrary.method_remove_animation, handle, pArgs, nil)
                 }
                 
             }
@@ -110,7 +110,7 @@ open class AnimationLibrary: Resource {
             withUnsafePointer(to: newname.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationLibrary.method_rename_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationLibrary.method_rename_animation, handle, pArgs, nil)
                     }
                     
                 }
@@ -140,7 +140,7 @@ open class AnimationLibrary: Resource {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationLibrary.method_has_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationLibrary.method_has_animation, handle, pArgs, &_result)
                 }
                 
             }
@@ -164,18 +164,18 @@ open class AnimationLibrary: Resource {
     /// Returns the ``Animation`` with the key `name`. If the animation does not exist, `null` is returned and an error is logged.
     public final func getAnimation(name: StringName) -> Animation? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationLibrary.method_get_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationLibrary.method_get_animation, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_animation_list: GDExtensionMethodBindPtr = {
@@ -193,7 +193,7 @@ open class AnimationLibrary: Resource {
     public final func getAnimationList() -> TypedArray<StringName> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(AnimationLibrary.method_get_animation_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationLibrary.method_get_animation_list, handle, nil, &_result)
         return TypedArray<StringName>(takingOver: _result)
     }
     
@@ -212,7 +212,7 @@ open class AnimationLibrary: Resource {
     public final func getAnimationListSize() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AnimationLibrary.method_get_animation_list_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationLibrary.method_get_animation_list_size, handle, nil, &_result)
         return _result
     }
     

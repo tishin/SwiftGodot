@@ -111,7 +111,7 @@ open class AudioStreamGenerator: AudioStream {
         withUnsafePointer(to: hz) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamGenerator.method_set_mix_rate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamGenerator.method_set_mix_rate, handle, pArgs, nil)
                 }
                 
             }
@@ -136,7 +136,7 @@ open class AudioStreamGenerator: AudioStream {
     fileprivate final func get_mix_rate() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStreamGenerator.method_get_mix_rate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamGenerator.method_get_mix_rate, handle, nil, &_result)
         return _result
     }
     
@@ -157,7 +157,7 @@ open class AudioStreamGenerator: AudioStream {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamGenerator.method_set_mix_rate_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamGenerator.method_set_mix_rate_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -182,7 +182,7 @@ open class AudioStreamGenerator: AudioStream {
     fileprivate final func get_mix_rate_mode() -> AudioStreamGenerator.AudioStreamGeneratorMixRate {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AudioStreamGenerator.method_get_mix_rate_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamGenerator.method_get_mix_rate_mode, handle, nil, &_result)
         return AudioStreamGenerator.AudioStreamGeneratorMixRate (rawValue: _result)!
     }
     
@@ -203,7 +203,7 @@ open class AudioStreamGenerator: AudioStream {
         withUnsafePointer(to: seconds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamGenerator.method_set_buffer_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamGenerator.method_set_buffer_length, handle, pArgs, nil)
                 }
                 
             }
@@ -228,7 +228,7 @@ open class AudioStreamGenerator: AudioStream {
     fileprivate final func get_buffer_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStreamGenerator.method_get_buffer_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamGenerator.method_get_buffer_length, handle, nil, &_result)
         return _result
     }
     

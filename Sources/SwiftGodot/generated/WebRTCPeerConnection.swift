@@ -130,7 +130,7 @@ open class WebRTCPeerConnection: RefCounted {
         withUnsafePointer(to: configuration.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_initialize, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_initialize, handle, pArgs, &_result)
                 }
                 
             }
@@ -161,13 +161,13 @@ open class WebRTCPeerConnection: RefCounted {
     /// 
     public final func createDataChannel(label: String, options: VariantDictionary = VariantDictionary ()) -> WebRTCDataChannel? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let label = GString(label)
         withUnsafePointer(to: label.content) { pArg0 in
             withUnsafePointer(to: options.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_create_data_channel, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_create_data_channel, handle, pArgs, &_result)
                     }
                     
                 }
@@ -176,7 +176,7 @@ open class WebRTCPeerConnection: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_create_offer: GDExtensionMethodBindPtr = {
@@ -197,7 +197,7 @@ open class WebRTCPeerConnection: RefCounted {
     public final func createOffer() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_create_offer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_create_offer, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -225,7 +225,7 @@ open class WebRTCPeerConnection: RefCounted {
             withUnsafePointer(to: sdp.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_set_local_description, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_set_local_description, handle, pArgs, &_result)
                     }
                     
                 }
@@ -263,7 +263,7 @@ open class WebRTCPeerConnection: RefCounted {
             withUnsafePointer(to: sdp.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_set_remote_description, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_set_remote_description, handle, pArgs, &_result)
                     }
                     
                 }
@@ -297,7 +297,7 @@ open class WebRTCPeerConnection: RefCounted {
                 withUnsafePointer(to: name.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_add_ice_candidate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_add_ice_candidate, handle, pArgs, &_result)
                         }
                         
                     }
@@ -326,7 +326,7 @@ open class WebRTCPeerConnection: RefCounted {
     public final func poll() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_poll, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -347,7 +347,7 @@ open class WebRTCPeerConnection: RefCounted {
     /// 
     public final func close() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_close, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_close, handle, nil, nil)
         
     }
     
@@ -366,7 +366,7 @@ open class WebRTCPeerConnection: RefCounted {
     public final func getConnectionState() -> WebRTCPeerConnection.ConnectionState {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_get_connection_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_get_connection_state, handle, nil, &_result)
         return WebRTCPeerConnection.ConnectionState (rawValue: _result)!
     }
     
@@ -385,7 +385,7 @@ open class WebRTCPeerConnection: RefCounted {
     public final func getGatheringState() -> WebRTCPeerConnection.GatheringState {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_get_gathering_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_get_gathering_state, handle, nil, &_result)
         return WebRTCPeerConnection.GatheringState (rawValue: _result)!
     }
     
@@ -404,7 +404,7 @@ open class WebRTCPeerConnection: RefCounted {
     public final func getSignalingState() -> WebRTCPeerConnection.SignalingState {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_get_signaling_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCPeerConnection.method_get_signaling_state, handle, nil, &_result)
         return WebRTCPeerConnection.SignalingState (rawValue: _result)!
     }
     

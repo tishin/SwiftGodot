@@ -44,7 +44,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
         withUnsafePointer(to: inputs.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_set_inputs, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_set_inputs, handle, pArgs, nil)
                 }
                 
             }
@@ -69,7 +69,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
     public final func getInputs() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_get_inputs, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_get_inputs, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -91,7 +91,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
         withUnsafePointer(to: outputs.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_set_outputs, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_set_outputs, handle, pArgs, nil)
                 }
                 
             }
@@ -116,7 +116,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
     public final func getOutputs() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_get_outputs, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_get_outputs, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -139,7 +139,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_is_valid_port_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_is_valid_port_name, handle, pArgs, &_result)
                 }
                 
             }
@@ -169,7 +169,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
                 withUnsafePointer(to: name.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_add_input_port, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_add_input_port, handle, pArgs, nil)
                         }
                         
                     }
@@ -200,7 +200,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_remove_input_port, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_remove_input_port, handle, pArgs, nil)
                 }
                 
             }
@@ -225,7 +225,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
     public final func getInputPortCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_get_input_port_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_get_input_port_count, handle, nil, &_result)
         return _result
     }
     
@@ -247,7 +247,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_has_input_port, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_has_input_port, handle, pArgs, &_result)
                 }
                 
             }
@@ -271,7 +271,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
     /// Removes all previously specified input ports.
     public final func clearInputPorts() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_clear_input_ports, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_clear_input_ports, handle, nil, nil)
         
     }
     
@@ -295,7 +295,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
                 withUnsafePointer(to: name.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_add_output_port, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_add_output_port, handle, pArgs, nil)
                         }
                         
                     }
@@ -326,7 +326,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_remove_output_port, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_remove_output_port, handle, pArgs, nil)
                 }
                 
             }
@@ -351,7 +351,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
     public final func getOutputPortCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_get_output_port_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_get_output_port_count, handle, nil, &_result)
         return _result
     }
     
@@ -373,7 +373,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_has_output_port, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_has_output_port, handle, pArgs, &_result)
                 }
                 
             }
@@ -397,7 +397,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
     /// Removes all previously specified output ports.
     public final func clearOutputPorts() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_clear_output_ports, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_clear_output_ports, handle, nil, nil)
         
     }
     
@@ -420,7 +420,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_set_input_port_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_set_input_port_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -450,7 +450,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
             withUnsafePointer(to: type) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_set_input_port_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_set_input_port_type, handle, pArgs, nil)
                     }
                     
                 }
@@ -481,7 +481,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_set_output_port_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_set_output_port_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -511,7 +511,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
             withUnsafePointer(to: type) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_set_output_port_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_set_output_port_type, handle, pArgs, nil)
                     }
                     
                 }
@@ -538,7 +538,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
     public final func getFreeInputPortId() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_get_free_input_port_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_get_free_input_port_id, handle, nil, &_result)
         return _result
     }
     
@@ -557,7 +557,7 @@ open class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
     public final func getFreeOutputPortId() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_get_free_output_port_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeGroupBase.method_get_free_output_port_id, handle, nil, &_result)
         return _result
     }
     

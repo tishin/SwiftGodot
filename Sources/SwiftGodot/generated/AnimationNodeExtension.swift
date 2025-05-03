@@ -51,7 +51,7 @@ open class AnimationNodeExtension: AnimationNode {
             withUnsafePointer(to: testOnly) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationNodeExtension.method__process_animation_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(AnimationNodeExtension.method__process_animation_node, handle, pArgs, &_result.content)
                     }
                     
                 }

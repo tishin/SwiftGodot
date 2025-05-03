@@ -94,7 +94,7 @@ open class ParallaxLayer: Node2D {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParallaxLayer.method_set_motion_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParallaxLayer.method_set_motion_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -119,7 +119,7 @@ open class ParallaxLayer: Node2D {
     fileprivate final func get_motion_scale() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(ParallaxLayer.method_get_motion_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParallaxLayer.method_get_motion_scale, handle, nil, &_result)
         return _result
     }
     
@@ -140,7 +140,7 @@ open class ParallaxLayer: Node2D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParallaxLayer.method_set_motion_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParallaxLayer.method_set_motion_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -165,7 +165,7 @@ open class ParallaxLayer: Node2D {
     fileprivate final func get_motion_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(ParallaxLayer.method_get_motion_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParallaxLayer.method_get_motion_offset, handle, nil, &_result)
         return _result
     }
     
@@ -186,7 +186,7 @@ open class ParallaxLayer: Node2D {
         withUnsafePointer(to: mirror) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParallaxLayer.method_set_mirroring, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParallaxLayer.method_set_mirroring, handle, pArgs, nil)
                 }
                 
             }
@@ -211,7 +211,7 @@ open class ParallaxLayer: Node2D {
     fileprivate final func get_mirroring() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(ParallaxLayer.method_get_mirroring, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParallaxLayer.method_get_mirroring, handle, nil, &_result)
         return _result
     }
     

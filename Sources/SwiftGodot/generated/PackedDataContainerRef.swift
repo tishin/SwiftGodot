@@ -44,7 +44,7 @@ open class PackedDataContainerRef: RefCounted {
     public final func size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PackedDataContainerRef.method_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PackedDataContainerRef.method_size, handle, nil, &_result)
         return _result
     }
     

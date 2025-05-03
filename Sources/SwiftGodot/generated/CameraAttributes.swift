@@ -118,7 +118,7 @@ open class CameraAttributes: Resource {
         withUnsafePointer(to: multiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributes.method_set_exposure_multiplier, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributes.method_set_exposure_multiplier, handle, pArgs, nil)
                 }
                 
             }
@@ -143,7 +143,7 @@ open class CameraAttributes: Resource {
     fileprivate final func get_exposure_multiplier() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributes.method_get_exposure_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributes.method_get_exposure_multiplier, handle, nil, &_result)
         return _result
     }
     
@@ -164,7 +164,7 @@ open class CameraAttributes: Resource {
         withUnsafePointer(to: sensitivity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributes.method_set_exposure_sensitivity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributes.method_set_exposure_sensitivity, handle, pArgs, nil)
                 }
                 
             }
@@ -189,7 +189,7 @@ open class CameraAttributes: Resource {
     fileprivate final func get_exposure_sensitivity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributes.method_get_exposure_sensitivity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributes.method_get_exposure_sensitivity, handle, nil, &_result)
         return _result
     }
     
@@ -210,7 +210,7 @@ open class CameraAttributes: Resource {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributes.method_set_auto_exposure_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributes.method_set_auto_exposure_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -235,7 +235,7 @@ open class CameraAttributes: Resource {
     fileprivate final func is_auto_exposure_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CameraAttributes.method_is_auto_exposure_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributes.method_is_auto_exposure_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -256,7 +256,7 @@ open class CameraAttributes: Resource {
         withUnsafePointer(to: exposureSpeed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributes.method_set_auto_exposure_speed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributes.method_set_auto_exposure_speed, handle, pArgs, nil)
                 }
                 
             }
@@ -281,7 +281,7 @@ open class CameraAttributes: Resource {
     fileprivate final func get_auto_exposure_speed() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributes.method_get_auto_exposure_speed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributes.method_get_auto_exposure_speed, handle, nil, &_result)
         return _result
     }
     
@@ -302,7 +302,7 @@ open class CameraAttributes: Resource {
         withUnsafePointer(to: exposureGrey) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributes.method_set_auto_exposure_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributes.method_set_auto_exposure_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -327,7 +327,7 @@ open class CameraAttributes: Resource {
     fileprivate final func get_auto_exposure_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributes.method_get_auto_exposure_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributes.method_get_auto_exposure_scale, handle, nil, &_result)
         return _result
     }
     

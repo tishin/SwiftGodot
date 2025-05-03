@@ -244,7 +244,7 @@ open class FileDialog: ConfirmationDialog {
     /// Clear all the added filters in the dialog.
     public final func clearFilters() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(FileDialog.method_clear_filters, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(FileDialog.method_clear_filters, handle, nil, nil)
         
     }
     
@@ -273,7 +273,7 @@ open class FileDialog: ConfirmationDialog {
             withUnsafePointer(to: description.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FileDialog.method_add_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FileDialog.method_add_filter, handle, pArgs, nil)
                     }
                     
                 }
@@ -302,7 +302,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: filters.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_set_filters, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileDialog.method_set_filters, handle, pArgs, nil)
                 }
                 
             }
@@ -327,7 +327,7 @@ open class FileDialog: ConfirmationDialog {
     fileprivate final func get_filters() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(FileDialog.method_get_filters, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FileDialog.method_get_filters, handle, nil, &_result.content)
         return _result
     }
     
@@ -345,7 +345,7 @@ open class FileDialog: ConfirmationDialog {
     /// Clear the filter for file names.
     public final func clearFilenameFilter() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(FileDialog.method_clear_filename_filter, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(FileDialog.method_clear_filename_filter, handle, nil, nil)
         
     }
     
@@ -367,7 +367,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: filter.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_set_filename_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileDialog.method_set_filename_filter, handle, pArgs, nil)
                 }
                 
             }
@@ -392,7 +392,7 @@ open class FileDialog: ConfirmationDialog {
     fileprivate final func get_filename_filter() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(FileDialog.method_get_filename_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FileDialog.method_get_filename_filter, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -414,7 +414,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: option) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_get_option_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(FileDialog.method_get_option_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -442,7 +442,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: option) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_get_option_values, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(FileDialog.method_get_option_values, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -470,7 +470,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: option) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_get_option_default, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FileDialog.method_get_option_default, handle, pArgs, &_result)
                 }
                 
             }
@@ -499,7 +499,7 @@ open class FileDialog: ConfirmationDialog {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FileDialog.method_set_option_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FileDialog.method_set_option_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -529,7 +529,7 @@ open class FileDialog: ConfirmationDialog {
             withUnsafePointer(to: values.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FileDialog.method_set_option_values, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FileDialog.method_set_option_values, handle, pArgs, nil)
                     }
                     
                 }
@@ -559,7 +559,7 @@ open class FileDialog: ConfirmationDialog {
             withUnsafePointer(to: defaultValueIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FileDialog.method_set_option_default, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FileDialog.method_set_option_default, handle, pArgs, nil)
                     }
                     
                 }
@@ -588,7 +588,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_set_option_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileDialog.method_set_option_count, handle, pArgs, nil)
                 }
                 
             }
@@ -613,7 +613,7 @@ open class FileDialog: ConfirmationDialog {
     fileprivate final func get_option_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(FileDialog.method_get_option_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileDialog.method_get_option_count, handle, nil, &_result)
         return _result
     }
     
@@ -640,7 +640,7 @@ open class FileDialog: ConfirmationDialog {
                 withUnsafePointer(to: defaultValueIndex) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FileDialog.method_add_option, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(FileDialog.method_add_option, handle, pArgs, nil)
                         }
                         
                     }
@@ -669,7 +669,7 @@ open class FileDialog: ConfirmationDialog {
     public final func getSelectedOptions() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(FileDialog.method_get_selected_options, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FileDialog.method_get_selected_options, handle, nil, &_result.content)
         return _result
     }
     
@@ -688,7 +688,7 @@ open class FileDialog: ConfirmationDialog {
     fileprivate final func get_current_dir() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(FileDialog.method_get_current_dir, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FileDialog.method_get_current_dir, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -707,7 +707,7 @@ open class FileDialog: ConfirmationDialog {
     fileprivate final func get_current_file() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(FileDialog.method_get_current_file, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FileDialog.method_get_current_file, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -726,7 +726,7 @@ open class FileDialog: ConfirmationDialog {
     fileprivate final func get_current_path() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(FileDialog.method_get_current_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FileDialog.method_get_current_path, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -748,7 +748,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: dir.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_set_current_dir, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileDialog.method_set_current_dir, handle, pArgs, nil)
                 }
                 
             }
@@ -776,7 +776,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: file.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_set_current_file, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileDialog.method_set_current_file, handle, pArgs, nil)
                 }
                 
             }
@@ -804,7 +804,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_set_current_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileDialog.method_set_current_path, handle, pArgs, nil)
                 }
                 
             }
@@ -831,7 +831,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: override) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_set_mode_overrides_title, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileDialog.method_set_mode_overrides_title, handle, pArgs, nil)
                 }
                 
             }
@@ -856,7 +856,7 @@ open class FileDialog: ConfirmationDialog {
     fileprivate final func is_mode_overriding_title() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FileDialog.method_is_mode_overriding_title, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileDialog.method_is_mode_overriding_title, handle, nil, &_result)
         return _result
     }
     
@@ -877,7 +877,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_set_file_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileDialog.method_set_file_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -902,7 +902,7 @@ open class FileDialog: ConfirmationDialog {
     fileprivate final func get_file_mode() -> FileDialog.FileMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FileDialog.method_get_file_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileDialog.method_get_file_mode, handle, nil, &_result)
         return FileDialog.FileMode (rawValue: _result)!
     }
     
@@ -925,9 +925,9 @@ open class FileDialog: ConfirmationDialog {
     /// 
     public final func getVbox() -> VBoxContainer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(FileDialog.method_get_vbox, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(FileDialog.method_get_vbox, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_line_edit: GDExtensionMethodBindPtr = {
@@ -947,9 +947,9 @@ open class FileDialog: ConfirmationDialog {
     /// 
     public final func getLineEdit() -> LineEdit? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(FileDialog.method_get_line_edit, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(FileDialog.method_get_line_edit, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_access: GDExtensionMethodBindPtr = {
@@ -969,7 +969,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: access.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_set_access, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileDialog.method_set_access, handle, pArgs, nil)
                 }
                 
             }
@@ -994,7 +994,7 @@ open class FileDialog: ConfirmationDialog {
     fileprivate final func get_access() -> FileDialog.Access {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FileDialog.method_get_access, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileDialog.method_get_access, handle, nil, &_result)
         return FileDialog.Access (rawValue: _result)!
     }
     
@@ -1016,7 +1016,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: dir.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_set_root_subfolder, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileDialog.method_set_root_subfolder, handle, pArgs, nil)
                 }
                 
             }
@@ -1041,7 +1041,7 @@ open class FileDialog: ConfirmationDialog {
     fileprivate final func get_root_subfolder() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(FileDialog.method_get_root_subfolder, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FileDialog.method_get_root_subfolder, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1062,7 +1062,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: show) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_set_show_hidden_files, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileDialog.method_set_show_hidden_files, handle, pArgs, nil)
                 }
                 
             }
@@ -1087,7 +1087,7 @@ open class FileDialog: ConfirmationDialog {
     fileprivate final func is_showing_hidden_files() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FileDialog.method_is_showing_hidden_files, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileDialog.method_is_showing_hidden_files, handle, nil, &_result)
         return _result
     }
     
@@ -1108,7 +1108,7 @@ open class FileDialog: ConfirmationDialog {
         withUnsafePointer(to: native) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileDialog.method_set_use_native_dialog, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileDialog.method_set_use_native_dialog, handle, pArgs, nil)
                 }
                 
             }
@@ -1133,7 +1133,7 @@ open class FileDialog: ConfirmationDialog {
     fileprivate final func get_use_native_dialog() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FileDialog.method_get_use_native_dialog, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FileDialog.method_get_use_native_dialog, handle, nil, &_result)
         return _result
     }
     
@@ -1151,7 +1151,7 @@ open class FileDialog: ConfirmationDialog {
     /// Clear all currently selected items in the dialog.
     public final func deselectAll() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(FileDialog.method_deselect_all, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(FileDialog.method_deselect_all, handle, nil, nil)
         
     }
     
@@ -1172,7 +1172,7 @@ open class FileDialog: ConfirmationDialog {
     /// 
     public final func invalidate() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(FileDialog.method_invalidate, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(FileDialog.method_invalidate, handle, nil, nil)
         
     }
     

@@ -34,7 +34,7 @@ open class JavaScriptBridge: Object {
     /// The shared instance of this class
     public static var shared: JavaScriptBridge {
         return withUnsafePointer(to: &JavaScriptBridge.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -64,7 +64,7 @@ open class JavaScriptBridge: Object {
             withUnsafePointer(to: useGlobalExecutionContext) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_eval, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_eval, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -89,19 +89,19 @@ open class JavaScriptBridge: Object {
     
     /// Returns an interface to a JavaScript object that can be used by scripts. The `interface` must be a valid property of the JavaScript `window`. The callback must accept a single ``VariantArray`` argument, which will contain the JavaScript `arguments`. See ``JavaScriptObject`` for usage.
     public static func getInterface(_ interface: String) -> JavaScriptObject? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let interface = GString(interface)
         withUnsafePointer(to: interface.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_interface, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_interface, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_create_callback: GDExtensionMethodBindPtr = {
@@ -120,18 +120,18 @@ open class JavaScriptBridge: Object {
     /// > Note: The callback function must take exactly one ``VariantArray`` argument, which is going to be the JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments">arguments object</a> converted to an array.
     /// 
     public static func createCallback(callable: Callable) -> JavaScriptObject? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: callable.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_create_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_create_callback, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_is_js_buffer: GDExtensionMethodBindPtr = {
@@ -151,7 +151,7 @@ open class JavaScriptBridge: Object {
         withUnsafePointer(to: javascriptObject?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_js_buffer, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_js_buffer, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -178,7 +178,7 @@ open class JavaScriptBridge: Object {
         withUnsafePointer(to: javascriptBuffer?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_js_buffer_to_packed_byte_array, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_js_buffer_to_packed_byte_array, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -207,7 +207,7 @@ open class JavaScriptBridge: Object {
             if arguments.isEmpty {
                 withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                        gi.object_method_bind_call(method_create_object, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, 1, &_result, nil)
+                        gi.object_method_bind_call(method_create_object, shared.handle, pArgs, 1, &_result, nil)
                     }
                     
                 }
@@ -234,7 +234,7 @@ open class JavaScriptBridge: Object {
                             pArgsBuffer.initializeElement(at: 1 + i, to: contentsPtr + i)
                         }
                     
-                        gi.object_method_bind_call(method_create_object, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, Int64(1 + arguments.count), &_result, nil)
+                        gi.object_method_bind_call(method_create_object, shared.handle, pArgs, Int64(1 + arguments.count), &_result, nil)
                     }                           
                 }
                 
@@ -271,7 +271,7 @@ open class JavaScriptBridge: Object {
                 withUnsafePointer(to: mime.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_download_buffer, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_download_buffer, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -302,7 +302,7 @@ open class JavaScriptBridge: Object {
     /// 
     public static func pwaNeedsUpdate() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_pwa_needs_update, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_pwa_needs_update, shared.handle, nil, &_result)
         return _result
     }
     
@@ -325,7 +325,7 @@ open class JavaScriptBridge: Object {
     /// 
     public static func pwaUpdate() -> GodotError {
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(method_pwa_update, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_pwa_update, shared.handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -345,7 +345,7 @@ open class JavaScriptBridge: Object {
     /// > Note: This is only useful for modules or extensions that can't use ``FileAccess`` to write files.
     /// 
     public static func forceFsSync() {
-        gi.object_method_bind_ptrcall(method_force_fs_sync, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_force_fs_sync, shared.handle, nil, nil)
         
     }
     

@@ -53,9 +53,9 @@ open class EditorFileSystem: Node {
     /// Gets the root directory object.
     public final func getFilesystem() -> EditorFileSystemDirectory? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorFileSystem.method_get_filesystem, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorFileSystem.method_get_filesystem, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_is_scanning: GDExtensionMethodBindPtr = {
@@ -73,7 +73,7 @@ open class EditorFileSystem: Node {
     public final func isScanning() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorFileSystem.method_is_scanning, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorFileSystem.method_is_scanning, handle, nil, &_result)
         return _result
     }
     
@@ -92,7 +92,7 @@ open class EditorFileSystem: Node {
     public final func getScanningProgress() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(EditorFileSystem.method_get_scanning_progress, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorFileSystem.method_get_scanning_progress, handle, nil, &_result)
         return _result
     }
     
@@ -110,7 +110,7 @@ open class EditorFileSystem: Node {
     /// Scan the filesystem for changes.
     public final func scan() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorFileSystem.method_scan, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorFileSystem.method_scan, handle, nil, nil)
         
     }
     
@@ -128,7 +128,7 @@ open class EditorFileSystem: Node {
     /// Check if the source of any imported resource changed.
     public final func scanSources() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorFileSystem.method_scan_sources, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorFileSystem.method_scan_sources, handle, nil, nil)
         
     }
     
@@ -153,7 +153,7 @@ open class EditorFileSystem: Node {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFileSystem.method_update_file, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorFileSystem.method_update_file, handle, pArgs, nil)
                 }
                 
             }
@@ -177,19 +177,19 @@ open class EditorFileSystem: Node {
     /// Returns a view into the filesystem at `path`.
     public final func getFilesystemPath(_ path: String) -> EditorFileSystemDirectory? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFileSystem.method_get_filesystem_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorFileSystem.method_get_filesystem_path, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_file_type: GDExtensionMethodBindPtr = {
@@ -211,7 +211,7 @@ open class EditorFileSystem: Node {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFileSystem.method_get_file_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorFileSystem.method_get_file_type, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -243,7 +243,7 @@ open class EditorFileSystem: Node {
         withUnsafePointer(to: files.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFileSystem.method_reimport_files, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorFileSystem.method_reimport_files, handle, pArgs, nil)
                 }
                 
             }

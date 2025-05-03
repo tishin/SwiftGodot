@@ -175,7 +175,7 @@ open class Parallax2D: Node2D {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Parallax2D.method_set_scroll_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Parallax2D.method_set_scroll_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -200,7 +200,7 @@ open class Parallax2D: Node2D {
     fileprivate final func get_scroll_scale() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Parallax2D.method_get_scroll_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Parallax2D.method_get_scroll_scale, handle, nil, &_result)
         return _result
     }
     
@@ -221,7 +221,7 @@ open class Parallax2D: Node2D {
         withUnsafePointer(to: repeatSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Parallax2D.method_set_repeat_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Parallax2D.method_set_repeat_size, handle, pArgs, nil)
                 }
                 
             }
@@ -246,7 +246,7 @@ open class Parallax2D: Node2D {
     fileprivate final func get_repeat_size() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Parallax2D.method_get_repeat_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Parallax2D.method_get_repeat_size, handle, nil, &_result)
         return _result
     }
     
@@ -267,7 +267,7 @@ open class Parallax2D: Node2D {
         withUnsafePointer(to: repeatTimes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Parallax2D.method_set_repeat_times, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Parallax2D.method_set_repeat_times, handle, pArgs, nil)
                 }
                 
             }
@@ -292,7 +292,7 @@ open class Parallax2D: Node2D {
     fileprivate final func get_repeat_times() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Parallax2D.method_get_repeat_times, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Parallax2D.method_get_repeat_times, handle, nil, &_result)
         return _result
     }
     
@@ -313,7 +313,7 @@ open class Parallax2D: Node2D {
         withUnsafePointer(to: autoscroll) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Parallax2D.method_set_autoscroll, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Parallax2D.method_set_autoscroll, handle, pArgs, nil)
                 }
                 
             }
@@ -338,7 +338,7 @@ open class Parallax2D: Node2D {
     fileprivate final func get_autoscroll() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Parallax2D.method_get_autoscroll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Parallax2D.method_get_autoscroll, handle, nil, &_result)
         return _result
     }
     
@@ -359,7 +359,7 @@ open class Parallax2D: Node2D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Parallax2D.method_set_scroll_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Parallax2D.method_set_scroll_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -384,7 +384,7 @@ open class Parallax2D: Node2D {
     fileprivate final func get_scroll_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Parallax2D.method_get_scroll_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Parallax2D.method_get_scroll_offset, handle, nil, &_result)
         return _result
     }
     
@@ -405,7 +405,7 @@ open class Parallax2D: Node2D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Parallax2D.method_set_screen_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Parallax2D.method_set_screen_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -430,7 +430,7 @@ open class Parallax2D: Node2D {
     fileprivate final func get_screen_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Parallax2D.method_get_screen_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Parallax2D.method_get_screen_offset, handle, nil, &_result)
         return _result
     }
     
@@ -451,7 +451,7 @@ open class Parallax2D: Node2D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Parallax2D.method_set_limit_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Parallax2D.method_set_limit_begin, handle, pArgs, nil)
                 }
                 
             }
@@ -476,7 +476,7 @@ open class Parallax2D: Node2D {
     fileprivate final func get_limit_begin() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Parallax2D.method_get_limit_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Parallax2D.method_get_limit_begin, handle, nil, &_result)
         return _result
     }
     
@@ -497,7 +497,7 @@ open class Parallax2D: Node2D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Parallax2D.method_set_limit_end, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Parallax2D.method_set_limit_end, handle, pArgs, nil)
                 }
                 
             }
@@ -522,7 +522,7 @@ open class Parallax2D: Node2D {
     fileprivate final func get_limit_end() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Parallax2D.method_get_limit_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Parallax2D.method_get_limit_end, handle, nil, &_result)
         return _result
     }
     
@@ -543,7 +543,7 @@ open class Parallax2D: Node2D {
         withUnsafePointer(to: follow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Parallax2D.method_set_follow_viewport, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Parallax2D.method_set_follow_viewport, handle, pArgs, nil)
                 }
                 
             }
@@ -568,7 +568,7 @@ open class Parallax2D: Node2D {
     fileprivate final func get_follow_viewport() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Parallax2D.method_get_follow_viewport, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Parallax2D.method_get_follow_viewport, handle, nil, &_result)
         return _result
     }
     
@@ -589,7 +589,7 @@ open class Parallax2D: Node2D {
         withUnsafePointer(to: ignore) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Parallax2D.method_set_ignore_camera_scroll, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Parallax2D.method_set_ignore_camera_scroll, handle, pArgs, nil)
                 }
                 
             }
@@ -614,7 +614,7 @@ open class Parallax2D: Node2D {
     fileprivate final func is_ignore_camera_scroll() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Parallax2D.method_is_ignore_camera_scroll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Parallax2D.method_is_ignore_camera_scroll, handle, nil, &_result)
         return _result
     }
     

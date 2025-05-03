@@ -61,7 +61,7 @@ open class Font: Resource {
         withUnsafePointer(to: fallbacks.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Font.method_set_fallbacks, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Font.method_set_fallbacks, handle, pArgs, nil)
                 }
                 
             }
@@ -86,7 +86,7 @@ open class Font: Resource {
     fileprivate final func get_fallbacks() -> TypedArray<Font?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Font.method_get_fallbacks, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Font.method_get_fallbacks, handle, nil, &_result)
         return TypedArray<Font?>(takingOver: _result)
     }
     
@@ -116,7 +116,7 @@ open class Font: Resource {
                                         withUnsafePointer(to: baselineOffset) { pArg8 in
                                             withUnsafePointer(to: UnsafeRawPointersN9(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8)) { pArgs in
                                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 9) { pArgs in
-                                                    gi.object_method_bind_ptrcall(Font.method_find_variation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                                    gi.object_method_bind_ptrcall(Font.method_find_variation, handle, pArgs, &_result.content)
                                                 }
                                                 
                                             }
@@ -157,7 +157,7 @@ open class Font: Resource {
     public final func getRids() -> TypedArray<RID> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Font.method_get_rids, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Font.method_get_rids, handle, nil, &_result)
         return TypedArray<RID>(takingOver: _result)
     }
     
@@ -182,7 +182,7 @@ open class Font: Resource {
         withUnsafePointer(to: fontSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Font.method_get_height, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Font.method_get_height, handle, pArgs, &_result)
                 }
                 
             }
@@ -213,7 +213,7 @@ open class Font: Resource {
         withUnsafePointer(to: fontSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Font.method_get_ascent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Font.method_get_ascent, handle, pArgs, &_result)
                 }
                 
             }
@@ -244,7 +244,7 @@ open class Font: Resource {
         withUnsafePointer(to: fontSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Font.method_get_descent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Font.method_get_descent, handle, pArgs, &_result)
                 }
                 
             }
@@ -275,7 +275,7 @@ open class Font: Resource {
         withUnsafePointer(to: fontSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Font.method_get_underline_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Font.method_get_underline_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -306,7 +306,7 @@ open class Font: Resource {
         withUnsafePointer(to: fontSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Font.method_get_underline_thickness, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Font.method_get_underline_thickness, handle, pArgs, &_result)
                 }
                 
             }
@@ -331,7 +331,7 @@ open class Font: Resource {
     public final func getFontName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Font.method_get_font_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Font.method_get_font_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -350,7 +350,7 @@ open class Font: Resource {
     public final func getFontStyleName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Font.method_get_font_style_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Font.method_get_font_style_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -369,7 +369,7 @@ open class Font: Resource {
     public final func getOtNameStrings() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(Font.method_get_ot_name_strings, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Font.method_get_ot_name_strings, handle, nil, &_result.content)
         return _result
     }
     
@@ -388,7 +388,7 @@ open class Font: Resource {
     public final func getFontStyle() -> TextServer.FontStyle {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: TextServer.FontStyle = TextServer.FontStyle ()
-        gi.object_method_bind_ptrcall(Font.method_get_font_style, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Font.method_get_font_style, handle, nil, &_result)
         return _result
     }
     
@@ -407,7 +407,7 @@ open class Font: Resource {
     public final func getFontWeight() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Font.method_get_font_weight, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Font.method_get_font_weight, handle, nil, &_result)
         return _result
     }
     
@@ -426,7 +426,7 @@ open class Font: Resource {
     public final func getFontStretch() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Font.method_get_font_stretch, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Font.method_get_font_stretch, handle, nil, &_result)
         return _result
     }
     
@@ -448,7 +448,7 @@ open class Font: Resource {
         withUnsafePointer(to: spacing.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Font.method_get_spacing, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Font.method_get_spacing, handle, pArgs, &_result)
                 }
                 
             }
@@ -473,7 +473,7 @@ open class Font: Resource {
     public final func getOpentypeFeatures() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(Font.method_get_opentype_features, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Font.method_get_opentype_features, handle, nil, &_result.content)
         return _result
     }
     
@@ -495,7 +495,7 @@ open class Font: Resource {
             withUnsafePointer(to: multiLine) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Font.method_set_cache_capacity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Font.method_set_cache_capacity, handle, pArgs, nil)
                     }
                     
                 }
@@ -539,7 +539,7 @@ open class Font: Resource {
                                 withUnsafePointer(to: orientation.rawValue) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(Font.method_get_string_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                            gi.object_method_bind_ptrcall(Font.method_get_string_size, handle, pArgs, &_result)
                                         }
                                         
                                     }
@@ -591,7 +591,7 @@ open class Font: Resource {
                                         withUnsafePointer(to: orientation.rawValue) { pArg8 in
                                             withUnsafePointer(to: UnsafeRawPointersN9(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8)) { pArgs in
                                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 9) { pArgs in
-                                                    gi.object_method_bind_ptrcall(Font.method_get_multiline_string_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                                    gi.object_method_bind_ptrcall(Font.method_get_multiline_string_size, handle, pArgs, &_result)
                                                 }
                                                 
                                             }
@@ -647,7 +647,7 @@ open class Font: Resource {
                                             withUnsafePointer(to: orientation.rawValue) { pArg9 in
                                                 withUnsafePointer(to: UnsafeRawPointersN10(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9)) { pArgs in
                                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 10) { pArgs in
-                                                        gi.object_method_bind_ptrcall(Font.method_draw_string, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                                        gi.object_method_bind_ptrcall(Font.method_draw_string, handle, pArgs, nil)
                                                     }
                                                     
                                                 }
@@ -707,7 +707,7 @@ open class Font: Resource {
                                                     withUnsafePointer(to: orientation.rawValue) { pArg11 in
                                                         withUnsafePointer(to: UnsafeRawPointersN12(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9, pArg10, pArg11)) { pArgs in
                                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 12) { pArgs in
-                                                                gi.object_method_bind_ptrcall(Font.method_draw_multiline_string, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                                                gi.object_method_bind_ptrcall(Font.method_draw_multiline_string, handle, pArgs, nil)
                                                             }
                                                             
                                                         }
@@ -770,7 +770,7 @@ open class Font: Resource {
                                                 withUnsafePointer(to: orientation.rawValue) { pArg10 in
                                                     withUnsafePointer(to: UnsafeRawPointersN11(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9, pArg10)) { pArgs in
                                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 11) { pArgs in
-                                                            gi.object_method_bind_ptrcall(Font.method_draw_string_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                                            gi.object_method_bind_ptrcall(Font.method_draw_string_outline, handle, pArgs, nil)
                                                         }
                                                         
                                                     }
@@ -833,7 +833,7 @@ open class Font: Resource {
                                                         withUnsafePointer(to: orientation.rawValue) { pArg12 in
                                                             withUnsafePointer(to: UnsafeRawPointersN13(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9, pArg10, pArg11, pArg12)) { pArgs in
                                                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 13) { pArgs in
-                                                                    gi.object_method_bind_ptrcall(Font.method_draw_multiline_string_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                                                    gi.object_method_bind_ptrcall(Font.method_draw_multiline_string_outline, handle, pArgs, nil)
                                                                 }
                                                                 
                                                             }
@@ -889,7 +889,7 @@ open class Font: Resource {
             withUnsafePointer(to: fontSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Font.method_get_char_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Font.method_get_char_size, handle, pArgs, &_result)
                     }
                     
                 }
@@ -926,7 +926,7 @@ open class Font: Resource {
                         withUnsafePointer(to: modulate) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(Font.method_draw_char, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(Font.method_draw_char, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -970,7 +970,7 @@ open class Font: Resource {
                             withUnsafePointer(to: modulate) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(Font.method_draw_char_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                        gi.object_method_bind_ptrcall(Font.method_draw_char_outline, handle, pArgs, &_result)
                                     }
                                     
                                 }
@@ -1008,7 +1008,7 @@ open class Font: Resource {
         withUnsafePointer(to: char) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Font.method_has_char, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Font.method_has_char, handle, pArgs, &_result)
                 }
                 
             }
@@ -1036,7 +1036,7 @@ open class Font: Resource {
     public final func getSupportedChars() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Font.method_get_supported_chars, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Font.method_get_supported_chars, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1059,7 +1059,7 @@ open class Font: Resource {
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Font.method_is_language_supported, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Font.method_is_language_supported, handle, pArgs, &_result)
                 }
                 
             }
@@ -1088,7 +1088,7 @@ open class Font: Resource {
         withUnsafePointer(to: script.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Font.method_is_script_supported, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Font.method_is_script_supported, handle, pArgs, &_result)
                 }
                 
             }
@@ -1113,7 +1113,7 @@ open class Font: Resource {
     public final func getSupportedFeatureList() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(Font.method_get_supported_feature_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Font.method_get_supported_feature_list, handle, nil, &_result.content)
         return _result
     }
     
@@ -1139,7 +1139,7 @@ open class Font: Resource {
     public final func getSupportedVariationList() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(Font.method_get_supported_variation_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Font.method_get_supported_variation_list, handle, nil, &_result.content)
         return _result
     }
     
@@ -1158,7 +1158,7 @@ open class Font: Resource {
     public final func getFaceCount() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(Font.method_get_face_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Font.method_get_face_count, handle, nil, &_result)
         return _result
     }
     

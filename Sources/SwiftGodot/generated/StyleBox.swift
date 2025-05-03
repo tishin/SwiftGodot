@@ -115,7 +115,7 @@ open class StyleBox: Resource {
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(StyleBox.method__draw, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(StyleBox.method__draw, handle, pArgs, nil)
                     }
                     
                 }
@@ -146,7 +146,7 @@ open class StyleBox: Resource {
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBox.method__get_draw_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(StyleBox.method__get_draw_rect, handle, pArgs, &_result)
                 }
                 
             }
@@ -172,7 +172,7 @@ open class StyleBox: Resource {
     open func _getMinimumSize() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(StyleBox.method__get_minimum_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBox.method__get_minimum_size, handle, nil, &_result)
         return _result
     }
     
@@ -196,7 +196,7 @@ open class StyleBox: Resource {
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(StyleBox.method__test_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(StyleBox.method__test_mask, handle, pArgs, &_result)
                     }
                     
                 }
@@ -223,7 +223,7 @@ open class StyleBox: Resource {
     public final func getMinimumSize() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(StyleBox.method_get_minimum_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBox.method_get_minimum_size, handle, nil, &_result)
         return _result
     }
     
@@ -246,7 +246,7 @@ open class StyleBox: Resource {
             withUnsafePointer(to: offset) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(StyleBox.method_set_content_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(StyleBox.method_set_content_margin, handle, pArgs, nil)
                     }
                     
                 }
@@ -275,7 +275,7 @@ open class StyleBox: Resource {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBox.method_set_content_margin_all, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBox.method_set_content_margin_all, handle, pArgs, nil)
                 }
                 
             }
@@ -304,7 +304,7 @@ open class StyleBox: Resource {
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBox.method_get_content_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(StyleBox.method_get_content_margin, handle, pArgs, &_result)
                 }
                 
             }
@@ -335,7 +335,7 @@ open class StyleBox: Resource {
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBox.method_get_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(StyleBox.method_get_margin, handle, pArgs, &_result)
                 }
                 
             }
@@ -360,7 +360,7 @@ open class StyleBox: Resource {
     public final func getOffset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(StyleBox.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBox.method_get_offset, handle, nil, &_result)
         return _result
     }
     
@@ -385,7 +385,7 @@ open class StyleBox: Resource {
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(StyleBox.method_draw, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(StyleBox.method_draw, handle, pArgs, nil)
                     }
                     
                 }
@@ -411,9 +411,9 @@ open class StyleBox: Resource {
     /// Returns the ``CanvasItem`` that handles its ``CanvasItem/notificationDraw`` or ``CanvasItem/_draw()`` callback at this moment.
     public final func getCurrentItemDrawn() -> CanvasItem? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(StyleBox.method_get_current_item_drawn, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(StyleBox.method_get_current_item_drawn, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_test_mask: GDExtensionMethodBindPtr = {
@@ -435,7 +435,7 @@ open class StyleBox: Resource {
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(StyleBox.method_test_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(StyleBox.method_test_mask, handle, pArgs, &_result)
                     }
                     
                 }

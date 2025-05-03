@@ -58,7 +58,7 @@ open class InputEventFromWindow: InputEvent {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventFromWindow.method_set_window_id, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventFromWindow.method_set_window_id, handle, pArgs, nil)
                 }
                 
             }
@@ -83,7 +83,7 @@ open class InputEventFromWindow: InputEvent {
     fileprivate final func get_window_id() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(InputEventFromWindow.method_get_window_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventFromWindow.method_get_window_id, handle, nil, &_result)
         return _result
     }
     

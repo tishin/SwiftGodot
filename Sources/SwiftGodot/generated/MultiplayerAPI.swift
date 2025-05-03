@@ -81,7 +81,7 @@ open class MultiplayerAPI: RefCounted {
     public final func hasMultiplayerPeer() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(MultiplayerAPI.method_has_multiplayer_peer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerAPI.method_has_multiplayer_peer, handle, nil, &_result)
         return _result
     }
     
@@ -99,9 +99,9 @@ open class MultiplayerAPI: RefCounted {
     @inline(__always)
     fileprivate final func get_multiplayer_peer() -> MultiplayerPeer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(MultiplayerAPI.method_get_multiplayer_peer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(MultiplayerAPI.method_get_multiplayer_peer, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_multiplayer_peer: GDExtensionMethodBindPtr = {
@@ -121,7 +121,7 @@ open class MultiplayerAPI: RefCounted {
         withUnsafePointer(to: peer?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerAPI.method_set_multiplayer_peer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerAPI.method_set_multiplayer_peer, handle, pArgs, nil)
                 }
                 
             }
@@ -146,7 +146,7 @@ open class MultiplayerAPI: RefCounted {
     public final func getUniqueId() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MultiplayerAPI.method_get_unique_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerAPI.method_get_unique_id, handle, nil, &_result)
         return _result
     }
     
@@ -165,7 +165,7 @@ open class MultiplayerAPI: RefCounted {
     public final func isServer() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(MultiplayerAPI.method_is_server, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerAPI.method_is_server, handle, nil, &_result)
         return _result
     }
     
@@ -187,7 +187,7 @@ open class MultiplayerAPI: RefCounted {
     public final func getRemoteSenderId() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MultiplayerAPI.method_get_remote_sender_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerAPI.method_get_remote_sender_id, handle, nil, &_result)
         return _result
     }
     
@@ -209,7 +209,7 @@ open class MultiplayerAPI: RefCounted {
     public final func poll() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(MultiplayerAPI.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerAPI.method_poll, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -237,7 +237,7 @@ open class MultiplayerAPI: RefCounted {
                     withUnsafePointer(to: arguments.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(MultiplayerAPI.method_rpc, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(MultiplayerAPI.method_rpc, handle, pArgs, &_result)
                             }
                             
                         }
@@ -275,7 +275,7 @@ open class MultiplayerAPI: RefCounted {
             withUnsafePointer(to: configuration.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MultiplayerAPI.method_object_configuration_add, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(MultiplayerAPI.method_object_configuration_add, handle, pArgs, &_result)
                     }
                     
                 }
@@ -309,7 +309,7 @@ open class MultiplayerAPI: RefCounted {
             withUnsafePointer(to: configuration.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MultiplayerAPI.method_object_configuration_remove, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(MultiplayerAPI.method_object_configuration_remove, handle, pArgs, &_result)
                     }
                     
                 }
@@ -336,7 +336,7 @@ open class MultiplayerAPI: RefCounted {
     public final func getPeers() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(MultiplayerAPI.method_get_peers, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(MultiplayerAPI.method_get_peers, handle, nil, &_result.content)
         return _result
     }
     
@@ -397,9 +397,9 @@ open class MultiplayerAPI: RefCounted {
     
     /// Returns a new instance of the default MultiplayerAPI.
     public static func createDefaultInterface() -> MultiplayerAPI? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         gi.object_method_bind_ptrcall(method_create_default_interface, nil, nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

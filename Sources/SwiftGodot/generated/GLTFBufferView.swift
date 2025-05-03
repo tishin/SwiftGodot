@@ -122,7 +122,7 @@ open class GLTFBufferView: Resource {
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFBufferView.method_load_buffer_view_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(GLTFBufferView.method_load_buffer_view_data, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -147,7 +147,7 @@ open class GLTFBufferView: Resource {
     fileprivate final func get_buffer() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFBufferView.method_get_buffer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFBufferView.method_get_buffer, handle, nil, &_result)
         return _result
     }
     
@@ -168,7 +168,7 @@ open class GLTFBufferView: Resource {
         withUnsafePointer(to: buffer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFBufferView.method_set_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFBufferView.method_set_buffer, handle, pArgs, nil)
                 }
                 
             }
@@ -193,7 +193,7 @@ open class GLTFBufferView: Resource {
     fileprivate final func get_byte_offset() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFBufferView.method_get_byte_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFBufferView.method_get_byte_offset, handle, nil, &_result)
         return _result
     }
     
@@ -214,7 +214,7 @@ open class GLTFBufferView: Resource {
         withUnsafePointer(to: byteOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFBufferView.method_set_byte_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFBufferView.method_set_byte_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -239,7 +239,7 @@ open class GLTFBufferView: Resource {
     fileprivate final func get_byte_length() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFBufferView.method_get_byte_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFBufferView.method_get_byte_length, handle, nil, &_result)
         return _result
     }
     
@@ -260,7 +260,7 @@ open class GLTFBufferView: Resource {
         withUnsafePointer(to: byteLength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFBufferView.method_set_byte_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFBufferView.method_set_byte_length, handle, pArgs, nil)
                 }
                 
             }
@@ -285,7 +285,7 @@ open class GLTFBufferView: Resource {
     fileprivate final func get_byte_stride() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFBufferView.method_get_byte_stride, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFBufferView.method_get_byte_stride, handle, nil, &_result)
         return _result
     }
     
@@ -306,7 +306,7 @@ open class GLTFBufferView: Resource {
         withUnsafePointer(to: byteStride) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFBufferView.method_set_byte_stride, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFBufferView.method_set_byte_stride, handle, pArgs, nil)
                 }
                 
             }
@@ -331,7 +331,7 @@ open class GLTFBufferView: Resource {
     fileprivate final func get_indices() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GLTFBufferView.method_get_indices, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFBufferView.method_get_indices, handle, nil, &_result)
         return _result
     }
     
@@ -352,7 +352,7 @@ open class GLTFBufferView: Resource {
         withUnsafePointer(to: indices) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFBufferView.method_set_indices, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFBufferView.method_set_indices, handle, pArgs, nil)
                 }
                 
             }
@@ -377,7 +377,7 @@ open class GLTFBufferView: Resource {
     fileprivate final func get_vertex_attributes() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GLTFBufferView.method_get_vertex_attributes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFBufferView.method_get_vertex_attributes, handle, nil, &_result)
         return _result
     }
     
@@ -398,7 +398,7 @@ open class GLTFBufferView: Resource {
         withUnsafePointer(to: isAttributes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFBufferView.method_set_vertex_attributes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFBufferView.method_set_vertex_attributes, handle, pArgs, nil)
                 }
                 
             }

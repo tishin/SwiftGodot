@@ -485,7 +485,7 @@ open class RichTextLabel: Control {
     public final func getParsedText() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_parsed_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_parsed_text, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -507,7 +507,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_add_text, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_add_text, handle, pArgs, nil)
                 }
                 
             }
@@ -535,7 +535,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_text, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_text, handle, pArgs, nil)
                 }
                 
             }
@@ -583,7 +583,7 @@ open class RichTextLabel: Control {
                                             withUnsafePointer(to: sizeInPercent) { pArg9 in
                                                 withUnsafePointer(to: UnsafeRawPointersN10(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9)) { pArgs in
                                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 10) { pArgs in
-                                                        gi.object_method_bind_ptrcall(RichTextLabel.method_add_image, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                                        gi.object_method_bind_ptrcall(RichTextLabel.method_add_image, handle, pArgs, nil)
                                                     }
                                                     
                                                 }
@@ -639,7 +639,7 @@ open class RichTextLabel: Control {
                                                 withUnsafePointer(to: sizeInPercent) { pArg10 in
                                                     withUnsafePointer(to: UnsafeRawPointersN11(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9, pArg10)) { pArgs in
                                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 11) { pArgs in
-                                                            gi.object_method_bind_ptrcall(RichTextLabel.method_update_image, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                                            gi.object_method_bind_ptrcall(RichTextLabel.method_update_image, handle, pArgs, nil)
                                                         }
                                                         
                                                     }
@@ -683,7 +683,7 @@ open class RichTextLabel: Control {
     /// Adds a newline tag to the tag stack.
     public final func newline() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_newline, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_newline, handle, nil, nil)
         
     }
     
@@ -711,7 +711,7 @@ open class RichTextLabel: Control {
             withUnsafePointer(to: noInvalidate) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RichTextLabel.method_remove_paragraph, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(RichTextLabel.method_remove_paragraph, handle, pArgs, &_result)
                     }
                     
                 }
@@ -741,7 +741,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: paragraph) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_invalidate_paragraph, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_invalidate_paragraph, handle, pArgs, &_result)
                 }
                 
             }
@@ -772,7 +772,7 @@ open class RichTextLabel: Control {
             withUnsafePointer(to: fontSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RichTextLabel.method_push_font, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RichTextLabel.method_push_font, handle, pArgs, nil)
                     }
                     
                 }
@@ -801,7 +801,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: fontSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_font_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_font_size, handle, pArgs, nil)
                 }
                 
             }
@@ -825,7 +825,7 @@ open class RichTextLabel: Control {
     /// Adds a [code skip-lint][font]` tag with a normal font to the tag stack.
     public final func pushNormal() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_push_normal, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_push_normal, handle, nil, nil)
         
     }
     
@@ -843,7 +843,7 @@ open class RichTextLabel: Control {
     /// Adds a [code skip-lint][font]` tag with a bold font to the tag stack. This is the same as adding a [code skip-lint]**` tag if not currently in a [code skip-lint]_` tag.
     public final func pushBold() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_push_bold, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_push_bold, handle, nil, nil)
         
     }
     
@@ -861,7 +861,7 @@ open class RichTextLabel: Control {
     /// Adds a [code skip-lint][font]` tag with a bold italics font to the tag stack.
     public final func pushBoldItalics() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_push_bold_italics, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_push_bold_italics, handle, nil, nil)
         
     }
     
@@ -879,7 +879,7 @@ open class RichTextLabel: Control {
     /// Adds a [code skip-lint][font]` tag with an italics font to the tag stack. This is the same as adding an [code skip-lint]_` tag if not currently in a [code skip-lint]**` tag.
     public final func pushItalics() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_push_italics, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_push_italics, handle, nil, nil)
         
     }
     
@@ -897,7 +897,7 @@ open class RichTextLabel: Control {
     /// Adds a [code skip-lint][font]` tag with a monospace font to the tag stack.
     public final func pushMono() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_push_mono, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_push_mono, handle, nil, nil)
         
     }
     
@@ -918,7 +918,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_color, handle, pArgs, nil)
                 }
                 
             }
@@ -945,7 +945,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: outlineSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_outline_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_outline_size, handle, pArgs, nil)
                 }
                 
             }
@@ -972,7 +972,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_outline_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_outline_color, handle, pArgs, nil)
                 }
                 
             }
@@ -1005,7 +1005,7 @@ open class RichTextLabel: Control {
                             withUnsafePointer(to: tabStops.content) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(RichTextLabel.method_push_paragraph, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(RichTextLabel.method_push_paragraph, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -1042,7 +1042,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: level) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_indent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_indent, handle, pArgs, nil)
                 }
                 
             }
@@ -1073,7 +1073,7 @@ open class RichTextLabel: Control {
                     withUnsafePointer(to: bullet.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(RichTextLabel.method_push_list, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(RichTextLabel.method_push_list, handle, pArgs, nil)
                             }
                             
                         }
@@ -1114,7 +1114,7 @@ open class RichTextLabel: Control {
                 withUnsafePointer(to: tooltip.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RichTextLabel.method_push_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(RichTextLabel.method_push_meta, handle, pArgs, nil)
                         }
                         
                     }
@@ -1146,7 +1146,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: description.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_hint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_hint, handle, pArgs, nil)
                 }
                 
             }
@@ -1174,7 +1174,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_language, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_language, handle, pArgs, nil)
                 }
                 
             }
@@ -1198,7 +1198,7 @@ open class RichTextLabel: Control {
     /// Adds a [code skip-lint][u]` tag to the tag stack.
     public final func pushUnderline() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_push_underline, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_push_underline, handle, nil, nil)
         
     }
     
@@ -1216,7 +1216,7 @@ open class RichTextLabel: Control {
     /// Adds a [code skip-lint][s]` tag to the tag stack.
     public final func pushStrikethrough() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_push_strikethrough, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_push_strikethrough, handle, nil, nil)
         
     }
     
@@ -1239,7 +1239,7 @@ open class RichTextLabel: Control {
                 withUnsafePointer(to: alignToRow) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RichTextLabel.method_push_table, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(RichTextLabel.method_push_table, handle, pArgs, nil)
                         }
                         
                     }
@@ -1277,7 +1277,7 @@ open class RichTextLabel: Control {
                                 withUnsafePointer(to: outlineColor) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(RichTextLabel.method_push_dropcap, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                            gi.object_method_bind_ptrcall(RichTextLabel.method_push_dropcap, handle, pArgs, nil)
                                         }
                                         
                                     }
@@ -1324,7 +1324,7 @@ open class RichTextLabel: Control {
                     withUnsafePointer(to: shrink) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(RichTextLabel.method_set_table_column_expand, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(RichTextLabel.method_set_table_column_expand, handle, pArgs, nil)
                             }
                             
                         }
@@ -1358,7 +1358,7 @@ open class RichTextLabel: Control {
             withUnsafePointer(to: evenRowBg) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RichTextLabel.method_set_cell_row_background_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RichTextLabel.method_set_cell_row_background_color, handle, pArgs, nil)
                     }
                     
                 }
@@ -1387,7 +1387,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_cell_border_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_cell_border_color, handle, pArgs, nil)
                 }
                 
             }
@@ -1415,7 +1415,7 @@ open class RichTextLabel: Control {
             withUnsafePointer(to: maxSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RichTextLabel.method_set_cell_size_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RichTextLabel.method_set_cell_size_override, handle, pArgs, nil)
                     }
                     
                 }
@@ -1444,7 +1444,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: padding) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_cell_padding, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_cell_padding, handle, pArgs, nil)
                 }
                 
             }
@@ -1468,7 +1468,7 @@ open class RichTextLabel: Control {
     /// Adds a [code skip-lint][cell]` tag to the tag stack. Must be inside a [code skip-lint][table]` tag. See ``pushTable(columns:inlineAlign:alignToRow:)`` for details. Use ``setTableColumnExpand(column:expand:ratio:shrink:)`` to set column expansion ratio, ``setCellBorderColor(_:)`` to set cell border, ``setCellRowBackgroundColor(oddRowBg:evenRowBg:)`` to set cell background, ``setCellSizeOverride(minSize:maxSize:)`` to override cell size, and ``setCellPadding(_:)`` to set padding.
     public final func pushCell() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_push_cell, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_push_cell, handle, nil, nil)
         
     }
     
@@ -1489,7 +1489,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: fgcolor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_fgcolor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_fgcolor, handle, pArgs, nil)
                 }
                 
             }
@@ -1516,7 +1516,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: bgcolor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_bgcolor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_push_bgcolor, handle, pArgs, nil)
                 }
                 
             }
@@ -1544,7 +1544,7 @@ open class RichTextLabel: Control {
             withUnsafePointer(to: env.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RichTextLabel.method_push_customfx, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RichTextLabel.method_push_customfx, handle, pArgs, nil)
                     }
                     
                 }
@@ -1570,7 +1570,7 @@ open class RichTextLabel: Control {
     /// Adds a context marker to the tag stack. See ``popContext()``.
     public final func pushContext() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_push_context, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_push_context, handle, nil, nil)
         
     }
     
@@ -1588,7 +1588,7 @@ open class RichTextLabel: Control {
     /// Terminates tags opened after the last ``pushContext()`` call (including context marker), or all tags if there's no context marker on the stack.
     public final func popContext() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_pop_context, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_pop_context, handle, nil, nil)
         
     }
     
@@ -1606,7 +1606,7 @@ open class RichTextLabel: Control {
     /// Terminates the current tag. Use after `push_*` methods to close BBCodes manually. Does not need to follow `add_*` methods.
     public final func pop() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_pop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_pop, handle, nil, nil)
         
     }
     
@@ -1624,7 +1624,7 @@ open class RichTextLabel: Control {
     /// Terminates all tags opened by `push_*` methods.
     public final func popAll() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_pop_all, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_pop_all, handle, nil, nil)
         
     }
     
@@ -1645,7 +1645,7 @@ open class RichTextLabel: Control {
     /// 
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_clear, handle, nil, nil)
         
     }
     
@@ -1666,7 +1666,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: parser.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_structured_text_bidi_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_structured_text_bidi_override, handle, pArgs, nil)
                 }
                 
             }
@@ -1691,7 +1691,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_structured_text_bidi_override() -> TextServer.StructuredTextParser {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_structured_text_bidi_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_structured_text_bidi_override, handle, nil, &_result)
         return TextServer.StructuredTextParser (rawValue: _result)!
     }
     
@@ -1712,7 +1712,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: args.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_structured_text_bidi_override_options, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_structured_text_bidi_override_options, handle, pArgs, nil)
                 }
                 
             }
@@ -1737,7 +1737,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_structured_text_bidi_override_options() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_structured_text_bidi_override_options, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_structured_text_bidi_override_options, handle, nil, &_result.content)
         return _result
     }
     
@@ -1758,7 +1758,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_text_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_text_direction, handle, pArgs, nil)
                 }
                 
             }
@@ -1783,7 +1783,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_text_direction() -> Control.TextDirection {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_text_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_text_direction, handle, nil, &_result)
         return Control.TextDirection (rawValue: _result)!
     }
     
@@ -1805,7 +1805,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_language, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_language, handle, pArgs, nil)
                 }
                 
             }
@@ -1830,7 +1830,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_language() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_language, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_language, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1851,7 +1851,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_horizontal_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_horizontal_alignment, handle, pArgs, nil)
                 }
                 
             }
@@ -1876,7 +1876,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_horizontal_alignment() -> HorizontalAlignment {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_horizontal_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_horizontal_alignment, handle, nil, &_result)
         return HorizontalAlignment (rawValue: _result)!
     }
     
@@ -1897,7 +1897,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_vertical_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_vertical_alignment, handle, pArgs, nil)
                 }
                 
             }
@@ -1922,7 +1922,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_vertical_alignment() -> VerticalAlignment {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_vertical_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_vertical_alignment, handle, nil, &_result)
         return VerticalAlignment (rawValue: _result)!
     }
     
@@ -1943,7 +1943,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: justificationFlags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_justification_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_justification_flags, handle, pArgs, nil)
                 }
                 
             }
@@ -1968,7 +1968,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_justification_flags() -> TextServer.JustificationFlag {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: TextServer.JustificationFlag = TextServer.JustificationFlag ()
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_justification_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_justification_flags, handle, nil, &_result)
         return _result
     }
     
@@ -1989,7 +1989,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: tabStops.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_tab_stops, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_tab_stops, handle, pArgs, nil)
                 }
                 
             }
@@ -2014,7 +2014,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_tab_stops() -> PackedFloat32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_tab_stops, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_tab_stops, handle, nil, &_result.content)
         return _result
     }
     
@@ -2035,7 +2035,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: autowrapMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_autowrap_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_autowrap_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -2060,7 +2060,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_autowrap_mode() -> TextServer.AutowrapMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_autowrap_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_autowrap_mode, handle, nil, &_result)
         return TextServer.AutowrapMode (rawValue: _result)!
     }
     
@@ -2081,7 +2081,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_meta_underline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_meta_underline, handle, pArgs, nil)
                 }
                 
             }
@@ -2106,7 +2106,7 @@ open class RichTextLabel: Control {
     fileprivate final func is_meta_underlined() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_meta_underlined, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_meta_underlined, handle, nil, &_result)
         return _result
     }
     
@@ -2127,7 +2127,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_hint_underline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_hint_underline, handle, pArgs, nil)
                 }
                 
             }
@@ -2152,7 +2152,7 @@ open class RichTextLabel: Control {
     fileprivate final func is_hint_underlined() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_hint_underlined, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_hint_underlined, handle, nil, &_result)
         return _result
     }
     
@@ -2173,7 +2173,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_scroll_active, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_scroll_active, handle, pArgs, nil)
                 }
                 
             }
@@ -2198,7 +2198,7 @@ open class RichTextLabel: Control {
     fileprivate final func is_scroll_active() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_scroll_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_scroll_active, handle, nil, &_result)
         return _result
     }
     
@@ -2219,7 +2219,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: follow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_scroll_follow, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_scroll_follow, handle, pArgs, nil)
                 }
                 
             }
@@ -2244,7 +2244,7 @@ open class RichTextLabel: Control {
     fileprivate final func is_scroll_following() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_scroll_following, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_scroll_following, handle, nil, &_result)
         return _result
     }
     
@@ -2265,9 +2265,9 @@ open class RichTextLabel: Control {
     /// 
     public final func getVScrollBar() -> VScrollBar? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_v_scroll_bar, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_v_scroll_bar, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_scroll_to_line: GDExtensionMethodBindPtr = {
@@ -2287,7 +2287,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_scroll_to_line, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_scroll_to_line, handle, pArgs, nil)
                 }
                 
             }
@@ -2314,7 +2314,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: paragraph) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_scroll_to_paragraph, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_scroll_to_paragraph, handle, pArgs, nil)
                 }
                 
             }
@@ -2338,7 +2338,7 @@ open class RichTextLabel: Control {
     /// Scrolls to the beginning of the current selection.
     public final func scrollToSelection() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_scroll_to_selection, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_scroll_to_selection, handle, nil, nil)
         
     }
     
@@ -2359,7 +2359,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: spaces) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_tab_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_tab_size, handle, pArgs, nil)
                 }
                 
             }
@@ -2384,7 +2384,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_tab_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_tab_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_tab_size, handle, nil, &_result)
         return _result
     }
     
@@ -2405,7 +2405,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_fit_content, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_fit_content, handle, pArgs, nil)
                 }
                 
             }
@@ -2430,7 +2430,7 @@ open class RichTextLabel: Control {
     fileprivate final func is_fit_content_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_fit_content_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_fit_content_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2451,7 +2451,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_selection_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_selection_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -2476,7 +2476,7 @@ open class RichTextLabel: Control {
     fileprivate final func is_selection_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_selection_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_selection_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2497,7 +2497,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_context_menu_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_context_menu_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -2522,7 +2522,7 @@ open class RichTextLabel: Control {
     fileprivate final func is_context_menu_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_context_menu_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_context_menu_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2543,7 +2543,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_shortcut_keys_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_shortcut_keys_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -2568,7 +2568,7 @@ open class RichTextLabel: Control {
     fileprivate final func is_shortcut_keys_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_shortcut_keys_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_shortcut_keys_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2589,7 +2589,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_deselect_on_focus_loss_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_deselect_on_focus_loss_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -2614,7 +2614,7 @@ open class RichTextLabel: Control {
     fileprivate final func is_deselect_on_focus_loss_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_deselect_on_focus_loss_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_deselect_on_focus_loss_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2635,7 +2635,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_drag_and_drop_selection_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_drag_and_drop_selection_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -2660,7 +2660,7 @@ open class RichTextLabel: Control {
     fileprivate final func is_drag_and_drop_selection_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_drag_and_drop_selection_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_drag_and_drop_selection_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2679,7 +2679,7 @@ open class RichTextLabel: Control {
     public final func getSelectionFrom() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_selection_from, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_selection_from, handle, nil, &_result)
         return _result
     }
     
@@ -2698,7 +2698,7 @@ open class RichTextLabel: Control {
     public final func getSelectionTo() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_selection_to, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_selection_to, handle, nil, &_result)
         return _result
     }
     
@@ -2717,7 +2717,7 @@ open class RichTextLabel: Control {
     public final func getSelectionLineOffset() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_selection_line_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_selection_line_offset, handle, nil, &_result)
         return _result
     }
     
@@ -2738,7 +2738,7 @@ open class RichTextLabel: Control {
     /// 
     public final func selectAll() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_select_all, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_select_all, handle, nil, nil)
         
     }
     
@@ -2757,7 +2757,7 @@ open class RichTextLabel: Control {
     public final func getSelectedText() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_selected_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_selected_text, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -2775,7 +2775,7 @@ open class RichTextLabel: Control {
     /// Clears the current selection.
     public final func deselect() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RichTextLabel.method_deselect, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_deselect, handle, nil, nil)
         
     }
     
@@ -2797,7 +2797,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: bbcode.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_parse_bbcode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_parse_bbcode, handle, pArgs, nil)
                 }
                 
             }
@@ -2828,7 +2828,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: bbcode.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_append_text, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_append_text, handle, pArgs, nil)
                 }
                 
             }
@@ -2853,7 +2853,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_text() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_text, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -2872,7 +2872,7 @@ open class RichTextLabel: Control {
     public final func isReady() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_ready, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_ready, handle, nil, &_result)
         return _result
     }
     
@@ -2891,7 +2891,7 @@ open class RichTextLabel: Control {
     public final func isFinished() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_finished, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_finished, handle, nil, &_result)
         return _result
     }
     
@@ -2912,7 +2912,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: threaded) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_threaded, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_threaded, handle, pArgs, nil)
                 }
                 
             }
@@ -2937,7 +2937,7 @@ open class RichTextLabel: Control {
     fileprivate final func is_threaded() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_threaded, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_threaded, handle, nil, &_result)
         return _result
     }
     
@@ -2958,7 +2958,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: delayMs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_progress_bar_delay, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_progress_bar_delay, handle, pArgs, nil)
                 }
                 
             }
@@ -2983,7 +2983,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_progress_bar_delay() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_progress_bar_delay, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_progress_bar_delay, handle, nil, &_result)
         return _result
     }
     
@@ -3004,7 +3004,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_visible_characters, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_visible_characters, handle, pArgs, nil)
                 }
                 
             }
@@ -3029,7 +3029,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_visible_characters() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_characters, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_characters, handle, nil, &_result)
         return _result
     }
     
@@ -3048,7 +3048,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_visible_characters_behavior() -> TextServer.VisibleCharactersBehavior {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_characters_behavior, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_characters_behavior, handle, nil, &_result)
         return TextServer.VisibleCharactersBehavior (rawValue: _result)!
     }
     
@@ -3069,7 +3069,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: behavior.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_visible_characters_behavior, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_visible_characters_behavior, handle, pArgs, nil)
                 }
                 
             }
@@ -3096,7 +3096,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_visible_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_visible_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -3121,7 +3121,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_visible_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -3146,7 +3146,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: character) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_get_character_line, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_get_character_line, handle, pArgs, &_result)
                 }
                 
             }
@@ -3177,7 +3177,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: character) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_get_character_paragraph, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_get_character_paragraph, handle, pArgs, &_result)
                 }
                 
             }
@@ -3202,7 +3202,7 @@ open class RichTextLabel: Control {
     public final func getTotalCharacterCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_total_character_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_total_character_count, handle, nil, &_result)
         return _result
     }
     
@@ -3223,7 +3223,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_use_bbcode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_use_bbcode, handle, pArgs, nil)
                 }
                 
             }
@@ -3248,7 +3248,7 @@ open class RichTextLabel: Control {
     fileprivate final func is_using_bbcode() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_using_bbcode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_using_bbcode, handle, nil, &_result)
         return _result
     }
     
@@ -3272,7 +3272,7 @@ open class RichTextLabel: Control {
     public final func getLineCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_line_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_line_count, handle, nil, &_result)
         return _result
     }
     
@@ -3299,7 +3299,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_get_line_range, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_get_line_range, handle, pArgs, &_result)
                 }
                 
             }
@@ -3327,7 +3327,7 @@ open class RichTextLabel: Control {
     public final func getVisibleLineCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_line_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_line_count, handle, nil, &_result)
         return _result
     }
     
@@ -3346,7 +3346,7 @@ open class RichTextLabel: Control {
     public final func getParagraphCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_paragraph_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_paragraph_count, handle, nil, &_result)
         return _result
     }
     
@@ -3368,7 +3368,7 @@ open class RichTextLabel: Control {
     public final func getVisibleParagraphCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_paragraph_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_visible_paragraph_count, handle, nil, &_result)
         return _result
     }
     
@@ -3390,7 +3390,7 @@ open class RichTextLabel: Control {
     public final func getContentHeight() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_content_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_content_height, handle, nil, &_result)
         return _result
     }
     
@@ -3412,7 +3412,7 @@ open class RichTextLabel: Control {
     public final func getContentWidth() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_content_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_content_width, handle, nil, &_result)
         return _result
     }
     
@@ -3437,7 +3437,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_get_line_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_get_line_offset, handle, pArgs, &_result)
                 }
                 
             }
@@ -3468,7 +3468,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: paragraph) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_get_paragraph_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_get_paragraph_offset, handle, pArgs, &_result)
                 }
                 
             }
@@ -3496,7 +3496,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: expressions.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_parse_expressions_for_values, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_parse_expressions_for_values, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -3523,7 +3523,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: effects.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_effects, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_set_effects, handle, pArgs, nil)
                 }
                 
             }
@@ -3548,7 +3548,7 @@ open class RichTextLabel: Control {
     fileprivate final func get_effects() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_effects, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_effects, handle, nil, &_result.content)
         return _result
     }
     
@@ -3574,7 +3574,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: effect.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_install_effect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_install_effect, handle, pArgs, nil)
                 }
                 
             }
@@ -3603,9 +3603,9 @@ open class RichTextLabel: Control {
     /// 
     public final func getMenu() -> PopupMenu? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(RichTextLabel.method_get_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_get_menu, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_is_menu_visible: GDExtensionMethodBindPtr = {
@@ -3623,7 +3623,7 @@ open class RichTextLabel: Control {
     public final func isMenuVisible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RichTextLabel.method_is_menu_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RichTextLabel.method_is_menu_visible, handle, nil, &_result)
         return _result
     }
     
@@ -3644,7 +3644,7 @@ open class RichTextLabel: Control {
         withUnsafePointer(to: option) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RichTextLabel.method_menu_option, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RichTextLabel.method_menu_option, handle, pArgs, nil)
                 }
                 
             }

@@ -47,7 +47,7 @@ open class AudioEffectEQ: AudioEffect {
             withUnsafePointer(to: volumeDb) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioEffectEQ.method_set_band_gain_db, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioEffectEQ.method_set_band_gain_db, handle, pArgs, nil)
                     }
                     
                 }
@@ -77,7 +77,7 @@ open class AudioEffectEQ: AudioEffect {
         withUnsafePointer(to: bandIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectEQ.method_get_band_gain_db, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioEffectEQ.method_get_band_gain_db, handle, pArgs, &_result)
                 }
                 
             }
@@ -102,7 +102,7 @@ open class AudioEffectEQ: AudioEffect {
     public final func getBandCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioEffectEQ.method_get_band_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectEQ.method_get_band_count, handle, nil, &_result)
         return _result
     }
     

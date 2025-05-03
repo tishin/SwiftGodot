@@ -288,7 +288,7 @@ open class HTTPClient: RefCounted {
                 withUnsafePointer(to: tlsOptions?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(HTTPClient.method_connect_to_host, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(HTTPClient.method_connect_to_host, handle, pArgs, &_result)
                         }
                         
                     }
@@ -319,7 +319,7 @@ open class HTTPClient: RefCounted {
         withUnsafePointer(to: connection?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HTTPClient.method_set_connection, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(HTTPClient.method_set_connection, handle, pArgs, nil)
                 }
                 
             }
@@ -343,9 +343,9 @@ open class HTTPClient: RefCounted {
     @inline(__always)
     fileprivate final func get_connection() -> StreamPeer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(HTTPClient.method_get_connection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(HTTPClient.method_get_connection, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_request_raw: GDExtensionMethodBindPtr = {
@@ -377,7 +377,7 @@ open class HTTPClient: RefCounted {
                     withUnsafePointer(to: body.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(HTTPClient.method_request_raw, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(HTTPClient.method_request_raw, handle, pArgs, &_result)
                             }
                             
                         }
@@ -425,7 +425,7 @@ open class HTTPClient: RefCounted {
                     withUnsafePointer(to: body.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(HTTPClient.method_request, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(HTTPClient.method_request, handle, pArgs, &_result)
                             }
                             
                         }
@@ -455,7 +455,7 @@ open class HTTPClient: RefCounted {
     /// Closes the current connection, allowing reuse of this ``HTTPClient``.
     public final func close() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(HTTPClient.method_close, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(HTTPClient.method_close, handle, nil, nil)
         
     }
     
@@ -474,7 +474,7 @@ open class HTTPClient: RefCounted {
     public final func hasResponse() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(HTTPClient.method_has_response, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPClient.method_has_response, handle, nil, &_result)
         return _result
     }
     
@@ -493,7 +493,7 @@ open class HTTPClient: RefCounted {
     public final func isResponseChunked() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(HTTPClient.method_is_response_chunked, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPClient.method_is_response_chunked, handle, nil, &_result)
         return _result
     }
     
@@ -512,7 +512,7 @@ open class HTTPClient: RefCounted {
     public final func getResponseCode() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(HTTPClient.method_get_response_code, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPClient.method_get_response_code, handle, nil, &_result)
         return _result
     }
     
@@ -531,7 +531,7 @@ open class HTTPClient: RefCounted {
     public final func getResponseHeaders() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(HTTPClient.method_get_response_headers, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(HTTPClient.method_get_response_headers, handle, nil, &_result.content)
         return _result
     }
     
@@ -551,7 +551,7 @@ open class HTTPClient: RefCounted {
     public final func getResponseHeadersAsDictionary() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(HTTPClient.method_get_response_headers_as_dictionary, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(HTTPClient.method_get_response_headers_as_dictionary, handle, nil, &_result.content)
         return _result
     }
     
@@ -575,7 +575,7 @@ open class HTTPClient: RefCounted {
     public final func getResponseBodyLength() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(HTTPClient.method_get_response_body_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPClient.method_get_response_body_length, handle, nil, &_result)
         return _result
     }
     
@@ -594,7 +594,7 @@ open class HTTPClient: RefCounted {
     public final func readResponseBodyChunk() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(HTTPClient.method_read_response_body_chunk, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(HTTPClient.method_read_response_body_chunk, handle, nil, &_result.content)
         return _result
     }
     
@@ -615,7 +615,7 @@ open class HTTPClient: RefCounted {
         withUnsafePointer(to: bytes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HTTPClient.method_set_read_chunk_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(HTTPClient.method_set_read_chunk_size, handle, pArgs, nil)
                 }
                 
             }
@@ -640,7 +640,7 @@ open class HTTPClient: RefCounted {
     fileprivate final func get_read_chunk_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(HTTPClient.method_get_read_chunk_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPClient.method_get_read_chunk_size, handle, nil, &_result)
         return _result
     }
     
@@ -661,7 +661,7 @@ open class HTTPClient: RefCounted {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HTTPClient.method_set_blocking_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(HTTPClient.method_set_blocking_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -686,7 +686,7 @@ open class HTTPClient: RefCounted {
     fileprivate final func is_blocking_mode_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(HTTPClient.method_is_blocking_mode_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPClient.method_is_blocking_mode_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -705,7 +705,7 @@ open class HTTPClient: RefCounted {
     public final func getStatus() -> HTTPClient.Status {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(HTTPClient.method_get_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPClient.method_get_status, handle, nil, &_result)
         return HTTPClient.Status (rawValue: _result)!
     }
     
@@ -724,7 +724,7 @@ open class HTTPClient: RefCounted {
     public final func poll() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(HTTPClient.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPClient.method_poll, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -750,7 +750,7 @@ open class HTTPClient: RefCounted {
             withUnsafePointer(to: port) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(HTTPClient.method_set_http_proxy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(HTTPClient.method_set_http_proxy, handle, pArgs, nil)
                     }
                     
                 }
@@ -784,7 +784,7 @@ open class HTTPClient: RefCounted {
             withUnsafePointer(to: port) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(HTTPClient.method_set_https_proxy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(HTTPClient.method_set_https_proxy, handle, pArgs, nil)
                     }
                     
                 }
@@ -817,7 +817,7 @@ open class HTTPClient: RefCounted {
         withUnsafePointer(to: fields.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HTTPClient.method_query_string_from_dict, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(HTTPClient.method_query_string_from_dict, handle, pArgs, &_result.content)
                 }
                 
             }

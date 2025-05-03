@@ -74,7 +74,7 @@ open class GPUParticlesCollision3D: VisualInstance3D {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticlesCollision3D.method_set_cull_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticlesCollision3D.method_set_cull_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -99,7 +99,7 @@ open class GPUParticlesCollision3D: VisualInstance3D {
     fileprivate final func get_cull_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(GPUParticlesCollision3D.method_get_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticlesCollision3D.method_get_cull_mask, handle, nil, &_result)
         return _result
     }
     

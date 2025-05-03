@@ -90,7 +90,7 @@ open class StaticBody3D: PhysicsBody3D {
         withUnsafePointer(to: vel) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StaticBody3D.method_set_constant_linear_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StaticBody3D.method_set_constant_linear_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -117,7 +117,7 @@ open class StaticBody3D: PhysicsBody3D {
         withUnsafePointer(to: vel) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StaticBody3D.method_set_constant_angular_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StaticBody3D.method_set_constant_angular_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -142,7 +142,7 @@ open class StaticBody3D: PhysicsBody3D {
     fileprivate final func get_constant_linear_velocity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(StaticBody3D.method_get_constant_linear_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StaticBody3D.method_get_constant_linear_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -161,7 +161,7 @@ open class StaticBody3D: PhysicsBody3D {
     fileprivate final func get_constant_angular_velocity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(StaticBody3D.method_get_constant_angular_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StaticBody3D.method_get_constant_angular_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -182,7 +182,7 @@ open class StaticBody3D: PhysicsBody3D {
         withUnsafePointer(to: physicsMaterialOverride?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StaticBody3D.method_set_physics_material_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StaticBody3D.method_set_physics_material_override, handle, pArgs, nil)
                 }
                 
             }
@@ -206,9 +206,9 @@ open class StaticBody3D: PhysicsBody3D {
     @inline(__always)
     fileprivate final func get_physics_material_override() -> PhysicsMaterial? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(StaticBody3D.method_get_physics_material_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(StaticBody3D.method_get_physics_material_override, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

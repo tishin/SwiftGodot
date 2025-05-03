@@ -47,7 +47,7 @@ open class Crypto: RefCounted {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Crypto.method_generate_random_bytes, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Crypto.method_generate_random_bytes, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -71,18 +71,18 @@ open class Crypto: RefCounted {
     /// Generates an RSA ``CryptoKey`` that can be used for creating self-signed certificates and passed to ``StreamPeerTLS/acceptStream(_:serverOptions:)``.
     public final func generateRsa(size: Int32) -> CryptoKey? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Crypto.method_generate_rsa, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Crypto.method_generate_rsa, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_generate_self_signed_certificate: GDExtensionMethodBindPtr = {
@@ -102,7 +102,7 @@ open class Crypto: RefCounted {
     /// 
     public final func generateSelfSignedCertificate(key: CryptoKey?, issuerName: String = "CN=myserver,O=myorganisation,C=IT", notBefore: String = "20140101000000", notAfter: String = "20340101000000") -> X509Certificate? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: key?.handle) { pArg0 in
             let issuerName = GString(issuerName)
             withUnsafePointer(to: issuerName.content) { pArg1 in
@@ -112,7 +112,7 @@ open class Crypto: RefCounted {
                     withUnsafePointer(to: notAfter.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Crypto.method_generate_self_signed_certificate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(Crypto.method_generate_self_signed_certificate, handle, pArgs, &_result)
                             }
                             
                         }
@@ -125,7 +125,7 @@ open class Crypto: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_sign: GDExtensionMethodBindPtr = {
@@ -148,7 +148,7 @@ open class Crypto: RefCounted {
                 withUnsafePointer(to: key?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Crypto.method_sign, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(Crypto.method_sign, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -183,7 +183,7 @@ open class Crypto: RefCounted {
                     withUnsafePointer(to: key?.handle) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Crypto.method_verify, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(Crypto.method_verify, handle, pArgs, &_result)
                             }
                             
                         }
@@ -221,7 +221,7 @@ open class Crypto: RefCounted {
             withUnsafePointer(to: plaintext.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Crypto.method_encrypt, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Crypto.method_encrypt, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -255,7 +255,7 @@ open class Crypto: RefCounted {
             withUnsafePointer(to: ciphertext.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Crypto.method_decrypt, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Crypto.method_decrypt, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -290,7 +290,7 @@ open class Crypto: RefCounted {
                 withUnsafePointer(to: msg.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Crypto.method_hmac_digest, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(Crypto.method_hmac_digest, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -326,7 +326,7 @@ open class Crypto: RefCounted {
             withUnsafePointer(to: received.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Crypto.method_constant_time_compare, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Crypto.method_constant_time_compare, handle, pArgs, &_result)
                     }
                     
                 }

@@ -87,7 +87,7 @@ open class RandomNumberGenerator: RefCounted {
         withUnsafePointer(to: seed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RandomNumberGenerator.method_set_seed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RandomNumberGenerator.method_set_seed, handle, pArgs, nil)
                 }
                 
             }
@@ -112,7 +112,7 @@ open class RandomNumberGenerator: RefCounted {
     fileprivate final func get_seed() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_get_seed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_get_seed, handle, nil, &_result)
         return _result
     }
     
@@ -133,7 +133,7 @@ open class RandomNumberGenerator: RefCounted {
         withUnsafePointer(to: state) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RandomNumberGenerator.method_set_state, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RandomNumberGenerator.method_set_state, handle, pArgs, nil)
                 }
                 
             }
@@ -158,7 +158,7 @@ open class RandomNumberGenerator: RefCounted {
     fileprivate final func get_state() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_get_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_get_state, handle, nil, &_result)
         return _result
     }
     
@@ -177,7 +177,7 @@ open class RandomNumberGenerator: RefCounted {
     public final func randi() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randi, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randi, handle, nil, &_result)
         return _result
     }
     
@@ -196,7 +196,7 @@ open class RandomNumberGenerator: RefCounted {
     public final func randf() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randf, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randf, handle, nil, &_result)
         return _result
     }
     
@@ -222,7 +222,7 @@ open class RandomNumberGenerator: RefCounted {
             withUnsafePointer(to: deviation) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randfn, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randfn, handle, pArgs, &_result)
                     }
                     
                 }
@@ -253,7 +253,7 @@ open class RandomNumberGenerator: RefCounted {
             withUnsafePointer(to: to) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randf_range, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randf_range, handle, pArgs, &_result)
                     }
                     
                 }
@@ -284,7 +284,7 @@ open class RandomNumberGenerator: RefCounted {
             withUnsafePointer(to: to) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randi_range, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randi_range, handle, pArgs, &_result)
                     }
                     
                 }
@@ -315,7 +315,7 @@ open class RandomNumberGenerator: RefCounted {
         withUnsafePointer(to: weights.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RandomNumberGenerator.method_rand_weighted, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RandomNumberGenerator.method_rand_weighted, handle, pArgs, &_result)
                 }
                 
             }
@@ -339,7 +339,7 @@ open class RandomNumberGenerator: RefCounted {
     /// Sets up a time-based seed for this ``RandomNumberGenerator`` instance. Unlike the [@GlobalScope] random number generation functions, different ``RandomNumberGenerator`` instances can use different seeds.
     public final func randomize() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randomize, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RandomNumberGenerator.method_randomize, handle, nil, nil)
         
     }
     

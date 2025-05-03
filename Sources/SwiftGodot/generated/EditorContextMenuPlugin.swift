@@ -70,7 +70,7 @@ open class EditorContextMenuPlugin: RefCounted {
         withUnsafePointer(to: paths.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorContextMenuPlugin.method__popup_menu, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorContextMenuPlugin.method__popup_menu, handle, pArgs, nil)
                 }
                 
             }
@@ -99,7 +99,7 @@ open class EditorContextMenuPlugin: RefCounted {
             withUnsafePointer(to: callback.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorContextMenuPlugin.method_add_menu_shortcut, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorContextMenuPlugin.method_add_menu_shortcut, handle, pArgs, nil)
                     }
                     
                 }
@@ -134,7 +134,7 @@ open class EditorContextMenuPlugin: RefCounted {
                 withUnsafePointer(to: icon?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorContextMenuPlugin.method_add_context_menu_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorContextMenuPlugin.method_add_context_menu_item, handle, pArgs, nil)
                         }
                         
                     }
@@ -169,7 +169,7 @@ open class EditorContextMenuPlugin: RefCounted {
                 withUnsafePointer(to: icon?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorContextMenuPlugin.method_add_context_menu_item_from_shortcut, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorContextMenuPlugin.method_add_context_menu_item_from_shortcut, handle, pArgs, nil)
                         }
                         
                     }
@@ -204,7 +204,7 @@ open class EditorContextMenuPlugin: RefCounted {
                 withUnsafePointer(to: icon?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorContextMenuPlugin.method_add_context_submenu_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorContextMenuPlugin.method_add_context_submenu_item, handle, pArgs, nil)
                         }
                         
                     }

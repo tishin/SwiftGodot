@@ -44,7 +44,7 @@ open class KinematicCollision2D: RefCounted {
     public final func getPosition() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_position, handle, nil, &_result)
         return _result
     }
     
@@ -63,7 +63,7 @@ open class KinematicCollision2D: RefCounted {
     public final func getNormal() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_normal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_normal, handle, nil, &_result)
         return _result
     }
     
@@ -82,7 +82,7 @@ open class KinematicCollision2D: RefCounted {
     public final func getTravel() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_travel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_travel, handle, nil, &_result)
         return _result
     }
     
@@ -101,7 +101,7 @@ open class KinematicCollision2D: RefCounted {
     public final func getRemainder() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_remainder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_remainder, handle, nil, &_result)
         return _result
     }
     
@@ -123,7 +123,7 @@ open class KinematicCollision2D: RefCounted {
         withUnsafePointer(to: upDirection) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_angle, handle, pArgs, &_result)
                 }
                 
             }
@@ -148,7 +148,7 @@ open class KinematicCollision2D: RefCounted {
     public final func getDepth() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_depth, handle, nil, &_result)
         return _result
     }
     
@@ -166,9 +166,9 @@ open class KinematicCollision2D: RefCounted {
     /// Returns the moving object's colliding shape.
     public final func getLocalShape() -> Object? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_local_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_local_shape, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_collider: GDExtensionMethodBindPtr = {
@@ -185,9 +185,9 @@ open class KinematicCollision2D: RefCounted {
     /// Returns the colliding body's attached ``Object``.
     public final func getCollider() -> Object? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_collider, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_collider, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_collider_id: GDExtensionMethodBindPtr = {
@@ -205,7 +205,7 @@ open class KinematicCollision2D: RefCounted {
     public final func getColliderId() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_collider_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_collider_id, handle, nil, &_result)
         return _result
     }
     
@@ -224,7 +224,7 @@ open class KinematicCollision2D: RefCounted {
     public final func getColliderRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_collider_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_collider_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -242,9 +242,9 @@ open class KinematicCollision2D: RefCounted {
     /// Returns the colliding body's shape.
     public final func getColliderShape() -> Object? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_collider_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_collider_shape, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_collider_shape_index: GDExtensionMethodBindPtr = {
@@ -262,7 +262,7 @@ open class KinematicCollision2D: RefCounted {
     public final func getColliderShapeIndex() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_collider_shape_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_collider_shape_index, handle, nil, &_result)
         return _result
     }
     
@@ -281,7 +281,7 @@ open class KinematicCollision2D: RefCounted {
     public final func getColliderVelocity() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_collider_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(KinematicCollision2D.method_get_collider_velocity, handle, nil, &_result)
         return _result
     }
     

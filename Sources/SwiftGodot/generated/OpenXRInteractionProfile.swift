@@ -86,7 +86,7 @@ open class OpenXRInteractionProfile: Resource {
         withUnsafePointer(to: interactionProfilePath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_set_interaction_profile_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_set_interaction_profile_path, handle, pArgs, nil)
                 }
                 
             }
@@ -111,7 +111,7 @@ open class OpenXRInteractionProfile: Resource {
     fileprivate final func get_interaction_profile_path() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_get_interaction_profile_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_get_interaction_profile_path, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -130,7 +130,7 @@ open class OpenXRInteractionProfile: Resource {
     public final func getBindingCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_get_binding_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_get_binding_count, handle, nil, &_result)
         return _result
     }
     
@@ -148,18 +148,18 @@ open class OpenXRInteractionProfile: Resource {
     /// Retrieve the binding at this index.
     public final func getBinding(index: Int32) -> OpenXRIPBinding? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_get_binding, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_get_binding, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_bindings: GDExtensionMethodBindPtr = {
@@ -179,7 +179,7 @@ open class OpenXRInteractionProfile: Resource {
         withUnsafePointer(to: bindings.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_set_bindings, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_set_bindings, handle, pArgs, nil)
                 }
                 
             }
@@ -204,7 +204,7 @@ open class OpenXRInteractionProfile: Resource {
     fileprivate final func get_bindings() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_get_bindings, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_get_bindings, handle, nil, &_result.content)
         return _result
     }
     
@@ -223,7 +223,7 @@ open class OpenXRInteractionProfile: Resource {
     public final func getBindingModifierCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_get_binding_modifier_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_get_binding_modifier_count, handle, nil, &_result)
         return _result
     }
     
@@ -241,18 +241,18 @@ open class OpenXRInteractionProfile: Resource {
     /// Get the ``OpenXRBindingModifier`` at this index.
     public final func getBindingModifier(index: Int32) -> OpenXRIPBindingModifier? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_get_binding_modifier, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_get_binding_modifier, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_binding_modifiers: GDExtensionMethodBindPtr = {
@@ -272,7 +272,7 @@ open class OpenXRInteractionProfile: Resource {
         withUnsafePointer(to: bindingModifiers.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_set_binding_modifiers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_set_binding_modifiers, handle, pArgs, nil)
                 }
                 
             }
@@ -297,7 +297,7 @@ open class OpenXRInteractionProfile: Resource {
     fileprivate final func get_binding_modifiers() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_get_binding_modifiers, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRInteractionProfile.method_get_binding_modifiers, handle, nil, &_result.content)
         return _result
     }
     

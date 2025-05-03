@@ -198,7 +198,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
         withUnsafePointer(to: pathfindingAlgorithm.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_pathfinding_algorithm, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_pathfinding_algorithm, handle, pArgs, nil)
                 }
                 
             }
@@ -223,7 +223,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     fileprivate final func get_pathfinding_algorithm() -> NavigationPathQueryParameters3D.PathfindingAlgorithm {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_pathfinding_algorithm, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_pathfinding_algorithm, handle, nil, &_result)
         return NavigationPathQueryParameters3D.PathfindingAlgorithm (rawValue: _result)!
     }
     
@@ -244,7 +244,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
         withUnsafePointer(to: pathPostprocessing.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_path_postprocessing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_path_postprocessing, handle, pArgs, nil)
                 }
                 
             }
@@ -269,7 +269,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     fileprivate final func get_path_postprocessing() -> NavigationPathQueryParameters3D.PathPostProcessing {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_path_postprocessing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_path_postprocessing, handle, nil, &_result)
         return NavigationPathQueryParameters3D.PathPostProcessing (rawValue: _result)!
     }
     
@@ -290,7 +290,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_map, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_map, handle, pArgs, nil)
                 }
                 
             }
@@ -315,7 +315,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     fileprivate final func get_map() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_map, handle, nil, &_result.content)
         return _result
     }
     
@@ -336,7 +336,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
         withUnsafePointer(to: startPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_start_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_start_position, handle, pArgs, nil)
                 }
                 
             }
@@ -361,7 +361,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     fileprivate final func get_start_position() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_start_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_start_position, handle, nil, &_result)
         return _result
     }
     
@@ -382,7 +382,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
         withUnsafePointer(to: targetPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_target_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_target_position, handle, pArgs, nil)
                 }
                 
             }
@@ -407,7 +407,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     fileprivate final func get_target_position() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_target_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_target_position, handle, nil, &_result)
         return _result
     }
     
@@ -428,7 +428,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
         withUnsafePointer(to: navigationLayers) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_navigation_layers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_navigation_layers, handle, pArgs, nil)
                 }
                 
             }
@@ -453,7 +453,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     fileprivate final func get_navigation_layers() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_navigation_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_navigation_layers, handle, nil, &_result)
         return _result
     }
     
@@ -474,7 +474,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
         withUnsafePointer(to: flags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_metadata_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_metadata_flags, handle, pArgs, nil)
                 }
                 
             }
@@ -499,7 +499,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     fileprivate final func get_metadata_flags() -> NavigationPathQueryParameters3D.PathMetadataFlags {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: NavigationPathQueryParameters3D.PathMetadataFlags = NavigationPathQueryParameters3D.PathMetadataFlags ()
-        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_metadata_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_metadata_flags, handle, nil, &_result)
         return _result
     }
     
@@ -520,7 +520,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_simplify_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_simplify_path, handle, pArgs, nil)
                 }
                 
             }
@@ -545,7 +545,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     fileprivate final func get_simplify_path() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_simplify_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_simplify_path, handle, nil, &_result)
         return _result
     }
     
@@ -566,7 +566,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
         withUnsafePointer(to: epsilon) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_simplify_epsilon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_set_simplify_epsilon, handle, pArgs, nil)
                 }
                 
             }
@@ -591,7 +591,7 @@ open class NavigationPathQueryParameters3D: RefCounted {
     fileprivate final func get_simplify_epsilon() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_simplify_epsilon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPathQueryParameters3D.method_get_simplify_epsilon, handle, nil, &_result)
         return _result
     }
     

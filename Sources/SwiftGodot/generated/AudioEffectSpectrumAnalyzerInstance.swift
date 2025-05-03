@@ -59,7 +59,7 @@ open class AudioEffectSpectrumAnalyzerInstance: AudioEffectInstance {
                 withUnsafePointer(to: mode.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzerInstance.method_get_magnitude_for_frequency_range, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzerInstance.method_get_magnitude_for_frequency_range, handle, pArgs, &_result)
                         }
                         
                     }

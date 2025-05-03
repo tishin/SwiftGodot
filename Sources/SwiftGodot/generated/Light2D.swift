@@ -247,7 +247,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -272,7 +272,7 @@ open class Light2D: Node2D {
     fileprivate final func is_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Light2D.method_is_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_is_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -293,7 +293,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: editorOnly) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_editor_only, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_editor_only, handle, pArgs, nil)
                 }
                 
             }
@@ -318,7 +318,7 @@ open class Light2D: Node2D {
     fileprivate final func is_editor_only() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Light2D.method_is_editor_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_is_editor_only, handle, nil, &_result)
         return _result
     }
     
@@ -339,7 +339,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_color, handle, pArgs, nil)
                 }
                 
             }
@@ -364,7 +364,7 @@ open class Light2D: Node2D {
     fileprivate final func get_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(Light2D.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_get_color, handle, nil, &_result)
         return _result
     }
     
@@ -385,7 +385,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_energy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_energy, handle, pArgs, nil)
                 }
                 
             }
@@ -410,7 +410,7 @@ open class Light2D: Node2D {
     fileprivate final func get_energy() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Light2D.method_get_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_get_energy, handle, nil, &_result)
         return _result
     }
     
@@ -431,7 +431,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: z) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_z_range_min, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_z_range_min, handle, pArgs, nil)
                 }
                 
             }
@@ -456,7 +456,7 @@ open class Light2D: Node2D {
     fileprivate final func get_z_range_min() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Light2D.method_get_z_range_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_get_z_range_min, handle, nil, &_result)
         return _result
     }
     
@@ -477,7 +477,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: z) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_z_range_max, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_z_range_max, handle, pArgs, nil)
                 }
                 
             }
@@ -502,7 +502,7 @@ open class Light2D: Node2D {
     fileprivate final func get_z_range_max() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Light2D.method_get_z_range_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_get_z_range_max, handle, nil, &_result)
         return _result
     }
     
@@ -523,7 +523,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_layer_range_min, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_layer_range_min, handle, pArgs, nil)
                 }
                 
             }
@@ -548,7 +548,7 @@ open class Light2D: Node2D {
     fileprivate final func get_layer_range_min() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Light2D.method_get_layer_range_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_get_layer_range_min, handle, nil, &_result)
         return _result
     }
     
@@ -569,7 +569,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_layer_range_max, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_layer_range_max, handle, pArgs, nil)
                 }
                 
             }
@@ -594,7 +594,7 @@ open class Light2D: Node2D {
     fileprivate final func get_layer_range_max() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Light2D.method_get_layer_range_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_get_layer_range_max, handle, nil, &_result)
         return _result
     }
     
@@ -615,7 +615,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: itemCullMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_item_cull_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_item_cull_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -640,7 +640,7 @@ open class Light2D: Node2D {
     fileprivate final func get_item_cull_mask() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Light2D.method_get_item_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_get_item_cull_mask, handle, nil, &_result)
         return _result
     }
     
@@ -661,7 +661,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: itemShadowCullMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_item_shadow_cull_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_item_shadow_cull_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -686,7 +686,7 @@ open class Light2D: Node2D {
     fileprivate final func get_item_shadow_cull_mask() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Light2D.method_get_item_shadow_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_get_item_shadow_cull_mask, handle, nil, &_result)
         return _result
     }
     
@@ -707,7 +707,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_shadow_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_shadow_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -732,7 +732,7 @@ open class Light2D: Node2D {
     fileprivate final func is_shadow_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Light2D.method_is_shadow_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_is_shadow_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -753,7 +753,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: smooth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_shadow_smooth, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_shadow_smooth, handle, pArgs, nil)
                 }
                 
             }
@@ -778,7 +778,7 @@ open class Light2D: Node2D {
     fileprivate final func get_shadow_smooth() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Light2D.method_get_shadow_smooth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_get_shadow_smooth, handle, nil, &_result)
         return _result
     }
     
@@ -799,7 +799,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: filter.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_shadow_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_shadow_filter, handle, pArgs, nil)
                 }
                 
             }
@@ -824,7 +824,7 @@ open class Light2D: Node2D {
     fileprivate final func get_shadow_filter() -> Light2D.ShadowFilter {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Light2D.method_get_shadow_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_get_shadow_filter, handle, nil, &_result)
         return Light2D.ShadowFilter (rawValue: _result)!
     }
     
@@ -845,7 +845,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: shadowColor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_shadow_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_shadow_color, handle, pArgs, nil)
                 }
                 
             }
@@ -870,7 +870,7 @@ open class Light2D: Node2D {
     fileprivate final func get_shadow_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(Light2D.method_get_shadow_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_get_shadow_color, handle, nil, &_result)
         return _result
     }
     
@@ -891,7 +891,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_blend_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_blend_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -916,7 +916,7 @@ open class Light2D: Node2D {
     fileprivate final func get_blend_mode() -> Light2D.BlendMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Light2D.method_get_blend_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_get_blend_mode, handle, nil, &_result)
         return Light2D.BlendMode (rawValue: _result)!
     }
     
@@ -937,7 +937,7 @@ open class Light2D: Node2D {
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light2D.method_set_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light2D.method_set_height, handle, pArgs, nil)
                 }
                 
             }
@@ -962,7 +962,7 @@ open class Light2D: Node2D {
     public final func getHeight() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Light2D.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light2D.method_get_height, handle, nil, &_result)
         return _result
     }
     

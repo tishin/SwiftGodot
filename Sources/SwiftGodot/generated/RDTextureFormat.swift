@@ -181,7 +181,7 @@ open class RDTextureFormat: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_format, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_format, handle, pArgs, nil)
                 }
                 
             }
@@ -206,7 +206,7 @@ open class RDTextureFormat: RefCounted {
     fileprivate final func get_format() -> RenderingDevice.DataFormat {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_format, handle, nil, &_result)
         return RenderingDevice.DataFormat (rawValue: _result)!
     }
     
@@ -227,7 +227,7 @@ open class RDTextureFormat: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_width, handle, pArgs, nil)
                 }
                 
             }
@@ -252,7 +252,7 @@ open class RDTextureFormat: RefCounted {
     fileprivate final func get_width() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_width, handle, nil, &_result)
         return _result
     }
     
@@ -273,7 +273,7 @@ open class RDTextureFormat: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_height, handle, pArgs, nil)
                 }
                 
             }
@@ -298,7 +298,7 @@ open class RDTextureFormat: RefCounted {
     fileprivate final func get_height() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_height, handle, nil, &_result)
         return _result
     }
     
@@ -319,7 +319,7 @@ open class RDTextureFormat: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_depth, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_depth, handle, pArgs, nil)
                 }
                 
             }
@@ -344,7 +344,7 @@ open class RDTextureFormat: RefCounted {
     fileprivate final func get_depth() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_depth, handle, nil, &_result)
         return _result
     }
     
@@ -365,7 +365,7 @@ open class RDTextureFormat: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_array_layers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_array_layers, handle, pArgs, nil)
                 }
                 
             }
@@ -390,7 +390,7 @@ open class RDTextureFormat: RefCounted {
     fileprivate final func get_array_layers() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_array_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_array_layers, handle, nil, &_result)
         return _result
     }
     
@@ -411,7 +411,7 @@ open class RDTextureFormat: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_mipmaps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_mipmaps, handle, pArgs, nil)
                 }
                 
             }
@@ -436,7 +436,7 @@ open class RDTextureFormat: RefCounted {
     fileprivate final func get_mipmaps() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_mipmaps, handle, nil, &_result)
         return _result
     }
     
@@ -457,7 +457,7 @@ open class RDTextureFormat: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_texture_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_texture_type, handle, pArgs, nil)
                 }
                 
             }
@@ -482,7 +482,7 @@ open class RDTextureFormat: RefCounted {
     fileprivate final func get_texture_type() -> RenderingDevice.TextureType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_texture_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_texture_type, handle, nil, &_result)
         return RenderingDevice.TextureType (rawValue: _result)!
     }
     
@@ -503,7 +503,7 @@ open class RDTextureFormat: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_samples, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_samples, handle, pArgs, nil)
                 }
                 
             }
@@ -528,7 +528,7 @@ open class RDTextureFormat: RefCounted {
     fileprivate final func get_samples() -> RenderingDevice.TextureSamples {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_samples, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_samples, handle, nil, &_result)
         return RenderingDevice.TextureSamples (rawValue: _result)!
     }
     
@@ -549,7 +549,7 @@ open class RDTextureFormat: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_usage_bits, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_usage_bits, handle, pArgs, nil)
                 }
                 
             }
@@ -574,7 +574,7 @@ open class RDTextureFormat: RefCounted {
     fileprivate final func get_usage_bits() -> RenderingDevice.TextureUsageBits {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: RenderingDevice.TextureUsageBits = RenderingDevice.TextureUsageBits ()
-        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_usage_bits, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_usage_bits, handle, nil, &_result)
         return _result
     }
     
@@ -595,7 +595,7 @@ open class RDTextureFormat: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_is_resolve_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_is_resolve_buffer, handle, pArgs, nil)
                 }
                 
             }
@@ -620,7 +620,7 @@ open class RDTextureFormat: RefCounted {
     fileprivate final func get_is_resolve_buffer() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_is_resolve_buffer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_is_resolve_buffer, handle, nil, &_result)
         return _result
     }
     
@@ -641,7 +641,7 @@ open class RDTextureFormat: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_is_discardable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_set_is_discardable, handle, pArgs, nil)
                 }
                 
             }
@@ -666,7 +666,7 @@ open class RDTextureFormat: RefCounted {
     fileprivate final func get_is_discardable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_is_discardable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDTextureFormat.method_get_is_discardable, handle, nil, &_result)
         return _result
     }
     
@@ -687,7 +687,7 @@ open class RDTextureFormat: RefCounted {
         withUnsafePointer(to: format.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureFormat.method_add_shareable_format, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_add_shareable_format, handle, pArgs, nil)
                 }
                 
             }
@@ -714,7 +714,7 @@ open class RDTextureFormat: RefCounted {
         withUnsafePointer(to: format.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDTextureFormat.method_remove_shareable_format, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDTextureFormat.method_remove_shareable_format, handle, pArgs, nil)
                 }
                 
             }

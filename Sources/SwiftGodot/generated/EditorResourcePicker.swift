@@ -107,7 +107,7 @@ open class EditorResourcePicker: HBoxContainer {
         withUnsafePointer(to: menuNode?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorResourcePicker.method__set_create_options, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorResourcePicker.method__set_create_options, handle, pArgs, nil)
                 }
                 
             }
@@ -136,7 +136,7 @@ open class EditorResourcePicker: HBoxContainer {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorResourcePicker.method__handle_menu_selected, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorResourcePicker.method__handle_menu_selected, handle, pArgs, &_result)
                 }
                 
             }
@@ -164,7 +164,7 @@ open class EditorResourcePicker: HBoxContainer {
         withUnsafePointer(to: baseType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorResourcePicker.method_set_base_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorResourcePicker.method_set_base_type, handle, pArgs, nil)
                 }
                 
             }
@@ -189,7 +189,7 @@ open class EditorResourcePicker: HBoxContainer {
     fileprivate final func get_base_type() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorResourcePicker.method_get_base_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorResourcePicker.method_get_base_type, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -208,7 +208,7 @@ open class EditorResourcePicker: HBoxContainer {
     public final func getAllowedTypes() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(EditorResourcePicker.method_get_allowed_types, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorResourcePicker.method_get_allowed_types, handle, nil, &_result.content)
         return _result
     }
     
@@ -229,7 +229,7 @@ open class EditorResourcePicker: HBoxContainer {
         withUnsafePointer(to: resource?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorResourcePicker.method_set_edited_resource, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorResourcePicker.method_set_edited_resource, handle, pArgs, nil)
                 }
                 
             }
@@ -253,9 +253,9 @@ open class EditorResourcePicker: HBoxContainer {
     @inline(__always)
     fileprivate final func get_edited_resource() -> Resource? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorResourcePicker.method_get_edited_resource, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorResourcePicker.method_get_edited_resource, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_toggle_mode: GDExtensionMethodBindPtr = {
@@ -275,7 +275,7 @@ open class EditorResourcePicker: HBoxContainer {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorResourcePicker.method_set_toggle_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorResourcePicker.method_set_toggle_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -300,7 +300,7 @@ open class EditorResourcePicker: HBoxContainer {
     fileprivate final func is_toggle_mode() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorResourcePicker.method_is_toggle_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorResourcePicker.method_is_toggle_mode, handle, nil, &_result)
         return _result
     }
     
@@ -321,7 +321,7 @@ open class EditorResourcePicker: HBoxContainer {
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorResourcePicker.method_set_toggle_pressed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorResourcePicker.method_set_toggle_pressed, handle, pArgs, nil)
                 }
                 
             }
@@ -348,7 +348,7 @@ open class EditorResourcePicker: HBoxContainer {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorResourcePicker.method_set_editable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorResourcePicker.method_set_editable, handle, pArgs, nil)
                 }
                 
             }
@@ -373,7 +373,7 @@ open class EditorResourcePicker: HBoxContainer {
     fileprivate final func is_editable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorResourcePicker.method_is_editable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorResourcePicker.method_is_editable, handle, nil, &_result)
         return _result
     }
     
@@ -440,8 +440,8 @@ func _EditorResourcePicker_proxy_set_create_options (instance: UnsafeMutableRawP
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorResourcePicker else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._setCreateOptions (menuNode: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object)
+    swiftObject._setCreateOptions (menuNode: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Object)
 }
 

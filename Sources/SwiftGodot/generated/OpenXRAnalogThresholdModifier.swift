@@ -97,7 +97,7 @@ open class OpenXRAnalogThresholdModifier: OpenXRActionBindingModifier {
         withUnsafePointer(to: onThreshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_set_on_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_set_on_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -122,7 +122,7 @@ open class OpenXRAnalogThresholdModifier: OpenXRActionBindingModifier {
     fileprivate final func get_on_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_get_on_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_get_on_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -143,7 +143,7 @@ open class OpenXRAnalogThresholdModifier: OpenXRActionBindingModifier {
         withUnsafePointer(to: offThreshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_set_off_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_set_off_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -168,7 +168,7 @@ open class OpenXRAnalogThresholdModifier: OpenXRActionBindingModifier {
     fileprivate final func get_off_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_get_off_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_get_off_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -189,7 +189,7 @@ open class OpenXRAnalogThresholdModifier: OpenXRActionBindingModifier {
         withUnsafePointer(to: haptic?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_set_on_haptic, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_set_on_haptic, handle, pArgs, nil)
                 }
                 
             }
@@ -213,9 +213,9 @@ open class OpenXRAnalogThresholdModifier: OpenXRActionBindingModifier {
     @inline(__always)
     fileprivate final func get_on_haptic() -> OpenXRHapticBase? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_get_on_haptic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_get_on_haptic, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_off_haptic: GDExtensionMethodBindPtr = {
@@ -235,7 +235,7 @@ open class OpenXRAnalogThresholdModifier: OpenXRActionBindingModifier {
         withUnsafePointer(to: haptic?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_set_off_haptic, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_set_off_haptic, handle, pArgs, nil)
                 }
                 
             }
@@ -259,9 +259,9 @@ open class OpenXRAnalogThresholdModifier: OpenXRActionBindingModifier {
     @inline(__always)
     fileprivate final func get_off_haptic() -> OpenXRHapticBase? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_get_off_haptic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(OpenXRAnalogThresholdModifier.method_get_off_haptic, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

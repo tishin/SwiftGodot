@@ -281,7 +281,7 @@ open class XRBodyTracker: XRPositionalTracker {
         withUnsafePointer(to: hasData) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRBodyTracker.method_set_has_tracking_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRBodyTracker.method_set_has_tracking_data, handle, pArgs, nil)
                 }
                 
             }
@@ -306,7 +306,7 @@ open class XRBodyTracker: XRPositionalTracker {
     fileprivate final func get_has_tracking_data() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XRBodyTracker.method_get_has_tracking_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRBodyTracker.method_get_has_tracking_data, handle, nil, &_result)
         return _result
     }
     
@@ -327,7 +327,7 @@ open class XRBodyTracker: XRPositionalTracker {
         withUnsafePointer(to: flags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRBodyTracker.method_set_body_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRBodyTracker.method_set_body_flags, handle, pArgs, nil)
                 }
                 
             }
@@ -352,7 +352,7 @@ open class XRBodyTracker: XRPositionalTracker {
     fileprivate final func get_body_flags() -> XRBodyTracker.BodyFlags {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: XRBodyTracker.BodyFlags = XRBodyTracker.BodyFlags ()
-        gi.object_method_bind_ptrcall(XRBodyTracker.method_get_body_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRBodyTracker.method_get_body_flags, handle, nil, &_result)
         return _result
     }
     
@@ -374,7 +374,7 @@ open class XRBodyTracker: XRPositionalTracker {
             withUnsafePointer(to: flags.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(XRBodyTracker.method_set_joint_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(XRBodyTracker.method_set_joint_flags, handle, pArgs, nil)
                     }
                     
                 }
@@ -404,7 +404,7 @@ open class XRBodyTracker: XRPositionalTracker {
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRBodyTracker.method_get_joint_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRBodyTracker.method_get_joint_flags, handle, pArgs, &_result)
                 }
                 
             }
@@ -432,7 +432,7 @@ open class XRBodyTracker: XRPositionalTracker {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(XRBodyTracker.method_set_joint_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(XRBodyTracker.method_set_joint_transform, handle, pArgs, nil)
                     }
                     
                 }
@@ -462,7 +462,7 @@ open class XRBodyTracker: XRPositionalTracker {
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRBodyTracker.method_get_joint_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRBodyTracker.method_get_joint_transform, handle, pArgs, &_result)
                 }
                 
             }

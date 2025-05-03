@@ -392,7 +392,7 @@ open class GraphEdit: Control {
                 withUnsafePointer(to: mousePosition) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(GraphEdit.method__is_in_input_hotzone, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(GraphEdit.method__is_in_input_hotzone, handle, pArgs, &_result)
                         }
                         
                     }
@@ -430,7 +430,7 @@ open class GraphEdit: Control {
                 withUnsafePointer(to: mousePosition) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(GraphEdit.method__is_in_output_hotzone, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(GraphEdit.method__is_in_output_hotzone, handle, pArgs, &_result)
                         }
                         
                     }
@@ -464,7 +464,7 @@ open class GraphEdit: Control {
             withUnsafePointer(to: toPosition) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphEdit.method__get_connection_line, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(GraphEdit.method__get_connection_line, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -503,7 +503,7 @@ open class GraphEdit: Control {
                     withUnsafePointer(to: toPort) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(GraphEdit.method__is_node_hover_valid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(GraphEdit.method__is_node_hover_valid, handle, pArgs, &_result)
                             }
                             
                         }
@@ -544,7 +544,7 @@ open class GraphEdit: Control {
                         withUnsafePointer(to: keepAlive) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(GraphEdit.method_connect_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(GraphEdit.method_connect_node, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -583,7 +583,7 @@ open class GraphEdit: Control {
                     withUnsafePointer(to: toPort) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(GraphEdit.method_is_node_connected, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(GraphEdit.method_is_node_connected, handle, pArgs, &_result)
                             }
                             
                         }
@@ -619,7 +619,7 @@ open class GraphEdit: Control {
                     withUnsafePointer(to: toPort) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(GraphEdit.method_disconnect_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(GraphEdit.method_disconnect_node, handle, pArgs, nil)
                             }
                             
                         }
@@ -656,7 +656,7 @@ open class GraphEdit: Control {
                         withUnsafePointer(to: amount) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(GraphEdit.method_set_connection_activity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(GraphEdit.method_set_connection_activity, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -691,7 +691,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: connections.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_connections, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_connections, handle, pArgs, nil)
                 }
                 
             }
@@ -716,7 +716,7 @@ open class GraphEdit: Control {
     fileprivate final func get_connection_list() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GraphEdit.method_get_connection_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_get_connection_list, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -739,7 +739,7 @@ open class GraphEdit: Control {
             withUnsafePointer(to: fromPort) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphEdit.method_get_connection_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(GraphEdit.method_get_connection_count, handle, pArgs, &_result)
                     }
                     
                 }
@@ -775,7 +775,7 @@ open class GraphEdit: Control {
             withUnsafePointer(to: maxDistance) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphEdit.method_get_closest_connection_at_point, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(GraphEdit.method_get_closest_connection_at_point, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -808,7 +808,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_get_connections_intersecting_with_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_get_connections_intersecting_with_rect, handle, pArgs, &_result)
                 }
                 
             }
@@ -832,7 +832,7 @@ open class GraphEdit: Control {
     /// Removes all connections between nodes.
     public final func clearConnections() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(GraphEdit.method_clear_connections, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(GraphEdit.method_clear_connections, handle, nil, nil)
         
     }
     
@@ -855,7 +855,7 @@ open class GraphEdit: Control {
     /// 
     public final func forceConnectionDragEnd() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(GraphEdit.method_force_connection_drag_end, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(GraphEdit.method_force_connection_drag_end, handle, nil, nil)
         
     }
     
@@ -874,7 +874,7 @@ open class GraphEdit: Control {
     fileprivate final func get_scroll_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(GraphEdit.method_get_scroll_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_get_scroll_offset, handle, nil, &_result)
         return _result
     }
     
@@ -895,7 +895,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_scroll_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_scroll_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -922,7 +922,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: type) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_add_valid_right_disconnect_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_add_valid_right_disconnect_type, handle, pArgs, nil)
                 }
                 
             }
@@ -949,7 +949,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: type) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_remove_valid_right_disconnect_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_remove_valid_right_disconnect_type, handle, pArgs, nil)
                 }
                 
             }
@@ -976,7 +976,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: type) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_add_valid_left_disconnect_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_add_valid_left_disconnect_type, handle, pArgs, nil)
                 }
                 
             }
@@ -1003,7 +1003,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: type) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_remove_valid_left_disconnect_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_remove_valid_left_disconnect_type, handle, pArgs, nil)
                 }
                 
             }
@@ -1034,7 +1034,7 @@ open class GraphEdit: Control {
             withUnsafePointer(to: toType) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphEdit.method_add_valid_connection_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GraphEdit.method_add_valid_connection_type, handle, pArgs, nil)
                     }
                     
                 }
@@ -1067,7 +1067,7 @@ open class GraphEdit: Control {
             withUnsafePointer(to: toType) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphEdit.method_remove_valid_connection_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GraphEdit.method_remove_valid_connection_type, handle, pArgs, nil)
                     }
                     
                 }
@@ -1101,7 +1101,7 @@ open class GraphEdit: Control {
             withUnsafePointer(to: toType) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphEdit.method_is_valid_connection_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(GraphEdit.method_is_valid_connection_type, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1132,7 +1132,7 @@ open class GraphEdit: Control {
             withUnsafePointer(to: toNode) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphEdit.method_get_connection_line, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(GraphEdit.method_get_connection_line, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1162,7 +1162,7 @@ open class GraphEdit: Control {
             withUnsafePointer(to: frame.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphEdit.method_attach_graph_element_to_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GraphEdit.method_attach_graph_element_to_frame, handle, pArgs, nil)
                     }
                     
                 }
@@ -1191,7 +1191,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: element.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_detach_graph_element_from_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_detach_graph_element_from_frame, handle, pArgs, nil)
                 }
                 
             }
@@ -1215,18 +1215,18 @@ open class GraphEdit: Control {
     /// Returns the ``GraphFrame`` that contains the ``GraphElement`` with the given name.
     public final func getElementFrame(element: StringName) -> GraphFrame? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: element.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_get_element_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_get_element_frame, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_attached_nodes_of_frame: GDExtensionMethodBindPtr = {
@@ -1247,7 +1247,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: frame.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_get_attached_nodes_of_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_get_attached_nodes_of_frame, handle, pArgs, &_result)
                 }
                 
             }
@@ -1274,7 +1274,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: scheme.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_panning_scheme, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_panning_scheme, handle, pArgs, nil)
                 }
                 
             }
@@ -1299,7 +1299,7 @@ open class GraphEdit: Control {
     fileprivate final func get_panning_scheme() -> GraphEdit.PanningScheme {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GraphEdit.method_get_panning_scheme, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_get_panning_scheme, handle, nil, &_result)
         return GraphEdit.PanningScheme (rawValue: _result)!
     }
     
@@ -1320,7 +1320,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: zoom) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_zoom, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_zoom, handle, pArgs, nil)
                 }
                 
             }
@@ -1345,7 +1345,7 @@ open class GraphEdit: Control {
     fileprivate final func get_zoom() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GraphEdit.method_get_zoom, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_get_zoom, handle, nil, &_result)
         return _result
     }
     
@@ -1366,7 +1366,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: zoomMin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_zoom_min, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_zoom_min, handle, pArgs, nil)
                 }
                 
             }
@@ -1391,7 +1391,7 @@ open class GraphEdit: Control {
     fileprivate final func get_zoom_min() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GraphEdit.method_get_zoom_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_get_zoom_min, handle, nil, &_result)
         return _result
     }
     
@@ -1412,7 +1412,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: zoomMax) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_zoom_max, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_zoom_max, handle, pArgs, nil)
                 }
                 
             }
@@ -1437,7 +1437,7 @@ open class GraphEdit: Control {
     fileprivate final func get_zoom_max() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GraphEdit.method_get_zoom_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_get_zoom_max, handle, nil, &_result)
         return _result
     }
     
@@ -1458,7 +1458,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: zoomStep) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_zoom_step, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_zoom_step, handle, pArgs, nil)
                 }
                 
             }
@@ -1483,7 +1483,7 @@ open class GraphEdit: Control {
     fileprivate final func get_zoom_step() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GraphEdit.method_get_zoom_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_get_zoom_step, handle, nil, &_result)
         return _result
     }
     
@@ -1504,7 +1504,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_show_grid, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_show_grid, handle, pArgs, nil)
                 }
                 
             }
@@ -1529,7 +1529,7 @@ open class GraphEdit: Control {
     fileprivate final func is_showing_grid() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_grid, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_grid, handle, nil, &_result)
         return _result
     }
     
@@ -1550,7 +1550,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: pattern.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_grid_pattern, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_grid_pattern, handle, pArgs, nil)
                 }
                 
             }
@@ -1575,7 +1575,7 @@ open class GraphEdit: Control {
     fileprivate final func get_grid_pattern() -> GraphEdit.GridPattern {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GraphEdit.method_get_grid_pattern, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_get_grid_pattern, handle, nil, &_result)
         return GraphEdit.GridPattern (rawValue: _result)!
     }
     
@@ -1596,7 +1596,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_snapping_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_snapping_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1621,7 +1621,7 @@ open class GraphEdit: Control {
     fileprivate final func is_snapping_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphEdit.method_is_snapping_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_is_snapping_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1642,7 +1642,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: pixels) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_snapping_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_snapping_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -1667,7 +1667,7 @@ open class GraphEdit: Control {
     fileprivate final func get_snapping_distance() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GraphEdit.method_get_snapping_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_get_snapping_distance, handle, nil, &_result)
         return _result
     }
     
@@ -1688,7 +1688,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: curvature) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_connection_lines_curvature, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_connection_lines_curvature, handle, pArgs, nil)
                 }
                 
             }
@@ -1713,7 +1713,7 @@ open class GraphEdit: Control {
     fileprivate final func get_connection_lines_curvature() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GraphEdit.method_get_connection_lines_curvature, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_get_connection_lines_curvature, handle, nil, &_result)
         return _result
     }
     
@@ -1734,7 +1734,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: pixels) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_connection_lines_thickness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_connection_lines_thickness, handle, pArgs, nil)
                 }
                 
             }
@@ -1759,7 +1759,7 @@ open class GraphEdit: Control {
     fileprivate final func get_connection_lines_thickness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GraphEdit.method_get_connection_lines_thickness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_get_connection_lines_thickness, handle, nil, &_result)
         return _result
     }
     
@@ -1780,7 +1780,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: pixels) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_connection_lines_antialiased, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_connection_lines_antialiased, handle, pArgs, nil)
                 }
                 
             }
@@ -1805,7 +1805,7 @@ open class GraphEdit: Control {
     fileprivate final func is_connection_lines_antialiased() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphEdit.method_is_connection_lines_antialiased, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_is_connection_lines_antialiased, handle, nil, &_result)
         return _result
     }
     
@@ -1826,7 +1826,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_minimap_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_minimap_size, handle, pArgs, nil)
                 }
                 
             }
@@ -1851,7 +1851,7 @@ open class GraphEdit: Control {
     fileprivate final func get_minimap_size() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(GraphEdit.method_get_minimap_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_get_minimap_size, handle, nil, &_result)
         return _result
     }
     
@@ -1872,7 +1872,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: opacity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_minimap_opacity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_minimap_opacity, handle, pArgs, nil)
                 }
                 
             }
@@ -1897,7 +1897,7 @@ open class GraphEdit: Control {
     fileprivate final func get_minimap_opacity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GraphEdit.method_get_minimap_opacity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_get_minimap_opacity, handle, nil, &_result)
         return _result
     }
     
@@ -1918,7 +1918,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_minimap_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_minimap_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1943,7 +1943,7 @@ open class GraphEdit: Control {
     fileprivate final func is_minimap_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphEdit.method_is_minimap_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_is_minimap_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1964,7 +1964,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: hidden) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_show_menu, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_show_menu, handle, pArgs, nil)
                 }
                 
             }
@@ -1989,7 +1989,7 @@ open class GraphEdit: Control {
     fileprivate final func is_showing_menu() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_menu, handle, nil, &_result)
         return _result
     }
     
@@ -2010,7 +2010,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_show_zoom_label, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_show_zoom_label, handle, pArgs, nil)
                 }
                 
             }
@@ -2035,7 +2035,7 @@ open class GraphEdit: Control {
     fileprivate final func is_showing_zoom_label() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_zoom_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_zoom_label, handle, nil, &_result)
         return _result
     }
     
@@ -2056,7 +2056,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: hidden) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_show_grid_buttons, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_show_grid_buttons, handle, pArgs, nil)
                 }
                 
             }
@@ -2081,7 +2081,7 @@ open class GraphEdit: Control {
     fileprivate final func is_showing_grid_buttons() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_grid_buttons, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_grid_buttons, handle, nil, &_result)
         return _result
     }
     
@@ -2102,7 +2102,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: hidden) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_show_zoom_buttons, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_show_zoom_buttons, handle, pArgs, nil)
                 }
                 
             }
@@ -2127,7 +2127,7 @@ open class GraphEdit: Control {
     fileprivate final func is_showing_zoom_buttons() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_zoom_buttons, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_zoom_buttons, handle, nil, &_result)
         return _result
     }
     
@@ -2148,7 +2148,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: hidden) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_show_minimap_button, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_show_minimap_button, handle, pArgs, nil)
                 }
                 
             }
@@ -2173,7 +2173,7 @@ open class GraphEdit: Control {
     fileprivate final func is_showing_minimap_button() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_minimap_button, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_minimap_button, handle, nil, &_result)
         return _result
     }
     
@@ -2194,7 +2194,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: hidden) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_show_arrange_button, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_show_arrange_button, handle, pArgs, nil)
                 }
                 
             }
@@ -2219,7 +2219,7 @@ open class GraphEdit: Control {
     fileprivate final func is_showing_arrange_button() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_arrange_button, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_is_showing_arrange_button, handle, nil, &_result)
         return _result
     }
     
@@ -2240,7 +2240,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_right_disconnects, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_right_disconnects, handle, pArgs, nil)
                 }
                 
             }
@@ -2265,7 +2265,7 @@ open class GraphEdit: Control {
     fileprivate final func is_right_disconnects_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphEdit.method_is_right_disconnects_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphEdit.method_is_right_disconnects_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2286,9 +2286,9 @@ open class GraphEdit: Control {
     /// 
     public final func getMenuHbox() -> HBoxContainer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GraphEdit.method_get_menu_hbox, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GraphEdit.method_get_menu_hbox, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_arrange_nodes: GDExtensionMethodBindPtr = {
@@ -2305,7 +2305,7 @@ open class GraphEdit: Control {
     /// Rearranges selected nodes in a layout with minimum crossings between connections and uniform horizontal and vertical gap between nodes.
     public final func arrangeNodes() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(GraphEdit.method_arrange_nodes, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(GraphEdit.method_arrange_nodes, handle, nil, nil)
         
     }
     
@@ -2326,7 +2326,7 @@ open class GraphEdit: Control {
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphEdit.method_set_selected, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphEdit.method_set_selected, handle, pArgs, nil)
                 }
                 
             }
@@ -2682,9 +2682,9 @@ func _GraphEdit_proxy_is_in_input_hotzone (instance: UnsafeMutableRawPointer?, a
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GraphEdit else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._isInInputHotzone (inNode: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, inPort: args [1]!.assumingMemoryBound (to: Int32.self).pointee, mousePosition: args [2]!.assumingMemoryBound (to: Vector2.self).pointee)
+    let ret = swiftObject._isInInputHotzone (inNode: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, inPort: args [1]!.assumingMemoryBound (to: Int32.self).pointee, mousePosition: args [2]!.assumingMemoryBound (to: Vector2.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
@@ -2693,9 +2693,9 @@ func _GraphEdit_proxy_is_in_output_hotzone (instance: UnsafeMutableRawPointer?, 
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GraphEdit else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._isInOutputHotzone (inNode: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, inPort: args [1]!.assumingMemoryBound (to: Int32.self).pointee, mousePosition: args [2]!.assumingMemoryBound (to: Vector2.self).pointee)
+    let ret = swiftObject._isInOutputHotzone (inNode: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Object, inPort: args [1]!.assumingMemoryBound (to: Int32.self).pointee, mousePosition: args [2]!.assumingMemoryBound (to: Vector2.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 

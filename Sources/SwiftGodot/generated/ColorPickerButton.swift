@@ -82,7 +82,7 @@ open class ColorPickerButton: Button {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPickerButton.method_set_pick_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPickerButton.method_set_pick_color, handle, pArgs, nil)
                 }
                 
             }
@@ -107,7 +107,7 @@ open class ColorPickerButton: Button {
     fileprivate final func get_pick_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(ColorPickerButton.method_get_pick_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ColorPickerButton.method_get_pick_color, handle, nil, &_result)
         return _result
     }
     
@@ -128,9 +128,9 @@ open class ColorPickerButton: Button {
     /// 
     public final func getPicker() -> ColorPicker? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ColorPickerButton.method_get_picker, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ColorPickerButton.method_get_picker, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_popup: GDExtensionMethodBindPtr = {
@@ -150,9 +150,9 @@ open class ColorPickerButton: Button {
     /// 
     public final func getPopup() -> PopupPanel? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ColorPickerButton.method_get_popup, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ColorPickerButton.method_get_popup, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_edit_alpha: GDExtensionMethodBindPtr = {
@@ -172,7 +172,7 @@ open class ColorPickerButton: Button {
         withUnsafePointer(to: show) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPickerButton.method_set_edit_alpha, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPickerButton.method_set_edit_alpha, handle, pArgs, nil)
                 }
                 
             }
@@ -197,7 +197,7 @@ open class ColorPickerButton: Button {
     fileprivate final func is_editing_alpha() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ColorPickerButton.method_is_editing_alpha, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ColorPickerButton.method_is_editing_alpha, handle, nil, &_result)
         return _result
     }
     

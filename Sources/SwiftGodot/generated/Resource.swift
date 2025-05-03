@@ -124,7 +124,7 @@ open class Resource: RefCounted {
     @_documentation(visibility: public)
     open func _setupLocalToScene() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Resource.method__setup_local_to_scene, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Resource.method__setup_local_to_scene, handle, nil, nil)
         
     }
     
@@ -144,7 +144,7 @@ open class Resource: RefCounted {
     open func _getRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: RID = RID ()
-        gi.object_method_bind_ptrcall(Resource.method__get_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Resource.method__get_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -163,7 +163,7 @@ open class Resource: RefCounted {
     @_documentation(visibility: public)
     open func _resetState() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Resource.method__reset_state, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Resource.method__reset_state, handle, nil, nil)
         
     }
     
@@ -186,7 +186,7 @@ open class Resource: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Resource.method__set_path_cache, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Resource.method__set_path_cache, handle, pArgs, nil)
                 }
                 
             }
@@ -214,7 +214,7 @@ open class Resource: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Resource.method_set_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Resource.method_set_path, handle, pArgs, nil)
                 }
                 
             }
@@ -242,7 +242,7 @@ open class Resource: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Resource.method_take_over_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Resource.method_take_over_path, handle, pArgs, nil)
                 }
                 
             }
@@ -267,7 +267,7 @@ open class Resource: RefCounted {
     fileprivate final func get_path() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Resource.method_get_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Resource.method_get_path, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -289,7 +289,7 @@ open class Resource: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Resource.method_set_path_cache, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Resource.method_set_path_cache, handle, pArgs, nil)
                 }
                 
             }
@@ -317,7 +317,7 @@ open class Resource: RefCounted {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Resource.method_set_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Resource.method_set_name, handle, pArgs, nil)
                 }
                 
             }
@@ -342,7 +342,7 @@ open class Resource: RefCounted {
     fileprivate final func get_name() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Resource.method_get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Resource.method_get_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -361,7 +361,7 @@ open class Resource: RefCounted {
     public final func getRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(Resource.method_get_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Resource.method_get_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -382,7 +382,7 @@ open class Resource: RefCounted {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Resource.method_set_local_to_scene, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Resource.method_set_local_to_scene, handle, pArgs, nil)
                 }
                 
             }
@@ -407,7 +407,7 @@ open class Resource: RefCounted {
     fileprivate final func is_local_to_scene() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Resource.method_is_local_to_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Resource.method_is_local_to_scene, handle, nil, &_result)
         return _result
     }
     
@@ -425,9 +425,9 @@ open class Resource: RefCounted {
     /// If ``resourceLocalToScene`` is set to `true` and the resource has been loaded from a ``PackedScene`` instantiation, returns the root ``Node`` of the scene where this resource is used. Otherwise, returns `null`.
     public final func getLocalScene() -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Resource.method_get_local_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Resource.method_get_local_scene, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_setup_local_to_scene: GDExtensionMethodBindPtr = {
@@ -444,7 +444,7 @@ open class Resource: RefCounted {
     /// Calls ``_setupLocalToScene()``. If ``resourceLocalToScene`` is set to `true`, this method is automatically called from ``PackedScene/instantiate(editState:)`` by the newly duplicated resource within the scene instance.
     public final func setupLocalToScene() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Resource.method_setup_local_to_scene, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Resource.method_setup_local_to_scene, handle, nil, nil)
         
     }
     
@@ -462,7 +462,7 @@ open class Resource: RefCounted {
     /// For resources that use a variable number of properties, either via ``Object/_validateProperty()`` or ``Object/_getPropertyList()``, override ``_resetState()`` to correctly clear the resource's state.
     public final func resetState() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Resource.method_reset_state, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Resource.method_reset_state, handle, nil, nil)
         
     }
     
@@ -489,7 +489,7 @@ open class Resource: RefCounted {
             withUnsafePointer(to: id.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Resource.method_set_id_for_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Resource.method_set_id_for_path, handle, pArgs, nil)
                     }
                     
                 }
@@ -523,7 +523,7 @@ open class Resource: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Resource.method_get_id_for_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Resource.method_get_id_for_path, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -548,7 +548,7 @@ open class Resource: RefCounted {
     public final func isBuiltIn() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Resource.method_is_built_in, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Resource.method_is_built_in, handle, nil, &_result)
         return _result
     }
     
@@ -588,7 +588,7 @@ open class Resource: RefCounted {
         withUnsafePointer(to: id.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Resource.method_set_scene_unique_id, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Resource.method_set_scene_unique_id, handle, pArgs, nil)
                 }
                 
             }
@@ -613,7 +613,7 @@ open class Resource: RefCounted {
     fileprivate final func get_scene_unique_id() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Resource.method_get_scene_unique_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Resource.method_get_scene_unique_id, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -634,7 +634,7 @@ open class Resource: RefCounted {
     /// 
     public final func emitChanged() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Resource.method_emit_changed, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Resource.method_emit_changed, handle, nil, nil)
         
     }
     
@@ -665,18 +665,18 @@ open class Resource: RefCounted {
     /// 
     public final func duplicate(subresources: Bool = false) -> Resource? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: subresources) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Resource.method_duplicate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Resource.method_duplicate, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {

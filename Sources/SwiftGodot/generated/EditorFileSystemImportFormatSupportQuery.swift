@@ -42,7 +42,7 @@ open class EditorFileSystemImportFormatSupportQuery: RefCounted {
     open func _isActive() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorFileSystemImportFormatSupportQuery.method__is_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorFileSystemImportFormatSupportQuery.method__is_active, handle, nil, &_result)
         return _result
     }
     
@@ -62,7 +62,7 @@ open class EditorFileSystemImportFormatSupportQuery: RefCounted {
     open func _getFileExtensions() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(EditorFileSystemImportFormatSupportQuery.method__get_file_extensions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorFileSystemImportFormatSupportQuery.method__get_file_extensions, handle, nil, &_result.content)
         return _result
     }
     
@@ -82,7 +82,7 @@ open class EditorFileSystemImportFormatSupportQuery: RefCounted {
     open func _query() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorFileSystemImportFormatSupportQuery.method__query, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorFileSystemImportFormatSupportQuery.method__query, handle, nil, &_result)
         return _result
     }
     

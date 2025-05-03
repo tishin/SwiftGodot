@@ -204,7 +204,7 @@ open class EditorProperty: Container {
     @_documentation(visibility: public)
     open func _updateProperty() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorProperty.method__update_property, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorProperty.method__update_property, handle, nil, nil)
         
     }
     
@@ -226,7 +226,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: readOnly) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method__set_read_only, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method__set_read_only, handle, pArgs, nil)
                 }
                 
             }
@@ -254,7 +254,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_set_label, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_set_label, handle, pArgs, nil)
                 }
                 
             }
@@ -279,7 +279,7 @@ open class EditorProperty: Container {
     fileprivate final func get_label() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorProperty.method_get_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorProperty.method_get_label, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -300,7 +300,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: readOnly) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_set_read_only, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_set_read_only, handle, pArgs, nil)
                 }
                 
             }
@@ -325,7 +325,7 @@ open class EditorProperty: Container {
     fileprivate final func is_read_only() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorProperty.method_is_read_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorProperty.method_is_read_only, handle, nil, &_result)
         return _result
     }
     
@@ -346,7 +346,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: drawLabel) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_set_draw_label, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_set_draw_label, handle, pArgs, nil)
                 }
                 
             }
@@ -371,7 +371,7 @@ open class EditorProperty: Container {
     fileprivate final func is_draw_label() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorProperty.method_is_draw_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorProperty.method_is_draw_label, handle, nil, &_result)
         return _result
     }
     
@@ -392,7 +392,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: drawBackground) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_set_draw_background, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_set_draw_background, handle, pArgs, nil)
                 }
                 
             }
@@ -417,7 +417,7 @@ open class EditorProperty: Container {
     fileprivate final func is_draw_background() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorProperty.method_is_draw_background, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorProperty.method_is_draw_background, handle, nil, &_result)
         return _result
     }
     
@@ -438,7 +438,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: checkable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_set_checkable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_set_checkable, handle, pArgs, nil)
                 }
                 
             }
@@ -463,7 +463,7 @@ open class EditorProperty: Container {
     fileprivate final func is_checkable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorProperty.method_is_checkable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorProperty.method_is_checkable, handle, nil, &_result)
         return _result
     }
     
@@ -484,7 +484,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: checked) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_set_checked, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_set_checked, handle, pArgs, nil)
                 }
                 
             }
@@ -509,7 +509,7 @@ open class EditorProperty: Container {
     fileprivate final func is_checked() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorProperty.method_is_checked, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorProperty.method_is_checked, handle, nil, &_result)
         return _result
     }
     
@@ -530,7 +530,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: drawWarning) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_set_draw_warning, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_set_draw_warning, handle, pArgs, nil)
                 }
                 
             }
@@ -555,7 +555,7 @@ open class EditorProperty: Container {
     fileprivate final func is_draw_warning() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorProperty.method_is_draw_warning, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorProperty.method_is_draw_warning, handle, nil, &_result)
         return _result
     }
     
@@ -576,7 +576,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: keying) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_set_keying, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_set_keying, handle, pArgs, nil)
                 }
                 
             }
@@ -601,7 +601,7 @@ open class EditorProperty: Container {
     fileprivate final func is_keying() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorProperty.method_is_keying, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorProperty.method_is_keying, handle, nil, &_result)
         return _result
     }
     
@@ -622,7 +622,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: deletable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_set_deletable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_set_deletable, handle, pArgs, nil)
                 }
                 
             }
@@ -647,7 +647,7 @@ open class EditorProperty: Container {
     fileprivate final func is_deletable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorProperty.method_is_deletable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorProperty.method_is_deletable, handle, nil, &_result)
         return _result
     }
     
@@ -666,7 +666,7 @@ open class EditorProperty: Container {
     public final func getEditedProperty() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(EditorProperty.method_get_edited_property, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorProperty.method_get_edited_property, handle, nil, &_result.content)
         return _result
     }
     
@@ -684,9 +684,9 @@ open class EditorProperty: Container {
     /// Gets the edited object.
     public final func getEditedObject() -> Object? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorProperty.method_get_edited_object, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorProperty.method_get_edited_object, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_update_property: GDExtensionMethodBindPtr = {
@@ -703,7 +703,7 @@ open class EditorProperty: Container {
     /// Forces refresh of the property display.
     public final func updateProperty() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorProperty.method_update_property, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorProperty.method_update_property, handle, nil, nil)
         
     }
     
@@ -724,7 +724,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: control?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_add_focusable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_add_focusable, handle, pArgs, nil)
                 }
                 
             }
@@ -751,7 +751,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: editor?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_set_bottom_editor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_set_bottom_editor, handle, pArgs, nil)
                 }
                 
             }
@@ -778,7 +778,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: selectable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_set_selectable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_set_selectable, handle, pArgs, nil)
                 }
                 
             }
@@ -803,7 +803,7 @@ open class EditorProperty: Container {
     fileprivate final func is_selectable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorProperty.method_is_selectable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorProperty.method_is_selectable, handle, nil, &_result)
         return _result
     }
     
@@ -824,7 +824,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: useFolding) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_set_use_folding, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_set_use_folding, handle, pArgs, nil)
                 }
                 
             }
@@ -849,7 +849,7 @@ open class EditorProperty: Container {
     fileprivate final func is_using_folding() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorProperty.method_is_using_folding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorProperty.method_is_using_folding, handle, nil, &_result)
         return _result
     }
     
@@ -870,7 +870,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_set_name_split_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_set_name_split_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -895,7 +895,7 @@ open class EditorProperty: Container {
     fileprivate final func get_name_split_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(EditorProperty.method_get_name_split_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorProperty.method_get_name_split_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -913,7 +913,7 @@ open class EditorProperty: Container {
     /// Draw property as not selected. Used by the inspector.
     public final func deselect() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorProperty.method_deselect, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorProperty.method_deselect, handle, nil, nil)
         
     }
     
@@ -932,7 +932,7 @@ open class EditorProperty: Container {
     public final func isSelected() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorProperty.method_is_selected, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorProperty.method_is_selected, handle, nil, &_result)
         return _result
     }
     
@@ -953,7 +953,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: focusable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_select, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_select, handle, pArgs, nil)
                 }
                 
             }
@@ -981,7 +981,7 @@ open class EditorProperty: Container {
             withUnsafePointer(to: property.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorProperty.method_set_object_and_property, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorProperty.method_set_object_and_property, handle, pArgs, nil)
                     }
                     
                 }
@@ -1010,7 +1010,7 @@ open class EditorProperty: Container {
         withUnsafePointer(to: control?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorProperty.method_set_label_reference, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorProperty.method_set_label_reference, handle, pArgs, nil)
                 }
                 
             }
@@ -1040,7 +1040,7 @@ open class EditorProperty: Container {
                     withUnsafePointer(to: changing) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorProperty.method_emit_changed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(EditorProperty.method_emit_changed, handle, pArgs, nil)
                             }
                             
                         }

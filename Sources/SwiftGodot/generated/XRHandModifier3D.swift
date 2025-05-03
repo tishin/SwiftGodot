@@ -84,7 +84,7 @@ open class XRHandModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: trackerName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRHandModifier3D.method_set_hand_tracker, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRHandModifier3D.method_set_hand_tracker, handle, pArgs, nil)
                 }
                 
             }
@@ -109,7 +109,7 @@ open class XRHandModifier3D: SkeletonModifier3D {
     fileprivate final func get_hand_tracker() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(XRHandModifier3D.method_get_hand_tracker, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XRHandModifier3D.method_get_hand_tracker, handle, nil, &_result.content)
         return _result
     }
     
@@ -130,7 +130,7 @@ open class XRHandModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: boneUpdate.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRHandModifier3D.method_set_bone_update, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRHandModifier3D.method_set_bone_update, handle, pArgs, nil)
                 }
                 
             }
@@ -155,7 +155,7 @@ open class XRHandModifier3D: SkeletonModifier3D {
     fileprivate final func get_bone_update() -> XRHandModifier3D.BoneUpdate {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(XRHandModifier3D.method_get_bone_update, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRHandModifier3D.method_get_bone_update, handle, nil, &_result)
         return XRHandModifier3D.BoneUpdate (rawValue: _result)!
     }
     

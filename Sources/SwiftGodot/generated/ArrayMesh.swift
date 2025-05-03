@@ -94,7 +94,7 @@ open class ArrayMesh: Mesh {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ArrayMesh.method_add_blend_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ArrayMesh.method_add_blend_shape, handle, pArgs, nil)
                 }
                 
             }
@@ -119,7 +119,7 @@ open class ArrayMesh: Mesh {
     public final func getBlendShapeCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ArrayMesh.method_get_blend_shape_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ArrayMesh.method_get_blend_shape_count, handle, nil, &_result)
         return _result
     }
     
@@ -141,7 +141,7 @@ open class ArrayMesh: Mesh {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ArrayMesh.method_get_blend_shape_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ArrayMesh.method_get_blend_shape_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -169,7 +169,7 @@ open class ArrayMesh: Mesh {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ArrayMesh.method_set_blend_shape_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ArrayMesh.method_set_blend_shape_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -195,7 +195,7 @@ open class ArrayMesh: Mesh {
     /// Removes all blend shapes from this ``ArrayMesh``.
     public final func clearBlendShapes() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ArrayMesh.method_clear_blend_shapes, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ArrayMesh.method_clear_blend_shapes, handle, nil, nil)
         
     }
     
@@ -216,7 +216,7 @@ open class ArrayMesh: Mesh {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ArrayMesh.method_set_blend_shape_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ArrayMesh.method_set_blend_shape_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -241,7 +241,7 @@ open class ArrayMesh: Mesh {
     fileprivate final func get_blend_shape_mode() -> Mesh.BlendShapeMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ArrayMesh.method_get_blend_shape_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ArrayMesh.method_get_blend_shape_mode, handle, nil, &_result)
         return Mesh.BlendShapeMode (rawValue: _result)!
     }
     
@@ -279,7 +279,7 @@ open class ArrayMesh: Mesh {
                         withUnsafePointer(to: flags.rawValue) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(ArrayMesh.method_add_surface_from_arrays, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(ArrayMesh.method_add_surface_from_arrays, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -311,7 +311,7 @@ open class ArrayMesh: Mesh {
     /// Removes all surfaces from this ``ArrayMesh``.
     public final func clearSurfaces() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ArrayMesh.method_clear_surfaces, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ArrayMesh.method_clear_surfaces, handle, nil, nil)
         
     }
     
@@ -332,7 +332,7 @@ open class ArrayMesh: Mesh {
         withUnsafePointer(to: surfIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ArrayMesh.method_surface_remove, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ArrayMesh.method_surface_remove, handle, pArgs, nil)
                 }
                 
             }
@@ -361,7 +361,7 @@ open class ArrayMesh: Mesh {
                 withUnsafePointer(to: data.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ArrayMesh.method_surface_update_vertex_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(ArrayMesh.method_surface_update_vertex_region, handle, pArgs, nil)
                         }
                         
                     }
@@ -394,7 +394,7 @@ open class ArrayMesh: Mesh {
                 withUnsafePointer(to: data.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ArrayMesh.method_surface_update_attribute_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(ArrayMesh.method_surface_update_attribute_region, handle, pArgs, nil)
                         }
                         
                     }
@@ -427,7 +427,7 @@ open class ArrayMesh: Mesh {
                 withUnsafePointer(to: data.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ArrayMesh.method_surface_update_skin_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(ArrayMesh.method_surface_update_skin_region, handle, pArgs, nil)
                         }
                         
                     }
@@ -459,7 +459,7 @@ open class ArrayMesh: Mesh {
         withUnsafePointer(to: surfIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ArrayMesh.method_surface_get_array_len, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ArrayMesh.method_surface_get_array_len, handle, pArgs, &_result)
                 }
                 
             }
@@ -487,7 +487,7 @@ open class ArrayMesh: Mesh {
         withUnsafePointer(to: surfIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ArrayMesh.method_surface_get_array_index_len, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ArrayMesh.method_surface_get_array_index_len, handle, pArgs, &_result)
                 }
                 
             }
@@ -515,7 +515,7 @@ open class ArrayMesh: Mesh {
         withUnsafePointer(to: surfIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ArrayMesh.method_surface_get_format, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ArrayMesh.method_surface_get_format, handle, pArgs, &_result)
                 }
                 
             }
@@ -543,7 +543,7 @@ open class ArrayMesh: Mesh {
         withUnsafePointer(to: surfIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ArrayMesh.method_surface_get_primitive_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ArrayMesh.method_surface_get_primitive_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -572,7 +572,7 @@ open class ArrayMesh: Mesh {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ArrayMesh.method_surface_find_by_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ArrayMesh.method_surface_find_by_name, handle, pArgs, &_result)
                 }
                 
             }
@@ -601,7 +601,7 @@ open class ArrayMesh: Mesh {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ArrayMesh.method_surface_set_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ArrayMesh.method_surface_set_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -631,7 +631,7 @@ open class ArrayMesh: Mesh {
         withUnsafePointer(to: surfIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ArrayMesh.method_surface_get_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ArrayMesh.method_surface_get_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -655,7 +655,7 @@ open class ArrayMesh: Mesh {
     /// Regenerates tangents for each of the ``ArrayMesh``'s surfaces.
     public final func regenNormalMaps() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ArrayMesh.method_regen_normal_maps, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ArrayMesh.method_regen_normal_maps, handle, nil, nil)
         
     }
     
@@ -678,7 +678,7 @@ open class ArrayMesh: Mesh {
             withUnsafePointer(to: texelSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ArrayMesh.method_lightmap_unwrap, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ArrayMesh.method_lightmap_unwrap, handle, pArgs, &_result)
                     }
                     
                 }
@@ -707,7 +707,7 @@ open class ArrayMesh: Mesh {
         withUnsafePointer(to: aabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ArrayMesh.method_set_custom_aabb, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ArrayMesh.method_set_custom_aabb, handle, pArgs, nil)
                 }
                 
             }
@@ -732,7 +732,7 @@ open class ArrayMesh: Mesh {
     fileprivate final func get_custom_aabb() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(ArrayMesh.method_get_custom_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ArrayMesh.method_get_custom_aabb, handle, nil, &_result)
         return _result
     }
     
@@ -753,7 +753,7 @@ open class ArrayMesh: Mesh {
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ArrayMesh.method_set_shadow_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ArrayMesh.method_set_shadow_mesh, handle, pArgs, nil)
                 }
                 
             }
@@ -777,9 +777,9 @@ open class ArrayMesh: Mesh {
     @inline(__always)
     fileprivate final func get_shadow_mesh() -> ArrayMesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ArrayMesh.method_get_shadow_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ArrayMesh.method_get_shadow_mesh, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

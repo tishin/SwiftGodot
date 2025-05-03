@@ -120,7 +120,7 @@ open class Sky: Resource {
         withUnsafePointer(to: size.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Sky.method_set_radiance_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Sky.method_set_radiance_size, handle, pArgs, nil)
                 }
                 
             }
@@ -145,7 +145,7 @@ open class Sky: Resource {
     fileprivate final func get_radiance_size() -> Sky.RadianceSize {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Sky.method_get_radiance_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Sky.method_get_radiance_size, handle, nil, &_result)
         return Sky.RadianceSize (rawValue: _result)!
     }
     
@@ -166,7 +166,7 @@ open class Sky: Resource {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Sky.method_set_process_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Sky.method_set_process_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -191,7 +191,7 @@ open class Sky: Resource {
     fileprivate final func get_process_mode() -> Sky.ProcessMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Sky.method_get_process_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Sky.method_get_process_mode, handle, nil, &_result)
         return Sky.ProcessMode (rawValue: _result)!
     }
     
@@ -212,7 +212,7 @@ open class Sky: Resource {
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Sky.method_set_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Sky.method_set_material, handle, pArgs, nil)
                 }
                 
             }
@@ -236,9 +236,9 @@ open class Sky: Resource {
     @inline(__always)
     fileprivate final func get_material() -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Sky.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Sky.method_get_material, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

@@ -79,7 +79,7 @@ open class Shape3D: Resource {
         withUnsafePointer(to: bias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Shape3D.method_set_custom_solver_bias, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Shape3D.method_set_custom_solver_bias, handle, pArgs, nil)
                 }
                 
             }
@@ -104,7 +104,7 @@ open class Shape3D: Resource {
     fileprivate final func get_custom_solver_bias() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Shape3D.method_get_custom_solver_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Shape3D.method_get_custom_solver_bias, handle, nil, &_result)
         return _result
     }
     
@@ -125,7 +125,7 @@ open class Shape3D: Resource {
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Shape3D.method_set_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Shape3D.method_set_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -150,7 +150,7 @@ open class Shape3D: Resource {
     fileprivate final func get_margin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Shape3D.method_get_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Shape3D.method_get_margin, handle, nil, &_result)
         return _result
     }
     
@@ -168,9 +168,9 @@ open class Shape3D: Resource {
     /// Returns the ``ArrayMesh`` used to draw the debug collision for this ``Shape3D``.
     public final func getDebugMesh() -> ArrayMesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Shape3D.method_get_debug_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Shape3D.method_get_debug_mesh, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

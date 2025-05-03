@@ -50,7 +50,7 @@ open class AnimationNodeStateMachinePlayback: Resource {
             withUnsafePointer(to: resetOnTeleport) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_travel, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_travel, handle, pArgs, nil)
                     }
                     
                 }
@@ -83,7 +83,7 @@ open class AnimationNodeStateMachinePlayback: Resource {
             withUnsafePointer(to: reset) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_start, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_start, handle, pArgs, nil)
                     }
                     
                 }
@@ -109,7 +109,7 @@ open class AnimationNodeStateMachinePlayback: Resource {
     /// If there is a next path by travel or auto advance, immediately transitions from the current state to the next state.
     public final func next() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_next, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_next, handle, nil, nil)
         
     }
     
@@ -127,7 +127,7 @@ open class AnimationNodeStateMachinePlayback: Resource {
     /// Stops the currently playing animation.
     public final func stop() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_stop, handle, nil, nil)
         
     }
     
@@ -146,7 +146,7 @@ open class AnimationNodeStateMachinePlayback: Resource {
     public final func isPlaying() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_is_playing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_is_playing, handle, nil, &_result)
         return _result
     }
     
@@ -168,7 +168,7 @@ open class AnimationNodeStateMachinePlayback: Resource {
     public final func getCurrentNode() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_get_current_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_get_current_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -187,7 +187,7 @@ open class AnimationNodeStateMachinePlayback: Resource {
     public final func getCurrentPlayPosition() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_get_current_play_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_get_current_play_position, handle, nil, &_result)
         return _result
     }
     
@@ -209,7 +209,7 @@ open class AnimationNodeStateMachinePlayback: Resource {
     public final func getCurrentLength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_get_current_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_get_current_length, handle, nil, &_result)
         return _result
     }
     
@@ -228,7 +228,7 @@ open class AnimationNodeStateMachinePlayback: Resource {
     public final func getFadingFromNode() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_get_fading_from_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_get_fading_from_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -247,7 +247,7 @@ open class AnimationNodeStateMachinePlayback: Resource {
     public final func getTravelPath() -> TypedArray<StringName> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_get_travel_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeStateMachinePlayback.method_get_travel_path, handle, nil, &_result)
         return TypedArray<StringName>(takingOver: _result)
     }
     

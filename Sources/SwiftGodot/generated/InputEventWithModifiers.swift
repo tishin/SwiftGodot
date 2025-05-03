@@ -109,7 +109,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventWithModifiers.method_set_command_or_control_autoremap, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventWithModifiers.method_set_command_or_control_autoremap, handle, pArgs, nil)
                 }
                 
             }
@@ -134,7 +134,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
     fileprivate final func is_command_or_control_autoremap() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_command_or_control_autoremap, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_command_or_control_autoremap, handle, nil, &_result)
         return _result
     }
     
@@ -156,7 +156,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
     public final func isCommandOrControlPressed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_command_or_control_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_command_or_control_pressed, handle, nil, &_result)
         return _result
     }
     
@@ -177,7 +177,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventWithModifiers.method_set_alt_pressed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventWithModifiers.method_set_alt_pressed, handle, pArgs, nil)
                 }
                 
             }
@@ -202,7 +202,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
     fileprivate final func is_alt_pressed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_alt_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_alt_pressed, handle, nil, &_result)
         return _result
     }
     
@@ -223,7 +223,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventWithModifiers.method_set_shift_pressed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventWithModifiers.method_set_shift_pressed, handle, pArgs, nil)
                 }
                 
             }
@@ -248,7 +248,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
     fileprivate final func is_shift_pressed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_shift_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_shift_pressed, handle, nil, &_result)
         return _result
     }
     
@@ -269,7 +269,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventWithModifiers.method_set_ctrl_pressed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventWithModifiers.method_set_ctrl_pressed, handle, pArgs, nil)
                 }
                 
             }
@@ -294,7 +294,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
     fileprivate final func is_ctrl_pressed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_ctrl_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_ctrl_pressed, handle, nil, &_result)
         return _result
     }
     
@@ -315,7 +315,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventWithModifiers.method_set_meta_pressed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventWithModifiers.method_set_meta_pressed, handle, pArgs, nil)
                 }
                 
             }
@@ -340,7 +340,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
     fileprivate final func is_meta_pressed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_meta_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventWithModifiers.method_is_meta_pressed, handle, nil, &_result)
         return _result
     }
     
@@ -359,7 +359,7 @@ open class InputEventWithModifiers: InputEventFromWindow {
     public final func getModifiersMask() -> KeyModifierMask {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: KeyModifierMask = KeyModifierMask ()
-        gi.object_method_bind_ptrcall(InputEventWithModifiers.method_get_modifiers_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventWithModifiers.method_get_modifiers_mask, handle, nil, &_result)
         return _result
     }
     

@@ -264,7 +264,7 @@ open class Tree: Control {
     /// Clears the tree. This removes all items.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Tree.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Tree.method_clear, handle, nil, nil)
         
     }
     
@@ -287,12 +287,12 @@ open class Tree: Control {
     /// 
     public final func createItem(parent: TreeItem? = nil, index: Int32 = -1) -> TreeItem? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: parent?.handle) { pArg0 in
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Tree.method_create_item, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Tree.method_create_item, handle, pArgs, &_result)
                     }
                     
                 }
@@ -301,7 +301,7 @@ open class Tree: Control {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_root: GDExtensionMethodBindPtr = {
@@ -318,9 +318,9 @@ open class Tree: Control {
     /// Returns the tree's root item, or `null` if the tree is empty.
     public final func getRoot() -> TreeItem? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Tree.method_get_root, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Tree.method_get_root, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_column_custom_minimum_width: GDExtensionMethodBindPtr = {
@@ -341,7 +341,7 @@ open class Tree: Control {
             withUnsafePointer(to: minWidth) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Tree.method_set_column_custom_minimum_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Tree.method_set_column_custom_minimum_width, handle, pArgs, nil)
                     }
                     
                 }
@@ -371,7 +371,7 @@ open class Tree: Control {
             withUnsafePointer(to: expand) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Tree.method_set_column_expand, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Tree.method_set_column_expand, handle, pArgs, nil)
                     }
                     
                 }
@@ -401,7 +401,7 @@ open class Tree: Control {
             withUnsafePointer(to: ratio) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Tree.method_set_column_expand_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Tree.method_set_column_expand_ratio, handle, pArgs, nil)
                     }
                     
                 }
@@ -431,7 +431,7 @@ open class Tree: Control {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Tree.method_set_column_clip_content, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Tree.method_set_column_clip_content, handle, pArgs, nil)
                     }
                     
                 }
@@ -461,7 +461,7 @@ open class Tree: Control {
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_is_column_expanding, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Tree.method_is_column_expanding, handle, pArgs, &_result)
                 }
                 
             }
@@ -489,7 +489,7 @@ open class Tree: Control {
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_is_column_clipping_content, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Tree.method_is_column_clipping_content, handle, pArgs, &_result)
                 }
                 
             }
@@ -517,7 +517,7 @@ open class Tree: Control {
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_get_column_expand_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Tree.method_get_column_expand_ratio, handle, pArgs, &_result)
                 }
                 
             }
@@ -545,7 +545,7 @@ open class Tree: Control {
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_get_column_width, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Tree.method_get_column_width, handle, pArgs, &_result)
                 }
                 
             }
@@ -572,7 +572,7 @@ open class Tree: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_set_hide_root, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Tree.method_set_hide_root, handle, pArgs, nil)
                 }
                 
             }
@@ -597,7 +597,7 @@ open class Tree: Control {
     fileprivate final func is_root_hidden() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Tree.method_is_root_hidden, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_is_root_hidden, handle, nil, &_result)
         return _result
     }
     
@@ -618,18 +618,18 @@ open class Tree: Control {
     /// 
     public final func getNextSelected(from: TreeItem?) -> TreeItem? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: from?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_get_next_selected, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Tree.method_get_next_selected, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_selected: GDExtensionMethodBindPtr = {
@@ -651,9 +651,9 @@ open class Tree: Control {
     /// 
     public final func getSelected() -> TreeItem? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Tree.method_get_selected, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Tree.method_get_selected, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_selected: GDExtensionMethodBindPtr = {
@@ -674,7 +674,7 @@ open class Tree: Control {
             withUnsafePointer(to: column) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Tree.method_set_selected, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Tree.method_set_selected, handle, pArgs, nil)
                     }
                     
                 }
@@ -706,7 +706,7 @@ open class Tree: Control {
     public final func getSelectedColumn() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Tree.method_get_selected_column, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_get_selected_column, handle, nil, &_result)
         return _result
     }
     
@@ -725,7 +725,7 @@ open class Tree: Control {
     public final func getPressedButton() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Tree.method_get_pressed_button, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_get_pressed_button, handle, nil, &_result)
         return _result
     }
     
@@ -746,7 +746,7 @@ open class Tree: Control {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_set_select_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Tree.method_set_select_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -771,7 +771,7 @@ open class Tree: Control {
     fileprivate final func get_select_mode() -> Tree.SelectMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Tree.method_get_select_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_get_select_mode, handle, nil, &_result)
         return Tree.SelectMode (rawValue: _result)!
     }
     
@@ -789,7 +789,7 @@ open class Tree: Control {
     /// Deselects all tree items (rows and columns). In ``SelectMode/multi`` mode also removes selection cursor.
     public final func deselectAll() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Tree.method_deselect_all, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Tree.method_deselect_all, handle, nil, nil)
         
     }
     
@@ -810,7 +810,7 @@ open class Tree: Control {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_set_columns, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Tree.method_set_columns, handle, pArgs, nil)
                 }
                 
             }
@@ -835,7 +835,7 @@ open class Tree: Control {
     fileprivate final func get_columns() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Tree.method_get_columns, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_get_columns, handle, nil, &_result)
         return _result
     }
     
@@ -854,9 +854,9 @@ open class Tree: Control {
     /// 
     public final func getEdited() -> TreeItem? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Tree.method_get_edited, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Tree.method_get_edited, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_edited_column: GDExtensionMethodBindPtr = {
@@ -874,7 +874,7 @@ open class Tree: Control {
     public final func getEditedColumn() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Tree.method_get_edited_column, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_get_edited_column, handle, nil, &_result)
         return _result
     }
     
@@ -901,7 +901,7 @@ open class Tree: Control {
         withUnsafePointer(to: forceEdit) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_edit_selected, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Tree.method_edit_selected, handle, pArgs, &_result)
                 }
                 
             }
@@ -926,7 +926,7 @@ open class Tree: Control {
     public final func getCustomPopupRect() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(Tree.method_get_custom_popup_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_get_custom_popup_rect, handle, nil, &_result)
         return _result
     }
     
@@ -950,7 +950,7 @@ open class Tree: Control {
                 withUnsafePointer(to: buttonIndex) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Tree.method_get_item_area_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Tree.method_get_item_area_rect, handle, pArgs, &_result)
                         }
                         
                     }
@@ -978,18 +978,18 @@ open class Tree: Control {
     /// Returns the tree item at the specified position (relative to the tree origin position).
     public final func getItemAtPosition(_ position: Vector2) -> TreeItem? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_get_item_at_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Tree.method_get_item_at_position, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_column_at_position: GDExtensionMethodBindPtr = {
@@ -1010,7 +1010,7 @@ open class Tree: Control {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_get_column_at_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Tree.method_get_column_at_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -1043,7 +1043,7 @@ open class Tree: Control {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_get_drop_section_at_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Tree.method_get_drop_section_at_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -1071,7 +1071,7 @@ open class Tree: Control {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_get_button_id_at_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Tree.method_get_button_id_at_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -1100,7 +1100,7 @@ open class Tree: Control {
     /// 
     public final func ensureCursorIsVisible() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Tree.method_ensure_cursor_is_visible, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Tree.method_ensure_cursor_is_visible, handle, nil, nil)
         
     }
     
@@ -1121,7 +1121,7 @@ open class Tree: Control {
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_set_column_titles_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Tree.method_set_column_titles_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -1146,7 +1146,7 @@ open class Tree: Control {
     fileprivate final func are_column_titles_visible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Tree.method_are_column_titles_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_are_column_titles_visible, handle, nil, &_result)
         return _result
     }
     
@@ -1169,7 +1169,7 @@ open class Tree: Control {
             withUnsafePointer(to: title.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Tree.method_set_column_title, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Tree.method_set_column_title, handle, pArgs, nil)
                     }
                     
                 }
@@ -1199,7 +1199,7 @@ open class Tree: Control {
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_get_column_title, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Tree.method_get_column_title, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1227,7 +1227,7 @@ open class Tree: Control {
             withUnsafePointer(to: titleAlignment.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Tree.method_set_column_title_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Tree.method_set_column_title_alignment, handle, pArgs, nil)
                     }
                     
                 }
@@ -1257,7 +1257,7 @@ open class Tree: Control {
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_get_column_title_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Tree.method_get_column_title_alignment, handle, pArgs, &_result)
                 }
                 
             }
@@ -1285,7 +1285,7 @@ open class Tree: Control {
             withUnsafePointer(to: direction.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Tree.method_set_column_title_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Tree.method_set_column_title_direction, handle, pArgs, nil)
                     }
                     
                 }
@@ -1315,7 +1315,7 @@ open class Tree: Control {
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_get_column_title_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Tree.method_get_column_title_direction, handle, pArgs, &_result)
                 }
                 
             }
@@ -1344,7 +1344,7 @@ open class Tree: Control {
             withUnsafePointer(to: language.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Tree.method_set_column_title_language, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Tree.method_set_column_title_language, handle, pArgs, nil)
                     }
                     
                 }
@@ -1374,7 +1374,7 @@ open class Tree: Control {
         withUnsafePointer(to: column) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_get_column_title_language, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Tree.method_get_column_title_language, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1399,7 +1399,7 @@ open class Tree: Control {
     public final func getScroll() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Tree.method_get_scroll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_get_scroll, handle, nil, &_result)
         return _result
     }
     
@@ -1421,7 +1421,7 @@ open class Tree: Control {
             withUnsafePointer(to: centerOnItem) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Tree.method_scroll_to_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Tree.method_scroll_to_item, handle, pArgs, nil)
                     }
                     
                 }
@@ -1450,7 +1450,7 @@ open class Tree: Control {
         withUnsafePointer(to: hScroll) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_set_h_scroll_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Tree.method_set_h_scroll_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1475,7 +1475,7 @@ open class Tree: Control {
     fileprivate final func is_h_scroll_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Tree.method_is_h_scroll_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_is_h_scroll_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1496,7 +1496,7 @@ open class Tree: Control {
         withUnsafePointer(to: hScroll) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_set_v_scroll_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Tree.method_set_v_scroll_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1521,7 +1521,7 @@ open class Tree: Control {
     fileprivate final func is_v_scroll_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Tree.method_is_v_scroll_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_is_v_scroll_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1542,7 +1542,7 @@ open class Tree: Control {
         withUnsafePointer(to: hide) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_set_hide_folding, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Tree.method_set_hide_folding, handle, pArgs, nil)
                 }
                 
             }
@@ -1567,7 +1567,7 @@ open class Tree: Control {
     fileprivate final func is_folding_hidden() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Tree.method_is_folding_hidden, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_is_folding_hidden, handle, nil, &_result)
         return _result
     }
     
@@ -1588,7 +1588,7 @@ open class Tree: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_set_enable_recursive_folding, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Tree.method_set_enable_recursive_folding, handle, pArgs, nil)
                 }
                 
             }
@@ -1613,7 +1613,7 @@ open class Tree: Control {
     fileprivate final func is_recursive_folding_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Tree.method_is_recursive_folding_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_is_recursive_folding_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1634,7 +1634,7 @@ open class Tree: Control {
         withUnsafePointer(to: flags) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_set_drop_mode_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Tree.method_set_drop_mode_flags, handle, pArgs, nil)
                 }
                 
             }
@@ -1659,7 +1659,7 @@ open class Tree: Control {
     fileprivate final func get_drop_mode_flags() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Tree.method_get_drop_mode_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_get_drop_mode_flags, handle, nil, &_result)
         return _result
     }
     
@@ -1680,7 +1680,7 @@ open class Tree: Control {
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_set_allow_rmb_select, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Tree.method_set_allow_rmb_select, handle, pArgs, nil)
                 }
                 
             }
@@ -1705,7 +1705,7 @@ open class Tree: Control {
     fileprivate final func get_allow_rmb_select() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Tree.method_get_allow_rmb_select, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_get_allow_rmb_select, handle, nil, &_result)
         return _result
     }
     
@@ -1726,7 +1726,7 @@ open class Tree: Control {
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_set_allow_reselect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Tree.method_set_allow_reselect, handle, pArgs, nil)
                 }
                 
             }
@@ -1751,7 +1751,7 @@ open class Tree: Control {
     fileprivate final func get_allow_reselect() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Tree.method_get_allow_reselect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_get_allow_reselect, handle, nil, &_result)
         return _result
     }
     
@@ -1772,7 +1772,7 @@ open class Tree: Control {
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_set_allow_search, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Tree.method_set_allow_search, handle, pArgs, nil)
                 }
                 
             }
@@ -1797,7 +1797,7 @@ open class Tree: Control {
     fileprivate final func get_allow_search() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Tree.method_get_allow_search, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_get_allow_search, handle, nil, &_result)
         return _result
     }
     
@@ -1818,7 +1818,7 @@ open class Tree: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Tree.method_set_auto_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Tree.method_set_auto_tooltip, handle, pArgs, nil)
                 }
                 
             }
@@ -1843,7 +1843,7 @@ open class Tree: Control {
     fileprivate final func is_auto_tooltip_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Tree.method_is_auto_tooltip_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Tree.method_is_auto_tooltip_enabled, handle, nil, &_result)
         return _result
     }
     

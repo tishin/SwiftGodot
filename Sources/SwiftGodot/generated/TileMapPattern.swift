@@ -49,7 +49,7 @@ open class TileMapPattern: Resource {
                     withUnsafePointer(to: alternativeTile) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TileMapPattern.method_set_cell, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TileMapPattern.method_set_cell, handle, pArgs, nil)
                             }
                             
                         }
@@ -83,7 +83,7 @@ open class TileMapPattern: Resource {
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapPattern.method_has_cell, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapPattern.method_has_cell, handle, pArgs, &_result)
                 }
                 
             }
@@ -111,7 +111,7 @@ open class TileMapPattern: Resource {
             withUnsafePointer(to: updateSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileMapPattern.method_remove_cell, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileMapPattern.method_remove_cell, handle, pArgs, nil)
                     }
                     
                 }
@@ -141,7 +141,7 @@ open class TileMapPattern: Resource {
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapPattern.method_get_cell_source_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapPattern.method_get_cell_source_id, handle, pArgs, &_result)
                 }
                 
             }
@@ -169,7 +169,7 @@ open class TileMapPattern: Resource {
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapPattern.method_get_cell_atlas_coords, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapPattern.method_get_cell_atlas_coords, handle, pArgs, &_result)
                 }
                 
             }
@@ -197,7 +197,7 @@ open class TileMapPattern: Resource {
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapPattern.method_get_cell_alternative_tile, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapPattern.method_get_cell_alternative_tile, handle, pArgs, &_result)
                 }
                 
             }
@@ -222,7 +222,7 @@ open class TileMapPattern: Resource {
     public final func getUsedCells() -> TypedArray<Vector2i> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(TileMapPattern.method_get_used_cells, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapPattern.method_get_used_cells, handle, nil, &_result)
         return TypedArray<Vector2i>(takingOver: _result)
     }
     
@@ -241,7 +241,7 @@ open class TileMapPattern: Resource {
     public final func getSize() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(TileMapPattern.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapPattern.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -262,7 +262,7 @@ open class TileMapPattern: Resource {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapPattern.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapPattern.method_set_size, handle, pArgs, nil)
                 }
                 
             }
@@ -287,7 +287,7 @@ open class TileMapPattern: Resource {
     public final func isEmpty() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TileMapPattern.method_is_empty, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapPattern.method_is_empty, handle, nil, &_result)
         return _result
     }
     

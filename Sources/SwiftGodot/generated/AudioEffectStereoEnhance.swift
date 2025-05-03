@@ -82,7 +82,7 @@ open class AudioEffectStereoEnhance: AudioEffect {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_set_pan_pullout, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_set_pan_pullout, handle, pArgs, nil)
                 }
                 
             }
@@ -107,7 +107,7 @@ open class AudioEffectStereoEnhance: AudioEffect {
     fileprivate final func get_pan_pullout() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_get_pan_pullout, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_get_pan_pullout, handle, nil, &_result)
         return _result
     }
     
@@ -128,7 +128,7 @@ open class AudioEffectStereoEnhance: AudioEffect {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_set_time_pullout, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_set_time_pullout, handle, pArgs, nil)
                 }
                 
             }
@@ -153,7 +153,7 @@ open class AudioEffectStereoEnhance: AudioEffect {
     fileprivate final func get_time_pullout() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_get_time_pullout, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_get_time_pullout, handle, nil, &_result)
         return _result
     }
     
@@ -174,7 +174,7 @@ open class AudioEffectStereoEnhance: AudioEffect {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_set_surround, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_set_surround, handle, pArgs, nil)
                 }
                 
             }
@@ -199,7 +199,7 @@ open class AudioEffectStereoEnhance: AudioEffect {
     fileprivate final func get_surround() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_get_surround, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectStereoEnhance.method_get_surround, handle, nil, &_result)
         return _result
     }
     

@@ -70,7 +70,7 @@ open class EditorFeatureProfile: RefCounted {
             withUnsafePointer(to: disable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorFeatureProfile.method_set_disable_class, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorFeatureProfile.method_set_disable_class, handle, pArgs, nil)
                     }
                     
                 }
@@ -100,7 +100,7 @@ open class EditorFeatureProfile: RefCounted {
         withUnsafePointer(to: className.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFeatureProfile.method_is_class_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorFeatureProfile.method_is_class_disabled, handle, pArgs, &_result)
                 }
                 
             }
@@ -128,7 +128,7 @@ open class EditorFeatureProfile: RefCounted {
             withUnsafePointer(to: disable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorFeatureProfile.method_set_disable_class_editor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorFeatureProfile.method_set_disable_class_editor, handle, pArgs, nil)
                     }
                     
                 }
@@ -158,7 +158,7 @@ open class EditorFeatureProfile: RefCounted {
         withUnsafePointer(to: className.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFeatureProfile.method_is_class_editor_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorFeatureProfile.method_is_class_editor_disabled, handle, pArgs, &_result)
                 }
                 
             }
@@ -187,7 +187,7 @@ open class EditorFeatureProfile: RefCounted {
                 withUnsafePointer(to: disable) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorFeatureProfile.method_set_disable_class_property, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorFeatureProfile.method_set_disable_class_property, handle, pArgs, nil)
                         }
                         
                     }
@@ -220,7 +220,7 @@ open class EditorFeatureProfile: RefCounted {
             withUnsafePointer(to: property.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorFeatureProfile.method_is_class_property_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(EditorFeatureProfile.method_is_class_property_disabled, handle, pArgs, &_result)
                     }
                     
                 }
@@ -250,7 +250,7 @@ open class EditorFeatureProfile: RefCounted {
             withUnsafePointer(to: disable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorFeatureProfile.method_set_disable_feature, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorFeatureProfile.method_set_disable_feature, handle, pArgs, nil)
                     }
                     
                 }
@@ -280,7 +280,7 @@ open class EditorFeatureProfile: RefCounted {
         withUnsafePointer(to: feature.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFeatureProfile.method_is_feature_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorFeatureProfile.method_is_feature_disabled, handle, pArgs, &_result)
                 }
                 
             }
@@ -308,7 +308,7 @@ open class EditorFeatureProfile: RefCounted {
         withUnsafePointer(to: feature.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFeatureProfile.method_get_feature_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorFeatureProfile.method_get_feature_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -340,7 +340,7 @@ open class EditorFeatureProfile: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFeatureProfile.method_save_to_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorFeatureProfile.method_save_to_file, handle, pArgs, &_result)
                 }
                 
             }
@@ -372,7 +372,7 @@ open class EditorFeatureProfile: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorFeatureProfile.method_load_from_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorFeatureProfile.method_load_from_file, handle, pArgs, &_result)
                 }
                 
             }

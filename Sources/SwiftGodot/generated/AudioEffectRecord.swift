@@ -65,7 +65,7 @@ open class AudioEffectRecord: AudioEffect {
         withUnsafePointer(to: record) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectRecord.method_set_recording_active, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectRecord.method_set_recording_active, handle, pArgs, nil)
                 }
                 
             }
@@ -90,7 +90,7 @@ open class AudioEffectRecord: AudioEffect {
     public final func isRecordingActive() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioEffectRecord.method_is_recording_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectRecord.method_is_recording_active, handle, nil, &_result)
         return _result
     }
     
@@ -111,7 +111,7 @@ open class AudioEffectRecord: AudioEffect {
         withUnsafePointer(to: format.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectRecord.method_set_format, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectRecord.method_set_format, handle, pArgs, nil)
                 }
                 
             }
@@ -136,7 +136,7 @@ open class AudioEffectRecord: AudioEffect {
     fileprivate final func get_format() -> AudioStreamWAV.Format {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AudioEffectRecord.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectRecord.method_get_format, handle, nil, &_result)
         return AudioStreamWAV.Format (rawValue: _result)!
     }
     
@@ -154,9 +154,9 @@ open class AudioEffectRecord: AudioEffect {
     /// Returns the recorded sample.
     public final func getRecording() -> AudioStreamWAV? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AudioEffectRecord.method_get_recording, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AudioEffectRecord.method_get_recording, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

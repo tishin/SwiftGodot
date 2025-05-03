@@ -160,7 +160,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_index, handle, pArgs, nil)
                 }
                 
             }
@@ -185,7 +185,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     fileprivate final func get_index() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_index, handle, nil, &_result)
         return _result
     }
     
@@ -206,7 +206,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
         withUnsafePointer(to: tilt) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_tilt, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_tilt, handle, pArgs, nil)
                 }
                 
             }
@@ -231,7 +231,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     fileprivate final func get_tilt() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_tilt, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_tilt, handle, nil, &_result)
         return _result
     }
     
@@ -252,7 +252,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
         withUnsafePointer(to: pressure) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_pressure, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_pressure, handle, pArgs, nil)
                 }
                 
             }
@@ -277,7 +277,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     fileprivate final func get_pressure() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_pressure, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_pressure, handle, nil, &_result)
         return _result
     }
     
@@ -298,7 +298,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
         withUnsafePointer(to: penInverted) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_pen_inverted, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_pen_inverted, handle, pArgs, nil)
                 }
                 
             }
@@ -323,7 +323,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     fileprivate final func get_pen_inverted() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_pen_inverted, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_pen_inverted, handle, nil, &_result)
         return _result
     }
     
@@ -344,7 +344,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_position, handle, pArgs, nil)
                 }
                 
             }
@@ -369,7 +369,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     fileprivate final func get_position() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_position, handle, nil, &_result)
         return _result
     }
     
@@ -390,7 +390,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
         withUnsafePointer(to: relative) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_relative, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_relative, handle, pArgs, nil)
                 }
                 
             }
@@ -415,7 +415,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     fileprivate final func get_relative() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_relative, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_relative, handle, nil, &_result)
         return _result
     }
     
@@ -436,7 +436,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
         withUnsafePointer(to: relative) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_screen_relative, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_screen_relative, handle, pArgs, nil)
                 }
                 
             }
@@ -461,7 +461,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     fileprivate final func get_screen_relative() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_screen_relative, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_screen_relative, handle, nil, &_result)
         return _result
     }
     
@@ -482,7 +482,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -507,7 +507,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     fileprivate final func get_velocity() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -528,7 +528,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_screen_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventScreenDrag.method_set_screen_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -553,7 +553,7 @@ open class InputEventScreenDrag: InputEventFromWindow {
     fileprivate final func get_screen_velocity() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_screen_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventScreenDrag.method_get_screen_velocity, handle, nil, &_result)
         return _result
     }
     

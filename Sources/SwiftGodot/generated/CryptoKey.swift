@@ -52,7 +52,7 @@ open class CryptoKey: Resource {
             withUnsafePointer(to: publicOnly) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CryptoKey.method_save, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(CryptoKey.method_save, handle, pArgs, &_result)
                     }
                     
                 }
@@ -87,7 +87,7 @@ open class CryptoKey: Resource {
             withUnsafePointer(to: publicOnly) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CryptoKey.method_load, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(CryptoKey.method_load, handle, pArgs, &_result)
                     }
                     
                 }
@@ -114,7 +114,7 @@ open class CryptoKey: Resource {
     public final func isPublicOnly() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CryptoKey.method_is_public_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CryptoKey.method_is_public_only, handle, nil, &_result)
         return _result
     }
     
@@ -136,7 +136,7 @@ open class CryptoKey: Resource {
         withUnsafePointer(to: publicOnly) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CryptoKey.method_save_to_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(CryptoKey.method_save_to_string, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -166,7 +166,7 @@ open class CryptoKey: Resource {
             withUnsafePointer(to: publicOnly) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CryptoKey.method_load_from_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(CryptoKey.method_load_from_string, handle, pArgs, &_result)
                     }
                     
                 }

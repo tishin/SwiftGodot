@@ -59,7 +59,7 @@ open class ShaderInclude: Resource {
         withUnsafePointer(to: code.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ShaderInclude.method_set_code, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ShaderInclude.method_set_code, handle, pArgs, nil)
                 }
                 
             }
@@ -84,7 +84,7 @@ open class ShaderInclude: Resource {
     fileprivate final func get_code() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(ShaderInclude.method_get_code, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ShaderInclude.method_get_code, handle, nil, &_result.content)
         return _result.description
     }
     

@@ -34,7 +34,7 @@ open class Input: Object {
     /// The shared instance of this class
     public static var shared: Input {
         return withUnsafePointer(to: &Input.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -170,7 +170,7 @@ open class Input: Object {
     /// Returns `true` if any action, key, joypad button, or mouse button is being pressed. This will also return `true` if any action is simulated via code by calling ``actionPress(action:strength:)``.
     public static func isAnythingPressed() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_anything_pressed, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_anything_pressed, shared.handle, nil, &_result)
         return _result
     }
     
@@ -196,7 +196,7 @@ open class Input: Object {
         withUnsafePointer(to: keycode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_key_pressed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_key_pressed, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -228,7 +228,7 @@ open class Input: Object {
         withUnsafePointer(to: keycode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_physical_key_pressed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_physical_key_pressed, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -255,7 +255,7 @@ open class Input: Object {
         withUnsafePointer(to: keycode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_key_label_pressed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_key_label_pressed, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -282,7 +282,7 @@ open class Input: Object {
         withUnsafePointer(to: button.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_mouse_button_pressed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_mouse_button_pressed, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -310,7 +310,7 @@ open class Input: Object {
             withUnsafePointer(to: button.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_is_joy_button_pressed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_is_joy_button_pressed, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -345,7 +345,7 @@ open class Input: Object {
             withUnsafePointer(to: exactMatch) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_is_action_pressed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_is_action_pressed, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -386,7 +386,7 @@ open class Input: Object {
             withUnsafePointer(to: exactMatch) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_is_action_just_pressed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_is_action_just_pressed, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -423,7 +423,7 @@ open class Input: Object {
             withUnsafePointer(to: exactMatch) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_is_action_just_released, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_is_action_just_released, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -456,7 +456,7 @@ open class Input: Object {
             withUnsafePointer(to: exactMatch) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_action_strength, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_get_action_strength, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -489,7 +489,7 @@ open class Input: Object {
             withUnsafePointer(to: exactMatch) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_action_raw_strength, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_get_action_raw_strength, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -522,7 +522,7 @@ open class Input: Object {
             withUnsafePointer(to: positiveAction.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_axis, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_get_axis, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -560,7 +560,7 @@ open class Input: Object {
                         withUnsafePointer(to: deadzone) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_get_vector, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(method_get_vector, shared.handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -596,7 +596,7 @@ open class Input: Object {
             withUnsafePointer(to: updateExisting) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_add_joy_mapping, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_add_joy_mapping, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -628,7 +628,7 @@ open class Input: Object {
         withUnsafePointer(to: guid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_remove_joy_mapping, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_remove_joy_mapping, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -655,7 +655,7 @@ open class Input: Object {
         withUnsafePointer(to: device) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_joy_known, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_joy_known, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -683,7 +683,7 @@ open class Input: Object {
             withUnsafePointer(to: axis.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_joy_axis, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_get_joy_axis, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -712,7 +712,7 @@ open class Input: Object {
         withUnsafePointer(to: device) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_joy_name, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_joy_name, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -742,7 +742,7 @@ open class Input: Object {
         withUnsafePointer(to: device) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_joy_guid, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_joy_guid, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -790,7 +790,7 @@ open class Input: Object {
         withUnsafePointer(to: device) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_joy_info, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_joy_info, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -821,7 +821,7 @@ open class Input: Object {
             withUnsafePointer(to: productId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_should_ignore_device, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_should_ignore_device, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -847,7 +847,7 @@ open class Input: Object {
     /// Returns an ``VariantArray`` containing the device IDs of all currently connected joypads.
     public static func getConnectedJoypads() -> TypedArray<Int64> {
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(method_get_connected_joypads, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_connected_joypads, shared.handle, nil, &_result)
         return TypedArray<Int64>(takingOver: _result)
     }
     
@@ -868,7 +868,7 @@ open class Input: Object {
         withUnsafePointer(to: device) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_joy_vibration_strength, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_joy_vibration_strength, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -895,7 +895,7 @@ open class Input: Object {
         withUnsafePointer(to: device) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_joy_vibration_duration, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_joy_vibration_duration, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -929,7 +929,7 @@ open class Input: Object {
                     withUnsafePointer(to: duration) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_start_joy_vibration, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_start_joy_vibration, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -961,7 +961,7 @@ open class Input: Object {
         withUnsafePointer(to: device) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_stop_joy_vibration, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_stop_joy_vibration, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1001,7 +1001,7 @@ open class Input: Object {
             withUnsafePointer(to: amplitude) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_vibrate_handheld, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_vibrate_handheld, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1032,7 +1032,7 @@ open class Input: Object {
     /// 
     public static func getGravity() -> Vector3 {
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(method_get_gravity, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_gravity, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1057,7 +1057,7 @@ open class Input: Object {
     /// 
     public static func getAccelerometer() -> Vector3 {
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(method_get_accelerometer, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_accelerometer, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1080,7 +1080,7 @@ open class Input: Object {
     /// 
     public static func getMagnetometer() -> Vector3 {
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(method_get_magnetometer, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_magnetometer, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1103,7 +1103,7 @@ open class Input: Object {
     /// 
     public static func getGyroscope() -> Vector3 {
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(method_get_gyroscope, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_gyroscope, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1126,7 +1126,7 @@ open class Input: Object {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_gravity, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_gravity, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1155,7 +1155,7 @@ open class Input: Object {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_accelerometer, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_accelerometer, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1184,7 +1184,7 @@ open class Input: Object {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_magnetometer, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_magnetometer, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1213,7 +1213,7 @@ open class Input: Object {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_gyroscope, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_gyroscope, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1237,7 +1237,7 @@ open class Input: Object {
     /// Returns the last mouse velocity. To provide a precise and jitter-free velocity, mouse velocity is only calculated every 0.1s. Therefore, mouse velocity will lag mouse movements.
     public static func getLastMouseVelocity() -> Vector2 {
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(method_get_last_mouse_velocity, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_last_mouse_velocity, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1255,7 +1255,7 @@ open class Input: Object {
     /// Returns the last mouse velocity in screen coordinates. To provide a precise and jitter-free velocity, mouse velocity is only calculated every 0.1s. Therefore, mouse velocity will lag mouse movements.
     public static func getLastMouseScreenVelocity() -> Vector2 {
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(method_get_last_mouse_screen_velocity, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_last_mouse_screen_velocity, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1273,7 +1273,7 @@ open class Input: Object {
     /// Returns mouse buttons as a bitmask. If multiple mouse buttons are pressed at the same time, the bits are added together. Equivalent to ``DisplayServer/mouseGetButtonState()``.
     public static func getMouseButtonMask() -> MouseButtonMask {
         var _result: MouseButtonMask = MouseButtonMask ()
-        gi.object_method_bind_ptrcall(method_get_mouse_button_mask, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_mouse_button_mask, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1293,7 +1293,7 @@ open class Input: Object {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_mouse_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_mouse_mode, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1317,7 +1317,7 @@ open class Input: Object {
     @inline(__always)
     fileprivate static func get_mouse_mode() -> Input.MouseMode {
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(method_get_mouse_mode, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_mouse_mode, shared.handle, nil, &_result)
         return Input.MouseMode (rawValue: _result)!
     }
     
@@ -1342,7 +1342,7 @@ open class Input: Object {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_warp_mouse, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_warp_mouse, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1374,7 +1374,7 @@ open class Input: Object {
             withUnsafePointer(to: strength) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_action_press, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_action_press, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1402,7 +1402,7 @@ open class Input: Object {
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_action_release, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_action_release, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1433,7 +1433,7 @@ open class Input: Object {
         withUnsafePointer(to: shape.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_default_cursor_shape, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_default_cursor_shape, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1457,7 +1457,7 @@ open class Input: Object {
     /// Returns the currently assigned cursor shape (see ``Input/CursorShape``).
     public static func getCurrentCursorShape() -> Input.CursorShape {
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(method_get_current_cursor_shape, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_current_cursor_shape, shared.handle, nil, &_result)
         return Input.CursorShape (rawValue: _result)!
     }
     
@@ -1490,7 +1490,7 @@ open class Input: Object {
                 withUnsafePointer(to: hotspot) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_custom_mouse_cursor, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_custom_mouse_cursor, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1523,7 +1523,7 @@ open class Input: Object {
         withUnsafePointer(to: event?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_parse_input_event, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_parse_input_event, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1549,7 +1549,7 @@ open class Input: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_use_accumulated_input, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_use_accumulated_input, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1573,7 +1573,7 @@ open class Input: Object {
     @inline(__always)
     fileprivate static func is_using_accumulated_input() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_using_accumulated_input, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_using_accumulated_input, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1593,7 +1593,7 @@ open class Input: Object {
     /// The engine will already do this itself at key execution points (at least once per frame). However, this can be useful in advanced cases where you want precise control over the timing of event handling.
     /// 
     public static func flushBufferedEvents() {
-        gi.object_method_bind_ptrcall(method_flush_buffered_events, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_flush_buffered_events, shared.handle, nil, nil)
         
     }
     
@@ -1613,7 +1613,7 @@ open class Input: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_emulate_mouse_from_touch, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_emulate_mouse_from_touch, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1637,7 +1637,7 @@ open class Input: Object {
     @inline(__always)
     fileprivate static func is_emulating_mouse_from_touch() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_emulating_mouse_from_touch, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_emulating_mouse_from_touch, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1657,7 +1657,7 @@ open class Input: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_emulate_touch_from_mouse, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_emulate_touch_from_mouse, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1681,7 +1681,7 @@ open class Input: Object {
     @inline(__always)
     fileprivate static func is_emulating_touch_from_mouse() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_emulating_touch_from_mouse, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_emulating_touch_from_mouse, shared.handle, nil, &_result)
         return _result
     }
     

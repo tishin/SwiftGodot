@@ -176,7 +176,7 @@ open class XRHandTracker: XRPositionalTracker {
         withUnsafePointer(to: hasData) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRHandTracker.method_set_has_tracking_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRHandTracker.method_set_has_tracking_data, handle, pArgs, nil)
                 }
                 
             }
@@ -201,7 +201,7 @@ open class XRHandTracker: XRPositionalTracker {
     fileprivate final func get_has_tracking_data() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XRHandTracker.method_get_has_tracking_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRHandTracker.method_get_has_tracking_data, handle, nil, &_result)
         return _result
     }
     
@@ -222,7 +222,7 @@ open class XRHandTracker: XRPositionalTracker {
         withUnsafePointer(to: source.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRHandTracker.method_set_hand_tracking_source, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRHandTracker.method_set_hand_tracking_source, handle, pArgs, nil)
                 }
                 
             }
@@ -247,7 +247,7 @@ open class XRHandTracker: XRPositionalTracker {
     fileprivate final func get_hand_tracking_source() -> XRHandTracker.HandTrackingSource {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(XRHandTracker.method_get_hand_tracking_source, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRHandTracker.method_get_hand_tracking_source, handle, nil, &_result)
         return XRHandTracker.HandTrackingSource (rawValue: _result)!
     }
     
@@ -269,7 +269,7 @@ open class XRHandTracker: XRPositionalTracker {
             withUnsafePointer(to: flags.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(XRHandTracker.method_set_hand_joint_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(XRHandTracker.method_set_hand_joint_flags, handle, pArgs, nil)
                     }
                     
                 }
@@ -299,7 +299,7 @@ open class XRHandTracker: XRPositionalTracker {
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRHandTracker.method_get_hand_joint_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRHandTracker.method_get_hand_joint_flags, handle, pArgs, &_result)
                 }
                 
             }
@@ -327,7 +327,7 @@ open class XRHandTracker: XRPositionalTracker {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(XRHandTracker.method_set_hand_joint_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(XRHandTracker.method_set_hand_joint_transform, handle, pArgs, nil)
                     }
                     
                 }
@@ -357,7 +357,7 @@ open class XRHandTracker: XRPositionalTracker {
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRHandTracker.method_get_hand_joint_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRHandTracker.method_get_hand_joint_transform, handle, pArgs, &_result)
                 }
                 
             }
@@ -385,7 +385,7 @@ open class XRHandTracker: XRPositionalTracker {
             withUnsafePointer(to: radius) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(XRHandTracker.method_set_hand_joint_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(XRHandTracker.method_set_hand_joint_radius, handle, pArgs, nil)
                     }
                     
                 }
@@ -415,7 +415,7 @@ open class XRHandTracker: XRPositionalTracker {
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRHandTracker.method_get_hand_joint_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRHandTracker.method_get_hand_joint_radius, handle, pArgs, &_result)
                 }
                 
             }
@@ -443,7 +443,7 @@ open class XRHandTracker: XRPositionalTracker {
             withUnsafePointer(to: linearVelocity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(XRHandTracker.method_set_hand_joint_linear_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(XRHandTracker.method_set_hand_joint_linear_velocity, handle, pArgs, nil)
                     }
                     
                 }
@@ -473,7 +473,7 @@ open class XRHandTracker: XRPositionalTracker {
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRHandTracker.method_get_hand_joint_linear_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRHandTracker.method_get_hand_joint_linear_velocity, handle, pArgs, &_result)
                 }
                 
             }
@@ -501,7 +501,7 @@ open class XRHandTracker: XRPositionalTracker {
             withUnsafePointer(to: angularVelocity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(XRHandTracker.method_set_hand_joint_angular_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(XRHandTracker.method_set_hand_joint_angular_velocity, handle, pArgs, nil)
                     }
                     
                 }
@@ -531,7 +531,7 @@ open class XRHandTracker: XRPositionalTracker {
         withUnsafePointer(to: joint.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRHandTracker.method_get_hand_joint_angular_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRHandTracker.method_get_hand_joint_angular_velocity, handle, pArgs, &_result)
                 }
                 
             }

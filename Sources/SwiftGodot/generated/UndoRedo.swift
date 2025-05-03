@@ -93,7 +93,7 @@ open class UndoRedo: Object {
                 withUnsafePointer(to: backwardUndoOps) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(UndoRedo.method_create_action, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(UndoRedo.method_create_action, handle, pArgs, nil)
                         }
                         
                     }
@@ -124,7 +124,7 @@ open class UndoRedo: Object {
         withUnsafePointer(to: execute) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UndoRedo.method_commit_action, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UndoRedo.method_commit_action, handle, pArgs, nil)
                 }
                 
             }
@@ -149,7 +149,7 @@ open class UndoRedo: Object {
     public final func isCommittingAction() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(UndoRedo.method_is_committing_action, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(UndoRedo.method_is_committing_action, handle, nil, &_result)
         return _result
     }
     
@@ -170,7 +170,7 @@ open class UndoRedo: Object {
         withUnsafePointer(to: callable.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UndoRedo.method_add_do_method, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UndoRedo.method_add_do_method, handle, pArgs, nil)
                 }
                 
             }
@@ -197,7 +197,7 @@ open class UndoRedo: Object {
         withUnsafePointer(to: callable.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UndoRedo.method_add_undo_method, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UndoRedo.method_add_undo_method, handle, pArgs, nil)
                 }
                 
             }
@@ -226,7 +226,7 @@ open class UndoRedo: Object {
                 withUnsafePointer(to: value.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(UndoRedo.method_add_do_property, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(UndoRedo.method_add_do_property, handle, pArgs, nil)
                         }
                         
                     }
@@ -259,7 +259,7 @@ open class UndoRedo: Object {
                 withUnsafePointer(to: value.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(UndoRedo.method_add_undo_property, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(UndoRedo.method_add_undo_property, handle, pArgs, nil)
                         }
                         
                     }
@@ -293,7 +293,7 @@ open class UndoRedo: Object {
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UndoRedo.method_add_do_reference, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UndoRedo.method_add_do_reference, handle, pArgs, nil)
                 }
                 
             }
@@ -323,7 +323,7 @@ open class UndoRedo: Object {
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UndoRedo.method_add_undo_reference, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UndoRedo.method_add_undo_reference, handle, pArgs, nil)
                 }
                 
             }
@@ -347,7 +347,7 @@ open class UndoRedo: Object {
     /// Marks the next "do" and "undo" operations to be processed even if the action gets merged with another in the ``MergeMode/ends`` mode. Return to normal operation using ``endForceKeepInMergeEnds()``.
     public final func startForceKeepInMergeEnds() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(UndoRedo.method_start_force_keep_in_merge_ends, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(UndoRedo.method_start_force_keep_in_merge_ends, handle, nil, nil)
         
     }
     
@@ -365,7 +365,7 @@ open class UndoRedo: Object {
     /// Stops marking operations as to be processed even if the action gets merged with another in the ``MergeMode/ends`` mode. See ``startForceKeepInMergeEnds()``.
     public final func endForceKeepInMergeEnds() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(UndoRedo.method_end_force_keep_in_merge_ends, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(UndoRedo.method_end_force_keep_in_merge_ends, handle, nil, nil)
         
     }
     
@@ -384,7 +384,7 @@ open class UndoRedo: Object {
     public final func getHistoryCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(UndoRedo.method_get_history_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(UndoRedo.method_get_history_count, handle, nil, &_result)
         return _result
     }
     
@@ -403,7 +403,7 @@ open class UndoRedo: Object {
     public final func getCurrentAction() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(UndoRedo.method_get_current_action, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(UndoRedo.method_get_current_action, handle, nil, &_result)
         return _result
     }
     
@@ -425,7 +425,7 @@ open class UndoRedo: Object {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UndoRedo.method_get_action_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(UndoRedo.method_get_action_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -455,7 +455,7 @@ open class UndoRedo: Object {
         withUnsafePointer(to: increaseVersion) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UndoRedo.method_clear_history, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UndoRedo.method_clear_history, handle, pArgs, nil)
                 }
                 
             }
@@ -480,7 +480,7 @@ open class UndoRedo: Object {
     public final func getCurrentActionName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(UndoRedo.method_get_current_action_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(UndoRedo.method_get_current_action_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -499,7 +499,7 @@ open class UndoRedo: Object {
     public final func hasUndo() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(UndoRedo.method_has_undo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(UndoRedo.method_has_undo, handle, nil, &_result)
         return _result
     }
     
@@ -518,7 +518,7 @@ open class UndoRedo: Object {
     public final func hasRedo() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(UndoRedo.method_has_redo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(UndoRedo.method_has_redo, handle, nil, &_result)
         return _result
     }
     
@@ -540,7 +540,7 @@ open class UndoRedo: Object {
     public final func getVersion() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(UndoRedo.method_get_version, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(UndoRedo.method_get_version, handle, nil, &_result)
         return _result
     }
     
@@ -561,7 +561,7 @@ open class UndoRedo: Object {
         withUnsafePointer(to: maxSteps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UndoRedo.method_set_max_steps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UndoRedo.method_set_max_steps, handle, pArgs, nil)
                 }
                 
             }
@@ -586,7 +586,7 @@ open class UndoRedo: Object {
     fileprivate final func get_max_steps() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(UndoRedo.method_get_max_steps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(UndoRedo.method_get_max_steps, handle, nil, &_result)
         return _result
     }
     
@@ -605,7 +605,7 @@ open class UndoRedo: Object {
     public final func redo() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(UndoRedo.method_redo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(UndoRedo.method_redo, handle, nil, &_result)
         return _result
     }
     
@@ -624,7 +624,7 @@ open class UndoRedo: Object {
     public final func undo() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(UndoRedo.method_undo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(UndoRedo.method_undo, handle, nil, &_result)
         return _result
     }
     

@@ -149,7 +149,7 @@ open class InputEventKey: InputEventWithModifiers {
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventKey.method_set_pressed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventKey.method_set_pressed, handle, pArgs, nil)
                 }
                 
             }
@@ -176,7 +176,7 @@ open class InputEventKey: InputEventWithModifiers {
         withUnsafePointer(to: keycode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventKey.method_set_keycode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventKey.method_set_keycode, handle, pArgs, nil)
                 }
                 
             }
@@ -201,7 +201,7 @@ open class InputEventKey: InputEventWithModifiers {
     fileprivate final func get_keycode() -> Key {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(InputEventKey.method_get_keycode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventKey.method_get_keycode, handle, nil, &_result)
         return Key (rawValue: _result)!
     }
     
@@ -222,7 +222,7 @@ open class InputEventKey: InputEventWithModifiers {
         withUnsafePointer(to: physicalKeycode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventKey.method_set_physical_keycode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventKey.method_set_physical_keycode, handle, pArgs, nil)
                 }
                 
             }
@@ -247,7 +247,7 @@ open class InputEventKey: InputEventWithModifiers {
     fileprivate final func get_physical_keycode() -> Key {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(InputEventKey.method_get_physical_keycode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventKey.method_get_physical_keycode, handle, nil, &_result)
         return Key (rawValue: _result)!
     }
     
@@ -268,7 +268,7 @@ open class InputEventKey: InputEventWithModifiers {
         withUnsafePointer(to: keyLabel.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventKey.method_set_key_label, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventKey.method_set_key_label, handle, pArgs, nil)
                 }
                 
             }
@@ -293,7 +293,7 @@ open class InputEventKey: InputEventWithModifiers {
     fileprivate final func get_key_label() -> Key {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(InputEventKey.method_get_key_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventKey.method_get_key_label, handle, nil, &_result)
         return Key (rawValue: _result)!
     }
     
@@ -314,7 +314,7 @@ open class InputEventKey: InputEventWithModifiers {
         withUnsafePointer(to: unicode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventKey.method_set_unicode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventKey.method_set_unicode, handle, pArgs, nil)
                 }
                 
             }
@@ -339,7 +339,7 @@ open class InputEventKey: InputEventWithModifiers {
     fileprivate final func get_unicode() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(InputEventKey.method_get_unicode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventKey.method_get_unicode, handle, nil, &_result)
         return _result
     }
     
@@ -360,7 +360,7 @@ open class InputEventKey: InputEventWithModifiers {
         withUnsafePointer(to: location.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventKey.method_set_location, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventKey.method_set_location, handle, pArgs, nil)
                 }
                 
             }
@@ -385,7 +385,7 @@ open class InputEventKey: InputEventWithModifiers {
     fileprivate final func get_location() -> KeyLocation {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(InputEventKey.method_get_location, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventKey.method_get_location, handle, nil, &_result)
         return KeyLocation (rawValue: _result)!
     }
     
@@ -406,7 +406,7 @@ open class InputEventKey: InputEventWithModifiers {
         withUnsafePointer(to: echo) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventKey.method_set_echo, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventKey.method_set_echo, handle, pArgs, nil)
                 }
                 
             }
@@ -434,7 +434,7 @@ open class InputEventKey: InputEventWithModifiers {
     public final func getKeycodeWithModifiers() -> Key {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(InputEventKey.method_get_keycode_with_modifiers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventKey.method_get_keycode_with_modifiers, handle, nil, &_result)
         return Key (rawValue: _result)!
     }
     
@@ -456,7 +456,7 @@ open class InputEventKey: InputEventWithModifiers {
     public final func getPhysicalKeycodeWithModifiers() -> Key {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(InputEventKey.method_get_physical_keycode_with_modifiers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventKey.method_get_physical_keycode_with_modifiers, handle, nil, &_result)
         return Key (rawValue: _result)!
     }
     
@@ -478,7 +478,7 @@ open class InputEventKey: InputEventWithModifiers {
     public final func getKeyLabelWithModifiers() -> Key {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(InputEventKey.method_get_key_label_with_modifiers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventKey.method_get_key_label_with_modifiers, handle, nil, &_result)
         return Key (rawValue: _result)!
     }
     
@@ -497,7 +497,7 @@ open class InputEventKey: InputEventWithModifiers {
     public final func asTextKeycode() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(InputEventKey.method_as_text_keycode, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(InputEventKey.method_as_text_keycode, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -516,7 +516,7 @@ open class InputEventKey: InputEventWithModifiers {
     public final func asTextPhysicalKeycode() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(InputEventKey.method_as_text_physical_keycode, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(InputEventKey.method_as_text_physical_keycode, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -535,7 +535,7 @@ open class InputEventKey: InputEventWithModifiers {
     public final func asTextKeyLabel() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(InputEventKey.method_as_text_key_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(InputEventKey.method_as_text_key_label, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -554,7 +554,7 @@ open class InputEventKey: InputEventWithModifiers {
     public final func asTextLocation() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(InputEventKey.method_as_text_location, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(InputEventKey.method_as_text_location, handle, nil, &_result.content)
         return _result.description
     }
     

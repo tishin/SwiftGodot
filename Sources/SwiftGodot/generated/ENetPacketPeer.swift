@@ -113,7 +113,7 @@ open class ENetPacketPeer: PacketPeer {
         withUnsafePointer(to: data) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ENetPacketPeer.method_peer_disconnect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ENetPacketPeer.method_peer_disconnect, handle, pArgs, nil)
                 }
                 
             }
@@ -140,7 +140,7 @@ open class ENetPacketPeer: PacketPeer {
         withUnsafePointer(to: data) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ENetPacketPeer.method_peer_disconnect_later, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ENetPacketPeer.method_peer_disconnect_later, handle, pArgs, nil)
                 }
                 
             }
@@ -167,7 +167,7 @@ open class ENetPacketPeer: PacketPeer {
         withUnsafePointer(to: data) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ENetPacketPeer.method_peer_disconnect_now, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ENetPacketPeer.method_peer_disconnect_now, handle, pArgs, nil)
                 }
                 
             }
@@ -191,7 +191,7 @@ open class ENetPacketPeer: PacketPeer {
     /// Sends a ping request to a peer. ENet automatically pings all connected peers at regular intervals, however, this function may be called to ensure more frequent ping requests.
     public final func ping() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ENetPacketPeer.method_ping, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ENetPacketPeer.method_ping, handle, nil, nil)
         
     }
     
@@ -212,7 +212,7 @@ open class ENetPacketPeer: PacketPeer {
         withUnsafePointer(to: pingInterval) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ENetPacketPeer.method_ping_interval, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ENetPacketPeer.method_ping_interval, handle, pArgs, nil)
                 }
                 
             }
@@ -236,7 +236,7 @@ open class ENetPacketPeer: PacketPeer {
     /// Forcefully disconnects a peer. The foreign host represented by the peer is not notified of the disconnection and will timeout on its connection to the local host.
     public final func reset() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ENetPacketPeer.method_reset, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ENetPacketPeer.method_reset, handle, nil, nil)
         
     }
     
@@ -260,7 +260,7 @@ open class ENetPacketPeer: PacketPeer {
                 withUnsafePointer(to: flags) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ENetPacketPeer.method_send, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(ENetPacketPeer.method_send, handle, pArgs, &_result)
                         }
                         
                     }
@@ -302,7 +302,7 @@ open class ENetPacketPeer: PacketPeer {
                 withUnsafePointer(to: deceleration) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ENetPacketPeer.method_throttle_configure, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(ENetPacketPeer.method_throttle_configure, handle, pArgs, nil)
                         }
                         
                     }
@@ -338,7 +338,7 @@ open class ENetPacketPeer: PacketPeer {
                 withUnsafePointer(to: timeoutMax) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ENetPacketPeer.method_set_timeout, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(ENetPacketPeer.method_set_timeout, handle, pArgs, nil)
                         }
                         
                     }
@@ -367,7 +367,7 @@ open class ENetPacketPeer: PacketPeer {
     public final func getPacketFlags() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_packet_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_packet_flags, handle, nil, &_result)
         return _result
     }
     
@@ -386,7 +386,7 @@ open class ENetPacketPeer: PacketPeer {
     public final func getRemoteAddress() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_remote_address, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_remote_address, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -405,7 +405,7 @@ open class ENetPacketPeer: PacketPeer {
     public final func getRemotePort() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_remote_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_remote_port, handle, nil, &_result)
         return _result
     }
     
@@ -427,7 +427,7 @@ open class ENetPacketPeer: PacketPeer {
         withUnsafePointer(to: statistic.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_statistic, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_statistic, handle, pArgs, &_result)
                 }
                 
             }
@@ -452,7 +452,7 @@ open class ENetPacketPeer: PacketPeer {
     public final func getState() -> ENetPacketPeer.PeerState {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_state, handle, nil, &_result)
         return ENetPacketPeer.PeerState (rawValue: _result)!
     }
     
@@ -471,7 +471,7 @@ open class ENetPacketPeer: PacketPeer {
     public final func getChannels() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_channels, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ENetPacketPeer.method_get_channels, handle, nil, &_result)
         return _result
     }
     
@@ -490,7 +490,7 @@ open class ENetPacketPeer: PacketPeer {
     public final func isActive() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ENetPacketPeer.method_is_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ENetPacketPeer.method_is_active, handle, nil, &_result)
         return _result
     }
     

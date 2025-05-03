@@ -58,7 +58,7 @@ open class Compositor: Resource {
         withUnsafePointer(to: compositorEffects.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Compositor.method_set_compositor_effects, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Compositor.method_set_compositor_effects, handle, pArgs, nil)
                 }
                 
             }
@@ -83,7 +83,7 @@ open class Compositor: Resource {
     fileprivate final func get_compositor_effects() -> TypedArray<CompositorEffect?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Compositor.method_get_compositor_effects, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Compositor.method_get_compositor_effects, handle, nil, &_result)
         return TypedArray<CompositorEffect?>(takingOver: _result)
     }
     

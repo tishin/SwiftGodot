@@ -63,7 +63,7 @@ open class EditorScenePostImportPlugin: RefCounted {
         withUnsafePointer(to: category) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__get_internal_import_options, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__get_internal_import_options, handle, pArgs, nil)
                 }
                 
             }
@@ -95,7 +95,7 @@ open class EditorScenePostImportPlugin: RefCounted {
                 withUnsafePointer(to: option.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__get_internal_option_visibility, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__get_internal_option_visibility, handle, pArgs, &_result)
                         }
                         
                     }
@@ -130,7 +130,7 @@ open class EditorScenePostImportPlugin: RefCounted {
             withUnsafePointer(to: option.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__get_internal_option_update_view_required, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__get_internal_option_update_view_required, handle, pArgs, &_result)
                     }
                     
                 }
@@ -163,7 +163,7 @@ open class EditorScenePostImportPlugin: RefCounted {
                     withUnsafePointer(to: resource?.handle) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__internal_process, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__internal_process, handle, pArgs, nil)
                             }
                             
                         }
@@ -198,7 +198,7 @@ open class EditorScenePostImportPlugin: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__get_import_options, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__get_import_options, handle, pArgs, nil)
                 }
                 
             }
@@ -231,7 +231,7 @@ open class EditorScenePostImportPlugin: RefCounted {
                 withUnsafePointer(to: option.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__get_option_visibility, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__get_option_visibility, handle, pArgs, &_result)
                         }
                         
                     }
@@ -266,7 +266,7 @@ open class EditorScenePostImportPlugin: RefCounted {
         withUnsafePointer(to: scene?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__pre_process, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__pre_process, handle, pArgs, nil)
                 }
                 
             }
@@ -294,7 +294,7 @@ open class EditorScenePostImportPlugin: RefCounted {
         withUnsafePointer(to: scene?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__post_process, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method__post_process, handle, pArgs, nil)
                 }
                 
             }
@@ -322,7 +322,7 @@ open class EditorScenePostImportPlugin: RefCounted {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method_get_option_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method_get_option_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -351,7 +351,7 @@ open class EditorScenePostImportPlugin: RefCounted {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method_add_import_option, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method_add_import_option, handle, pArgs, nil)
                     }
                     
                 }
@@ -387,7 +387,7 @@ open class EditorScenePostImportPlugin: RefCounted {
                             withUnsafePointer(to: usageFlags) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method_add_import_option_advanced, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(EditorScenePostImportPlugin.method_add_import_option_advanced, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -486,11 +486,11 @@ func _EditorScenePostImportPlugin_proxy_internal_process (instance: UnsafeMutabl
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorScenePostImportPlugin else { return }
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
-    let resolved_2 = args [2]!.load (as: UnsafeRawPointer?.self)
-    let resolved_3 = args [3]!.load (as: UnsafeRawPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_2 = args [2]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_3 = args [3]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._internalProcess (category: args [0]!.assumingMemoryBound (to: Int32.self).pointee, baseNode: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? Node, node: resolved_2 == nil ? nil : lookupObject (nativeHandle: resolved_2!, ownsRef: false) as? Node, resource: resolved_3 == nil ? nil : lookupObject (nativeHandle: resolved_3!, ownsRef: false) as? Resource)
+    swiftObject._internalProcess (category: args [0]!.assumingMemoryBound (to: Int32.self).pointee, baseNode: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? Node, node: resolved_2 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_2!, ownsRef: false) as? Node, resource: resolved_3 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_3!, ownsRef: false) as? Resource)
 }
 
 func _EditorScenePostImportPlugin_proxy_post_process (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -498,9 +498,9 @@ func _EditorScenePostImportPlugin_proxy_post_process (instance: UnsafeMutableRaw
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorScenePostImportPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._postProcess (scene: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Node)
+    swiftObject._postProcess (scene: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Node)
 }
 
 func _EditorScenePostImportPlugin_proxy_pre_process (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -508,8 +508,8 @@ func _EditorScenePostImportPlugin_proxy_pre_process (instance: UnsafeMutableRawP
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorScenePostImportPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._preProcess (scene: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Node)
+    swiftObject._preProcess (scene: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Node)
 }
 

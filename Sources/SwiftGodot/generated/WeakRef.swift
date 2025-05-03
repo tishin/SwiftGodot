@@ -41,7 +41,7 @@ open class WeakRef: RefCounted {
     public final func getRef() -> Variant? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        gi.object_method_bind_ptrcall(WeakRef.method_get_ref, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WeakRef.method_get_ref, handle, nil, &_result)
         return Variant(takingOver: _result)
     }
     

@@ -61,7 +61,7 @@ open class WorldBoundaryShape3D: Shape3D {
         withUnsafePointer(to: plane) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WorldBoundaryShape3D.method_set_plane, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WorldBoundaryShape3D.method_set_plane, handle, pArgs, nil)
                 }
                 
             }
@@ -86,7 +86,7 @@ open class WorldBoundaryShape3D: Shape3D {
     fileprivate final func get_plane() -> Plane {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Plane = Plane ()
-        gi.object_method_bind_ptrcall(WorldBoundaryShape3D.method_get_plane, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WorldBoundaryShape3D.method_get_plane, handle, nil, &_result)
         return _result
     }
     

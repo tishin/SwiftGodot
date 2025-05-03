@@ -121,7 +121,7 @@ open class GraphElement: Container {
         withUnsafePointer(to: resizable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphElement.method_set_resizable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphElement.method_set_resizable, handle, pArgs, nil)
                 }
                 
             }
@@ -146,7 +146,7 @@ open class GraphElement: Container {
     fileprivate final func is_resizable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphElement.method_is_resizable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphElement.method_is_resizable, handle, nil, &_result)
         return _result
     }
     
@@ -167,7 +167,7 @@ open class GraphElement: Container {
         withUnsafePointer(to: draggable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphElement.method_set_draggable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphElement.method_set_draggable, handle, pArgs, nil)
                 }
                 
             }
@@ -192,7 +192,7 @@ open class GraphElement: Container {
     fileprivate final func is_draggable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphElement.method_is_draggable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphElement.method_is_draggable, handle, nil, &_result)
         return _result
     }
     
@@ -213,7 +213,7 @@ open class GraphElement: Container {
         withUnsafePointer(to: selectable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphElement.method_set_selectable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphElement.method_set_selectable, handle, pArgs, nil)
                 }
                 
             }
@@ -238,7 +238,7 @@ open class GraphElement: Container {
     fileprivate final func is_selectable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphElement.method_is_selectable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphElement.method_is_selectable, handle, nil, &_result)
         return _result
     }
     
@@ -259,7 +259,7 @@ open class GraphElement: Container {
         withUnsafePointer(to: selected) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphElement.method_set_selected, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphElement.method_set_selected, handle, pArgs, nil)
                 }
                 
             }
@@ -284,7 +284,7 @@ open class GraphElement: Container {
     fileprivate final func is_selected() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphElement.method_is_selected, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphElement.method_is_selected, handle, nil, &_result)
         return _result
     }
     
@@ -305,7 +305,7 @@ open class GraphElement: Container {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphElement.method_set_position_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphElement.method_set_position_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -330,7 +330,7 @@ open class GraphElement: Container {
     fileprivate final func get_position_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(GraphElement.method_get_position_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphElement.method_get_position_offset, handle, nil, &_result)
         return _result
     }
     

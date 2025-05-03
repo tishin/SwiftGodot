@@ -72,7 +72,7 @@ open class ViewportTexture: Texture2D {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ViewportTexture.method_set_viewport_path_in_scene, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ViewportTexture.method_set_viewport_path_in_scene, handle, pArgs, nil)
                 }
                 
             }
@@ -97,7 +97,7 @@ open class ViewportTexture: Texture2D {
     fileprivate final func get_viewport_path_in_scene() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(ViewportTexture.method_get_viewport_path_in_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ViewportTexture.method_get_viewport_path_in_scene, handle, nil, &_result.content)
         return _result
     }
     

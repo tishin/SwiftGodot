@@ -61,7 +61,7 @@ open class AudioStreamSynchronized: AudioStream {
         withUnsafePointer(to: streamCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamSynchronized.method_set_stream_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamSynchronized.method_set_stream_count, handle, pArgs, nil)
                 }
                 
             }
@@ -86,7 +86,7 @@ open class AudioStreamSynchronized: AudioStream {
     fileprivate final func get_stream_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamSynchronized.method_get_stream_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamSynchronized.method_get_stream_count, handle, nil, &_result)
         return _result
     }
     
@@ -108,7 +108,7 @@ open class AudioStreamSynchronized: AudioStream {
             withUnsafePointer(to: audioStream?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamSynchronized.method_set_sync_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioStreamSynchronized.method_set_sync_stream, handle, pArgs, nil)
                     }
                     
                 }
@@ -134,18 +134,18 @@ open class AudioStreamSynchronized: AudioStream {
     /// Get one of the synchronized streams, by index.
     public final func getSyncStream(streamIndex: Int32) -> AudioStream? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: streamIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamSynchronized.method_get_sync_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioStreamSynchronized.method_get_sync_stream, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_sync_stream_volume: GDExtensionMethodBindPtr = {
@@ -166,7 +166,7 @@ open class AudioStreamSynchronized: AudioStream {
             withUnsafePointer(to: volumeDb) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamSynchronized.method_set_sync_stream_volume, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioStreamSynchronized.method_set_sync_stream_volume, handle, pArgs, nil)
                     }
                     
                 }
@@ -196,7 +196,7 @@ open class AudioStreamSynchronized: AudioStream {
         withUnsafePointer(to: streamIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamSynchronized.method_get_sync_stream_volume, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioStreamSynchronized.method_get_sync_stream_volume, handle, pArgs, &_result)
                 }
                 
             }

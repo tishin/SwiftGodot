@@ -72,7 +72,7 @@ open class Thread: RefCounted {
             withUnsafePointer(to: priority.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Thread.method_start, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Thread.method_start, handle, pArgs, &_result)
                     }
                     
                 }
@@ -99,7 +99,7 @@ open class Thread: RefCounted {
     public final func getId() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Thread.method_get_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Thread.method_get_id, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -118,7 +118,7 @@ open class Thread: RefCounted {
     public final func isStarted() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Thread.method_is_started, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Thread.method_is_started, handle, nil, &_result)
         return _result
     }
     
@@ -140,7 +140,7 @@ open class Thread: RefCounted {
     public final func isAlive() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Thread.method_is_alive, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Thread.method_is_alive, handle, nil, &_result)
         return _result
     }
     
@@ -164,7 +164,7 @@ open class Thread: RefCounted {
     public final func waitToFinish() -> Variant? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        gi.object_method_bind_ptrcall(Thread.method_wait_to_finish, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Thread.method_wait_to_finish, handle, nil, &_result)
         return Variant(takingOver: _result)
     }
     

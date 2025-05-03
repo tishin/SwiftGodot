@@ -125,7 +125,7 @@ open class AudioEffectDistortion: AudioEffect {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectDistortion.method_set_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectDistortion.method_set_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -150,7 +150,7 @@ open class AudioEffectDistortion: AudioEffect {
     fileprivate final func get_mode() -> AudioEffectDistortion.Mode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AudioEffectDistortion.method_get_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectDistortion.method_get_mode, handle, nil, &_result)
         return AudioEffectDistortion.Mode (rawValue: _result)!
     }
     
@@ -171,7 +171,7 @@ open class AudioEffectDistortion: AudioEffect {
         withUnsafePointer(to: preGain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectDistortion.method_set_pre_gain, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectDistortion.method_set_pre_gain, handle, pArgs, nil)
                 }
                 
             }
@@ -196,7 +196,7 @@ open class AudioEffectDistortion: AudioEffect {
     fileprivate final func get_pre_gain() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectDistortion.method_get_pre_gain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectDistortion.method_get_pre_gain, handle, nil, &_result)
         return _result
     }
     
@@ -217,7 +217,7 @@ open class AudioEffectDistortion: AudioEffect {
         withUnsafePointer(to: keepHfHz) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectDistortion.method_set_keep_hf_hz, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectDistortion.method_set_keep_hf_hz, handle, pArgs, nil)
                 }
                 
             }
@@ -242,7 +242,7 @@ open class AudioEffectDistortion: AudioEffect {
     fileprivate final func get_keep_hf_hz() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectDistortion.method_get_keep_hf_hz, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectDistortion.method_get_keep_hf_hz, handle, nil, &_result)
         return _result
     }
     
@@ -263,7 +263,7 @@ open class AudioEffectDistortion: AudioEffect {
         withUnsafePointer(to: drive) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectDistortion.method_set_drive, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectDistortion.method_set_drive, handle, pArgs, nil)
                 }
                 
             }
@@ -288,7 +288,7 @@ open class AudioEffectDistortion: AudioEffect {
     fileprivate final func get_drive() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectDistortion.method_get_drive, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectDistortion.method_get_drive, handle, nil, &_result)
         return _result
     }
     
@@ -309,7 +309,7 @@ open class AudioEffectDistortion: AudioEffect {
         withUnsafePointer(to: postGain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectDistortion.method_set_post_gain, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectDistortion.method_set_post_gain, handle, pArgs, nil)
                 }
                 
             }
@@ -334,7 +334,7 @@ open class AudioEffectDistortion: AudioEffect {
     fileprivate final func get_post_gain() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectDistortion.method_get_post_gain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectDistortion.method_get_post_gain, handle, nil, &_result)
         return _result
     }
     

@@ -109,7 +109,7 @@ open class InputEventMouseButton: InputEventMouse {
         withUnsafePointer(to: factor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMouseButton.method_set_factor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMouseButton.method_set_factor, handle, pArgs, nil)
                 }
                 
             }
@@ -134,7 +134,7 @@ open class InputEventMouseButton: InputEventMouse {
     fileprivate final func get_factor() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(InputEventMouseButton.method_get_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventMouseButton.method_get_factor, handle, nil, &_result)
         return _result
     }
     
@@ -155,7 +155,7 @@ open class InputEventMouseButton: InputEventMouse {
         withUnsafePointer(to: buttonIndex.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMouseButton.method_set_button_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMouseButton.method_set_button_index, handle, pArgs, nil)
                 }
                 
             }
@@ -180,7 +180,7 @@ open class InputEventMouseButton: InputEventMouse {
     fileprivate final func get_button_index() -> MouseButton {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(InputEventMouseButton.method_get_button_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventMouseButton.method_get_button_index, handle, nil, &_result)
         return MouseButton (rawValue: _result)!
     }
     
@@ -201,7 +201,7 @@ open class InputEventMouseButton: InputEventMouse {
         withUnsafePointer(to: pressed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMouseButton.method_set_pressed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMouseButton.method_set_pressed, handle, pArgs, nil)
                 }
                 
             }
@@ -228,7 +228,7 @@ open class InputEventMouseButton: InputEventMouse {
         withUnsafePointer(to: canceled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMouseButton.method_set_canceled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMouseButton.method_set_canceled, handle, pArgs, nil)
                 }
                 
             }
@@ -255,7 +255,7 @@ open class InputEventMouseButton: InputEventMouse {
         withUnsafePointer(to: doubleClick) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMouseButton.method_set_double_click, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMouseButton.method_set_double_click, handle, pArgs, nil)
                 }
                 
             }
@@ -280,7 +280,7 @@ open class InputEventMouseButton: InputEventMouse {
     fileprivate final func is_double_click() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(InputEventMouseButton.method_is_double_click, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventMouseButton.method_is_double_click, handle, nil, &_result)
         return _result
     }
     

@@ -100,7 +100,7 @@ open class Slider: Range {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Slider.method_set_ticks, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Slider.method_set_ticks, handle, pArgs, nil)
                 }
                 
             }
@@ -125,7 +125,7 @@ open class Slider: Range {
     fileprivate final func get_ticks() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Slider.method_get_ticks, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Slider.method_get_ticks, handle, nil, &_result)
         return _result
     }
     
@@ -144,7 +144,7 @@ open class Slider: Range {
     fileprivate final func get_ticks_on_borders() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Slider.method_get_ticks_on_borders, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Slider.method_get_ticks_on_borders, handle, nil, &_result)
         return _result
     }
     
@@ -165,7 +165,7 @@ open class Slider: Range {
         withUnsafePointer(to: ticksOnBorder) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Slider.method_set_ticks_on_borders, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Slider.method_set_ticks_on_borders, handle, pArgs, nil)
                 }
                 
             }
@@ -192,7 +192,7 @@ open class Slider: Range {
         withUnsafePointer(to: editable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Slider.method_set_editable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Slider.method_set_editable, handle, pArgs, nil)
                 }
                 
             }
@@ -217,7 +217,7 @@ open class Slider: Range {
     fileprivate final func is_editable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Slider.method_is_editable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Slider.method_is_editable, handle, nil, &_result)
         return _result
     }
     
@@ -238,7 +238,7 @@ open class Slider: Range {
         withUnsafePointer(to: scrollable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Slider.method_set_scrollable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Slider.method_set_scrollable, handle, pArgs, nil)
                 }
                 
             }
@@ -263,7 +263,7 @@ open class Slider: Range {
     fileprivate final func is_scrollable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Slider.method_is_scrollable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Slider.method_is_scrollable, handle, nil, &_result)
         return _result
     }
     

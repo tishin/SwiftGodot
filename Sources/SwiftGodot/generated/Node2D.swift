@@ -204,7 +204,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_set_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_set_position, handle, pArgs, nil)
                 }
                 
             }
@@ -231,7 +231,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_set_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_set_rotation, handle, pArgs, nil)
                 }
                 
             }
@@ -258,7 +258,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: degrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_set_rotation_degrees, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_set_rotation_degrees, handle, pArgs, nil)
                 }
                 
             }
@@ -285,7 +285,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_set_skew, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_set_skew, handle, pArgs, nil)
                 }
                 
             }
@@ -312,7 +312,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_set_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_set_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -337,7 +337,7 @@ open class Node2D: CanvasItem {
     fileprivate final func get_position() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Node2D.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node2D.method_get_position, handle, nil, &_result)
         return _result
     }
     
@@ -356,7 +356,7 @@ open class Node2D: CanvasItem {
     fileprivate final func get_rotation() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Node2D.method_get_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node2D.method_get_rotation, handle, nil, &_result)
         return _result
     }
     
@@ -375,7 +375,7 @@ open class Node2D: CanvasItem {
     fileprivate final func get_rotation_degrees() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Node2D.method_get_rotation_degrees, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node2D.method_get_rotation_degrees, handle, nil, &_result)
         return _result
     }
     
@@ -394,7 +394,7 @@ open class Node2D: CanvasItem {
     fileprivate final func get_skew() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Node2D.method_get_skew, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node2D.method_get_skew, handle, nil, &_result)
         return _result
     }
     
@@ -413,7 +413,7 @@ open class Node2D: CanvasItem {
     fileprivate final func get_scale() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Node2D.method_get_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node2D.method_get_scale, handle, nil, &_result)
         return _result
     }
     
@@ -434,7 +434,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_rotate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_rotate, handle, pArgs, nil)
                 }
                 
             }
@@ -462,7 +462,7 @@ open class Node2D: CanvasItem {
             withUnsafePointer(to: scaled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node2D.method_move_local_x, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node2D.method_move_local_x, handle, pArgs, nil)
                     }
                     
                 }
@@ -492,7 +492,7 @@ open class Node2D: CanvasItem {
             withUnsafePointer(to: scaled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node2D.method_move_local_y, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node2D.method_move_local_y, handle, pArgs, nil)
                     }
                     
                 }
@@ -521,7 +521,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_translate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_translate, handle, pArgs, nil)
                 }
                 
             }
@@ -548,7 +548,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_global_translate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_global_translate, handle, pArgs, nil)
                 }
                 
             }
@@ -575,7 +575,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_apply_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_apply_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -602,7 +602,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_set_global_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_set_global_position, handle, pArgs, nil)
                 }
                 
             }
@@ -627,7 +627,7 @@ open class Node2D: CanvasItem {
     fileprivate final func get_global_position() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Node2D.method_get_global_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node2D.method_get_global_position, handle, nil, &_result)
         return _result
     }
     
@@ -648,7 +648,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_set_global_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_set_global_rotation, handle, pArgs, nil)
                 }
                 
             }
@@ -675,7 +675,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: degrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_set_global_rotation_degrees, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_set_global_rotation_degrees, handle, pArgs, nil)
                 }
                 
             }
@@ -700,7 +700,7 @@ open class Node2D: CanvasItem {
     fileprivate final func get_global_rotation() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Node2D.method_get_global_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node2D.method_get_global_rotation, handle, nil, &_result)
         return _result
     }
     
@@ -719,7 +719,7 @@ open class Node2D: CanvasItem {
     fileprivate final func get_global_rotation_degrees() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Node2D.method_get_global_rotation_degrees, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node2D.method_get_global_rotation_degrees, handle, nil, &_result)
         return _result
     }
     
@@ -740,7 +740,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_set_global_skew, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_set_global_skew, handle, pArgs, nil)
                 }
                 
             }
@@ -765,7 +765,7 @@ open class Node2D: CanvasItem {
     fileprivate final func get_global_skew() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Node2D.method_get_global_skew, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node2D.method_get_global_skew, handle, nil, &_result)
         return _result
     }
     
@@ -786,7 +786,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_set_global_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_set_global_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -811,7 +811,7 @@ open class Node2D: CanvasItem {
     fileprivate final func get_global_scale() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Node2D.method_get_global_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node2D.method_get_global_scale, handle, nil, &_result)
         return _result
     }
     
@@ -832,7 +832,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: xform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_set_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_set_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -859,7 +859,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: xform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_set_global_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_set_global_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -889,7 +889,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_look_at, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node2D.method_look_at, handle, pArgs, nil)
                 }
                 
             }
@@ -920,7 +920,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_get_angle_to, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node2D.method_get_angle_to, handle, pArgs, &_result)
                 }
                 
             }
@@ -948,7 +948,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: globalPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_to_local, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node2D.method_to_local, handle, pArgs, &_result)
                 }
                 
             }
@@ -976,7 +976,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: localPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_to_global, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node2D.method_to_global, handle, pArgs, &_result)
                 }
                 
             }
@@ -1004,7 +1004,7 @@ open class Node2D: CanvasItem {
         withUnsafePointer(to: parent?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node2D.method_get_relative_transform_to_parent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node2D.method_get_relative_transform_to_parent, handle, pArgs, &_result)
                 }
                 
             }

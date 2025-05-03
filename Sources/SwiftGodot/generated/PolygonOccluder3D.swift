@@ -64,7 +64,7 @@ open class PolygonOccluder3D: Occluder3D {
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PolygonOccluder3D.method_set_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PolygonOccluder3D.method_set_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -89,7 +89,7 @@ open class PolygonOccluder3D: Occluder3D {
     fileprivate final func get_polygon() -> PackedVector2Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
-        gi.object_method_bind_ptrcall(PolygonOccluder3D.method_get_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(PolygonOccluder3D.method_get_polygon, handle, nil, &_result.content)
         return _result
     }
     

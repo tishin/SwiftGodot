@@ -71,7 +71,7 @@ open class WebRTCDataChannel: PacketPeer {
     public final func poll() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_poll, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -89,7 +89,7 @@ open class WebRTCDataChannel: PacketPeer {
     /// Closes this data channel, notifying the other peer.
     public final func close() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_close, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_close, handle, nil, nil)
         
     }
     
@@ -108,7 +108,7 @@ open class WebRTCDataChannel: PacketPeer {
     public final func wasStringPacket() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_was_string_packet, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_was_string_packet, handle, nil, &_result)
         return _result
     }
     
@@ -129,7 +129,7 @@ open class WebRTCDataChannel: PacketPeer {
         withUnsafePointer(to: writeMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebRTCDataChannel.method_set_write_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebRTCDataChannel.method_set_write_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -154,7 +154,7 @@ open class WebRTCDataChannel: PacketPeer {
     fileprivate final func get_write_mode() -> WebRTCDataChannel.WriteMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_write_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_write_mode, handle, nil, &_result)
         return WebRTCDataChannel.WriteMode (rawValue: _result)!
     }
     
@@ -173,7 +173,7 @@ open class WebRTCDataChannel: PacketPeer {
     public final func getReadyState() -> WebRTCDataChannel.ChannelState {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_ready_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_ready_state, handle, nil, &_result)
         return WebRTCDataChannel.ChannelState (rawValue: _result)!
     }
     
@@ -192,7 +192,7 @@ open class WebRTCDataChannel: PacketPeer {
     public final func getLabel() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_label, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_label, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -211,7 +211,7 @@ open class WebRTCDataChannel: PacketPeer {
     public final func isOrdered() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_is_ordered, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_is_ordered, handle, nil, &_result)
         return _result
     }
     
@@ -233,7 +233,7 @@ open class WebRTCDataChannel: PacketPeer {
     public final func getId() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_id, handle, nil, &_result)
         return _result
     }
     
@@ -255,7 +255,7 @@ open class WebRTCDataChannel: PacketPeer {
     public final func getMaxPacketLifeTime() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_max_packet_life_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_max_packet_life_time, handle, nil, &_result)
         return _result
     }
     
@@ -277,7 +277,7 @@ open class WebRTCDataChannel: PacketPeer {
     public final func getMaxRetransmits() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_max_retransmits, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_max_retransmits, handle, nil, &_result)
         return _result
     }
     
@@ -296,7 +296,7 @@ open class WebRTCDataChannel: PacketPeer {
     public final func getProtocol() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_protocol, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_protocol, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -315,7 +315,7 @@ open class WebRTCDataChannel: PacketPeer {
     public final func isNegotiated() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_is_negotiated, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_is_negotiated, handle, nil, &_result)
         return _result
     }
     
@@ -334,7 +334,7 @@ open class WebRTCDataChannel: PacketPeer {
     public final func getBufferedAmount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_buffered_amount, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebRTCDataChannel.method_get_buffered_amount, handle, nil, &_result)
         return _result
     }
     

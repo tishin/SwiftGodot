@@ -82,7 +82,7 @@ open class AnimationNode: Resource {
     open func _getChildNodes() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(AnimationNode.method__get_child_nodes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimationNode.method__get_child_nodes, handle, nil, &_result.content)
         return _result
     }
     
@@ -102,7 +102,7 @@ open class AnimationNode: Resource {
     open func _getParameterList() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(AnimationNode.method__get_parameter_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimationNode.method__get_parameter_list, handle, nil, &_result.content)
         return _result
     }
     
@@ -121,18 +121,18 @@ open class AnimationNode: Resource {
     @_documentation(visibility: public)
     open func _getChildByName(_ name: StringName) -> AnimationNode? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNode.method__get_child_by_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNode.method__get_child_by_name, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__get_parameter_default_value: GDExtensionMethodBindPtr = {
@@ -154,7 +154,7 @@ open class AnimationNode: Resource {
         withUnsafePointer(to: parameter.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNode.method__get_parameter_default_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNode.method__get_parameter_default_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -183,7 +183,7 @@ open class AnimationNode: Resource {
         withUnsafePointer(to: parameter.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNode.method__is_parameter_read_only, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNode.method__is_parameter_read_only, handle, pArgs, &_result)
                 }
                 
             }
@@ -220,7 +220,7 @@ open class AnimationNode: Resource {
                     withUnsafePointer(to: testOnly) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(AnimationNode.method__process, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(AnimationNode.method__process, handle, pArgs, &_result)
                             }
                             
                         }
@@ -252,7 +252,7 @@ open class AnimationNode: Resource {
     open func _getCaption() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(AnimationNode.method__get_caption, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimationNode.method__get_caption, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -272,7 +272,7 @@ open class AnimationNode: Resource {
     open func _hasFilter() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationNode.method__has_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNode.method__has_filter, handle, nil, &_result)
         return _result
     }
     
@@ -295,7 +295,7 @@ open class AnimationNode: Resource {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNode.method_add_input, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNode.method_add_input, handle, pArgs, &_result)
                 }
                 
             }
@@ -322,7 +322,7 @@ open class AnimationNode: Resource {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNode.method_remove_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNode.method_remove_input, handle, pArgs, nil)
                 }
                 
             }
@@ -352,7 +352,7 @@ open class AnimationNode: Resource {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationNode.method_set_input_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AnimationNode.method_set_input_name, handle, pArgs, &_result)
                     }
                     
                 }
@@ -382,7 +382,7 @@ open class AnimationNode: Resource {
         withUnsafePointer(to: input) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNode.method_get_input_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(AnimationNode.method_get_input_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -407,7 +407,7 @@ open class AnimationNode: Resource {
     public final func getInputCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AnimationNode.method_get_input_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNode.method_get_input_count, handle, nil, &_result)
         return _result
     }
     
@@ -430,7 +430,7 @@ open class AnimationNode: Resource {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNode.method_find_input, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNode.method_find_input, handle, pArgs, &_result)
                 }
                 
             }
@@ -458,7 +458,7 @@ open class AnimationNode: Resource {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationNode.method_set_filter_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationNode.method_set_filter_path, handle, pArgs, nil)
                     }
                     
                 }
@@ -488,7 +488,7 @@ open class AnimationNode: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNode.method_is_path_filtered, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNode.method_is_path_filtered, handle, pArgs, &_result)
                 }
                 
             }
@@ -515,7 +515,7 @@ open class AnimationNode: Resource {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNode.method_set_filter_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNode.method_set_filter_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -540,7 +540,7 @@ open class AnimationNode: Resource {
     fileprivate final func is_filter_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationNode.method_is_filter_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNode.method_is_filter_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -562,7 +562,7 @@ open class AnimationNode: Resource {
     public final func getProcessingAnimationTreeInstanceId() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(AnimationNode.method_get_processing_animation_tree_instance_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNode.method_get_processing_animation_tree_instance_id, handle, nil, &_result)
         return _result
     }
     
@@ -581,7 +581,7 @@ open class AnimationNode: Resource {
     public final func isProcessTesting() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationNode.method_is_process_testing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNode.method_is_process_testing, handle, nil, &_result)
         return _result
     }
     
@@ -611,7 +611,7 @@ open class AnimationNode: Resource {
                                 withUnsafePointer(to: loopedFlag.rawValue) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(AnimationNode.method_blend_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                            gi.object_method_bind_ptrcall(AnimationNode.method_blend_animation, handle, pArgs, nil)
                                         }
                                         
                                     }
@@ -659,7 +659,7 @@ open class AnimationNode: Resource {
                                         withUnsafePointer(to: testOnly) { pArg8 in
                                             withUnsafePointer(to: UnsafeRawPointersN9(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8)) { pArgs in
                                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 9) { pArgs in
-                                                    gi.object_method_bind_ptrcall(AnimationNode.method_blend_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                                    gi.object_method_bind_ptrcall(AnimationNode.method_blend_node, handle, pArgs, &_result)
                                                 }
                                                 
                                             }
@@ -710,7 +710,7 @@ open class AnimationNode: Resource {
                                     withUnsafePointer(to: testOnly) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                gi.object_method_bind_ptrcall(AnimationNode.method_blend_input, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                                gi.object_method_bind_ptrcall(AnimationNode.method_blend_input, handle, pArgs, &_result)
                                             }
                                             
                                         }
@@ -752,7 +752,7 @@ open class AnimationNode: Resource {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationNode.method_set_parameter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationNode.method_set_parameter, handle, pArgs, nil)
                     }
                     
                 }
@@ -782,7 +782,7 @@ open class AnimationNode: Resource {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNode.method_get_parameter, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNode.method_get_parameter, handle, pArgs, &_result)
                 }
                 
             }
@@ -884,7 +884,7 @@ func _AnimationNode_proxy_get_child_by_name (instance: UnsafeMutableRawPointer?,
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? AnimationNode else { return }
     let ret = swiftObject._getChildByName (StringName (content: args [0]!.assumingMemoryBound (to: Int64.self).pointee))
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // AnimationNode
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // AnimationNode
 }
 
 func _AnimationNode_proxy_get_child_nodes (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {

@@ -41,7 +41,7 @@ open class PhysicsTestMotionResult2D: RefCounted {
     public final func getTravel() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_travel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_travel, handle, nil, &_result)
         return _result
     }
     
@@ -60,7 +60,7 @@ open class PhysicsTestMotionResult2D: RefCounted {
     public final func getRemainder() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_remainder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_remainder, handle, nil, &_result)
         return _result
     }
     
@@ -79,7 +79,7 @@ open class PhysicsTestMotionResult2D: RefCounted {
     public final func getCollisionPoint() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_point, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_point, handle, nil, &_result)
         return _result
     }
     
@@ -98,7 +98,7 @@ open class PhysicsTestMotionResult2D: RefCounted {
     public final func getCollisionNormal() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_normal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_normal, handle, nil, &_result)
         return _result
     }
     
@@ -117,7 +117,7 @@ open class PhysicsTestMotionResult2D: RefCounted {
     public final func getColliderVelocity() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -136,7 +136,7 @@ open class PhysicsTestMotionResult2D: RefCounted {
     public final func getColliderId() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider_id, handle, nil, &_result)
         return _result
     }
     
@@ -155,7 +155,7 @@ open class PhysicsTestMotionResult2D: RefCounted {
     public final func getColliderRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -173,9 +173,9 @@ open class PhysicsTestMotionResult2D: RefCounted {
     /// Returns the colliding body's attached ``Object``, if a collision occurred.
     public final func getCollider() -> Object? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_collider_shape: GDExtensionMethodBindPtr = {
@@ -193,7 +193,7 @@ open class PhysicsTestMotionResult2D: RefCounted {
     public final func getColliderShape() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collider_shape, handle, nil, &_result)
         return _result
     }
     
@@ -212,7 +212,7 @@ open class PhysicsTestMotionResult2D: RefCounted {
     public final func getCollisionLocalShape() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_local_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_local_shape, handle, nil, &_result)
         return _result
     }
     
@@ -231,7 +231,7 @@ open class PhysicsTestMotionResult2D: RefCounted {
     public final func getCollisionDepth() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_depth, handle, nil, &_result)
         return _result
     }
     
@@ -250,7 +250,7 @@ open class PhysicsTestMotionResult2D: RefCounted {
     public final func getCollisionSafeFraction() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_safe_fraction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_safe_fraction, handle, nil, &_result)
         return _result
     }
     
@@ -269,7 +269,7 @@ open class PhysicsTestMotionResult2D: RefCounted {
     public final func getCollisionUnsafeFraction() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_unsafe_fraction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsTestMotionResult2D.method_get_collision_unsafe_fraction, handle, nil, &_result)
         return _result
     }
     

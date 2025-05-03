@@ -433,7 +433,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: targetNode.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_target_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_target_node, handle, pArgs, nil)
                 }
                 
             }
@@ -458,7 +458,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_target_node() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_target_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_target_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -480,7 +480,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: boneName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_bone_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_bone_name, handle, pArgs, nil)
                 }
                 
             }
@@ -505,7 +505,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_bone_name() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_bone_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_bone_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -526,7 +526,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: bone) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_bone, handle, pArgs, nil)
                 }
                 
             }
@@ -551,7 +551,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_bone() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_bone, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_bone, handle, nil, &_result)
         return _result
     }
     
@@ -572,7 +572,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: forwardAxis.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_forward_axis, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_forward_axis, handle, pArgs, nil)
                 }
                 
             }
@@ -597,7 +597,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_forward_axis() -> SkeletonModifier3D.BoneAxis {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_forward_axis, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_forward_axis, handle, nil, &_result)
         return SkeletonModifier3D.BoneAxis (rawValue: _result)!
     }
     
@@ -618,7 +618,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: axis.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_primary_rotation_axis, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_primary_rotation_axis, handle, pArgs, nil)
                 }
                 
             }
@@ -643,7 +643,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_primary_rotation_axis() -> Vector3.Axis {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_primary_rotation_axis, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_primary_rotation_axis, handle, nil, &_result)
         return Vector3.Axis (rawValue: _result)!
     }
     
@@ -664,7 +664,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_use_secondary_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_use_secondary_rotation, handle, pArgs, nil)
                 }
                 
             }
@@ -689,7 +689,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func is_using_secondary_rotation() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_is_using_secondary_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_is_using_secondary_rotation, handle, nil, &_result)
         return _result
     }
     
@@ -710,7 +710,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_origin_safe_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_origin_safe_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -735,7 +735,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_origin_safe_margin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_origin_safe_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_origin_safe_margin, handle, nil, &_result)
         return _result
     }
     
@@ -756,7 +756,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: originFrom.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_origin_from, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_origin_from, handle, pArgs, nil)
                 }
                 
             }
@@ -781,7 +781,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_origin_from() -> LookAtModifier3D.OriginFrom {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_origin_from, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_origin_from, handle, nil, &_result)
         return LookAtModifier3D.OriginFrom (rawValue: _result)!
     }
     
@@ -803,7 +803,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: boneName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_origin_bone_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_origin_bone_name, handle, pArgs, nil)
                 }
                 
             }
@@ -828,7 +828,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_origin_bone_name() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_origin_bone_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_origin_bone_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -849,7 +849,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: bone) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_origin_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_origin_bone, handle, pArgs, nil)
                 }
                 
             }
@@ -874,7 +874,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_origin_bone() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_origin_bone, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_origin_bone, handle, nil, &_result)
         return _result
     }
     
@@ -895,7 +895,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: externalNode.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_origin_external_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_origin_external_node, handle, pArgs, nil)
                 }
                 
             }
@@ -920,7 +920,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_origin_external_node() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_origin_external_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_origin_external_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -941,7 +941,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_origin_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_origin_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -966,7 +966,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_origin_offset() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_origin_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_origin_offset, handle, nil, &_result)
         return _result
     }
     
@@ -987,7 +987,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: duration) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_duration, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_duration, handle, pArgs, nil)
                 }
                 
             }
@@ -1012,7 +1012,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_duration() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_duration, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_duration, handle, nil, &_result)
         return _result
     }
     
@@ -1033,7 +1033,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: transitionType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_transition_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_transition_type, handle, pArgs, nil)
                 }
                 
             }
@@ -1058,7 +1058,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_transition_type() -> Tween.TransitionType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_transition_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_transition_type, handle, nil, &_result)
         return Tween.TransitionType (rawValue: _result)!
     }
     
@@ -1079,7 +1079,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: easeType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_ease_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_ease_type, handle, pArgs, nil)
                 }
                 
             }
@@ -1104,7 +1104,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_ease_type() -> Tween.EaseType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_ease_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_ease_type, handle, nil, &_result)
         return Tween.EaseType (rawValue: _result)!
     }
     
@@ -1125,7 +1125,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_use_angle_limitation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_use_angle_limitation, handle, pArgs, nil)
                 }
                 
             }
@@ -1150,7 +1150,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func is_using_angle_limitation() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_is_using_angle_limitation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_is_using_angle_limitation, handle, nil, &_result)
         return _result
     }
     
@@ -1171,7 +1171,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_symmetry_limitation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_symmetry_limitation, handle, pArgs, nil)
                 }
                 
             }
@@ -1196,7 +1196,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func is_limitation_symmetry() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_is_limitation_symmetry, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_is_limitation_symmetry, handle, nil, &_result)
         return _result
     }
     
@@ -1217,7 +1217,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_primary_limit_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_primary_limit_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -1242,7 +1242,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_primary_limit_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_primary_limit_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_primary_limit_angle, handle, nil, &_result)
         return _result
     }
     
@@ -1263,7 +1263,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: power) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_primary_damp_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_primary_damp_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -1288,7 +1288,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_primary_damp_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_primary_damp_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_primary_damp_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -1309,7 +1309,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_primary_positive_limit_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_primary_positive_limit_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -1334,7 +1334,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_primary_positive_limit_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_primary_positive_limit_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_primary_positive_limit_angle, handle, nil, &_result)
         return _result
     }
     
@@ -1355,7 +1355,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: power) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_primary_positive_damp_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_primary_positive_damp_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -1380,7 +1380,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_primary_positive_damp_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_primary_positive_damp_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_primary_positive_damp_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -1401,7 +1401,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_primary_negative_limit_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_primary_negative_limit_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -1426,7 +1426,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_primary_negative_limit_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_primary_negative_limit_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_primary_negative_limit_angle, handle, nil, &_result)
         return _result
     }
     
@@ -1447,7 +1447,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: power) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_primary_negative_damp_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_primary_negative_damp_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -1472,7 +1472,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_primary_negative_damp_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_primary_negative_damp_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_primary_negative_damp_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -1493,7 +1493,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_secondary_limit_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_secondary_limit_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -1518,7 +1518,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_secondary_limit_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_secondary_limit_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_secondary_limit_angle, handle, nil, &_result)
         return _result
     }
     
@@ -1539,7 +1539,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: power) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_secondary_damp_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_secondary_damp_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -1564,7 +1564,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_secondary_damp_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_secondary_damp_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_secondary_damp_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -1585,7 +1585,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_secondary_positive_limit_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_secondary_positive_limit_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -1610,7 +1610,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_secondary_positive_limit_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_secondary_positive_limit_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_secondary_positive_limit_angle, handle, nil, &_result)
         return _result
     }
     
@@ -1631,7 +1631,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: power) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_secondary_positive_damp_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_secondary_positive_damp_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -1656,7 +1656,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_secondary_positive_damp_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_secondary_positive_damp_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_secondary_positive_damp_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -1677,7 +1677,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_secondary_negative_limit_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_secondary_negative_limit_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -1702,7 +1702,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_secondary_negative_limit_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_secondary_negative_limit_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_secondary_negative_limit_angle, handle, nil, &_result)
         return _result
     }
     
@@ -1723,7 +1723,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
         withUnsafePointer(to: power) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_secondary_negative_damp_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LookAtModifier3D.method_set_secondary_negative_damp_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -1748,7 +1748,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     fileprivate final func get_secondary_negative_damp_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_secondary_negative_damp_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_secondary_negative_damp_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -1767,7 +1767,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     public final func getInterpolationRemaining() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_interpolation_remaining, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_get_interpolation_remaining, handle, nil, &_result)
         return _result
     }
     
@@ -1789,7 +1789,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     public final func isInterpolating() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_is_interpolating, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_is_interpolating, handle, nil, &_result)
         return _result
     }
     
@@ -1811,7 +1811,7 @@ open class LookAtModifier3D: SkeletonModifier3D {
     public final func isTargetWithinLimitation() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(LookAtModifier3D.method_is_target_within_limitation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LookAtModifier3D.method_is_target_within_limitation, handle, nil, &_result)
         return _result
     }
     

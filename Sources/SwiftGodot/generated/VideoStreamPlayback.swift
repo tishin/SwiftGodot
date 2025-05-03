@@ -41,7 +41,7 @@ open class VideoStreamPlayback: Resource {
     @_documentation(visibility: public)
     open func _stop() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__stop, handle, nil, nil)
         
     }
     
@@ -60,7 +60,7 @@ open class VideoStreamPlayback: Resource {
     @_documentation(visibility: public)
     open func _play() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__play, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__play, handle, nil, nil)
         
     }
     
@@ -80,7 +80,7 @@ open class VideoStreamPlayback: Resource {
     open func _isPlaying() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__is_playing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__is_playing, handle, nil, &_result)
         return _result
     }
     
@@ -102,7 +102,7 @@ open class VideoStreamPlayback: Resource {
         withUnsafePointer(to: paused) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayback.method__set_paused, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayback.method__set_paused, handle, pArgs, nil)
                 }
                 
             }
@@ -128,7 +128,7 @@ open class VideoStreamPlayback: Resource {
     open func _isPaused() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__is_paused, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__is_paused, handle, nil, &_result)
         return _result
     }
     
@@ -148,7 +148,7 @@ open class VideoStreamPlayback: Resource {
     open func _getLength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_length, handle, nil, &_result)
         return _result
     }
     
@@ -168,7 +168,7 @@ open class VideoStreamPlayback: Resource {
     open func _getPlaybackPosition() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_playback_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_playback_position, handle, nil, &_result)
         return _result
     }
     
@@ -190,7 +190,7 @@ open class VideoStreamPlayback: Resource {
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayback.method__seek, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayback.method__seek, handle, pArgs, nil)
                 }
                 
             }
@@ -218,7 +218,7 @@ open class VideoStreamPlayback: Resource {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayback.method__set_audio_track, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayback.method__set_audio_track, handle, pArgs, nil)
                 }
                 
             }
@@ -243,9 +243,9 @@ open class VideoStreamPlayback: Resource {
     @_documentation(visibility: public)
     open func _getTexture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__update: GDExtensionMethodBindPtr = {
@@ -266,7 +266,7 @@ open class VideoStreamPlayback: Resource {
         withUnsafePointer(to: delta) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStreamPlayback.method__update, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStreamPlayback.method__update, handle, pArgs, nil)
                 }
                 
             }
@@ -292,7 +292,7 @@ open class VideoStreamPlayback: Resource {
     open func _getChannels() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_channels, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_channels, handle, nil, &_result)
         return _result
     }
     
@@ -312,7 +312,7 @@ open class VideoStreamPlayback: Resource {
     open func _getMixRate() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_mix_rate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VideoStreamPlayback.method__get_mix_rate, handle, nil, &_result)
         return _result
     }
     
@@ -336,7 +336,7 @@ open class VideoStreamPlayback: Resource {
                 withUnsafePointer(to: offset) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(VideoStreamPlayback.method_mix_audio, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(VideoStreamPlayback.method_mix_audio, handle, pArgs, &_result)
                         }
                         
                     }
@@ -425,7 +425,7 @@ func _VideoStreamPlayback_proxy_get_texture (instance: UnsafeMutableRawPointer?,
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? VideoStreamPlayback else { return }
     let ret = swiftObject._getTexture ()
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Texture2D
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // Texture2D
 }
 
 func _VideoStreamPlayback_proxy_is_paused (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {

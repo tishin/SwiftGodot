@@ -79,7 +79,7 @@ open class ConcavePolygonShape3D: Shape3D {
         withUnsafePointer(to: faces.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ConcavePolygonShape3D.method_set_faces, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ConcavePolygonShape3D.method_set_faces, handle, pArgs, nil)
                 }
                 
             }
@@ -105,7 +105,7 @@ open class ConcavePolygonShape3D: Shape3D {
     fileprivate final func get_faces() -> PackedVector3Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
-        gi.object_method_bind_ptrcall(ConcavePolygonShape3D.method_get_faces, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ConcavePolygonShape3D.method_get_faces, handle, nil, &_result.content)
         return _result
     }
     
@@ -126,7 +126,7 @@ open class ConcavePolygonShape3D: Shape3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ConcavePolygonShape3D.method_set_backface_collision_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ConcavePolygonShape3D.method_set_backface_collision_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -151,7 +151,7 @@ open class ConcavePolygonShape3D: Shape3D {
     fileprivate final func is_backface_collision_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ConcavePolygonShape3D.method_is_backface_collision_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ConcavePolygonShape3D.method_is_backface_collision_enabled, handle, nil, &_result)
         return _result
     }
     

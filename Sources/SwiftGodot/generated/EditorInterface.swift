@@ -29,7 +29,7 @@ open class EditorInterface: Object {
     /// The shared instance of this class
     public static var shared: EditorInterface {
         return withUnsafePointer(to: &EditorInterface.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -81,7 +81,7 @@ open class EditorInterface: Object {
         withUnsafePointer(to: save) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInterface.method_restart_editor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorInterface.method_restart_editor, handle, pArgs, nil)
                 }
                 
             }
@@ -108,9 +108,9 @@ open class EditorInterface: Object {
     /// 
     public final func getCommandPalette() -> EditorCommandPalette? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_command_palette, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_command_palette, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_resource_filesystem: GDExtensionMethodBindPtr = {
@@ -127,9 +127,9 @@ open class EditorInterface: Object {
     /// Returns the editor's ``EditorFileSystem`` instance.
     public final func getResourceFilesystem() -> EditorFileSystem? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_resource_filesystem, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_resource_filesystem, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_editor_paths: GDExtensionMethodBindPtr = {
@@ -146,9 +146,9 @@ open class EditorInterface: Object {
     /// Returns the ``EditorPaths`` singleton.
     public final func getEditorPaths() -> EditorPaths? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_paths, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_paths, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_resource_previewer: GDExtensionMethodBindPtr = {
@@ -165,9 +165,9 @@ open class EditorInterface: Object {
     /// Returns the editor's ``EditorResourcePreview`` instance.
     public final func getResourcePreviewer() -> EditorResourcePreview? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_resource_previewer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_resource_previewer, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_selection: GDExtensionMethodBindPtr = {
@@ -184,9 +184,9 @@ open class EditorInterface: Object {
     /// Returns the editor's ``EditorSelection`` instance.
     public final func getSelection() -> EditorSelection? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_selection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_selection, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_editor_settings: GDExtensionMethodBindPtr = {
@@ -203,9 +203,9 @@ open class EditorInterface: Object {
     /// Returns the editor's ``EditorSettings`` instance.
     public final func getEditorSettings() -> EditorSettings? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_settings, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_settings, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_editor_toaster: GDExtensionMethodBindPtr = {
@@ -222,9 +222,9 @@ open class EditorInterface: Object {
     /// Returns the editor's ``EditorToaster``.
     public final func getEditorToaster() -> EditorToaster? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_toaster, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_toaster, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_editor_undo_redo: GDExtensionMethodBindPtr = {
@@ -241,9 +241,9 @@ open class EditorInterface: Object {
     /// Returns the editor's ``EditorUndoRedoManager``.
     public final func getEditorUndoRedo() -> EditorUndoRedoManager? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_undo_redo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_undo_redo, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_make_mesh_previews: GDExtensionMethodBindPtr = {
@@ -265,7 +265,7 @@ open class EditorInterface: Object {
             withUnsafePointer(to: previewSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorInterface.method_make_mesh_previews, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(EditorInterface.method_make_mesh_previews, handle, pArgs, &_result)
                     }
                     
                 }
@@ -296,7 +296,7 @@ open class EditorInterface: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorInterface.method_set_plugin_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorInterface.method_set_plugin_enabled, handle, pArgs, nil)
                     }
                     
                 }
@@ -327,7 +327,7 @@ open class EditorInterface: Object {
         withUnsafePointer(to: plugin.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInterface.method_is_plugin_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorInterface.method_is_plugin_enabled, handle, pArgs, &_result)
                 }
                 
             }
@@ -354,9 +354,9 @@ open class EditorInterface: Object {
     /// 
     public final func getEditorTheme() -> Theme? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_theme, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_theme, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_base_control: GDExtensionMethodBindPtr = {
@@ -376,9 +376,9 @@ open class EditorInterface: Object {
     /// 
     public final func getBaseControl() -> Control? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_base_control, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_base_control, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_editor_main_screen: GDExtensionMethodBindPtr = {
@@ -400,9 +400,9 @@ open class EditorInterface: Object {
     /// 
     public final func getEditorMainScreen() -> VBoxContainer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_main_screen, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_main_screen, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_script_editor: GDExtensionMethodBindPtr = {
@@ -422,9 +422,9 @@ open class EditorInterface: Object {
     /// 
     public final func getScriptEditor() -> ScriptEditor? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_script_editor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_script_editor, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_editor_viewport_2d: GDExtensionMethodBindPtr = {
@@ -441,9 +441,9 @@ open class EditorInterface: Object {
     /// Returns the 2D editor ``SubViewport``. It does not have a camera. Instead, the view transforms are done directly and can be accessed with ``Viewport/globalCanvasTransform``.
     public final func getEditorViewport2d() -> SubViewport? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_viewport_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_viewport_2d, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_editor_viewport_3d: GDExtensionMethodBindPtr = {
@@ -460,18 +460,18 @@ open class EditorInterface: Object {
     /// Returns the specified 3D editor ``SubViewport``, from `0` to `3`. The viewport can be used to access the active editor cameras with ``Viewport/getCamera3d()``.
     public final func getEditorViewport3d(idx: Int32 = 0) -> SubViewport? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_viewport_3d, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_viewport_3d, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_main_screen_editor: GDExtensionMethodBindPtr = {
@@ -492,7 +492,7 @@ open class EditorInterface: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInterface.method_set_main_screen_editor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorInterface.method_set_main_screen_editor, handle, pArgs, nil)
                 }
                 
             }
@@ -519,7 +519,7 @@ open class EditorInterface: Object {
         withUnsafePointer(to: enter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInterface.method_set_distraction_free_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorInterface.method_set_distraction_free_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -544,7 +544,7 @@ open class EditorInterface: Object {
     fileprivate final func is_distraction_free_mode_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorInterface.method_is_distraction_free_mode_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorInterface.method_is_distraction_free_mode_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -570,7 +570,7 @@ open class EditorInterface: Object {
     public final func isMultiWindowEnabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorInterface.method_is_multi_window_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorInterface.method_is_multi_window_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -592,7 +592,7 @@ open class EditorInterface: Object {
     public final func getEditorScale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_editor_scale, handle, nil, &_result)
         return _result
     }
     
@@ -617,7 +617,7 @@ open class EditorInterface: Object {
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorInterface.method_popup_dialog, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorInterface.method_popup_dialog, handle, pArgs, nil)
                     }
                     
                 }
@@ -650,7 +650,7 @@ open class EditorInterface: Object {
             withUnsafePointer(to: minsize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorInterface.method_popup_dialog_centered, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorInterface.method_popup_dialog_centered, handle, pArgs, nil)
                     }
                     
                 }
@@ -683,7 +683,7 @@ open class EditorInterface: Object {
             withUnsafePointer(to: ratio) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorInterface.method_popup_dialog_centered_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorInterface.method_popup_dialog_centered_ratio, handle, pArgs, nil)
                     }
                     
                 }
@@ -717,7 +717,7 @@ open class EditorInterface: Object {
                 withUnsafePointer(to: fallbackRatio) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorInterface.method_popup_dialog_centered_clamped, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorInterface.method_popup_dialog_centered_clamped, handle, pArgs, nil)
                         }
                         
                     }
@@ -751,7 +751,7 @@ open class EditorInterface: Object {
     public final func getCurrentFeatureProfile() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_current_feature_profile, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_current_feature_profile, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -778,7 +778,7 @@ open class EditorInterface: Object {
         withUnsafePointer(to: profileName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInterface.method_set_current_feature_profile, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorInterface.method_set_current_feature_profile, handle, pArgs, nil)
                 }
                 
             }
@@ -810,7 +810,7 @@ open class EditorInterface: Object {
                 withUnsafePointer(to: currentValue?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorInterface.method_popup_node_selector, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorInterface.method_popup_node_selector, handle, pArgs, nil)
                         }
                         
                     }
@@ -846,7 +846,7 @@ open class EditorInterface: Object {
                     withUnsafePointer(to: currentValue.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorInterface.method_popup_property_selector, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(EditorInterface.method_popup_property_selector, handle, pArgs, nil)
                             }
                             
                         }
@@ -882,7 +882,7 @@ open class EditorInterface: Object {
                 withUnsafePointer(to: currentValue.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorInterface.method_popup_method_selector, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorInterface.method_popup_method_selector, handle, pArgs, nil)
                         }
                         
                     }
@@ -914,7 +914,7 @@ open class EditorInterface: Object {
             withUnsafePointer(to: baseTypes.array.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorInterface.method_popup_quick_open, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorInterface.method_popup_quick_open, handle, pArgs, nil)
                     }
                     
                 }
@@ -962,7 +962,7 @@ open class EditorInterface: Object {
                         withUnsafePointer(to: typeBlocklist.array.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(EditorInterface.method_popup_create_dialog, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(EditorInterface.method_popup_create_dialog, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -997,9 +997,9 @@ open class EditorInterface: Object {
     /// 
     public final func getFileSystemDock() -> FileSystemDock? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_file_system_dock, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_file_system_dock, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_select_file: GDExtensionMethodBindPtr = {
@@ -1020,7 +1020,7 @@ open class EditorInterface: Object {
         withUnsafePointer(to: file.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInterface.method_select_file, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorInterface.method_select_file, handle, pArgs, nil)
                 }
                 
             }
@@ -1045,7 +1045,7 @@ open class EditorInterface: Object {
     public final func getSelectedPaths() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_selected_paths, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_selected_paths, handle, nil, &_result.content)
         return _result
     }
     
@@ -1064,7 +1064,7 @@ open class EditorInterface: Object {
     public final func getCurrentPath() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_current_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_current_path, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1083,7 +1083,7 @@ open class EditorInterface: Object {
     public final func getCurrentDirectory() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_current_directory, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_current_directory, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1104,9 +1104,9 @@ open class EditorInterface: Object {
     /// 
     public final func getInspector() -> EditorInspector? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_inspector, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_inspector, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_inspect_object: GDExtensionMethodBindPtr = {
@@ -1129,7 +1129,7 @@ open class EditorInterface: Object {
                 withUnsafePointer(to: inspectorOnly) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorInterface.method_inspect_object, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorInterface.method_inspect_object, handle, pArgs, nil)
                         }
                         
                     }
@@ -1160,7 +1160,7 @@ open class EditorInterface: Object {
         withUnsafePointer(to: resource?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInterface.method_edit_resource, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorInterface.method_edit_resource, handle, pArgs, nil)
                 }
                 
             }
@@ -1187,7 +1187,7 @@ open class EditorInterface: Object {
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInterface.method_edit_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorInterface.method_edit_node, handle, pArgs, nil)
                 }
                 
             }
@@ -1217,7 +1217,7 @@ open class EditorInterface: Object {
                     withUnsafePointer(to: grabFocus) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorInterface.method_edit_script, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(EditorInterface.method_edit_script, handle, pArgs, nil)
                             }
                             
                         }
@@ -1252,7 +1252,7 @@ open class EditorInterface: Object {
             withUnsafePointer(to: setInherited) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorInterface.method_open_scene_from_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorInterface.method_open_scene_from_path, handle, pArgs, nil)
                     }
                     
                 }
@@ -1282,7 +1282,7 @@ open class EditorInterface: Object {
         withUnsafePointer(to: sceneFilepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInterface.method_reload_scene_from_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorInterface.method_reload_scene_from_path, handle, pArgs, nil)
                 }
                 
             }
@@ -1307,7 +1307,7 @@ open class EditorInterface: Object {
     public final func getOpenScenes() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_open_scenes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_open_scenes, handle, nil, &_result.content)
         return _result
     }
     
@@ -1325,9 +1325,9 @@ open class EditorInterface: Object {
     /// Returns the edited (current) scene's root ``Node``.
     public final func getEditedSceneRoot() -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_edited_scene_root, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_edited_scene_root, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_save_scene: GDExtensionMethodBindPtr = {
@@ -1345,7 +1345,7 @@ open class EditorInterface: Object {
     public final func saveScene() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(EditorInterface.method_save_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorInterface.method_save_scene, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -1368,7 +1368,7 @@ open class EditorInterface: Object {
             withUnsafePointer(to: withPreview) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorInterface.method_save_scene_as, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorInterface.method_save_scene_as, handle, pArgs, nil)
                     }
                     
                 }
@@ -1394,7 +1394,7 @@ open class EditorInterface: Object {
     /// Saves all opened scenes in the editor.
     public final func saveAllScenes() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorInterface.method_save_all_scenes, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorInterface.method_save_all_scenes, handle, nil, nil)
         
     }
     
@@ -1412,7 +1412,7 @@ open class EditorInterface: Object {
     /// Marks the current scene tab as unsaved.
     public final func markSceneAsUnsaved() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorInterface.method_mark_scene_as_unsaved, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorInterface.method_mark_scene_as_unsaved, handle, nil, nil)
         
     }
     
@@ -1430,7 +1430,7 @@ open class EditorInterface: Object {
     /// Plays the main scene.
     public final func playMainScene() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorInterface.method_play_main_scene, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorInterface.method_play_main_scene, handle, nil, nil)
         
     }
     
@@ -1448,7 +1448,7 @@ open class EditorInterface: Object {
     /// Plays the currently active scene.
     public final func playCurrentScene() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorInterface.method_play_current_scene, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorInterface.method_play_current_scene, handle, nil, nil)
         
     }
     
@@ -1470,7 +1470,7 @@ open class EditorInterface: Object {
         withUnsafePointer(to: sceneFilepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInterface.method_play_custom_scene, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorInterface.method_play_custom_scene, handle, pArgs, nil)
                 }
                 
             }
@@ -1494,7 +1494,7 @@ open class EditorInterface: Object {
     /// Stops the scene that is currently playing.
     public final func stopPlayingScene() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorInterface.method_stop_playing_scene, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorInterface.method_stop_playing_scene, handle, nil, nil)
         
     }
     
@@ -1513,7 +1513,7 @@ open class EditorInterface: Object {
     public final func isPlayingScene() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorInterface.method_is_playing_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorInterface.method_is_playing_scene, handle, nil, &_result)
         return _result
     }
     
@@ -1532,7 +1532,7 @@ open class EditorInterface: Object {
     public final func getPlayingScene() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorInterface.method_get_playing_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorInterface.method_get_playing_scene, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1553,7 +1553,7 @@ open class EditorInterface: Object {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInterface.method_set_movie_maker_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorInterface.method_set_movie_maker_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1578,7 +1578,7 @@ open class EditorInterface: Object {
     fileprivate final func is_movie_maker_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorInterface.method_is_movie_maker_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorInterface.method_is_movie_maker_enabled, handle, nil, &_result)
         return _result
     }
     

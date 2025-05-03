@@ -1330,7 +1330,7 @@ open class Environment: Resource {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_background, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_background, handle, pArgs, nil)
                 }
                 
             }
@@ -1355,7 +1355,7 @@ open class Environment: Resource {
     fileprivate final func get_background() -> Environment.BGMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Environment.method_get_background, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_background, handle, nil, &_result)
         return Environment.BGMode (rawValue: _result)!
     }
     
@@ -1376,7 +1376,7 @@ open class Environment: Resource {
         withUnsafePointer(to: sky?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sky, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sky, handle, pArgs, nil)
                 }
                 
             }
@@ -1400,9 +1400,9 @@ open class Environment: Resource {
     @inline(__always)
     fileprivate final func get_sky() -> Sky? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Environment.method_get_sky, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Environment.method_get_sky, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_sky_custom_fov: GDExtensionMethodBindPtr = {
@@ -1422,7 +1422,7 @@ open class Environment: Resource {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sky_custom_fov, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sky_custom_fov, handle, pArgs, nil)
                 }
                 
             }
@@ -1447,7 +1447,7 @@ open class Environment: Resource {
     fileprivate final func get_sky_custom_fov() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_sky_custom_fov, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_sky_custom_fov, handle, nil, &_result)
         return _result
     }
     
@@ -1468,7 +1468,7 @@ open class Environment: Resource {
         withUnsafePointer(to: eulerRadians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sky_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sky_rotation, handle, pArgs, nil)
                 }
                 
             }
@@ -1493,7 +1493,7 @@ open class Environment: Resource {
     fileprivate final func get_sky_rotation() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(Environment.method_get_sky_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_sky_rotation, handle, nil, &_result)
         return _result
     }
     
@@ -1514,7 +1514,7 @@ open class Environment: Resource {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_bg_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_bg_color, handle, pArgs, nil)
                 }
                 
             }
@@ -1539,7 +1539,7 @@ open class Environment: Resource {
     fileprivate final func get_bg_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(Environment.method_get_bg_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_bg_color, handle, nil, &_result)
         return _result
     }
     
@@ -1560,7 +1560,7 @@ open class Environment: Resource {
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_bg_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_bg_energy_multiplier, handle, pArgs, nil)
                 }
                 
             }
@@ -1585,7 +1585,7 @@ open class Environment: Resource {
     fileprivate final func get_bg_energy_multiplier() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_bg_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_bg_energy_multiplier, handle, nil, &_result)
         return _result
     }
     
@@ -1606,7 +1606,7 @@ open class Environment: Resource {
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_bg_intensity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_bg_intensity, handle, pArgs, nil)
                 }
                 
             }
@@ -1631,7 +1631,7 @@ open class Environment: Resource {
     fileprivate final func get_bg_intensity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_bg_intensity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_bg_intensity, handle, nil, &_result)
         return _result
     }
     
@@ -1652,7 +1652,7 @@ open class Environment: Resource {
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_canvas_max_layer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_canvas_max_layer, handle, pArgs, nil)
                 }
                 
             }
@@ -1677,7 +1677,7 @@ open class Environment: Resource {
     fileprivate final func get_canvas_max_layer() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Environment.method_get_canvas_max_layer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_canvas_max_layer, handle, nil, &_result)
         return _result
     }
     
@@ -1698,7 +1698,7 @@ open class Environment: Resource {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_camera_feed_id, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_camera_feed_id, handle, pArgs, nil)
                 }
                 
             }
@@ -1723,7 +1723,7 @@ open class Environment: Resource {
     fileprivate final func get_camera_feed_id() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Environment.method_get_camera_feed_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_camera_feed_id, handle, nil, &_result)
         return _result
     }
     
@@ -1744,7 +1744,7 @@ open class Environment: Resource {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ambient_light_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ambient_light_color, handle, pArgs, nil)
                 }
                 
             }
@@ -1769,7 +1769,7 @@ open class Environment: Resource {
     fileprivate final func get_ambient_light_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(Environment.method_get_ambient_light_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ambient_light_color, handle, nil, &_result)
         return _result
     }
     
@@ -1790,7 +1790,7 @@ open class Environment: Resource {
         withUnsafePointer(to: source.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ambient_source, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ambient_source, handle, pArgs, nil)
                 }
                 
             }
@@ -1815,7 +1815,7 @@ open class Environment: Resource {
     fileprivate final func get_ambient_source() -> Environment.AmbientSource {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Environment.method_get_ambient_source, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ambient_source, handle, nil, &_result)
         return Environment.AmbientSource (rawValue: _result)!
     }
     
@@ -1836,7 +1836,7 @@ open class Environment: Resource {
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ambient_light_energy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ambient_light_energy, handle, pArgs, nil)
                 }
                 
             }
@@ -1861,7 +1861,7 @@ open class Environment: Resource {
     fileprivate final func get_ambient_light_energy() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ambient_light_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ambient_light_energy, handle, nil, &_result)
         return _result
     }
     
@@ -1882,7 +1882,7 @@ open class Environment: Resource {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ambient_light_sky_contribution, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ambient_light_sky_contribution, handle, pArgs, nil)
                 }
                 
             }
@@ -1907,7 +1907,7 @@ open class Environment: Resource {
     fileprivate final func get_ambient_light_sky_contribution() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ambient_light_sky_contribution, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ambient_light_sky_contribution, handle, nil, &_result)
         return _result
     }
     
@@ -1928,7 +1928,7 @@ open class Environment: Resource {
         withUnsafePointer(to: source.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_reflection_source, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_reflection_source, handle, pArgs, nil)
                 }
                 
             }
@@ -1953,7 +1953,7 @@ open class Environment: Resource {
     fileprivate final func get_reflection_source() -> Environment.ReflectionSource {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Environment.method_get_reflection_source, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_reflection_source, handle, nil, &_result)
         return Environment.ReflectionSource (rawValue: _result)!
     }
     
@@ -1974,7 +1974,7 @@ open class Environment: Resource {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_tonemapper, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_tonemapper, handle, pArgs, nil)
                 }
                 
             }
@@ -1999,7 +1999,7 @@ open class Environment: Resource {
     fileprivate final func get_tonemapper() -> Environment.ToneMapper {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Environment.method_get_tonemapper, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_tonemapper, handle, nil, &_result)
         return Environment.ToneMapper (rawValue: _result)!
     }
     
@@ -2020,7 +2020,7 @@ open class Environment: Resource {
         withUnsafePointer(to: exposure) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_tonemap_exposure, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_tonemap_exposure, handle, pArgs, nil)
                 }
                 
             }
@@ -2045,7 +2045,7 @@ open class Environment: Resource {
     fileprivate final func get_tonemap_exposure() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_tonemap_exposure, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_tonemap_exposure, handle, nil, &_result)
         return _result
     }
     
@@ -2066,7 +2066,7 @@ open class Environment: Resource {
         withUnsafePointer(to: white) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_tonemap_white, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_tonemap_white, handle, pArgs, nil)
                 }
                 
             }
@@ -2091,7 +2091,7 @@ open class Environment: Resource {
     fileprivate final func get_tonemap_white() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_tonemap_white, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_tonemap_white, handle, nil, &_result)
         return _result
     }
     
@@ -2112,7 +2112,7 @@ open class Environment: Resource {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssr_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssr_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -2137,7 +2137,7 @@ open class Environment: Resource {
     fileprivate final func is_ssr_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Environment.method_is_ssr_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_is_ssr_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2158,7 +2158,7 @@ open class Environment: Resource {
         withUnsafePointer(to: maxSteps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssr_max_steps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssr_max_steps, handle, pArgs, nil)
                 }
                 
             }
@@ -2183,7 +2183,7 @@ open class Environment: Resource {
     fileprivate final func get_ssr_max_steps() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssr_max_steps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssr_max_steps, handle, nil, &_result)
         return _result
     }
     
@@ -2204,7 +2204,7 @@ open class Environment: Resource {
         withUnsafePointer(to: fadeIn) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssr_fade_in, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssr_fade_in, handle, pArgs, nil)
                 }
                 
             }
@@ -2229,7 +2229,7 @@ open class Environment: Resource {
     fileprivate final func get_ssr_fade_in() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssr_fade_in, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssr_fade_in, handle, nil, &_result)
         return _result
     }
     
@@ -2250,7 +2250,7 @@ open class Environment: Resource {
         withUnsafePointer(to: fadeOut) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssr_fade_out, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssr_fade_out, handle, pArgs, nil)
                 }
                 
             }
@@ -2275,7 +2275,7 @@ open class Environment: Resource {
     fileprivate final func get_ssr_fade_out() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssr_fade_out, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssr_fade_out, handle, nil, &_result)
         return _result
     }
     
@@ -2296,7 +2296,7 @@ open class Environment: Resource {
         withUnsafePointer(to: depthTolerance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssr_depth_tolerance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssr_depth_tolerance, handle, pArgs, nil)
                 }
                 
             }
@@ -2321,7 +2321,7 @@ open class Environment: Resource {
     fileprivate final func get_ssr_depth_tolerance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssr_depth_tolerance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssr_depth_tolerance, handle, nil, &_result)
         return _result
     }
     
@@ -2342,7 +2342,7 @@ open class Environment: Resource {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -2367,7 +2367,7 @@ open class Environment: Resource {
     fileprivate final func is_ssao_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Environment.method_is_ssao_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_is_ssao_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2388,7 +2388,7 @@ open class Environment: Resource {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -2413,7 +2413,7 @@ open class Environment: Resource {
     fileprivate final func get_ssao_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssao_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssao_radius, handle, nil, &_result)
         return _result
     }
     
@@ -2434,7 +2434,7 @@ open class Environment: Resource {
         withUnsafePointer(to: intensity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_intensity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_intensity, handle, pArgs, nil)
                 }
                 
             }
@@ -2459,7 +2459,7 @@ open class Environment: Resource {
     fileprivate final func get_ssao_intensity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssao_intensity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssao_intensity, handle, nil, &_result)
         return _result
     }
     
@@ -2480,7 +2480,7 @@ open class Environment: Resource {
         withUnsafePointer(to: power) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_power, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_power, handle, pArgs, nil)
                 }
                 
             }
@@ -2505,7 +2505,7 @@ open class Environment: Resource {
     fileprivate final func get_ssao_power() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssao_power, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssao_power, handle, nil, &_result)
         return _result
     }
     
@@ -2526,7 +2526,7 @@ open class Environment: Resource {
         withUnsafePointer(to: detail) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_detail, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_detail, handle, pArgs, nil)
                 }
                 
             }
@@ -2551,7 +2551,7 @@ open class Environment: Resource {
     fileprivate final func get_ssao_detail() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssao_detail, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssao_detail, handle, nil, &_result)
         return _result
     }
     
@@ -2572,7 +2572,7 @@ open class Environment: Resource {
         withUnsafePointer(to: horizon) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_horizon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_horizon, handle, pArgs, nil)
                 }
                 
             }
@@ -2597,7 +2597,7 @@ open class Environment: Resource {
     fileprivate final func get_ssao_horizon() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssao_horizon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssao_horizon, handle, nil, &_result)
         return _result
     }
     
@@ -2618,7 +2618,7 @@ open class Environment: Resource {
         withUnsafePointer(to: sharpness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_sharpness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_sharpness, handle, pArgs, nil)
                 }
                 
             }
@@ -2643,7 +2643,7 @@ open class Environment: Resource {
     fileprivate final func get_ssao_sharpness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssao_sharpness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssao_sharpness, handle, nil, &_result)
         return _result
     }
     
@@ -2664,7 +2664,7 @@ open class Environment: Resource {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_direct_light_affect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_direct_light_affect, handle, pArgs, nil)
                 }
                 
             }
@@ -2689,7 +2689,7 @@ open class Environment: Resource {
     fileprivate final func get_ssao_direct_light_affect() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssao_direct_light_affect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssao_direct_light_affect, handle, nil, &_result)
         return _result
     }
     
@@ -2710,7 +2710,7 @@ open class Environment: Resource {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_ao_channel_affect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssao_ao_channel_affect, handle, pArgs, nil)
                 }
                 
             }
@@ -2735,7 +2735,7 @@ open class Environment: Resource {
     fileprivate final func get_ssao_ao_channel_affect() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssao_ao_channel_affect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssao_ao_channel_affect, handle, nil, &_result)
         return _result
     }
     
@@ -2756,7 +2756,7 @@ open class Environment: Resource {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssil_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssil_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -2781,7 +2781,7 @@ open class Environment: Resource {
     fileprivate final func is_ssil_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Environment.method_is_ssil_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_is_ssil_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2802,7 +2802,7 @@ open class Environment: Resource {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssil_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssil_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -2827,7 +2827,7 @@ open class Environment: Resource {
     fileprivate final func get_ssil_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssil_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssil_radius, handle, nil, &_result)
         return _result
     }
     
@@ -2848,7 +2848,7 @@ open class Environment: Resource {
         withUnsafePointer(to: intensity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssil_intensity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssil_intensity, handle, pArgs, nil)
                 }
                 
             }
@@ -2873,7 +2873,7 @@ open class Environment: Resource {
     fileprivate final func get_ssil_intensity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssil_intensity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssil_intensity, handle, nil, &_result)
         return _result
     }
     
@@ -2894,7 +2894,7 @@ open class Environment: Resource {
         withUnsafePointer(to: sharpness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssil_sharpness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssil_sharpness, handle, pArgs, nil)
                 }
                 
             }
@@ -2919,7 +2919,7 @@ open class Environment: Resource {
     fileprivate final func get_ssil_sharpness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssil_sharpness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssil_sharpness, handle, nil, &_result)
         return _result
     }
     
@@ -2940,7 +2940,7 @@ open class Environment: Resource {
         withUnsafePointer(to: normalRejection) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_ssil_normal_rejection, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_ssil_normal_rejection, handle, pArgs, nil)
                 }
                 
             }
@@ -2965,7 +2965,7 @@ open class Environment: Resource {
     fileprivate final func get_ssil_normal_rejection() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_ssil_normal_rejection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_ssil_normal_rejection, handle, nil, &_result)
         return _result
     }
     
@@ -2986,7 +2986,7 @@ open class Environment: Resource {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -3011,7 +3011,7 @@ open class Environment: Resource {
     fileprivate final func is_sdfgi_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Environment.method_is_sdfgi_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_is_sdfgi_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -3032,7 +3032,7 @@ open class Environment: Resource {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_cascades, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_cascades, handle, pArgs, nil)
                 }
                 
             }
@@ -3057,7 +3057,7 @@ open class Environment: Resource {
     fileprivate final func get_sdfgi_cascades() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_cascades, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_cascades, handle, nil, &_result)
         return _result
     }
     
@@ -3078,7 +3078,7 @@ open class Environment: Resource {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_min_cell_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_min_cell_size, handle, pArgs, nil)
                 }
                 
             }
@@ -3103,7 +3103,7 @@ open class Environment: Resource {
     fileprivate final func get_sdfgi_min_cell_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_min_cell_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_min_cell_size, handle, nil, &_result)
         return _result
     }
     
@@ -3124,7 +3124,7 @@ open class Environment: Resource {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_max_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_max_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -3149,7 +3149,7 @@ open class Environment: Resource {
     fileprivate final func get_sdfgi_max_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_max_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_max_distance, handle, nil, &_result)
         return _result
     }
     
@@ -3170,7 +3170,7 @@ open class Environment: Resource {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_cascade0_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_cascade0_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -3195,7 +3195,7 @@ open class Environment: Resource {
     fileprivate final func get_sdfgi_cascade0_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_cascade0_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_cascade0_distance, handle, nil, &_result)
         return _result
     }
     
@@ -3216,7 +3216,7 @@ open class Environment: Resource {
         withUnsafePointer(to: scale.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_y_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_y_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -3241,7 +3241,7 @@ open class Environment: Resource {
     fileprivate final func get_sdfgi_y_scale() -> Environment.SDFGIYScale {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_y_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_y_scale, handle, nil, &_result)
         return Environment.SDFGIYScale (rawValue: _result)!
     }
     
@@ -3262,7 +3262,7 @@ open class Environment: Resource {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_use_occlusion, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_use_occlusion, handle, pArgs, nil)
                 }
                 
             }
@@ -3287,7 +3287,7 @@ open class Environment: Resource {
     fileprivate final func is_sdfgi_using_occlusion() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Environment.method_is_sdfgi_using_occlusion, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_is_sdfgi_using_occlusion, handle, nil, &_result)
         return _result
     }
     
@@ -3308,7 +3308,7 @@ open class Environment: Resource {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_bounce_feedback, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_bounce_feedback, handle, pArgs, nil)
                 }
                 
             }
@@ -3333,7 +3333,7 @@ open class Environment: Resource {
     fileprivate final func get_sdfgi_bounce_feedback() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_bounce_feedback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_bounce_feedback, handle, nil, &_result)
         return _result
     }
     
@@ -3354,7 +3354,7 @@ open class Environment: Resource {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_read_sky_light, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_read_sky_light, handle, pArgs, nil)
                 }
                 
             }
@@ -3379,7 +3379,7 @@ open class Environment: Resource {
     fileprivate final func is_sdfgi_reading_sky_light() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Environment.method_is_sdfgi_reading_sky_light, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_is_sdfgi_reading_sky_light, handle, nil, &_result)
         return _result
     }
     
@@ -3400,7 +3400,7 @@ open class Environment: Resource {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_energy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_energy, handle, pArgs, nil)
                 }
                 
             }
@@ -3425,7 +3425,7 @@ open class Environment: Resource {
     fileprivate final func get_sdfgi_energy() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_energy, handle, nil, &_result)
         return _result
     }
     
@@ -3446,7 +3446,7 @@ open class Environment: Resource {
         withUnsafePointer(to: bias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_normal_bias, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_normal_bias, handle, pArgs, nil)
                 }
                 
             }
@@ -3471,7 +3471,7 @@ open class Environment: Resource {
     fileprivate final func get_sdfgi_normal_bias() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_normal_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_normal_bias, handle, nil, &_result)
         return _result
     }
     
@@ -3492,7 +3492,7 @@ open class Environment: Resource {
         withUnsafePointer(to: bias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_probe_bias, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_sdfgi_probe_bias, handle, pArgs, nil)
                 }
                 
             }
@@ -3517,7 +3517,7 @@ open class Environment: Resource {
     fileprivate final func get_sdfgi_probe_bias() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_probe_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_sdfgi_probe_bias, handle, nil, &_result)
         return _result
     }
     
@@ -3538,7 +3538,7 @@ open class Environment: Resource {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_glow_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_glow_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -3563,7 +3563,7 @@ open class Environment: Resource {
     fileprivate final func is_glow_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Environment.method_is_glow_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_is_glow_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -3585,7 +3585,7 @@ open class Environment: Resource {
             withUnsafePointer(to: intensity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Environment.method_set_glow_level, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Environment.method_set_glow_level, handle, pArgs, nil)
                     }
                     
                 }
@@ -3615,7 +3615,7 @@ open class Environment: Resource {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_get_glow_level, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Environment.method_get_glow_level, handle, pArgs, &_result)
                 }
                 
             }
@@ -3642,7 +3642,7 @@ open class Environment: Resource {
         withUnsafePointer(to: normalize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_glow_normalized, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_glow_normalized, handle, pArgs, nil)
                 }
                 
             }
@@ -3667,7 +3667,7 @@ open class Environment: Resource {
     fileprivate final func is_glow_normalized() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Environment.method_is_glow_normalized, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_is_glow_normalized, handle, nil, &_result)
         return _result
     }
     
@@ -3688,7 +3688,7 @@ open class Environment: Resource {
         withUnsafePointer(to: intensity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_glow_intensity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_glow_intensity, handle, pArgs, nil)
                 }
                 
             }
@@ -3713,7 +3713,7 @@ open class Environment: Resource {
     fileprivate final func get_glow_intensity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_glow_intensity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_glow_intensity, handle, nil, &_result)
         return _result
     }
     
@@ -3734,7 +3734,7 @@ open class Environment: Resource {
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_glow_strength, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_glow_strength, handle, pArgs, nil)
                 }
                 
             }
@@ -3759,7 +3759,7 @@ open class Environment: Resource {
     fileprivate final func get_glow_strength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_glow_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_glow_strength, handle, nil, &_result)
         return _result
     }
     
@@ -3780,7 +3780,7 @@ open class Environment: Resource {
         withUnsafePointer(to: mix) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_glow_mix, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_glow_mix, handle, pArgs, nil)
                 }
                 
             }
@@ -3805,7 +3805,7 @@ open class Environment: Resource {
     fileprivate final func get_glow_mix() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_glow_mix, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_glow_mix, handle, nil, &_result)
         return _result
     }
     
@@ -3826,7 +3826,7 @@ open class Environment: Resource {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_glow_bloom, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_glow_bloom, handle, pArgs, nil)
                 }
                 
             }
@@ -3851,7 +3851,7 @@ open class Environment: Resource {
     fileprivate final func get_glow_bloom() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_glow_bloom, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_glow_bloom, handle, nil, &_result)
         return _result
     }
     
@@ -3872,7 +3872,7 @@ open class Environment: Resource {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_glow_blend_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_glow_blend_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -3897,7 +3897,7 @@ open class Environment: Resource {
     fileprivate final func get_glow_blend_mode() -> Environment.GlowBlendMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Environment.method_get_glow_blend_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_glow_blend_mode, handle, nil, &_result)
         return Environment.GlowBlendMode (rawValue: _result)!
     }
     
@@ -3918,7 +3918,7 @@ open class Environment: Resource {
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_glow_hdr_bleed_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_glow_hdr_bleed_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -3943,7 +3943,7 @@ open class Environment: Resource {
     fileprivate final func get_glow_hdr_bleed_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_glow_hdr_bleed_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_glow_hdr_bleed_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -3964,7 +3964,7 @@ open class Environment: Resource {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_glow_hdr_bleed_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_glow_hdr_bleed_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -3989,7 +3989,7 @@ open class Environment: Resource {
     fileprivate final func get_glow_hdr_bleed_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_glow_hdr_bleed_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_glow_hdr_bleed_scale, handle, nil, &_result)
         return _result
     }
     
@@ -4010,7 +4010,7 @@ open class Environment: Resource {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_glow_hdr_luminance_cap, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_glow_hdr_luminance_cap, handle, pArgs, nil)
                 }
                 
             }
@@ -4035,7 +4035,7 @@ open class Environment: Resource {
     fileprivate final func get_glow_hdr_luminance_cap() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_glow_hdr_luminance_cap, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_glow_hdr_luminance_cap, handle, nil, &_result)
         return _result
     }
     
@@ -4056,7 +4056,7 @@ open class Environment: Resource {
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_glow_map_strength, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_glow_map_strength, handle, pArgs, nil)
                 }
                 
             }
@@ -4081,7 +4081,7 @@ open class Environment: Resource {
     fileprivate final func get_glow_map_strength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_glow_map_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_glow_map_strength, handle, nil, &_result)
         return _result
     }
     
@@ -4102,7 +4102,7 @@ open class Environment: Resource {
         withUnsafePointer(to: mode?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_glow_map, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_glow_map, handle, pArgs, nil)
                 }
                 
             }
@@ -4126,9 +4126,9 @@ open class Environment: Resource {
     @inline(__always)
     fileprivate final func get_glow_map() -> Texture? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Environment.method_get_glow_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Environment.method_get_glow_map, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_fog_enabled: GDExtensionMethodBindPtr = {
@@ -4148,7 +4148,7 @@ open class Environment: Resource {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_fog_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_fog_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -4173,7 +4173,7 @@ open class Environment: Resource {
     fileprivate final func is_fog_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Environment.method_is_fog_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_is_fog_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -4194,7 +4194,7 @@ open class Environment: Resource {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_fog_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_fog_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -4219,7 +4219,7 @@ open class Environment: Resource {
     fileprivate final func get_fog_mode() -> Environment.FogMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Environment.method_get_fog_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_fog_mode, handle, nil, &_result)
         return Environment.FogMode (rawValue: _result)!
     }
     
@@ -4240,7 +4240,7 @@ open class Environment: Resource {
         withUnsafePointer(to: lightColor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_fog_light_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_fog_light_color, handle, pArgs, nil)
                 }
                 
             }
@@ -4265,7 +4265,7 @@ open class Environment: Resource {
     fileprivate final func get_fog_light_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(Environment.method_get_fog_light_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_fog_light_color, handle, nil, &_result)
         return _result
     }
     
@@ -4286,7 +4286,7 @@ open class Environment: Resource {
         withUnsafePointer(to: lightEnergy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_fog_light_energy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_fog_light_energy, handle, pArgs, nil)
                 }
                 
             }
@@ -4311,7 +4311,7 @@ open class Environment: Resource {
     fileprivate final func get_fog_light_energy() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_fog_light_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_fog_light_energy, handle, nil, &_result)
         return _result
     }
     
@@ -4332,7 +4332,7 @@ open class Environment: Resource {
         withUnsafePointer(to: sunScatter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_fog_sun_scatter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_fog_sun_scatter, handle, pArgs, nil)
                 }
                 
             }
@@ -4357,7 +4357,7 @@ open class Environment: Resource {
     fileprivate final func get_fog_sun_scatter() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_fog_sun_scatter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_fog_sun_scatter, handle, nil, &_result)
         return _result
     }
     
@@ -4378,7 +4378,7 @@ open class Environment: Resource {
         withUnsafePointer(to: density) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_fog_density, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_fog_density, handle, pArgs, nil)
                 }
                 
             }
@@ -4403,7 +4403,7 @@ open class Environment: Resource {
     fileprivate final func get_fog_density() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_fog_density, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_fog_density, handle, nil, &_result)
         return _result
     }
     
@@ -4424,7 +4424,7 @@ open class Environment: Resource {
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_fog_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_fog_height, handle, pArgs, nil)
                 }
                 
             }
@@ -4449,7 +4449,7 @@ open class Environment: Resource {
     fileprivate final func get_fog_height() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_fog_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_fog_height, handle, nil, &_result)
         return _result
     }
     
@@ -4470,7 +4470,7 @@ open class Environment: Resource {
         withUnsafePointer(to: heightDensity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_fog_height_density, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_fog_height_density, handle, pArgs, nil)
                 }
                 
             }
@@ -4495,7 +4495,7 @@ open class Environment: Resource {
     fileprivate final func get_fog_height_density() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_fog_height_density, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_fog_height_density, handle, nil, &_result)
         return _result
     }
     
@@ -4516,7 +4516,7 @@ open class Environment: Resource {
         withUnsafePointer(to: aerialPerspective) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_fog_aerial_perspective, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_fog_aerial_perspective, handle, pArgs, nil)
                 }
                 
             }
@@ -4541,7 +4541,7 @@ open class Environment: Resource {
     fileprivate final func get_fog_aerial_perspective() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_fog_aerial_perspective, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_fog_aerial_perspective, handle, nil, &_result)
         return _result
     }
     
@@ -4562,7 +4562,7 @@ open class Environment: Resource {
         withUnsafePointer(to: skyAffect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_fog_sky_affect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_fog_sky_affect, handle, pArgs, nil)
                 }
                 
             }
@@ -4587,7 +4587,7 @@ open class Environment: Resource {
     fileprivate final func get_fog_sky_affect() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_fog_sky_affect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_fog_sky_affect, handle, nil, &_result)
         return _result
     }
     
@@ -4608,7 +4608,7 @@ open class Environment: Resource {
         withUnsafePointer(to: curve) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_fog_depth_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_fog_depth_curve, handle, pArgs, nil)
                 }
                 
             }
@@ -4633,7 +4633,7 @@ open class Environment: Resource {
     fileprivate final func get_fog_depth_curve() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_fog_depth_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_fog_depth_curve, handle, nil, &_result)
         return _result
     }
     
@@ -4654,7 +4654,7 @@ open class Environment: Resource {
         withUnsafePointer(to: begin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_fog_depth_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_fog_depth_begin, handle, pArgs, nil)
                 }
                 
             }
@@ -4679,7 +4679,7 @@ open class Environment: Resource {
     fileprivate final func get_fog_depth_begin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_fog_depth_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_fog_depth_begin, handle, nil, &_result)
         return _result
     }
     
@@ -4700,7 +4700,7 @@ open class Environment: Resource {
         withUnsafePointer(to: end) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_fog_depth_end, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_fog_depth_end, handle, pArgs, nil)
                 }
                 
             }
@@ -4725,7 +4725,7 @@ open class Environment: Resource {
     fileprivate final func get_fog_depth_end() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_fog_depth_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_fog_depth_end, handle, nil, &_result)
         return _result
     }
     
@@ -4746,7 +4746,7 @@ open class Environment: Resource {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -4771,7 +4771,7 @@ open class Environment: Resource {
     fileprivate final func is_volumetric_fog_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Environment.method_is_volumetric_fog_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_is_volumetric_fog_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -4792,7 +4792,7 @@ open class Environment: Resource {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_emission, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_emission, handle, pArgs, nil)
                 }
                 
             }
@@ -4817,7 +4817,7 @@ open class Environment: Resource {
     fileprivate final func get_volumetric_fog_emission() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_emission, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_emission, handle, nil, &_result)
         return _result
     }
     
@@ -4838,7 +4838,7 @@ open class Environment: Resource {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_albedo, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_albedo, handle, pArgs, nil)
                 }
                 
             }
@@ -4863,7 +4863,7 @@ open class Environment: Resource {
     fileprivate final func get_volumetric_fog_albedo() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_albedo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_albedo, handle, nil, &_result)
         return _result
     }
     
@@ -4884,7 +4884,7 @@ open class Environment: Resource {
         withUnsafePointer(to: density) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_density, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_density, handle, pArgs, nil)
                 }
                 
             }
@@ -4909,7 +4909,7 @@ open class Environment: Resource {
     fileprivate final func get_volumetric_fog_density() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_density, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_density, handle, nil, &_result)
         return _result
     }
     
@@ -4930,7 +4930,7 @@ open class Environment: Resource {
         withUnsafePointer(to: begin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_emission_energy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_emission_energy, handle, pArgs, nil)
                 }
                 
             }
@@ -4955,7 +4955,7 @@ open class Environment: Resource {
     fileprivate final func get_volumetric_fog_emission_energy() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_emission_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_emission_energy, handle, nil, &_result)
         return _result
     }
     
@@ -4976,7 +4976,7 @@ open class Environment: Resource {
         withUnsafePointer(to: anisotropy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_anisotropy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_anisotropy, handle, pArgs, nil)
                 }
                 
             }
@@ -5001,7 +5001,7 @@ open class Environment: Resource {
     fileprivate final func get_volumetric_fog_anisotropy() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_anisotropy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_anisotropy, handle, nil, &_result)
         return _result
     }
     
@@ -5022,7 +5022,7 @@ open class Environment: Resource {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_length, handle, pArgs, nil)
                 }
                 
             }
@@ -5047,7 +5047,7 @@ open class Environment: Resource {
     fileprivate final func get_volumetric_fog_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_length, handle, nil, &_result)
         return _result
     }
     
@@ -5068,7 +5068,7 @@ open class Environment: Resource {
         withUnsafePointer(to: detailSpread) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_detail_spread, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_detail_spread, handle, pArgs, nil)
                 }
                 
             }
@@ -5093,7 +5093,7 @@ open class Environment: Resource {
     fileprivate final func get_volumetric_fog_detail_spread() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_detail_spread, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_detail_spread, handle, nil, &_result)
         return _result
     }
     
@@ -5114,7 +5114,7 @@ open class Environment: Resource {
         withUnsafePointer(to: giInject) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_gi_inject, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_gi_inject, handle, pArgs, nil)
                 }
                 
             }
@@ -5139,7 +5139,7 @@ open class Environment: Resource {
     fileprivate final func get_volumetric_fog_gi_inject() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_gi_inject, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_gi_inject, handle, nil, &_result)
         return _result
     }
     
@@ -5160,7 +5160,7 @@ open class Environment: Resource {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_ambient_inject, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_ambient_inject, handle, pArgs, nil)
                 }
                 
             }
@@ -5185,7 +5185,7 @@ open class Environment: Resource {
     fileprivate final func get_volumetric_fog_ambient_inject() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_ambient_inject, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_ambient_inject, handle, nil, &_result)
         return _result
     }
     
@@ -5206,7 +5206,7 @@ open class Environment: Resource {
         withUnsafePointer(to: skyAffect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_sky_affect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_sky_affect, handle, pArgs, nil)
                 }
                 
             }
@@ -5231,7 +5231,7 @@ open class Environment: Resource {
     fileprivate final func get_volumetric_fog_sky_affect() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_sky_affect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_sky_affect, handle, nil, &_result)
         return _result
     }
     
@@ -5252,7 +5252,7 @@ open class Environment: Resource {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_temporal_reprojection_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_temporal_reprojection_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -5277,7 +5277,7 @@ open class Environment: Resource {
     fileprivate final func is_volumetric_fog_temporal_reprojection_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Environment.method_is_volumetric_fog_temporal_reprojection_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_is_volumetric_fog_temporal_reprojection_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -5298,7 +5298,7 @@ open class Environment: Resource {
         withUnsafePointer(to: temporalReprojectionAmount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_temporal_reprojection_amount, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_volumetric_fog_temporal_reprojection_amount, handle, pArgs, nil)
                 }
                 
             }
@@ -5323,7 +5323,7 @@ open class Environment: Resource {
     fileprivate final func get_volumetric_fog_temporal_reprojection_amount() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_temporal_reprojection_amount, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_volumetric_fog_temporal_reprojection_amount, handle, nil, &_result)
         return _result
     }
     
@@ -5344,7 +5344,7 @@ open class Environment: Resource {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_adjustment_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_adjustment_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -5369,7 +5369,7 @@ open class Environment: Resource {
     fileprivate final func is_adjustment_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Environment.method_is_adjustment_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_is_adjustment_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -5390,7 +5390,7 @@ open class Environment: Resource {
         withUnsafePointer(to: brightness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_adjustment_brightness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_adjustment_brightness, handle, pArgs, nil)
                 }
                 
             }
@@ -5415,7 +5415,7 @@ open class Environment: Resource {
     fileprivate final func get_adjustment_brightness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_adjustment_brightness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_adjustment_brightness, handle, nil, &_result)
         return _result
     }
     
@@ -5436,7 +5436,7 @@ open class Environment: Resource {
         withUnsafePointer(to: contrast) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_adjustment_contrast, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_adjustment_contrast, handle, pArgs, nil)
                 }
                 
             }
@@ -5461,7 +5461,7 @@ open class Environment: Resource {
     fileprivate final func get_adjustment_contrast() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_adjustment_contrast, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_adjustment_contrast, handle, nil, &_result)
         return _result
     }
     
@@ -5482,7 +5482,7 @@ open class Environment: Resource {
         withUnsafePointer(to: saturation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_adjustment_saturation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_adjustment_saturation, handle, pArgs, nil)
                 }
                 
             }
@@ -5507,7 +5507,7 @@ open class Environment: Resource {
     fileprivate final func get_adjustment_saturation() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Environment.method_get_adjustment_saturation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Environment.method_get_adjustment_saturation, handle, nil, &_result)
         return _result
     }
     
@@ -5528,7 +5528,7 @@ open class Environment: Resource {
         withUnsafePointer(to: colorCorrection?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Environment.method_set_adjustment_color_correction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Environment.method_set_adjustment_color_correction, handle, pArgs, nil)
                 }
                 
             }
@@ -5552,9 +5552,9 @@ open class Environment: Resource {
     @inline(__always)
     fileprivate final func get_adjustment_color_correction() -> Texture? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Environment.method_get_adjustment_color_correction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Environment.method_get_adjustment_color_correction, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

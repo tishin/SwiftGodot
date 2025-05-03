@@ -85,7 +85,7 @@ open class CameraTexture: Texture2D {
         withUnsafePointer(to: feedId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraTexture.method_set_camera_feed_id, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraTexture.method_set_camera_feed_id, handle, pArgs, nil)
                 }
                 
             }
@@ -110,7 +110,7 @@ open class CameraTexture: Texture2D {
     fileprivate final func get_camera_feed_id() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CameraTexture.method_get_camera_feed_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraTexture.method_get_camera_feed_id, handle, nil, &_result)
         return _result
     }
     
@@ -131,7 +131,7 @@ open class CameraTexture: Texture2D {
         withUnsafePointer(to: whichFeed.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraTexture.method_set_which_feed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraTexture.method_set_which_feed, handle, pArgs, nil)
                 }
                 
             }
@@ -156,7 +156,7 @@ open class CameraTexture: Texture2D {
     fileprivate final func get_which_feed() -> CameraServer.FeedImage {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CameraTexture.method_get_which_feed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraTexture.method_get_which_feed, handle, nil, &_result)
         return CameraServer.FeedImage (rawValue: _result)!
     }
     
@@ -177,7 +177,7 @@ open class CameraTexture: Texture2D {
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraTexture.method_set_camera_active, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraTexture.method_set_camera_active, handle, pArgs, nil)
                 }
                 
             }
@@ -202,7 +202,7 @@ open class CameraTexture: Texture2D {
     fileprivate final func get_camera_active() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CameraTexture.method_get_camera_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraTexture.method_get_camera_active, handle, nil, &_result)
         return _result
     }
     

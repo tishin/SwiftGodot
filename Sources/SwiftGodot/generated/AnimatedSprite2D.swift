@@ -181,7 +181,7 @@ open class AnimatedSprite2D: Node2D {
         withUnsafePointer(to: spriteFrames?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_sprite_frames, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_sprite_frames, handle, pArgs, nil)
                 }
                 
             }
@@ -205,9 +205,9 @@ open class AnimatedSprite2D: Node2D {
     @inline(__always)
     fileprivate final func get_sprite_frames() -> SpriteFrames? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_sprite_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_sprite_frames, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_animation: GDExtensionMethodBindPtr = {
@@ -227,7 +227,7 @@ open class AnimatedSprite2D: Node2D {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_animation, handle, pArgs, nil)
                 }
                 
             }
@@ -252,7 +252,7 @@ open class AnimatedSprite2D: Node2D {
     fileprivate final func get_animation() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_animation, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_animation, handle, nil, &_result.content)
         return _result
     }
     
@@ -274,7 +274,7 @@ open class AnimatedSprite2D: Node2D {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_autoplay, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_autoplay, handle, pArgs, nil)
                 }
                 
             }
@@ -299,7 +299,7 @@ open class AnimatedSprite2D: Node2D {
     fileprivate final func get_autoplay() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_autoplay, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_autoplay, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -318,7 +318,7 @@ open class AnimatedSprite2D: Node2D {
     public final func isPlaying() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_is_playing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_is_playing, handle, nil, &_result)
         return _result
     }
     
@@ -344,7 +344,7 @@ open class AnimatedSprite2D: Node2D {
                 withUnsafePointer(to: fromEnd) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AnimatedSprite2D.method_play, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(AnimatedSprite2D.method_play, handle, pArgs, nil)
                         }
                         
                     }
@@ -378,7 +378,7 @@ open class AnimatedSprite2D: Node2D {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_play_backwards, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_play_backwards, handle, pArgs, nil)
                 }
                 
             }
@@ -405,7 +405,7 @@ open class AnimatedSprite2D: Node2D {
     /// 
     public final func pause() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_pause, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_pause, handle, nil, nil)
         
     }
     
@@ -423,7 +423,7 @@ open class AnimatedSprite2D: Node2D {
     /// Stops the currently playing animation. The animation position is reset to `0` and the `custom_speed` is reset to `1.0`. See also ``pause()``.
     public final func stop() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_stop, handle, nil, nil)
         
     }
     
@@ -444,7 +444,7 @@ open class AnimatedSprite2D: Node2D {
         withUnsafePointer(to: centered) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_centered, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_centered, handle, pArgs, nil)
                 }
                 
             }
@@ -469,7 +469,7 @@ open class AnimatedSprite2D: Node2D {
     fileprivate final func is_centered() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_is_centered, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_is_centered, handle, nil, &_result)
         return _result
     }
     
@@ -490,7 +490,7 @@ open class AnimatedSprite2D: Node2D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -515,7 +515,7 @@ open class AnimatedSprite2D: Node2D {
     fileprivate final func get_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_offset, handle, nil, &_result)
         return _result
     }
     
@@ -536,7 +536,7 @@ open class AnimatedSprite2D: Node2D {
         withUnsafePointer(to: flipH) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_flip_h, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_flip_h, handle, pArgs, nil)
                 }
                 
             }
@@ -561,7 +561,7 @@ open class AnimatedSprite2D: Node2D {
     fileprivate final func is_flipped_h() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_is_flipped_h, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_is_flipped_h, handle, nil, &_result)
         return _result
     }
     
@@ -582,7 +582,7 @@ open class AnimatedSprite2D: Node2D {
         withUnsafePointer(to: flipV) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_flip_v, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_flip_v, handle, pArgs, nil)
                 }
                 
             }
@@ -607,7 +607,7 @@ open class AnimatedSprite2D: Node2D {
     fileprivate final func is_flipped_v() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_is_flipped_v, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_is_flipped_v, handle, nil, &_result)
         return _result
     }
     
@@ -628,7 +628,7 @@ open class AnimatedSprite2D: Node2D {
         withUnsafePointer(to: frame) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_frame, handle, pArgs, nil)
                 }
                 
             }
@@ -653,7 +653,7 @@ open class AnimatedSprite2D: Node2D {
     fileprivate final func get_frame() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_frame, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_frame, handle, nil, &_result)
         return _result
     }
     
@@ -674,7 +674,7 @@ open class AnimatedSprite2D: Node2D {
         withUnsafePointer(to: progress) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_frame_progress, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_frame_progress, handle, pArgs, nil)
                 }
                 
             }
@@ -699,7 +699,7 @@ open class AnimatedSprite2D: Node2D {
     fileprivate final func get_frame_progress() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_frame_progress, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_frame_progress, handle, nil, &_result)
         return _result
     }
     
@@ -724,7 +724,7 @@ open class AnimatedSprite2D: Node2D {
             withUnsafePointer(to: progress) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_frame_and_progress, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_frame_and_progress, handle, pArgs, nil)
                     }
                     
                 }
@@ -753,7 +753,7 @@ open class AnimatedSprite2D: Node2D {
         withUnsafePointer(to: speedScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_speed_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedSprite2D.method_set_speed_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -778,7 +778,7 @@ open class AnimatedSprite2D: Node2D {
     fileprivate final func get_speed_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_speed_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_speed_scale, handle, nil, &_result)
         return _result
     }
     
@@ -800,7 +800,7 @@ open class AnimatedSprite2D: Node2D {
     public final func getPlayingSpeed() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_playing_speed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatedSprite2D.method_get_playing_speed, handle, nil, &_result)
         return _result
     }
     

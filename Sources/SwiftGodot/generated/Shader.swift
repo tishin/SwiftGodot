@@ -72,7 +72,7 @@ open class Shader: Resource {
     public final func getMode() -> Shader.Mode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Shader.method_get_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Shader.method_get_mode, handle, nil, &_result)
         return Shader.Mode (rawValue: _result)!
     }
     
@@ -94,7 +94,7 @@ open class Shader: Resource {
         withUnsafePointer(to: code.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Shader.method_set_code, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Shader.method_set_code, handle, pArgs, nil)
                 }
                 
             }
@@ -119,7 +119,7 @@ open class Shader: Resource {
     fileprivate final func get_code() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Shader.method_get_code, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Shader.method_get_code, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -147,7 +147,7 @@ open class Shader: Resource {
                 withUnsafePointer(to: index) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Shader.method_set_default_texture_parameter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Shader.method_set_default_texture_parameter, handle, pArgs, nil)
                         }
                         
                     }
@@ -180,12 +180,12 @@ open class Shader: Resource {
     /// 
     public final func getDefaultTextureParameter(name: StringName, index: Int32 = 0) -> Texture? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Shader.method_get_default_texture_parameter, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Shader.method_get_default_texture_parameter, handle, pArgs, &_result)
                     }
                     
                 }
@@ -194,7 +194,7 @@ open class Shader: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_shader_uniform_list: GDExtensionMethodBindPtr = {
@@ -218,7 +218,7 @@ open class Shader: Resource {
         withUnsafePointer(to: getGroups) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Shader.method_get_shader_uniform_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Shader.method_get_shader_uniform_list, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -242,7 +242,7 @@ open class Shader: Resource {
     /// Only available when running in the editor. Opens a popup that visualizes the generated shader code, including all variants and internal shader code. See also ``Material/inspectNativeShaderCode()``.
     public final func inspectNativeShaderCode() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Shader.method_inspect_native_shader_code, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Shader.method_inspect_native_shader_code, handle, nil, nil)
         
     }
     

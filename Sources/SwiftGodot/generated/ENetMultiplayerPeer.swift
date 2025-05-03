@@ -62,7 +62,7 @@ open class ENetMultiplayerPeer: MultiplayerPeer {
                         withUnsafePointer(to: outBandwidth) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(ENetMultiplayerPeer.method_create_server, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(ENetMultiplayerPeer.method_create_server, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -104,7 +104,7 @@ open class ENetMultiplayerPeer: MultiplayerPeer {
                             withUnsafePointer(to: localPort) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(ENetMultiplayerPeer.method_create_client, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                        gi.object_method_bind_ptrcall(ENetMultiplayerPeer.method_create_client, handle, pArgs, &_result)
                                     }
                                     
                                 }
@@ -142,7 +142,7 @@ open class ENetMultiplayerPeer: MultiplayerPeer {
         withUnsafePointer(to: uniqueId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ENetMultiplayerPeer.method_create_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ENetMultiplayerPeer.method_create_mesh, handle, pArgs, &_result)
                 }
                 
             }
@@ -174,7 +174,7 @@ open class ENetMultiplayerPeer: MultiplayerPeer {
             withUnsafePointer(to: host?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ENetMultiplayerPeer.method_add_mesh_peer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ENetMultiplayerPeer.method_add_mesh_peer, handle, pArgs, &_result)
                     }
                     
                 }
@@ -204,7 +204,7 @@ open class ENetMultiplayerPeer: MultiplayerPeer {
         withUnsafePointer(to: ip.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ENetMultiplayerPeer.method_set_bind_ip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ENetMultiplayerPeer.method_set_bind_ip, handle, pArgs, nil)
                 }
                 
             }
@@ -228,9 +228,9 @@ open class ENetMultiplayerPeer: MultiplayerPeer {
     @inline(__always)
     fileprivate final func get_host() -> ENetConnection? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ENetMultiplayerPeer.method_get_host, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ENetMultiplayerPeer.method_get_host, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_peer: GDExtensionMethodBindPtr = {
@@ -247,18 +247,18 @@ open class ENetMultiplayerPeer: MultiplayerPeer {
     /// Returns the ``ENetPacketPeer`` associated to the given `id`.
     public final func getPeer(id: Int32) -> ENetPacketPeer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ENetMultiplayerPeer.method_get_peer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ENetMultiplayerPeer.method_get_peer, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

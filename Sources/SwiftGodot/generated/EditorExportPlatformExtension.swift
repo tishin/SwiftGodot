@@ -51,7 +51,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
         withUnsafePointer(to: preset?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_preset_features, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_preset_features, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -84,7 +84,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__is_executable, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__is_executable, handle, pArgs, &_result)
                 }
                 
             }
@@ -131,7 +131,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     open func _getExportOptions() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_export_options, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_export_options, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -154,7 +154,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     open func _shouldUpdateExportOptions() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__should_update_export_options, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__should_update_export_options, handle, nil, &_result)
         return _result
     }
     
@@ -182,7 +182,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
             withUnsafePointer(to: option.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_export_option_visibility, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_export_option_visibility, handle, pArgs, &_result)
                     }
                     
                 }
@@ -217,7 +217,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
             withUnsafePointer(to: option.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_export_option_warning, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_export_option_warning, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -248,7 +248,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     open func _getOsName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_os_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_os_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -271,7 +271,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     open func _getName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -293,9 +293,9 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     @_documentation(visibility: public)
     open func _getLogo() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_logo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_logo, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__poll_export: GDExtensionMethodBindPtr = {
@@ -317,7 +317,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     open func _pollExport() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__poll_export, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__poll_export, handle, nil, &_result)
         return _result
     }
     
@@ -340,7 +340,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     open func _getOptionsCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_options_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_options_count, handle, nil, &_result)
         return _result
     }
     
@@ -363,7 +363,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     open func _getOptionsTooltip() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_options_tooltip, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_options_tooltip, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -385,18 +385,18 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     @_documentation(visibility: public)
     open func _getOptionIcon(device: Int32) -> ImageTexture? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: device) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_option_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_option_icon, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__get_option_label: GDExtensionMethodBindPtr = {
@@ -421,7 +421,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
         withUnsafePointer(to: device) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_option_label, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_option_label, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -453,7 +453,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
         withUnsafePointer(to: device) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_option_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_option_tooltip, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -485,7 +485,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
         withUnsafePointer(to: device) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_device_architecture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_device_architecture, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -513,7 +513,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     @_documentation(visibility: public)
     open func _cleanup() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__cleanup, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__cleanup, handle, nil, nil)
         
     }
     
@@ -543,7 +543,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
                 withUnsafePointer(to: debugFlags.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__run, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__run, handle, pArgs, &_result)
                         }
                         
                     }
@@ -575,9 +575,9 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     @_documentation(visibility: public)
     open func _getRunIcon() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_run_icon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_run_icon, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__can_export: GDExtensionMethodBindPtr = {
@@ -605,7 +605,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
             withUnsafePointer(to: debug) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__can_export, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__can_export, handle, pArgs, &_result)
                     }
                     
                 }
@@ -640,7 +640,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
             withUnsafePointer(to: debug) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__has_valid_export_configuration, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__has_valid_export_configuration, handle, pArgs, &_result)
                     }
                     
                 }
@@ -674,7 +674,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
         withUnsafePointer(to: preset?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__has_valid_project_configuration, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__has_valid_project_configuration, handle, pArgs, &_result)
                 }
                 
             }
@@ -706,7 +706,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
         withUnsafePointer(to: preset?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_binary_extensions, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_binary_extensions, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -746,7 +746,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
                     withUnsafePointer(to: flags.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__export_project, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__export_project, handle, pArgs, &_result)
                             }
                             
                         }
@@ -790,7 +790,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
                     withUnsafePointer(to: flags.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__export_pack, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__export_pack, handle, pArgs, &_result)
                             }
                             
                         }
@@ -834,7 +834,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
                     withUnsafePointer(to: flags.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__export_zip, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__export_zip, handle, pArgs, &_result)
                             }
                             
                         }
@@ -881,7 +881,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
                         withUnsafePointer(to: flags.rawValue) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__export_pack_patch, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__export_pack_patch, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -930,7 +930,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
                         withUnsafePointer(to: flags.rawValue) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__export_zip_patch, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__export_zip_patch, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -967,7 +967,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     open func _getPlatformFeatures() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_platform_features, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_platform_features, handle, nil, &_result.content)
         return _result
     }
     
@@ -990,7 +990,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     open func _getDebugProtocol() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_debug_protocol, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method__get_debug_protocol, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1012,7 +1012,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
         withUnsafePointer(to: errorText.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method_set_config_error, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method_set_config_error, handle, pArgs, nil)
                 }
                 
             }
@@ -1037,7 +1037,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     public final func getConfigError() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method_get_config_error, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method_get_config_error, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1058,7 +1058,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
         withUnsafePointer(to: missingTemplates) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method_set_config_missing_templates, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method_set_config_missing_templates, handle, pArgs, nil)
                 }
                 
             }
@@ -1083,7 +1083,7 @@ open class EditorExportPlatformExtension: EditorExportPlatform {
     public final func getConfigMissingTemplates() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method_get_config_missing_templates, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPlatformExtension.method_get_config_missing_templates, handle, nil, &_result)
         return _result
     }
     
@@ -1164,9 +1164,9 @@ func _EditorExportPlatformExtension_proxy_can_export (instance: UnsafeMutableRaw
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._canExport (preset: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, debug: args [1]!.assumingMemoryBound (to: Bool.self).pointee)
+    let ret = swiftObject._canExport (preset: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, debug: args [1]!.assumingMemoryBound (to: Bool.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
@@ -1182,9 +1182,9 @@ func _EditorExportPlatformExtension_proxy_export_pack (instance: UnsafeMutableRa
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._exportPack (preset: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, debug: args [1]!.assumingMemoryBound (to: Bool.self).pointee, path: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", flags: args [3]!.assumingMemoryBound (to: EditorExportPlatform.DebugFlags.self).pointee)
+    let ret = swiftObject._exportPack (preset: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, debug: args [1]!.assumingMemoryBound (to: Bool.self).pointee, path: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", flags: args [3]!.assumingMemoryBound (to: EditorExportPlatform.DebugFlags.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1193,9 +1193,9 @@ func _EditorExportPlatformExtension_proxy_export_pack_patch (instance: UnsafeMut
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._exportPackPatch (preset: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, debug: args [1]!.assumingMemoryBound (to: Bool.self).pointee, path: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", patches: PackedStringArray (content: args [3]!.assumingMemoryBound (to: (Int64, Int64).self).pointee), flags: args [4]!.assumingMemoryBound (to: EditorExportPlatform.DebugFlags.self).pointee)
+    let ret = swiftObject._exportPackPatch (preset: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, debug: args [1]!.assumingMemoryBound (to: Bool.self).pointee, path: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", patches: PackedStringArray (content: args [3]!.assumingMemoryBound (to: (Int64, Int64).self).pointee), flags: args [4]!.assumingMemoryBound (to: EditorExportPlatform.DebugFlags.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1204,9 +1204,9 @@ func _EditorExportPlatformExtension_proxy_export_project (instance: UnsafeMutabl
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._exportProject (preset: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, debug: args [1]!.assumingMemoryBound (to: Bool.self).pointee, path: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", flags: args [3]!.assumingMemoryBound (to: EditorExportPlatform.DebugFlags.self).pointee)
+    let ret = swiftObject._exportProject (preset: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, debug: args [1]!.assumingMemoryBound (to: Bool.self).pointee, path: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", flags: args [3]!.assumingMemoryBound (to: EditorExportPlatform.DebugFlags.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1215,9 +1215,9 @@ func _EditorExportPlatformExtension_proxy_export_zip (instance: UnsafeMutableRaw
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._exportZip (preset: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, debug: args [1]!.assumingMemoryBound (to: Bool.self).pointee, path: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", flags: args [3]!.assumingMemoryBound (to: EditorExportPlatform.DebugFlags.self).pointee)
+    let ret = swiftObject._exportZip (preset: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, debug: args [1]!.assumingMemoryBound (to: Bool.self).pointee, path: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", flags: args [3]!.assumingMemoryBound (to: EditorExportPlatform.DebugFlags.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1226,9 +1226,9 @@ func _EditorExportPlatformExtension_proxy_export_zip_patch (instance: UnsafeMuta
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._exportZipPatch (preset: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, debug: args [1]!.assumingMemoryBound (to: Bool.self).pointee, path: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", patches: PackedStringArray (content: args [3]!.assumingMemoryBound (to: (Int64, Int64).self).pointee), flags: args [4]!.assumingMemoryBound (to: EditorExportPlatform.DebugFlags.self).pointee)
+    let ret = swiftObject._exportZipPatch (preset: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, debug: args [1]!.assumingMemoryBound (to: Bool.self).pointee, path: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", patches: PackedStringArray (content: args [3]!.assumingMemoryBound (to: (Int64, Int64).self).pointee), flags: args [4]!.assumingMemoryBound (to: EditorExportPlatform.DebugFlags.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1237,9 +1237,9 @@ func _EditorExportPlatformExtension_proxy_get_binary_extensions (instance: Unsaf
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._getBinaryExtensions (preset: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset)
+    let ret = swiftObject._getBinaryExtensions (preset: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
 }
@@ -1268,9 +1268,9 @@ func _EditorExportPlatformExtension_proxy_get_export_option_visibility (instance
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._getExportOptionVisibility (preset: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, option: GString.stringFromGStringPtr (ptr: args [1]!) ?? "")
+    let ret = swiftObject._getExportOptionVisibility (preset: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, option: GString.stringFromGStringPtr (ptr: args [1]!) ?? "")
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
@@ -1279,9 +1279,9 @@ func _EditorExportPlatformExtension_proxy_get_export_option_warning (instance: U
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = GString (swiftObject._getExportOptionWarning (preset: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, option: StringName (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee)))
+    let ret = GString (swiftObject._getExportOptionWarning (preset: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, option: StringName (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee)))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
 }
@@ -1299,7 +1299,7 @@ func _EditorExportPlatformExtension_proxy_get_logo (instance: UnsafeMutableRawPo
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
     let ret = swiftObject._getLogo ()
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Texture2D
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // Texture2D
 }
 
 func _EditorExportPlatformExtension_proxy_get_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -1317,7 +1317,7 @@ func _EditorExportPlatformExtension_proxy_get_option_icon (instance: UnsafeMutab
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
     let ret = swiftObject._getOptionIcon (device: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // ImageTexture
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // ImageTexture
 }
 
 func _EditorExportPlatformExtension_proxy_get_option_label (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -1380,9 +1380,9 @@ func _EditorExportPlatformExtension_proxy_get_preset_features (instance: UnsafeM
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._getPresetFeatures (preset: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset)
+    let ret = swiftObject._getPresetFeatures (preset: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedStringArray
     ret.content = PackedStringArray.zero
 }
@@ -1392,7 +1392,7 @@ func _EditorExportPlatformExtension_proxy_get_run_icon (instance: UnsafeMutableR
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
     let ret = swiftObject._getRunIcon ()
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Texture2D
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // Texture2D
 }
 
 func _EditorExportPlatformExtension_proxy_has_valid_export_configuration (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -1400,9 +1400,9 @@ func _EditorExportPlatformExtension_proxy_has_valid_export_configuration (instan
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._hasValidExportConfiguration (preset: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, debug: args [1]!.assumingMemoryBound (to: Bool.self).pointee)
+    let ret = swiftObject._hasValidExportConfiguration (preset: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, debug: args [1]!.assumingMemoryBound (to: Bool.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
@@ -1411,9 +1411,9 @@ func _EditorExportPlatformExtension_proxy_has_valid_project_configuration (insta
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._hasValidProjectConfiguration (preset: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset)
+    let ret = swiftObject._hasValidProjectConfiguration (preset: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
@@ -1439,9 +1439,9 @@ func _EditorExportPlatformExtension_proxy_run (instance: UnsafeMutableRawPointer
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorExportPlatformExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._run (preset: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, device: args [1]!.assumingMemoryBound (to: Int32.self).pointee, debugFlags: args [2]!.assumingMemoryBound (to: EditorExportPlatform.DebugFlags.self).pointee)
+    let ret = swiftObject._run (preset: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorExportPreset, device: args [1]!.assumingMemoryBound (to: Int32.self).pointee, debugFlags: args [2]!.assumingMemoryBound (to: EditorExportPlatform.DebugFlags.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 

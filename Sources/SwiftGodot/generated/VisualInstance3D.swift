@@ -93,7 +93,7 @@ open class VisualInstance3D: Node3D {
     open func _getAabb() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(VisualInstance3D.method__get_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualInstance3D.method__get_aabb, handle, nil, &_result)
         return _result
     }
     
@@ -114,7 +114,7 @@ open class VisualInstance3D: Node3D {
         withUnsafePointer(to: base.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualInstance3D.method_set_base, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualInstance3D.method_set_base, handle, pArgs, nil)
                 }
                 
             }
@@ -139,7 +139,7 @@ open class VisualInstance3D: Node3D {
     public final func getBase() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(VisualInstance3D.method_get_base, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualInstance3D.method_get_base, handle, nil, &_result.content)
         return _result
     }
     
@@ -158,7 +158,7 @@ open class VisualInstance3D: Node3D {
     public final func getInstance() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(VisualInstance3D.method_get_instance, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualInstance3D.method_get_instance, handle, nil, &_result.content)
         return _result
     }
     
@@ -179,7 +179,7 @@ open class VisualInstance3D: Node3D {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualInstance3D.method_set_layer_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualInstance3D.method_set_layer_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -204,7 +204,7 @@ open class VisualInstance3D: Node3D {
     fileprivate final func get_layer_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(VisualInstance3D.method_get_layer_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualInstance3D.method_get_layer_mask, handle, nil, &_result)
         return _result
     }
     
@@ -226,7 +226,7 @@ open class VisualInstance3D: Node3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(VisualInstance3D.method_set_layer_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(VisualInstance3D.method_set_layer_mask_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -256,7 +256,7 @@ open class VisualInstance3D: Node3D {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualInstance3D.method_get_layer_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(VisualInstance3D.method_get_layer_mask_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -283,7 +283,7 @@ open class VisualInstance3D: Node3D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualInstance3D.method_set_sorting_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualInstance3D.method_set_sorting_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -308,7 +308,7 @@ open class VisualInstance3D: Node3D {
     fileprivate final func get_sorting_offset() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VisualInstance3D.method_get_sorting_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualInstance3D.method_get_sorting_offset, handle, nil, &_result)
         return _result
     }
     
@@ -329,7 +329,7 @@ open class VisualInstance3D: Node3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualInstance3D.method_set_sorting_use_aabb_center, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualInstance3D.method_set_sorting_use_aabb_center, handle, pArgs, nil)
                 }
                 
             }
@@ -354,7 +354,7 @@ open class VisualInstance3D: Node3D {
     fileprivate final func is_sorting_use_aabb_center() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VisualInstance3D.method_is_sorting_use_aabb_center, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualInstance3D.method_is_sorting_use_aabb_center, handle, nil, &_result)
         return _result
     }
     
@@ -373,7 +373,7 @@ open class VisualInstance3D: Node3D {
     public final func getAabb() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(VisualInstance3D.method_get_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualInstance3D.method_get_aabb, handle, nil, &_result)
         return _result
     }
     

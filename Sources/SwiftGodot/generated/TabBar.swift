@@ -227,7 +227,7 @@ open class TabBar: Control {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_set_tab_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TabBar.method_set_tab_count, handle, pArgs, nil)
                 }
                 
             }
@@ -252,7 +252,7 @@ open class TabBar: Control {
     fileprivate final func get_tab_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TabBar.method_get_tab_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_tab_count, handle, nil, &_result)
         return _result
     }
     
@@ -273,7 +273,7 @@ open class TabBar: Control {
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_set_current_tab, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TabBar.method_set_current_tab, handle, pArgs, nil)
                 }
                 
             }
@@ -298,7 +298,7 @@ open class TabBar: Control {
     fileprivate final func get_current_tab() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TabBar.method_get_current_tab, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_current_tab, handle, nil, &_result)
         return _result
     }
     
@@ -317,7 +317,7 @@ open class TabBar: Control {
     public final func getPreviousTab() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TabBar.method_get_previous_tab, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_previous_tab, handle, nil, &_result)
         return _result
     }
     
@@ -336,7 +336,7 @@ open class TabBar: Control {
     public final func selectPreviousAvailable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TabBar.method_select_previous_available, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_select_previous_available, handle, nil, &_result)
         return _result
     }
     
@@ -355,7 +355,7 @@ open class TabBar: Control {
     public final func selectNextAvailable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TabBar.method_select_next_available, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_select_next_available, handle, nil, &_result)
         return _result
     }
     
@@ -378,7 +378,7 @@ open class TabBar: Control {
             withUnsafePointer(to: title.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_title, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_title, handle, pArgs, nil)
                     }
                     
                 }
@@ -408,7 +408,7 @@ open class TabBar: Control {
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_title, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_title, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -440,7 +440,7 @@ open class TabBar: Control {
             withUnsafePointer(to: tooltip.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_tooltip, handle, pArgs, nil)
                     }
                     
                 }
@@ -470,7 +470,7 @@ open class TabBar: Control {
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_tooltip, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -498,7 +498,7 @@ open class TabBar: Control {
             withUnsafePointer(to: direction.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_text_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_text_direction, handle, pArgs, nil)
                     }
                     
                 }
@@ -528,7 +528,7 @@ open class TabBar: Control {
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_text_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_text_direction, handle, pArgs, &_result)
                 }
                 
             }
@@ -557,7 +557,7 @@ open class TabBar: Control {
             withUnsafePointer(to: language.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_language, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_language, handle, pArgs, nil)
                     }
                     
                 }
@@ -587,7 +587,7 @@ open class TabBar: Control {
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_language, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_language, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -615,7 +615,7 @@ open class TabBar: Control {
             withUnsafePointer(to: icon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_icon, handle, pArgs, nil)
                     }
                     
                 }
@@ -641,18 +641,18 @@ open class TabBar: Control {
     /// Returns the icon for the tab at index `tabIdx` or `null` if the tab has no icon.
     public final func getTabIcon(tabIdx: Int32) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_icon, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_tab_icon_max_width: GDExtensionMethodBindPtr = {
@@ -673,7 +673,7 @@ open class TabBar: Control {
             withUnsafePointer(to: width) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_icon_max_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_icon_max_width, handle, pArgs, nil)
                     }
                     
                 }
@@ -703,7 +703,7 @@ open class TabBar: Control {
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_icon_max_width, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_icon_max_width, handle, pArgs, &_result)
                 }
                 
             }
@@ -731,7 +731,7 @@ open class TabBar: Control {
             withUnsafePointer(to: icon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_button_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_button_icon, handle, pArgs, nil)
                     }
                     
                 }
@@ -757,18 +757,18 @@ open class TabBar: Control {
     /// Returns the icon for the right button of the tab at index `tabIdx` or `null` if the right button has no icon.
     public final func getTabButtonIcon(tabIdx: Int32) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_button_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_button_icon, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_tab_disabled: GDExtensionMethodBindPtr = {
@@ -789,7 +789,7 @@ open class TabBar: Control {
             withUnsafePointer(to: disabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_disabled, handle, pArgs, nil)
                     }
                     
                 }
@@ -819,7 +819,7 @@ open class TabBar: Control {
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_is_tab_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TabBar.method_is_tab_disabled, handle, pArgs, &_result)
                 }
                 
             }
@@ -847,7 +847,7 @@ open class TabBar: Control {
             withUnsafePointer(to: hidden) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_hidden, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_hidden, handle, pArgs, nil)
                     }
                     
                 }
@@ -877,7 +877,7 @@ open class TabBar: Control {
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_is_tab_hidden, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TabBar.method_is_tab_hidden, handle, pArgs, &_result)
                 }
                 
             }
@@ -905,7 +905,7 @@ open class TabBar: Control {
             withUnsafePointer(to: metadata.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_metadata, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TabBar.method_set_tab_metadata, handle, pArgs, nil)
                     }
                     
                 }
@@ -935,7 +935,7 @@ open class TabBar: Control {
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_metadata, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_metadata, handle, pArgs, &_result)
                 }
                 
             }
@@ -962,7 +962,7 @@ open class TabBar: Control {
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_remove_tab, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TabBar.method_remove_tab, handle, pArgs, nil)
                 }
                 
             }
@@ -991,7 +991,7 @@ open class TabBar: Control {
             withUnsafePointer(to: icon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TabBar.method_add_tab, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TabBar.method_add_tab, handle, pArgs, nil)
                     }
                     
                 }
@@ -1021,7 +1021,7 @@ open class TabBar: Control {
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_idx_at_point, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_idx_at_point, handle, pArgs, &_result)
                 }
                 
             }
@@ -1048,7 +1048,7 @@ open class TabBar: Control {
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_set_tab_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TabBar.method_set_tab_alignment, handle, pArgs, nil)
                 }
                 
             }
@@ -1073,7 +1073,7 @@ open class TabBar: Control {
     fileprivate final func get_tab_alignment() -> TabBar.AlignmentMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TabBar.method_get_tab_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_tab_alignment, handle, nil, &_result)
         return TabBar.AlignmentMode (rawValue: _result)!
     }
     
@@ -1094,7 +1094,7 @@ open class TabBar: Control {
         withUnsafePointer(to: clipTabs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_set_clip_tabs, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TabBar.method_set_clip_tabs, handle, pArgs, nil)
                 }
                 
             }
@@ -1119,7 +1119,7 @@ open class TabBar: Control {
     fileprivate final func get_clip_tabs() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TabBar.method_get_clip_tabs, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_clip_tabs, handle, nil, &_result)
         return _result
     }
     
@@ -1138,7 +1138,7 @@ open class TabBar: Control {
     public final func getTabOffset() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TabBar.method_get_tab_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_tab_offset, handle, nil, &_result)
         return _result
     }
     
@@ -1157,7 +1157,7 @@ open class TabBar: Control {
     public final func getOffsetButtonsVisible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TabBar.method_get_offset_buttons_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_offset_buttons_visible, handle, nil, &_result)
         return _result
     }
     
@@ -1178,7 +1178,7 @@ open class TabBar: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_ensure_tab_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TabBar.method_ensure_tab_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -1206,7 +1206,7 @@ open class TabBar: Control {
         withUnsafePointer(to: tabIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TabBar.method_get_tab_rect, handle, pArgs, &_result)
                 }
                 
             }
@@ -1234,7 +1234,7 @@ open class TabBar: Control {
             withUnsafePointer(to: to) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TabBar.method_move_tab, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TabBar.method_move_tab, handle, pArgs, nil)
                     }
                     
                 }
@@ -1263,7 +1263,7 @@ open class TabBar: Control {
         withUnsafePointer(to: policy.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_set_tab_close_display_policy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TabBar.method_set_tab_close_display_policy, handle, pArgs, nil)
                 }
                 
             }
@@ -1288,7 +1288,7 @@ open class TabBar: Control {
     fileprivate final func get_tab_close_display_policy() -> TabBar.CloseButtonDisplayPolicy {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TabBar.method_get_tab_close_display_policy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_tab_close_display_policy, handle, nil, &_result)
         return TabBar.CloseButtonDisplayPolicy (rawValue: _result)!
     }
     
@@ -1309,7 +1309,7 @@ open class TabBar: Control {
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_set_max_tab_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TabBar.method_set_max_tab_width, handle, pArgs, nil)
                 }
                 
             }
@@ -1334,7 +1334,7 @@ open class TabBar: Control {
     fileprivate final func get_max_tab_width() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TabBar.method_get_max_tab_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_max_tab_width, handle, nil, &_result)
         return _result
     }
     
@@ -1355,7 +1355,7 @@ open class TabBar: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_set_scrolling_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TabBar.method_set_scrolling_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1380,7 +1380,7 @@ open class TabBar: Control {
     fileprivate final func get_scrolling_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TabBar.method_get_scrolling_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_scrolling_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1401,7 +1401,7 @@ open class TabBar: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_set_drag_to_rearrange_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TabBar.method_set_drag_to_rearrange_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1426,7 +1426,7 @@ open class TabBar: Control {
     fileprivate final func get_drag_to_rearrange_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TabBar.method_get_drag_to_rearrange_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_drag_to_rearrange_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1447,7 +1447,7 @@ open class TabBar: Control {
         withUnsafePointer(to: groupId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_set_tabs_rearrange_group, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TabBar.method_set_tabs_rearrange_group, handle, pArgs, nil)
                 }
                 
             }
@@ -1472,7 +1472,7 @@ open class TabBar: Control {
     fileprivate final func get_tabs_rearrange_group() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TabBar.method_get_tabs_rearrange_group, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_tabs_rearrange_group, handle, nil, &_result)
         return _result
     }
     
@@ -1493,7 +1493,7 @@ open class TabBar: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_set_scroll_to_selected, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TabBar.method_set_scroll_to_selected, handle, pArgs, nil)
                 }
                 
             }
@@ -1518,7 +1518,7 @@ open class TabBar: Control {
     fileprivate final func get_scroll_to_selected() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TabBar.method_get_scroll_to_selected, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_scroll_to_selected, handle, nil, &_result)
         return _result
     }
     
@@ -1539,7 +1539,7 @@ open class TabBar: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_set_select_with_rmb, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TabBar.method_set_select_with_rmb, handle, pArgs, nil)
                 }
                 
             }
@@ -1564,7 +1564,7 @@ open class TabBar: Control {
     fileprivate final func get_select_with_rmb() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TabBar.method_get_select_with_rmb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_select_with_rmb, handle, nil, &_result)
         return _result
     }
     
@@ -1585,7 +1585,7 @@ open class TabBar: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TabBar.method_set_deselect_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TabBar.method_set_deselect_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1610,7 +1610,7 @@ open class TabBar: Control {
     fileprivate final func get_deselect_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TabBar.method_get_deselect_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TabBar.method_get_deselect_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1628,7 +1628,7 @@ open class TabBar: Control {
     /// Clears all tabs.
     public final func clearTabs() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(TabBar.method_clear_tabs, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(TabBar.method_clear_tabs, handle, nil, nil)
         
     }
     

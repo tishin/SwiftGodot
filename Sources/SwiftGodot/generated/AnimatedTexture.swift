@@ -118,7 +118,7 @@ open class AnimatedTexture: Texture2D {
         withUnsafePointer(to: frames) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedTexture.method_set_frames, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedTexture.method_set_frames, handle, pArgs, nil)
                 }
                 
             }
@@ -143,7 +143,7 @@ open class AnimatedTexture: Texture2D {
     fileprivate final func get_frames() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AnimatedTexture.method_get_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatedTexture.method_get_frames, handle, nil, &_result)
         return _result
     }
     
@@ -164,7 +164,7 @@ open class AnimatedTexture: Texture2D {
         withUnsafePointer(to: frame) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedTexture.method_set_current_frame, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedTexture.method_set_current_frame, handle, pArgs, nil)
                 }
                 
             }
@@ -189,7 +189,7 @@ open class AnimatedTexture: Texture2D {
     fileprivate final func get_current_frame() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AnimatedTexture.method_get_current_frame, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatedTexture.method_get_current_frame, handle, nil, &_result)
         return _result
     }
     
@@ -210,7 +210,7 @@ open class AnimatedTexture: Texture2D {
         withUnsafePointer(to: pause) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedTexture.method_set_pause, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedTexture.method_set_pause, handle, pArgs, nil)
                 }
                 
             }
@@ -235,7 +235,7 @@ open class AnimatedTexture: Texture2D {
     fileprivate final func get_pause() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimatedTexture.method_get_pause, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatedTexture.method_get_pause, handle, nil, &_result)
         return _result
     }
     
@@ -256,7 +256,7 @@ open class AnimatedTexture: Texture2D {
         withUnsafePointer(to: oneShot) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedTexture.method_set_one_shot, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedTexture.method_set_one_shot, handle, pArgs, nil)
                 }
                 
             }
@@ -281,7 +281,7 @@ open class AnimatedTexture: Texture2D {
     fileprivate final func get_one_shot() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimatedTexture.method_get_one_shot, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatedTexture.method_get_one_shot, handle, nil, &_result)
         return _result
     }
     
@@ -302,7 +302,7 @@ open class AnimatedTexture: Texture2D {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedTexture.method_set_speed_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatedTexture.method_set_speed_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -327,7 +327,7 @@ open class AnimatedTexture: Texture2D {
     fileprivate final func get_speed_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimatedTexture.method_get_speed_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatedTexture.method_get_speed_scale, handle, nil, &_result)
         return _result
     }
     
@@ -352,7 +352,7 @@ open class AnimatedTexture: Texture2D {
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimatedTexture.method_set_frame_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimatedTexture.method_set_frame_texture, handle, pArgs, nil)
                     }
                     
                 }
@@ -378,18 +378,18 @@ open class AnimatedTexture: Texture2D {
     /// Returns the given frame's ``Texture2D``.
     public final func getFrameTexture(frame: Int32) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: frame) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedTexture.method_get_frame_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimatedTexture.method_get_frame_texture, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_frame_duration: GDExtensionMethodBindPtr = {
@@ -410,7 +410,7 @@ open class AnimatedTexture: Texture2D {
             withUnsafePointer(to: duration) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimatedTexture.method_set_frame_duration, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimatedTexture.method_set_frame_duration, handle, pArgs, nil)
                     }
                     
                 }
@@ -440,7 +440,7 @@ open class AnimatedTexture: Texture2D {
         withUnsafePointer(to: frame) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatedTexture.method_get_frame_duration, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimatedTexture.method_get_frame_duration, handle, pArgs, &_result)
                 }
                 
             }

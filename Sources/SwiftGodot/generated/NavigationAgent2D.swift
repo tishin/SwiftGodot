@@ -382,7 +382,7 @@ open class NavigationAgent2D: Node {
     public final func getRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -403,7 +403,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_avoidance_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_avoidance_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -428,7 +428,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_avoidance_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_avoidance_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_avoidance_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -449,7 +449,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: desiredDistance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_path_desired_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_path_desired_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -474,7 +474,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_path_desired_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_path_desired_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_path_desired_distance, handle, nil, &_result)
         return _result
     }
     
@@ -495,7 +495,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: desiredDistance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_target_desired_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_target_desired_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -520,7 +520,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_target_desired_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_target_desired_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_target_desired_distance, handle, nil, &_result)
         return _result
     }
     
@@ -541,7 +541,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -566,7 +566,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_radius, handle, nil, &_result)
         return _result
     }
     
@@ -587,7 +587,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: neighborDistance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_neighbor_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_neighbor_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -612,7 +612,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_neighbor_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_neighbor_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_neighbor_distance, handle, nil, &_result)
         return _result
     }
     
@@ -633,7 +633,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: maxNeighbors) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_max_neighbors, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_max_neighbors, handle, pArgs, nil)
                 }
                 
             }
@@ -658,7 +658,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_max_neighbors() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_max_neighbors, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_max_neighbors, handle, nil, &_result)
         return _result
     }
     
@@ -679,7 +679,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: timeHorizon) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_time_horizon_agents, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_time_horizon_agents, handle, pArgs, nil)
                 }
                 
             }
@@ -704,7 +704,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_time_horizon_agents() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_time_horizon_agents, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_time_horizon_agents, handle, nil, &_result)
         return _result
     }
     
@@ -725,7 +725,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: timeHorizon) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_time_horizon_obstacles, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_time_horizon_obstacles, handle, pArgs, nil)
                 }
                 
             }
@@ -750,7 +750,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_time_horizon_obstacles() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_time_horizon_obstacles, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_time_horizon_obstacles, handle, nil, &_result)
         return _result
     }
     
@@ -771,7 +771,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: maxSpeed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_max_speed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_max_speed, handle, pArgs, nil)
                 }
                 
             }
@@ -796,7 +796,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_max_speed() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_max_speed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_max_speed, handle, nil, &_result)
         return _result
     }
     
@@ -817,7 +817,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: maxSpeed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_path_max_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_path_max_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -842,7 +842,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_path_max_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_path_max_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_path_max_distance, handle, nil, &_result)
         return _result
     }
     
@@ -863,7 +863,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: navigationLayers) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_navigation_layers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_navigation_layers, handle, pArgs, nil)
                 }
                 
             }
@@ -888,7 +888,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_navigation_layers() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_navigation_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_navigation_layers, handle, nil, &_result)
         return _result
     }
     
@@ -910,7 +910,7 @@ open class NavigationAgent2D: Node {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_navigation_layer_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_navigation_layer_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -940,7 +940,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_navigation_layer_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_navigation_layer_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -967,7 +967,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: pathfindingAlgorithm.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_pathfinding_algorithm, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_pathfinding_algorithm, handle, pArgs, nil)
                 }
                 
             }
@@ -992,7 +992,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_pathfinding_algorithm() -> NavigationPathQueryParameters2D.PathfindingAlgorithm {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_pathfinding_algorithm, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_pathfinding_algorithm, handle, nil, &_result)
         return NavigationPathQueryParameters2D.PathfindingAlgorithm (rawValue: _result)!
     }
     
@@ -1013,7 +1013,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: pathPostprocessing.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_path_postprocessing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_path_postprocessing, handle, pArgs, nil)
                 }
                 
             }
@@ -1038,7 +1038,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_path_postprocessing() -> NavigationPathQueryParameters2D.PathPostProcessing {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_path_postprocessing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_path_postprocessing, handle, nil, &_result)
         return NavigationPathQueryParameters2D.PathPostProcessing (rawValue: _result)!
     }
     
@@ -1059,7 +1059,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: flags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_path_metadata_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_path_metadata_flags, handle, pArgs, nil)
                 }
                 
             }
@@ -1084,7 +1084,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_path_metadata_flags() -> NavigationPathQueryParameters2D.PathMetadataFlags {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: NavigationPathQueryParameters2D.PathMetadataFlags = NavigationPathQueryParameters2D.PathMetadataFlags ()
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_path_metadata_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_path_metadata_flags, handle, nil, &_result)
         return _result
     }
     
@@ -1105,7 +1105,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: navigationMap.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_navigation_map, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_navigation_map, handle, pArgs, nil)
                 }
                 
             }
@@ -1130,7 +1130,7 @@ open class NavigationAgent2D: Node {
     public final func getNavigationMap() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_navigation_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_navigation_map, handle, nil, &_result.content)
         return _result
     }
     
@@ -1151,7 +1151,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_target_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_target_position, handle, pArgs, nil)
                 }
                 
             }
@@ -1176,7 +1176,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_target_position() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_target_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_target_position, handle, nil, &_result)
         return _result
     }
     
@@ -1197,7 +1197,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_simplify_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_simplify_path, handle, pArgs, nil)
                 }
                 
             }
@@ -1222,7 +1222,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_simplify_path() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_simplify_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_simplify_path, handle, nil, &_result)
         return _result
     }
     
@@ -1243,7 +1243,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: epsilon) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_simplify_epsilon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_simplify_epsilon, handle, pArgs, nil)
                 }
                 
             }
@@ -1268,7 +1268,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_simplify_epsilon() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_simplify_epsilon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_simplify_epsilon, handle, nil, &_result)
         return _result
     }
     
@@ -1287,7 +1287,7 @@ open class NavigationAgent2D: Node {
     public final func getNextPathPosition() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_next_path_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_next_path_position, handle, nil, &_result)
         return _result
     }
     
@@ -1308,7 +1308,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_velocity_forced, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_velocity_forced, handle, pArgs, nil)
                 }
                 
             }
@@ -1335,7 +1335,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -1360,7 +1360,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_velocity() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -1379,7 +1379,7 @@ open class NavigationAgent2D: Node {
     public final func distanceToTarget() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_distance_to_target, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_distance_to_target, handle, nil, &_result)
         return _result
     }
     
@@ -1397,9 +1397,9 @@ open class NavigationAgent2D: Node {
     /// Returns the path query result for the path the agent is currently following.
     public final func getCurrentNavigationResult() -> NavigationPathQueryResult2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_current_navigation_result, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_current_navigation_result, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_current_navigation_path: GDExtensionMethodBindPtr = {
@@ -1417,7 +1417,7 @@ open class NavigationAgent2D: Node {
     public final func getCurrentNavigationPath() -> PackedVector2Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_current_navigation_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_current_navigation_path, handle, nil, &_result.content)
         return _result
     }
     
@@ -1436,7 +1436,7 @@ open class NavigationAgent2D: Node {
     public final func getCurrentNavigationPathIndex() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_current_navigation_path_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_current_navigation_path_index, handle, nil, &_result)
         return _result
     }
     
@@ -1455,7 +1455,7 @@ open class NavigationAgent2D: Node {
     public final func isTargetReached() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_is_target_reached, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_is_target_reached, handle, nil, &_result)
         return _result
     }
     
@@ -1474,7 +1474,7 @@ open class NavigationAgent2D: Node {
     public final func isTargetReachable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_is_target_reachable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_is_target_reachable, handle, nil, &_result)
         return _result
     }
     
@@ -1496,7 +1496,7 @@ open class NavigationAgent2D: Node {
     public final func isNavigationFinished() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_is_navigation_finished, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_is_navigation_finished, handle, nil, &_result)
         return _result
     }
     
@@ -1515,7 +1515,7 @@ open class NavigationAgent2D: Node {
     public final func getFinalPosition() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_final_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_final_position, handle, nil, &_result)
         return _result
     }
     
@@ -1536,7 +1536,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: layers) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_avoidance_layers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_avoidance_layers, handle, pArgs, nil)
                 }
                 
             }
@@ -1561,7 +1561,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_avoidance_layers() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_avoidance_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_avoidance_layers, handle, nil, &_result)
         return _result
     }
     
@@ -1582,7 +1582,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_avoidance_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_avoidance_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -1607,7 +1607,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_avoidance_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_avoidance_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_avoidance_mask, handle, nil, &_result)
         return _result
     }
     
@@ -1629,7 +1629,7 @@ open class NavigationAgent2D: Node {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_avoidance_layer_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_avoidance_layer_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -1659,7 +1659,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_avoidance_layer_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_avoidance_layer_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -1687,7 +1687,7 @@ open class NavigationAgent2D: Node {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_avoidance_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_avoidance_mask_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -1717,7 +1717,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: maskNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_avoidance_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_avoidance_mask_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -1744,7 +1744,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_avoidance_priority, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_avoidance_priority, handle, pArgs, nil)
                 }
                 
             }
@@ -1769,7 +1769,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_avoidance_priority() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_avoidance_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_avoidance_priority, handle, nil, &_result)
         return _result
     }
     
@@ -1790,7 +1790,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_debug_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_debug_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1815,7 +1815,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_debug_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_debug_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_debug_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1836,7 +1836,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_debug_use_custom, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_debug_use_custom, handle, pArgs, nil)
                 }
                 
             }
@@ -1861,7 +1861,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_debug_use_custom() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_debug_use_custom, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_debug_use_custom, handle, nil, &_result)
         return _result
     }
     
@@ -1882,7 +1882,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_debug_path_custom_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_debug_path_custom_color, handle, pArgs, nil)
                 }
                 
             }
@@ -1907,7 +1907,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_debug_path_custom_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_debug_path_custom_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_debug_path_custom_color, handle, nil, &_result)
         return _result
     }
     
@@ -1928,7 +1928,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: pointSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_debug_path_custom_point_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_debug_path_custom_point_size, handle, pArgs, nil)
                 }
                 
             }
@@ -1953,7 +1953,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_debug_path_custom_point_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_debug_path_custom_point_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_debug_path_custom_point_size, handle, nil, &_result)
         return _result
     }
     
@@ -1974,7 +1974,7 @@ open class NavigationAgent2D: Node {
         withUnsafePointer(to: lineWidth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_debug_path_custom_line_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationAgent2D.method_set_debug_path_custom_line_width, handle, pArgs, nil)
                 }
                 
             }
@@ -1999,7 +1999,7 @@ open class NavigationAgent2D: Node {
     fileprivate final func get_debug_path_custom_line_width() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_debug_path_custom_line_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationAgent2D.method_get_debug_path_custom_line_width, handle, nil, &_result)
         return _result
     }
     

@@ -181,19 +181,19 @@ open class TranslationDomain: RefCounted {
     /// Returns the ``Translation`` instance that best matches `locale`. Returns `null` if there are no matches.
     public final func getTranslationObject(locale: String) -> Translation? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let locale = GString(locale)
         withUnsafePointer(to: locale.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TranslationDomain.method_get_translation_object, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TranslationDomain.method_get_translation_object, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_add_translation: GDExtensionMethodBindPtr = {
@@ -213,7 +213,7 @@ open class TranslationDomain: RefCounted {
         withUnsafePointer(to: translation?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TranslationDomain.method_add_translation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TranslationDomain.method_add_translation, handle, pArgs, nil)
                 }
                 
             }
@@ -240,7 +240,7 @@ open class TranslationDomain: RefCounted {
         withUnsafePointer(to: translation?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TranslationDomain.method_remove_translation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TranslationDomain.method_remove_translation, handle, pArgs, nil)
                 }
                 
             }
@@ -264,7 +264,7 @@ open class TranslationDomain: RefCounted {
     /// Removes all translations.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(TranslationDomain.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(TranslationDomain.method_clear, handle, nil, nil)
         
     }
     
@@ -287,7 +287,7 @@ open class TranslationDomain: RefCounted {
             withUnsafePointer(to: context.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TranslationDomain.method_translate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(TranslationDomain.method_translate, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -323,7 +323,7 @@ open class TranslationDomain: RefCounted {
                     withUnsafePointer(to: context.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TranslationDomain.method_translate_plural, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(TranslationDomain.method_translate_plural, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -354,7 +354,7 @@ open class TranslationDomain: RefCounted {
     fileprivate final func is_pseudolocalization_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TranslationDomain.method_is_pseudolocalization_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TranslationDomain.method_is_pseudolocalization_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -375,7 +375,7 @@ open class TranslationDomain: RefCounted {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -400,7 +400,7 @@ open class TranslationDomain: RefCounted {
     fileprivate final func is_pseudolocalization_accents_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TranslationDomain.method_is_pseudolocalization_accents_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TranslationDomain.method_is_pseudolocalization_accents_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -421,7 +421,7 @@ open class TranslationDomain: RefCounted {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_accents_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_accents_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -446,7 +446,7 @@ open class TranslationDomain: RefCounted {
     fileprivate final func is_pseudolocalization_double_vowels_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TranslationDomain.method_is_pseudolocalization_double_vowels_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TranslationDomain.method_is_pseudolocalization_double_vowels_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -467,7 +467,7 @@ open class TranslationDomain: RefCounted {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_double_vowels_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_double_vowels_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -492,7 +492,7 @@ open class TranslationDomain: RefCounted {
     fileprivate final func is_pseudolocalization_fake_bidi_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TranslationDomain.method_is_pseudolocalization_fake_bidi_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TranslationDomain.method_is_pseudolocalization_fake_bidi_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -513,7 +513,7 @@ open class TranslationDomain: RefCounted {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_fake_bidi_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_fake_bidi_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -538,7 +538,7 @@ open class TranslationDomain: RefCounted {
     fileprivate final func is_pseudolocalization_override_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TranslationDomain.method_is_pseudolocalization_override_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TranslationDomain.method_is_pseudolocalization_override_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -559,7 +559,7 @@ open class TranslationDomain: RefCounted {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_override_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_override_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -584,7 +584,7 @@ open class TranslationDomain: RefCounted {
     fileprivate final func is_pseudolocalization_skip_placeholders_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TranslationDomain.method_is_pseudolocalization_skip_placeholders_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TranslationDomain.method_is_pseudolocalization_skip_placeholders_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -605,7 +605,7 @@ open class TranslationDomain: RefCounted {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_skip_placeholders_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_skip_placeholders_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -630,7 +630,7 @@ open class TranslationDomain: RefCounted {
     fileprivate final func get_pseudolocalization_expansion_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(TranslationDomain.method_get_pseudolocalization_expansion_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TranslationDomain.method_get_pseudolocalization_expansion_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -651,7 +651,7 @@ open class TranslationDomain: RefCounted {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_expansion_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_expansion_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -676,7 +676,7 @@ open class TranslationDomain: RefCounted {
     fileprivate final func get_pseudolocalization_prefix() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(TranslationDomain.method_get_pseudolocalization_prefix, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TranslationDomain.method_get_pseudolocalization_prefix, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -698,7 +698,7 @@ open class TranslationDomain: RefCounted {
         withUnsafePointer(to: prefix.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_prefix, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_prefix, handle, pArgs, nil)
                 }
                 
             }
@@ -723,7 +723,7 @@ open class TranslationDomain: RefCounted {
     fileprivate final func get_pseudolocalization_suffix() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(TranslationDomain.method_get_pseudolocalization_suffix, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TranslationDomain.method_get_pseudolocalization_suffix, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -745,7 +745,7 @@ open class TranslationDomain: RefCounted {
         withUnsafePointer(to: suffix.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_suffix, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TranslationDomain.method_set_pseudolocalization_suffix, handle, pArgs, nil)
                 }
                 
             }
@@ -773,7 +773,7 @@ open class TranslationDomain: RefCounted {
         withUnsafePointer(to: message.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TranslationDomain.method_pseudolocalize, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TranslationDomain.method_pseudolocalize, handle, pArgs, &_result.content)
                 }
                 
             }

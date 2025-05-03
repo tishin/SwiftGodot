@@ -49,7 +49,7 @@ open class EditorImportPlugin: ResourceImporter {
     open func _getImporterName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_importer_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_importer_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -69,7 +69,7 @@ open class EditorImportPlugin: ResourceImporter {
     open func _getVisibleName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_visible_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_visible_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -89,7 +89,7 @@ open class EditorImportPlugin: ResourceImporter {
     open func _getPresetCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_preset_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_preset_count, handle, nil, &_result)
         return _result
     }
     
@@ -112,7 +112,7 @@ open class EditorImportPlugin: ResourceImporter {
         withUnsafePointer(to: presetIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_preset_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_preset_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -138,7 +138,7 @@ open class EditorImportPlugin: ResourceImporter {
     open func _getRecognizedExtensions() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_recognized_extensions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_recognized_extensions, handle, nil, &_result.content)
         return _result
     }
     
@@ -163,7 +163,7 @@ open class EditorImportPlugin: ResourceImporter {
             withUnsafePointer(to: presetIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_import_options, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_import_options, handle, pArgs, &_result)
                     }
                     
                 }
@@ -191,7 +191,7 @@ open class EditorImportPlugin: ResourceImporter {
     open func _getSaveExtension() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_save_extension, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_save_extension, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -211,7 +211,7 @@ open class EditorImportPlugin: ResourceImporter {
     open func _getResourceType() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_resource_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_resource_type, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -231,7 +231,7 @@ open class EditorImportPlugin: ResourceImporter {
     open func _getPriority() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_priority, handle, nil, &_result)
         return _result
     }
     
@@ -251,7 +251,7 @@ open class EditorImportPlugin: ResourceImporter {
     open func _getImportOrder() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_import_order, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_import_order, handle, nil, &_result)
         return _result
     }
     
@@ -271,7 +271,7 @@ open class EditorImportPlugin: ResourceImporter {
     open func _getFormatVersion() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_format_version, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_format_version, handle, nil, &_result)
         return _result
     }
     
@@ -300,7 +300,7 @@ open class EditorImportPlugin: ResourceImporter {
                 withUnsafePointer(to: options.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_option_visibility, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(EditorImportPlugin.method__get_option_visibility, handle, pArgs, &_result)
                         }
                         
                     }
@@ -342,7 +342,7 @@ open class EditorImportPlugin: ResourceImporter {
                         withUnsafePointer(to: genFiles.array.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(EditorImportPlugin.method__import, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(EditorImportPlugin.method__import, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -381,7 +381,7 @@ open class EditorImportPlugin: ResourceImporter {
     open func _canImportThreaded() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorImportPlugin.method__can_import_threaded, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorImportPlugin.method__can_import_threaded, handle, nil, &_result)
         return _result
     }
     
@@ -408,7 +408,7 @@ open class EditorImportPlugin: ResourceImporter {
                     withUnsafePointer(to: generatorParameters.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorImportPlugin.method_append_import_external_resource, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(EditorImportPlugin.method_append_import_external_resource, handle, pArgs, &_result)
                             }
                             
                         }

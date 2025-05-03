@@ -106,7 +106,7 @@ open class PrismMesh: PrimitiveMesh {
         withUnsafePointer(to: leftToRight) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PrismMesh.method_set_left_to_right, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PrismMesh.method_set_left_to_right, handle, pArgs, nil)
                 }
                 
             }
@@ -131,7 +131,7 @@ open class PrismMesh: PrimitiveMesh {
     fileprivate final func get_left_to_right() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PrismMesh.method_get_left_to_right, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PrismMesh.method_get_left_to_right, handle, nil, &_result)
         return _result
     }
     
@@ -152,7 +152,7 @@ open class PrismMesh: PrimitiveMesh {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PrismMesh.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PrismMesh.method_set_size, handle, pArgs, nil)
                 }
                 
             }
@@ -177,7 +177,7 @@ open class PrismMesh: PrimitiveMesh {
     fileprivate final func get_size() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(PrismMesh.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PrismMesh.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -198,7 +198,7 @@ open class PrismMesh: PrimitiveMesh {
         withUnsafePointer(to: segments) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PrismMesh.method_set_subdivide_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PrismMesh.method_set_subdivide_width, handle, pArgs, nil)
                 }
                 
             }
@@ -223,7 +223,7 @@ open class PrismMesh: PrimitiveMesh {
     fileprivate final func get_subdivide_width() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PrismMesh.method_get_subdivide_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PrismMesh.method_get_subdivide_width, handle, nil, &_result)
         return _result
     }
     
@@ -244,7 +244,7 @@ open class PrismMesh: PrimitiveMesh {
         withUnsafePointer(to: segments) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PrismMesh.method_set_subdivide_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PrismMesh.method_set_subdivide_height, handle, pArgs, nil)
                 }
                 
             }
@@ -269,7 +269,7 @@ open class PrismMesh: PrimitiveMesh {
     fileprivate final func get_subdivide_height() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PrismMesh.method_get_subdivide_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PrismMesh.method_get_subdivide_height, handle, nil, &_result)
         return _result
     }
     
@@ -290,7 +290,7 @@ open class PrismMesh: PrimitiveMesh {
         withUnsafePointer(to: segments) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PrismMesh.method_set_subdivide_depth, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PrismMesh.method_set_subdivide_depth, handle, pArgs, nil)
                 }
                 
             }
@@ -315,7 +315,7 @@ open class PrismMesh: PrimitiveMesh {
     fileprivate final func get_subdivide_depth() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PrismMesh.method_get_subdivide_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PrismMesh.method_get_subdivide_depth, handle, nil, &_result)
         return _result
     }
     

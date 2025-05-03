@@ -58,7 +58,7 @@ open class InputEventShortcut: InputEvent {
         withUnsafePointer(to: shortcut?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventShortcut.method_set_shortcut, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventShortcut.method_set_shortcut, handle, pArgs, nil)
                 }
                 
             }
@@ -82,9 +82,9 @@ open class InputEventShortcut: InputEvent {
     @inline(__always)
     fileprivate final func get_shortcut() -> Shortcut? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(InputEventShortcut.method_get_shortcut, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(InputEventShortcut.method_get_shortcut, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

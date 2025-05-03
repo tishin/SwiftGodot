@@ -70,7 +70,7 @@ open class GrooveJoint2D: Joint2D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GrooveJoint2D.method_set_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GrooveJoint2D.method_set_length, handle, pArgs, nil)
                 }
                 
             }
@@ -95,7 +95,7 @@ open class GrooveJoint2D: Joint2D {
     fileprivate final func get_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GrooveJoint2D.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GrooveJoint2D.method_get_length, handle, nil, &_result)
         return _result
     }
     
@@ -116,7 +116,7 @@ open class GrooveJoint2D: Joint2D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GrooveJoint2D.method_set_initial_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GrooveJoint2D.method_set_initial_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -141,7 +141,7 @@ open class GrooveJoint2D: Joint2D {
     fileprivate final func get_initial_offset() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GrooveJoint2D.method_get_initial_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GrooveJoint2D.method_get_initial_offset, handle, nil, &_result)
         return _result
     }
     

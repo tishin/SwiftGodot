@@ -48,7 +48,7 @@ open class EditorSelection: Object {
     /// Clear the selection.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorSelection.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorSelection.method_clear, handle, nil, nil)
         
     }
     
@@ -72,7 +72,7 @@ open class EditorSelection: Object {
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSelection.method_add_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorSelection.method_add_node, handle, pArgs, nil)
                 }
                 
             }
@@ -99,7 +99,7 @@ open class EditorSelection: Object {
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSelection.method_remove_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorSelection.method_remove_node, handle, pArgs, nil)
                 }
                 
             }
@@ -124,7 +124,7 @@ open class EditorSelection: Object {
     public final func getSelectedNodes() -> TypedArray<Node?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(EditorSelection.method_get_selected_nodes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorSelection.method_get_selected_nodes, handle, nil, &_result)
         return TypedArray<Node?>(takingOver: _result)
     }
     
@@ -143,7 +143,7 @@ open class EditorSelection: Object {
     public final func getTransformableSelectedNodes() -> TypedArray<Node?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(EditorSelection.method_get_transformable_selected_nodes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorSelection.method_get_transformable_selected_nodes, handle, nil, &_result)
         return TypedArray<Node?>(takingOver: _result)
     }
     

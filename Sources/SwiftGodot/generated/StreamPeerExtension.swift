@@ -39,7 +39,7 @@ open class StreamPeerExtension: StreamPeer {
     open func _getAvailableBytes() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(StreamPeerExtension.method__get_available_bytes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeerExtension.method__get_available_bytes, handle, nil, &_result)
         return _result
     }
     

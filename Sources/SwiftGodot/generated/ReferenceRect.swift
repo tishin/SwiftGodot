@@ -80,7 +80,7 @@ open class ReferenceRect: Control {
     fileprivate final func get_border_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(ReferenceRect.method_get_border_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReferenceRect.method_get_border_color, handle, nil, &_result)
         return _result
     }
     
@@ -101,7 +101,7 @@ open class ReferenceRect: Control {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReferenceRect.method_set_border_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReferenceRect.method_set_border_color, handle, pArgs, nil)
                 }
                 
             }
@@ -126,7 +126,7 @@ open class ReferenceRect: Control {
     fileprivate final func get_border_width() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ReferenceRect.method_get_border_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReferenceRect.method_get_border_width, handle, nil, &_result)
         return _result
     }
     
@@ -147,7 +147,7 @@ open class ReferenceRect: Control {
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReferenceRect.method_set_border_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReferenceRect.method_set_border_width, handle, pArgs, nil)
                 }
                 
             }
@@ -172,7 +172,7 @@ open class ReferenceRect: Control {
     fileprivate final func get_editor_only() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ReferenceRect.method_get_editor_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ReferenceRect.method_get_editor_only, handle, nil, &_result)
         return _result
     }
     
@@ -193,7 +193,7 @@ open class ReferenceRect: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ReferenceRect.method_set_editor_only, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ReferenceRect.method_set_editor_only, handle, pArgs, nil)
                 }
                 
             }

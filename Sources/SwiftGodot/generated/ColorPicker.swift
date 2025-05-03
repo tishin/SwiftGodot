@@ -217,7 +217,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_set_pick_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_set_pick_color, handle, pArgs, nil)
                 }
                 
             }
@@ -242,7 +242,7 @@ open class ColorPicker: VBoxContainer {
     fileprivate final func get_pick_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(ColorPicker.method_get_pick_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ColorPicker.method_get_pick_color, handle, nil, &_result)
         return _result
     }
     
@@ -263,7 +263,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: mode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_set_deferred_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_set_deferred_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -288,7 +288,7 @@ open class ColorPicker: VBoxContainer {
     fileprivate final func is_deferred_mode() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ColorPicker.method_is_deferred_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ColorPicker.method_is_deferred_mode, handle, nil, &_result)
         return _result
     }
     
@@ -309,7 +309,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: colorMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_set_color_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_set_color_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -334,7 +334,7 @@ open class ColorPicker: VBoxContainer {
     fileprivate final func get_color_mode() -> ColorPicker.ColorModeType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ColorPicker.method_get_color_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ColorPicker.method_get_color_mode, handle, nil, &_result)
         return ColorPicker.ColorModeType (rawValue: _result)!
     }
     
@@ -355,7 +355,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: show) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_set_edit_alpha, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_set_edit_alpha, handle, pArgs, nil)
                 }
                 
             }
@@ -380,7 +380,7 @@ open class ColorPicker: VBoxContainer {
     fileprivate final func is_editing_alpha() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ColorPicker.method_is_editing_alpha, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ColorPicker.method_is_editing_alpha, handle, nil, &_result)
         return _result
     }
     
@@ -401,7 +401,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_set_can_add_swatches, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_set_can_add_swatches, handle, pArgs, nil)
                 }
                 
             }
@@ -426,7 +426,7 @@ open class ColorPicker: VBoxContainer {
     fileprivate final func are_swatches_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ColorPicker.method_are_swatches_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ColorPicker.method_are_swatches_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -447,7 +447,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_set_presets_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_set_presets_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -472,7 +472,7 @@ open class ColorPicker: VBoxContainer {
     fileprivate final func are_presets_visible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ColorPicker.method_are_presets_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ColorPicker.method_are_presets_visible, handle, nil, &_result)
         return _result
     }
     
@@ -493,7 +493,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_set_modes_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_set_modes_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -518,7 +518,7 @@ open class ColorPicker: VBoxContainer {
     fileprivate final func are_modes_visible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ColorPicker.method_are_modes_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ColorPicker.method_are_modes_visible, handle, nil, &_result)
         return _result
     }
     
@@ -539,7 +539,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_set_sampler_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_set_sampler_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -564,7 +564,7 @@ open class ColorPicker: VBoxContainer {
     fileprivate final func is_sampler_visible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ColorPicker.method_is_sampler_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ColorPicker.method_is_sampler_visible, handle, nil, &_result)
         return _result
     }
     
@@ -585,7 +585,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_set_sliders_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_set_sliders_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -610,7 +610,7 @@ open class ColorPicker: VBoxContainer {
     fileprivate final func are_sliders_visible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ColorPicker.method_are_sliders_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ColorPicker.method_are_sliders_visible, handle, nil, &_result)
         return _result
     }
     
@@ -631,7 +631,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_set_hex_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_set_hex_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -656,7 +656,7 @@ open class ColorPicker: VBoxContainer {
     fileprivate final func is_hex_visible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ColorPicker.method_is_hex_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ColorPicker.method_is_hex_visible, handle, nil, &_result)
         return _result
     }
     
@@ -680,7 +680,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_add_preset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_add_preset, handle, pArgs, nil)
                 }
                 
             }
@@ -707,7 +707,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_erase_preset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_erase_preset, handle, pArgs, nil)
                 }
                 
             }
@@ -732,7 +732,7 @@ open class ColorPicker: VBoxContainer {
     public final func getPresets() -> PackedColorArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedColorArray = PackedColorArray ()
-        gi.object_method_bind_ptrcall(ColorPicker.method_get_presets, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ColorPicker.method_get_presets, handle, nil, &_result.content)
         return _result
     }
     
@@ -756,7 +756,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_add_recent_preset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_add_recent_preset, handle, pArgs, nil)
                 }
                 
             }
@@ -783,7 +783,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_erase_recent_preset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_erase_recent_preset, handle, pArgs, nil)
                 }
                 
             }
@@ -808,7 +808,7 @@ open class ColorPicker: VBoxContainer {
     public final func getRecentPresets() -> PackedColorArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedColorArray = PackedColorArray ()
-        gi.object_method_bind_ptrcall(ColorPicker.method_get_recent_presets, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ColorPicker.method_get_recent_presets, handle, nil, &_result.content)
         return _result
     }
     
@@ -829,7 +829,7 @@ open class ColorPicker: VBoxContainer {
         withUnsafePointer(to: shape.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPicker.method_set_picker_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPicker.method_set_picker_shape, handle, pArgs, nil)
                 }
                 
             }
@@ -854,7 +854,7 @@ open class ColorPicker: VBoxContainer {
     fileprivate final func get_picker_shape() -> ColorPicker.PickerShapeType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ColorPicker.method_get_picker_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ColorPicker.method_get_picker_shape, handle, nil, &_result)
         return ColorPicker.PickerShapeType (rawValue: _result)!
     }
     

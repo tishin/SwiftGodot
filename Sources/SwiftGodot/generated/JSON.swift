@@ -159,7 +159,7 @@ open class JSON: Resource {
             withUnsafePointer(to: keepText) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(JSON.method_parse, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(JSON.method_parse, handle, pArgs, &_result)
                     }
                     
                 }
@@ -186,7 +186,7 @@ open class JSON: Resource {
     fileprivate final func get_data() -> Variant? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        gi.object_method_bind_ptrcall(JSON.method_get_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(JSON.method_get_data, handle, nil, &_result)
         return Variant(takingOver: _result)
     }
     
@@ -207,7 +207,7 @@ open class JSON: Resource {
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(JSON.method_set_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(JSON.method_set_data, handle, pArgs, nil)
                 }
                 
             }
@@ -232,7 +232,7 @@ open class JSON: Resource {
     public final func getParsedText() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(JSON.method_get_parsed_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(JSON.method_get_parsed_text, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -251,7 +251,7 @@ open class JSON: Resource {
     public final func getErrorLine() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(JSON.method_get_error_line, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(JSON.method_get_error_line, handle, nil, &_result)
         return _result
     }
     
@@ -270,7 +270,7 @@ open class JSON: Resource {
     public final func getErrorMessage() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(JSON.method_get_error_message, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(JSON.method_get_error_message, handle, nil, &_result.content)
         return _result.description
     }
     

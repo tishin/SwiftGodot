@@ -61,7 +61,7 @@ open class AnimatableBody3D: StaticBody3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimatableBody3D.method_set_sync_to_physics, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimatableBody3D.method_set_sync_to_physics, handle, pArgs, nil)
                 }
                 
             }
@@ -86,7 +86,7 @@ open class AnimatableBody3D: StaticBody3D {
     fileprivate final func is_sync_to_physics_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimatableBody3D.method_is_sync_to_physics_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimatableBody3D.method_is_sync_to_physics_enabled, handle, nil, &_result)
         return _result
     }
     

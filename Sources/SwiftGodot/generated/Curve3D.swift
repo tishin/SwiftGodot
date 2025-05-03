@@ -95,7 +95,7 @@ open class Curve3D: Resource {
     fileprivate final func get_point_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Curve3D.method_get_point_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Curve3D.method_get_point_count, handle, nil, &_result)
         return _result
     }
     
@@ -116,7 +116,7 @@ open class Curve3D: Resource {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Curve3D.method_set_point_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Curve3D.method_set_point_count, handle, pArgs, nil)
                 }
                 
             }
@@ -149,7 +149,7 @@ open class Curve3D: Resource {
                     withUnsafePointer(to: index) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Curve3D.method_add_point, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(Curve3D.method_add_point, handle, pArgs, nil)
                             }
                             
                         }
@@ -183,7 +183,7 @@ open class Curve3D: Resource {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Curve3D.method_set_point_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Curve3D.method_set_point_position, handle, pArgs, nil)
                     }
                     
                 }
@@ -213,7 +213,7 @@ open class Curve3D: Resource {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Curve3D.method_get_point_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Curve3D.method_get_point_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -244,7 +244,7 @@ open class Curve3D: Resource {
             withUnsafePointer(to: tilt) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Curve3D.method_set_point_tilt, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Curve3D.method_set_point_tilt, handle, pArgs, nil)
                     }
                     
                 }
@@ -274,7 +274,7 @@ open class Curve3D: Resource {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Curve3D.method_get_point_tilt, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Curve3D.method_get_point_tilt, handle, pArgs, &_result)
                 }
                 
             }
@@ -302,7 +302,7 @@ open class Curve3D: Resource {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Curve3D.method_set_point_in, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Curve3D.method_set_point_in, handle, pArgs, nil)
                     }
                     
                 }
@@ -332,7 +332,7 @@ open class Curve3D: Resource {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Curve3D.method_get_point_in, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Curve3D.method_get_point_in, handle, pArgs, &_result)
                 }
                 
             }
@@ -360,7 +360,7 @@ open class Curve3D: Resource {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Curve3D.method_set_point_out, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Curve3D.method_set_point_out, handle, pArgs, nil)
                     }
                     
                 }
@@ -390,7 +390,7 @@ open class Curve3D: Resource {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Curve3D.method_get_point_out, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Curve3D.method_get_point_out, handle, pArgs, &_result)
                 }
                 
             }
@@ -417,7 +417,7 @@ open class Curve3D: Resource {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Curve3D.method_remove_point, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Curve3D.method_remove_point, handle, pArgs, nil)
                 }
                 
             }
@@ -441,7 +441,7 @@ open class Curve3D: Resource {
     /// Removes all points from the curve.
     public final func clearPoints() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Curve3D.method_clear_points, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Curve3D.method_clear_points, handle, nil, nil)
         
     }
     
@@ -467,7 +467,7 @@ open class Curve3D: Resource {
             withUnsafePointer(to: t) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Curve3D.method_sample, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Curve3D.method_sample, handle, pArgs, &_result)
                     }
                     
                 }
@@ -497,7 +497,7 @@ open class Curve3D: Resource {
         withUnsafePointer(to: fofs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Curve3D.method_samplef, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Curve3D.method_samplef, handle, pArgs, &_result)
                 }
                 
             }
@@ -524,7 +524,7 @@ open class Curve3D: Resource {
         withUnsafePointer(to: closed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Curve3D.method_set_closed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Curve3D.method_set_closed, handle, pArgs, nil)
                 }
                 
             }
@@ -549,7 +549,7 @@ open class Curve3D: Resource {
     fileprivate final func is_closed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Curve3D.method_is_closed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Curve3D.method_is_closed, handle, nil, &_result)
         return _result
     }
     
@@ -570,7 +570,7 @@ open class Curve3D: Resource {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Curve3D.method_set_bake_interval, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Curve3D.method_set_bake_interval, handle, pArgs, nil)
                 }
                 
             }
@@ -595,7 +595,7 @@ open class Curve3D: Resource {
     fileprivate final func get_bake_interval() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Curve3D.method_get_bake_interval, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Curve3D.method_get_bake_interval, handle, nil, &_result)
         return _result
     }
     
@@ -616,7 +616,7 @@ open class Curve3D: Resource {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Curve3D.method_set_up_vector_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Curve3D.method_set_up_vector_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -641,7 +641,7 @@ open class Curve3D: Resource {
     fileprivate final func is_up_vector_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Curve3D.method_is_up_vector_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Curve3D.method_is_up_vector_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -660,7 +660,7 @@ open class Curve3D: Resource {
     public final func getBakedLength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Curve3D.method_get_baked_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Curve3D.method_get_baked_length, handle, nil, &_result)
         return _result
     }
     
@@ -686,7 +686,7 @@ open class Curve3D: Resource {
             withUnsafePointer(to: cubic) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Curve3D.method_sample_baked, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Curve3D.method_sample_baked, handle, pArgs, &_result)
                     }
                     
                 }
@@ -718,7 +718,7 @@ open class Curve3D: Resource {
                 withUnsafePointer(to: applyTilt) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Curve3D.method_sample_baked_with_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Curve3D.method_sample_baked_with_rotation, handle, pArgs, &_result)
                         }
                         
                     }
@@ -754,7 +754,7 @@ open class Curve3D: Resource {
             withUnsafePointer(to: applyTilt) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Curve3D.method_sample_baked_up_vector, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Curve3D.method_sample_baked_up_vector, handle, pArgs, &_result)
                     }
                     
                 }
@@ -781,7 +781,7 @@ open class Curve3D: Resource {
     public final func getBakedPoints() -> PackedVector3Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
-        gi.object_method_bind_ptrcall(Curve3D.method_get_baked_points, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Curve3D.method_get_baked_points, handle, nil, &_result.content)
         return _result
     }
     
@@ -800,7 +800,7 @@ open class Curve3D: Resource {
     public final func getBakedTilts() -> PackedFloat32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
-        gi.object_method_bind_ptrcall(Curve3D.method_get_baked_tilts, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Curve3D.method_get_baked_tilts, handle, nil, &_result.content)
         return _result
     }
     
@@ -822,7 +822,7 @@ open class Curve3D: Resource {
     public final func getBakedUpVectors() -> PackedVector3Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
-        gi.object_method_bind_ptrcall(Curve3D.method_get_baked_up_vectors, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Curve3D.method_get_baked_up_vectors, handle, nil, &_result.content)
         return _result
     }
     
@@ -847,7 +847,7 @@ open class Curve3D: Resource {
         withUnsafePointer(to: toPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Curve3D.method_get_closest_point, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Curve3D.method_get_closest_point, handle, pArgs, &_result)
                 }
                 
             }
@@ -878,7 +878,7 @@ open class Curve3D: Resource {
         withUnsafePointer(to: toPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Curve3D.method_get_closest_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Curve3D.method_get_closest_offset, handle, pArgs, &_result)
                 }
                 
             }
@@ -914,7 +914,7 @@ open class Curve3D: Resource {
             withUnsafePointer(to: toleranceDegrees) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Curve3D.method_tessellate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Curve3D.method_tessellate, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -948,7 +948,7 @@ open class Curve3D: Resource {
             withUnsafePointer(to: toleranceLength) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Curve3D.method_tessellate_even_length, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Curve3D.method_tessellate_even_length, handle, pArgs, &_result.content)
                     }
                     
                 }

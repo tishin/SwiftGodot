@@ -70,7 +70,7 @@ open class PacketPeer: RefCounted {
         withUnsafePointer(to: allowObjects) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PacketPeer.method_get_var, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PacketPeer.method_get_var, handle, pArgs, &_result)
                 }
                 
             }
@@ -102,7 +102,7 @@ open class PacketPeer: RefCounted {
             withUnsafePointer(to: fullObjects) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PacketPeer.method_put_var, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(PacketPeer.method_put_var, handle, pArgs, &_result)
                     }
                     
                 }
@@ -129,7 +129,7 @@ open class PacketPeer: RefCounted {
     public final func getPacket() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(PacketPeer.method_get_packet, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(PacketPeer.method_get_packet, handle, nil, &_result.content)
         return _result
     }
     
@@ -151,7 +151,7 @@ open class PacketPeer: RefCounted {
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PacketPeer.method_put_packet, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PacketPeer.method_put_packet, handle, pArgs, &_result)
                 }
                 
             }
@@ -176,7 +176,7 @@ open class PacketPeer: RefCounted {
     public final func getPacketError() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(PacketPeer.method_get_packet_error, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PacketPeer.method_get_packet_error, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -195,7 +195,7 @@ open class PacketPeer: RefCounted {
     public final func getAvailablePacketCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PacketPeer.method_get_available_packet_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PacketPeer.method_get_available_packet_count, handle, nil, &_result)
         return _result
     }
     
@@ -214,7 +214,7 @@ open class PacketPeer: RefCounted {
     fileprivate final func get_encode_buffer_max_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PacketPeer.method_get_encode_buffer_max_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PacketPeer.method_get_encode_buffer_max_size, handle, nil, &_result)
         return _result
     }
     
@@ -235,7 +235,7 @@ open class PacketPeer: RefCounted {
         withUnsafePointer(to: maxSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PacketPeer.method_set_encode_buffer_max_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PacketPeer.method_set_encode_buffer_max_size, handle, pArgs, nil)
                 }
                 
             }

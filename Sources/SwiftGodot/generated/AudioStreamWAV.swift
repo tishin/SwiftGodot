@@ -164,7 +164,7 @@ open class AudioStreamWAV: AudioStream {
     /// The keys and values of `options` match the properties of ``ResourceImporterWAV``. The usage of `options` is identical to ``AudioStreamWAV/loadFromFile(path:options:)``.
     /// 
     public static func loadFromBuffer(streamData: PackedByteArray, options: VariantDictionary = VariantDictionary ()) -> AudioStreamWAV? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: streamData.content) { pArg0 in
             withUnsafePointer(to: options.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -178,7 +178,7 @@ open class AudioStreamWAV: AudioStream {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_load_from_file: GDExtensionMethodBindPtr = {
@@ -199,7 +199,7 @@ open class AudioStreamWAV: AudioStream {
     /// **Example:** Load the first file dropped as a WAV and play it:
     /// 
     public static func loadFromFile(path: String, options: VariantDictionary = VariantDictionary ()) -> AudioStreamWAV? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: options.content) { pArg1 in
@@ -214,7 +214,7 @@ open class AudioStreamWAV: AudioStream {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_data: GDExtensionMethodBindPtr = {
@@ -234,7 +234,7 @@ open class AudioStreamWAV: AudioStream {
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_set_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_set_data, handle, pArgs, nil)
                 }
                 
             }
@@ -259,7 +259,7 @@ open class AudioStreamWAV: AudioStream {
     fileprivate final func get_data() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(AudioStreamWAV.method_get_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AudioStreamWAV.method_get_data, handle, nil, &_result.content)
         return _result
     }
     
@@ -280,7 +280,7 @@ open class AudioStreamWAV: AudioStream {
         withUnsafePointer(to: format.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_set_format, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_set_format, handle, pArgs, nil)
                 }
                 
             }
@@ -305,7 +305,7 @@ open class AudioStreamWAV: AudioStream {
     fileprivate final func get_format() -> AudioStreamWAV.Format {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AudioStreamWAV.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamWAV.method_get_format, handle, nil, &_result)
         return AudioStreamWAV.Format (rawValue: _result)!
     }
     
@@ -326,7 +326,7 @@ open class AudioStreamWAV: AudioStream {
         withUnsafePointer(to: loopMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_set_loop_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_set_loop_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -351,7 +351,7 @@ open class AudioStreamWAV: AudioStream {
     fileprivate final func get_loop_mode() -> AudioStreamWAV.LoopMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AudioStreamWAV.method_get_loop_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamWAV.method_get_loop_mode, handle, nil, &_result)
         return AudioStreamWAV.LoopMode (rawValue: _result)!
     }
     
@@ -372,7 +372,7 @@ open class AudioStreamWAV: AudioStream {
         withUnsafePointer(to: loopBegin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_set_loop_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_set_loop_begin, handle, pArgs, nil)
                 }
                 
             }
@@ -397,7 +397,7 @@ open class AudioStreamWAV: AudioStream {
     fileprivate final func get_loop_begin() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamWAV.method_get_loop_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamWAV.method_get_loop_begin, handle, nil, &_result)
         return _result
     }
     
@@ -418,7 +418,7 @@ open class AudioStreamWAV: AudioStream {
         withUnsafePointer(to: loopEnd) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_set_loop_end, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_set_loop_end, handle, pArgs, nil)
                 }
                 
             }
@@ -443,7 +443,7 @@ open class AudioStreamWAV: AudioStream {
     fileprivate final func get_loop_end() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamWAV.method_get_loop_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamWAV.method_get_loop_end, handle, nil, &_result)
         return _result
     }
     
@@ -464,7 +464,7 @@ open class AudioStreamWAV: AudioStream {
         withUnsafePointer(to: mixRate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_set_mix_rate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_set_mix_rate, handle, pArgs, nil)
                 }
                 
             }
@@ -489,7 +489,7 @@ open class AudioStreamWAV: AudioStream {
     fileprivate final func get_mix_rate() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamWAV.method_get_mix_rate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamWAV.method_get_mix_rate, handle, nil, &_result)
         return _result
     }
     
@@ -510,7 +510,7 @@ open class AudioStreamWAV: AudioStream {
         withUnsafePointer(to: stereo) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_set_stereo, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_set_stereo, handle, pArgs, nil)
                 }
                 
             }
@@ -535,7 +535,7 @@ open class AudioStreamWAV: AudioStream {
     fileprivate final func is_stereo() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioStreamWAV.method_is_stereo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamWAV.method_is_stereo, handle, nil, &_result)
         return _result
     }
     
@@ -561,7 +561,7 @@ open class AudioStreamWAV: AudioStream {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_save_to_wav, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioStreamWAV.method_save_to_wav, handle, pArgs, &_result)
                 }
                 
             }

@@ -54,7 +54,7 @@ open class FBXState: GLTFState {
     fileprivate final func get_allow_geometry_helper_nodes() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FBXState.method_get_allow_geometry_helper_nodes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FBXState.method_get_allow_geometry_helper_nodes, handle, nil, &_result)
         return _result
     }
     
@@ -75,7 +75,7 @@ open class FBXState: GLTFState {
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FBXState.method_set_allow_geometry_helper_nodes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FBXState.method_set_allow_geometry_helper_nodes, handle, pArgs, nil)
                 }
                 
             }

@@ -226,7 +226,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: vertices.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_vertices, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_vertices, handle, pArgs, nil)
                 }
                 
             }
@@ -252,7 +252,7 @@ open class NavigationPolygon: Resource {
     fileprivate final func get_vertices() -> PackedVector2Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_vertices, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_vertices, handle, nil, &_result.content)
         return _result
     }
     
@@ -273,7 +273,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_add_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_add_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -298,7 +298,7 @@ open class NavigationPolygon: Resource {
     public final func getPolygonCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_polygon_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_polygon_count, handle, nil, &_result)
         return _result
     }
     
@@ -320,7 +320,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_get_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_get_polygon, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -344,7 +344,7 @@ open class NavigationPolygon: Resource {
     /// Clears the array of polygons, but it doesn't clear the array of outlines and vertices.
     public final func clearPolygons() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_clear_polygons, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_clear_polygons, handle, nil, nil)
         
     }
     
@@ -362,9 +362,9 @@ open class NavigationPolygon: Resource {
     /// Returns the ``NavigationMesh`` resulting from this navigation polygon. This navigation mesh can be used to update the navigation mesh of a region with the ``NavigationServer3D/regionSetNavigationMesh(region:navigationMesh:)`` API directly (as 2D uses the 3D server behind the scene).
     public final func getNavigationMesh() -> NavigationMesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_navigation_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_navigation_mesh, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_add_outline: GDExtensionMethodBindPtr = {
@@ -384,7 +384,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: outline.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_add_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_add_outline, handle, pArgs, nil)
                 }
                 
             }
@@ -412,7 +412,7 @@ open class NavigationPolygon: Resource {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NavigationPolygon.method_add_outline_at_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NavigationPolygon.method_add_outline_at_index, handle, pArgs, nil)
                     }
                     
                 }
@@ -439,7 +439,7 @@ open class NavigationPolygon: Resource {
     public final func getOutlineCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_outline_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_outline_count, handle, nil, &_result)
         return _result
     }
     
@@ -461,7 +461,7 @@ open class NavigationPolygon: Resource {
             withUnsafePointer(to: outline.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NavigationPolygon.method_set_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NavigationPolygon.method_set_outline, handle, pArgs, nil)
                     }
                     
                 }
@@ -491,7 +491,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_get_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_get_outline, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -518,7 +518,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_remove_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_remove_outline, handle, pArgs, nil)
                 }
                 
             }
@@ -542,7 +542,7 @@ open class NavigationPolygon: Resource {
     /// Clears the array of the outlines, but it doesn't clear the vertices and the polygons that were created by them.
     public final func clearOutlines() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_clear_outlines, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_clear_outlines, handle, nil, nil)
         
     }
     
@@ -560,7 +560,7 @@ open class NavigationPolygon: Resource {
     /// Creates polygons from the outlines added in the editor or by script.
     public final func makePolygonsFromOutlines() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_make_polygons_from_outlines, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_make_polygons_from_outlines, handle, nil, nil)
         
     }
     
@@ -581,7 +581,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: cellSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_cell_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_cell_size, handle, pArgs, nil)
                 }
                 
             }
@@ -606,7 +606,7 @@ open class NavigationPolygon: Resource {
     fileprivate final func get_cell_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_cell_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_cell_size, handle, nil, &_result)
         return _result
     }
     
@@ -627,7 +627,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: borderSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_border_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_border_size, handle, pArgs, nil)
                 }
                 
             }
@@ -652,7 +652,7 @@ open class NavigationPolygon: Resource {
     fileprivate final func get_border_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_border_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_border_size, handle, nil, &_result)
         return _result
     }
     
@@ -673,7 +673,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: samplePartitionType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_sample_partition_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_sample_partition_type, handle, pArgs, nil)
                 }
                 
             }
@@ -698,7 +698,7 @@ open class NavigationPolygon: Resource {
     fileprivate final func get_sample_partition_type() -> NavigationPolygon.SamplePartitionType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_sample_partition_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_sample_partition_type, handle, nil, &_result)
         return NavigationPolygon.SamplePartitionType (rawValue: _result)!
     }
     
@@ -719,7 +719,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: geometryType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_parsed_geometry_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_parsed_geometry_type, handle, pArgs, nil)
                 }
                 
             }
@@ -744,7 +744,7 @@ open class NavigationPolygon: Resource {
     fileprivate final func get_parsed_geometry_type() -> NavigationPolygon.ParsedGeometryType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_parsed_geometry_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_parsed_geometry_type, handle, nil, &_result)
         return NavigationPolygon.ParsedGeometryType (rawValue: _result)!
     }
     
@@ -765,7 +765,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_parsed_collision_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_parsed_collision_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -790,7 +790,7 @@ open class NavigationPolygon: Resource {
     fileprivate final func get_parsed_collision_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_parsed_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_parsed_collision_mask, handle, nil, &_result)
         return _result
     }
     
@@ -812,7 +812,7 @@ open class NavigationPolygon: Resource {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NavigationPolygon.method_set_parsed_collision_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NavigationPolygon.method_set_parsed_collision_mask_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -842,7 +842,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_get_parsed_collision_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_get_parsed_collision_mask_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -869,7 +869,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: geometryMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_source_geometry_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_source_geometry_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -894,7 +894,7 @@ open class NavigationPolygon: Resource {
     fileprivate final func get_source_geometry_mode() -> NavigationPolygon.SourceGeometryMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_source_geometry_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_source_geometry_mode, handle, nil, &_result)
         return NavigationPolygon.SourceGeometryMode (rawValue: _result)!
     }
     
@@ -915,7 +915,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: groupName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_source_geometry_group_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_source_geometry_group_name, handle, pArgs, nil)
                 }
                 
             }
@@ -940,7 +940,7 @@ open class NavigationPolygon: Resource {
     fileprivate final func get_source_geometry_group_name() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_source_geometry_group_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_source_geometry_group_name, handle, nil, &_result.content)
         return _result
     }
     
@@ -961,7 +961,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: agentRadius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_agent_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_agent_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -986,7 +986,7 @@ open class NavigationPolygon: Resource {
     fileprivate final func get_agent_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_agent_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_agent_radius, handle, nil, &_result)
         return _result
     }
     
@@ -1007,7 +1007,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_baking_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_baking_rect, handle, pArgs, nil)
                 }
                 
             }
@@ -1032,7 +1032,7 @@ open class NavigationPolygon: Resource {
     fileprivate final func get_baking_rect() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_baking_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_baking_rect, handle, nil, &_result)
         return _result
     }
     
@@ -1053,7 +1053,7 @@ open class NavigationPolygon: Resource {
         withUnsafePointer(to: rectOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_baking_rect_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPolygon.method_set_baking_rect_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -1078,7 +1078,7 @@ open class NavigationPolygon: Resource {
     fileprivate final func get_baking_rect_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_baking_rect_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_get_baking_rect_offset, handle, nil, &_result)
         return _result
     }
     
@@ -1096,7 +1096,7 @@ open class NavigationPolygon: Resource {
     /// Clears the internal arrays for vertices and polygon indices.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(NavigationPolygon.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(NavigationPolygon.method_clear, handle, nil, nil)
         
     }
     

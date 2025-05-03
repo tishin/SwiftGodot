@@ -46,7 +46,7 @@ open class OptimizedTranslation: Translation {
         withUnsafePointer(to: from?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptimizedTranslation.method_generate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OptimizedTranslation.method_generate, handle, pArgs, nil)
                 }
                 
             }

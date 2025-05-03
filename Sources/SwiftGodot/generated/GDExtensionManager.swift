@@ -36,7 +36,7 @@ open class GDExtensionManager: Object {
     /// The shared instance of this class
     public static var shared: GDExtensionManager {
         return withUnsafePointer(to: &GDExtensionManager.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -75,7 +75,7 @@ open class GDExtensionManager: Object {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_load_extension, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_load_extension, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -106,7 +106,7 @@ open class GDExtensionManager: Object {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_reload_extension, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_reload_extension, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -134,7 +134,7 @@ open class GDExtensionManager: Object {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_unload_extension, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_unload_extension, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -162,7 +162,7 @@ open class GDExtensionManager: Object {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_extension_loaded, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_extension_loaded, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -186,7 +186,7 @@ open class GDExtensionManager: Object {
     /// Returns the file paths of all currently loaded extensions.
     public static func getLoadedExtensions() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_loaded_extensions, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_loaded_extensions, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -203,19 +203,19 @@ open class GDExtensionManager: Object {
     
     /// Returns the ``GDExtension`` at the given file `path`, or `null` if it has not been loaded or does not exist.
     public static func getExtension(path: String) -> GDExtension? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_extension, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_extension, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

@@ -80,7 +80,7 @@ open class ArrayOccluder3D: Occluder3D {
             withUnsafePointer(to: indices.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ArrayOccluder3D.method_set_arrays, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ArrayOccluder3D.method_set_arrays, handle, pArgs, nil)
                     }
                     
                 }
@@ -109,7 +109,7 @@ open class ArrayOccluder3D: Occluder3D {
         withUnsafePointer(to: vertices.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ArrayOccluder3D.method_set_vertices, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ArrayOccluder3D.method_set_vertices, handle, pArgs, nil)
                 }
                 
             }
@@ -136,7 +136,7 @@ open class ArrayOccluder3D: Occluder3D {
         withUnsafePointer(to: indices.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ArrayOccluder3D.method_set_indices, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ArrayOccluder3D.method_set_indices, handle, pArgs, nil)
                 }
                 
             }

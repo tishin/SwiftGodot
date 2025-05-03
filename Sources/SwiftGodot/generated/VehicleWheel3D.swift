@@ -225,7 +225,7 @@ open class VehicleWheel3D: Node3D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -250,7 +250,7 @@ open class VehicleWheel3D: Node3D {
     fileprivate final func get_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_radius, handle, nil, &_result)
         return _result
     }
     
@@ -271,7 +271,7 @@ open class VehicleWheel3D: Node3D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_suspension_rest_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_suspension_rest_length, handle, pArgs, nil)
                 }
                 
             }
@@ -296,7 +296,7 @@ open class VehicleWheel3D: Node3D {
     fileprivate final func get_suspension_rest_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_suspension_rest_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_suspension_rest_length, handle, nil, &_result)
         return _result
     }
     
@@ -317,7 +317,7 @@ open class VehicleWheel3D: Node3D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_suspension_travel, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_suspension_travel, handle, pArgs, nil)
                 }
                 
             }
@@ -342,7 +342,7 @@ open class VehicleWheel3D: Node3D {
     fileprivate final func get_suspension_travel() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_suspension_travel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_suspension_travel, handle, nil, &_result)
         return _result
     }
     
@@ -363,7 +363,7 @@ open class VehicleWheel3D: Node3D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_suspension_stiffness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_suspension_stiffness, handle, pArgs, nil)
                 }
                 
             }
@@ -388,7 +388,7 @@ open class VehicleWheel3D: Node3D {
     fileprivate final func get_suspension_stiffness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_suspension_stiffness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_suspension_stiffness, handle, nil, &_result)
         return _result
     }
     
@@ -409,7 +409,7 @@ open class VehicleWheel3D: Node3D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_suspension_max_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_suspension_max_force, handle, pArgs, nil)
                 }
                 
             }
@@ -434,7 +434,7 @@ open class VehicleWheel3D: Node3D {
     fileprivate final func get_suspension_max_force() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_suspension_max_force, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_suspension_max_force, handle, nil, &_result)
         return _result
     }
     
@@ -455,7 +455,7 @@ open class VehicleWheel3D: Node3D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_damping_compression, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_damping_compression, handle, pArgs, nil)
                 }
                 
             }
@@ -480,7 +480,7 @@ open class VehicleWheel3D: Node3D {
     fileprivate final func get_damping_compression() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_damping_compression, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_damping_compression, handle, nil, &_result)
         return _result
     }
     
@@ -501,7 +501,7 @@ open class VehicleWheel3D: Node3D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_damping_relaxation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_damping_relaxation, handle, pArgs, nil)
                 }
                 
             }
@@ -526,7 +526,7 @@ open class VehicleWheel3D: Node3D {
     fileprivate final func get_damping_relaxation() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_damping_relaxation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_damping_relaxation, handle, nil, &_result)
         return _result
     }
     
@@ -547,7 +547,7 @@ open class VehicleWheel3D: Node3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_use_as_traction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_use_as_traction, handle, pArgs, nil)
                 }
                 
             }
@@ -572,7 +572,7 @@ open class VehicleWheel3D: Node3D {
     fileprivate final func is_used_as_traction() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_is_used_as_traction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_is_used_as_traction, handle, nil, &_result)
         return _result
     }
     
@@ -593,7 +593,7 @@ open class VehicleWheel3D: Node3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_use_as_steering, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_use_as_steering, handle, pArgs, nil)
                 }
                 
             }
@@ -618,7 +618,7 @@ open class VehicleWheel3D: Node3D {
     fileprivate final func is_used_as_steering() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_is_used_as_steering, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_is_used_as_steering, handle, nil, &_result)
         return _result
     }
     
@@ -639,7 +639,7 @@ open class VehicleWheel3D: Node3D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_friction_slip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_friction_slip, handle, pArgs, nil)
                 }
                 
             }
@@ -664,7 +664,7 @@ open class VehicleWheel3D: Node3D {
     fileprivate final func get_friction_slip() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_friction_slip, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_friction_slip, handle, nil, &_result)
         return _result
     }
     
@@ -683,7 +683,7 @@ open class VehicleWheel3D: Node3D {
     public final func isInContact() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_is_in_contact, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_is_in_contact, handle, nil, &_result)
         return _result
     }
     
@@ -704,9 +704,9 @@ open class VehicleWheel3D: Node3D {
     /// 
     public final func getContactBody() -> Node3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_contact_body, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_contact_body, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_contact_point: GDExtensionMethodBindPtr = {
@@ -724,7 +724,7 @@ open class VehicleWheel3D: Node3D {
     public final func getContactPoint() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_contact_point, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_contact_point, handle, nil, &_result)
         return _result
     }
     
@@ -743,7 +743,7 @@ open class VehicleWheel3D: Node3D {
     public final func getContactNormal() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_contact_normal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_contact_normal, handle, nil, &_result)
         return _result
     }
     
@@ -764,7 +764,7 @@ open class VehicleWheel3D: Node3D {
         withUnsafePointer(to: rollInfluence) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_roll_influence, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_roll_influence, handle, pArgs, nil)
                 }
                 
             }
@@ -789,7 +789,7 @@ open class VehicleWheel3D: Node3D {
     fileprivate final func get_roll_influence() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_roll_influence, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_roll_influence, handle, nil, &_result)
         return _result
     }
     
@@ -808,7 +808,7 @@ open class VehicleWheel3D: Node3D {
     public final func getSkidinfo() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_skidinfo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_skidinfo, handle, nil, &_result)
         return _result
     }
     
@@ -827,7 +827,7 @@ open class VehicleWheel3D: Node3D {
     public final func getRpm() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_rpm, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_rpm, handle, nil, &_result)
         return _result
     }
     
@@ -848,7 +848,7 @@ open class VehicleWheel3D: Node3D {
         withUnsafePointer(to: engineForce) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_engine_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_engine_force, handle, pArgs, nil)
                 }
                 
             }
@@ -873,7 +873,7 @@ open class VehicleWheel3D: Node3D {
     fileprivate final func get_engine_force() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_engine_force, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_engine_force, handle, nil, &_result)
         return _result
     }
     
@@ -894,7 +894,7 @@ open class VehicleWheel3D: Node3D {
         withUnsafePointer(to: brake) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_brake, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_brake, handle, pArgs, nil)
                 }
                 
             }
@@ -919,7 +919,7 @@ open class VehicleWheel3D: Node3D {
     fileprivate final func get_brake() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_brake, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_brake, handle, nil, &_result)
         return _result
     }
     
@@ -940,7 +940,7 @@ open class VehicleWheel3D: Node3D {
         withUnsafePointer(to: steering) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_steering, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleWheel3D.method_set_steering, handle, pArgs, nil)
                 }
                 
             }
@@ -965,7 +965,7 @@ open class VehicleWheel3D: Node3D {
     fileprivate final func get_steering() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_steering, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleWheel3D.method_get_steering, handle, nil, &_result)
         return _result
     }
     

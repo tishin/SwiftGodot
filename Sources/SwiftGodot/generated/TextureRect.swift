@@ -138,7 +138,7 @@ open class TextureRect: Control {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureRect.method_set_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureRect.method_set_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -162,9 +162,9 @@ open class TextureRect: Control {
     @inline(__always)
     fileprivate final func get_texture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TextureRect.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TextureRect.method_get_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_expand_mode: GDExtensionMethodBindPtr = {
@@ -184,7 +184,7 @@ open class TextureRect: Control {
         withUnsafePointer(to: expandMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureRect.method_set_expand_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureRect.method_set_expand_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -209,7 +209,7 @@ open class TextureRect: Control {
     fileprivate final func get_expand_mode() -> TextureRect.ExpandMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TextureRect.method_get_expand_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureRect.method_get_expand_mode, handle, nil, &_result)
         return TextureRect.ExpandMode (rawValue: _result)!
     }
     
@@ -230,7 +230,7 @@ open class TextureRect: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureRect.method_set_flip_h, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureRect.method_set_flip_h, handle, pArgs, nil)
                 }
                 
             }
@@ -255,7 +255,7 @@ open class TextureRect: Control {
     fileprivate final func is_flipped_h() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TextureRect.method_is_flipped_h, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureRect.method_is_flipped_h, handle, nil, &_result)
         return _result
     }
     
@@ -276,7 +276,7 @@ open class TextureRect: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureRect.method_set_flip_v, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureRect.method_set_flip_v, handle, pArgs, nil)
                 }
                 
             }
@@ -301,7 +301,7 @@ open class TextureRect: Control {
     fileprivate final func is_flipped_v() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TextureRect.method_is_flipped_v, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureRect.method_is_flipped_v, handle, nil, &_result)
         return _result
     }
     
@@ -322,7 +322,7 @@ open class TextureRect: Control {
         withUnsafePointer(to: stretchMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureRect.method_set_stretch_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureRect.method_set_stretch_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -347,7 +347,7 @@ open class TextureRect: Control {
     fileprivate final func get_stretch_mode() -> TextureRect.StretchMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TextureRect.method_get_stretch_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureRect.method_get_stretch_mode, handle, nil, &_result)
         return TextureRect.StretchMode (rawValue: _result)!
     }
     

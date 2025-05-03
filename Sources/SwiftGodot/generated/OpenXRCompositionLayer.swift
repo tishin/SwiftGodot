@@ -135,7 +135,7 @@ open class OpenXRCompositionLayer: Node3D {
         withUnsafePointer(to: viewport?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_set_layer_viewport, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_set_layer_viewport, handle, pArgs, nil)
                 }
                 
             }
@@ -159,9 +159,9 @@ open class OpenXRCompositionLayer: Node3D {
     @inline(__always)
     fileprivate final func get_layer_viewport() -> SubViewport? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_get_layer_viewport, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_get_layer_viewport, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_use_android_surface: GDExtensionMethodBindPtr = {
@@ -181,7 +181,7 @@ open class OpenXRCompositionLayer: Node3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_set_use_android_surface, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_set_use_android_surface, handle, pArgs, nil)
                 }
                 
             }
@@ -206,7 +206,7 @@ open class OpenXRCompositionLayer: Node3D {
     fileprivate final func get_use_android_surface() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_get_use_android_surface, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_get_use_android_surface, handle, nil, &_result)
         return _result
     }
     
@@ -227,7 +227,7 @@ open class OpenXRCompositionLayer: Node3D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_set_android_surface_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_set_android_surface_size, handle, pArgs, nil)
                 }
                 
             }
@@ -252,7 +252,7 @@ open class OpenXRCompositionLayer: Node3D {
     fileprivate final func get_android_surface_size() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_get_android_surface_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_get_android_surface_size, handle, nil, &_result)
         return _result
     }
     
@@ -273,7 +273,7 @@ open class OpenXRCompositionLayer: Node3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_set_enable_hole_punch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_set_enable_hole_punch, handle, pArgs, nil)
                 }
                 
             }
@@ -298,7 +298,7 @@ open class OpenXRCompositionLayer: Node3D {
     fileprivate final func get_enable_hole_punch() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_get_enable_hole_punch, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_get_enable_hole_punch, handle, nil, &_result)
         return _result
     }
     
@@ -319,7 +319,7 @@ open class OpenXRCompositionLayer: Node3D {
         withUnsafePointer(to: order) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_set_sort_order, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_set_sort_order, handle, pArgs, nil)
                 }
                 
             }
@@ -344,7 +344,7 @@ open class OpenXRCompositionLayer: Node3D {
     fileprivate final func get_sort_order() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_get_sort_order, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_get_sort_order, handle, nil, &_result)
         return _result
     }
     
@@ -365,7 +365,7 @@ open class OpenXRCompositionLayer: Node3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_set_alpha_blend, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_set_alpha_blend, handle, pArgs, nil)
                 }
                 
             }
@@ -390,7 +390,7 @@ open class OpenXRCompositionLayer: Node3D {
     fileprivate final func get_alpha_blend() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_get_alpha_blend, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_get_alpha_blend, handle, nil, &_result)
         return _result
     }
     
@@ -411,9 +411,9 @@ open class OpenXRCompositionLayer: Node3D {
     /// 
     public final func getAndroidSurface() -> JavaObject? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_get_android_surface, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_get_android_surface, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_is_natively_supported: GDExtensionMethodBindPtr = {
@@ -434,7 +434,7 @@ open class OpenXRCompositionLayer: Node3D {
     public final func isNativelySupported() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_is_natively_supported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_is_natively_supported, handle, nil, &_result)
         return _result
     }
     
@@ -460,7 +460,7 @@ open class OpenXRCompositionLayer: Node3D {
             withUnsafePointer(to: direction) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_intersects_ray, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(OpenXRCompositionLayer.method_intersects_ray, handle, pArgs, &_result)
                     }
                     
                 }

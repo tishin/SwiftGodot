@@ -86,7 +86,7 @@ open class GraphNode: GraphElement {
                     withUnsafePointer(to: color) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(GraphNode.method__draw_port, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(GraphNode.method__draw_port, handle, pArgs, nil)
                             }
                             
                         }
@@ -120,7 +120,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: title.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_set_title, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphNode.method_set_title, handle, pArgs, nil)
                 }
                 
             }
@@ -145,7 +145,7 @@ open class GraphNode: GraphElement {
     fileprivate final func get_title() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(GraphNode.method_get_title, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GraphNode.method_get_title, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -163,9 +163,9 @@ open class GraphNode: GraphElement {
     /// Returns the ``HBoxContainer`` used for the title bar, only containing a ``Label`` for displaying the title by default. This can be used to add custom controls to the title bar such as option or close buttons.
     public final func getTitlebarHbox() -> HBoxContainer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GraphNode.method_get_titlebar_hbox, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GraphNode.method_get_titlebar_hbox, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_slot: GDExtensionMethodBindPtr = {
@@ -207,7 +207,7 @@ open class GraphNode: GraphElement {
                                             withUnsafePointer(to: drawStylebox) { pArg9 in
                                                 withUnsafePointer(to: UnsafeRawPointersN10(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9)) { pArgs in
                                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 10) { pArgs in
-                                                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot, handle, pArgs, nil)
                                                     }
                                                     
                                                 }
@@ -252,7 +252,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_clear_slot, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphNode.method_clear_slot, handle, pArgs, nil)
                 }
                 
             }
@@ -276,7 +276,7 @@ open class GraphNode: GraphElement {
     /// Disables all slots of the GraphNode. This will remove all input/output ports from the GraphNode.
     public final func clearAllSlots() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(GraphNode.method_clear_all_slots, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(GraphNode.method_clear_all_slots, handle, nil, nil)
         
     }
     
@@ -298,7 +298,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_is_slot_enabled_left, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_is_slot_enabled_left, handle, pArgs, &_result)
                 }
                 
             }
@@ -326,7 +326,7 @@ open class GraphNode: GraphElement {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_enabled_left, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_enabled_left, handle, pArgs, nil)
                     }
                     
                 }
@@ -356,7 +356,7 @@ open class GraphNode: GraphElement {
             withUnsafePointer(to: type) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_type_left, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_type_left, handle, pArgs, nil)
                     }
                     
                 }
@@ -386,7 +386,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_get_slot_type_left, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_get_slot_type_left, handle, pArgs, &_result)
                 }
                 
             }
@@ -414,7 +414,7 @@ open class GraphNode: GraphElement {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_color_left, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_color_left, handle, pArgs, nil)
                     }
                     
                 }
@@ -444,7 +444,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_get_slot_color_left, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_get_slot_color_left, handle, pArgs, &_result)
                 }
                 
             }
@@ -472,7 +472,7 @@ open class GraphNode: GraphElement {
             withUnsafePointer(to: customIcon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_custom_icon_left, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_custom_icon_left, handle, pArgs, nil)
                     }
                     
                 }
@@ -498,18 +498,18 @@ open class GraphNode: GraphElement {
     /// Returns the left (input) custom ``Texture2D`` of the slot with the given `slotIndex`.
     public final func getSlotCustomIconLeft(slotIndex: Int32) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_get_slot_custom_icon_left, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_get_slot_custom_icon_left, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_is_slot_enabled_right: GDExtensionMethodBindPtr = {
@@ -530,7 +530,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_is_slot_enabled_right, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_is_slot_enabled_right, handle, pArgs, &_result)
                 }
                 
             }
@@ -558,7 +558,7 @@ open class GraphNode: GraphElement {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_enabled_right, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_enabled_right, handle, pArgs, nil)
                     }
                     
                 }
@@ -588,7 +588,7 @@ open class GraphNode: GraphElement {
             withUnsafePointer(to: type) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_type_right, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_type_right, handle, pArgs, nil)
                     }
                     
                 }
@@ -618,7 +618,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_get_slot_type_right, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_get_slot_type_right, handle, pArgs, &_result)
                 }
                 
             }
@@ -646,7 +646,7 @@ open class GraphNode: GraphElement {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_color_right, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_color_right, handle, pArgs, nil)
                     }
                     
                 }
@@ -676,7 +676,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_get_slot_color_right, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_get_slot_color_right, handle, pArgs, &_result)
                 }
                 
             }
@@ -704,7 +704,7 @@ open class GraphNode: GraphElement {
             withUnsafePointer(to: customIcon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_custom_icon_right, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_custom_icon_right, handle, pArgs, nil)
                     }
                     
                 }
@@ -730,18 +730,18 @@ open class GraphNode: GraphElement {
     /// Returns the right (output) custom ``Texture2D`` of the slot with the given `slotIndex`.
     public final func getSlotCustomIconRight(slotIndex: Int32) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_get_slot_custom_icon_right, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_get_slot_custom_icon_right, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_is_slot_draw_stylebox: GDExtensionMethodBindPtr = {
@@ -762,7 +762,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: slotIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_is_slot_draw_stylebox, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_is_slot_draw_stylebox, handle, pArgs, &_result)
                 }
                 
             }
@@ -790,7 +790,7 @@ open class GraphNode: GraphElement {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_draw_stylebox, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GraphNode.method_set_slot_draw_stylebox, handle, pArgs, nil)
                     }
                     
                 }
@@ -819,7 +819,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: ignore) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_set_ignore_invalid_connection_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphNode.method_set_ignore_invalid_connection_type, handle, pArgs, nil)
                 }
                 
             }
@@ -844,7 +844,7 @@ open class GraphNode: GraphElement {
     fileprivate final func is_ignoring_valid_connection_type() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphNode.method_is_ignoring_valid_connection_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphNode.method_is_ignoring_valid_connection_type, handle, nil, &_result)
         return _result
     }
     
@@ -863,7 +863,7 @@ open class GraphNode: GraphElement {
     public final func getInputPortCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GraphNode.method_get_input_port_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphNode.method_get_input_port_count, handle, nil, &_result)
         return _result
     }
     
@@ -885,7 +885,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_get_input_port_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_get_input_port_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -913,7 +913,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_get_input_port_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_get_input_port_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -941,7 +941,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_get_input_port_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_get_input_port_color, handle, pArgs, &_result)
                 }
                 
             }
@@ -969,7 +969,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_get_input_port_slot, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_get_input_port_slot, handle, pArgs, &_result)
                 }
                 
             }
@@ -994,7 +994,7 @@ open class GraphNode: GraphElement {
     public final func getOutputPortCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GraphNode.method_get_output_port_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphNode.method_get_output_port_count, handle, nil, &_result)
         return _result
     }
     
@@ -1016,7 +1016,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_get_output_port_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_get_output_port_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -1044,7 +1044,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_get_output_port_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_get_output_port_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -1072,7 +1072,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_get_output_port_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_get_output_port_color, handle, pArgs, &_result)
                 }
                 
             }
@@ -1100,7 +1100,7 @@ open class GraphNode: GraphElement {
         withUnsafePointer(to: portIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphNode.method_get_output_port_slot, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GraphNode.method_get_output_port_slot, handle, pArgs, &_result)
                 }
                 
             }

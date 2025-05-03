@@ -70,7 +70,7 @@ open class RDUniform: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDUniform.method_set_uniform_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDUniform.method_set_uniform_type, handle, pArgs, nil)
                 }
                 
             }
@@ -95,7 +95,7 @@ open class RDUniform: RefCounted {
     fileprivate final func get_uniform_type() -> RenderingDevice.UniformType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDUniform.method_get_uniform_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDUniform.method_get_uniform_type, handle, nil, &_result)
         return RenderingDevice.UniformType (rawValue: _result)!
     }
     
@@ -116,7 +116,7 @@ open class RDUniform: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDUniform.method_set_binding, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDUniform.method_set_binding, handle, pArgs, nil)
                 }
                 
             }
@@ -141,7 +141,7 @@ open class RDUniform: RefCounted {
     fileprivate final func get_binding() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RDUniform.method_get_binding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDUniform.method_get_binding, handle, nil, &_result)
         return _result
     }
     
@@ -162,7 +162,7 @@ open class RDUniform: RefCounted {
         withUnsafePointer(to: id.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDUniform.method_add_id, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDUniform.method_add_id, handle, pArgs, nil)
                 }
                 
             }
@@ -186,7 +186,7 @@ open class RDUniform: RefCounted {
     /// Unbinds all ids currently bound to the uniform.
     public final func clearIds() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RDUniform.method_clear_ids, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RDUniform.method_clear_ids, handle, nil, nil)
         
     }
     
@@ -205,7 +205,7 @@ open class RDUniform: RefCounted {
     public final func getIds() -> TypedArray<RID> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(RDUniform.method_get_ids, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDUniform.method_get_ids, handle, nil, &_result)
         return TypedArray<RID>(takingOver: _result)
     }
     

@@ -102,7 +102,7 @@ open class GLTFCamera: Resource {
     
     /// Create a new GLTFCamera instance from the given Godot ``Camera3D`` node.
     public static func fromNode(cameraNode: Camera3D?) -> GLTFCamera? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: cameraNode?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -113,7 +113,7 @@ open class GLTFCamera: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_to_node: GDExtensionMethodBindPtr = {
@@ -130,9 +130,9 @@ open class GLTFCamera: Resource {
     /// Converts this GLTFCamera instance into a Godot ``Camera3D`` node.
     public final func toNode() -> Camera3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GLTFCamera.method_to_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GLTFCamera.method_to_node, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_from_dictionary: GDExtensionMethodBindPtr = {
@@ -148,7 +148,7 @@ open class GLTFCamera: Resource {
     
     /// Creates a new GLTFCamera instance by parsing the given ``VariantDictionary``.
     public static func fromDictionary(_ dictionary: VariantDictionary) -> GLTFCamera? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: dictionary.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -159,7 +159,7 @@ open class GLTFCamera: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_to_dictionary: GDExtensionMethodBindPtr = {
@@ -177,7 +177,7 @@ open class GLTFCamera: Resource {
     public final func toDictionary() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(GLTFCamera.method_to_dictionary, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFCamera.method_to_dictionary, handle, nil, &_result.content)
         return _result
     }
     
@@ -196,7 +196,7 @@ open class GLTFCamera: Resource {
     fileprivate final func get_perspective() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GLTFCamera.method_get_perspective, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFCamera.method_get_perspective, handle, nil, &_result)
         return _result
     }
     
@@ -217,7 +217,7 @@ open class GLTFCamera: Resource {
         withUnsafePointer(to: perspective) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFCamera.method_set_perspective, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFCamera.method_set_perspective, handle, pArgs, nil)
                 }
                 
             }
@@ -242,7 +242,7 @@ open class GLTFCamera: Resource {
     fileprivate final func get_fov() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GLTFCamera.method_get_fov, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFCamera.method_get_fov, handle, nil, &_result)
         return _result
     }
     
@@ -263,7 +263,7 @@ open class GLTFCamera: Resource {
         withUnsafePointer(to: fov) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFCamera.method_set_fov, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFCamera.method_set_fov, handle, pArgs, nil)
                 }
                 
             }
@@ -288,7 +288,7 @@ open class GLTFCamera: Resource {
     fileprivate final func get_size_mag() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GLTFCamera.method_get_size_mag, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFCamera.method_get_size_mag, handle, nil, &_result)
         return _result
     }
     
@@ -309,7 +309,7 @@ open class GLTFCamera: Resource {
         withUnsafePointer(to: sizeMag) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFCamera.method_set_size_mag, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFCamera.method_set_size_mag, handle, pArgs, nil)
                 }
                 
             }
@@ -334,7 +334,7 @@ open class GLTFCamera: Resource {
     fileprivate final func get_depth_far() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GLTFCamera.method_get_depth_far, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFCamera.method_get_depth_far, handle, nil, &_result)
         return _result
     }
     
@@ -355,7 +355,7 @@ open class GLTFCamera: Resource {
         withUnsafePointer(to: zdepthFar) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFCamera.method_set_depth_far, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFCamera.method_set_depth_far, handle, pArgs, nil)
                 }
                 
             }
@@ -380,7 +380,7 @@ open class GLTFCamera: Resource {
     fileprivate final func get_depth_near() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GLTFCamera.method_get_depth_near, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFCamera.method_get_depth_near, handle, nil, &_result)
         return _result
     }
     
@@ -401,7 +401,7 @@ open class GLTFCamera: Resource {
         withUnsafePointer(to: zdepthNear) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFCamera.method_set_depth_near, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFCamera.method_set_depth_near, handle, pArgs, nil)
                 }
                 
             }

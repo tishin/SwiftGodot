@@ -33,7 +33,7 @@ open class ResourceLoader: Object {
     /// The shared instance of this class
     public static var shared: ResourceLoader {
         return withUnsafePointer(to: &ResourceLoader.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -90,7 +90,7 @@ open class ResourceLoader: Object {
                     withUnsafePointer(to: cacheMode.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_load_threaded_request, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(method_load_threaded_request, shared.handle, pArgs, &_result)
                             }
                             
                         }
@@ -130,7 +130,7 @@ open class ResourceLoader: Object {
             withUnsafePointer(to: progress.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_load_threaded_get_status, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_load_threaded_get_status, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -158,19 +158,19 @@ open class ResourceLoader: Object {
     /// If this is called before the loading thread is done (i.e. ``loadThreadedGetStatus(path:progress:)`` is not ``ThreadLoadStatus/loaded``), the calling thread will be blocked until the resource has finished loading. However, it's recommended to use ``loadThreadedGetStatus(path:progress:)`` to known when the load has actually completed.
     /// 
     public static func loadThreadedGet(path: String) -> Resource? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_load_threaded_get, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_load_threaded_get, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_load: GDExtensionMethodBindPtr = {
@@ -201,7 +201,7 @@ open class ResourceLoader: Object {
     /// > Note: Relative paths will be prefixed with `"res://"` before loading, to avoid unexpected results make sure your paths are absolute.
     /// 
     public static func load(path: String, typeHint: String = "", cacheMode: ResourceLoader.CacheMode = .reuse) -> Resource? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             let typeHint = GString(typeHint)
@@ -209,7 +209,7 @@ open class ResourceLoader: Object {
                 withUnsafePointer(to: cacheMode.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_load, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_load, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -220,7 +220,7 @@ open class ResourceLoader: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_recognized_extensions_for_type: GDExtensionMethodBindPtr = {
@@ -241,7 +241,7 @@ open class ResourceLoader: Object {
         withUnsafePointer(to: type.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_recognized_extensions_for_type, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_recognized_extensions_for_type, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -271,7 +271,7 @@ open class ResourceLoader: Object {
             withUnsafePointer(to: atFront) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_add_resource_format_loader, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_add_resource_format_loader, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -299,7 +299,7 @@ open class ResourceLoader: Object {
         withUnsafePointer(to: formatLoader?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_remove_resource_format_loader, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_remove_resource_format_loader, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -325,7 +325,7 @@ open class ResourceLoader: Object {
         withUnsafePointer(to: abort) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_abort_on_missing_resources, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_abort_on_missing_resources, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -356,7 +356,7 @@ open class ResourceLoader: Object {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_dependencies, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_dependencies, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -387,7 +387,7 @@ open class ResourceLoader: Object {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_cached, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_cached, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -413,19 +413,19 @@ open class ResourceLoader: Object {
     /// > Note: If the resource is not cached, the returned ``Resource`` will be invalid.
     /// 
     public static func getCachedRef(path: String) -> Resource? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_cached_ref, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_cached_ref, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_exists: GDExtensionMethodBindPtr = {
@@ -453,7 +453,7 @@ open class ResourceLoader: Object {
             withUnsafePointer(to: typeHint.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_exists, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_exists, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -483,7 +483,7 @@ open class ResourceLoader: Object {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_resource_uid, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_resource_uid, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -511,7 +511,7 @@ open class ResourceLoader: Object {
         withUnsafePointer(to: directoryPath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_list_directory, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_list_directory, shared.handle, pArgs, &_result.content)
                 }
                 
             }

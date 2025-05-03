@@ -89,7 +89,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         withUnsafePointer(to: targetNodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_target_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_target_node, handle, pArgs, nil)
                 }
                 
             }
@@ -114,7 +114,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     fileprivate final func get_target_node() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_target_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_target_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -135,7 +135,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         withUnsafePointer(to: tipNodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_tip_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_tip_node, handle, pArgs, nil)
                 }
                 
             }
@@ -160,7 +160,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     fileprivate final func get_tip_node() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_tip_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_tip_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -181,7 +181,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_data_chain_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_data_chain_length, handle, pArgs, nil)
                 }
                 
             }
@@ -206,7 +206,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
     fileprivate final func get_ccdik_data_chain_length() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_data_chain_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_data_chain_length, handle, nil, &_result)
         return _result
     }
     
@@ -228,7 +228,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
             withUnsafePointer(to: bone2dNodepath.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_joint_bone2d_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_joint_bone2d_node, handle, pArgs, nil)
                     }
                     
                 }
@@ -258,7 +258,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_joint_bone2d_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_joint_bone2d_node, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -286,7 +286,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
             withUnsafePointer(to: boneIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_joint_bone_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_joint_bone_index, handle, pArgs, nil)
                     }
                     
                 }
@@ -316,7 +316,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_joint_bone_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_joint_bone_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -344,7 +344,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
             withUnsafePointer(to: rotateFromJoint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_joint_rotate_from_joint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_joint_rotate_from_joint, handle, pArgs, nil)
                     }
                     
                 }
@@ -374,7 +374,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_joint_rotate_from_joint, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_joint_rotate_from_joint, handle, pArgs, &_result)
                 }
                 
             }
@@ -402,7 +402,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
             withUnsafePointer(to: enableConstraint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_joint_enable_constraint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_joint_enable_constraint, handle, pArgs, nil)
                     }
                     
                 }
@@ -432,7 +432,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_joint_enable_constraint, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_joint_enable_constraint, handle, pArgs, &_result)
                 }
                 
             }
@@ -460,7 +460,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
             withUnsafePointer(to: angleMin) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_joint_constraint_angle_min, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_joint_constraint_angle_min, handle, pArgs, nil)
                     }
                     
                 }
@@ -490,7 +490,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_joint_constraint_angle_min, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_joint_constraint_angle_min, handle, pArgs, &_result)
                 }
                 
             }
@@ -518,7 +518,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
             withUnsafePointer(to: angleMax) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_joint_constraint_angle_max, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_joint_constraint_angle_max, handle, pArgs, nil)
                     }
                     
                 }
@@ -548,7 +548,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_joint_constraint_angle_max, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_joint_constraint_angle_max, handle, pArgs, &_result)
                 }
                 
             }
@@ -579,7 +579,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
             withUnsafePointer(to: invert) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_joint_constraint_angle_invert, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_set_ccdik_joint_constraint_angle_invert, handle, pArgs, nil)
                     }
                     
                 }
@@ -609,7 +609,7 @@ open class SkeletonModification2DCCDIK: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_joint_constraint_angle_invert, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DCCDIK.method_get_ccdik_joint_constraint_angle_invert, handle, pArgs, &_result)
                 }
                 
             }

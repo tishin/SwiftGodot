@@ -181,7 +181,7 @@ open class SplitContainer: Container {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SplitContainer.method_set_split_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SplitContainer.method_set_split_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -206,7 +206,7 @@ open class SplitContainer: Container {
     fileprivate final func get_split_offset() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SplitContainer.method_get_split_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SplitContainer.method_get_split_offset, handle, nil, &_result)
         return _result
     }
     
@@ -224,7 +224,7 @@ open class SplitContainer: Container {
     /// Clamps the ``splitOffset`` value to not go outside the currently possible minimal and maximum values.
     public final func clampSplitOffset() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SplitContainer.method_clamp_split_offset, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SplitContainer.method_clamp_split_offset, handle, nil, nil)
         
     }
     
@@ -245,7 +245,7 @@ open class SplitContainer: Container {
         withUnsafePointer(to: collapsed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SplitContainer.method_set_collapsed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SplitContainer.method_set_collapsed, handle, pArgs, nil)
                 }
                 
             }
@@ -270,7 +270,7 @@ open class SplitContainer: Container {
     fileprivate final func is_collapsed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SplitContainer.method_is_collapsed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SplitContainer.method_is_collapsed, handle, nil, &_result)
         return _result
     }
     
@@ -291,7 +291,7 @@ open class SplitContainer: Container {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SplitContainer.method_set_dragger_visibility, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SplitContainer.method_set_dragger_visibility, handle, pArgs, nil)
                 }
                 
             }
@@ -316,7 +316,7 @@ open class SplitContainer: Container {
     fileprivate final func get_dragger_visibility() -> SplitContainer.DraggerVisibility {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SplitContainer.method_get_dragger_visibility, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SplitContainer.method_get_dragger_visibility, handle, nil, &_result)
         return SplitContainer.DraggerVisibility (rawValue: _result)!
     }
     
@@ -337,7 +337,7 @@ open class SplitContainer: Container {
         withUnsafePointer(to: vertical) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SplitContainer.method_set_vertical, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SplitContainer.method_set_vertical, handle, pArgs, nil)
                 }
                 
             }
@@ -362,7 +362,7 @@ open class SplitContainer: Container {
     fileprivate final func is_vertical() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SplitContainer.method_is_vertical, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SplitContainer.method_is_vertical, handle, nil, &_result)
         return _result
     }
     
@@ -383,7 +383,7 @@ open class SplitContainer: Container {
         withUnsafePointer(to: draggingEnabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SplitContainer.method_set_dragging_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SplitContainer.method_set_dragging_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -408,7 +408,7 @@ open class SplitContainer: Container {
     fileprivate final func is_dragging_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SplitContainer.method_is_dragging_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SplitContainer.method_is_dragging_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -429,7 +429,7 @@ open class SplitContainer: Container {
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SplitContainer.method_set_drag_area_margin_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SplitContainer.method_set_drag_area_margin_begin, handle, pArgs, nil)
                 }
                 
             }
@@ -454,7 +454,7 @@ open class SplitContainer: Container {
     fileprivate final func get_drag_area_margin_begin() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SplitContainer.method_get_drag_area_margin_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SplitContainer.method_get_drag_area_margin_begin, handle, nil, &_result)
         return _result
     }
     
@@ -475,7 +475,7 @@ open class SplitContainer: Container {
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SplitContainer.method_set_drag_area_margin_end, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SplitContainer.method_set_drag_area_margin_end, handle, pArgs, nil)
                 }
                 
             }
@@ -500,7 +500,7 @@ open class SplitContainer: Container {
     fileprivate final func get_drag_area_margin_end() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SplitContainer.method_get_drag_area_margin_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SplitContainer.method_get_drag_area_margin_end, handle, nil, &_result)
         return _result
     }
     
@@ -521,7 +521,7 @@ open class SplitContainer: Container {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SplitContainer.method_set_drag_area_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SplitContainer.method_set_drag_area_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -546,7 +546,7 @@ open class SplitContainer: Container {
     fileprivate final func get_drag_area_offset() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SplitContainer.method_get_drag_area_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SplitContainer.method_get_drag_area_offset, handle, nil, &_result)
         return _result
     }
     
@@ -567,7 +567,7 @@ open class SplitContainer: Container {
         withUnsafePointer(to: dragAreaHighlightInEditor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SplitContainer.method_set_drag_area_highlight_in_editor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SplitContainer.method_set_drag_area_highlight_in_editor, handle, pArgs, nil)
                 }
                 
             }
@@ -592,7 +592,7 @@ open class SplitContainer: Container {
     fileprivate final func is_drag_area_highlight_in_editor_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SplitContainer.method_is_drag_area_highlight_in_editor_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SplitContainer.method_is_drag_area_highlight_in_editor_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -615,9 +615,9 @@ open class SplitContainer: Container {
     /// 
     public final func getDragAreaControl() -> Control? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(SplitContainer.method_get_drag_area_control, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(SplitContainer.method_get_drag_area_control, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

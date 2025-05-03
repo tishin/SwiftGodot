@@ -63,7 +63,7 @@ open class StreamPeerTCP: StreamPeer {
             withUnsafePointer(to: host.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(StreamPeerTCP.method_bind, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(StreamPeerTCP.method_bind, handle, pArgs, &_result)
                     }
                     
                 }
@@ -95,7 +95,7 @@ open class StreamPeerTCP: StreamPeer {
             withUnsafePointer(to: port) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(StreamPeerTCP.method_connect_to_host, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(StreamPeerTCP.method_connect_to_host, handle, pArgs, &_result)
                     }
                     
                 }
@@ -122,7 +122,7 @@ open class StreamPeerTCP: StreamPeer {
     public final func poll() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(StreamPeerTCP.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeerTCP.method_poll, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -141,7 +141,7 @@ open class StreamPeerTCP: StreamPeer {
     public final func getStatus() -> StreamPeerTCP.Status {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(StreamPeerTCP.method_get_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeerTCP.method_get_status, handle, nil, &_result)
         return StreamPeerTCP.Status (rawValue: _result)!
     }
     
@@ -160,7 +160,7 @@ open class StreamPeerTCP: StreamPeer {
     public final func getConnectedHost() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(StreamPeerTCP.method_get_connected_host, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(StreamPeerTCP.method_get_connected_host, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -179,7 +179,7 @@ open class StreamPeerTCP: StreamPeer {
     public final func getConnectedPort() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(StreamPeerTCP.method_get_connected_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeerTCP.method_get_connected_port, handle, nil, &_result)
         return _result
     }
     
@@ -198,7 +198,7 @@ open class StreamPeerTCP: StreamPeer {
     public final func getLocalPort() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(StreamPeerTCP.method_get_local_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeerTCP.method_get_local_port, handle, nil, &_result)
         return _result
     }
     
@@ -216,7 +216,7 @@ open class StreamPeerTCP: StreamPeer {
     /// Disconnects from host.
     public final func disconnectFromHost() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(StreamPeerTCP.method_disconnect_from_host, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(StreamPeerTCP.method_disconnect_from_host, handle, nil, nil)
         
     }
     
@@ -240,7 +240,7 @@ open class StreamPeerTCP: StreamPeer {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeerTCP.method_set_no_delay, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeerTCP.method_set_no_delay, handle, pArgs, nil)
                 }
                 
             }

@@ -206,7 +206,7 @@ open class WebXRInterface: XRInterface {
         withUnsafePointer(to: sessionMode.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebXRInterface.method_is_session_supported, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebXRInterface.method_is_session_supported, handle, pArgs, nil)
                 }
                 
             }
@@ -234,7 +234,7 @@ open class WebXRInterface: XRInterface {
         withUnsafePointer(to: sessionMode.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebXRInterface.method_set_session_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebXRInterface.method_set_session_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -259,7 +259,7 @@ open class WebXRInterface: XRInterface {
     fileprivate final func get_session_mode() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(WebXRInterface.method_get_session_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebXRInterface.method_get_session_mode, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -281,7 +281,7 @@ open class WebXRInterface: XRInterface {
         withUnsafePointer(to: requiredFeatures.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebXRInterface.method_set_required_features, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebXRInterface.method_set_required_features, handle, pArgs, nil)
                 }
                 
             }
@@ -306,7 +306,7 @@ open class WebXRInterface: XRInterface {
     fileprivate final func get_required_features() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(WebXRInterface.method_get_required_features, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebXRInterface.method_get_required_features, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -328,7 +328,7 @@ open class WebXRInterface: XRInterface {
         withUnsafePointer(to: optionalFeatures.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebXRInterface.method_set_optional_features, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebXRInterface.method_set_optional_features, handle, pArgs, nil)
                 }
                 
             }
@@ -353,7 +353,7 @@ open class WebXRInterface: XRInterface {
     fileprivate final func get_optional_features() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(WebXRInterface.method_get_optional_features, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebXRInterface.method_get_optional_features, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -372,7 +372,7 @@ open class WebXRInterface: XRInterface {
     fileprivate final func get_reference_space_type() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(WebXRInterface.method_get_reference_space_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebXRInterface.method_get_reference_space_type, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -391,7 +391,7 @@ open class WebXRInterface: XRInterface {
     fileprivate final func get_enabled_features() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(WebXRInterface.method_get_enabled_features, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebXRInterface.method_get_enabled_features, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -413,7 +413,7 @@ open class WebXRInterface: XRInterface {
         withUnsafePointer(to: requestedReferenceSpaceTypes.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebXRInterface.method_set_requested_reference_space_types, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebXRInterface.method_set_requested_reference_space_types, handle, pArgs, nil)
                 }
                 
             }
@@ -438,7 +438,7 @@ open class WebXRInterface: XRInterface {
     fileprivate final func get_requested_reference_space_types() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(WebXRInterface.method_get_requested_reference_space_types, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebXRInterface.method_get_requested_reference_space_types, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -460,7 +460,7 @@ open class WebXRInterface: XRInterface {
         withUnsafePointer(to: inputSourceId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebXRInterface.method_is_input_source_active, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(WebXRInterface.method_is_input_source_active, handle, pArgs, &_result)
                 }
                 
             }
@@ -501,18 +501,18 @@ open class WebXRInterface: XRInterface {
     /// 
     public final func getInputSourceTracker(inputSourceId: Int32) -> XRControllerTracker? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: inputSourceId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebXRInterface.method_get_input_source_tracker, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(WebXRInterface.method_get_input_source_tracker, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_input_source_target_ray_mode: GDExtensionMethodBindPtr = {
@@ -536,7 +536,7 @@ open class WebXRInterface: XRInterface {
         withUnsafePointer(to: inputSourceId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebXRInterface.method_get_input_source_target_ray_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(WebXRInterface.method_get_input_source_target_ray_mode, handle, pArgs, &_result)
                 }
                 
             }
@@ -561,7 +561,7 @@ open class WebXRInterface: XRInterface {
     fileprivate final func get_visibility_state() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(WebXRInterface.method_get_visibility_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebXRInterface.method_get_visibility_state, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -580,7 +580,7 @@ open class WebXRInterface: XRInterface {
     public final func getDisplayRefreshRate() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(WebXRInterface.method_get_display_refresh_rate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebXRInterface.method_get_display_refresh_rate, handle, nil, &_result)
         return _result
     }
     
@@ -601,7 +601,7 @@ open class WebXRInterface: XRInterface {
         withUnsafePointer(to: refreshRate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebXRInterface.method_set_display_refresh_rate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebXRInterface.method_set_display_refresh_rate, handle, pArgs, nil)
                 }
                 
             }
@@ -626,7 +626,7 @@ open class WebXRInterface: XRInterface {
     public final func getAvailableDisplayRefreshRates() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(WebXRInterface.method_get_available_display_refresh_rates, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebXRInterface.method_get_available_display_refresh_rates, handle, nil, &_result.content)
         return _result
     }
     

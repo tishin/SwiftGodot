@@ -121,7 +121,7 @@ open class ParallaxBackground: CanvasLayer {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParallaxBackground.method_set_scroll_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParallaxBackground.method_set_scroll_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -146,7 +146,7 @@ open class ParallaxBackground: CanvasLayer {
     fileprivate final func get_scroll_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(ParallaxBackground.method_get_scroll_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParallaxBackground.method_get_scroll_offset, handle, nil, &_result)
         return _result
     }
     
@@ -167,7 +167,7 @@ open class ParallaxBackground: CanvasLayer {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParallaxBackground.method_set_scroll_base_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParallaxBackground.method_set_scroll_base_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -192,7 +192,7 @@ open class ParallaxBackground: CanvasLayer {
     fileprivate final func get_scroll_base_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(ParallaxBackground.method_get_scroll_base_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParallaxBackground.method_get_scroll_base_offset, handle, nil, &_result)
         return _result
     }
     
@@ -213,7 +213,7 @@ open class ParallaxBackground: CanvasLayer {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParallaxBackground.method_set_scroll_base_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParallaxBackground.method_set_scroll_base_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -238,7 +238,7 @@ open class ParallaxBackground: CanvasLayer {
     fileprivate final func get_scroll_base_scale() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(ParallaxBackground.method_get_scroll_base_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParallaxBackground.method_get_scroll_base_scale, handle, nil, &_result)
         return _result
     }
     
@@ -259,7 +259,7 @@ open class ParallaxBackground: CanvasLayer {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParallaxBackground.method_set_limit_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParallaxBackground.method_set_limit_begin, handle, pArgs, nil)
                 }
                 
             }
@@ -284,7 +284,7 @@ open class ParallaxBackground: CanvasLayer {
     fileprivate final func get_limit_begin() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(ParallaxBackground.method_get_limit_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParallaxBackground.method_get_limit_begin, handle, nil, &_result)
         return _result
     }
     
@@ -305,7 +305,7 @@ open class ParallaxBackground: CanvasLayer {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParallaxBackground.method_set_limit_end, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParallaxBackground.method_set_limit_end, handle, pArgs, nil)
                 }
                 
             }
@@ -330,7 +330,7 @@ open class ParallaxBackground: CanvasLayer {
     fileprivate final func get_limit_end() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(ParallaxBackground.method_get_limit_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParallaxBackground.method_get_limit_end, handle, nil, &_result)
         return _result
     }
     
@@ -351,7 +351,7 @@ open class ParallaxBackground: CanvasLayer {
         withUnsafePointer(to: ignore) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParallaxBackground.method_set_ignore_camera_zoom, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParallaxBackground.method_set_ignore_camera_zoom, handle, pArgs, nil)
                 }
                 
             }
@@ -376,7 +376,7 @@ open class ParallaxBackground: CanvasLayer {
     fileprivate final func is_ignore_camera_zoom() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ParallaxBackground.method_is_ignore_camera_zoom, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParallaxBackground.method_is_ignore_camera_zoom, handle, nil, &_result)
         return _result
     }
     

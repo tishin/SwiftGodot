@@ -111,7 +111,7 @@ open class PrimitiveMesh: Mesh {
     open func _createMeshArray() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(PrimitiveMesh.method__create_mesh_array, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(PrimitiveMesh.method__create_mesh_array, handle, nil, &_result.content)
         return _result
     }
     
@@ -132,7 +132,7 @@ open class PrimitiveMesh: Mesh {
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PrimitiveMesh.method_set_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PrimitiveMesh.method_set_material, handle, pArgs, nil)
                 }
                 
             }
@@ -156,9 +156,9 @@ open class PrimitiveMesh: Mesh {
     @inline(__always)
     fileprivate final func get_material() -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_material, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_mesh_arrays: GDExtensionMethodBindPtr = {
@@ -179,7 +179,7 @@ open class PrimitiveMesh: Mesh {
     public final func getMeshArrays() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_mesh_arrays, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_mesh_arrays, handle, nil, &_result.content)
         return _result
     }
     
@@ -200,7 +200,7 @@ open class PrimitiveMesh: Mesh {
         withUnsafePointer(to: aabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PrimitiveMesh.method_set_custom_aabb, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PrimitiveMesh.method_set_custom_aabb, handle, pArgs, nil)
                 }
                 
             }
@@ -225,7 +225,7 @@ open class PrimitiveMesh: Mesh {
     fileprivate final func get_custom_aabb() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_custom_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_custom_aabb, handle, nil, &_result)
         return _result
     }
     
@@ -246,7 +246,7 @@ open class PrimitiveMesh: Mesh {
         withUnsafePointer(to: flipFaces) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PrimitiveMesh.method_set_flip_faces, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PrimitiveMesh.method_set_flip_faces, handle, pArgs, nil)
                 }
                 
             }
@@ -271,7 +271,7 @@ open class PrimitiveMesh: Mesh {
     fileprivate final func get_flip_faces() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_flip_faces, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_flip_faces, handle, nil, &_result)
         return _result
     }
     
@@ -292,7 +292,7 @@ open class PrimitiveMesh: Mesh {
         withUnsafePointer(to: addUv2) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PrimitiveMesh.method_set_add_uv2, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PrimitiveMesh.method_set_add_uv2, handle, pArgs, nil)
                 }
                 
             }
@@ -317,7 +317,7 @@ open class PrimitiveMesh: Mesh {
     fileprivate final func get_add_uv2() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_add_uv2, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_add_uv2, handle, nil, &_result)
         return _result
     }
     
@@ -338,7 +338,7 @@ open class PrimitiveMesh: Mesh {
         withUnsafePointer(to: uv2Padding) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PrimitiveMesh.method_set_uv2_padding, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PrimitiveMesh.method_set_uv2_padding, handle, pArgs, nil)
                 }
                 
             }
@@ -363,7 +363,7 @@ open class PrimitiveMesh: Mesh {
     fileprivate final func get_uv2_padding() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_uv2_padding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PrimitiveMesh.method_get_uv2_padding, handle, nil, &_result)
         return _result
     }
     
@@ -381,7 +381,7 @@ open class PrimitiveMesh: Mesh {
     /// Request an update of this primitive mesh based on its properties.
     public final func requestUpdate() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(PrimitiveMesh.method_request_update, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(PrimitiveMesh.method_request_update, handle, nil, nil)
         
     }
     

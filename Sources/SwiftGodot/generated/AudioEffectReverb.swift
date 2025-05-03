@@ -142,7 +142,7 @@ open class AudioEffectReverb: AudioEffect {
         withUnsafePointer(to: msec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_predelay_msec, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_predelay_msec, handle, pArgs, nil)
                 }
                 
             }
@@ -167,7 +167,7 @@ open class AudioEffectReverb: AudioEffect {
     fileprivate final func get_predelay_msec() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_predelay_msec, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_predelay_msec, handle, nil, &_result)
         return _result
     }
     
@@ -188,7 +188,7 @@ open class AudioEffectReverb: AudioEffect {
         withUnsafePointer(to: feedback) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_predelay_feedback, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_predelay_feedback, handle, pArgs, nil)
                 }
                 
             }
@@ -213,7 +213,7 @@ open class AudioEffectReverb: AudioEffect {
     fileprivate final func get_predelay_feedback() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_predelay_feedback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_predelay_feedback, handle, nil, &_result)
         return _result
     }
     
@@ -234,7 +234,7 @@ open class AudioEffectReverb: AudioEffect {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_room_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_room_size, handle, pArgs, nil)
                 }
                 
             }
@@ -259,7 +259,7 @@ open class AudioEffectReverb: AudioEffect {
     fileprivate final func get_room_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_room_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_room_size, handle, nil, &_result)
         return _result
     }
     
@@ -280,7 +280,7 @@ open class AudioEffectReverb: AudioEffect {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_damping, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_damping, handle, pArgs, nil)
                 }
                 
             }
@@ -305,7 +305,7 @@ open class AudioEffectReverb: AudioEffect {
     fileprivate final func get_damping() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_damping, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_damping, handle, nil, &_result)
         return _result
     }
     
@@ -326,7 +326,7 @@ open class AudioEffectReverb: AudioEffect {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_spread, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_spread, handle, pArgs, nil)
                 }
                 
             }
@@ -351,7 +351,7 @@ open class AudioEffectReverb: AudioEffect {
     fileprivate final func get_spread() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_spread, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_spread, handle, nil, &_result)
         return _result
     }
     
@@ -372,7 +372,7 @@ open class AudioEffectReverb: AudioEffect {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_dry, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_dry, handle, pArgs, nil)
                 }
                 
             }
@@ -397,7 +397,7 @@ open class AudioEffectReverb: AudioEffect {
     fileprivate final func get_dry() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_dry, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_dry, handle, nil, &_result)
         return _result
     }
     
@@ -418,7 +418,7 @@ open class AudioEffectReverb: AudioEffect {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_wet, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_wet, handle, pArgs, nil)
                 }
                 
             }
@@ -443,7 +443,7 @@ open class AudioEffectReverb: AudioEffect {
     fileprivate final func get_wet() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_wet, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_wet, handle, nil, &_result)
         return _result
     }
     
@@ -464,7 +464,7 @@ open class AudioEffectReverb: AudioEffect {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_hpf, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectReverb.method_set_hpf, handle, pArgs, nil)
                 }
                 
             }
@@ -489,7 +489,7 @@ open class AudioEffectReverb: AudioEffect {
     fileprivate final func get_hpf() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_hpf, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectReverb.method_get_hpf, handle, nil, &_result)
         return _result
     }
     

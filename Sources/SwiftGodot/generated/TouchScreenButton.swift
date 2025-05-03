@@ -175,7 +175,7 @@ open class TouchScreenButton: Node2D {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_texture_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_texture_normal, handle, pArgs, nil)
                 }
                 
             }
@@ -199,9 +199,9 @@ open class TouchScreenButton: Node2D {
     @inline(__always)
     fileprivate final func get_texture_normal() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TouchScreenButton.method_get_texture_normal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TouchScreenButton.method_get_texture_normal, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_texture_pressed: GDExtensionMethodBindPtr = {
@@ -221,7 +221,7 @@ open class TouchScreenButton: Node2D {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_texture_pressed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_texture_pressed, handle, pArgs, nil)
                 }
                 
             }
@@ -245,9 +245,9 @@ open class TouchScreenButton: Node2D {
     @inline(__always)
     fileprivate final func get_texture_pressed() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TouchScreenButton.method_get_texture_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TouchScreenButton.method_get_texture_pressed, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_bitmask: GDExtensionMethodBindPtr = {
@@ -267,7 +267,7 @@ open class TouchScreenButton: Node2D {
         withUnsafePointer(to: bitmask?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_bitmask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_bitmask, handle, pArgs, nil)
                 }
                 
             }
@@ -291,9 +291,9 @@ open class TouchScreenButton: Node2D {
     @inline(__always)
     fileprivate final func get_bitmask() -> BitMap? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TouchScreenButton.method_get_bitmask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TouchScreenButton.method_get_bitmask, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_shape: GDExtensionMethodBindPtr = {
@@ -313,7 +313,7 @@ open class TouchScreenButton: Node2D {
         withUnsafePointer(to: shape?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_shape, handle, pArgs, nil)
                 }
                 
             }
@@ -337,9 +337,9 @@ open class TouchScreenButton: Node2D {
     @inline(__always)
     fileprivate final func get_shape() -> Shape2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TouchScreenButton.method_get_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TouchScreenButton.method_get_shape, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_shape_centered: GDExtensionMethodBindPtr = {
@@ -359,7 +359,7 @@ open class TouchScreenButton: Node2D {
         withUnsafePointer(to: bool) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_shape_centered, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_shape_centered, handle, pArgs, nil)
                 }
                 
             }
@@ -384,7 +384,7 @@ open class TouchScreenButton: Node2D {
     fileprivate final func is_shape_centered() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TouchScreenButton.method_is_shape_centered, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TouchScreenButton.method_is_shape_centered, handle, nil, &_result)
         return _result
     }
     
@@ -405,7 +405,7 @@ open class TouchScreenButton: Node2D {
         withUnsafePointer(to: bool) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_shape_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_shape_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -430,7 +430,7 @@ open class TouchScreenButton: Node2D {
     fileprivate final func is_shape_visible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TouchScreenButton.method_is_shape_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TouchScreenButton.method_is_shape_visible, handle, nil, &_result)
         return _result
     }
     
@@ -452,7 +452,7 @@ open class TouchScreenButton: Node2D {
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_action, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_action, handle, pArgs, nil)
                 }
                 
             }
@@ -477,7 +477,7 @@ open class TouchScreenButton: Node2D {
     fileprivate final func get_action() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(TouchScreenButton.method_get_action, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TouchScreenButton.method_get_action, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -498,7 +498,7 @@ open class TouchScreenButton: Node2D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_visibility_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_visibility_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -523,7 +523,7 @@ open class TouchScreenButton: Node2D {
     fileprivate final func get_visibility_mode() -> TouchScreenButton.VisibilityMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TouchScreenButton.method_get_visibility_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TouchScreenButton.method_get_visibility_mode, handle, nil, &_result)
         return TouchScreenButton.VisibilityMode (rawValue: _result)!
     }
     
@@ -544,7 +544,7 @@ open class TouchScreenButton: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_passby_press, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TouchScreenButton.method_set_passby_press, handle, pArgs, nil)
                 }
                 
             }
@@ -569,7 +569,7 @@ open class TouchScreenButton: Node2D {
     fileprivate final func is_passby_press_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TouchScreenButton.method_is_passby_press_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TouchScreenButton.method_is_passby_press_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -588,7 +588,7 @@ open class TouchScreenButton: Node2D {
     public final func isPressed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TouchScreenButton.method_is_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TouchScreenButton.method_is_pressed, handle, nil, &_result)
         return _result
     }
     

@@ -62,7 +62,7 @@ open class ConfigFile: RefCounted {
                 withUnsafePointer(to: value.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ConfigFile.method_set_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(ConfigFile.method_set_value, handle, pArgs, nil)
                         }
                         
                     }
@@ -98,7 +98,7 @@ open class ConfigFile: RefCounted {
                 withUnsafePointer(to: `default`.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ConfigFile.method_get_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(ConfigFile.method_get_value, handle, pArgs, &_result)
                         }
                         
                     }
@@ -131,7 +131,7 @@ open class ConfigFile: RefCounted {
         withUnsafePointer(to: section.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ConfigFile.method_has_section, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ConfigFile.method_has_section, handle, pArgs, &_result)
                 }
                 
             }
@@ -162,7 +162,7 @@ open class ConfigFile: RefCounted {
             withUnsafePointer(to: key.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ConfigFile.method_has_section_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ConfigFile.method_has_section_key, handle, pArgs, &_result)
                     }
                     
                 }
@@ -189,7 +189,7 @@ open class ConfigFile: RefCounted {
     public final func getSections() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(ConfigFile.method_get_sections, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ConfigFile.method_get_sections, handle, nil, &_result.content)
         return _result
     }
     
@@ -212,7 +212,7 @@ open class ConfigFile: RefCounted {
         withUnsafePointer(to: section.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ConfigFile.method_get_section_keys, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ConfigFile.method_get_section_keys, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -240,7 +240,7 @@ open class ConfigFile: RefCounted {
         withUnsafePointer(to: section.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ConfigFile.method_erase_section, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ConfigFile.method_erase_section, handle, pArgs, nil)
                 }
                 
             }
@@ -270,7 +270,7 @@ open class ConfigFile: RefCounted {
             withUnsafePointer(to: key.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ConfigFile.method_erase_section_key, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ConfigFile.method_erase_section_key, handle, pArgs, nil)
                     }
                     
                 }
@@ -304,7 +304,7 @@ open class ConfigFile: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ConfigFile.method_load, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ConfigFile.method_load, handle, pArgs, &_result)
                 }
                 
             }
@@ -336,7 +336,7 @@ open class ConfigFile: RefCounted {
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ConfigFile.method_parse, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ConfigFile.method_parse, handle, pArgs, &_result)
                 }
                 
             }
@@ -368,7 +368,7 @@ open class ConfigFile: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ConfigFile.method_save, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ConfigFile.method_save, handle, pArgs, &_result)
                 }
                 
             }
@@ -393,7 +393,7 @@ open class ConfigFile: RefCounted {
     public final func encodeToText() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(ConfigFile.method_encode_to_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ConfigFile.method_encode_to_text, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -420,7 +420,7 @@ open class ConfigFile: RefCounted {
             withUnsafePointer(to: key.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ConfigFile.method_load_encrypted, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ConfigFile.method_load_encrypted, handle, pArgs, &_result)
                     }
                     
                 }
@@ -456,7 +456,7 @@ open class ConfigFile: RefCounted {
             withUnsafePointer(to: password.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ConfigFile.method_load_encrypted_pass, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ConfigFile.method_load_encrypted_pass, handle, pArgs, &_result)
                     }
                     
                 }
@@ -491,7 +491,7 @@ open class ConfigFile: RefCounted {
             withUnsafePointer(to: key.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ConfigFile.method_save_encrypted, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ConfigFile.method_save_encrypted, handle, pArgs, &_result)
                     }
                     
                 }
@@ -527,7 +527,7 @@ open class ConfigFile: RefCounted {
             withUnsafePointer(to: password.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ConfigFile.method_save_encrypted_pass, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ConfigFile.method_save_encrypted_pass, handle, pArgs, &_result)
                     }
                     
                 }
@@ -553,7 +553,7 @@ open class ConfigFile: RefCounted {
     /// Removes the entire contents of the config.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ConfigFile.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ConfigFile.method_clear, handle, nil, nil)
         
     }
     

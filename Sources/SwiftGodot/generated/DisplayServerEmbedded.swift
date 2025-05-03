@@ -62,9 +62,9 @@ open class DisplayServerEmbedded: DisplayServer {
     
     /// 
     public static func getSingleton() -> DisplayServerEmbedded? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         gi.object_method_bind_ptrcall(method_get_singleton, nil, nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_resize_window: GDExtensionMethodBindPtr = {
@@ -85,7 +85,7 @@ open class DisplayServerEmbedded: DisplayServer {
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(DisplayServerEmbedded.method_resize_window, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(DisplayServerEmbedded.method_resize_window, handle, pArgs, nil)
                     }
                     
                 }
@@ -114,7 +114,7 @@ open class DisplayServerEmbedded: DisplayServer {
         withUnsafePointer(to: contentScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(DisplayServerEmbedded.method_set_content_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(DisplayServerEmbedded.method_set_content_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -146,7 +146,7 @@ open class DisplayServerEmbedded: DisplayServer {
                             withUnsafePointer(to: window) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(DisplayServerEmbedded.method_touch_press, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(DisplayServerEmbedded.method_touch_press, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -190,7 +190,7 @@ open class DisplayServerEmbedded: DisplayServer {
                                     withUnsafePointer(to: window) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                gi.object_method_bind_ptrcall(DisplayServerEmbedded.method_touch_drag, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                                gi.object_method_bind_ptrcall(DisplayServerEmbedded.method_touch_drag, handle, pArgs, nil)
                                             }
                                             
                                         }
@@ -232,7 +232,7 @@ open class DisplayServerEmbedded: DisplayServer {
             withUnsafePointer(to: window) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(DisplayServerEmbedded.method_touches_canceled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(DisplayServerEmbedded.method_touches_canceled, handle, pArgs, nil)
                     }
                     
                 }
@@ -267,7 +267,7 @@ open class DisplayServerEmbedded: DisplayServer {
                                 withUnsafePointer(to: window) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(DisplayServerEmbedded.method_key, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                            gi.object_method_bind_ptrcall(DisplayServerEmbedded.method_key, handle, pArgs, nil)
                                         }
                                         
                                     }

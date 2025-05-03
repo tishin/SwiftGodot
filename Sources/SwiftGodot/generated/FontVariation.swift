@@ -194,7 +194,7 @@ open class FontVariation: Font {
         withUnsafePointer(to: font?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontVariation.method_set_base_font, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontVariation.method_set_base_font, handle, pArgs, nil)
                 }
                 
             }
@@ -218,9 +218,9 @@ open class FontVariation: Font {
     @inline(__always)
     fileprivate final func get_base_font() -> Font? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(FontVariation.method_get_base_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(FontVariation.method_get_base_font, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_variation_opentype: GDExtensionMethodBindPtr = {
@@ -240,7 +240,7 @@ open class FontVariation: Font {
         withUnsafePointer(to: coords.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontVariation.method_set_variation_opentype, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontVariation.method_set_variation_opentype, handle, pArgs, nil)
                 }
                 
             }
@@ -265,7 +265,7 @@ open class FontVariation: Font {
     fileprivate final func get_variation_opentype() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(FontVariation.method_get_variation_opentype, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FontVariation.method_get_variation_opentype, handle, nil, &_result.content)
         return _result
     }
     
@@ -286,7 +286,7 @@ open class FontVariation: Font {
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontVariation.method_set_variation_embolden, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontVariation.method_set_variation_embolden, handle, pArgs, nil)
                 }
                 
             }
@@ -311,7 +311,7 @@ open class FontVariation: Font {
     fileprivate final func get_variation_embolden() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FontVariation.method_get_variation_embolden, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontVariation.method_get_variation_embolden, handle, nil, &_result)
         return _result
     }
     
@@ -332,7 +332,7 @@ open class FontVariation: Font {
         withUnsafePointer(to: faceIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontVariation.method_set_variation_face_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontVariation.method_set_variation_face_index, handle, pArgs, nil)
                 }
                 
             }
@@ -357,7 +357,7 @@ open class FontVariation: Font {
     fileprivate final func get_variation_face_index() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(FontVariation.method_get_variation_face_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontVariation.method_get_variation_face_index, handle, nil, &_result)
         return _result
     }
     
@@ -378,7 +378,7 @@ open class FontVariation: Font {
         withUnsafePointer(to: transform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontVariation.method_set_variation_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontVariation.method_set_variation_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -403,7 +403,7 @@ open class FontVariation: Font {
     fileprivate final func get_variation_transform() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(FontVariation.method_get_variation_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontVariation.method_get_variation_transform, handle, nil, &_result)
         return _result
     }
     
@@ -424,7 +424,7 @@ open class FontVariation: Font {
         withUnsafePointer(to: features.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontVariation.method_set_opentype_features, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontVariation.method_set_opentype_features, handle, pArgs, nil)
                 }
                 
             }
@@ -453,7 +453,7 @@ open class FontVariation: Font {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontVariation.method_set_spacing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FontVariation.method_set_spacing, handle, pArgs, nil)
                     }
                     
                 }
@@ -482,7 +482,7 @@ open class FontVariation: Font {
         withUnsafePointer(to: baselineOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontVariation.method_set_baseline_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontVariation.method_set_baseline_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -507,7 +507,7 @@ open class FontVariation: Font {
     fileprivate final func get_baseline_offset() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FontVariation.method_get_baseline_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontVariation.method_get_baseline_offset, handle, nil, &_result)
         return _result
     }
     

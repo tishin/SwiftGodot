@@ -29,7 +29,7 @@ open class TranslationServer: Object {
     /// The shared instance of this class
     public static var shared: TranslationServer {
         return withUnsafePointer(to: &TranslationServer.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -72,7 +72,7 @@ open class TranslationServer: Object {
         withUnsafePointer(to: locale.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_locale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_locale, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -99,7 +99,7 @@ open class TranslationServer: Object {
     /// 
     public static func getLocale() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_locale, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_locale, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -120,7 +120,7 @@ open class TranslationServer: Object {
     /// 
     public static func getToolLocale() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_tool_locale, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_tool_locale, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -144,7 +144,7 @@ open class TranslationServer: Object {
             withUnsafePointer(to: localeB.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_compare_locales, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_compare_locales, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -175,7 +175,7 @@ open class TranslationServer: Object {
             withUnsafePointer(to: addDefaults) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_standardize_locale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_standardize_locale, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -201,7 +201,7 @@ open class TranslationServer: Object {
     /// Returns array of known language codes.
     public static func getAllLanguages() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_all_languages, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_all_languages, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -223,7 +223,7 @@ open class TranslationServer: Object {
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_language_name, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_language_name, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -247,7 +247,7 @@ open class TranslationServer: Object {
     /// Returns an array of known script codes.
     public static func getAllScripts() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_all_scripts, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_all_scripts, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -269,7 +269,7 @@ open class TranslationServer: Object {
         withUnsafePointer(to: script.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_script_name, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_script_name, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -293,7 +293,7 @@ open class TranslationServer: Object {
     /// Returns an array of known country codes.
     public static func getAllCountries() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_all_countries, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_all_countries, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -315,7 +315,7 @@ open class TranslationServer: Object {
         withUnsafePointer(to: country.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_country_name, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_country_name, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -343,7 +343,7 @@ open class TranslationServer: Object {
         withUnsafePointer(to: locale.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_locale_name, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_locale_name, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -374,7 +374,7 @@ open class TranslationServer: Object {
             withUnsafePointer(to: context.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_translate, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_translate, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -411,7 +411,7 @@ open class TranslationServer: Object {
                     withUnsafePointer(to: context.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_translate_plural, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(method_translate_plural, shared.handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -443,7 +443,7 @@ open class TranslationServer: Object {
         withUnsafePointer(to: translation?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_add_translation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_add_translation, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -469,7 +469,7 @@ open class TranslationServer: Object {
         withUnsafePointer(to: translation?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_remove_translation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_remove_translation, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -492,19 +492,19 @@ open class TranslationServer: Object {
     
     /// Returns the ``Translation`` instance that best matches `locale` in the main translation domain. Returns `null` if there are no matches.
     public static func getTranslationObject(locale: String) -> Translation? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let locale = GString(locale)
         withUnsafePointer(to: locale.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_translation_object, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_translation_object, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_has_domain: GDExtensionMethodBindPtr = {
@@ -524,7 +524,7 @@ open class TranslationServer: Object {
         withUnsafePointer(to: domain.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_domain, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_domain, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -547,18 +547,18 @@ open class TranslationServer: Object {
     
     /// Returns the translation domain with the specified name. An empty translation domain will be created and added if it does not exist.
     public static func getOrAddDomain(_ domain: StringName) -> TranslationDomain? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: domain.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_or_add_domain, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_or_add_domain, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_remove_domain: GDExtensionMethodBindPtr = {
@@ -580,7 +580,7 @@ open class TranslationServer: Object {
         withUnsafePointer(to: domain.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_remove_domain, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_remove_domain, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -603,7 +603,7 @@ open class TranslationServer: Object {
     
     /// Removes all translations from the main translation domain.
     public static func clear() {
-        gi.object_method_bind_ptrcall(method_clear, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_clear, shared.handle, nil, nil)
         
     }
     
@@ -621,7 +621,7 @@ open class TranslationServer: Object {
     /// Returns an array of all loaded locales of the project.
     public static func getLoadedLocales() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_loaded_locales, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_loaded_locales, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -639,7 +639,7 @@ open class TranslationServer: Object {
     @inline(__always)
     fileprivate static func is_pseudolocalization_enabled() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_pseudolocalization_enabled, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_pseudolocalization_enabled, shared.handle, nil, &_result)
         return _result
     }
     
@@ -659,7 +659,7 @@ open class TranslationServer: Object {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_pseudolocalization_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_pseudolocalization_enabled, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -682,7 +682,7 @@ open class TranslationServer: Object {
     
     /// Reparses the pseudolocalization options and reloads the translation for the main translation domain.
     public static func reloadPseudolocalization() {
-        gi.object_method_bind_ptrcall(method_reload_pseudolocalization, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_reload_pseudolocalization, shared.handle, nil, nil)
         
     }
     
@@ -706,7 +706,7 @@ open class TranslationServer: Object {
         withUnsafePointer(to: message.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_pseudolocalize, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_pseudolocalize, shared.handle, pArgs, &_result.content)
                 }
                 
             }

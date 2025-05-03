@@ -112,7 +112,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
         withUnsafePointer(to: title.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_set_title, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_set_title, handle, pArgs, nil)
                 }
                 
             }
@@ -137,7 +137,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     fileprivate final func get_title() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_get_title, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_get_title, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -158,7 +158,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_set_tint_color_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_set_tint_color_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -183,7 +183,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     fileprivate final func is_tint_color_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_is_tint_color_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_is_tint_color_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -204,7 +204,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_set_tint_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_set_tint_color, handle, pArgs, nil)
                 }
                 
             }
@@ -229,7 +229,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     fileprivate final func get_tint_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_get_tint_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_get_tint_color, handle, nil, &_result)
         return _result
     }
     
@@ -250,7 +250,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_set_autoshrink_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_set_autoshrink_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -275,7 +275,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     fileprivate final func is_autoshrink_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_is_autoshrink_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_is_autoshrink_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -296,7 +296,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
         withUnsafePointer(to: node) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_add_attached_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_add_attached_node, handle, pArgs, nil)
                 }
                 
             }
@@ -323,7 +323,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
         withUnsafePointer(to: node) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_remove_attached_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_remove_attached_node, handle, pArgs, nil)
                 }
                 
             }
@@ -350,7 +350,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
         withUnsafePointer(to: attachedNodes.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_set_attached_nodes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_set_attached_nodes, handle, pArgs, nil)
                 }
                 
             }
@@ -375,7 +375,7 @@ open class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
     fileprivate final func get_attached_nodes() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_get_attached_nodes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualShaderNodeFrame.method_get_attached_nodes, handle, nil, &_result.content)
         return _result
     }
     

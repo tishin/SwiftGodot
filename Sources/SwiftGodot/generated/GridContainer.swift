@@ -61,7 +61,7 @@ open class GridContainer: Container {
         withUnsafePointer(to: columns) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridContainer.method_set_columns, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridContainer.method_set_columns, handle, pArgs, nil)
                 }
                 
             }
@@ -86,7 +86,7 @@ open class GridContainer: Container {
     fileprivate final func get_columns() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GridContainer.method_get_columns, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridContainer.method_get_columns, handle, nil, &_result)
         return _result
     }
     

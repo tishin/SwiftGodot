@@ -100,7 +100,7 @@ open class AudioEffectPitchShift: AudioEffect {
         withUnsafePointer(to: rate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_set_pitch_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_set_pitch_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -125,7 +125,7 @@ open class AudioEffectPitchShift: AudioEffect {
     fileprivate final func get_pitch_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_get_pitch_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_get_pitch_scale, handle, nil, &_result)
         return _result
     }
     
@@ -146,7 +146,7 @@ open class AudioEffectPitchShift: AudioEffect {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_set_oversampling, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_set_oversampling, handle, pArgs, nil)
                 }
                 
             }
@@ -171,7 +171,7 @@ open class AudioEffectPitchShift: AudioEffect {
     fileprivate final func get_oversampling() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_get_oversampling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_get_oversampling, handle, nil, &_result)
         return _result
     }
     
@@ -192,7 +192,7 @@ open class AudioEffectPitchShift: AudioEffect {
         withUnsafePointer(to: size.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_set_fft_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_set_fft_size, handle, pArgs, nil)
                 }
                 
             }
@@ -217,7 +217,7 @@ open class AudioEffectPitchShift: AudioEffect {
     fileprivate final func get_fft_size() -> AudioEffectPitchShift.FFTSize {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_get_fft_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectPitchShift.method_get_fft_size, handle, nil, &_result)
         return AudioEffectPitchShift.FFTSize (rawValue: _result)!
     }
     

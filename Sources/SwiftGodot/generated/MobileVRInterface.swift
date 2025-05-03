@@ -179,7 +179,7 @@ open class MobileVRInterface: XRInterface {
         withUnsafePointer(to: eyeHeight) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_eye_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_eye_height, handle, pArgs, nil)
                 }
                 
             }
@@ -204,7 +204,7 @@ open class MobileVRInterface: XRInterface {
     fileprivate final func get_eye_height() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_eye_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_eye_height, handle, nil, &_result)
         return _result
     }
     
@@ -225,7 +225,7 @@ open class MobileVRInterface: XRInterface {
         withUnsafePointer(to: iod) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_iod, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_iod, handle, pArgs, nil)
                 }
                 
             }
@@ -250,7 +250,7 @@ open class MobileVRInterface: XRInterface {
     fileprivate final func get_iod() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_iod, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_iod, handle, nil, &_result)
         return _result
     }
     
@@ -271,7 +271,7 @@ open class MobileVRInterface: XRInterface {
         withUnsafePointer(to: displayWidth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_display_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_display_width, handle, pArgs, nil)
                 }
                 
             }
@@ -296,7 +296,7 @@ open class MobileVRInterface: XRInterface {
     fileprivate final func get_display_width() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_display_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_display_width, handle, nil, &_result)
         return _result
     }
     
@@ -317,7 +317,7 @@ open class MobileVRInterface: XRInterface {
         withUnsafePointer(to: displayToLens) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_display_to_lens, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_display_to_lens, handle, pArgs, nil)
                 }
                 
             }
@@ -342,7 +342,7 @@ open class MobileVRInterface: XRInterface {
     fileprivate final func get_display_to_lens() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_display_to_lens, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_display_to_lens, handle, nil, &_result)
         return _result
     }
     
@@ -363,7 +363,7 @@ open class MobileVRInterface: XRInterface {
         withUnsafePointer(to: offsetRect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_offset_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_offset_rect, handle, pArgs, nil)
                 }
                 
             }
@@ -388,7 +388,7 @@ open class MobileVRInterface: XRInterface {
     fileprivate final func get_offset_rect() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_offset_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_offset_rect, handle, nil, &_result)
         return _result
     }
     
@@ -409,7 +409,7 @@ open class MobileVRInterface: XRInterface {
         withUnsafePointer(to: oversample) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_oversample, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_oversample, handle, pArgs, nil)
                 }
                 
             }
@@ -434,7 +434,7 @@ open class MobileVRInterface: XRInterface {
     fileprivate final func get_oversample() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_oversample, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_oversample, handle, nil, &_result)
         return _result
     }
     
@@ -455,7 +455,7 @@ open class MobileVRInterface: XRInterface {
         withUnsafePointer(to: k) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_k1, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_k1, handle, pArgs, nil)
                 }
                 
             }
@@ -480,7 +480,7 @@ open class MobileVRInterface: XRInterface {
     fileprivate final func get_k1() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_k1, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_k1, handle, nil, &_result)
         return _result
     }
     
@@ -501,7 +501,7 @@ open class MobileVRInterface: XRInterface {
         withUnsafePointer(to: k) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_k2, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_k2, handle, pArgs, nil)
                 }
                 
             }
@@ -526,7 +526,7 @@ open class MobileVRInterface: XRInterface {
     fileprivate final func get_k2() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_k2, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_k2, handle, nil, &_result)
         return _result
     }
     
@@ -545,7 +545,7 @@ open class MobileVRInterface: XRInterface {
     fileprivate final func get_vrs_min_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_vrs_min_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_vrs_min_radius, handle, nil, &_result)
         return _result
     }
     
@@ -566,7 +566,7 @@ open class MobileVRInterface: XRInterface {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_vrs_min_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_vrs_min_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -591,7 +591,7 @@ open class MobileVRInterface: XRInterface {
     fileprivate final func get_vrs_strength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_vrs_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MobileVRInterface.method_get_vrs_strength, handle, nil, &_result)
         return _result
     }
     
@@ -612,7 +612,7 @@ open class MobileVRInterface: XRInterface {
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_vrs_strength, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MobileVRInterface.method_set_vrs_strength, handle, pArgs, nil)
                 }
                 
             }

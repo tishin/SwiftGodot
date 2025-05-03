@@ -49,7 +49,7 @@ open class AudioEffectInstance: RefCounted {
                 withUnsafePointer(to: frameCount) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AudioEffectInstance.method__process, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(AudioEffectInstance.method__process, handle, pArgs, nil)
                         }
                         
                     }
@@ -82,7 +82,7 @@ open class AudioEffectInstance: RefCounted {
     open func _processSilence() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioEffectInstance.method__process_silence, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectInstance.method__process_silence, handle, nil, &_result)
         return _result
     }
     

@@ -407,7 +407,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: samplePartitionType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_sample_partition_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_sample_partition_type, handle, pArgs, nil)
                 }
                 
             }
@@ -432,7 +432,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_sample_partition_type() -> NavigationMesh.SamplePartitionType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_sample_partition_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_sample_partition_type, handle, nil, &_result)
         return NavigationMesh.SamplePartitionType (rawValue: _result)!
     }
     
@@ -453,7 +453,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: geometryType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_parsed_geometry_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_parsed_geometry_type, handle, pArgs, nil)
                 }
                 
             }
@@ -478,7 +478,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_parsed_geometry_type() -> NavigationMesh.ParsedGeometryType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_parsed_geometry_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_parsed_geometry_type, handle, nil, &_result)
         return NavigationMesh.ParsedGeometryType (rawValue: _result)!
     }
     
@@ -499,7 +499,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_collision_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_collision_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -524,7 +524,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_collision_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_collision_mask, handle, nil, &_result)
         return _result
     }
     
@@ -546,7 +546,7 @@ open class NavigationMesh: Resource {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NavigationMesh.method_set_collision_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NavigationMesh.method_set_collision_mask_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -576,7 +576,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_get_collision_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_get_collision_mask_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -603,7 +603,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: mask.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_source_geometry_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_source_geometry_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -628,7 +628,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_source_geometry_mode() -> NavigationMesh.SourceGeometryMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_source_geometry_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_source_geometry_mode, handle, nil, &_result)
         return NavigationMesh.SourceGeometryMode (rawValue: _result)!
     }
     
@@ -649,7 +649,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: mask.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_source_group_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_source_group_name, handle, pArgs, nil)
                 }
                 
             }
@@ -674,7 +674,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_source_group_name() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_source_group_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_source_group_name, handle, nil, &_result.content)
         return _result
     }
     
@@ -695,7 +695,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: cellSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_cell_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_cell_size, handle, pArgs, nil)
                 }
                 
             }
@@ -720,7 +720,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_cell_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_cell_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_cell_size, handle, nil, &_result)
         return _result
     }
     
@@ -741,7 +741,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: cellHeight) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_cell_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_cell_height, handle, pArgs, nil)
                 }
                 
             }
@@ -766,7 +766,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_cell_height() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_cell_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_cell_height, handle, nil, &_result)
         return _result
     }
     
@@ -787,7 +787,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: borderSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_border_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_border_size, handle, pArgs, nil)
                 }
                 
             }
@@ -812,7 +812,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_border_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_border_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_border_size, handle, nil, &_result)
         return _result
     }
     
@@ -833,7 +833,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: agentHeight) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_agent_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_agent_height, handle, pArgs, nil)
                 }
                 
             }
@@ -858,7 +858,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_agent_height() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_agent_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_agent_height, handle, nil, &_result)
         return _result
     }
     
@@ -879,7 +879,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: agentRadius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_agent_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_agent_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -904,7 +904,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_agent_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_agent_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_agent_radius, handle, nil, &_result)
         return _result
     }
     
@@ -925,7 +925,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: agentMaxClimb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_agent_max_climb, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_agent_max_climb, handle, pArgs, nil)
                 }
                 
             }
@@ -950,7 +950,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_agent_max_climb() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_agent_max_climb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_agent_max_climb, handle, nil, &_result)
         return _result
     }
     
@@ -971,7 +971,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: agentMaxSlope) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_agent_max_slope, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_agent_max_slope, handle, pArgs, nil)
                 }
                 
             }
@@ -996,7 +996,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_agent_max_slope() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_agent_max_slope, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_agent_max_slope, handle, nil, &_result)
         return _result
     }
     
@@ -1017,7 +1017,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: regionMinSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_region_min_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_region_min_size, handle, pArgs, nil)
                 }
                 
             }
@@ -1042,7 +1042,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_region_min_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_region_min_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_region_min_size, handle, nil, &_result)
         return _result
     }
     
@@ -1063,7 +1063,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: regionMergeSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_region_merge_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_region_merge_size, handle, pArgs, nil)
                 }
                 
             }
@@ -1088,7 +1088,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_region_merge_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_region_merge_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_region_merge_size, handle, nil, &_result)
         return _result
     }
     
@@ -1109,7 +1109,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: edgeMaxLength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_edge_max_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_edge_max_length, handle, pArgs, nil)
                 }
                 
             }
@@ -1134,7 +1134,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_edge_max_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_edge_max_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_edge_max_length, handle, nil, &_result)
         return _result
     }
     
@@ -1155,7 +1155,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: edgeMaxError) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_edge_max_error, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_edge_max_error, handle, pArgs, nil)
                 }
                 
             }
@@ -1180,7 +1180,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_edge_max_error() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_edge_max_error, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_edge_max_error, handle, nil, &_result)
         return _result
     }
     
@@ -1201,7 +1201,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: verticesPerPolygon) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_vertices_per_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_vertices_per_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -1226,7 +1226,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_vertices_per_polygon() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_vertices_per_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_vertices_per_polygon, handle, nil, &_result)
         return _result
     }
     
@@ -1247,7 +1247,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: detailSampleDist) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_detail_sample_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_detail_sample_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -1272,7 +1272,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_detail_sample_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_detail_sample_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_detail_sample_distance, handle, nil, &_result)
         return _result
     }
     
@@ -1293,7 +1293,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: detailSampleMaxError) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_detail_sample_max_error, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_detail_sample_max_error, handle, pArgs, nil)
                 }
                 
             }
@@ -1318,7 +1318,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_detail_sample_max_error() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_detail_sample_max_error, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_detail_sample_max_error, handle, nil, &_result)
         return _result
     }
     
@@ -1339,7 +1339,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: filterLowHangingObstacles) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_filter_low_hanging_obstacles, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_filter_low_hanging_obstacles, handle, pArgs, nil)
                 }
                 
             }
@@ -1364,7 +1364,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_filter_low_hanging_obstacles() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_low_hanging_obstacles, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_low_hanging_obstacles, handle, nil, &_result)
         return _result
     }
     
@@ -1385,7 +1385,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: filterLedgeSpans) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_filter_ledge_spans, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_filter_ledge_spans, handle, pArgs, nil)
                 }
                 
             }
@@ -1410,7 +1410,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_filter_ledge_spans() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_ledge_spans, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_ledge_spans, handle, nil, &_result)
         return _result
     }
     
@@ -1431,7 +1431,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: filterWalkableLowHeightSpans) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_filter_walkable_low_height_spans, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_filter_walkable_low_height_spans, handle, pArgs, nil)
                 }
                 
             }
@@ -1456,7 +1456,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_filter_walkable_low_height_spans() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_walkable_low_height_spans, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_walkable_low_height_spans, handle, nil, &_result)
         return _result
     }
     
@@ -1477,7 +1477,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: bakingAabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_filter_baking_aabb, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_filter_baking_aabb, handle, pArgs, nil)
                 }
                 
             }
@@ -1502,7 +1502,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_filter_baking_aabb() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_baking_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_baking_aabb, handle, nil, &_result)
         return _result
     }
     
@@ -1523,7 +1523,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: bakingAabbOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_filter_baking_aabb_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_filter_baking_aabb_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -1548,7 +1548,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_filter_baking_aabb_offset() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_baking_aabb_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_filter_baking_aabb_offset, handle, nil, &_result)
         return _result
     }
     
@@ -1570,7 +1570,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: vertices.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_vertices, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_set_vertices, handle, pArgs, nil)
                 }
                 
             }
@@ -1596,7 +1596,7 @@ open class NavigationMesh: Resource {
     fileprivate final func get_vertices() -> PackedVector3Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_vertices, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_vertices, handle, nil, &_result.content)
         return _result
     }
     
@@ -1617,7 +1617,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_add_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_add_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -1642,7 +1642,7 @@ open class NavigationMesh: Resource {
     public final func getPolygonCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(NavigationMesh.method_get_polygon_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_get_polygon_count, handle, nil, &_result)
         return _result
     }
     
@@ -1664,7 +1664,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_get_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_get_polygon, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1688,7 +1688,7 @@ open class NavigationMesh: Resource {
     /// Clears the array of polygons, but it doesn't clear the array of vertices.
     public final func clearPolygons() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(NavigationMesh.method_clear_polygons, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_clear_polygons, handle, nil, nil)
         
     }
     
@@ -1712,7 +1712,7 @@ open class NavigationMesh: Resource {
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMesh.method_create_from_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMesh.method_create_from_mesh, handle, pArgs, nil)
                 }
                 
             }
@@ -1736,7 +1736,7 @@ open class NavigationMesh: Resource {
     /// Clears the internal arrays for vertices and polygon indices.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(NavigationMesh.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(NavigationMesh.method_clear, handle, nil, nil)
         
     }
     

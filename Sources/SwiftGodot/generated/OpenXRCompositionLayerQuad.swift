@@ -58,7 +58,7 @@ open class OpenXRCompositionLayerQuad: OpenXRCompositionLayer {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerQuad.method_set_quad_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerQuad.method_set_quad_size, handle, pArgs, nil)
                 }
                 
             }
@@ -83,7 +83,7 @@ open class OpenXRCompositionLayerQuad: OpenXRCompositionLayer {
     fileprivate final func get_quad_size() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayerQuad.method_get_quad_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayerQuad.method_get_quad_size, handle, nil, &_result)
         return _result
     }
     

@@ -103,7 +103,7 @@ open class SpringArm3D: Node3D {
     public final func getHitLength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SpringArm3D.method_get_hit_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpringArm3D.method_get_hit_length, handle, nil, &_result)
         return _result
     }
     
@@ -124,7 +124,7 @@ open class SpringArm3D: Node3D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringArm3D.method_set_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringArm3D.method_set_length, handle, pArgs, nil)
                 }
                 
             }
@@ -149,7 +149,7 @@ open class SpringArm3D: Node3D {
     fileprivate final func get_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SpringArm3D.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpringArm3D.method_get_length, handle, nil, &_result)
         return _result
     }
     
@@ -170,7 +170,7 @@ open class SpringArm3D: Node3D {
         withUnsafePointer(to: shape?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringArm3D.method_set_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringArm3D.method_set_shape, handle, pArgs, nil)
                 }
                 
             }
@@ -194,9 +194,9 @@ open class SpringArm3D: Node3D {
     @inline(__always)
     fileprivate final func get_shape() -> Shape3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(SpringArm3D.method_get_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(SpringArm3D.method_get_shape, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_add_excluded_object: GDExtensionMethodBindPtr = {
@@ -216,7 +216,7 @@ open class SpringArm3D: Node3D {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringArm3D.method_add_excluded_object, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringArm3D.method_add_excluded_object, handle, pArgs, nil)
                 }
                 
             }
@@ -244,7 +244,7 @@ open class SpringArm3D: Node3D {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringArm3D.method_remove_excluded_object, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringArm3D.method_remove_excluded_object, handle, pArgs, &_result)
                 }
                 
             }
@@ -268,7 +268,7 @@ open class SpringArm3D: Node3D {
     /// Clears the list of ``PhysicsBody3D`` objects excluded from the collision check.
     public final func clearExcludedObjects() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SpringArm3D.method_clear_excluded_objects, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SpringArm3D.method_clear_excluded_objects, handle, nil, nil)
         
     }
     
@@ -289,7 +289,7 @@ open class SpringArm3D: Node3D {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringArm3D.method_set_collision_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringArm3D.method_set_collision_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -314,7 +314,7 @@ open class SpringArm3D: Node3D {
     fileprivate final func get_collision_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(SpringArm3D.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpringArm3D.method_get_collision_mask, handle, nil, &_result)
         return _result
     }
     
@@ -335,7 +335,7 @@ open class SpringArm3D: Node3D {
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringArm3D.method_set_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringArm3D.method_set_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -360,7 +360,7 @@ open class SpringArm3D: Node3D {
     fileprivate final func get_margin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SpringArm3D.method_get_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpringArm3D.method_get_margin, handle, nil, &_result)
         return _result
     }
     

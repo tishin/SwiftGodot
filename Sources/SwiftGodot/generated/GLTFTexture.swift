@@ -66,7 +66,7 @@ open class GLTFTexture: Resource {
     fileprivate final func get_src_image() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFTexture.method_get_src_image, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFTexture.method_get_src_image, handle, nil, &_result)
         return _result
     }
     
@@ -87,7 +87,7 @@ open class GLTFTexture: Resource {
         withUnsafePointer(to: srcImage) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFTexture.method_set_src_image, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFTexture.method_set_src_image, handle, pArgs, nil)
                 }
                 
             }
@@ -112,7 +112,7 @@ open class GLTFTexture: Resource {
     fileprivate final func get_sampler() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFTexture.method_get_sampler, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFTexture.method_get_sampler, handle, nil, &_result)
         return _result
     }
     
@@ -133,7 +133,7 @@ open class GLTFTexture: Resource {
         withUnsafePointer(to: sampler) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFTexture.method_set_sampler, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFTexture.method_set_sampler, handle, pArgs, nil)
                 }
                 
             }

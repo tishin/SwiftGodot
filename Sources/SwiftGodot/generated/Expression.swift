@@ -54,7 +54,7 @@ open class Expression: RefCounted {
             withUnsafePointer(to: inputNames.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Expression.method_parse, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Expression.method_parse, handle, pArgs, &_result)
                     }
                     
                 }
@@ -90,7 +90,7 @@ open class Expression: RefCounted {
                     withUnsafePointer(to: constCallsOnly) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Expression.method_execute, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(Expression.method_execute, handle, pArgs, &_result)
                             }
                             
                         }
@@ -121,7 +121,7 @@ open class Expression: RefCounted {
     public final func hasExecuteFailed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Expression.method_has_execute_failed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Expression.method_has_execute_failed, handle, nil, &_result)
         return _result
     }
     
@@ -140,7 +140,7 @@ open class Expression: RefCounted {
     public final func getErrorText() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Expression.method_get_error_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Expression.method_get_error_text, handle, nil, &_result.content)
         return _result.description
     }
     

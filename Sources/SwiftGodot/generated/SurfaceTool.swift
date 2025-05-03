@@ -87,7 +87,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: count.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_skin_weight_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_skin_weight_count, handle, pArgs, nil)
                 }
                 
             }
@@ -117,7 +117,7 @@ open class SurfaceTool: RefCounted {
     public final func getSkinWeightCount() -> SurfaceTool.SkinWeightCount {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SurfaceTool.method_get_skin_weight_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SurfaceTool.method_get_skin_weight_count, handle, nil, &_result)
         return SurfaceTool.SkinWeightCount (rawValue: _result)!
     }
     
@@ -142,7 +142,7 @@ open class SurfaceTool: RefCounted {
             withUnsafePointer(to: format.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SurfaceTool.method_set_custom_format, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SurfaceTool.method_set_custom_format, handle, pArgs, nil)
                     }
                     
                 }
@@ -172,7 +172,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: channelIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_get_custom_format, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_get_custom_format, handle, pArgs, &_result)
                 }
                 
             }
@@ -199,7 +199,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: primitive.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_begin, handle, pArgs, nil)
                 }
                 
             }
@@ -226,7 +226,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: vertex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_add_vertex, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_add_vertex, handle, pArgs, nil)
                 }
                 
             }
@@ -256,7 +256,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_color, handle, pArgs, nil)
                 }
                 
             }
@@ -283,7 +283,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: normal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_normal, handle, pArgs, nil)
                 }
                 
             }
@@ -310,7 +310,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: tangent) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_tangent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_tangent, handle, pArgs, nil)
                 }
                 
             }
@@ -337,7 +337,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: uv) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_uv, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_uv, handle, pArgs, nil)
                 }
                 
             }
@@ -364,7 +364,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: uv2) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_uv2, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_uv2, handle, pArgs, nil)
                 }
                 
             }
@@ -391,7 +391,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: bones.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_bones, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_bones, handle, pArgs, nil)
                 }
                 
             }
@@ -418,7 +418,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: weights.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_weights, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_weights, handle, pArgs, nil)
                 }
                 
             }
@@ -449,7 +449,7 @@ open class SurfaceTool: RefCounted {
             withUnsafePointer(to: customColor) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SurfaceTool.method_set_custom, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SurfaceTool.method_set_custom, handle, pArgs, nil)
                     }
                     
                 }
@@ -481,7 +481,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_smooth_group, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_smooth_group, handle, pArgs, nil)
                 }
                 
             }
@@ -516,7 +516,7 @@ open class SurfaceTool: RefCounted {
                             withUnsafePointer(to: tangents.array.content) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(SurfaceTool.method_add_triangle_fan, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(SurfaceTool.method_add_triangle_fan, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -553,7 +553,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_add_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_add_index, handle, pArgs, nil)
                 }
                 
             }
@@ -577,7 +577,7 @@ open class SurfaceTool: RefCounted {
     /// Shrinks the vertex array by creating an index array. This can improve performance by avoiding vertex reuse.
     public final func index() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SurfaceTool.method_index, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SurfaceTool.method_index, handle, nil, nil)
         
     }
     
@@ -595,7 +595,7 @@ open class SurfaceTool: RefCounted {
     /// Removes the index array by expanding the vertex array.
     public final func deindex() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SurfaceTool.method_deindex, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SurfaceTool.method_deindex, handle, nil, nil)
         
     }
     
@@ -621,7 +621,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: flip) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_generate_normals, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_generate_normals, handle, pArgs, nil)
                 }
                 
             }
@@ -645,7 +645,7 @@ open class SurfaceTool: RefCounted {
     /// Generates a tangent vector for each vertex. Requires that each vertex already has UVs and normals set (see ``generateNormals(flip:)``).
     public final func generateTangents() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SurfaceTool.method_generate_tangents, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SurfaceTool.method_generate_tangents, handle, nil, nil)
         
     }
     
@@ -663,7 +663,7 @@ open class SurfaceTool: RefCounted {
     /// Optimizes triangle sorting for performance. Requires that ``getPrimitiveType()`` is ``Mesh/PrimitiveType/triangles``.
     public final func optimizeIndicesForCache() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SurfaceTool.method_optimize_indices_for_cache, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SurfaceTool.method_optimize_indices_for_cache, handle, nil, nil)
         
     }
     
@@ -682,7 +682,7 @@ open class SurfaceTool: RefCounted {
     public final func getAabb() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(SurfaceTool.method_get_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SurfaceTool.method_get_aabb, handle, nil, &_result)
         return _result
     }
     
@@ -705,7 +705,7 @@ open class SurfaceTool: RefCounted {
             withUnsafePointer(to: targetIndexCount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SurfaceTool.method_generate_lod, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(SurfaceTool.method_generate_lod, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -734,7 +734,7 @@ open class SurfaceTool: RefCounted {
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SurfaceTool.method_set_material, handle, pArgs, nil)
                 }
                 
             }
@@ -759,7 +759,7 @@ open class SurfaceTool: RefCounted {
     public final func getPrimitiveType() -> Mesh.PrimitiveType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SurfaceTool.method_get_primitive_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SurfaceTool.method_get_primitive_type, handle, nil, &_result)
         return Mesh.PrimitiveType (rawValue: _result)!
     }
     
@@ -777,7 +777,7 @@ open class SurfaceTool: RefCounted {
     /// Clear all information passed into the surface tool so far.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SurfaceTool.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SurfaceTool.method_clear, handle, nil, nil)
         
     }
     
@@ -799,7 +799,7 @@ open class SurfaceTool: RefCounted {
             withUnsafePointer(to: surface) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SurfaceTool.method_create_from, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SurfaceTool.method_create_from, handle, pArgs, nil)
                     }
                     
                 }
@@ -829,7 +829,7 @@ open class SurfaceTool: RefCounted {
             withUnsafePointer(to: primitiveType.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SurfaceTool.method_create_from_arrays, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SurfaceTool.method_create_from_arrays, handle, pArgs, nil)
                     }
                     
                 }
@@ -861,7 +861,7 @@ open class SurfaceTool: RefCounted {
                 withUnsafePointer(to: blendShape.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(SurfaceTool.method_create_from_blend_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(SurfaceTool.method_create_from_blend_shape, handle, pArgs, nil)
                         }
                         
                     }
@@ -894,7 +894,7 @@ open class SurfaceTool: RefCounted {
                 withUnsafePointer(to: transform) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(SurfaceTool.method_append_from, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(SurfaceTool.method_append_from, handle, pArgs, nil)
                         }
                         
                     }
@@ -925,12 +925,12 @@ open class SurfaceTool: RefCounted {
     /// 
     public final func commit(existing: ArrayMesh? = nil, flags: UInt = 0) -> ArrayMesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: existing?.handle) { pArg0 in
             withUnsafePointer(to: flags) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SurfaceTool.method_commit, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(SurfaceTool.method_commit, handle, pArgs, &_result)
                     }
                     
                 }
@@ -939,7 +939,7 @@ open class SurfaceTool: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_commit_to_arrays: GDExtensionMethodBindPtr = {
@@ -957,7 +957,7 @@ open class SurfaceTool: RefCounted {
     public final func commitToArrays() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(SurfaceTool.method_commit_to_arrays, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SurfaceTool.method_commit_to_arrays, handle, nil, &_result.content)
         return _result
     }
     

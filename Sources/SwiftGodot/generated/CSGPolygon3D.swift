@@ -287,7 +287,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -312,7 +312,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func get_polygon() -> PackedVector2Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_polygon, handle, nil, &_result.content)
         return _result
     }
     
@@ -333,7 +333,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -358,7 +358,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func get_mode() -> CSGPolygon3D.Mode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_mode, handle, nil, &_result)
         return CSGPolygon3D.Mode (rawValue: _result)!
     }
     
@@ -379,7 +379,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: depth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_depth, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_depth, handle, pArgs, nil)
                 }
                 
             }
@@ -404,7 +404,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func get_depth() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_depth, handle, nil, &_result)
         return _result
     }
     
@@ -425,7 +425,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: degrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_spin_degrees, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_spin_degrees, handle, pArgs, nil)
                 }
                 
             }
@@ -450,7 +450,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func get_spin_degrees() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_spin_degrees, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_spin_degrees, handle, nil, &_result)
         return _result
     }
     
@@ -471,7 +471,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: spinSides) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_spin_sides, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_spin_sides, handle, pArgs, nil)
                 }
                 
             }
@@ -496,7 +496,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func get_spin_sides() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_spin_sides, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_spin_sides, handle, nil, &_result)
         return _result
     }
     
@@ -517,7 +517,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_node, handle, pArgs, nil)
                 }
                 
             }
@@ -542,7 +542,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func get_path_node() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -563,7 +563,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: intervalType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_interval_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_interval_type, handle, pArgs, nil)
                 }
                 
             }
@@ -588,7 +588,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func get_path_interval_type() -> CSGPolygon3D.PathIntervalType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_interval_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_interval_type, handle, nil, &_result)
         return CSGPolygon3D.PathIntervalType (rawValue: _result)!
     }
     
@@ -609,7 +609,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: interval) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_interval, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_interval, handle, pArgs, nil)
                 }
                 
             }
@@ -634,7 +634,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func get_path_interval() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_interval, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_interval, handle, nil, &_result)
         return _result
     }
     
@@ -655,7 +655,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: degrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_simplify_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_simplify_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -680,7 +680,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func get_path_simplify_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_simplify_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_simplify_angle, handle, nil, &_result)
         return _result
     }
     
@@ -701,7 +701,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: pathRotation.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_rotation, handle, pArgs, nil)
                 }
                 
             }
@@ -726,7 +726,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func get_path_rotation() -> CSGPolygon3D.PathRotation {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_rotation, handle, nil, &_result)
         return CSGPolygon3D.PathRotation (rawValue: _result)!
     }
     
@@ -747,7 +747,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_rotation_accurate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_rotation_accurate, handle, pArgs, nil)
                 }
                 
             }
@@ -772,7 +772,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func get_path_rotation_accurate() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_rotation_accurate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_rotation_accurate, handle, nil, &_result)
         return _result
     }
     
@@ -793,7 +793,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_local, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_local, handle, pArgs, nil)
                 }
                 
             }
@@ -818,7 +818,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func is_path_local() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_is_path_local, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_is_path_local, handle, nil, &_result)
         return _result
     }
     
@@ -839,7 +839,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_continuous_u, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_continuous_u, handle, pArgs, nil)
                 }
                 
             }
@@ -864,7 +864,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func is_path_continuous_u() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_is_path_continuous_u, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_is_path_continuous_u, handle, nil, &_result)
         return _result
     }
     
@@ -885,7 +885,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_u_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_u_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -910,7 +910,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func get_path_u_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_u_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_path_u_distance, handle, nil, &_result)
         return _result
     }
     
@@ -931,7 +931,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_joined, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_path_joined, handle, pArgs, nil)
                 }
                 
             }
@@ -956,7 +956,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func is_path_joined() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_is_path_joined, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_is_path_joined, handle, nil, &_result)
         return _result
     }
     
@@ -977,7 +977,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_material, handle, pArgs, nil)
                 }
                 
             }
@@ -1001,9 +1001,9 @@ open class CSGPolygon3D: CSGPrimitive3D {
     @inline(__always)
     fileprivate final func get_material() -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_material, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_smooth_faces: GDExtensionMethodBindPtr = {
@@ -1023,7 +1023,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
         withUnsafePointer(to: smoothFaces) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_smooth_faces, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGPolygon3D.method_set_smooth_faces, handle, pArgs, nil)
                 }
                 
             }
@@ -1048,7 +1048,7 @@ open class CSGPolygon3D: CSGPrimitive3D {
     fileprivate final func get_smooth_faces() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_smooth_faces, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGPolygon3D.method_get_smooth_faces, handle, nil, &_result)
         return _result
     }
     

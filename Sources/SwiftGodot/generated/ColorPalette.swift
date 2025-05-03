@@ -58,7 +58,7 @@ open class ColorPalette: Resource {
         withUnsafePointer(to: colors.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ColorPalette.method_set_colors, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ColorPalette.method_set_colors, handle, pArgs, nil)
                 }
                 
             }
@@ -83,7 +83,7 @@ open class ColorPalette: Resource {
     fileprivate final func get_colors() -> PackedColorArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedColorArray = PackedColorArray ()
-        gi.object_method_bind_ptrcall(ColorPalette.method_get_colors, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ColorPalette.method_get_colors, handle, nil, &_result.content)
         return _result
     }
     

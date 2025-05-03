@@ -58,7 +58,7 @@ open class InputEventGesture: InputEventWithModifiers {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventGesture.method_set_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventGesture.method_set_position, handle, pArgs, nil)
                 }
                 
             }
@@ -83,7 +83,7 @@ open class InputEventGesture: InputEventWithModifiers {
     fileprivate final func get_position() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(InputEventGesture.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventGesture.method_get_position, handle, nil, &_result)
         return _result
     }
     

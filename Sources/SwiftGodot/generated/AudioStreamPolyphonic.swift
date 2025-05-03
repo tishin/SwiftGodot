@@ -61,7 +61,7 @@ open class AudioStreamPolyphonic: AudioStream {
         withUnsafePointer(to: voices) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamPolyphonic.method_set_polyphony, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamPolyphonic.method_set_polyphony, handle, pArgs, nil)
                 }
                 
             }
@@ -86,7 +86,7 @@ open class AudioStreamPolyphonic: AudioStream {
     fileprivate final func get_polyphony() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamPolyphonic.method_get_polyphony, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamPolyphonic.method_get_polyphony, handle, nil, &_result)
         return _result
     }
     

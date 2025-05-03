@@ -60,7 +60,7 @@ open class EditorSceneFormatImporter: RefCounted {
     open func _getExtensions() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(EditorSceneFormatImporter.method__get_extensions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorSceneFormatImporter.method__get_extensions, handle, nil, &_result.content)
         return _result
     }
     
@@ -79,14 +79,14 @@ open class EditorSceneFormatImporter: RefCounted {
     @_documentation(visibility: public)
     open func _importScene(path: String, flags: UInt32, options: VariantDictionary) -> Object? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: flags) { pArg1 in
                 withUnsafePointer(to: options.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorSceneFormatImporter.method__import_scene, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(EditorSceneFormatImporter.method__import_scene, handle, pArgs, &_result)
                         }
                         
                     }
@@ -97,7 +97,7 @@ open class EditorSceneFormatImporter: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__get_import_options: GDExtensionMethodBindPtr = {
@@ -124,7 +124,7 @@ open class EditorSceneFormatImporter: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSceneFormatImporter.method__get_import_options, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorSceneFormatImporter.method__get_import_options, handle, pArgs, nil)
                 }
                 
             }
@@ -157,7 +157,7 @@ open class EditorSceneFormatImporter: RefCounted {
                 withUnsafePointer(to: option.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorSceneFormatImporter.method__get_option_visibility, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(EditorSceneFormatImporter.method__get_option_visibility, handle, pArgs, &_result)
                         }
                         
                     }
@@ -190,7 +190,7 @@ open class EditorSceneFormatImporter: RefCounted {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorSceneFormatImporter.method_add_import_option, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorSceneFormatImporter.method_add_import_option, handle, pArgs, nil)
                     }
                     
                 }
@@ -226,7 +226,7 @@ open class EditorSceneFormatImporter: RefCounted {
                             withUnsafePointer(to: usageFlags) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(EditorSceneFormatImporter.method_add_import_option_advanced, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(EditorSceneFormatImporter.method_add_import_option_advanced, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -299,6 +299,6 @@ func _EditorSceneFormatImporter_proxy_import_scene (instance: UnsafeMutableRawPo
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorSceneFormatImporter else { return }
     let ret = swiftObject._importScene (path: GString.stringFromGStringPtr (ptr: args [0]!) ?? "", flags: args [1]!.assumingMemoryBound (to: UInt32.self).pointee, options: VariantDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee))
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Object
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // Object
 }
 

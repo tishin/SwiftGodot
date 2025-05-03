@@ -164,7 +164,7 @@ open class UPNP: RefCounted {
     public final func getDeviceCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(UPNP.method_get_device_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(UPNP.method_get_device_count, handle, nil, &_result)
         return _result
     }
     
@@ -182,18 +182,18 @@ open class UPNP: RefCounted {
     /// Returns the ``UPNPDevice`` at the given `index`.
     public final func getDevice(index: Int32) -> UPNPDevice? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UPNP.method_get_device, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(UPNP.method_get_device, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_add_device: GDExtensionMethodBindPtr = {
@@ -213,7 +213,7 @@ open class UPNP: RefCounted {
         withUnsafePointer(to: device?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UPNP.method_add_device, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UPNP.method_add_device, handle, pArgs, nil)
                 }
                 
             }
@@ -241,7 +241,7 @@ open class UPNP: RefCounted {
             withUnsafePointer(to: device?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(UPNP.method_set_device, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(UPNP.method_set_device, handle, pArgs, nil)
                     }
                     
                 }
@@ -270,7 +270,7 @@ open class UPNP: RefCounted {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UPNP.method_remove_device, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UPNP.method_remove_device, handle, pArgs, nil)
                 }
                 
             }
@@ -294,7 +294,7 @@ open class UPNP: RefCounted {
     /// Clears the list of discovered devices.
     public final func clearDevices() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(UPNP.method_clear_devices, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(UPNP.method_clear_devices, handle, nil, nil)
         
     }
     
@@ -312,9 +312,9 @@ open class UPNP: RefCounted {
     /// Returns the default gateway. That is the first discovered ``UPNPDevice`` that is also a valid IGD (InternetGatewayDevice).
     public final func getGateway() -> UPNPDevice? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(UPNP.method_get_gateway, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(UPNP.method_get_gateway, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_discover: GDExtensionMethodBindPtr = {
@@ -343,7 +343,7 @@ open class UPNP: RefCounted {
                 withUnsafePointer(to: deviceFilter.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(UPNP.method_discover, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(UPNP.method_discover, handle, pArgs, &_result)
                         }
                         
                     }
@@ -372,7 +372,7 @@ open class UPNP: RefCounted {
     public final func queryExternalAddress() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(UPNP.method_query_external_address, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(UPNP.method_query_external_address, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -411,7 +411,7 @@ open class UPNP: RefCounted {
                         withUnsafePointer(to: duration) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(UPNP.method_add_port_mapping, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(UPNP.method_add_port_mapping, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -449,7 +449,7 @@ open class UPNP: RefCounted {
             withUnsafePointer(to: proto.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(UPNP.method_delete_port_mapping, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(UPNP.method_delete_port_mapping, handle, pArgs, &_result)
                     }
                     
                 }
@@ -479,7 +479,7 @@ open class UPNP: RefCounted {
         withUnsafePointer(to: mIf.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UPNP.method_set_discover_multicast_if, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UPNP.method_set_discover_multicast_if, handle, pArgs, nil)
                 }
                 
             }
@@ -504,7 +504,7 @@ open class UPNP: RefCounted {
     fileprivate final func get_discover_multicast_if() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(UPNP.method_get_discover_multicast_if, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(UPNP.method_get_discover_multicast_if, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -525,7 +525,7 @@ open class UPNP: RefCounted {
         withUnsafePointer(to: port) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UPNP.method_set_discover_local_port, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UPNP.method_set_discover_local_port, handle, pArgs, nil)
                 }
                 
             }
@@ -550,7 +550,7 @@ open class UPNP: RefCounted {
     fileprivate final func get_discover_local_port() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(UPNP.method_get_discover_local_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(UPNP.method_get_discover_local_port, handle, nil, &_result)
         return _result
     }
     
@@ -571,7 +571,7 @@ open class UPNP: RefCounted {
         withUnsafePointer(to: ipv6) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(UPNP.method_set_discover_ipv6, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(UPNP.method_set_discover_ipv6, handle, pArgs, nil)
                 }
                 
             }
@@ -596,7 +596,7 @@ open class UPNP: RefCounted {
     fileprivate final func is_discover_ipv6() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(UPNP.method_is_discover_ipv6, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(UPNP.method_is_discover_ipv6, handle, nil, &_result)
         return _result
     }
     

@@ -90,7 +90,7 @@ open class VisualShaderNodeColorOp: VisualShaderNode {
         withUnsafePointer(to: op.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeColorOp.method_set_operator, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeColorOp.method_set_operator, handle, pArgs, nil)
                 }
                 
             }
@@ -115,7 +115,7 @@ open class VisualShaderNodeColorOp: VisualShaderNode {
     fileprivate final func get_operator() -> VisualShaderNodeColorOp.Operator {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeColorOp.method_get_operator, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeColorOp.method_get_operator, handle, nil, &_result)
         return VisualShaderNodeColorOp.Operator (rawValue: _result)!
     }
     

@@ -87,7 +87,7 @@ open class HeightMapShape3D: Shape3D {
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HeightMapShape3D.method_set_map_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(HeightMapShape3D.method_set_map_width, handle, pArgs, nil)
                 }
                 
             }
@@ -112,7 +112,7 @@ open class HeightMapShape3D: Shape3D {
     fileprivate final func get_map_width() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_map_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_map_width, handle, nil, &_result)
         return _result
     }
     
@@ -133,7 +133,7 @@ open class HeightMapShape3D: Shape3D {
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HeightMapShape3D.method_set_map_depth, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(HeightMapShape3D.method_set_map_depth, handle, pArgs, nil)
                 }
                 
             }
@@ -158,7 +158,7 @@ open class HeightMapShape3D: Shape3D {
     fileprivate final func get_map_depth() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_map_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_map_depth, handle, nil, &_result)
         return _result
     }
     
@@ -179,7 +179,7 @@ open class HeightMapShape3D: Shape3D {
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HeightMapShape3D.method_set_map_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(HeightMapShape3D.method_set_map_data, handle, pArgs, nil)
                 }
                 
             }
@@ -204,7 +204,7 @@ open class HeightMapShape3D: Shape3D {
     fileprivate final func get_map_data() -> PackedFloat32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
-        gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_map_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_map_data, handle, nil, &_result.content)
         return _result
     }
     
@@ -223,7 +223,7 @@ open class HeightMapShape3D: Shape3D {
     public final func getMinHeight() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_min_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_min_height, handle, nil, &_result)
         return _result
     }
     
@@ -242,7 +242,7 @@ open class HeightMapShape3D: Shape3D {
     public final func getMaxHeight() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_max_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HeightMapShape3D.method_get_max_height, handle, nil, &_result)
         return _result
     }
     
@@ -270,7 +270,7 @@ open class HeightMapShape3D: Shape3D {
                 withUnsafePointer(to: heightMax) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(HeightMapShape3D.method_update_map_data_from_image, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(HeightMapShape3D.method_update_map_data_from_image, handle, pArgs, nil)
                         }
                         
                     }

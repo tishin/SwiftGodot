@@ -34,7 +34,7 @@ open class ThemeDB: Object {
     /// The shared instance of this class
     public static var shared: ThemeDB {
         return withUnsafePointer(to: &ThemeDB.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -127,9 +127,9 @@ open class ThemeDB: Object {
     
     /// Returns a reference to the default engine ``Theme``. This theme resource is responsible for the out-of-the-box look of ``Control`` nodes and cannot be overridden.
     public static func getDefaultTheme() -> Theme? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(method_get_default_theme, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(method_get_default_theme, shared.handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_project_theme: GDExtensionMethodBindPtr = {
@@ -148,9 +148,9 @@ open class ThemeDB: Object {
     /// To set the project theme, see ``ProjectSettings/gui/theme/custom``.
     /// 
     public static func getProjectTheme() -> Theme? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(method_get_project_theme, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(method_get_project_theme, shared.handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_fallback_base_scale: GDExtensionMethodBindPtr = {
@@ -169,7 +169,7 @@ open class ThemeDB: Object {
         withUnsafePointer(to: baseScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_fallback_base_scale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_fallback_base_scale, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -193,7 +193,7 @@ open class ThemeDB: Object {
     @inline(__always)
     fileprivate static func get_fallback_base_scale() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_get_fallback_base_scale, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_fallback_base_scale, shared.handle, nil, &_result)
         return _result
     }
     
@@ -213,7 +213,7 @@ open class ThemeDB: Object {
         withUnsafePointer(to: font?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_fallback_font, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_fallback_font, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -236,9 +236,9 @@ open class ThemeDB: Object {
     
     @inline(__always)
     fileprivate static func get_fallback_font() -> Font? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(method_get_fallback_font, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(method_get_fallback_font, shared.handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_fallback_font_size: GDExtensionMethodBindPtr = {
@@ -257,7 +257,7 @@ open class ThemeDB: Object {
         withUnsafePointer(to: fontSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_fallback_font_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_fallback_font_size, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -281,7 +281,7 @@ open class ThemeDB: Object {
     @inline(__always)
     fileprivate static func get_fallback_font_size() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_fallback_font_size, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_fallback_font_size, shared.handle, nil, &_result)
         return _result
     }
     
@@ -301,7 +301,7 @@ open class ThemeDB: Object {
         withUnsafePointer(to: icon?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_fallback_icon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_fallback_icon, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -324,9 +324,9 @@ open class ThemeDB: Object {
     
     @inline(__always)
     fileprivate static func get_fallback_icon() -> Texture2D? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(method_get_fallback_icon, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(method_get_fallback_icon, shared.handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_fallback_stylebox: GDExtensionMethodBindPtr = {
@@ -345,7 +345,7 @@ open class ThemeDB: Object {
         withUnsafePointer(to: stylebox?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_fallback_stylebox, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_fallback_stylebox, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -368,9 +368,9 @@ open class ThemeDB: Object {
     
     @inline(__always)
     fileprivate static func get_fallback_stylebox() -> StyleBox? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(method_get_fallback_stylebox, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(method_get_fallback_stylebox, shared.handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

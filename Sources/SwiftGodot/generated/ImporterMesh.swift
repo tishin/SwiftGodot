@@ -47,7 +47,7 @@ open class ImporterMesh: Resource {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMesh.method_add_blend_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImporterMesh.method_add_blend_shape, handle, pArgs, nil)
                 }
                 
             }
@@ -72,7 +72,7 @@ open class ImporterMesh: Resource {
     public final func getBlendShapeCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ImporterMesh.method_get_blend_shape_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ImporterMesh.method_get_blend_shape_count, handle, nil, &_result)
         return _result
     }
     
@@ -94,7 +94,7 @@ open class ImporterMesh: Resource {
         withUnsafePointer(to: blendShapeIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_blend_shape_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_blend_shape_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -121,7 +121,7 @@ open class ImporterMesh: Resource {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMesh.method_set_blend_shape_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImporterMesh.method_set_blend_shape_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -146,7 +146,7 @@ open class ImporterMesh: Resource {
     public final func getBlendShapeMode() -> Mesh.BlendShapeMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ImporterMesh.method_get_blend_shape_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ImporterMesh.method_get_blend_shape_mode, handle, nil, &_result)
         return Mesh.BlendShapeMode (rawValue: _result)!
     }
     
@@ -187,7 +187,7 @@ open class ImporterMesh: Resource {
                                 withUnsafePointer(to: flags) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(ImporterMesh.method_add_surface, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                            gi.object_method_bind_ptrcall(ImporterMesh.method_add_surface, handle, pArgs, nil)
                                         }
                                         
                                     }
@@ -224,7 +224,7 @@ open class ImporterMesh: Resource {
     public final func getSurfaceCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_count, handle, nil, &_result)
         return _result
     }
     
@@ -246,7 +246,7 @@ open class ImporterMesh: Resource {
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_primitive_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_primitive_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -274,7 +274,7 @@ open class ImporterMesh: Resource {
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -302,7 +302,7 @@ open class ImporterMesh: Resource {
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_arrays, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_arrays, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -331,7 +331,7 @@ open class ImporterMesh: Resource {
             withUnsafePointer(to: blendShapeIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_blend_shape_arrays, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_blend_shape_arrays, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -361,7 +361,7 @@ open class ImporterMesh: Resource {
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_lod_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_lod_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -390,7 +390,7 @@ open class ImporterMesh: Resource {
             withUnsafePointer(to: lodIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_lod_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_lod_size, handle, pArgs, &_result)
                     }
                     
                 }
@@ -421,7 +421,7 @@ open class ImporterMesh: Resource {
             withUnsafePointer(to: lodIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_lod_indices, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_lod_indices, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -447,18 +447,18 @@ open class ImporterMesh: Resource {
     /// Returns a ``Material`` in a given surface. Surface is rendered using this material.
     public final func getSurfaceMaterial(surfaceIdx: Int32) -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_material, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_material, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_surface_format: GDExtensionMethodBindPtr = {
@@ -479,7 +479,7 @@ open class ImporterMesh: Resource {
         withUnsafePointer(to: surfaceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_format, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_surface_format, handle, pArgs, &_result)
                 }
                 
             }
@@ -508,7 +508,7 @@ open class ImporterMesh: Resource {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ImporterMesh.method_set_surface_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ImporterMesh.method_set_surface_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -538,7 +538,7 @@ open class ImporterMesh: Resource {
             withUnsafePointer(to: material?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ImporterMesh.method_set_surface_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ImporterMesh.method_set_surface_material, handle, pArgs, nil)
                     }
                     
                 }
@@ -578,7 +578,7 @@ open class ImporterMesh: Resource {
                 withUnsafePointer(to: boneTransformArray.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ImporterMesh.method_generate_lods, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(ImporterMesh.method_generate_lods, handle, pArgs, nil)
                         }
                         
                     }
@@ -611,18 +611,18 @@ open class ImporterMesh: Resource {
     /// 
     public final func getMesh(baseMesh: ArrayMesh? = nil) -> ArrayMesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: baseMesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ImporterMesh.method_get_mesh, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_clear: GDExtensionMethodBindPtr = {
@@ -639,7 +639,7 @@ open class ImporterMesh: Resource {
     /// Removes all surfaces and blend shapes from this ``ImporterMesh``.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ImporterMesh.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ImporterMesh.method_clear, handle, nil, nil)
         
     }
     
@@ -660,7 +660,7 @@ open class ImporterMesh: Resource {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMesh.method_set_lightmap_size_hint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImporterMesh.method_set_lightmap_size_hint, handle, pArgs, nil)
                 }
                 
             }
@@ -685,7 +685,7 @@ open class ImporterMesh: Resource {
     public final func getLightmapSizeHint() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(ImporterMesh.method_get_lightmap_size_hint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ImporterMesh.method_get_lightmap_size_hint, handle, nil, &_result)
         return _result
     }
     

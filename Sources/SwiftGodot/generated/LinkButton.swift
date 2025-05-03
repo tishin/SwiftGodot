@@ -144,7 +144,7 @@ open class LinkButton: BaseButton {
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LinkButton.method_set_text, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LinkButton.method_set_text, handle, pArgs, nil)
                 }
                 
             }
@@ -169,7 +169,7 @@ open class LinkButton: BaseButton {
     fileprivate final func get_text() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(LinkButton.method_get_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(LinkButton.method_get_text, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -190,7 +190,7 @@ open class LinkButton: BaseButton {
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LinkButton.method_set_text_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LinkButton.method_set_text_direction, handle, pArgs, nil)
                 }
                 
             }
@@ -215,7 +215,7 @@ open class LinkButton: BaseButton {
     fileprivate final func get_text_direction() -> Control.TextDirection {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(LinkButton.method_get_text_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LinkButton.method_get_text_direction, handle, nil, &_result)
         return Control.TextDirection (rawValue: _result)!
     }
     
@@ -237,7 +237,7 @@ open class LinkButton: BaseButton {
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LinkButton.method_set_language, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LinkButton.method_set_language, handle, pArgs, nil)
                 }
                 
             }
@@ -262,7 +262,7 @@ open class LinkButton: BaseButton {
     fileprivate final func get_language() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(LinkButton.method_get_language, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(LinkButton.method_get_language, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -284,7 +284,7 @@ open class LinkButton: BaseButton {
         withUnsafePointer(to: uri.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LinkButton.method_set_uri, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LinkButton.method_set_uri, handle, pArgs, nil)
                 }
                 
             }
@@ -309,7 +309,7 @@ open class LinkButton: BaseButton {
     fileprivate final func get_uri() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(LinkButton.method_get_uri, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(LinkButton.method_get_uri, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -330,7 +330,7 @@ open class LinkButton: BaseButton {
         withUnsafePointer(to: underlineMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LinkButton.method_set_underline_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LinkButton.method_set_underline_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -355,7 +355,7 @@ open class LinkButton: BaseButton {
     fileprivate final func get_underline_mode() -> LinkButton.UnderlineMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(LinkButton.method_get_underline_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LinkButton.method_get_underline_mode, handle, nil, &_result)
         return LinkButton.UnderlineMode (rawValue: _result)!
     }
     
@@ -376,7 +376,7 @@ open class LinkButton: BaseButton {
         withUnsafePointer(to: parser.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LinkButton.method_set_structured_text_bidi_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LinkButton.method_set_structured_text_bidi_override, handle, pArgs, nil)
                 }
                 
             }
@@ -401,7 +401,7 @@ open class LinkButton: BaseButton {
     fileprivate final func get_structured_text_bidi_override() -> TextServer.StructuredTextParser {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(LinkButton.method_get_structured_text_bidi_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LinkButton.method_get_structured_text_bidi_override, handle, nil, &_result)
         return TextServer.StructuredTextParser (rawValue: _result)!
     }
     
@@ -422,7 +422,7 @@ open class LinkButton: BaseButton {
         withUnsafePointer(to: args.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LinkButton.method_set_structured_text_bidi_override_options, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LinkButton.method_set_structured_text_bidi_override_options, handle, pArgs, nil)
                 }
                 
             }
@@ -447,7 +447,7 @@ open class LinkButton: BaseButton {
     fileprivate final func get_structured_text_bidi_override_options() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(LinkButton.method_get_structured_text_bidi_override_options, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(LinkButton.method_get_structured_text_bidi_override_options, handle, nil, &_result.content)
         return _result
     }
     

@@ -37,7 +37,7 @@ open class CameraServer: Object {
     /// The shared instance of this class
     public static var shared: CameraServer {
         return withUnsafePointer(to: &CameraServer.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -69,18 +69,18 @@ open class CameraServer: Object {
     
     /// Returns the ``CameraFeed`` corresponding to the camera with the given `index`.
     public static func getFeed(index: Int32) -> CameraFeed? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_feed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_feed, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_feed_count: GDExtensionMethodBindPtr = {
@@ -97,7 +97,7 @@ open class CameraServer: Object {
     /// Returns the number of ``CameraFeed``s registered.
     public static func getFeedCount() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_feed_count, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_feed_count, shared.handle, nil, &_result)
         return _result
     }
     
@@ -115,7 +115,7 @@ open class CameraServer: Object {
     /// Returns an array of ``CameraFeed``s.
     public static func feeds() -> TypedArray<CameraFeed?> {
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(method_feeds, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_feeds, shared.handle, nil, &_result)
         return TypedArray<CameraFeed?>(takingOver: _result)
     }
     
@@ -135,7 +135,7 @@ open class CameraServer: Object {
         withUnsafePointer(to: feed?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_add_feed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_add_feed, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -161,7 +161,7 @@ open class CameraServer: Object {
         withUnsafePointer(to: feed?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_remove_feed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_remove_feed, shared.handle, pArgs, nil)
                 }
                 
             }

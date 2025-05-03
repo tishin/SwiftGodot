@@ -46,7 +46,7 @@ open class PhysicsServer3DRenderingServerHandler: Object {
             withUnsafePointer(to: vertex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PhysicsServer3DRenderingServerHandler.method__set_vertex, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PhysicsServer3DRenderingServerHandler.method__set_vertex, handle, pArgs, nil)
                     }
                     
                 }
@@ -80,7 +80,7 @@ open class PhysicsServer3DRenderingServerHandler: Object {
             withUnsafePointer(to: normal) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PhysicsServer3DRenderingServerHandler.method__set_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PhysicsServer3DRenderingServerHandler.method__set_normal, handle, pArgs, nil)
                     }
                     
                 }
@@ -110,7 +110,7 @@ open class PhysicsServer3DRenderingServerHandler: Object {
         withUnsafePointer(to: aabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsServer3DRenderingServerHandler.method__set_aabb, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsServer3DRenderingServerHandler.method__set_aabb, handle, pArgs, nil)
                 }
                 
             }
@@ -138,7 +138,7 @@ open class PhysicsServer3DRenderingServerHandler: Object {
             withUnsafePointer(to: vertex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PhysicsServer3DRenderingServerHandler.method_set_vertex, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PhysicsServer3DRenderingServerHandler.method_set_vertex, handle, pArgs, nil)
                     }
                     
                 }
@@ -168,7 +168,7 @@ open class PhysicsServer3DRenderingServerHandler: Object {
             withUnsafePointer(to: normal) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PhysicsServer3DRenderingServerHandler.method_set_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PhysicsServer3DRenderingServerHandler.method_set_normal, handle, pArgs, nil)
                     }
                     
                 }
@@ -197,7 +197,7 @@ open class PhysicsServer3DRenderingServerHandler: Object {
         withUnsafePointer(to: aabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsServer3DRenderingServerHandler.method_set_aabb, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsServer3DRenderingServerHandler.method_set_aabb, handle, pArgs, nil)
                 }
                 
             }

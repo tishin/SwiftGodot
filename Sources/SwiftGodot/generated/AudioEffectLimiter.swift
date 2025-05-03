@@ -96,7 +96,7 @@ open class AudioEffectLimiter: AudioEffect {
         withUnsafePointer(to: ceiling) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectLimiter.method_set_ceiling_db, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectLimiter.method_set_ceiling_db, handle, pArgs, nil)
                 }
                 
             }
@@ -121,7 +121,7 @@ open class AudioEffectLimiter: AudioEffect {
     fileprivate final func get_ceiling_db() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectLimiter.method_get_ceiling_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectLimiter.method_get_ceiling_db, handle, nil, &_result)
         return _result
     }
     
@@ -142,7 +142,7 @@ open class AudioEffectLimiter: AudioEffect {
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectLimiter.method_set_threshold_db, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectLimiter.method_set_threshold_db, handle, pArgs, nil)
                 }
                 
             }
@@ -167,7 +167,7 @@ open class AudioEffectLimiter: AudioEffect {
     fileprivate final func get_threshold_db() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectLimiter.method_get_threshold_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectLimiter.method_get_threshold_db, handle, nil, &_result)
         return _result
     }
     
@@ -188,7 +188,7 @@ open class AudioEffectLimiter: AudioEffect {
         withUnsafePointer(to: softClip) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectLimiter.method_set_soft_clip_db, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectLimiter.method_set_soft_clip_db, handle, pArgs, nil)
                 }
                 
             }
@@ -213,7 +213,7 @@ open class AudioEffectLimiter: AudioEffect {
     fileprivate final func get_soft_clip_db() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectLimiter.method_get_soft_clip_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectLimiter.method_get_soft_clip_db, handle, nil, &_result)
         return _result
     }
     
@@ -234,7 +234,7 @@ open class AudioEffectLimiter: AudioEffect {
         withUnsafePointer(to: softClip) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectLimiter.method_set_soft_clip_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectLimiter.method_set_soft_clip_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -259,7 +259,7 @@ open class AudioEffectLimiter: AudioEffect {
     fileprivate final func get_soft_clip_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectLimiter.method_get_soft_clip_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectLimiter.method_get_soft_clip_ratio, handle, nil, &_result)
         return _result
     }
     

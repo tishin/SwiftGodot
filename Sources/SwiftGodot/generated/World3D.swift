@@ -112,7 +112,7 @@ open class World3D: Resource {
     fileprivate final func get_space() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(World3D.method_get_space, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(World3D.method_get_space, handle, nil, &_result.content)
         return _result
     }
     
@@ -131,7 +131,7 @@ open class World3D: Resource {
     fileprivate final func get_navigation_map() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(World3D.method_get_navigation_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(World3D.method_get_navigation_map, handle, nil, &_result.content)
         return _result
     }
     
@@ -150,7 +150,7 @@ open class World3D: Resource {
     fileprivate final func get_scenario() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(World3D.method_get_scenario, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(World3D.method_get_scenario, handle, nil, &_result.content)
         return _result
     }
     
@@ -171,7 +171,7 @@ open class World3D: Resource {
         withUnsafePointer(to: env?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(World3D.method_set_environment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(World3D.method_set_environment, handle, pArgs, nil)
                 }
                 
             }
@@ -195,9 +195,9 @@ open class World3D: Resource {
     @inline(__always)
     fileprivate final func get_environment() -> Environment? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(World3D.method_get_environment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(World3D.method_get_environment, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_fallback_environment: GDExtensionMethodBindPtr = {
@@ -217,7 +217,7 @@ open class World3D: Resource {
         withUnsafePointer(to: env?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(World3D.method_set_fallback_environment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(World3D.method_set_fallback_environment, handle, pArgs, nil)
                 }
                 
             }
@@ -241,9 +241,9 @@ open class World3D: Resource {
     @inline(__always)
     fileprivate final func get_fallback_environment() -> Environment? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(World3D.method_get_fallback_environment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(World3D.method_get_fallback_environment, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_camera_attributes: GDExtensionMethodBindPtr = {
@@ -263,7 +263,7 @@ open class World3D: Resource {
         withUnsafePointer(to: attributes?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(World3D.method_set_camera_attributes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(World3D.method_set_camera_attributes, handle, pArgs, nil)
                 }
                 
             }
@@ -287,9 +287,9 @@ open class World3D: Resource {
     @inline(__always)
     fileprivate final func get_camera_attributes() -> CameraAttributes? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(World3D.method_get_camera_attributes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(World3D.method_get_camera_attributes, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_direct_space_state: GDExtensionMethodBindPtr = {
@@ -306,9 +306,9 @@ open class World3D: Resource {
     @inline(__always)
     fileprivate final func get_direct_space_state() -> PhysicsDirectSpaceState3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(World3D.method_get_direct_space_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(World3D.method_get_direct_space_state, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

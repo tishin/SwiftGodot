@@ -155,7 +155,7 @@ open class CameraAttributesPhysical: CameraAttributes {
         withUnsafePointer(to: aperture) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_aperture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_aperture, handle, pArgs, nil)
                 }
                 
             }
@@ -180,7 +180,7 @@ open class CameraAttributesPhysical: CameraAttributes {
     fileprivate final func get_aperture() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_aperture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_aperture, handle, nil, &_result)
         return _result
     }
     
@@ -201,7 +201,7 @@ open class CameraAttributesPhysical: CameraAttributes {
         withUnsafePointer(to: shutterSpeed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_shutter_speed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_shutter_speed, handle, pArgs, nil)
                 }
                 
             }
@@ -226,7 +226,7 @@ open class CameraAttributesPhysical: CameraAttributes {
     fileprivate final func get_shutter_speed() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_shutter_speed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_shutter_speed, handle, nil, &_result)
         return _result
     }
     
@@ -247,7 +247,7 @@ open class CameraAttributesPhysical: CameraAttributes {
         withUnsafePointer(to: focalLength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_focal_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_focal_length, handle, pArgs, nil)
                 }
                 
             }
@@ -272,7 +272,7 @@ open class CameraAttributesPhysical: CameraAttributes {
     fileprivate final func get_focal_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_focal_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_focal_length, handle, nil, &_result)
         return _result
     }
     
@@ -293,7 +293,7 @@ open class CameraAttributesPhysical: CameraAttributes {
         withUnsafePointer(to: focusDistance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_focus_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_focus_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -318,7 +318,7 @@ open class CameraAttributesPhysical: CameraAttributes {
     fileprivate final func get_focus_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_focus_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_focus_distance, handle, nil, &_result)
         return _result
     }
     
@@ -339,7 +339,7 @@ open class CameraAttributesPhysical: CameraAttributes {
         withUnsafePointer(to: near) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_near, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_near, handle, pArgs, nil)
                 }
                 
             }
@@ -364,7 +364,7 @@ open class CameraAttributesPhysical: CameraAttributes {
     fileprivate final func get_near() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_near, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_near, handle, nil, &_result)
         return _result
     }
     
@@ -385,7 +385,7 @@ open class CameraAttributesPhysical: CameraAttributes {
         withUnsafePointer(to: far) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_far, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_far, handle, pArgs, nil)
                 }
                 
             }
@@ -410,7 +410,7 @@ open class CameraAttributesPhysical: CameraAttributes {
     fileprivate final func get_far() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_far, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_far, handle, nil, &_result)
         return _result
     }
     
@@ -429,7 +429,7 @@ open class CameraAttributesPhysical: CameraAttributes {
     public final func getFov() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_fov, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_fov, handle, nil, &_result)
         return _result
     }
     
@@ -450,7 +450,7 @@ open class CameraAttributesPhysical: CameraAttributes {
         withUnsafePointer(to: exposureValueMax) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_auto_exposure_max_exposure_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_auto_exposure_max_exposure_value, handle, pArgs, nil)
                 }
                 
             }
@@ -475,7 +475,7 @@ open class CameraAttributesPhysical: CameraAttributes {
     fileprivate final func get_auto_exposure_max_exposure_value() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_auto_exposure_max_exposure_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_auto_exposure_max_exposure_value, handle, nil, &_result)
         return _result
     }
     
@@ -496,7 +496,7 @@ open class CameraAttributesPhysical: CameraAttributes {
         withUnsafePointer(to: exposureValueMin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_auto_exposure_min_exposure_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_set_auto_exposure_min_exposure_value, handle, pArgs, nil)
                 }
                 
             }
@@ -521,7 +521,7 @@ open class CameraAttributesPhysical: CameraAttributes {
     fileprivate final func get_auto_exposure_min_exposure_value() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_auto_exposure_min_exposure_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPhysical.method_get_auto_exposure_min_exposure_value, handle, nil, &_result)
         return _result
     }
     

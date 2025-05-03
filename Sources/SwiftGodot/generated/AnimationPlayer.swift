@@ -227,7 +227,7 @@ open class AnimationPlayer: AnimationMixer {
             withUnsafePointer(to: animationTo.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationPlayer.method_animation_set_next, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationPlayer.method_animation_set_next, handle, pArgs, nil)
                     }
                     
                 }
@@ -257,7 +257,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: animationFrom.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_animation_get_next, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_animation_get_next, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -286,7 +286,7 @@ open class AnimationPlayer: AnimationMixer {
                 withUnsafePointer(to: sec) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AnimationPlayer.method_set_blend_time, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(AnimationPlayer.method_set_blend_time, handle, pArgs, nil)
                         }
                         
                     }
@@ -319,7 +319,7 @@ open class AnimationPlayer: AnimationMixer {
             withUnsafePointer(to: animationTo.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_blend_time, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_blend_time, handle, pArgs, &_result)
                     }
                     
                 }
@@ -348,7 +348,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: sec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_default_blend_time, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_default_blend_time, handle, pArgs, nil)
                 }
                 
             }
@@ -373,7 +373,7 @@ open class AnimationPlayer: AnimationMixer {
     fileprivate final func get_default_blend_time() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_default_blend_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_default_blend_time, handle, nil, &_result)
         return _result
     }
     
@@ -394,7 +394,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: autoCapture) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_auto_capture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_auto_capture, handle, pArgs, nil)
                 }
                 
             }
@@ -419,7 +419,7 @@ open class AnimationPlayer: AnimationMixer {
     fileprivate final func is_auto_capture() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_is_auto_capture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_is_auto_capture, handle, nil, &_result)
         return _result
     }
     
@@ -440,7 +440,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: autoCaptureDuration) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_auto_capture_duration, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_auto_capture_duration, handle, pArgs, nil)
                 }
                 
             }
@@ -465,7 +465,7 @@ open class AnimationPlayer: AnimationMixer {
     fileprivate final func get_auto_capture_duration() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_auto_capture_duration, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_auto_capture_duration, handle, nil, &_result)
         return _result
     }
     
@@ -486,7 +486,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: autoCaptureTransitionType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_auto_capture_transition_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_auto_capture_transition_type, handle, pArgs, nil)
                 }
                 
             }
@@ -511,7 +511,7 @@ open class AnimationPlayer: AnimationMixer {
     fileprivate final func get_auto_capture_transition_type() -> Tween.TransitionType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_auto_capture_transition_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_auto_capture_transition_type, handle, nil, &_result)
         return Tween.TransitionType (rawValue: _result)!
     }
     
@@ -532,7 +532,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: autoCaptureEaseType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_auto_capture_ease_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_auto_capture_ease_type, handle, pArgs, nil)
                 }
                 
             }
@@ -557,7 +557,7 @@ open class AnimationPlayer: AnimationMixer {
     fileprivate final func get_auto_capture_ease_type() -> Tween.EaseType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_auto_capture_ease_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_auto_capture_ease_type, handle, nil, &_result)
         return Tween.EaseType (rawValue: _result)!
     }
     
@@ -588,7 +588,7 @@ open class AnimationPlayer: AnimationMixer {
                     withUnsafePointer(to: fromEnd) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(AnimationPlayer.method_play, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(AnimationPlayer.method_play, handle, pArgs, nil)
                             }
                             
                         }
@@ -629,7 +629,7 @@ open class AnimationPlayer: AnimationMixer {
                             withUnsafePointer(to: fromEnd) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(AnimationPlayer.method_play_section_with_markers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(AnimationPlayer.method_play_section_with_markers, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -674,7 +674,7 @@ open class AnimationPlayer: AnimationMixer {
                             withUnsafePointer(to: fromEnd) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(AnimationPlayer.method_play_section, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(AnimationPlayer.method_play_section, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -715,7 +715,7 @@ open class AnimationPlayer: AnimationMixer {
             withUnsafePointer(to: customBlend) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationPlayer.method_play_backwards, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationPlayer.method_play_backwards, handle, pArgs, nil)
                     }
                     
                 }
@@ -750,7 +750,7 @@ open class AnimationPlayer: AnimationMixer {
                     withUnsafePointer(to: customBlend) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(AnimationPlayer.method_play_section_with_markers_backwards, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(AnimationPlayer.method_play_section_with_markers_backwards, handle, pArgs, nil)
                             }
                             
                         }
@@ -789,7 +789,7 @@ open class AnimationPlayer: AnimationMixer {
                     withUnsafePointer(to: customBlend) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(AnimationPlayer.method_play_section_backwards, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(AnimationPlayer.method_play_section_backwards, handle, pArgs, nil)
                             }
                             
                         }
@@ -837,7 +837,7 @@ open class AnimationPlayer: AnimationMixer {
                                 withUnsafePointer(to: easeType.rawValue) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(AnimationPlayer.method_play_with_capture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                            gi.object_method_bind_ptrcall(AnimationPlayer.method_play_with_capture, handle, pArgs, nil)
                                         }
                                         
                                     }
@@ -876,7 +876,7 @@ open class AnimationPlayer: AnimationMixer {
     /// 
     public final func pause() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_pause, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_pause, handle, nil, nil)
         
     }
     
@@ -902,7 +902,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: keepState) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_stop, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_stop, handle, pArgs, nil)
                 }
                 
             }
@@ -927,7 +927,7 @@ open class AnimationPlayer: AnimationMixer {
     public final func isPlaying() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_is_playing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_is_playing, handle, nil, &_result)
         return _result
     }
     
@@ -949,7 +949,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: animation.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_current_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_current_animation, handle, pArgs, nil)
                 }
                 
             }
@@ -974,7 +974,7 @@ open class AnimationPlayer: AnimationMixer {
     fileprivate final func get_current_animation() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_current_animation, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_current_animation, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -996,7 +996,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: animation.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_assigned_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_assigned_animation, handle, pArgs, nil)
                 }
                 
             }
@@ -1021,7 +1021,7 @@ open class AnimationPlayer: AnimationMixer {
     fileprivate final func get_assigned_animation() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_assigned_animation, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_assigned_animation, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1045,7 +1045,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_queue, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_queue, handle, pArgs, nil)
                 }
                 
             }
@@ -1070,7 +1070,7 @@ open class AnimationPlayer: AnimationMixer {
     public final func getQueue() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_queue, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_queue, handle, nil, &_result.content)
         return _result
     }
     
@@ -1088,7 +1088,7 @@ open class AnimationPlayer: AnimationMixer {
     /// Clears all queued, unplayed animations.
     public final func clearQueue() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_clear_queue, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_clear_queue, handle, nil, nil)
         
     }
     
@@ -1109,7 +1109,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: speed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_speed_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_speed_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -1134,7 +1134,7 @@ open class AnimationPlayer: AnimationMixer {
     fileprivate final func get_speed_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_speed_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_speed_scale, handle, nil, &_result)
         return _result
     }
     
@@ -1156,7 +1156,7 @@ open class AnimationPlayer: AnimationMixer {
     public final func getPlayingSpeed() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_playing_speed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_playing_speed, handle, nil, &_result)
         return _result
     }
     
@@ -1178,7 +1178,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_autoplay, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_autoplay, handle, pArgs, nil)
                 }
                 
             }
@@ -1203,7 +1203,7 @@ open class AnimationPlayer: AnimationMixer {
     fileprivate final func get_autoplay() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_autoplay, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_autoplay, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1224,7 +1224,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_movie_quit_on_finish_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_movie_quit_on_finish_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1249,7 +1249,7 @@ open class AnimationPlayer: AnimationMixer {
     fileprivate final func is_movie_quit_on_finish_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_is_movie_quit_on_finish_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_is_movie_quit_on_finish_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1268,7 +1268,7 @@ open class AnimationPlayer: AnimationMixer {
     fileprivate final func get_current_animation_position() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_current_animation_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_current_animation_position, handle, nil, &_result)
         return _result
     }
     
@@ -1287,7 +1287,7 @@ open class AnimationPlayer: AnimationMixer {
     fileprivate final func get_current_animation_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_current_animation_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_current_animation_length, handle, nil, &_result)
         return _result
     }
     
@@ -1312,7 +1312,7 @@ open class AnimationPlayer: AnimationMixer {
             withUnsafePointer(to: endMarker.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationPlayer.method_set_section_with_markers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationPlayer.method_set_section_with_markers, handle, pArgs, nil)
                     }
                     
                 }
@@ -1342,7 +1342,7 @@ open class AnimationPlayer: AnimationMixer {
             withUnsafePointer(to: endTime) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationPlayer.method_set_section, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationPlayer.method_set_section, handle, pArgs, nil)
                     }
                     
                 }
@@ -1368,7 +1368,7 @@ open class AnimationPlayer: AnimationMixer {
     /// Resets the current section if section is set.
     public final func resetSection() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_reset_section, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_reset_section, handle, nil, nil)
         
     }
     
@@ -1387,7 +1387,7 @@ open class AnimationPlayer: AnimationMixer {
     public final func getSectionStartTime() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_section_start_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_section_start_time, handle, nil, &_result)
         return _result
     }
     
@@ -1406,7 +1406,7 @@ open class AnimationPlayer: AnimationMixer {
     public final func getSectionEndTime() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_section_end_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_section_end_time, handle, nil, &_result)
         return _result
     }
     
@@ -1425,7 +1425,7 @@ open class AnimationPlayer: AnimationMixer {
     public final func hasSection() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_has_section, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_has_section, handle, nil, &_result)
         return _result
     }
     
@@ -1453,7 +1453,7 @@ open class AnimationPlayer: AnimationMixer {
                 withUnsafePointer(to: updateOnly) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AnimationPlayer.method_seek, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(AnimationPlayer.method_seek, handle, pArgs, nil)
                         }
                         
                     }
@@ -1484,7 +1484,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_process_callback, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_process_callback, handle, pArgs, nil)
                 }
                 
             }
@@ -1509,7 +1509,7 @@ open class AnimationPlayer: AnimationMixer {
     public final func getProcessCallback() -> AnimationPlayer.AnimationProcessCallback {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_process_callback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_process_callback, handle, nil, &_result)
         return AnimationPlayer.AnimationProcessCallback (rawValue: _result)!
     }
     
@@ -1530,7 +1530,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_method_call_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_method_call_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -1555,7 +1555,7 @@ open class AnimationPlayer: AnimationMixer {
     public final func getMethodCallMode() -> AnimationPlayer.AnimationMethodCallMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_method_call_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_method_call_mode, handle, nil, &_result)
         return AnimationPlayer.AnimationMethodCallMode (rawValue: _result)!
     }
     
@@ -1576,7 +1576,7 @@ open class AnimationPlayer: AnimationMixer {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_root, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationPlayer.method_set_root, handle, pArgs, nil)
                 }
                 
             }
@@ -1601,7 +1601,7 @@ open class AnimationPlayer: AnimationMixer {
     public final func getRoot() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_root, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimationPlayer.method_get_root, handle, nil, &_result.content)
         return _result
     }
     

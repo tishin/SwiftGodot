@@ -82,7 +82,7 @@ open class MeshInstance3D: GeometryInstance3D {
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshInstance3D.method_set_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MeshInstance3D.method_set_mesh, handle, pArgs, nil)
                 }
                 
             }
@@ -106,9 +106,9 @@ open class MeshInstance3D: GeometryInstance3D {
     @inline(__always)
     fileprivate final func get_mesh() -> Mesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(MeshInstance3D.method_get_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(MeshInstance3D.method_get_mesh, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_skeleton_path: GDExtensionMethodBindPtr = {
@@ -128,7 +128,7 @@ open class MeshInstance3D: GeometryInstance3D {
         withUnsafePointer(to: skeletonPath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshInstance3D.method_set_skeleton_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MeshInstance3D.method_set_skeleton_path, handle, pArgs, nil)
                 }
                 
             }
@@ -153,7 +153,7 @@ open class MeshInstance3D: GeometryInstance3D {
     fileprivate final func get_skeleton_path() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(MeshInstance3D.method_get_skeleton_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(MeshInstance3D.method_get_skeleton_path, handle, nil, &_result.content)
         return _result
     }
     
@@ -174,7 +174,7 @@ open class MeshInstance3D: GeometryInstance3D {
         withUnsafePointer(to: skin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshInstance3D.method_set_skin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MeshInstance3D.method_set_skin, handle, pArgs, nil)
                 }
                 
             }
@@ -198,9 +198,9 @@ open class MeshInstance3D: GeometryInstance3D {
     @inline(__always)
     fileprivate final func get_skin() -> Skin? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(MeshInstance3D.method_get_skin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(MeshInstance3D.method_get_skin, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_skin_reference: GDExtensionMethodBindPtr = {
@@ -217,9 +217,9 @@ open class MeshInstance3D: GeometryInstance3D {
     /// Returns the internal ``SkinReference`` containing the skeleton's ``RID`` attached to this RID. See also ``Resource/getRid()``, ``SkinReference/getSkeleton()``, and ``RenderingServer/instanceAttachSkeleton(instance:skeleton:)``.
     public final func getSkinReference() -> SkinReference? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(MeshInstance3D.method_get_skin_reference, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(MeshInstance3D.method_get_skin_reference, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_surface_override_material_count: GDExtensionMethodBindPtr = {
@@ -237,7 +237,7 @@ open class MeshInstance3D: GeometryInstance3D {
     public final func getSurfaceOverrideMaterialCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MeshInstance3D.method_get_surface_override_material_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MeshInstance3D.method_get_surface_override_material_count, handle, nil, &_result)
         return _result
     }
     
@@ -262,7 +262,7 @@ open class MeshInstance3D: GeometryInstance3D {
             withUnsafePointer(to: material?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshInstance3D.method_set_surface_override_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshInstance3D.method_set_surface_override_material, handle, pArgs, nil)
                     }
                     
                 }
@@ -291,18 +291,18 @@ open class MeshInstance3D: GeometryInstance3D {
     /// 
     public final func getSurfaceOverrideMaterial(surface: Int32) -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: surface) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshInstance3D.method_get_surface_override_material, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshInstance3D.method_get_surface_override_material, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_active_material: GDExtensionMethodBindPtr = {
@@ -322,18 +322,18 @@ open class MeshInstance3D: GeometryInstance3D {
     /// 
     public final func getActiveMaterial(surface: Int32) -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: surface) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshInstance3D.method_get_active_material, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshInstance3D.method_get_active_material, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_create_trimesh_collision: GDExtensionMethodBindPtr = {
@@ -350,7 +350,7 @@ open class MeshInstance3D: GeometryInstance3D {
     /// This helper creates a ``StaticBody3D`` child node with a ``ConcavePolygonShape3D`` collision shape calculated from the mesh geometry. It's mainly used for testing.
     public final func createTrimeshCollision() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(MeshInstance3D.method_create_trimesh_collision, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(MeshInstance3D.method_create_trimesh_collision, handle, nil, nil)
         
     }
     
@@ -377,7 +377,7 @@ open class MeshInstance3D: GeometryInstance3D {
             withUnsafePointer(to: simplify) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshInstance3D.method_create_convex_collision, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshInstance3D.method_create_convex_collision, handle, pArgs, nil)
                     }
                     
                 }
@@ -406,7 +406,7 @@ open class MeshInstance3D: GeometryInstance3D {
         withUnsafePointer(to: settings?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshInstance3D.method_create_multiple_convex_collisions, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MeshInstance3D.method_create_multiple_convex_collisions, handle, pArgs, nil)
                 }
                 
             }
@@ -431,7 +431,7 @@ open class MeshInstance3D: GeometryInstance3D {
     public final func getBlendShapeCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MeshInstance3D.method_get_blend_shape_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MeshInstance3D.method_get_blend_shape_count, handle, nil, &_result)
         return _result
     }
     
@@ -453,7 +453,7 @@ open class MeshInstance3D: GeometryInstance3D {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshInstance3D.method_find_blend_shape_by_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshInstance3D.method_find_blend_shape_by_name, handle, pArgs, &_result)
                 }
                 
             }
@@ -481,7 +481,7 @@ open class MeshInstance3D: GeometryInstance3D {
         withUnsafePointer(to: blendShapeIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshInstance3D.method_get_blend_shape_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshInstance3D.method_get_blend_shape_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -509,7 +509,7 @@ open class MeshInstance3D: GeometryInstance3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshInstance3D.method_set_blend_shape_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshInstance3D.method_set_blend_shape_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -535,7 +535,7 @@ open class MeshInstance3D: GeometryInstance3D {
     /// This helper creates a ``MeshInstance3D`` child node with gizmos at every vertex calculated from the mesh geometry. It's mainly used for testing.
     public final func createDebugTangents() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(MeshInstance3D.method_create_debug_tangents, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(MeshInstance3D.method_create_debug_tangents, handle, nil, nil)
         
     }
     
@@ -556,18 +556,18 @@ open class MeshInstance3D: GeometryInstance3D {
     /// 
     public final func bakeMeshFromCurrentBlendShapeMix(existing: ArrayMesh? = nil) -> ArrayMesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: existing?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshInstance3D.method_bake_mesh_from_current_blend_shape_mix, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshInstance3D.method_bake_mesh_from_current_blend_shape_mix, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_bake_mesh_from_current_skeleton_pose: GDExtensionMethodBindPtr = {
@@ -587,18 +587,18 @@ open class MeshInstance3D: GeometryInstance3D {
     /// 
     public final func bakeMeshFromCurrentSkeletonPose(existing: ArrayMesh? = nil) -> ArrayMesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: existing?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshInstance3D.method_bake_mesh_from_current_skeleton_pose, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshInstance3D.method_bake_mesh_from_current_skeleton_pose, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

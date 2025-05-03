@@ -59,7 +59,7 @@ open class EditorTranslationParserPlugin: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorTranslationParserPlugin.method__parse_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorTranslationParserPlugin.method__parse_file, handle, pArgs, &_result)
                 }
                 
             }
@@ -85,7 +85,7 @@ open class EditorTranslationParserPlugin: RefCounted {
     open func _getRecognizedExtensions() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(EditorTranslationParserPlugin.method__get_recognized_extensions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorTranslationParserPlugin.method__get_recognized_extensions, handle, nil, &_result.content)
         return _result
     }
     

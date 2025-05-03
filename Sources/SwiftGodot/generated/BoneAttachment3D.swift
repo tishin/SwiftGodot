@@ -82,9 +82,9 @@ open class BoneAttachment3D: Node3D {
     /// Get parent or external ``Skeleton3D`` node if found.
     public final func getSkeleton() -> Skeleton3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_skeleton, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_bone_name: GDExtensionMethodBindPtr = {
@@ -105,7 +105,7 @@ open class BoneAttachment3D: Node3D {
         withUnsafePointer(to: boneName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BoneAttachment3D.method_set_bone_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BoneAttachment3D.method_set_bone_name, handle, pArgs, nil)
                 }
                 
             }
@@ -130,7 +130,7 @@ open class BoneAttachment3D: Node3D {
     fileprivate final func get_bone_name() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_bone_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_bone_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -151,7 +151,7 @@ open class BoneAttachment3D: Node3D {
         withUnsafePointer(to: boneIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BoneAttachment3D.method_set_bone_idx, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BoneAttachment3D.method_set_bone_idx, handle, pArgs, nil)
                 }
                 
             }
@@ -176,7 +176,7 @@ open class BoneAttachment3D: Node3D {
     fileprivate final func get_bone_idx() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_bone_idx, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_bone_idx, handle, nil, &_result)
         return _result
     }
     
@@ -194,7 +194,7 @@ open class BoneAttachment3D: Node3D {
     /// A function that is called automatically when the ``Skeleton3D`` is updated. This function is where the ``BoneAttachment3D`` node updates its position so it is correctly bound when it is _not_ set to override the bone pose.
     public final func onSkeletonUpdate() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(BoneAttachment3D.method_on_skeleton_update, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(BoneAttachment3D.method_on_skeleton_update, handle, nil, nil)
         
     }
     
@@ -215,7 +215,7 @@ open class BoneAttachment3D: Node3D {
         withUnsafePointer(to: overridePose) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BoneAttachment3D.method_set_override_pose, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BoneAttachment3D.method_set_override_pose, handle, pArgs, nil)
                 }
                 
             }
@@ -240,7 +240,7 @@ open class BoneAttachment3D: Node3D {
     fileprivate final func get_override_pose() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_override_pose, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_override_pose, handle, nil, &_result)
         return _result
     }
     
@@ -261,7 +261,7 @@ open class BoneAttachment3D: Node3D {
         withUnsafePointer(to: useExternalSkeleton) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BoneAttachment3D.method_set_use_external_skeleton, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BoneAttachment3D.method_set_use_external_skeleton, handle, pArgs, nil)
                 }
                 
             }
@@ -286,7 +286,7 @@ open class BoneAttachment3D: Node3D {
     public final func getUseExternalSkeleton() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_use_external_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_use_external_skeleton, handle, nil, &_result)
         return _result
     }
     
@@ -307,7 +307,7 @@ open class BoneAttachment3D: Node3D {
         withUnsafePointer(to: externalSkeleton.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BoneAttachment3D.method_set_external_skeleton, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BoneAttachment3D.method_set_external_skeleton, handle, pArgs, nil)
                 }
                 
             }
@@ -332,7 +332,7 @@ open class BoneAttachment3D: Node3D {
     public final func getExternalSkeleton() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_external_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(BoneAttachment3D.method_get_external_skeleton, handle, nil, &_result.content)
         return _result
     }
     

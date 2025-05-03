@@ -184,7 +184,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_fadein_time, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_fadein_time, handle, pArgs, nil)
                 }
                 
             }
@@ -209,7 +209,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     fileprivate final func get_fadein_time() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_fadein_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_fadein_time, handle, nil, &_result)
         return _result
     }
     
@@ -230,7 +230,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_fadein_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_fadein_curve, handle, pArgs, nil)
                 }
                 
             }
@@ -254,9 +254,9 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     @inline(__always)
     fileprivate final func get_fadein_curve() -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_fadein_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_fadein_curve, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_fadeout_time: GDExtensionMethodBindPtr = {
@@ -276,7 +276,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_fadeout_time, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_fadeout_time, handle, pArgs, nil)
                 }
                 
             }
@@ -301,7 +301,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     fileprivate final func get_fadeout_time() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_fadeout_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_fadeout_time, handle, nil, &_result)
         return _result
     }
     
@@ -322,7 +322,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_fadeout_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_fadeout_curve, handle, pArgs, nil)
                 }
                 
             }
@@ -346,9 +346,9 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     @inline(__always)
     fileprivate final func get_fadeout_curve() -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_fadeout_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_fadeout_curve, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_break_loop_at_end: GDExtensionMethodBindPtr = {
@@ -368,7 +368,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_break_loop_at_end, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_break_loop_at_end, handle, pArgs, nil)
                 }
                 
             }
@@ -393,7 +393,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     fileprivate final func is_loop_broken_at_end() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_is_loop_broken_at_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_is_loop_broken_at_end, handle, nil, &_result)
         return _result
     }
     
@@ -414,7 +414,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_autorestart, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_autorestart, handle, pArgs, nil)
                 }
                 
             }
@@ -439,7 +439,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     fileprivate final func has_autorestart() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_has_autorestart, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_has_autorestart, handle, nil, &_result)
         return _result
     }
     
@@ -460,7 +460,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_autorestart_delay, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_autorestart_delay, handle, pArgs, nil)
                 }
                 
             }
@@ -485,7 +485,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     fileprivate final func get_autorestart_delay() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_autorestart_delay, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_autorestart_delay, handle, nil, &_result)
         return _result
     }
     
@@ -506,7 +506,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_autorestart_random_delay, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_autorestart_random_delay, handle, pArgs, nil)
                 }
                 
             }
@@ -531,7 +531,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     fileprivate final func get_autorestart_random_delay() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_autorestart_random_delay, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_autorestart_random_delay, handle, nil, &_result)
         return _result
     }
     
@@ -552,7 +552,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_mix_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_set_mix_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -577,7 +577,7 @@ open class AnimationNodeOneShot: AnimationNodeSync {
     fileprivate final func get_mix_mode() -> AnimationNodeOneShot.MixMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_mix_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeOneShot.method_get_mix_mode, handle, nil, &_result)
         return AnimationNodeOneShot.MixMode (rawValue: _result)!
     }
     

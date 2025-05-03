@@ -103,9 +103,9 @@ open class GLTFSpecGloss: Resource {
     @inline(__always)
     fileprivate final func get_diffuse_img() -> Image? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_diffuse_img, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_diffuse_img, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_diffuse_img: GDExtensionMethodBindPtr = {
@@ -125,7 +125,7 @@ open class GLTFSpecGloss: Resource {
         withUnsafePointer(to: diffuseImg?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSpecGloss.method_set_diffuse_img, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSpecGloss.method_set_diffuse_img, handle, pArgs, nil)
                 }
                 
             }
@@ -150,7 +150,7 @@ open class GLTFSpecGloss: Resource {
     fileprivate final func get_diffuse_factor() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_diffuse_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_diffuse_factor, handle, nil, &_result)
         return _result
     }
     
@@ -171,7 +171,7 @@ open class GLTFSpecGloss: Resource {
         withUnsafePointer(to: diffuseFactor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSpecGloss.method_set_diffuse_factor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSpecGloss.method_set_diffuse_factor, handle, pArgs, nil)
                 }
                 
             }
@@ -196,7 +196,7 @@ open class GLTFSpecGloss: Resource {
     fileprivate final func get_gloss_factor() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_gloss_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_gloss_factor, handle, nil, &_result)
         return _result
     }
     
@@ -217,7 +217,7 @@ open class GLTFSpecGloss: Resource {
         withUnsafePointer(to: glossFactor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSpecGloss.method_set_gloss_factor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSpecGloss.method_set_gloss_factor, handle, pArgs, nil)
                 }
                 
             }
@@ -242,7 +242,7 @@ open class GLTFSpecGloss: Resource {
     fileprivate final func get_specular_factor() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_specular_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_specular_factor, handle, nil, &_result)
         return _result
     }
     
@@ -263,7 +263,7 @@ open class GLTFSpecGloss: Resource {
         withUnsafePointer(to: specularFactor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSpecGloss.method_set_specular_factor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSpecGloss.method_set_specular_factor, handle, pArgs, nil)
                 }
                 
             }
@@ -287,9 +287,9 @@ open class GLTFSpecGloss: Resource {
     @inline(__always)
     fileprivate final func get_spec_gloss_img() -> Image? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_spec_gloss_img, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GLTFSpecGloss.method_get_spec_gloss_img, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_spec_gloss_img: GDExtensionMethodBindPtr = {
@@ -309,7 +309,7 @@ open class GLTFSpecGloss: Resource {
         withUnsafePointer(to: specGlossImg?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSpecGloss.method_set_spec_gloss_img, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSpecGloss.method_set_spec_gloss_img, handle, pArgs, nil)
                 }
                 
             }

@@ -92,7 +92,7 @@ open class CurveTexture: Texture2D {
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CurveTexture.method_set_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CurveTexture.method_set_width, handle, pArgs, nil)
                 }
                 
             }
@@ -119,7 +119,7 @@ open class CurveTexture: Texture2D {
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CurveTexture.method_set_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CurveTexture.method_set_curve, handle, pArgs, nil)
                 }
                 
             }
@@ -143,9 +143,9 @@ open class CurveTexture: Texture2D {
     @inline(__always)
     fileprivate final func get_curve() -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CurveTexture.method_get_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CurveTexture.method_get_curve, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_texture_mode: GDExtensionMethodBindPtr = {
@@ -165,7 +165,7 @@ open class CurveTexture: Texture2D {
         withUnsafePointer(to: textureMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CurveTexture.method_set_texture_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CurveTexture.method_set_texture_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -190,7 +190,7 @@ open class CurveTexture: Texture2D {
     fileprivate final func get_texture_mode() -> CurveTexture.TextureMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CurveTexture.method_get_texture_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CurveTexture.method_get_texture_mode, handle, nil, &_result)
         return CurveTexture.TextureMode (rawValue: _result)!
     }
     

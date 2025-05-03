@@ -231,7 +231,7 @@ open class Mesh: Resource {
     open func _getSurfaceCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Mesh.method__get_surface_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Mesh.method__get_surface_count, handle, nil, &_result)
         return _result
     }
     
@@ -254,7 +254,7 @@ open class Mesh: Resource {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_array_len, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_array_len, handle, pArgs, &_result)
                 }
                 
             }
@@ -283,7 +283,7 @@ open class Mesh: Resource {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_array_index_len, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_array_index_len, handle, pArgs, &_result)
                 }
                 
             }
@@ -312,7 +312,7 @@ open class Mesh: Resource {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_arrays, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_arrays, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -341,7 +341,7 @@ open class Mesh: Resource {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_blend_shape_arrays, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_blend_shape_arrays, handle, pArgs, &_result)
                 }
                 
             }
@@ -370,7 +370,7 @@ open class Mesh: Resource {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_lods, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_lods, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -399,7 +399,7 @@ open class Mesh: Resource {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_format, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_format, handle, pArgs, &_result)
                 }
                 
             }
@@ -428,7 +428,7 @@ open class Mesh: Resource {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_primitive_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_primitive_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -457,7 +457,7 @@ open class Mesh: Resource {
             withUnsafePointer(to: material?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Mesh.method__surface_set_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Mesh.method__surface_set_material, handle, pArgs, nil)
                     }
                     
                 }
@@ -484,18 +484,18 @@ open class Mesh: Resource {
     @_documentation(visibility: public)
     open func _surfaceGetMaterial(index: Int32) -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_material, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Mesh.method__surface_get_material, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__get_blend_shape_count: GDExtensionMethodBindPtr = {
@@ -514,7 +514,7 @@ open class Mesh: Resource {
     open func _getBlendShapeCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Mesh.method__get_blend_shape_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Mesh.method__get_blend_shape_count, handle, nil, &_result)
         return _result
     }
     
@@ -537,7 +537,7 @@ open class Mesh: Resource {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Mesh.method__get_blend_shape_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Mesh.method__get_blend_shape_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -566,7 +566,7 @@ open class Mesh: Resource {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Mesh.method__set_blend_shape_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Mesh.method__set_blend_shape_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -594,7 +594,7 @@ open class Mesh: Resource {
     open func _getAabb() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(Mesh.method__get_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Mesh.method__get_aabb, handle, nil, &_result)
         return _result
     }
     
@@ -615,7 +615,7 @@ open class Mesh: Resource {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Mesh.method_set_lightmap_size_hint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Mesh.method_set_lightmap_size_hint, handle, pArgs, nil)
                 }
                 
             }
@@ -640,7 +640,7 @@ open class Mesh: Resource {
     fileprivate final func get_lightmap_size_hint() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(Mesh.method_get_lightmap_size_hint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Mesh.method_get_lightmap_size_hint, handle, nil, &_result)
         return _result
     }
     
@@ -662,7 +662,7 @@ open class Mesh: Resource {
     public final func getAabb() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(Mesh.method_get_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Mesh.method_get_aabb, handle, nil, &_result)
         return _result
     }
     
@@ -681,7 +681,7 @@ open class Mesh: Resource {
     public final func getFaces() -> PackedVector3Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
-        gi.object_method_bind_ptrcall(Mesh.method_get_faces, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Mesh.method_get_faces, handle, nil, &_result.content)
         return _result
     }
     
@@ -700,7 +700,7 @@ open class Mesh: Resource {
     public final func getSurfaceCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Mesh.method_get_surface_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Mesh.method_get_surface_count, handle, nil, &_result)
         return _result
     }
     
@@ -722,7 +722,7 @@ open class Mesh: Resource {
         withUnsafePointer(to: surfIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Mesh.method_surface_get_arrays, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Mesh.method_surface_get_arrays, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -750,7 +750,7 @@ open class Mesh: Resource {
         withUnsafePointer(to: surfIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Mesh.method_surface_get_blend_shape_arrays, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Mesh.method_surface_get_blend_shape_arrays, handle, pArgs, &_result)
                 }
                 
             }
@@ -781,7 +781,7 @@ open class Mesh: Resource {
             withUnsafePointer(to: material?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Mesh.method_surface_set_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Mesh.method_surface_set_material, handle, pArgs, nil)
                     }
                     
                 }
@@ -810,18 +810,18 @@ open class Mesh: Resource {
     /// 
     public final func surfaceGetMaterial(surfIdx: Int32) -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: surfIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Mesh.method_surface_get_material, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Mesh.method_surface_get_material, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_create_placeholder: GDExtensionMethodBindPtr = {
@@ -838,9 +838,9 @@ open class Mesh: Resource {
     /// Creates a placeholder version of this resource (``PlaceholderMesh``).
     public final func createPlaceholder() -> Resource? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Mesh.method_create_placeholder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Mesh.method_create_placeholder, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_create_trimesh_shape: GDExtensionMethodBindPtr = {
@@ -857,9 +857,9 @@ open class Mesh: Resource {
     /// Calculate a ``ConcavePolygonShape3D`` from the mesh.
     public final func createTrimeshShape() -> ConcavePolygonShape3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Mesh.method_create_trimesh_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Mesh.method_create_trimesh_shape, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_create_convex_shape: GDExtensionMethodBindPtr = {
@@ -881,12 +881,12 @@ open class Mesh: Resource {
     /// 
     public final func createConvexShape(clean: Bool = true, simplify: Bool = false) -> ConvexPolygonShape3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: clean) { pArg0 in
             withUnsafePointer(to: simplify) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Mesh.method_create_convex_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Mesh.method_create_convex_shape, handle, pArgs, &_result)
                     }
                     
                 }
@@ -895,7 +895,7 @@ open class Mesh: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_create_outline: GDExtensionMethodBindPtr = {
@@ -915,18 +915,18 @@ open class Mesh: Resource {
     /// 
     public final func createOutline(margin: Double) -> Mesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Mesh.method_create_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Mesh.method_create_outline, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_generate_triangle_mesh: GDExtensionMethodBindPtr = {
@@ -943,9 +943,9 @@ open class Mesh: Resource {
     /// Generate a ``TriangleMesh`` from the mesh. Considers only surfaces using one of these primitive types: ``PrimitiveType/triangles``, ``PrimitiveType/triangleStrip``.
     public final func generateTriangleMesh() -> TriangleMesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Mesh.method_generate_triangle_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Mesh.method_generate_triangle_mesh, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
@@ -1092,7 +1092,7 @@ func _Mesh_proxy_surface_get_material (instance: UnsafeMutableRawPointer?, args:
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? Mesh else { return }
     let ret = swiftObject._surfaceGetMaterial (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Material
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // Material
 }
 
 func _Mesh_proxy_surface_get_primitive_type (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -1109,8 +1109,8 @@ func _Mesh_proxy_surface_set_material (instance: UnsafeMutableRawPointer?, args:
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? Mesh else { return }
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._surfaceSetMaterial (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee, material: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? Material)
+    swiftObject._surfaceSetMaterial (index: args [0]!.assumingMemoryBound (to: Int32.self).pointee, material: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? Material)
 }
 

@@ -128,7 +128,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RibbonTrailMesh.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RibbonTrailMesh.method_set_size, handle, pArgs, nil)
                 }
                 
             }
@@ -153,7 +153,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
     fileprivate final func get_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -174,7 +174,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
         withUnsafePointer(to: sections) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RibbonTrailMesh.method_set_sections, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RibbonTrailMesh.method_set_sections, handle, pArgs, nil)
                 }
                 
             }
@@ -199,7 +199,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
     fileprivate final func get_sections() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_sections, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_sections, handle, nil, &_result)
         return _result
     }
     
@@ -220,7 +220,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
         withUnsafePointer(to: sectionLength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RibbonTrailMesh.method_set_section_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RibbonTrailMesh.method_set_section_length, handle, pArgs, nil)
                 }
                 
             }
@@ -245,7 +245,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
     fileprivate final func get_section_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_section_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_section_length, handle, nil, &_result)
         return _result
     }
     
@@ -266,7 +266,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
         withUnsafePointer(to: sectionSegments) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RibbonTrailMesh.method_set_section_segments, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RibbonTrailMesh.method_set_section_segments, handle, pArgs, nil)
                 }
                 
             }
@@ -291,7 +291,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
     fileprivate final func get_section_segments() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_section_segments, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_section_segments, handle, nil, &_result)
         return _result
     }
     
@@ -312,7 +312,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RibbonTrailMesh.method_set_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RibbonTrailMesh.method_set_curve, handle, pArgs, nil)
                 }
                 
             }
@@ -336,9 +336,9 @@ open class RibbonTrailMesh: PrimitiveMesh {
     @inline(__always)
     fileprivate final func get_curve() -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_curve, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_shape: GDExtensionMethodBindPtr = {
@@ -358,7 +358,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
         withUnsafePointer(to: shape.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RibbonTrailMesh.method_set_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RibbonTrailMesh.method_set_shape, handle, pArgs, nil)
                 }
                 
             }
@@ -383,7 +383,7 @@ open class RibbonTrailMesh: PrimitiveMesh {
     fileprivate final func get_shape() -> RibbonTrailMesh.Shape {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RibbonTrailMesh.method_get_shape, handle, nil, &_result)
         return RibbonTrailMesh.Shape (rawValue: _result)!
     }
     

@@ -1425,7 +1425,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: data.array.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_texture_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_texture_create, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -1458,7 +1458,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: withTexture.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_create_shared, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_create_shared, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1498,7 +1498,7 @@ open class RenderingDevice: Object {
                             withUnsafePointer(to: sliceType.rawValue) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_create_shared_from_slice, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_create_shared_from_slice, handle, pArgs, &_result.content)
                                     }
                                     
                                 }
@@ -1544,7 +1544,7 @@ open class RenderingDevice: Object {
                                         withUnsafePointer(to: layers) { pArg8 in
                                             withUnsafePointer(to: UnsafeRawPointersN9(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8)) { pArgs in
                                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 9) { pArgs in
-                                                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_create_from_extension, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_create_from_extension, handle, pArgs, &_result.content)
                                                 }
                                                 
                                             }
@@ -1597,7 +1597,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: data.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_texture_update, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_texture_update, handle, pArgs, &_result)
                         }
                         
                     }
@@ -1637,7 +1637,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: layer) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_get_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_get_data, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1674,7 +1674,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: callback.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_texture_get_data_async, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_texture_get_data_async, handle, pArgs, &_result)
                         }
                         
                     }
@@ -1707,7 +1707,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: usageFlags.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_is_format_supported_for_usage, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_is_format_supported_for_usage, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1737,7 +1737,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_is_shared, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_is_shared, handle, pArgs, &_result)
                 }
                 
             }
@@ -1765,7 +1765,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_is_valid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_is_valid, handle, pArgs, &_result)
                 }
                 
             }
@@ -1798,7 +1798,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: discardable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_set_discardable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_set_discardable, handle, pArgs, nil)
                     }
                     
                 }
@@ -1828,7 +1828,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_is_discardable, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_is_discardable, handle, pArgs, &_result)
                 }
                 
             }
@@ -1875,7 +1875,7 @@ open class RenderingDevice: Object {
                                         withUnsafePointer(to: dstLayer) { pArg8 in
                                             withUnsafePointer(to: UnsafeRawPointersN9(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8)) { pArgs in
                                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 9) { pArgs in
-                                                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_copy, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_copy, handle, pArgs, &_result)
                                                 }
                                                 
                                             }
@@ -1927,7 +1927,7 @@ open class RenderingDevice: Object {
                             withUnsafePointer(to: layerCount) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_clear, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_clear, handle, pArgs, &_result)
                                     }
                                     
                                 }
@@ -1981,7 +1981,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: toTexture.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_resolve_multisample, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_texture_resolve_multisample, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2007,18 +2007,18 @@ open class RenderingDevice: Object {
     /// Returns the data format used to create this texture.
     public final func textureGetFormat(texture: RID) -> RDTextureFormat? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_get_format, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_get_format, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_texture_get_native_handle: GDExtensionMethodBindPtr = {
@@ -2042,7 +2042,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_get_native_handle, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_texture_get_native_handle, handle, pArgs, &_result)
                 }
                 
             }
@@ -2074,7 +2074,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: viewCount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_format_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_format_create, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2106,7 +2106,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: viewCount) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_format_create_multipass, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_format_create_multipass, handle, pArgs, &_result)
                         }
                         
                     }
@@ -2138,7 +2138,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: samples.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_format_create_empty, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_format_create_empty, handle, pArgs, &_result)
                 }
                 
             }
@@ -2167,7 +2167,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: renderPass) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_format_get_texture_samples, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_format_get_texture_samples, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2202,7 +2202,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: viewCount) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_create, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -2240,7 +2240,7 @@ open class RenderingDevice: Object {
                     withUnsafePointer(to: viewCount) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_create_multipass, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_create_multipass, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -2279,7 +2279,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: validateWithFormat) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_create_empty, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_create_empty, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -2311,7 +2311,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: framebuffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_get_format, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_get_format, handle, pArgs, &_result)
                 }
                 
             }
@@ -2339,7 +2339,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: framebuffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_is_valid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_framebuffer_is_valid, handle, pArgs, &_result)
                 }
                 
             }
@@ -2370,7 +2370,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_sampler_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_sampler_create, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2399,7 +2399,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: samplerFilter.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_sampler_is_format_supported_for_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_sampler_is_format_supported_for_filter, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2434,7 +2434,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: creationBits.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_vertex_buffer_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_vertex_buffer_create, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -2466,7 +2466,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: vertexDescriptions.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_vertex_format_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_vertex_format_create, handle, pArgs, &_result)
                 }
                 
             }
@@ -2497,7 +2497,7 @@ open class RenderingDevice: Object {
                     withUnsafePointer(to: offsets.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(RenderingDevice.method_vertex_array_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(RenderingDevice.method_vertex_array_create, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -2538,7 +2538,7 @@ open class RenderingDevice: Object {
                         withUnsafePointer(to: creationBits.rawValue) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(RenderingDevice.method_index_buffer_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                    gi.object_method_bind_ptrcall(RenderingDevice.method_index_buffer_create, handle, pArgs, &_result.content)
                                 }
                                 
                             }
@@ -2579,7 +2579,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: indexCount) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_index_array_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_index_array_create, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -2610,12 +2610,12 @@ open class RenderingDevice: Object {
     /// 
     public final func shaderCompileSpirvFromSource(shaderSource: RDShaderSource?, allowCache: Bool = true) -> RDShaderSPIRV? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: shaderSource?.handle) { pArg0 in
             withUnsafePointer(to: allowCache) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_shader_compile_spirv_from_source, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_shader_compile_spirv_from_source, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2624,7 +2624,7 @@ open class RenderingDevice: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_shader_compile_binary_from_spirv: GDExtensionMethodBindPtr = {
@@ -2650,7 +2650,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_shader_compile_binary_from_spirv, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_shader_compile_binary_from_spirv, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -2685,7 +2685,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_shader_create_from_spirv, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_shader_create_from_spirv, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -2719,7 +2719,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: placeholderRid.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_shader_create_from_bytecode, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_shader_create_from_bytecode, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -2746,7 +2746,7 @@ open class RenderingDevice: Object {
     public final func shaderCreatePlaceholder() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(RenderingDevice.method_shader_create_placeholder, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_shader_create_placeholder, handle, nil, &_result.content)
         return _result
     }
     
@@ -2768,7 +2768,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: shader.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_shader_get_vertex_input_attribute_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_shader_get_vertex_input_attribute_mask, handle, pArgs, &_result)
                 }
                 
             }
@@ -2801,7 +2801,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: creationBits.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_uniform_buffer_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_uniform_buffer_create, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -2839,7 +2839,7 @@ open class RenderingDevice: Object {
                     withUnsafePointer(to: creationBits.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(RenderingDevice.method_storage_buffer_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(RenderingDevice.method_storage_buffer_create, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -2878,7 +2878,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: data.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_texture_buffer_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_texture_buffer_create, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -2915,7 +2915,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: shaderSet) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_uniform_set_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_uniform_set_create, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -2947,7 +2947,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: uniformSet.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_uniform_set_is_valid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_uniform_set_is_valid, handle, pArgs, &_result)
                 }
                 
             }
@@ -2988,7 +2988,7 @@ open class RenderingDevice: Object {
                         withUnsafePointer(to: size) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(RenderingDevice.method_buffer_copy, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(RenderingDevice.method_buffer_copy, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -3036,7 +3036,7 @@ open class RenderingDevice: Object {
                     withUnsafePointer(to: data.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(RenderingDevice.method_buffer_update, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(RenderingDevice.method_buffer_update, handle, pArgs, &_result)
                             }
                             
                         }
@@ -3083,7 +3083,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: sizeBytes) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_buffer_clear, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_buffer_clear, handle, pArgs, &_result)
                         }
                         
                     }
@@ -3120,7 +3120,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: sizeBytes) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_buffer_get_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_buffer_get_data, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -3160,7 +3160,7 @@ open class RenderingDevice: Object {
                     withUnsafePointer(to: sizeBytes) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(RenderingDevice.method_buffer_get_data_async, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(RenderingDevice.method_buffer_get_data_async, handle, pArgs, &_result)
                             }
                             
                         }
@@ -3197,7 +3197,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_buffer_get_device_address, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_buffer_get_device_address, handle, pArgs, &_result)
                 }
                 
             }
@@ -3238,7 +3238,7 @@ open class RenderingDevice: Object {
                                                 withUnsafePointer(to: specializationConstants.array.content) { pArg10 in
                                                     withUnsafePointer(to: UnsafeRawPointersN11(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9, pArg10)) { pArgs in
                                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 11) { pArgs in
-                                                            gi.object_method_bind_ptrcall(RenderingDevice.method_render_pipeline_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                                            gi.object_method_bind_ptrcall(RenderingDevice.method_render_pipeline_create, handle, pArgs, &_result.content)
                                                         }
                                                         
                                                     }
@@ -3286,7 +3286,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: renderPipeline.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_render_pipeline_is_valid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_render_pipeline_is_valid, handle, pArgs, &_result)
                 }
                 
             }
@@ -3318,7 +3318,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: specializationConstants.array.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_compute_pipeline_create, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_compute_pipeline_create, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -3348,7 +3348,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: computePipeline.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_compute_pipeline_is_valid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_compute_pipeline_is_valid, handle, pArgs, &_result)
                 }
                 
             }
@@ -3379,7 +3379,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_screen_get_width, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_screen_get_width, handle, pArgs, &_result)
                 }
                 
             }
@@ -3410,7 +3410,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_screen_get_height, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_screen_get_height, handle, pArgs, &_result)
                 }
                 
             }
@@ -3441,7 +3441,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_screen_get_framebuffer_format, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_screen_get_framebuffer_format, handle, pArgs, &_result)
                 }
                 
             }
@@ -3473,7 +3473,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: clearColor) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_begin_for_screen, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_begin_for_screen, handle, pArgs, &_result)
                     }
                     
                 }
@@ -3520,7 +3520,7 @@ open class RenderingDevice: Object {
                                 withUnsafePointer(to: breadcrumb) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                            gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_begin, handle, pArgs, &_result)
                                         }
                                         
                                     }
@@ -3570,7 +3570,7 @@ open class RenderingDevice: Object {
                                                 withUnsafePointer(to: storageTextures.array.content) { pArg10 in
                                                     withUnsafePointer(to: UnsafeRawPointersN11(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9, pArg10)) { pArgs in
                                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 11) { pArgs in
-                                                            gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_begin_split, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                                            gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_begin_split, handle, pArgs, &_result.content)
                                                         }
                                                         
                                                     }
@@ -3618,7 +3618,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_set_blend_constants, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_set_blend_constants, handle, pArgs, nil)
                     }
                     
                 }
@@ -3648,7 +3648,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: renderPipeline.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_bind_render_pipeline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_bind_render_pipeline, handle, pArgs, nil)
                     }
                     
                 }
@@ -3679,7 +3679,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: setIndex) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_bind_uniform_set, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_bind_uniform_set, handle, pArgs, nil)
                         }
                         
                     }
@@ -3711,7 +3711,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: vertexArray.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_bind_vertex_array, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_bind_vertex_array, handle, pArgs, nil)
                     }
                     
                 }
@@ -3741,7 +3741,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: indexArray.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_bind_index_array, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_bind_index_array, handle, pArgs, nil)
                     }
                     
                 }
@@ -3772,7 +3772,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: sizeBytes) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_set_push_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_set_push_constant, handle, pArgs, nil)
                         }
                         
                     }
@@ -3806,7 +3806,7 @@ open class RenderingDevice: Object {
                     withUnsafePointer(to: proceduralVertexCount) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_draw, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_draw, handle, pArgs, nil)
                             }
                             
                         }
@@ -3844,7 +3844,7 @@ open class RenderingDevice: Object {
                             withUnsafePointer(to: stride) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_draw_indirect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_draw_indirect, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -3885,7 +3885,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_enable_scissor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_enable_scissor, handle, pArgs, nil)
                     }
                     
                 }
@@ -3914,7 +3914,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: drawList) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_disable_scissor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_disable_scissor, handle, pArgs, nil)
                 }
                 
             }
@@ -3939,7 +3939,7 @@ open class RenderingDevice: Object {
     public final func drawListSwitchToNextPass() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_switch_to_next_pass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_switch_to_next_pass, handle, nil, &_result)
         return _result
     }
     
@@ -3961,7 +3961,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: splits) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_switch_to_next_pass_split, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_switch_to_next_pass_split, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -3985,7 +3985,7 @@ open class RenderingDevice: Object {
     /// Finishes a list of raster drawing commands created with the `draw_*` methods.
     public final func drawListEnd() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_end, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_list_end, handle, nil, nil)
         
     }
     
@@ -4009,7 +4009,7 @@ open class RenderingDevice: Object {
     public final func computeListBegin() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_begin, handle, nil, &_result)
         return _result
     }
     
@@ -4031,7 +4031,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: computePipeline.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_bind_compute_pipeline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_bind_compute_pipeline, handle, pArgs, nil)
                     }
                     
                 }
@@ -4062,7 +4062,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: sizeBytes) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_set_push_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_set_push_constant, handle, pArgs, nil)
                         }
                         
                     }
@@ -4095,7 +4095,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: setIndex) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_bind_uniform_set, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_bind_uniform_set, handle, pArgs, nil)
                         }
                         
                     }
@@ -4129,7 +4129,7 @@ open class RenderingDevice: Object {
                     withUnsafePointer(to: zGroups) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_dispatch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_dispatch, handle, pArgs, nil)
                             }
                             
                         }
@@ -4164,7 +4164,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: offset) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_dispatch_indirect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_dispatch_indirect, handle, pArgs, nil)
                         }
                         
                     }
@@ -4195,7 +4195,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: computeList) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_add_barrier, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_add_barrier, handle, pArgs, nil)
                 }
                 
             }
@@ -4219,7 +4219,7 @@ open class RenderingDevice: Object {
     /// Finishes a list of compute commands created with the `compute_*` methods.
     public final func computeListEnd() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_end, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_compute_list_end, handle, nil, nil)
         
     }
     
@@ -4240,7 +4240,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_free_rid, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_free_rid, handle, pArgs, nil)
                 }
                 
             }
@@ -4268,7 +4268,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_capture_timestamp, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_capture_timestamp, handle, pArgs, nil)
                 }
                 
             }
@@ -4293,7 +4293,7 @@ open class RenderingDevice: Object {
     public final func getCapturedTimestampsCount() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RenderingDevice.method_get_captured_timestamps_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_captured_timestamps_count, handle, nil, &_result)
         return _result
     }
     
@@ -4312,7 +4312,7 @@ open class RenderingDevice: Object {
     public final func getCapturedTimestampsFrame() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(RenderingDevice.method_get_captured_timestamps_frame, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_captured_timestamps_frame, handle, nil, &_result)
         return _result
     }
     
@@ -4334,7 +4334,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_captured_timestamp_gpu_time, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_captured_timestamp_gpu_time, handle, pArgs, &_result)
                 }
                 
             }
@@ -4362,7 +4362,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_captured_timestamp_cpu_time, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_captured_timestamp_cpu_time, handle, pArgs, &_result)
                 }
                 
             }
@@ -4390,7 +4390,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_captured_timestamp_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_captured_timestamp_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -4418,7 +4418,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: feature.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_has_feature, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_has_feature, handle, pArgs, &_result)
                 }
                 
             }
@@ -4449,7 +4449,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: limit.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_limit_get, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_limit_get, handle, pArgs, &_result)
                 }
                 
             }
@@ -4474,7 +4474,7 @@ open class RenderingDevice: Object {
     public final func getFrameDelay() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RenderingDevice.method_get_frame_delay, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_frame_delay, handle, nil, &_result)
         return _result
     }
     
@@ -4495,7 +4495,7 @@ open class RenderingDevice: Object {
     /// 
     public final func submit() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RenderingDevice.method_submit, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_submit, handle, nil, nil)
         
     }
     
@@ -4518,7 +4518,7 @@ open class RenderingDevice: Object {
     /// 
     public final func sync() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RenderingDevice.method_sync, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_sync, handle, nil, nil)
         
     }
     
@@ -4540,7 +4540,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: to.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_barrier, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_barrier, handle, pArgs, nil)
                     }
                     
                 }
@@ -4566,7 +4566,7 @@ open class RenderingDevice: Object {
     /// This method does nothing.
     public final func fullBarrier() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RenderingDevice.method_full_barrier, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_full_barrier, handle, nil, nil)
         
     }
     
@@ -4584,9 +4584,9 @@ open class RenderingDevice: Object {
     /// Create a new local ``RenderingDevice``. This is most useful for performing compute operations on the GPU independently from the rest of the engine.
     public final func createLocalDevice() -> RenderingDevice? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(RenderingDevice.method_create_local_device, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_create_local_device, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_resource_name: GDExtensionMethodBindPtr = {
@@ -4613,7 +4613,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_set_resource_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_set_resource_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -4647,7 +4647,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_command_begin_label, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_command_begin_label, handle, pArgs, nil)
                     }
                     
                 }
@@ -4678,7 +4678,7 @@ open class RenderingDevice: Object {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_command_insert_label, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_command_insert_label, handle, pArgs, nil)
                     }
                     
                 }
@@ -4704,7 +4704,7 @@ open class RenderingDevice: Object {
     /// Ends the command buffer debug label region started by a ``drawCommandBeginLabel(name:color:)`` call.
     public final func drawCommandEndLabel() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_command_end_label, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_draw_command_end_label, handle, nil, nil)
         
     }
     
@@ -4723,7 +4723,7 @@ open class RenderingDevice: Object {
     public final func getDeviceVendorName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_vendor_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_vendor_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -4742,7 +4742,7 @@ open class RenderingDevice: Object {
     public final func getDeviceName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -4761,7 +4761,7 @@ open class RenderingDevice: Object {
     public final func getDevicePipelineCacheUuid() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_pipeline_cache_uuid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_pipeline_cache_uuid, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -4783,7 +4783,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_memory_usage, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_memory_usage, handle, pArgs, &_result)
                 }
                 
             }
@@ -4813,7 +4813,7 @@ open class RenderingDevice: Object {
                 withUnsafePointer(to: index) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_resource, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_resource, handle, pArgs, &_result)
                         }
                         
                     }
@@ -4842,7 +4842,7 @@ open class RenderingDevice: Object {
     public final func getPerfReport() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(RenderingDevice.method_get_perf_report, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_perf_report, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -4884,7 +4884,7 @@ open class RenderingDevice: Object {
     public final func getDriverAndDeviceMemoryReport() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_and_device_memory_report, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_and_device_memory_report, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -4921,7 +4921,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: typeIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_tracked_object_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_tracked_object_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -4949,7 +4949,7 @@ open class RenderingDevice: Object {
     public final func getTrackedObjectTypeCount() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(RenderingDevice.method_get_tracked_object_type_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_tracked_object_type_count, handle, nil, &_result)
         return _result
     }
     
@@ -4971,7 +4971,7 @@ open class RenderingDevice: Object {
     public final func getDriverTotalMemory() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_total_memory, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_total_memory, handle, nil, &_result)
         return _result
     }
     
@@ -4993,7 +4993,7 @@ open class RenderingDevice: Object {
     public final func getDriverAllocationCount() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_allocation_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_allocation_count, handle, nil, &_result)
         return _result
     }
     
@@ -5020,7 +5020,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: type) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_memory_by_object_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_memory_by_object_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -5053,7 +5053,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: type) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_allocs_by_object_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_driver_allocs_by_object_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -5081,7 +5081,7 @@ open class RenderingDevice: Object {
     public final func getDeviceTotalMemory() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_total_memory, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_total_memory, handle, nil, &_result)
         return _result
     }
     
@@ -5103,7 +5103,7 @@ open class RenderingDevice: Object {
     public final func getDeviceAllocationCount() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_allocation_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_allocation_count, handle, nil, &_result)
         return _result
     }
     
@@ -5130,7 +5130,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: type) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_memory_by_object_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_memory_by_object_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -5163,7 +5163,7 @@ open class RenderingDevice: Object {
         withUnsafePointer(to: type) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_allocs_by_object_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderingDevice.method_get_device_allocs_by_object_type, handle, pArgs, &_result)
                 }
                 
             }

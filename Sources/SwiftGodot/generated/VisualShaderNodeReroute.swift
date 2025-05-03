@@ -44,7 +44,7 @@ open class VisualShaderNodeReroute: VisualShaderNode {
     public final func getPortType() -> VisualShaderNode.PortType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeReroute.method_get_port_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeReroute.method_get_port_type, handle, nil, &_result)
         return VisualShaderNode.PortType (rawValue: _result)!
     }
     

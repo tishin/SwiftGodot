@@ -276,7 +276,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: screenPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_project_ray_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Camera3D.method_project_ray_normal, handle, pArgs, &_result)
                 }
                 
             }
@@ -304,7 +304,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: screenPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_project_local_ray_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Camera3D.method_project_local_ray_normal, handle, pArgs, &_result)
                 }
                 
             }
@@ -332,7 +332,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: screenPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_project_ray_origin, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Camera3D.method_project_ray_origin, handle, pArgs, &_result)
                 }
                 
             }
@@ -363,7 +363,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: worldPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_unproject_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Camera3D.method_unproject_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -394,7 +394,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: worldPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_is_position_behind, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Camera3D.method_is_position_behind, handle, pArgs, &_result)
                 }
                 
             }
@@ -423,7 +423,7 @@ open class Camera3D: Node3D {
             withUnsafePointer(to: zDepth) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Camera3D.method_project_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Camera3D.method_project_position, handle, pArgs, &_result)
                     }
                     
                 }
@@ -454,7 +454,7 @@ open class Camera3D: Node3D {
                 withUnsafePointer(to: zFar) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Camera3D.method_set_perspective, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Camera3D.method_set_perspective, handle, pArgs, nil)
                         }
                         
                     }
@@ -487,7 +487,7 @@ open class Camera3D: Node3D {
                 withUnsafePointer(to: zFar) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Camera3D.method_set_orthogonal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Camera3D.method_set_orthogonal, handle, pArgs, nil)
                         }
                         
                     }
@@ -521,7 +521,7 @@ open class Camera3D: Node3D {
                     withUnsafePointer(to: zFar) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Camera3D.method_set_frustum, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(Camera3D.method_set_frustum, handle, pArgs, nil)
                             }
                             
                         }
@@ -551,7 +551,7 @@ open class Camera3D: Node3D {
     /// Makes this camera the current camera for the ``Viewport`` (see class description). If the camera node is outside the scene tree, it will attempt to become current once it's added.
     public final func makeCurrent() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Camera3D.method_make_current, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Camera3D.method_make_current, handle, nil, nil)
         
     }
     
@@ -572,7 +572,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: enableNext) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_clear_current, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_clear_current, handle, pArgs, nil)
                 }
                 
             }
@@ -599,7 +599,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_current, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_current, handle, pArgs, nil)
                 }
                 
             }
@@ -624,7 +624,7 @@ open class Camera3D: Node3D {
     fileprivate final func is_current() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Camera3D.method_is_current, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_is_current, handle, nil, &_result)
         return _result
     }
     
@@ -643,7 +643,7 @@ open class Camera3D: Node3D {
     public final func getCameraTransform() -> Transform3D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
-        gi.object_method_bind_ptrcall(Camera3D.method_get_camera_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_camera_transform, handle, nil, &_result)
         return _result
     }
     
@@ -662,7 +662,7 @@ open class Camera3D: Node3D {
     public final func getCameraProjection() -> Projection {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Projection = Projection ()
-        gi.object_method_bind_ptrcall(Camera3D.method_get_camera_projection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_camera_projection, handle, nil, &_result)
         return _result
     }
     
@@ -681,7 +681,7 @@ open class Camera3D: Node3D {
     fileprivate final func get_fov() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Camera3D.method_get_fov, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_fov, handle, nil, &_result)
         return _result
     }
     
@@ -700,7 +700,7 @@ open class Camera3D: Node3D {
     fileprivate final func get_frustum_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Camera3D.method_get_frustum_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_frustum_offset, handle, nil, &_result)
         return _result
     }
     
@@ -719,7 +719,7 @@ open class Camera3D: Node3D {
     fileprivate final func get_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Camera3D.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -738,7 +738,7 @@ open class Camera3D: Node3D {
     fileprivate final func get_far() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Camera3D.method_get_far, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_far, handle, nil, &_result)
         return _result
     }
     
@@ -757,7 +757,7 @@ open class Camera3D: Node3D {
     fileprivate final func get_near() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Camera3D.method_get_near, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_near, handle, nil, &_result)
         return _result
     }
     
@@ -778,7 +778,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: fov) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_fov, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_fov, handle, pArgs, nil)
                 }
                 
             }
@@ -805,7 +805,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_frustum_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_frustum_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -832,7 +832,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_size, handle, pArgs, nil)
                 }
                 
             }
@@ -859,7 +859,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: far) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_far, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_far, handle, pArgs, nil)
                 }
                 
             }
@@ -886,7 +886,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: near) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_near, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_near, handle, pArgs, nil)
                 }
                 
             }
@@ -911,7 +911,7 @@ open class Camera3D: Node3D {
     fileprivate final func get_projection() -> Camera3D.ProjectionType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Camera3D.method_get_projection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_projection, handle, nil, &_result)
         return Camera3D.ProjectionType (rawValue: _result)!
     }
     
@@ -932,7 +932,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_projection, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_projection, handle, pArgs, nil)
                 }
                 
             }
@@ -959,7 +959,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_h_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_h_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -984,7 +984,7 @@ open class Camera3D: Node3D {
     fileprivate final func get_h_offset() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Camera3D.method_get_h_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_h_offset, handle, nil, &_result)
         return _result
     }
     
@@ -1005,7 +1005,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_v_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_v_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -1030,7 +1030,7 @@ open class Camera3D: Node3D {
     fileprivate final func get_v_offset() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Camera3D.method_get_v_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_v_offset, handle, nil, &_result)
         return _result
     }
     
@@ -1051,7 +1051,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_cull_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_cull_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -1076,7 +1076,7 @@ open class Camera3D: Node3D {
     fileprivate final func get_cull_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(Camera3D.method_get_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_cull_mask, handle, nil, &_result)
         return _result
     }
     
@@ -1097,7 +1097,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: env?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_environment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_environment, handle, pArgs, nil)
                 }
                 
             }
@@ -1121,9 +1121,9 @@ open class Camera3D: Node3D {
     @inline(__always)
     fileprivate final func get_environment() -> Environment? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Camera3D.method_get_environment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_environment, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_attributes: GDExtensionMethodBindPtr = {
@@ -1143,7 +1143,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: env?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_attributes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_attributes, handle, pArgs, nil)
                 }
                 
             }
@@ -1167,9 +1167,9 @@ open class Camera3D: Node3D {
     @inline(__always)
     fileprivate final func get_attributes() -> CameraAttributes? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Camera3D.method_get_attributes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_attributes, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_compositor: GDExtensionMethodBindPtr = {
@@ -1189,7 +1189,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: compositor?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_compositor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_compositor, handle, pArgs, nil)
                 }
                 
             }
@@ -1213,9 +1213,9 @@ open class Camera3D: Node3D {
     @inline(__always)
     fileprivate final func get_compositor() -> Compositor? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Camera3D.method_get_compositor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_compositor, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_keep_aspect_mode: GDExtensionMethodBindPtr = {
@@ -1235,7 +1235,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_keep_aspect_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_keep_aspect_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -1260,7 +1260,7 @@ open class Camera3D: Node3D {
     fileprivate final func get_keep_aspect_mode() -> Camera3D.KeepAspect {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Camera3D.method_get_keep_aspect_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_keep_aspect_mode, handle, nil, &_result)
         return Camera3D.KeepAspect (rawValue: _result)!
     }
     
@@ -1281,7 +1281,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_set_doppler_tracking, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera3D.method_set_doppler_tracking, handle, pArgs, nil)
                 }
                 
             }
@@ -1306,7 +1306,7 @@ open class Camera3D: Node3D {
     fileprivate final func get_doppler_tracking() -> Camera3D.DopplerTracking {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Camera3D.method_get_doppler_tracking, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_doppler_tracking, handle, nil, &_result)
         return Camera3D.DopplerTracking (rawValue: _result)!
     }
     
@@ -1325,7 +1325,7 @@ open class Camera3D: Node3D {
     public final func getFrustum() -> TypedArray<Plane> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Camera3D.method_get_frustum, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_frustum, handle, nil, &_result)
         return TypedArray<Plane>(takingOver: _result)
     }
     
@@ -1347,7 +1347,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: worldPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_is_position_in_frustum, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Camera3D.method_is_position_in_frustum, handle, pArgs, &_result)
                 }
                 
             }
@@ -1372,7 +1372,7 @@ open class Camera3D: Node3D {
     public final func getCameraRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(Camera3D.method_get_camera_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_camera_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -1391,7 +1391,7 @@ open class Camera3D: Node3D {
     public final func getPyramidShapeRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(Camera3D.method_get_pyramid_shape_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Camera3D.method_get_pyramid_shape_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -1413,7 +1413,7 @@ open class Camera3D: Node3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Camera3D.method_set_cull_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Camera3D.method_set_cull_mask_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -1443,7 +1443,7 @@ open class Camera3D: Node3D {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera3D.method_get_cull_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Camera3D.method_get_cull_mask_value, handle, pArgs, &_result)
                 }
                 
             }

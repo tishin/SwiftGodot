@@ -226,7 +226,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -251,7 +251,7 @@ open class Polygon2D: Node2D {
     fileprivate final func get_polygon() -> PackedVector2Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_polygon, handle, nil, &_result.content)
         return _result
     }
     
@@ -272,7 +272,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: uv.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_uv, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_uv, handle, pArgs, nil)
                 }
                 
             }
@@ -297,7 +297,7 @@ open class Polygon2D: Node2D {
     fileprivate final func get_uv() -> PackedVector2Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_uv, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_uv, handle, nil, &_result.content)
         return _result
     }
     
@@ -318,7 +318,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_color, handle, pArgs, nil)
                 }
                 
             }
@@ -343,7 +343,7 @@ open class Polygon2D: Node2D {
     fileprivate final func get_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_color, handle, nil, &_result)
         return _result
     }
     
@@ -364,7 +364,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: polygons.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_polygons, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_polygons, handle, pArgs, nil)
                 }
                 
             }
@@ -389,7 +389,7 @@ open class Polygon2D: Node2D {
     fileprivate final func get_polygons() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_polygons, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_polygons, handle, nil, &_result.content)
         return _result
     }
     
@@ -410,7 +410,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: vertexColors.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_vertex_colors, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_vertex_colors, handle, pArgs, nil)
                 }
                 
             }
@@ -435,7 +435,7 @@ open class Polygon2D: Node2D {
     fileprivate final func get_vertex_colors() -> PackedColorArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedColorArray = PackedColorArray ()
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_vertex_colors, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_vertex_colors, handle, nil, &_result.content)
         return _result
     }
     
@@ -456,7 +456,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -480,9 +480,9 @@ open class Polygon2D: Node2D {
     @inline(__always)
     fileprivate final func get_texture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_texture_offset: GDExtensionMethodBindPtr = {
@@ -502,7 +502,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: textureOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_texture_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_texture_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -527,7 +527,7 @@ open class Polygon2D: Node2D {
     fileprivate final func get_texture_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_texture_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_texture_offset, handle, nil, &_result)
         return _result
     }
     
@@ -548,7 +548,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: textureRotation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_texture_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_texture_rotation, handle, pArgs, nil)
                 }
                 
             }
@@ -573,7 +573,7 @@ open class Polygon2D: Node2D {
     fileprivate final func get_texture_rotation() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_texture_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_texture_rotation, handle, nil, &_result)
         return _result
     }
     
@@ -594,7 +594,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: textureScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_texture_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_texture_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -619,7 +619,7 @@ open class Polygon2D: Node2D {
     fileprivate final func get_texture_scale() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_texture_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_texture_scale, handle, nil, &_result)
         return _result
     }
     
@@ -640,7 +640,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: invert) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_invert_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_invert_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -665,7 +665,7 @@ open class Polygon2D: Node2D {
     fileprivate final func get_invert_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_invert_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_invert_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -686,7 +686,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: antialiased) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_antialiased, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_antialiased, handle, pArgs, nil)
                 }
                 
             }
@@ -711,7 +711,7 @@ open class Polygon2D: Node2D {
     fileprivate final func get_antialiased() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_antialiased, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_antialiased, handle, nil, &_result)
         return _result
     }
     
@@ -732,7 +732,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: invertBorder) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_invert_border, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_invert_border, handle, pArgs, nil)
                 }
                 
             }
@@ -757,7 +757,7 @@ open class Polygon2D: Node2D {
     fileprivate final func get_invert_border() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_invert_border, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_invert_border, handle, nil, &_result)
         return _result
     }
     
@@ -778,7 +778,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -803,7 +803,7 @@ open class Polygon2D: Node2D {
     fileprivate final func get_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_offset, handle, nil, &_result)
         return _result
     }
     
@@ -825,7 +825,7 @@ open class Polygon2D: Node2D {
             withUnsafePointer(to: weights.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Polygon2D.method_add_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Polygon2D.method_add_bone, handle, pArgs, nil)
                     }
                     
                 }
@@ -852,7 +852,7 @@ open class Polygon2D: Node2D {
     public final func getBoneCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_bone_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_bone_count, handle, nil, &_result)
         return _result
     }
     
@@ -874,7 +874,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_get_bone_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_get_bone_path, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -902,7 +902,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_get_bone_weights, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_get_bone_weights, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -929,7 +929,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_erase_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_erase_bone, handle, pArgs, nil)
                 }
                 
             }
@@ -953,7 +953,7 @@ open class Polygon2D: Node2D {
     /// Removes all bones from this ``Polygon2D``.
     public final func clearBones() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Polygon2D.method_clear_bones, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Polygon2D.method_clear_bones, handle, nil, nil)
         
     }
     
@@ -975,7 +975,7 @@ open class Polygon2D: Node2D {
             withUnsafePointer(to: path.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Polygon2D.method_set_bone_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Polygon2D.method_set_bone_path, handle, pArgs, nil)
                     }
                     
                 }
@@ -1005,7 +1005,7 @@ open class Polygon2D: Node2D {
             withUnsafePointer(to: weights.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Polygon2D.method_set_bone_weights, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Polygon2D.method_set_bone_weights, handle, pArgs, nil)
                     }
                     
                 }
@@ -1034,7 +1034,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: skeleton.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_skeleton, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_skeleton, handle, pArgs, nil)
                 }
                 
             }
@@ -1059,7 +1059,7 @@ open class Polygon2D: Node2D {
     fileprivate final func get_skeleton() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_skeleton, handle, nil, &_result.content)
         return _result
     }
     
@@ -1080,7 +1080,7 @@ open class Polygon2D: Node2D {
         withUnsafePointer(to: internalVertexCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Polygon2D.method_set_internal_vertex_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Polygon2D.method_set_internal_vertex_count, handle, pArgs, nil)
                 }
                 
             }
@@ -1105,7 +1105,7 @@ open class Polygon2D: Node2D {
     fileprivate final func get_internal_vertex_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Polygon2D.method_get_internal_vertex_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Polygon2D.method_get_internal_vertex_count, handle, nil, &_result)
         return _result
     }
     

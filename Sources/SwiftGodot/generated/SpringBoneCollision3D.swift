@@ -98,9 +98,9 @@ open class SpringBoneCollision3D: Node3D {
     /// Get parent ``Skeleton3D`` node of the parent ``SpringBoneSimulator3D`` if found.
     public final func getSkeleton() -> Skeleton3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_get_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_get_skeleton, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_bone_name: GDExtensionMethodBindPtr = {
@@ -121,7 +121,7 @@ open class SpringBoneCollision3D: Node3D {
         withUnsafePointer(to: boneName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_set_bone_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_set_bone_name, handle, pArgs, nil)
                 }
                 
             }
@@ -146,7 +146,7 @@ open class SpringBoneCollision3D: Node3D {
     fileprivate final func get_bone_name() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_get_bone_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_get_bone_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -167,7 +167,7 @@ open class SpringBoneCollision3D: Node3D {
         withUnsafePointer(to: bone) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_set_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_set_bone, handle, pArgs, nil)
                 }
                 
             }
@@ -192,7 +192,7 @@ open class SpringBoneCollision3D: Node3D {
     fileprivate final func get_bone() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_get_bone, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_get_bone, handle, nil, &_result)
         return _result
     }
     
@@ -213,7 +213,7 @@ open class SpringBoneCollision3D: Node3D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_set_position_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_set_position_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -238,7 +238,7 @@ open class SpringBoneCollision3D: Node3D {
     fileprivate final func get_position_offset() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_get_position_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_get_position_offset, handle, nil, &_result)
         return _result
     }
     
@@ -259,7 +259,7 @@ open class SpringBoneCollision3D: Node3D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_set_rotation_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_set_rotation_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -284,7 +284,7 @@ open class SpringBoneCollision3D: Node3D {
     fileprivate final func get_rotation_offset() -> Quaternion {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Quaternion = Quaternion ()
-        gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_get_rotation_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpringBoneCollision3D.method_get_rotation_offset, handle, nil, &_result)
         return _result
     }
     

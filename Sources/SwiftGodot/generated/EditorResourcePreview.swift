@@ -58,7 +58,7 @@ open class EditorResourcePreview: Node {
                     withUnsafePointer(to: userdata.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorResourcePreview.method_queue_resource_preview, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(EditorResourcePreview.method_queue_resource_preview, handle, pArgs, nil)
                             }
                             
                         }
@@ -97,7 +97,7 @@ open class EditorResourcePreview: Node {
                     withUnsafePointer(to: userdata.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorResourcePreview.method_queue_edited_resource_preview, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(EditorResourcePreview.method_queue_edited_resource_preview, handle, pArgs, nil)
                             }
                             
                         }
@@ -130,7 +130,7 @@ open class EditorResourcePreview: Node {
         withUnsafePointer(to: generator?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorResourcePreview.method_add_preview_generator, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorResourcePreview.method_add_preview_generator, handle, pArgs, nil)
                 }
                 
             }
@@ -157,7 +157,7 @@ open class EditorResourcePreview: Node {
         withUnsafePointer(to: generator?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorResourcePreview.method_remove_preview_generator, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorResourcePreview.method_remove_preview_generator, handle, pArgs, nil)
                 }
                 
             }
@@ -185,7 +185,7 @@ open class EditorResourcePreview: Node {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorResourcePreview.method_check_for_invalidation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorResourcePreview.method_check_for_invalidation, handle, pArgs, nil)
                 }
                 
             }

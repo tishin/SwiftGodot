@@ -62,7 +62,7 @@ open class VisualShaderNodeExpression: VisualShaderNodeGroupBase {
         withUnsafePointer(to: expression.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeExpression.method_set_expression, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeExpression.method_set_expression, handle, pArgs, nil)
                 }
                 
             }
@@ -87,7 +87,7 @@ open class VisualShaderNodeExpression: VisualShaderNodeGroupBase {
     fileprivate final func get_expression() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeExpression.method_get_expression, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualShaderNodeExpression.method_get_expression, handle, nil, &_result.content)
         return _result.description
     }
     

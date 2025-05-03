@@ -124,7 +124,7 @@ open class CollisionPolygon3D: Node3D {
         withUnsafePointer(to: depth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionPolygon3D.method_set_depth, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionPolygon3D.method_set_depth, handle, pArgs, nil)
                 }
                 
             }
@@ -149,7 +149,7 @@ open class CollisionPolygon3D: Node3D {
     fileprivate final func get_depth() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_depth, handle, nil, &_result)
         return _result
     }
     
@@ -170,7 +170,7 @@ open class CollisionPolygon3D: Node3D {
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionPolygon3D.method_set_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionPolygon3D.method_set_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -195,7 +195,7 @@ open class CollisionPolygon3D: Node3D {
     fileprivate final func get_polygon() -> PackedVector2Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
-        gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_polygon, handle, nil, &_result.content)
         return _result
     }
     
@@ -216,7 +216,7 @@ open class CollisionPolygon3D: Node3D {
         withUnsafePointer(to: disabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionPolygon3D.method_set_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionPolygon3D.method_set_disabled, handle, pArgs, nil)
                 }
                 
             }
@@ -241,7 +241,7 @@ open class CollisionPolygon3D: Node3D {
     fileprivate final func is_disabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CollisionPolygon3D.method_is_disabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CollisionPolygon3D.method_is_disabled, handle, nil, &_result)
         return _result
     }
     
@@ -262,7 +262,7 @@ open class CollisionPolygon3D: Node3D {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionPolygon3D.method_set_debug_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionPolygon3D.method_set_debug_color, handle, pArgs, nil)
                 }
                 
             }
@@ -287,7 +287,7 @@ open class CollisionPolygon3D: Node3D {
     fileprivate final func get_debug_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_debug_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_debug_color, handle, nil, &_result)
         return _result
     }
     
@@ -308,7 +308,7 @@ open class CollisionPolygon3D: Node3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionPolygon3D.method_set_enable_debug_fill, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionPolygon3D.method_set_enable_debug_fill, handle, pArgs, nil)
                 }
                 
             }
@@ -333,7 +333,7 @@ open class CollisionPolygon3D: Node3D {
     fileprivate final func get_enable_debug_fill() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_enable_debug_fill, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_enable_debug_fill, handle, nil, &_result)
         return _result
     }
     
@@ -354,7 +354,7 @@ open class CollisionPolygon3D: Node3D {
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionPolygon3D.method_set_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionPolygon3D.method_set_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -379,7 +379,7 @@ open class CollisionPolygon3D: Node3D {
     fileprivate final func get_margin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CollisionPolygon3D.method_get_margin, handle, nil, &_result)
         return _result
     }
     

@@ -82,7 +82,7 @@ open class OggPacketSequence: Resource {
         withUnsafePointer(to: packetData.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OggPacketSequence.method_set_packet_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OggPacketSequence.method_set_packet_data, handle, pArgs, nil)
                 }
                 
             }
@@ -107,7 +107,7 @@ open class OggPacketSequence: Resource {
     fileprivate final func get_packet_data() -> TypedArray<VariantArray> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(OggPacketSequence.method_get_packet_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OggPacketSequence.method_get_packet_data, handle, nil, &_result)
         return TypedArray<VariantArray>(takingOver: _result)
     }
     
@@ -128,7 +128,7 @@ open class OggPacketSequence: Resource {
         withUnsafePointer(to: granulePositions.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OggPacketSequence.method_set_packet_granule_positions, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OggPacketSequence.method_set_packet_granule_positions, handle, pArgs, nil)
                 }
                 
             }
@@ -153,7 +153,7 @@ open class OggPacketSequence: Resource {
     fileprivate final func get_packet_granule_positions() -> PackedInt64Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt64Array = PackedInt64Array ()
-        gi.object_method_bind_ptrcall(OggPacketSequence.method_get_packet_granule_positions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OggPacketSequence.method_get_packet_granule_positions, handle, nil, &_result.content)
         return _result
     }
     
@@ -174,7 +174,7 @@ open class OggPacketSequence: Resource {
         withUnsafePointer(to: samplingRate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OggPacketSequence.method_set_sampling_rate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OggPacketSequence.method_set_sampling_rate, handle, pArgs, nil)
                 }
                 
             }
@@ -199,7 +199,7 @@ open class OggPacketSequence: Resource {
     fileprivate final func get_sampling_rate() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OggPacketSequence.method_get_sampling_rate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OggPacketSequence.method_get_sampling_rate, handle, nil, &_result)
         return _result
     }
     
@@ -218,7 +218,7 @@ open class OggPacketSequence: Resource {
     public final func getLength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OggPacketSequence.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OggPacketSequence.method_get_length, handle, nil, &_result)
         return _result
     }
     

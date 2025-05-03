@@ -105,7 +105,7 @@ open class ProgressBar: Range {
         withUnsafePointer(to: mode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProgressBar.method_set_fill_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProgressBar.method_set_fill_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -130,7 +130,7 @@ open class ProgressBar: Range {
     fileprivate final func get_fill_mode() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ProgressBar.method_get_fill_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProgressBar.method_get_fill_mode, handle, nil, &_result)
         return _result
     }
     
@@ -151,7 +151,7 @@ open class ProgressBar: Range {
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProgressBar.method_set_show_percentage, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProgressBar.method_set_show_percentage, handle, pArgs, nil)
                 }
                 
             }
@@ -176,7 +176,7 @@ open class ProgressBar: Range {
     fileprivate final func is_percentage_shown() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ProgressBar.method_is_percentage_shown, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProgressBar.method_is_percentage_shown, handle, nil, &_result)
         return _result
     }
     
@@ -197,7 +197,7 @@ open class ProgressBar: Range {
         withUnsafePointer(to: indeterminate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProgressBar.method_set_indeterminate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProgressBar.method_set_indeterminate, handle, pArgs, nil)
                 }
                 
             }
@@ -222,7 +222,7 @@ open class ProgressBar: Range {
     fileprivate final func is_indeterminate() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ProgressBar.method_is_indeterminate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProgressBar.method_is_indeterminate, handle, nil, &_result)
         return _result
     }
     
@@ -243,7 +243,7 @@ open class ProgressBar: Range {
         withUnsafePointer(to: previewIndeterminate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProgressBar.method_set_editor_preview_indeterminate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProgressBar.method_set_editor_preview_indeterminate, handle, pArgs, nil)
                 }
                 
             }
@@ -268,7 +268,7 @@ open class ProgressBar: Range {
     fileprivate final func is_editor_preview_indeterminate_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ProgressBar.method_is_editor_preview_indeterminate_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProgressBar.method_is_editor_preview_indeterminate_enabled, handle, nil, &_result)
         return _result
     }
     

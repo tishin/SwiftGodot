@@ -139,7 +139,7 @@ open class VoxelGIData: Resource {
                                 withUnsafePointer(to: levelCounts.content) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(VoxelGIData.method_allocate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                            gi.object_method_bind_ptrcall(VoxelGIData.method_allocate, handle, pArgs, nil)
                                         }
                                         
                                     }
@@ -179,7 +179,7 @@ open class VoxelGIData: Resource {
     public final func getBounds() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(VoxelGIData.method_get_bounds, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VoxelGIData.method_get_bounds, handle, nil, &_result)
         return _result
     }
     
@@ -198,7 +198,7 @@ open class VoxelGIData: Resource {
     public final func getOctreeSize() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(VoxelGIData.method_get_octree_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VoxelGIData.method_get_octree_size, handle, nil, &_result)
         return _result
     }
     
@@ -217,7 +217,7 @@ open class VoxelGIData: Resource {
     public final func getToCellXform() -> Transform3D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
-        gi.object_method_bind_ptrcall(VoxelGIData.method_get_to_cell_xform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VoxelGIData.method_get_to_cell_xform, handle, nil, &_result)
         return _result
     }
     
@@ -236,7 +236,7 @@ open class VoxelGIData: Resource {
     public final func getOctreeCells() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(VoxelGIData.method_get_octree_cells, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VoxelGIData.method_get_octree_cells, handle, nil, &_result.content)
         return _result
     }
     
@@ -255,7 +255,7 @@ open class VoxelGIData: Resource {
     public final func getDataCells() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(VoxelGIData.method_get_data_cells, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VoxelGIData.method_get_data_cells, handle, nil, &_result.content)
         return _result
     }
     
@@ -274,7 +274,7 @@ open class VoxelGIData: Resource {
     public final func getLevelCounts() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(VoxelGIData.method_get_level_counts, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VoxelGIData.method_get_level_counts, handle, nil, &_result.content)
         return _result
     }
     
@@ -295,7 +295,7 @@ open class VoxelGIData: Resource {
         withUnsafePointer(to: dynamicRange) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VoxelGIData.method_set_dynamic_range, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VoxelGIData.method_set_dynamic_range, handle, pArgs, nil)
                 }
                 
             }
@@ -320,7 +320,7 @@ open class VoxelGIData: Resource {
     fileprivate final func get_dynamic_range() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VoxelGIData.method_get_dynamic_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VoxelGIData.method_get_dynamic_range, handle, nil, &_result)
         return _result
     }
     
@@ -341,7 +341,7 @@ open class VoxelGIData: Resource {
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VoxelGIData.method_set_energy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VoxelGIData.method_set_energy, handle, pArgs, nil)
                 }
                 
             }
@@ -366,7 +366,7 @@ open class VoxelGIData: Resource {
     fileprivate final func get_energy() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VoxelGIData.method_get_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VoxelGIData.method_get_energy, handle, nil, &_result)
         return _result
     }
     
@@ -387,7 +387,7 @@ open class VoxelGIData: Resource {
         withUnsafePointer(to: bias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VoxelGIData.method_set_bias, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VoxelGIData.method_set_bias, handle, pArgs, nil)
                 }
                 
             }
@@ -412,7 +412,7 @@ open class VoxelGIData: Resource {
     fileprivate final func get_bias() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VoxelGIData.method_get_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VoxelGIData.method_get_bias, handle, nil, &_result)
         return _result
     }
     
@@ -433,7 +433,7 @@ open class VoxelGIData: Resource {
         withUnsafePointer(to: bias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VoxelGIData.method_set_normal_bias, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VoxelGIData.method_set_normal_bias, handle, pArgs, nil)
                 }
                 
             }
@@ -458,7 +458,7 @@ open class VoxelGIData: Resource {
     fileprivate final func get_normal_bias() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VoxelGIData.method_get_normal_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VoxelGIData.method_get_normal_bias, handle, nil, &_result)
         return _result
     }
     
@@ -479,7 +479,7 @@ open class VoxelGIData: Resource {
         withUnsafePointer(to: propagation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VoxelGIData.method_set_propagation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VoxelGIData.method_set_propagation, handle, pArgs, nil)
                 }
                 
             }
@@ -504,7 +504,7 @@ open class VoxelGIData: Resource {
     fileprivate final func get_propagation() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VoxelGIData.method_get_propagation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VoxelGIData.method_get_propagation, handle, nil, &_result)
         return _result
     }
     
@@ -525,7 +525,7 @@ open class VoxelGIData: Resource {
         withUnsafePointer(to: interior) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VoxelGIData.method_set_interior, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VoxelGIData.method_set_interior, handle, pArgs, nil)
                 }
                 
             }
@@ -550,7 +550,7 @@ open class VoxelGIData: Resource {
     fileprivate final func is_interior() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VoxelGIData.method_is_interior, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VoxelGIData.method_is_interior, handle, nil, &_result)
         return _result
     }
     
@@ -571,7 +571,7 @@ open class VoxelGIData: Resource {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VoxelGIData.method_set_use_two_bounces, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VoxelGIData.method_set_use_two_bounces, handle, pArgs, nil)
                 }
                 
             }
@@ -596,7 +596,7 @@ open class VoxelGIData: Resource {
     fileprivate final func is_using_two_bounces() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VoxelGIData.method_is_using_two_bounces, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VoxelGIData.method_is_using_two_bounces, handle, nil, &_result)
         return _result
     }
     

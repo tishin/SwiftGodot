@@ -46,7 +46,7 @@ open class JavaClass: RefCounted {
     public final func getJavaClassName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(JavaClass.method_get_java_class_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(JavaClass.method_get_java_class_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -65,7 +65,7 @@ open class JavaClass: RefCounted {
     public final func getJavaMethodList() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(JavaClass.method_get_java_method_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(JavaClass.method_get_java_method_list, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -83,9 +83,9 @@ open class JavaClass: RefCounted {
     /// Returns a ``JavaClass`` representing the Java parent class of this class.
     public final func getJavaParentClass() -> JavaClass? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(JavaClass.method_get_java_parent_class, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(JavaClass.method_get_java_parent_class, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

@@ -31,7 +31,7 @@ open class NativeMenu: Object {
     /// The shared instance of this class
     public static var shared: NativeMenu {
         return withUnsafePointer(to: &NativeMenu.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -87,7 +87,7 @@ open class NativeMenu: Object {
         withUnsafePointer(to: feature.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_feature, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_feature, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -117,7 +117,7 @@ open class NativeMenu: Object {
         withUnsafePointer(to: menuId.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_system_menu, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_system_menu, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -147,7 +147,7 @@ open class NativeMenu: Object {
         withUnsafePointer(to: menuId.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_system_menu, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_system_menu, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -177,7 +177,7 @@ open class NativeMenu: Object {
         withUnsafePointer(to: menuId.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_system_menu_name, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_system_menu_name, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -204,7 +204,7 @@ open class NativeMenu: Object {
     /// 
     public static func createMenu() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_create_menu, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_create_menu, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -228,7 +228,7 @@ open class NativeMenu: Object {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_menu, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_menu, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -257,7 +257,7 @@ open class NativeMenu: Object {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_free_menu, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_free_menu, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -287,7 +287,7 @@ open class NativeMenu: Object {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_size, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -317,7 +317,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_popup, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_popup, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -349,7 +349,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: isRtl) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_set_interface_direction, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_set_interface_direction, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -381,7 +381,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: callback.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_set_popup_open_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_set_popup_open_callback, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -413,7 +413,7 @@ open class NativeMenu: Object {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_popup_open_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_popup_open_callback, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -445,7 +445,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: callback.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_set_popup_close_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_set_popup_close_callback, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -477,7 +477,7 @@ open class NativeMenu: Object {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_popup_close_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_popup_close_callback, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -507,7 +507,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: width) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_set_minimum_width, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_set_minimum_width, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -539,7 +539,7 @@ open class NativeMenu: Object {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_minimum_width, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_minimum_width, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -569,7 +569,7 @@ open class NativeMenu: Object {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_opened, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_opened, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -606,7 +606,7 @@ open class NativeMenu: Object {
                         withUnsafePointer(to: index) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_add_submenu_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(method_add_submenu_item, shared.handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -659,7 +659,7 @@ open class NativeMenu: Object {
                                 withUnsafePointer(to: index) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(method_add_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                            gi.object_method_bind_ptrcall(method_add_item, shared.handle, pArgs, &_result)
                                         }
                                         
                                     }
@@ -716,7 +716,7 @@ open class NativeMenu: Object {
                                 withUnsafePointer(to: index) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(method_add_check_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                            gi.object_method_bind_ptrcall(method_add_check_item, shared.handle, pArgs, &_result)
                                         }
                                         
                                     }
@@ -774,7 +774,7 @@ open class NativeMenu: Object {
                                     withUnsafePointer(to: index) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                gi.object_method_bind_ptrcall(method_add_icon_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                                gi.object_method_bind_ptrcall(method_add_icon_item, shared.handle, pArgs, &_result)
                                             }
                                             
                                         }
@@ -834,7 +834,7 @@ open class NativeMenu: Object {
                                     withUnsafePointer(to: index) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                gi.object_method_bind_ptrcall(method_add_icon_check_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                                gi.object_method_bind_ptrcall(method_add_icon_check_item, shared.handle, pArgs, &_result)
                                             }
                                             
                                         }
@@ -895,7 +895,7 @@ open class NativeMenu: Object {
                                 withUnsafePointer(to: index) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(method_add_radio_check_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                            gi.object_method_bind_ptrcall(method_add_radio_check_item, shared.handle, pArgs, &_result)
                                         }
                                         
                                     }
@@ -955,7 +955,7 @@ open class NativeMenu: Object {
                                     withUnsafePointer(to: index) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                gi.object_method_bind_ptrcall(method_add_icon_radio_check_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                                gi.object_method_bind_ptrcall(method_add_icon_radio_check_item, shared.handle, pArgs, &_result)
                                             }
                                             
                                         }
@@ -1020,7 +1020,7 @@ open class NativeMenu: Object {
                                         withUnsafePointer(to: index) { pArg8 in
                                             withUnsafePointer(to: UnsafeRawPointersN9(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8)) { pArgs in
                                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 9) { pArgs in
-                                                    gi.object_method_bind_ptrcall(method_add_multistate_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                                    gi.object_method_bind_ptrcall(method_add_multistate_item, shared.handle, pArgs, &_result)
                                                 }
                                                 
                                             }
@@ -1069,7 +1069,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_add_separator, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_add_separator, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1103,7 +1103,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: text.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_find_item_index_with_text, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_find_item_index_with_text, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1136,7 +1136,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: tag.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_find_item_index_with_tag, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_find_item_index_with_tag, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1169,7 +1169,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: submenuRid.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_find_item_index_with_submenu, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_find_item_index_with_submenu, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1202,7 +1202,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_is_item_checked, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_is_item_checked, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1235,7 +1235,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_is_item_checkable, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_is_item_checkable, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1270,7 +1270,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_is_item_radio_checkable, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_is_item_radio_checkable, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1303,7 +1303,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_item_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_get_item_callback, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1336,7 +1336,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_item_key_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_get_item_key_callback, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1369,7 +1369,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_item_tag, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_get_item_tag, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1402,7 +1402,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_item_text, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_get_item_text, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1435,7 +1435,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_item_submenu, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_get_item_submenu, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1468,7 +1468,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_item_accelerator, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_get_item_accelerator, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1503,7 +1503,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_is_item_disabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_is_item_disabled, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1538,7 +1538,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_is_item_hidden, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_is_item_hidden, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1571,7 +1571,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_item_tooltip, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_get_item_tooltip, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1604,7 +1604,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_item_state, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_get_item_state, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1637,7 +1637,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_item_max_states, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_get_item_max_states, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1665,12 +1665,12 @@ open class NativeMenu: Object {
     /// > Note: This method is implemented on macOS and Windows.
     /// 
     public static func getItemIcon(rid: RID, idx: Int32) -> Texture2D? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_item_icon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_get_item_icon, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1679,7 +1679,7 @@ open class NativeMenu: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_item_indentation_level: GDExtensionMethodBindPtr = {
@@ -1703,7 +1703,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_item_indentation_level, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_get_item_indentation_level, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1736,7 +1736,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: checked) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_checked, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_checked, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1771,7 +1771,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: checkable) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_checkable, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_checkable, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1808,7 +1808,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: checkable) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_radio_checkable, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_radio_checkable, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1845,7 +1845,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: callback.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_callback, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1882,7 +1882,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: callback.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_hover_callbacks, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_hover_callbacks, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1919,7 +1919,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: keyCallback.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_key_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_key_callback, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1954,7 +1954,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: tag.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_tag, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_tag, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1990,7 +1990,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: text.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_text, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_text, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2025,7 +2025,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: submenuRid.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_submenu, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_submenu, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2060,7 +2060,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: keycode.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_accelerator, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_accelerator, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2095,7 +2095,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: disabled) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_disabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_disabled, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2130,7 +2130,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: hidden) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_hidden, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_hidden, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2166,7 +2166,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: tooltip.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_tooltip, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_tooltip, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2201,7 +2201,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: state) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_state, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_state, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2236,7 +2236,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: maxStates) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_max_states, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_max_states, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2273,7 +2273,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: icon?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_icon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_icon, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2308,7 +2308,7 @@ open class NativeMenu: Object {
                 withUnsafePointer(to: level) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_item_indentation_level, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_item_indentation_level, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2342,7 +2342,7 @@ open class NativeMenu: Object {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_item_count, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_item_count, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2372,7 +2372,7 @@ open class NativeMenu: Object {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_system_menu, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_system_menu, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2404,7 +2404,7 @@ open class NativeMenu: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_remove_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_remove_item, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2435,7 +2435,7 @@ open class NativeMenu: Object {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_clear, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_clear, shared.handle, pArgs, nil)
                 }
                 
             }

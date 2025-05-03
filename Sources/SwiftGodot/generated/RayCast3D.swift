@@ -176,7 +176,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_set_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_set_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -201,7 +201,7 @@ open class RayCast3D: Node3D {
     fileprivate final func is_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RayCast3D.method_is_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_is_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -222,7 +222,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: localPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_set_target_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_set_target_position, handle, pArgs, nil)
                 }
                 
             }
@@ -247,7 +247,7 @@ open class RayCast3D: Node3D {
     fileprivate final func get_target_position() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(RayCast3D.method_get_target_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_get_target_position, handle, nil, &_result)
         return _result
     }
     
@@ -266,7 +266,7 @@ open class RayCast3D: Node3D {
     public final func isColliding() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RayCast3D.method_is_colliding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_is_colliding, handle, nil, &_result)
         return _result
     }
     
@@ -287,7 +287,7 @@ open class RayCast3D: Node3D {
     /// 
     public final func forceRaycastUpdate() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RayCast3D.method_force_raycast_update, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RayCast3D.method_force_raycast_update, handle, nil, nil)
         
     }
     
@@ -308,9 +308,9 @@ open class RayCast3D: Node3D {
     /// 
     public final func getCollider() -> Object? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(RayCast3D.method_get_collider, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(RayCast3D.method_get_collider, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_collider_rid: GDExtensionMethodBindPtr = {
@@ -328,7 +328,7 @@ open class RayCast3D: Node3D {
     public final func getColliderRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(RayCast3D.method_get_collider_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RayCast3D.method_get_collider_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -350,7 +350,7 @@ open class RayCast3D: Node3D {
     public final func getColliderShape() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RayCast3D.method_get_collider_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_get_collider_shape, handle, nil, &_result)
         return _result
     }
     
@@ -372,7 +372,7 @@ open class RayCast3D: Node3D {
     public final func getCollisionPoint() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(RayCast3D.method_get_collision_point, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_get_collision_point, handle, nil, &_result)
         return _result
     }
     
@@ -394,7 +394,7 @@ open class RayCast3D: Node3D {
     public final func getCollisionNormal() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(RayCast3D.method_get_collision_normal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_get_collision_normal, handle, nil, &_result)
         return _result
     }
     
@@ -413,7 +413,7 @@ open class RayCast3D: Node3D {
     public final func getCollisionFaceIndex() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RayCast3D.method_get_collision_face_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_get_collision_face_index, handle, nil, &_result)
         return _result
     }
     
@@ -434,7 +434,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_add_exception_rid, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_add_exception_rid, handle, pArgs, nil)
                 }
                 
             }
@@ -461,7 +461,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_add_exception, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_add_exception, handle, pArgs, nil)
                 }
                 
             }
@@ -488,7 +488,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_remove_exception_rid, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_remove_exception_rid, handle, pArgs, nil)
                 }
                 
             }
@@ -515,7 +515,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_remove_exception, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_remove_exception, handle, pArgs, nil)
                 }
                 
             }
@@ -539,7 +539,7 @@ open class RayCast3D: Node3D {
     /// Removes all collision exceptions for this ray.
     public final func clearExceptions() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RayCast3D.method_clear_exceptions, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RayCast3D.method_clear_exceptions, handle, nil, nil)
         
     }
     
@@ -560,7 +560,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_set_collision_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_set_collision_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -585,7 +585,7 @@ open class RayCast3D: Node3D {
     fileprivate final func get_collision_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RayCast3D.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_get_collision_mask, handle, nil, &_result)
         return _result
     }
     
@@ -607,7 +607,7 @@ open class RayCast3D: Node3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RayCast3D.method_set_collision_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RayCast3D.method_set_collision_mask_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -637,7 +637,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_get_collision_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_get_collision_mask_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -664,7 +664,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_set_exclude_parent_body, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_set_exclude_parent_body, handle, pArgs, nil)
                 }
                 
             }
@@ -689,7 +689,7 @@ open class RayCast3D: Node3D {
     fileprivate final func get_exclude_parent_body() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RayCast3D.method_get_exclude_parent_body, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_get_exclude_parent_body, handle, nil, &_result)
         return _result
     }
     
@@ -710,7 +710,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_set_collide_with_areas, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_set_collide_with_areas, handle, pArgs, nil)
                 }
                 
             }
@@ -735,7 +735,7 @@ open class RayCast3D: Node3D {
     fileprivate final func is_collide_with_areas_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RayCast3D.method_is_collide_with_areas_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_is_collide_with_areas_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -756,7 +756,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_set_collide_with_bodies, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_set_collide_with_bodies, handle, pArgs, nil)
                 }
                 
             }
@@ -781,7 +781,7 @@ open class RayCast3D: Node3D {
     fileprivate final func is_collide_with_bodies_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RayCast3D.method_is_collide_with_bodies_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_is_collide_with_bodies_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -802,7 +802,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_set_hit_from_inside, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_set_hit_from_inside, handle, pArgs, nil)
                 }
                 
             }
@@ -827,7 +827,7 @@ open class RayCast3D: Node3D {
     fileprivate final func is_hit_from_inside_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RayCast3D.method_is_hit_from_inside_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_is_hit_from_inside_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -848,7 +848,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_set_hit_back_faces, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_set_hit_back_faces, handle, pArgs, nil)
                 }
                 
             }
@@ -873,7 +873,7 @@ open class RayCast3D: Node3D {
     fileprivate final func is_hit_back_faces_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RayCast3D.method_is_hit_back_faces_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_is_hit_back_faces_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -894,7 +894,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: debugShapeCustomColor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_set_debug_shape_custom_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_set_debug_shape_custom_color, handle, pArgs, nil)
                 }
                 
             }
@@ -919,7 +919,7 @@ open class RayCast3D: Node3D {
     fileprivate final func get_debug_shape_custom_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(RayCast3D.method_get_debug_shape_custom_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_get_debug_shape_custom_color, handle, nil, &_result)
         return _result
     }
     
@@ -940,7 +940,7 @@ open class RayCast3D: Node3D {
         withUnsafePointer(to: debugShapeThickness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RayCast3D.method_set_debug_shape_thickness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RayCast3D.method_set_debug_shape_thickness, handle, pArgs, nil)
                 }
                 
             }
@@ -965,7 +965,7 @@ open class RayCast3D: Node3D {
     fileprivate final func get_debug_shape_thickness() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RayCast3D.method_get_debug_shape_thickness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RayCast3D.method_get_debug_shape_thickness, handle, nil, &_result)
         return _result
     }
     

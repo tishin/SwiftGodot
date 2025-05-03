@@ -26,7 +26,7 @@ open class Marshalls: Object {
     /// The shared instance of this class
     public static var shared: Marshalls {
         return withUnsafePointer(to: &Marshalls.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -55,7 +55,7 @@ open class Marshalls: Object {
             withUnsafePointer(to: fullObjects) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_variant_to_base64, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_variant_to_base64, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -91,7 +91,7 @@ open class Marshalls: Object {
             withUnsafePointer(to: allowObjects) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_base64_to_variant, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_base64_to_variant, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -120,7 +120,7 @@ open class Marshalls: Object {
         withUnsafePointer(to: array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_raw_to_base64, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_raw_to_base64, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -148,7 +148,7 @@ open class Marshalls: Object {
         withUnsafePointer(to: base64Str.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_base64_to_raw, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_base64_to_raw, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -176,7 +176,7 @@ open class Marshalls: Object {
         withUnsafePointer(to: utf8Str.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_utf8_to_base64, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_utf8_to_base64, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -204,7 +204,7 @@ open class Marshalls: Object {
         withUnsafePointer(to: base64Str.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_base64_to_utf8, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_base64_to_utf8, shared.handle, pArgs, &_result.content)
                 }
                 
             }

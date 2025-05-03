@@ -68,7 +68,7 @@ open class RegExMatch: RefCounted {
     fileprivate final func get_subject() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(RegExMatch.method_get_subject, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RegExMatch.method_get_subject, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -87,7 +87,7 @@ open class RegExMatch: RefCounted {
     public final func getGroupCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RegExMatch.method_get_group_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RegExMatch.method_get_group_count, handle, nil, &_result)
         return _result
     }
     
@@ -106,7 +106,7 @@ open class RegExMatch: RefCounted {
     fileprivate final func get_names() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(RegExMatch.method_get_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RegExMatch.method_get_names, handle, nil, &_result.content)
         return _result
     }
     
@@ -125,7 +125,7 @@ open class RegExMatch: RefCounted {
     fileprivate final func get_strings() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(RegExMatch.method_get_strings, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RegExMatch.method_get_strings, handle, nil, &_result.content)
         return _result
     }
     
@@ -150,7 +150,7 @@ open class RegExMatch: RefCounted {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RegExMatch.method_get_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(RegExMatch.method_get_string, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -181,7 +181,7 @@ open class RegExMatch: RefCounted {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RegExMatch.method_get_start, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RegExMatch.method_get_start, handle, pArgs, &_result)
                 }
                 
             }
@@ -212,7 +212,7 @@ open class RegExMatch: RefCounted {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RegExMatch.method_get_end, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RegExMatch.method_get_end, handle, pArgs, &_result)
                 }
                 
             }

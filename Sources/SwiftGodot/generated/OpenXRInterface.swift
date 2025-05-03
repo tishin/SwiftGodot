@@ -262,7 +262,7 @@ open class OpenXRInterface: XRInterface {
     fileprivate final func get_display_refresh_rate() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_display_refresh_rate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_display_refresh_rate, handle, nil, &_result)
         return _result
     }
     
@@ -283,7 +283,7 @@ open class OpenXRInterface: XRInterface {
         withUnsafePointer(to: refreshRate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRInterface.method_set_display_refresh_rate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRInterface.method_set_display_refresh_rate, handle, pArgs, nil)
                 }
                 
             }
@@ -308,7 +308,7 @@ open class OpenXRInterface: XRInterface {
     fileprivate final func get_render_target_size_multiplier() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_render_target_size_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_render_target_size_multiplier, handle, nil, &_result)
         return _result
     }
     
@@ -329,7 +329,7 @@ open class OpenXRInterface: XRInterface {
         withUnsafePointer(to: multiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRInterface.method_set_render_target_size_multiplier, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRInterface.method_set_render_target_size_multiplier, handle, pArgs, nil)
                 }
                 
             }
@@ -357,7 +357,7 @@ open class OpenXRInterface: XRInterface {
     public final func isFoveationSupported() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OpenXRInterface.method_is_foveation_supported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRInterface.method_is_foveation_supported, handle, nil, &_result)
         return _result
     }
     
@@ -376,7 +376,7 @@ open class OpenXRInterface: XRInterface {
     fileprivate final func get_foveation_level() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_foveation_level, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_foveation_level, handle, nil, &_result)
         return _result
     }
     
@@ -397,7 +397,7 @@ open class OpenXRInterface: XRInterface {
         withUnsafePointer(to: foveationLevel) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRInterface.method_set_foveation_level, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRInterface.method_set_foveation_level, handle, pArgs, nil)
                 }
                 
             }
@@ -422,7 +422,7 @@ open class OpenXRInterface: XRInterface {
     fileprivate final func get_foveation_dynamic() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_foveation_dynamic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_foveation_dynamic, handle, nil, &_result)
         return _result
     }
     
@@ -443,7 +443,7 @@ open class OpenXRInterface: XRInterface {
         withUnsafePointer(to: foveationDynamic) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRInterface.method_set_foveation_dynamic, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRInterface.method_set_foveation_dynamic, handle, pArgs, nil)
                 }
                 
             }
@@ -472,7 +472,7 @@ open class OpenXRInterface: XRInterface {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRInterface.method_is_action_set_active, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRInterface.method_is_action_set_active, handle, pArgs, &_result)
                 }
                 
             }
@@ -501,7 +501,7 @@ open class OpenXRInterface: XRInterface {
             withUnsafePointer(to: active) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OpenXRInterface.method_set_action_set_active, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(OpenXRInterface.method_set_action_set_active, handle, pArgs, nil)
                     }
                     
                 }
@@ -528,7 +528,7 @@ open class OpenXRInterface: XRInterface {
     public final func getActionSets() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_action_sets, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_action_sets, handle, nil, &_result.content)
         return _result
     }
     
@@ -547,7 +547,7 @@ open class OpenXRInterface: XRInterface {
     public final func getAvailableDisplayRefreshRates() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_available_display_refresh_rates, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_available_display_refresh_rates, handle, nil, &_result.content)
         return _result
     }
     
@@ -569,7 +569,7 @@ open class OpenXRInterface: XRInterface {
             withUnsafePointer(to: motionRange.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OpenXRInterface.method_set_motion_range, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(OpenXRInterface.method_set_motion_range, handle, pArgs, nil)
                     }
                     
                 }
@@ -599,7 +599,7 @@ open class OpenXRInterface: XRInterface {
         withUnsafePointer(to: hand.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRInterface.method_get_motion_range, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRInterface.method_get_motion_range, handle, pArgs, &_result)
                 }
                 
             }
@@ -627,7 +627,7 @@ open class OpenXRInterface: XRInterface {
         withUnsafePointer(to: hand.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRInterface.method_get_hand_tracking_source, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRInterface.method_get_hand_tracking_source, handle, pArgs, &_result)
                 }
                 
             }
@@ -656,7 +656,7 @@ open class OpenXRInterface: XRInterface {
             withUnsafePointer(to: joint.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_hand_joint_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_hand_joint_flags, handle, pArgs, &_result)
                     }
                     
                 }
@@ -687,7 +687,7 @@ open class OpenXRInterface: XRInterface {
             withUnsafePointer(to: joint.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_hand_joint_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_hand_joint_rotation, handle, pArgs, &_result)
                     }
                     
                 }
@@ -718,7 +718,7 @@ open class OpenXRInterface: XRInterface {
             withUnsafePointer(to: joint.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_hand_joint_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_hand_joint_position, handle, pArgs, &_result)
                     }
                     
                 }
@@ -749,7 +749,7 @@ open class OpenXRInterface: XRInterface {
             withUnsafePointer(to: joint.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_hand_joint_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_hand_joint_radius, handle, pArgs, &_result)
                     }
                     
                 }
@@ -780,7 +780,7 @@ open class OpenXRInterface: XRInterface {
             withUnsafePointer(to: joint.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_hand_joint_linear_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_hand_joint_linear_velocity, handle, pArgs, &_result)
                     }
                     
                 }
@@ -811,7 +811,7 @@ open class OpenXRInterface: XRInterface {
             withUnsafePointer(to: joint.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_hand_joint_angular_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_hand_joint_angular_velocity, handle, pArgs, &_result)
                     }
                     
                 }
@@ -841,7 +841,7 @@ open class OpenXRInterface: XRInterface {
     public final func isHandTrackingSupported() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OpenXRInterface.method_is_hand_tracking_supported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRInterface.method_is_hand_tracking_supported, handle, nil, &_result)
         return _result
     }
     
@@ -863,7 +863,7 @@ open class OpenXRInterface: XRInterface {
     public final func isHandInteractionSupported() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OpenXRInterface.method_is_hand_interaction_supported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRInterface.method_is_hand_interaction_supported, handle, nil, &_result)
         return _result
     }
     
@@ -885,7 +885,7 @@ open class OpenXRInterface: XRInterface {
     public final func isEyeGazeInteractionSupported() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OpenXRInterface.method_is_eye_gaze_interaction_supported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRInterface.method_is_eye_gaze_interaction_supported, handle, nil, &_result)
         return _result
     }
     
@@ -904,7 +904,7 @@ open class OpenXRInterface: XRInterface {
     fileprivate final func get_vrs_min_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_vrs_min_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_vrs_min_radius, handle, nil, &_result)
         return _result
     }
     
@@ -925,7 +925,7 @@ open class OpenXRInterface: XRInterface {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRInterface.method_set_vrs_min_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRInterface.method_set_vrs_min_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -950,7 +950,7 @@ open class OpenXRInterface: XRInterface {
     fileprivate final func get_vrs_strength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_vrs_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRInterface.method_get_vrs_strength, handle, nil, &_result)
         return _result
     }
     
@@ -971,7 +971,7 @@ open class OpenXRInterface: XRInterface {
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRInterface.method_set_vrs_strength, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRInterface.method_set_vrs_strength, handle, pArgs, nil)
                 }
                 
             }

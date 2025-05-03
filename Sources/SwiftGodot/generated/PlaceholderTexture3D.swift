@@ -65,7 +65,7 @@ open class PlaceholderTexture3D: Texture3D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PlaceholderTexture3D.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PlaceholderTexture3D.method_set_size, handle, pArgs, nil)
                 }
                 
             }
@@ -90,7 +90,7 @@ open class PlaceholderTexture3D: Texture3D {
     fileprivate final func get_size() -> Vector3i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3i = Vector3i ()
-        gi.object_method_bind_ptrcall(PlaceholderTexture3D.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PlaceholderTexture3D.method_get_size, handle, nil, &_result)
         return _result
     }
     

@@ -47,7 +47,7 @@ open class PolygonPathFinder: Resource {
             withUnsafePointer(to: connections.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PolygonPathFinder.method_setup, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PolygonPathFinder.method_setup, handle, pArgs, nil)
                     }
                     
                 }
@@ -78,7 +78,7 @@ open class PolygonPathFinder: Resource {
             withUnsafePointer(to: to) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PolygonPathFinder.method_find_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(PolygonPathFinder.method_find_path, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -109,7 +109,7 @@ open class PolygonPathFinder: Resource {
             withUnsafePointer(to: to) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PolygonPathFinder.method_get_intersections, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(PolygonPathFinder.method_get_intersections, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -139,7 +139,7 @@ open class PolygonPathFinder: Resource {
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PolygonPathFinder.method_get_closest_point, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PolygonPathFinder.method_get_closest_point, handle, pArgs, &_result)
                 }
                 
             }
@@ -168,7 +168,7 @@ open class PolygonPathFinder: Resource {
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PolygonPathFinder.method_is_point_inside, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PolygonPathFinder.method_is_point_inside, handle, pArgs, &_result)
                 }
                 
             }
@@ -196,7 +196,7 @@ open class PolygonPathFinder: Resource {
             withUnsafePointer(to: penalty) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PolygonPathFinder.method_set_point_penalty, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PolygonPathFinder.method_set_point_penalty, handle, pArgs, nil)
                     }
                     
                 }
@@ -226,7 +226,7 @@ open class PolygonPathFinder: Resource {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PolygonPathFinder.method_get_point_penalty, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PolygonPathFinder.method_get_point_penalty, handle, pArgs, &_result)
                 }
                 
             }
@@ -251,7 +251,7 @@ open class PolygonPathFinder: Resource {
     public final func getBounds() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(PolygonPathFinder.method_get_bounds, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PolygonPathFinder.method_get_bounds, handle, nil, &_result)
         return _result
     }
     

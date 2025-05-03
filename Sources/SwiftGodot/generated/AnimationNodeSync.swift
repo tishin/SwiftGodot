@@ -61,7 +61,7 @@ open class AnimationNodeSync: AnimationNode {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeSync.method_set_use_sync, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeSync.method_set_use_sync, handle, pArgs, nil)
                 }
                 
             }
@@ -86,7 +86,7 @@ open class AnimationNodeSync: AnimationNode {
     fileprivate final func is_using_sync() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationNodeSync.method_is_using_sync, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeSync.method_is_using_sync, handle, nil, &_result)
         return _result
     }
     

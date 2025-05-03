@@ -135,7 +135,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: targetNodepath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_target_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_target_node, handle, pArgs, nil)
                 }
                 
             }
@@ -160,7 +160,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     fileprivate final func get_target_node() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_target_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_target_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -181,7 +181,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_data_chain_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_data_chain_length, handle, pArgs, nil)
                 }
                 
             }
@@ -206,7 +206,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     fileprivate final func get_jiggle_data_chain_length() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_data_chain_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_data_chain_length, handle, nil, &_result)
         return _result
     }
     
@@ -227,7 +227,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: stiffness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_stiffness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_stiffness, handle, pArgs, nil)
                 }
                 
             }
@@ -252,7 +252,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     fileprivate final func get_stiffness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_stiffness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_stiffness, handle, nil, &_result)
         return _result
     }
     
@@ -273,7 +273,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: mass) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_mass, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_mass, handle, pArgs, nil)
                 }
                 
             }
@@ -298,7 +298,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     fileprivate final func get_mass() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_mass, handle, nil, &_result)
         return _result
     }
     
@@ -319,7 +319,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: damping) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_damping, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_damping, handle, pArgs, nil)
                 }
                 
             }
@@ -344,7 +344,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     fileprivate final func get_damping() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_damping, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_damping, handle, nil, &_result)
         return _result
     }
     
@@ -365,7 +365,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: useGravity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_use_gravity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_use_gravity, handle, pArgs, nil)
                 }
                 
             }
@@ -390,7 +390,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     fileprivate final func get_use_gravity() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_use_gravity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_use_gravity, handle, nil, &_result)
         return _result
     }
     
@@ -411,7 +411,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: gravity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_gravity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_gravity, handle, pArgs, nil)
                 }
                 
             }
@@ -436,7 +436,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     fileprivate final func get_gravity() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_gravity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_gravity, handle, nil, &_result)
         return _result
     }
     
@@ -457,7 +457,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: useColliders) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_use_colliders, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_use_colliders, handle, pArgs, nil)
                 }
                 
             }
@@ -482,7 +482,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     public final func getUseColliders() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_use_colliders, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_use_colliders, handle, nil, &_result)
         return _result
     }
     
@@ -503,7 +503,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: collisionMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_collision_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_collision_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -528,7 +528,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
     public final func getCollisionMask() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_collision_mask, handle, nil, &_result)
         return _result
     }
     
@@ -550,7 +550,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
             withUnsafePointer(to: bone2dNode.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_bone2d_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_bone2d_node, handle, pArgs, nil)
                     }
                     
                 }
@@ -580,7 +580,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_bone2d_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_bone2d_node, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -608,7 +608,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
             withUnsafePointer(to: boneIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_bone_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_bone_index, handle, pArgs, nil)
                     }
                     
                 }
@@ -638,7 +638,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_bone_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_bone_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -666,7 +666,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
             withUnsafePointer(to: override) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_override, handle, pArgs, nil)
                     }
                     
                 }
@@ -696,7 +696,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_override, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_override, handle, pArgs, &_result)
                 }
                 
             }
@@ -724,7 +724,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
             withUnsafePointer(to: stiffness) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_stiffness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_stiffness, handle, pArgs, nil)
                     }
                     
                 }
@@ -754,7 +754,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_stiffness, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_stiffness, handle, pArgs, &_result)
                 }
                 
             }
@@ -782,7 +782,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
             withUnsafePointer(to: mass) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_mass, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_mass, handle, pArgs, nil)
                     }
                     
                 }
@@ -812,7 +812,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_mass, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_mass, handle, pArgs, &_result)
                 }
                 
             }
@@ -840,7 +840,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
             withUnsafePointer(to: damping) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_damping, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_damping, handle, pArgs, nil)
                     }
                     
                 }
@@ -870,7 +870,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_damping, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_damping, handle, pArgs, &_result)
                 }
                 
             }
@@ -898,7 +898,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
             withUnsafePointer(to: useGravity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_use_gravity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_use_gravity, handle, pArgs, nil)
                     }
                     
                 }
@@ -928,7 +928,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_use_gravity, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_use_gravity, handle, pArgs, &_result)
                 }
                 
             }
@@ -956,7 +956,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
             withUnsafePointer(to: gravity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_gravity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_set_jiggle_joint_gravity, handle, pArgs, nil)
                     }
                     
                 }
@@ -986,7 +986,7 @@ open class SkeletonModification2DJiggle: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_gravity, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DJiggle.method_get_jiggle_joint_gravity, handle, pArgs, &_result)
                 }
                 
             }

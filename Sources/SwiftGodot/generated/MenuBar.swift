@@ -123,7 +123,7 @@ open class MenuBar: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuBar.method_set_switch_on_hover, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MenuBar.method_set_switch_on_hover, handle, pArgs, nil)
                 }
                 
             }
@@ -148,7 +148,7 @@ open class MenuBar: Control {
     fileprivate final func is_switch_on_hover() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(MenuBar.method_is_switch_on_hover, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MenuBar.method_is_switch_on_hover, handle, nil, &_result)
         return _result
     }
     
@@ -169,7 +169,7 @@ open class MenuBar: Control {
         withUnsafePointer(to: disabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuBar.method_set_disable_shortcuts, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MenuBar.method_set_disable_shortcuts, handle, pArgs, nil)
                 }
                 
             }
@@ -196,7 +196,7 @@ open class MenuBar: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuBar.method_set_prefer_global_menu, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MenuBar.method_set_prefer_global_menu, handle, pArgs, nil)
                 }
                 
             }
@@ -221,7 +221,7 @@ open class MenuBar: Control {
     fileprivate final func is_prefer_global_menu() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(MenuBar.method_is_prefer_global_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MenuBar.method_is_prefer_global_menu, handle, nil, &_result)
         return _result
     }
     
@@ -240,7 +240,7 @@ open class MenuBar: Control {
     public final func isNativeMenu() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(MenuBar.method_is_native_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MenuBar.method_is_native_menu, handle, nil, &_result)
         return _result
     }
     
@@ -259,7 +259,7 @@ open class MenuBar: Control {
     public final func getMenuCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MenuBar.method_get_menu_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MenuBar.method_get_menu_count, handle, nil, &_result)
         return _result
     }
     
@@ -280,7 +280,7 @@ open class MenuBar: Control {
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuBar.method_set_text_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MenuBar.method_set_text_direction, handle, pArgs, nil)
                 }
                 
             }
@@ -305,7 +305,7 @@ open class MenuBar: Control {
     fileprivate final func get_text_direction() -> Control.TextDirection {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(MenuBar.method_get_text_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MenuBar.method_get_text_direction, handle, nil, &_result)
         return Control.TextDirection (rawValue: _result)!
     }
     
@@ -327,7 +327,7 @@ open class MenuBar: Control {
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuBar.method_set_language, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MenuBar.method_set_language, handle, pArgs, nil)
                 }
                 
             }
@@ -352,7 +352,7 @@ open class MenuBar: Control {
     fileprivate final func get_language() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(MenuBar.method_get_language, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(MenuBar.method_get_language, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -373,7 +373,7 @@ open class MenuBar: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuBar.method_set_flat, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MenuBar.method_set_flat, handle, pArgs, nil)
                 }
                 
             }
@@ -398,7 +398,7 @@ open class MenuBar: Control {
     fileprivate final func is_flat() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(MenuBar.method_is_flat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MenuBar.method_is_flat, handle, nil, &_result)
         return _result
     }
     
@@ -419,7 +419,7 @@ open class MenuBar: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuBar.method_set_start_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MenuBar.method_set_start_index, handle, pArgs, nil)
                 }
                 
             }
@@ -444,7 +444,7 @@ open class MenuBar: Control {
     fileprivate final func get_start_index() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MenuBar.method_get_start_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MenuBar.method_get_start_index, handle, nil, &_result)
         return _result
     }
     
@@ -467,7 +467,7 @@ open class MenuBar: Control {
             withUnsafePointer(to: title.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MenuBar.method_set_menu_title, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MenuBar.method_set_menu_title, handle, pArgs, nil)
                     }
                     
                 }
@@ -497,7 +497,7 @@ open class MenuBar: Control {
         withUnsafePointer(to: menu) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuBar.method_get_menu_title, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(MenuBar.method_get_menu_title, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -526,7 +526,7 @@ open class MenuBar: Control {
             withUnsafePointer(to: tooltip.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MenuBar.method_set_menu_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MenuBar.method_set_menu_tooltip, handle, pArgs, nil)
                     }
                     
                 }
@@ -556,7 +556,7 @@ open class MenuBar: Control {
         withUnsafePointer(to: menu) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuBar.method_get_menu_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(MenuBar.method_get_menu_tooltip, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -584,7 +584,7 @@ open class MenuBar: Control {
             withUnsafePointer(to: disabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MenuBar.method_set_menu_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MenuBar.method_set_menu_disabled, handle, pArgs, nil)
                     }
                     
                 }
@@ -614,7 +614,7 @@ open class MenuBar: Control {
         withUnsafePointer(to: menu) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuBar.method_is_menu_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MenuBar.method_is_menu_disabled, handle, pArgs, &_result)
                 }
                 
             }
@@ -642,7 +642,7 @@ open class MenuBar: Control {
             withUnsafePointer(to: hidden) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MenuBar.method_set_menu_hidden, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MenuBar.method_set_menu_hidden, handle, pArgs, nil)
                     }
                     
                 }
@@ -672,7 +672,7 @@ open class MenuBar: Control {
         withUnsafePointer(to: menu) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuBar.method_is_menu_hidden, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MenuBar.method_is_menu_hidden, handle, pArgs, &_result)
                 }
                 
             }
@@ -696,18 +696,18 @@ open class MenuBar: Control {
     /// Returns ``PopupMenu`` associated with menu item.
     public final func getMenuPopup(menu: Int32) -> PopupMenu? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: menu) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuBar.method_get_menu_popup, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MenuBar.method_get_menu_popup, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

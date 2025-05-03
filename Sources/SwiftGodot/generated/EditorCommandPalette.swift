@@ -63,7 +63,7 @@ open class EditorCommandPalette: ConfirmationDialog {
                     withUnsafePointer(to: shortcutText.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorCommandPalette.method_add_command, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(EditorCommandPalette.method_add_command, handle, pArgs, nil)
                             }
                             
                         }
@@ -100,7 +100,7 @@ open class EditorCommandPalette: ConfirmationDialog {
         withUnsafePointer(to: keyName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorCommandPalette.method_remove_command, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorCommandPalette.method_remove_command, handle, pArgs, nil)
                 }
                 
             }

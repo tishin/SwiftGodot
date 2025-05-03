@@ -58,7 +58,7 @@ open class SkeletonModification2DPhysicalBones: SkeletonModification2D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DPhysicalBones.method_set_physical_bone_chain_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DPhysicalBones.method_set_physical_bone_chain_length, handle, pArgs, nil)
                 }
                 
             }
@@ -83,7 +83,7 @@ open class SkeletonModification2DPhysicalBones: SkeletonModification2D {
     fileprivate final func get_physical_bone_chain_length() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SkeletonModification2DPhysicalBones.method_get_physical_bone_chain_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2DPhysicalBones.method_get_physical_bone_chain_length, handle, nil, &_result)
         return _result
     }
     
@@ -108,7 +108,7 @@ open class SkeletonModification2DPhysicalBones: SkeletonModification2D {
             withUnsafePointer(to: physicalbone2dNode.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SkeletonModification2DPhysicalBones.method_set_physical_bone_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SkeletonModification2DPhysicalBones.method_set_physical_bone_node, handle, pArgs, nil)
                     }
                     
                 }
@@ -138,7 +138,7 @@ open class SkeletonModification2DPhysicalBones: SkeletonModification2D {
         withUnsafePointer(to: jointIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DPhysicalBones.method_get_physical_bone_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DPhysicalBones.method_get_physical_bone_node, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -162,7 +162,7 @@ open class SkeletonModification2DPhysicalBones: SkeletonModification2D {
     /// Empties the list of ``PhysicalBone2D`` nodes and populates it with all ``PhysicalBone2D`` nodes that are children of the ``Skeleton2D``.
     public final func fetchPhysicalBones() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SkeletonModification2DPhysicalBones.method_fetch_physical_bones, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SkeletonModification2DPhysicalBones.method_fetch_physical_bones, handle, nil, nil)
         
     }
     
@@ -186,7 +186,7 @@ open class SkeletonModification2DPhysicalBones: SkeletonModification2D {
         withUnsafePointer(to: bones.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DPhysicalBones.method_start_simulation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DPhysicalBones.method_start_simulation, handle, pArgs, nil)
                 }
                 
             }
@@ -216,7 +216,7 @@ open class SkeletonModification2DPhysicalBones: SkeletonModification2D {
         withUnsafePointer(to: bones.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DPhysicalBones.method_stop_simulation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DPhysicalBones.method_stop_simulation, handle, pArgs, nil)
                 }
                 
             }

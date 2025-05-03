@@ -118,7 +118,7 @@ open class PinJoint2D: Joint2D {
         withUnsafePointer(to: softness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PinJoint2D.method_set_softness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PinJoint2D.method_set_softness, handle, pArgs, nil)
                 }
                 
             }
@@ -143,7 +143,7 @@ open class PinJoint2D: Joint2D {
     fileprivate final func get_softness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PinJoint2D.method_get_softness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PinJoint2D.method_get_softness, handle, nil, &_result)
         return _result
     }
     
@@ -164,7 +164,7 @@ open class PinJoint2D: Joint2D {
         withUnsafePointer(to: angularLimitLower) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PinJoint2D.method_set_angular_limit_lower, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PinJoint2D.method_set_angular_limit_lower, handle, pArgs, nil)
                 }
                 
             }
@@ -189,7 +189,7 @@ open class PinJoint2D: Joint2D {
     fileprivate final func get_angular_limit_lower() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PinJoint2D.method_get_angular_limit_lower, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PinJoint2D.method_get_angular_limit_lower, handle, nil, &_result)
         return _result
     }
     
@@ -210,7 +210,7 @@ open class PinJoint2D: Joint2D {
         withUnsafePointer(to: angularLimitUpper) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PinJoint2D.method_set_angular_limit_upper, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PinJoint2D.method_set_angular_limit_upper, handle, pArgs, nil)
                 }
                 
             }
@@ -235,7 +235,7 @@ open class PinJoint2D: Joint2D {
     fileprivate final func get_angular_limit_upper() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PinJoint2D.method_get_angular_limit_upper, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PinJoint2D.method_get_angular_limit_upper, handle, nil, &_result)
         return _result
     }
     
@@ -256,7 +256,7 @@ open class PinJoint2D: Joint2D {
         withUnsafePointer(to: motorTargetVelocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PinJoint2D.method_set_motor_target_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PinJoint2D.method_set_motor_target_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -281,7 +281,7 @@ open class PinJoint2D: Joint2D {
     fileprivate final func get_motor_target_velocity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PinJoint2D.method_get_motor_target_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PinJoint2D.method_get_motor_target_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -302,7 +302,7 @@ open class PinJoint2D: Joint2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PinJoint2D.method_set_motor_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PinJoint2D.method_set_motor_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -327,7 +327,7 @@ open class PinJoint2D: Joint2D {
     fileprivate final func is_motor_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PinJoint2D.method_is_motor_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PinJoint2D.method_is_motor_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -348,7 +348,7 @@ open class PinJoint2D: Joint2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PinJoint2D.method_set_angular_limit_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PinJoint2D.method_set_angular_limit_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -373,7 +373,7 @@ open class PinJoint2D: Joint2D {
     fileprivate final func is_angular_limit_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PinJoint2D.method_is_angular_limit_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PinJoint2D.method_is_angular_limit_enabled, handle, nil, &_result)
         return _result
     }
     

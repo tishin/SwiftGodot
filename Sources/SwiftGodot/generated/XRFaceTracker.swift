@@ -353,7 +353,7 @@ open class XRFaceTracker: XRTracker {
         withUnsafePointer(to: blendShape.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRFaceTracker.method_get_blend_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRFaceTracker.method_get_blend_shape, handle, pArgs, &_result)
                 }
                 
             }
@@ -381,7 +381,7 @@ open class XRFaceTracker: XRTracker {
             withUnsafePointer(to: weight) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(XRFaceTracker.method_set_blend_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(XRFaceTracker.method_set_blend_shape, handle, pArgs, nil)
                     }
                     
                 }
@@ -408,7 +408,7 @@ open class XRFaceTracker: XRTracker {
     fileprivate final func get_blend_shapes() -> PackedFloat32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
-        gi.object_method_bind_ptrcall(XRFaceTracker.method_get_blend_shapes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XRFaceTracker.method_get_blend_shapes, handle, nil, &_result.content)
         return _result
     }
     
@@ -429,7 +429,7 @@ open class XRFaceTracker: XRTracker {
         withUnsafePointer(to: weights.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRFaceTracker.method_set_blend_shapes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRFaceTracker.method_set_blend_shapes, handle, pArgs, nil)
                 }
                 
             }

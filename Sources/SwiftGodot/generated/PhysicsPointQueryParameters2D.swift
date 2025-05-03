@@ -124,7 +124,7 @@ open class PhysicsPointQueryParameters2D: RefCounted {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_set_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_set_position, handle, pArgs, nil)
                 }
                 
             }
@@ -149,7 +149,7 @@ open class PhysicsPointQueryParameters2D: RefCounted {
     fileprivate final func get_position() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_get_position, handle, nil, &_result)
         return _result
     }
     
@@ -170,7 +170,7 @@ open class PhysicsPointQueryParameters2D: RefCounted {
         withUnsafePointer(to: canvasInstanceId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_set_canvas_instance_id, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_set_canvas_instance_id, handle, pArgs, nil)
                 }
                 
             }
@@ -195,7 +195,7 @@ open class PhysicsPointQueryParameters2D: RefCounted {
     fileprivate final func get_canvas_instance_id() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_get_canvas_instance_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_get_canvas_instance_id, handle, nil, &_result)
         return _result
     }
     
@@ -216,7 +216,7 @@ open class PhysicsPointQueryParameters2D: RefCounted {
         withUnsafePointer(to: collisionMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_set_collision_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_set_collision_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -241,7 +241,7 @@ open class PhysicsPointQueryParameters2D: RefCounted {
     fileprivate final func get_collision_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_get_collision_mask, handle, nil, &_result)
         return _result
     }
     
@@ -262,7 +262,7 @@ open class PhysicsPointQueryParameters2D: RefCounted {
         withUnsafePointer(to: exclude.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_set_exclude, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_set_exclude, handle, pArgs, nil)
                 }
                 
             }
@@ -287,7 +287,7 @@ open class PhysicsPointQueryParameters2D: RefCounted {
     fileprivate final func get_exclude() -> TypedArray<RID> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_get_exclude, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_get_exclude, handle, nil, &_result)
         return TypedArray<RID>(takingOver: _result)
     }
     
@@ -308,7 +308,7 @@ open class PhysicsPointQueryParameters2D: RefCounted {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_set_collide_with_bodies, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_set_collide_with_bodies, handle, pArgs, nil)
                 }
                 
             }
@@ -333,7 +333,7 @@ open class PhysicsPointQueryParameters2D: RefCounted {
     fileprivate final func is_collide_with_bodies_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_is_collide_with_bodies_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_is_collide_with_bodies_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -354,7 +354,7 @@ open class PhysicsPointQueryParameters2D: RefCounted {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_set_collide_with_areas, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_set_collide_with_areas, handle, pArgs, nil)
                 }
                 
             }
@@ -379,7 +379,7 @@ open class PhysicsPointQueryParameters2D: RefCounted {
     fileprivate final func is_collide_with_areas_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_is_collide_with_areas_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsPointQueryParameters2D.method_is_collide_with_areas_enabled, handle, nil, &_result)
         return _result
     }
     

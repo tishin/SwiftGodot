@@ -79,18 +79,18 @@ open class BoxContainer: Container {
     /// Adds a ``Control`` node to the box as a spacer. If `begin` is `true`, it will insert the ``Control`` node in front of all other children.
     public final func addSpacer(begin: Bool) -> Control? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: begin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BoxContainer.method_add_spacer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(BoxContainer.method_add_spacer, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_alignment: GDExtensionMethodBindPtr = {
@@ -110,7 +110,7 @@ open class BoxContainer: Container {
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BoxContainer.method_set_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BoxContainer.method_set_alignment, handle, pArgs, nil)
                 }
                 
             }
@@ -135,7 +135,7 @@ open class BoxContainer: Container {
     fileprivate final func get_alignment() -> BoxContainer.AlignmentMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BoxContainer.method_get_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BoxContainer.method_get_alignment, handle, nil, &_result)
         return BoxContainer.AlignmentMode (rawValue: _result)!
     }
     
@@ -156,7 +156,7 @@ open class BoxContainer: Container {
         withUnsafePointer(to: vertical) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BoxContainer.method_set_vertical, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BoxContainer.method_set_vertical, handle, pArgs, nil)
                 }
                 
             }
@@ -181,7 +181,7 @@ open class BoxContainer: Container {
     fileprivate final func is_vertical() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BoxContainer.method_is_vertical, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BoxContainer.method_is_vertical, handle, nil, &_result)
         return _result
     }
     

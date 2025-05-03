@@ -119,7 +119,7 @@ open class MultiplayerPeer: PacketPeer {
         withUnsafePointer(to: channel) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerPeer.method_set_transfer_channel, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerPeer.method_set_transfer_channel, handle, pArgs, nil)
                 }
                 
             }
@@ -144,7 +144,7 @@ open class MultiplayerPeer: PacketPeer {
     fileprivate final func get_transfer_channel() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_transfer_channel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_transfer_channel, handle, nil, &_result)
         return _result
     }
     
@@ -165,7 +165,7 @@ open class MultiplayerPeer: PacketPeer {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerPeer.method_set_transfer_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerPeer.method_set_transfer_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -190,7 +190,7 @@ open class MultiplayerPeer: PacketPeer {
     fileprivate final func get_transfer_mode() -> MultiplayerPeer.TransferMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_transfer_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_transfer_mode, handle, nil, &_result)
         return MultiplayerPeer.TransferMode (rawValue: _result)!
     }
     
@@ -214,7 +214,7 @@ open class MultiplayerPeer: PacketPeer {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerPeer.method_set_target_peer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerPeer.method_set_target_peer, handle, pArgs, nil)
                 }
                 
             }
@@ -239,7 +239,7 @@ open class MultiplayerPeer: PacketPeer {
     public final func getPacketPeer() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_packet_peer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_packet_peer, handle, nil, &_result)
         return _result
     }
     
@@ -258,7 +258,7 @@ open class MultiplayerPeer: PacketPeer {
     public final func getPacketChannel() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_packet_channel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_packet_channel, handle, nil, &_result)
         return _result
     }
     
@@ -277,7 +277,7 @@ open class MultiplayerPeer: PacketPeer {
     public final func getPacketMode() -> MultiplayerPeer.TransferMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_packet_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_packet_mode, handle, nil, &_result)
         return MultiplayerPeer.TransferMode (rawValue: _result)!
     }
     
@@ -295,7 +295,7 @@ open class MultiplayerPeer: PacketPeer {
     /// Waits up to 1 second to receive a new network event.
     public final func poll() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(MultiplayerPeer.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(MultiplayerPeer.method_poll, handle, nil, nil)
         
     }
     
@@ -313,7 +313,7 @@ open class MultiplayerPeer: PacketPeer {
     /// Immediately close the multiplayer peer returning to the state ``ConnectionStatus/disconnected``. Connected peers will be dropped without emitting [signal peer_disconnected].
     public final func close() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(MultiplayerPeer.method_close, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(MultiplayerPeer.method_close, handle, nil, nil)
         
     }
     
@@ -335,7 +335,7 @@ open class MultiplayerPeer: PacketPeer {
             withUnsafePointer(to: force) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MultiplayerPeer.method_disconnect_peer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MultiplayerPeer.method_disconnect_peer, handle, pArgs, nil)
                     }
                     
                 }
@@ -362,7 +362,7 @@ open class MultiplayerPeer: PacketPeer {
     public final func getConnectionStatus() -> MultiplayerPeer.ConnectionStatus {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_connection_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_connection_status, handle, nil, &_result)
         return MultiplayerPeer.ConnectionStatus (rawValue: _result)!
     }
     
@@ -381,7 +381,7 @@ open class MultiplayerPeer: PacketPeer {
     public final func getUniqueId() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_unique_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerPeer.method_get_unique_id, handle, nil, &_result)
         return _result
     }
     
@@ -400,7 +400,7 @@ open class MultiplayerPeer: PacketPeer {
     public final func generateUniqueId() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(MultiplayerPeer.method_generate_unique_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerPeer.method_generate_unique_id, handle, nil, &_result)
         return _result
     }
     
@@ -421,7 +421,7 @@ open class MultiplayerPeer: PacketPeer {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerPeer.method_set_refuse_new_connections, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerPeer.method_set_refuse_new_connections, handle, pArgs, nil)
                 }
                 
             }
@@ -446,7 +446,7 @@ open class MultiplayerPeer: PacketPeer {
     fileprivate final func is_refusing_new_connections() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(MultiplayerPeer.method_is_refusing_new_connections, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerPeer.method_is_refusing_new_connections, handle, nil, &_result)
         return _result
     }
     
@@ -465,7 +465,7 @@ open class MultiplayerPeer: PacketPeer {
     public final func isServerRelaySupported() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(MultiplayerPeer.method_is_server_relay_supported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerPeer.method_is_server_relay_supported, handle, nil, &_result)
         return _result
     }
     

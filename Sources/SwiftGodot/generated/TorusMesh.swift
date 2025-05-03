@@ -94,7 +94,7 @@ open class TorusMesh: PrimitiveMesh {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TorusMesh.method_set_inner_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TorusMesh.method_set_inner_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -119,7 +119,7 @@ open class TorusMesh: PrimitiveMesh {
     fileprivate final func get_inner_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(TorusMesh.method_get_inner_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TorusMesh.method_get_inner_radius, handle, nil, &_result)
         return _result
     }
     
@@ -140,7 +140,7 @@ open class TorusMesh: PrimitiveMesh {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TorusMesh.method_set_outer_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TorusMesh.method_set_outer_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -165,7 +165,7 @@ open class TorusMesh: PrimitiveMesh {
     fileprivate final func get_outer_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(TorusMesh.method_get_outer_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TorusMesh.method_get_outer_radius, handle, nil, &_result)
         return _result
     }
     
@@ -186,7 +186,7 @@ open class TorusMesh: PrimitiveMesh {
         withUnsafePointer(to: rings) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TorusMesh.method_set_rings, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TorusMesh.method_set_rings, handle, pArgs, nil)
                 }
                 
             }
@@ -211,7 +211,7 @@ open class TorusMesh: PrimitiveMesh {
     fileprivate final func get_rings() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TorusMesh.method_get_rings, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TorusMesh.method_get_rings, handle, nil, &_result)
         return _result
     }
     
@@ -232,7 +232,7 @@ open class TorusMesh: PrimitiveMesh {
         withUnsafePointer(to: rings) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TorusMesh.method_set_ring_segments, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TorusMesh.method_set_ring_segments, handle, pArgs, nil)
                 }
                 
             }
@@ -257,7 +257,7 @@ open class TorusMesh: PrimitiveMesh {
     fileprivate final func get_ring_segments() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TorusMesh.method_get_ring_segments, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TorusMesh.method_get_ring_segments, handle, nil, &_result)
         return _result
     }
     

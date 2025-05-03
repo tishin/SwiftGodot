@@ -151,7 +151,7 @@ open class GLTFSkin: Resource {
     fileprivate final func get_skin_root() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFSkin.method_get_skin_root, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFSkin.method_get_skin_root, handle, nil, &_result)
         return _result
     }
     
@@ -172,7 +172,7 @@ open class GLTFSkin: Resource {
         withUnsafePointer(to: skinRoot) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_skin_root, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_skin_root, handle, pArgs, nil)
                 }
                 
             }
@@ -197,7 +197,7 @@ open class GLTFSkin: Resource {
     fileprivate final func get_joints_original() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(GLTFSkin.method_get_joints_original, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFSkin.method_get_joints_original, handle, nil, &_result.content)
         return _result
     }
     
@@ -218,7 +218,7 @@ open class GLTFSkin: Resource {
         withUnsafePointer(to: jointsOriginal.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_joints_original, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_joints_original, handle, pArgs, nil)
                 }
                 
             }
@@ -244,7 +244,7 @@ open class GLTFSkin: Resource {
     fileprivate final func get_inverse_binds() -> TypedArray<Transform3D> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFSkin.method_get_inverse_binds, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFSkin.method_get_inverse_binds, handle, nil, &_result)
         return TypedArray<Transform3D>(takingOver: _result)
     }
     
@@ -266,7 +266,7 @@ open class GLTFSkin: Resource {
         withUnsafePointer(to: inverseBinds.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_inverse_binds, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_inverse_binds, handle, pArgs, nil)
                 }
                 
             }
@@ -291,7 +291,7 @@ open class GLTFSkin: Resource {
     fileprivate final func get_joints() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(GLTFSkin.method_get_joints, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFSkin.method_get_joints, handle, nil, &_result.content)
         return _result
     }
     
@@ -312,7 +312,7 @@ open class GLTFSkin: Resource {
         withUnsafePointer(to: joints.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_joints, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_joints, handle, pArgs, nil)
                 }
                 
             }
@@ -337,7 +337,7 @@ open class GLTFSkin: Resource {
     fileprivate final func get_non_joints() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(GLTFSkin.method_get_non_joints, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFSkin.method_get_non_joints, handle, nil, &_result.content)
         return _result
     }
     
@@ -358,7 +358,7 @@ open class GLTFSkin: Resource {
         withUnsafePointer(to: nonJoints.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_non_joints, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_non_joints, handle, pArgs, nil)
                 }
                 
             }
@@ -383,7 +383,7 @@ open class GLTFSkin: Resource {
     fileprivate final func get_roots() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(GLTFSkin.method_get_roots, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFSkin.method_get_roots, handle, nil, &_result.content)
         return _result
     }
     
@@ -404,7 +404,7 @@ open class GLTFSkin: Resource {
         withUnsafePointer(to: roots.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_roots, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_roots, handle, pArgs, nil)
                 }
                 
             }
@@ -429,7 +429,7 @@ open class GLTFSkin: Resource {
     fileprivate final func get_skeleton() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFSkin.method_get_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFSkin.method_get_skeleton, handle, nil, &_result)
         return _result
     }
     
@@ -450,7 +450,7 @@ open class GLTFSkin: Resource {
         withUnsafePointer(to: skeleton) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_skeleton, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_skeleton, handle, pArgs, nil)
                 }
                 
             }
@@ -476,7 +476,7 @@ open class GLTFSkin: Resource {
     fileprivate final func get_joint_i_to_bone_i() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(GLTFSkin.method_get_joint_i_to_bone_i, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFSkin.method_get_joint_i_to_bone_i, handle, nil, &_result.content)
         return _result
     }
     
@@ -498,7 +498,7 @@ open class GLTFSkin: Resource {
         withUnsafePointer(to: jointIToBoneI.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_joint_i_to_bone_i, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_joint_i_to_bone_i, handle, pArgs, nil)
                 }
                 
             }
@@ -524,7 +524,7 @@ open class GLTFSkin: Resource {
     fileprivate final func get_joint_i_to_name() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(GLTFSkin.method_get_joint_i_to_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFSkin.method_get_joint_i_to_name, handle, nil, &_result.content)
         return _result
     }
     
@@ -546,7 +546,7 @@ open class GLTFSkin: Resource {
         withUnsafePointer(to: jointIToName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_joint_i_to_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_joint_i_to_name, handle, pArgs, nil)
                 }
                 
             }
@@ -570,9 +570,9 @@ open class GLTFSkin: Resource {
     @inline(__always)
     fileprivate final func get_godot_skin() -> Skin? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GLTFSkin.method_get_godot_skin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GLTFSkin.method_get_godot_skin, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_godot_skin: GDExtensionMethodBindPtr = {
@@ -592,7 +592,7 @@ open class GLTFSkin: Resource {
         withUnsafePointer(to: godotSkin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_godot_skin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFSkin.method_set_godot_skin, handle, pArgs, nil)
                 }
                 
             }

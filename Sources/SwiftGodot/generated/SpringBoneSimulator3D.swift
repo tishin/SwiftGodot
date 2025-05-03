@@ -116,7 +116,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: boneName.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_root_bone_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_root_bone_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -146,7 +146,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_root_bone_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_root_bone_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -174,7 +174,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: bone) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_root_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_root_bone, handle, pArgs, nil)
                     }
                     
                 }
@@ -204,7 +204,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_root_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_root_bone, handle, pArgs, &_result)
                 }
                 
             }
@@ -236,7 +236,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: boneName.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_end_bone_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_end_bone_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -266,7 +266,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_end_bone_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_end_bone_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -294,7 +294,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: bone) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_end_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_end_bone, handle, pArgs, nil)
                     }
                     
                 }
@@ -324,7 +324,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_end_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_end_bone, handle, pArgs, &_result)
                 }
                 
             }
@@ -357,7 +357,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_extend_end_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_extend_end_bone, handle, pArgs, nil)
                     }
                     
                 }
@@ -387,7 +387,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_is_end_bone_extended, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_is_end_bone_extended, handle, pArgs, &_result)
                 }
                 
             }
@@ -415,7 +415,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: boneDirection.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_end_bone_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_end_bone_direction, handle, pArgs, nil)
                     }
                     
                 }
@@ -445,7 +445,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_end_bone_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_end_bone_direction, handle, pArgs, &_result)
                 }
                 
             }
@@ -473,7 +473,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: length) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_end_bone_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_end_bone_length, handle, pArgs, nil)
                     }
                     
                 }
@@ -503,7 +503,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_end_bone_length, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_end_bone_length, handle, pArgs, &_result)
                 }
                 
             }
@@ -538,7 +538,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: centerFrom.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_center_from, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_center_from, handle, pArgs, nil)
                     }
                     
                 }
@@ -568,7 +568,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_center_from, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_center_from, handle, pArgs, &_result)
                 }
                 
             }
@@ -596,7 +596,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: nodePath.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_center_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_center_node, handle, pArgs, nil)
                     }
                     
                 }
@@ -626,7 +626,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_center_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_center_node, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -655,7 +655,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: boneName.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_center_bone_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_center_bone_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -685,7 +685,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_center_bone_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_center_bone_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -713,7 +713,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: bone) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_center_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_center_bone, handle, pArgs, nil)
                     }
                     
                 }
@@ -743,7 +743,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_center_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_center_bone, handle, pArgs, &_result)
                 }
                 
             }
@@ -774,7 +774,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: radius) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_radius, handle, pArgs, nil)
                     }
                     
                 }
@@ -804,7 +804,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_radius, handle, pArgs, &_result)
                 }
                 
             }
@@ -837,7 +837,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: axis.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_rotation_axis, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_rotation_axis, handle, pArgs, nil)
                     }
                     
                 }
@@ -867,7 +867,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_rotation_axis, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_rotation_axis, handle, pArgs, &_result)
                 }
                 
             }
@@ -895,7 +895,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: curve?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_radius_damping_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_radius_damping_curve, handle, pArgs, nil)
                     }
                     
                 }
@@ -921,18 +921,18 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
     /// Returns the joint radius damping curve of the bone chain.
     public final func getRadiusDampingCurve(index: Int32) -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_radius_damping_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_radius_damping_curve, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_stiffness: GDExtensionMethodBindPtr = {
@@ -958,7 +958,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: stiffness) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_stiffness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_stiffness, handle, pArgs, nil)
                     }
                     
                 }
@@ -988,7 +988,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_stiffness, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_stiffness, handle, pArgs, &_result)
                 }
                 
             }
@@ -1016,7 +1016,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: curve?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_stiffness_damping_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_stiffness_damping_curve, handle, pArgs, nil)
                     }
                     
                 }
@@ -1042,18 +1042,18 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
     /// Returns the stiffness force damping curve of the bone chain.
     public final func getStiffnessDampingCurve(index: Int32) -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_stiffness_damping_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_stiffness_damping_curve, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_drag: GDExtensionMethodBindPtr = {
@@ -1077,7 +1077,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: drag) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_drag, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_drag, handle, pArgs, nil)
                     }
                     
                 }
@@ -1107,7 +1107,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_drag, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_drag, handle, pArgs, &_result)
                 }
                 
             }
@@ -1135,7 +1135,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: curve?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_drag_damping_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_drag_damping_curve, handle, pArgs, nil)
                     }
                     
                 }
@@ -1161,18 +1161,18 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
     /// Returns the drag force damping curve of the bone chain.
     public final func getDragDampingCurve(index: Int32) -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_drag_damping_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_drag_damping_curve, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_gravity: GDExtensionMethodBindPtr = {
@@ -1198,7 +1198,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: gravity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_gravity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_gravity, handle, pArgs, nil)
                     }
                     
                 }
@@ -1228,7 +1228,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_gravity, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_gravity, handle, pArgs, &_result)
                 }
                 
             }
@@ -1256,7 +1256,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: curve?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_gravity_damping_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_gravity_damping_curve, handle, pArgs, nil)
                     }
                     
                 }
@@ -1282,18 +1282,18 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
     /// Returns the gravity amount damping curve of the bone chain.
     public final func getGravityDampingCurve(index: Int32) -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_gravity_damping_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_gravity_damping_curve, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_gravity_direction: GDExtensionMethodBindPtr = {
@@ -1317,7 +1317,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: gravityDirection) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_gravity_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_gravity_direction, handle, pArgs, nil)
                     }
                     
                 }
@@ -1347,7 +1347,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_gravity_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_gravity_direction, handle, pArgs, &_result)
                 }
                 
             }
@@ -1374,7 +1374,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_setting_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_setting_count, handle, pArgs, nil)
                 }
                 
             }
@@ -1399,7 +1399,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
     fileprivate final func get_setting_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_setting_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_setting_count, handle, nil, &_result)
         return _result
     }
     
@@ -1417,7 +1417,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
     /// Clears all settings.
     public final func clearSettings() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_clear_settings, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_clear_settings, handle, nil, nil)
         
     }
     
@@ -1439,7 +1439,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_individual_config, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_individual_config, handle, pArgs, nil)
                     }
                     
                 }
@@ -1469,7 +1469,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_is_config_individual, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_is_config_individual, handle, pArgs, &_result)
                 }
                 
             }
@@ -1498,7 +1498,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: joint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_bone_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_bone_name, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1529,7 +1529,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: joint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_bone, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1560,7 +1560,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
                 withUnsafePointer(to: axis.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_joint_rotation_axis, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_joint_rotation_axis, handle, pArgs, nil)
                         }
                         
                     }
@@ -1593,7 +1593,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: joint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_rotation_axis, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_rotation_axis, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1624,7 +1624,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
                 withUnsafePointer(to: radius) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_joint_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_joint_radius, handle, pArgs, nil)
                         }
                         
                     }
@@ -1657,7 +1657,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: joint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_radius, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1688,7 +1688,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
                 withUnsafePointer(to: stiffness) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_joint_stiffness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_joint_stiffness, handle, pArgs, nil)
                         }
                         
                     }
@@ -1721,7 +1721,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: joint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_stiffness, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_stiffness, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1752,7 +1752,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
                 withUnsafePointer(to: drag) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_joint_drag, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_joint_drag, handle, pArgs, nil)
                         }
                         
                     }
@@ -1785,7 +1785,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: joint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_drag, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_drag, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1816,7 +1816,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
                 withUnsafePointer(to: gravity) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_joint_gravity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_joint_gravity, handle, pArgs, nil)
                         }
                         
                     }
@@ -1849,7 +1849,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: joint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_gravity, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_gravity, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1880,7 +1880,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
                 withUnsafePointer(to: gravityDirection) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_joint_gravity_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_joint_gravity_direction, handle, pArgs, nil)
                         }
                         
                     }
@@ -1913,7 +1913,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: joint) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_gravity_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_gravity_direction, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1943,7 +1943,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_joint_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -1974,7 +1974,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_enable_all_child_collisions, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_enable_all_child_collisions, handle, pArgs, nil)
                     }
                     
                 }
@@ -2004,7 +2004,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_are_all_child_collisions_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_are_all_child_collisions_enabled, handle, pArgs, &_result)
                 }
                 
             }
@@ -2033,7 +2033,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
                 withUnsafePointer(to: nodePath.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_exclude_collision_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_exclude_collision_path, handle, pArgs, nil)
                         }
                         
                     }
@@ -2066,7 +2066,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: collision) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_exclude_collision_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_exclude_collision_path, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -2096,7 +2096,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: count) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_exclude_collision_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_exclude_collision_count, handle, pArgs, nil)
                     }
                     
                 }
@@ -2126,7 +2126,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_exclude_collision_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_exclude_collision_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -2153,7 +2153,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_clear_exclude_collisions, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_clear_exclude_collisions, handle, pArgs, nil)
                 }
                 
             }
@@ -2182,7 +2182,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
                 withUnsafePointer(to: nodePath.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_collision_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_collision_path, handle, pArgs, nil)
                         }
                         
                     }
@@ -2215,7 +2215,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: collision) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_collision_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_collision_path, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -2245,7 +2245,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
             withUnsafePointer(to: count) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_collision_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_set_collision_count, handle, pArgs, nil)
                     }
                     
                 }
@@ -2275,7 +2275,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_collision_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_get_collision_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -2302,7 +2302,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_clear_collisions, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_clear_collisions, handle, pArgs, nil)
                 }
                 
             }
@@ -2329,7 +2329,7 @@ open class SpringBoneSimulator3D: SkeletonModifier3D {
     /// 
     public final func reset() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_reset, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SpringBoneSimulator3D.method_reset, handle, nil, nil)
         
     }
     

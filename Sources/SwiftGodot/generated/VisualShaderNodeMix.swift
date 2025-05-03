@@ -77,7 +77,7 @@ open class VisualShaderNodeMix: VisualShaderNode {
         withUnsafePointer(to: opType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeMix.method_set_op_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeMix.method_set_op_type, handle, pArgs, nil)
                 }
                 
             }
@@ -102,7 +102,7 @@ open class VisualShaderNodeMix: VisualShaderNode {
     fileprivate final func get_op_type() -> VisualShaderNodeMix.OpType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeMix.method_get_op_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeMix.method_get_op_type, handle, nil, &_result)
         return VisualShaderNodeMix.OpType (rawValue: _result)!
     }
     

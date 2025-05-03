@@ -60,7 +60,7 @@ open class AStar3D: RefCounted {
             withUnsafePointer(to: endId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AStar3D.method__estimate_cost, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AStar3D.method__estimate_cost, handle, pArgs, &_result)
                     }
                     
                 }
@@ -95,7 +95,7 @@ open class AStar3D: RefCounted {
             withUnsafePointer(to: toId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AStar3D.method__compute_cost, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AStar3D.method__compute_cost, handle, pArgs, &_result)
                     }
                     
                 }
@@ -122,7 +122,7 @@ open class AStar3D: RefCounted {
     public final func getAvailablePointId() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(AStar3D.method_get_available_point_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AStar3D.method_get_available_point_id, handle, nil, &_result)
         return _result
     }
     
@@ -150,7 +150,7 @@ open class AStar3D: RefCounted {
                 withUnsafePointer(to: weightScale) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AStar3D.method_add_point, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(AStar3D.method_add_point, handle, pArgs, nil)
                         }
                         
                     }
@@ -182,7 +182,7 @@ open class AStar3D: RefCounted {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStar3D.method_get_point_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AStar3D.method_get_point_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -210,7 +210,7 @@ open class AStar3D: RefCounted {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AStar3D.method_set_point_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AStar3D.method_set_point_position, handle, pArgs, nil)
                     }
                     
                 }
@@ -240,7 +240,7 @@ open class AStar3D: RefCounted {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStar3D.method_get_point_weight_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AStar3D.method_get_point_weight_scale, handle, pArgs, &_result)
                 }
                 
             }
@@ -268,7 +268,7 @@ open class AStar3D: RefCounted {
             withUnsafePointer(to: weightScale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AStar3D.method_set_point_weight_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AStar3D.method_set_point_weight_scale, handle, pArgs, nil)
                     }
                     
                 }
@@ -297,7 +297,7 @@ open class AStar3D: RefCounted {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStar3D.method_remove_point, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AStar3D.method_remove_point, handle, pArgs, nil)
                 }
                 
             }
@@ -325,7 +325,7 @@ open class AStar3D: RefCounted {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStar3D.method_has_point, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AStar3D.method_has_point, handle, pArgs, &_result)
                 }
                 
             }
@@ -354,7 +354,7 @@ open class AStar3D: RefCounted {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStar3D.method_get_point_connections, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(AStar3D.method_get_point_connections, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -379,7 +379,7 @@ open class AStar3D: RefCounted {
     public final func getPointIds() -> PackedInt64Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt64Array = PackedInt64Array ()
-        gi.object_method_bind_ptrcall(AStar3D.method_get_point_ids, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AStar3D.method_get_point_ids, handle, nil, &_result.content)
         return _result
     }
     
@@ -401,7 +401,7 @@ open class AStar3D: RefCounted {
             withUnsafePointer(to: disabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AStar3D.method_set_point_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AStar3D.method_set_point_disabled, handle, pArgs, nil)
                     }
                     
                 }
@@ -431,7 +431,7 @@ open class AStar3D: RefCounted {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStar3D.method_is_point_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AStar3D.method_is_point_disabled, handle, pArgs, &_result)
                 }
                 
             }
@@ -461,7 +461,7 @@ open class AStar3D: RefCounted {
                 withUnsafePointer(to: bidirectional) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AStar3D.method_connect_points, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(AStar3D.method_connect_points, handle, pArgs, nil)
                         }
                         
                     }
@@ -494,7 +494,7 @@ open class AStar3D: RefCounted {
                 withUnsafePointer(to: bidirectional) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AStar3D.method_disconnect_points, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(AStar3D.method_disconnect_points, handle, pArgs, nil)
                         }
                         
                     }
@@ -528,7 +528,7 @@ open class AStar3D: RefCounted {
                 withUnsafePointer(to: bidirectional) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AStar3D.method_are_points_connected, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(AStar3D.method_are_points_connected, handle, pArgs, &_result)
                         }
                         
                     }
@@ -557,7 +557,7 @@ open class AStar3D: RefCounted {
     public final func getPointCount() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(AStar3D.method_get_point_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AStar3D.method_get_point_count, handle, nil, &_result)
         return _result
     }
     
@@ -576,7 +576,7 @@ open class AStar3D: RefCounted {
     public final func getPointCapacity() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(AStar3D.method_get_point_capacity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AStar3D.method_get_point_capacity, handle, nil, &_result)
         return _result
     }
     
@@ -597,7 +597,7 @@ open class AStar3D: RefCounted {
         withUnsafePointer(to: numNodes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStar3D.method_reserve_space, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AStar3D.method_reserve_space, handle, pArgs, nil)
                 }
                 
             }
@@ -621,7 +621,7 @@ open class AStar3D: RefCounted {
     /// Clears all the points and segments.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AStar3D.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AStar3D.method_clear, handle, nil, nil)
         
     }
     
@@ -647,7 +647,7 @@ open class AStar3D: RefCounted {
             withUnsafePointer(to: includeDisabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AStar3D.method_get_closest_point, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AStar3D.method_get_closest_point, handle, pArgs, &_result)
                     }
                     
                 }
@@ -680,7 +680,7 @@ open class AStar3D: RefCounted {
         withUnsafePointer(to: toPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStar3D.method_get_closest_position_in_segment, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AStar3D.method_get_closest_position_in_segment, handle, pArgs, &_result)
                 }
                 
             }
@@ -717,7 +717,7 @@ open class AStar3D: RefCounted {
                 withUnsafePointer(to: allowPartialPath) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AStar3D.method_get_point_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(AStar3D.method_get_point_path, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -758,7 +758,7 @@ open class AStar3D: RefCounted {
                 withUnsafePointer(to: allowPartialPath) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AStar3D.method_get_id_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(AStar3D.method_get_id_path, handle, pArgs, &_result.content)
                         }
                         
                     }

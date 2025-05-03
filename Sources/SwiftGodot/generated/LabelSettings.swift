@@ -166,7 +166,7 @@ open class LabelSettings: Resource {
         withUnsafePointer(to: spacing) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LabelSettings.method_set_line_spacing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LabelSettings.method_set_line_spacing, handle, pArgs, nil)
                 }
                 
             }
@@ -191,7 +191,7 @@ open class LabelSettings: Resource {
     fileprivate final func get_line_spacing() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LabelSettings.method_get_line_spacing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LabelSettings.method_get_line_spacing, handle, nil, &_result)
         return _result
     }
     
@@ -212,7 +212,7 @@ open class LabelSettings: Resource {
         withUnsafePointer(to: spacing) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LabelSettings.method_set_paragraph_spacing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LabelSettings.method_set_paragraph_spacing, handle, pArgs, nil)
                 }
                 
             }
@@ -237,7 +237,7 @@ open class LabelSettings: Resource {
     fileprivate final func get_paragraph_spacing() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(LabelSettings.method_get_paragraph_spacing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LabelSettings.method_get_paragraph_spacing, handle, nil, &_result)
         return _result
     }
     
@@ -258,7 +258,7 @@ open class LabelSettings: Resource {
         withUnsafePointer(to: font?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LabelSettings.method_set_font, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LabelSettings.method_set_font, handle, pArgs, nil)
                 }
                 
             }
@@ -282,9 +282,9 @@ open class LabelSettings: Resource {
     @inline(__always)
     fileprivate final func get_font() -> Font? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(LabelSettings.method_get_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(LabelSettings.method_get_font, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_font_size: GDExtensionMethodBindPtr = {
@@ -304,7 +304,7 @@ open class LabelSettings: Resource {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LabelSettings.method_set_font_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LabelSettings.method_set_font_size, handle, pArgs, nil)
                 }
                 
             }
@@ -329,7 +329,7 @@ open class LabelSettings: Resource {
     fileprivate final func get_font_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(LabelSettings.method_get_font_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LabelSettings.method_get_font_size, handle, nil, &_result)
         return _result
     }
     
@@ -350,7 +350,7 @@ open class LabelSettings: Resource {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LabelSettings.method_set_font_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LabelSettings.method_set_font_color, handle, pArgs, nil)
                 }
                 
             }
@@ -375,7 +375,7 @@ open class LabelSettings: Resource {
     fileprivate final func get_font_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(LabelSettings.method_get_font_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LabelSettings.method_get_font_color, handle, nil, &_result)
         return _result
     }
     
@@ -396,7 +396,7 @@ open class LabelSettings: Resource {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LabelSettings.method_set_outline_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LabelSettings.method_set_outline_size, handle, pArgs, nil)
                 }
                 
             }
@@ -421,7 +421,7 @@ open class LabelSettings: Resource {
     fileprivate final func get_outline_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(LabelSettings.method_get_outline_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LabelSettings.method_get_outline_size, handle, nil, &_result)
         return _result
     }
     
@@ -442,7 +442,7 @@ open class LabelSettings: Resource {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LabelSettings.method_set_outline_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LabelSettings.method_set_outline_color, handle, pArgs, nil)
                 }
                 
             }
@@ -467,7 +467,7 @@ open class LabelSettings: Resource {
     fileprivate final func get_outline_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(LabelSettings.method_get_outline_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LabelSettings.method_get_outline_color, handle, nil, &_result)
         return _result
     }
     
@@ -488,7 +488,7 @@ open class LabelSettings: Resource {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LabelSettings.method_set_shadow_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LabelSettings.method_set_shadow_size, handle, pArgs, nil)
                 }
                 
             }
@@ -513,7 +513,7 @@ open class LabelSettings: Resource {
     fileprivate final func get_shadow_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(LabelSettings.method_get_shadow_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LabelSettings.method_get_shadow_size, handle, nil, &_result)
         return _result
     }
     
@@ -534,7 +534,7 @@ open class LabelSettings: Resource {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LabelSettings.method_set_shadow_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LabelSettings.method_set_shadow_color, handle, pArgs, nil)
                 }
                 
             }
@@ -559,7 +559,7 @@ open class LabelSettings: Resource {
     fileprivate final func get_shadow_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(LabelSettings.method_get_shadow_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LabelSettings.method_get_shadow_color, handle, nil, &_result)
         return _result
     }
     
@@ -580,7 +580,7 @@ open class LabelSettings: Resource {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LabelSettings.method_set_shadow_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LabelSettings.method_set_shadow_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -605,7 +605,7 @@ open class LabelSettings: Resource {
     fileprivate final func get_shadow_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(LabelSettings.method_get_shadow_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LabelSettings.method_get_shadow_offset, handle, nil, &_result)
         return _result
     }
     

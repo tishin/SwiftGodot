@@ -98,7 +98,7 @@ open class MainLoop: Object {
     @_documentation(visibility: public)
     open func _initialize() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(MainLoop.method__initialize, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(MainLoop.method__initialize, handle, nil, nil)
         
     }
     
@@ -126,7 +126,7 @@ open class MainLoop: Object {
         withUnsafePointer(to: delta) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MainLoop.method__physics_process, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MainLoop.method__physics_process, handle, pArgs, &_result)
                 }
                 
             }
@@ -160,7 +160,7 @@ open class MainLoop: Object {
         withUnsafePointer(to: delta) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MainLoop.method__process, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MainLoop.method__process, handle, pArgs, &_result)
                 }
                 
             }
@@ -185,7 +185,7 @@ open class MainLoop: Object {
     @_documentation(visibility: public)
     open func _finalize() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(MainLoop.method__finalize, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(MainLoop.method__finalize, handle, nil, nil)
         
     }
     

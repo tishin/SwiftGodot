@@ -146,7 +146,7 @@ open class MultiplayerSynchronizer: Node {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_set_root_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_set_root_path, handle, pArgs, nil)
                 }
                 
             }
@@ -171,7 +171,7 @@ open class MultiplayerSynchronizer: Node {
     fileprivate final func get_root_path() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_root_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_root_path, handle, nil, &_result.content)
         return _result
     }
     
@@ -192,7 +192,7 @@ open class MultiplayerSynchronizer: Node {
         withUnsafePointer(to: milliseconds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_set_replication_interval, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_set_replication_interval, handle, pArgs, nil)
                 }
                 
             }
@@ -217,7 +217,7 @@ open class MultiplayerSynchronizer: Node {
     fileprivate final func get_replication_interval() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_replication_interval, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_replication_interval, handle, nil, &_result)
         return _result
     }
     
@@ -238,7 +238,7 @@ open class MultiplayerSynchronizer: Node {
         withUnsafePointer(to: milliseconds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_set_delta_interval, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_set_delta_interval, handle, pArgs, nil)
                 }
                 
             }
@@ -263,7 +263,7 @@ open class MultiplayerSynchronizer: Node {
     fileprivate final func get_delta_interval() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_delta_interval, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_delta_interval, handle, nil, &_result)
         return _result
     }
     
@@ -284,7 +284,7 @@ open class MultiplayerSynchronizer: Node {
         withUnsafePointer(to: config?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_set_replication_config, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_set_replication_config, handle, pArgs, nil)
                 }
                 
             }
@@ -308,9 +308,9 @@ open class MultiplayerSynchronizer: Node {
     @inline(__always)
     fileprivate final func get_replication_config() -> SceneReplicationConfig? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_replication_config, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_replication_config, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_visibility_update_mode: GDExtensionMethodBindPtr = {
@@ -330,7 +330,7 @@ open class MultiplayerSynchronizer: Node {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_set_visibility_update_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_set_visibility_update_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -355,7 +355,7 @@ open class MultiplayerSynchronizer: Node {
     fileprivate final func get_visibility_update_mode() -> MultiplayerSynchronizer.VisibilityUpdateMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_visibility_update_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_visibility_update_mode, handle, nil, &_result)
         return MultiplayerSynchronizer.VisibilityUpdateMode (rawValue: _result)!
     }
     
@@ -376,7 +376,7 @@ open class MultiplayerSynchronizer: Node {
         withUnsafePointer(to: forPeer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_update_visibility, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_update_visibility, handle, pArgs, nil)
                 }
                 
             }
@@ -403,7 +403,7 @@ open class MultiplayerSynchronizer: Node {
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_set_visibility_public, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_set_visibility_public, handle, pArgs, nil)
                 }
                 
             }
@@ -428,7 +428,7 @@ open class MultiplayerSynchronizer: Node {
     fileprivate final func is_visibility_public() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_is_visibility_public, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_is_visibility_public, handle, nil, &_result)
         return _result
     }
     
@@ -452,7 +452,7 @@ open class MultiplayerSynchronizer: Node {
         withUnsafePointer(to: filter.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_add_visibility_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_add_visibility_filter, handle, pArgs, nil)
                 }
                 
             }
@@ -479,7 +479,7 @@ open class MultiplayerSynchronizer: Node {
         withUnsafePointer(to: filter.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_remove_visibility_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_remove_visibility_filter, handle, pArgs, nil)
                 }
                 
             }
@@ -507,7 +507,7 @@ open class MultiplayerSynchronizer: Node {
             withUnsafePointer(to: visible) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_set_visibility_for, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_set_visibility_for, handle, pArgs, nil)
                     }
                     
                 }
@@ -537,7 +537,7 @@ open class MultiplayerSynchronizer: Node {
         withUnsafePointer(to: peer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_visibility_for, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MultiplayerSynchronizer.method_get_visibility_for, handle, pArgs, &_result)
                 }
                 
             }

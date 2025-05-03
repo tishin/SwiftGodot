@@ -106,7 +106,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_set_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_set_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -131,7 +131,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     fileprivate final func get_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_radius, handle, nil, &_result)
         return _result
     }
     
@@ -152,7 +152,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_set_central_horizontal_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_set_central_horizontal_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -177,7 +177,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     fileprivate final func get_central_horizontal_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_central_horizontal_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_central_horizontal_angle, handle, nil, &_result)
         return _result
     }
     
@@ -198,7 +198,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_set_upper_vertical_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_set_upper_vertical_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -223,7 +223,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     fileprivate final func get_upper_vertical_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_upper_vertical_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_upper_vertical_angle, handle, nil, &_result)
         return _result
     }
     
@@ -244,7 +244,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_set_lower_vertical_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_set_lower_vertical_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -269,7 +269,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     fileprivate final func get_lower_vertical_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_lower_vertical_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_lower_vertical_angle, handle, nil, &_result)
         return _result
     }
     
@@ -290,7 +290,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
         withUnsafePointer(to: segments) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_set_fallback_segments, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_set_fallback_segments, handle, pArgs, nil)
                 }
                 
             }
@@ -315,7 +315,7 @@ open class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
     fileprivate final func get_fallback_segments() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_fallback_segments, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayerEquirect.method_get_fallback_segments, handle, nil, &_result)
         return _result
     }
     

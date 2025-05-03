@@ -63,9 +63,9 @@ open class ButtonGroup: Resource {
     /// Returns the current pressed button.
     public final func getPressedButton() -> BaseButton? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ButtonGroup.method_get_pressed_button, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ButtonGroup.method_get_pressed_button, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_buttons: GDExtensionMethodBindPtr = {
@@ -83,7 +83,7 @@ open class ButtonGroup: Resource {
     public final func getButtons() -> TypedArray<BaseButton?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(ButtonGroup.method_get_buttons, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ButtonGroup.method_get_buttons, handle, nil, &_result)
         return TypedArray<BaseButton?>(takingOver: _result)
     }
     
@@ -104,7 +104,7 @@ open class ButtonGroup: Resource {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ButtonGroup.method_set_allow_unpress, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ButtonGroup.method_set_allow_unpress, handle, pArgs, nil)
                 }
                 
             }
@@ -129,7 +129,7 @@ open class ButtonGroup: Resource {
     fileprivate final func is_allow_unpress() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ButtonGroup.method_is_allow_unpress, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ButtonGroup.method_is_allow_unpress, handle, nil, &_result)
         return _result
     }
     

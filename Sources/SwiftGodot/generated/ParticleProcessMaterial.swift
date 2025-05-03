@@ -1598,7 +1598,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: degrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_direction, handle, pArgs, nil)
                 }
                 
             }
@@ -1623,7 +1623,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_direction() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_direction, handle, nil, &_result)
         return _result
     }
     
@@ -1644,7 +1644,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_inherit_velocity_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_inherit_velocity_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -1669,7 +1669,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_inherit_velocity_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_inherit_velocity_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_inherit_velocity_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -1690,7 +1690,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: degrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_spread, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_spread, handle, pArgs, nil)
                 }
                 
             }
@@ -1715,7 +1715,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_spread() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_spread, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_spread, handle, nil, &_result)
         return _result
     }
     
@@ -1736,7 +1736,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_flatness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_flatness, handle, pArgs, nil)
                 }
                 
             }
@@ -1761,7 +1761,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_flatness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_flatness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_flatness, handle, nil, &_result)
         return _result
     }
     
@@ -1787,7 +1787,7 @@ open class ParticleProcessMaterial: Material {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_param, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_param, handle, pArgs, nil)
                     }
                     
                 }
@@ -1821,7 +1821,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_param, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_param, handle, pArgs, &_result)
                 }
                 
             }
@@ -1850,7 +1850,7 @@ open class ParticleProcessMaterial: Material {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_param_min, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_param_min, handle, pArgs, nil)
                     }
                     
                 }
@@ -1881,7 +1881,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_param_min, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_param_min, handle, pArgs, &_result)
                 }
                 
             }
@@ -1910,7 +1910,7 @@ open class ParticleProcessMaterial: Material {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_param_max, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_param_max, handle, pArgs, nil)
                     }
                     
                 }
@@ -1941,7 +1941,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_param_max, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_param_max, handle, pArgs, &_result)
                 }
                 
             }
@@ -1970,7 +1970,7 @@ open class ParticleProcessMaterial: Material {
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_param_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_param_texture, handle, pArgs, nil)
                     }
                     
                 }
@@ -1997,18 +1997,18 @@ open class ParticleProcessMaterial: Material {
     /// Returns the ``Texture2D`` used by the specified parameter.
     fileprivate final func get_param_texture(_ param: ParticleProcessMaterial.Parameter) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_param_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_param_texture, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_color: GDExtensionMethodBindPtr = {
@@ -2028,7 +2028,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_color, handle, pArgs, nil)
                 }
                 
             }
@@ -2053,7 +2053,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_color, handle, nil, &_result)
         return _result
     }
     
@@ -2074,7 +2074,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: ramp?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_color_ramp, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_color_ramp, handle, pArgs, nil)
                 }
                 
             }
@@ -2098,9 +2098,9 @@ open class ParticleProcessMaterial: Material {
     @inline(__always)
     fileprivate final func get_color_ramp() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_color_ramp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_color_ramp, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_alpha_curve: GDExtensionMethodBindPtr = {
@@ -2120,7 +2120,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_alpha_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_alpha_curve, handle, pArgs, nil)
                 }
                 
             }
@@ -2144,9 +2144,9 @@ open class ParticleProcessMaterial: Material {
     @inline(__always)
     fileprivate final func get_alpha_curve() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_alpha_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_alpha_curve, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_emission_curve: GDExtensionMethodBindPtr = {
@@ -2166,7 +2166,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_curve, handle, pArgs, nil)
                 }
                 
             }
@@ -2190,9 +2190,9 @@ open class ParticleProcessMaterial: Material {
     @inline(__always)
     fileprivate final func get_emission_curve() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_curve, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_color_initial_ramp: GDExtensionMethodBindPtr = {
@@ -2212,7 +2212,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: ramp?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_color_initial_ramp, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_color_initial_ramp, handle, pArgs, nil)
                 }
                 
             }
@@ -2236,9 +2236,9 @@ open class ParticleProcessMaterial: Material {
     @inline(__always)
     fileprivate final func get_color_initial_ramp() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_color_initial_ramp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_color_initial_ramp, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_velocity_limit_curve: GDExtensionMethodBindPtr = {
@@ -2258,7 +2258,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_velocity_limit_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_velocity_limit_curve, handle, pArgs, nil)
                 }
                 
             }
@@ -2282,9 +2282,9 @@ open class ParticleProcessMaterial: Material {
     @inline(__always)
     fileprivate final func get_velocity_limit_curve() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_velocity_limit_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_velocity_limit_curve, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_particle_flag: GDExtensionMethodBindPtr = {
@@ -2306,7 +2306,7 @@ open class ParticleProcessMaterial: Material {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_particle_flag, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_particle_flag, handle, pArgs, nil)
                     }
                     
                 }
@@ -2337,7 +2337,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: particleFlag.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_particle_flag, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_particle_flag, handle, pArgs, &_result)
                 }
                 
             }
@@ -2364,7 +2364,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: pivot) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_velocity_pivot, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_velocity_pivot, handle, pArgs, nil)
                 }
                 
             }
@@ -2389,7 +2389,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_velocity_pivot() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_velocity_pivot, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_velocity_pivot, handle, nil, &_result)
         return _result
     }
     
@@ -2410,7 +2410,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: shape.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_shape, handle, pArgs, nil)
                 }
                 
             }
@@ -2435,7 +2435,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_emission_shape() -> ParticleProcessMaterial.EmissionShape {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_shape, handle, nil, &_result)
         return ParticleProcessMaterial.EmissionShape (rawValue: _result)!
     }
     
@@ -2456,7 +2456,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_sphere_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_sphere_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -2481,7 +2481,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_emission_sphere_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_sphere_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_sphere_radius, handle, nil, &_result)
         return _result
     }
     
@@ -2502,7 +2502,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: extents) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_box_extents, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_box_extents, handle, pArgs, nil)
                 }
                 
             }
@@ -2527,7 +2527,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_emission_box_extents() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_box_extents, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_box_extents, handle, nil, &_result)
         return _result
     }
     
@@ -2548,7 +2548,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_point_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_point_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -2572,9 +2572,9 @@ open class ParticleProcessMaterial: Material {
     @inline(__always)
     fileprivate final func get_emission_point_texture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_point_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_point_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_emission_normal_texture: GDExtensionMethodBindPtr = {
@@ -2594,7 +2594,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_normal_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_normal_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -2618,9 +2618,9 @@ open class ParticleProcessMaterial: Material {
     @inline(__always)
     fileprivate final func get_emission_normal_texture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_normal_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_normal_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_emission_color_texture: GDExtensionMethodBindPtr = {
@@ -2640,7 +2640,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_color_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_color_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -2664,9 +2664,9 @@ open class ParticleProcessMaterial: Material {
     @inline(__always)
     fileprivate final func get_emission_color_texture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_color_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_color_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_emission_point_count: GDExtensionMethodBindPtr = {
@@ -2686,7 +2686,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: pointCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_point_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_point_count, handle, pArgs, nil)
                 }
                 
             }
@@ -2711,7 +2711,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_emission_point_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_point_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_point_count, handle, nil, &_result)
         return _result
     }
     
@@ -2732,7 +2732,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: axis) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_ring_axis, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_ring_axis, handle, pArgs, nil)
                 }
                 
             }
@@ -2757,7 +2757,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_emission_ring_axis() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_ring_axis, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_ring_axis, handle, nil, &_result)
         return _result
     }
     
@@ -2778,7 +2778,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_ring_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_ring_height, handle, pArgs, nil)
                 }
                 
             }
@@ -2803,7 +2803,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_emission_ring_height() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_ring_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_ring_height, handle, nil, &_result)
         return _result
     }
     
@@ -2824,7 +2824,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_ring_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_ring_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -2849,7 +2849,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_emission_ring_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_ring_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_ring_radius, handle, nil, &_result)
         return _result
     }
     
@@ -2870,7 +2870,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: innerRadius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_ring_inner_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_ring_inner_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -2895,7 +2895,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_emission_ring_inner_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_ring_inner_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_ring_inner_radius, handle, nil, &_result)
         return _result
     }
     
@@ -2916,7 +2916,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: coneAngle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_ring_cone_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_ring_cone_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -2941,7 +2941,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_emission_ring_cone_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_ring_cone_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_ring_cone_angle, handle, nil, &_result)
         return _result
     }
     
@@ -2962,7 +2962,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: emissionShapeOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_shape_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_shape_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -2987,7 +2987,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_emission_shape_offset() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_shape_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_shape_offset, handle, nil, &_result)
         return _result
     }
     
@@ -3008,7 +3008,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: emissionShapeScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_shape_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_emission_shape_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -3033,7 +3033,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_emission_shape_scale() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_shape_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_emission_shape_scale, handle, nil, &_result)
         return _result
     }
     
@@ -3052,7 +3052,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_turbulence_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_turbulence_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_turbulence_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -3073,7 +3073,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: turbulenceEnabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_turbulence_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_turbulence_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -3098,7 +3098,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_turbulence_noise_strength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_turbulence_noise_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_turbulence_noise_strength, handle, nil, &_result)
         return _result
     }
     
@@ -3119,7 +3119,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: turbulenceNoiseStrength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_turbulence_noise_strength, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_turbulence_noise_strength, handle, pArgs, nil)
                 }
                 
             }
@@ -3144,7 +3144,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_turbulence_noise_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_turbulence_noise_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_turbulence_noise_scale, handle, nil, &_result)
         return _result
     }
     
@@ -3165,7 +3165,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: turbulenceNoiseScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_turbulence_noise_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_turbulence_noise_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -3190,7 +3190,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_turbulence_noise_speed_random() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_turbulence_noise_speed_random, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_turbulence_noise_speed_random, handle, nil, &_result)
         return _result
     }
     
@@ -3211,7 +3211,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: turbulenceNoiseSpeedRandom) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_turbulence_noise_speed_random, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_turbulence_noise_speed_random, handle, pArgs, nil)
                 }
                 
             }
@@ -3236,7 +3236,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_turbulence_noise_speed() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_turbulence_noise_speed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_turbulence_noise_speed, handle, nil, &_result)
         return _result
     }
     
@@ -3257,7 +3257,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: turbulenceNoiseSpeed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_turbulence_noise_speed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_turbulence_noise_speed, handle, pArgs, nil)
                 }
                 
             }
@@ -3282,7 +3282,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_gravity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_gravity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_gravity, handle, nil, &_result)
         return _result
     }
     
@@ -3303,7 +3303,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: accelVec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_gravity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_gravity, handle, pArgs, nil)
                 }
                 
             }
@@ -3330,7 +3330,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: randomness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_lifetime_randomness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_lifetime_randomness, handle, pArgs, nil)
                 }
                 
             }
@@ -3355,7 +3355,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_lifetime_randomness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_lifetime_randomness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_lifetime_randomness, handle, nil, &_result)
         return _result
     }
     
@@ -3374,7 +3374,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_sub_emitter_mode() -> ParticleProcessMaterial.SubEmitterMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_sub_emitter_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_sub_emitter_mode, handle, nil, &_result)
         return ParticleProcessMaterial.SubEmitterMode (rawValue: _result)!
     }
     
@@ -3395,7 +3395,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_sub_emitter_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_sub_emitter_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -3420,7 +3420,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_sub_emitter_frequency() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_sub_emitter_frequency, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_sub_emitter_frequency, handle, nil, &_result)
         return _result
     }
     
@@ -3441,7 +3441,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: hz) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_sub_emitter_frequency, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_sub_emitter_frequency, handle, pArgs, nil)
                 }
                 
             }
@@ -3466,7 +3466,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_sub_emitter_amount_at_end() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_sub_emitter_amount_at_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_sub_emitter_amount_at_end, handle, nil, &_result)
         return _result
     }
     
@@ -3487,7 +3487,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_sub_emitter_amount_at_end, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_sub_emitter_amount_at_end, handle, pArgs, nil)
                 }
                 
             }
@@ -3512,7 +3512,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_sub_emitter_amount_at_collision() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_sub_emitter_amount_at_collision, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_sub_emitter_amount_at_collision, handle, nil, &_result)
         return _result
     }
     
@@ -3533,7 +3533,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_sub_emitter_amount_at_collision, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_sub_emitter_amount_at_collision, handle, pArgs, nil)
                 }
                 
             }
@@ -3558,7 +3558,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_sub_emitter_amount_at_start() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_sub_emitter_amount_at_start, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_sub_emitter_amount_at_start, handle, nil, &_result)
         return _result
     }
     
@@ -3579,7 +3579,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_sub_emitter_amount_at_start, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_sub_emitter_amount_at_start, handle, pArgs, nil)
                 }
                 
             }
@@ -3604,7 +3604,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_sub_emitter_keep_velocity() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_sub_emitter_keep_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_sub_emitter_keep_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -3625,7 +3625,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_sub_emitter_keep_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_sub_emitter_keep_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -3652,7 +3652,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_attractor_interaction_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_attractor_interaction_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -3677,7 +3677,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func is_attractor_interaction_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_is_attractor_interaction_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_is_attractor_interaction_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -3698,7 +3698,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_collision_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_collision_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -3723,7 +3723,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_collision_mode() -> ParticleProcessMaterial.CollisionMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_collision_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_collision_mode, handle, nil, &_result)
         return ParticleProcessMaterial.CollisionMode (rawValue: _result)!
     }
     
@@ -3744,7 +3744,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_collision_use_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_collision_use_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -3769,7 +3769,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func is_collision_using_scale() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_is_collision_using_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_is_collision_using_scale, handle, nil, &_result)
         return _result
     }
     
@@ -3790,7 +3790,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: friction) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_collision_friction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_collision_friction, handle, pArgs, nil)
                 }
                 
             }
@@ -3815,7 +3815,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_collision_friction() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_collision_friction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_collision_friction, handle, nil, &_result)
         return _result
     }
     
@@ -3836,7 +3836,7 @@ open class ParticleProcessMaterial: Material {
         withUnsafePointer(to: bounce) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_collision_bounce, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_set_collision_bounce, handle, pArgs, nil)
                 }
                 
             }
@@ -3861,7 +3861,7 @@ open class ParticleProcessMaterial: Material {
     fileprivate final func get_collision_bounce() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_collision_bounce, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ParticleProcessMaterial.method_get_collision_bounce, handle, nil, &_result)
         return _result
     }
     

@@ -95,7 +95,7 @@ open class VehicleBody3D: RigidBody3D {
         withUnsafePointer(to: engineForce) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleBody3D.method_set_engine_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleBody3D.method_set_engine_force, handle, pArgs, nil)
                 }
                 
             }
@@ -120,7 +120,7 @@ open class VehicleBody3D: RigidBody3D {
     fileprivate final func get_engine_force() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleBody3D.method_get_engine_force, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleBody3D.method_get_engine_force, handle, nil, &_result)
         return _result
     }
     
@@ -141,7 +141,7 @@ open class VehicleBody3D: RigidBody3D {
         withUnsafePointer(to: brake) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleBody3D.method_set_brake, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleBody3D.method_set_brake, handle, pArgs, nil)
                 }
                 
             }
@@ -166,7 +166,7 @@ open class VehicleBody3D: RigidBody3D {
     fileprivate final func get_brake() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleBody3D.method_get_brake, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleBody3D.method_get_brake, handle, nil, &_result)
         return _result
     }
     
@@ -187,7 +187,7 @@ open class VehicleBody3D: RigidBody3D {
         withUnsafePointer(to: steering) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VehicleBody3D.method_set_steering, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VehicleBody3D.method_set_steering, handle, pArgs, nil)
                 }
                 
             }
@@ -212,7 +212,7 @@ open class VehicleBody3D: RigidBody3D {
     fileprivate final func get_steering() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(VehicleBody3D.method_get_steering, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VehicleBody3D.method_get_steering, handle, nil, &_result)
         return _result
     }
     

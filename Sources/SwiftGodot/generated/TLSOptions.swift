@@ -47,7 +47,7 @@ open class TLSOptions: RefCounted {
     /// > Note: On the Web platform, TLS verification is always enforced against the CA list of the web browser. This is considered a security feature.
     /// 
     public static func client(trustedChain: X509Certificate? = nil, commonNameOverride: String = "") -> TLSOptions? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: trustedChain?.handle) { pArg0 in
             let commonNameOverride = GString(commonNameOverride)
             withUnsafePointer(to: commonNameOverride.content) { pArg1 in
@@ -62,7 +62,7 @@ open class TLSOptions: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_client_unsafe: GDExtensionMethodBindPtr = {
@@ -81,7 +81,7 @@ open class TLSOptions: RefCounted {
     /// > Note: On the Web platform, TLS verification is always enforced against the CA list of the web browser. This is considered a security feature.
     /// 
     public static func clientUnsafe(trustedChain: X509Certificate? = nil) -> TLSOptions? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: trustedChain?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -92,7 +92,7 @@ open class TLSOptions: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_server: GDExtensionMethodBindPtr = {
@@ -111,7 +111,7 @@ open class TLSOptions: RefCounted {
     /// > Note: The `certificate` should include the full certificate chain up to the signing CA (certificates file can be concatenated using a general purpose text editor).
     /// 
     public static func server(key: CryptoKey?, certificate: X509Certificate?) -> TLSOptions? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: key?.handle) { pArg0 in
             withUnsafePointer(to: certificate?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
@@ -125,7 +125,7 @@ open class TLSOptions: RefCounted {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_is_server: GDExtensionMethodBindPtr = {
@@ -143,7 +143,7 @@ open class TLSOptions: RefCounted {
     public final func isServer() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TLSOptions.method_is_server, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TLSOptions.method_is_server, handle, nil, &_result)
         return _result
     }
     
@@ -162,7 +162,7 @@ open class TLSOptions: RefCounted {
     public final func isUnsafeClient() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TLSOptions.method_is_unsafe_client, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TLSOptions.method_is_unsafe_client, handle, nil, &_result)
         return _result
     }
     
@@ -181,7 +181,7 @@ open class TLSOptions: RefCounted {
     public final func getCommonNameOverride() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(TLSOptions.method_get_common_name_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TLSOptions.method_get_common_name_override, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -199,9 +199,9 @@ open class TLSOptions: RefCounted {
     /// Returns the CA ``X509Certificate`` chain specified when creating with ``TLSOptions/client(trustedChain:commonNameOverride:)`` or ``TLSOptions/clientUnsafe(trustedChain:)``.
     public final func getTrustedCaChain() -> X509Certificate? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TLSOptions.method_get_trusted_ca_chain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TLSOptions.method_get_trusted_ca_chain, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_private_key: GDExtensionMethodBindPtr = {
@@ -218,9 +218,9 @@ open class TLSOptions: RefCounted {
     /// Returns the ``CryptoKey`` specified when creating with ``TLSOptions/server(key:certificate:)``.
     public final func getPrivateKey() -> CryptoKey? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TLSOptions.method_get_private_key, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TLSOptions.method_get_private_key, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_own_certificate: GDExtensionMethodBindPtr = {
@@ -237,9 +237,9 @@ open class TLSOptions: RefCounted {
     /// Returns the ``X509Certificate`` specified when creating with ``TLSOptions/server(key:certificate:)``.
     public final func getOwnCertificate() -> X509Certificate? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TLSOptions.method_get_own_certificate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TLSOptions.method_get_own_certificate, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

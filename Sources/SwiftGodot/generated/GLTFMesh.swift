@@ -92,7 +92,7 @@ open class GLTFMesh: Resource {
     fileprivate final func get_original_name() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(GLTFMesh.method_get_original_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFMesh.method_get_original_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -114,7 +114,7 @@ open class GLTFMesh: Resource {
         withUnsafePointer(to: originalName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFMesh.method_set_original_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFMesh.method_set_original_name, handle, pArgs, nil)
                 }
                 
             }
@@ -138,9 +138,9 @@ open class GLTFMesh: Resource {
     @inline(__always)
     fileprivate final func get_mesh() -> ImporterMesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GLTFMesh.method_get_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GLTFMesh.method_get_mesh, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_mesh: GDExtensionMethodBindPtr = {
@@ -160,7 +160,7 @@ open class GLTFMesh: Resource {
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFMesh.method_set_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFMesh.method_set_mesh, handle, pArgs, nil)
                 }
                 
             }
@@ -185,7 +185,7 @@ open class GLTFMesh: Resource {
     fileprivate final func get_blend_weights() -> PackedFloat32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
-        gi.object_method_bind_ptrcall(GLTFMesh.method_get_blend_weights, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFMesh.method_get_blend_weights, handle, nil, &_result.content)
         return _result
     }
     
@@ -206,7 +206,7 @@ open class GLTFMesh: Resource {
         withUnsafePointer(to: blendWeights.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFMesh.method_set_blend_weights, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFMesh.method_set_blend_weights, handle, pArgs, nil)
                 }
                 
             }
@@ -231,7 +231,7 @@ open class GLTFMesh: Resource {
     fileprivate final func get_instance_materials() -> TypedArray<Material?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFMesh.method_get_instance_materials, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFMesh.method_get_instance_materials, handle, nil, &_result)
         return TypedArray<Material?>(takingOver: _result)
     }
     
@@ -252,7 +252,7 @@ open class GLTFMesh: Resource {
         withUnsafePointer(to: instanceMaterials.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFMesh.method_set_instance_materials, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFMesh.method_set_instance_materials, handle, pArgs, nil)
                 }
                 
             }
@@ -283,7 +283,7 @@ open class GLTFMesh: Resource {
         withUnsafePointer(to: extensionName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFMesh.method_get_additional_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFMesh.method_get_additional_data, handle, pArgs, &_result)
                 }
                 
             }
@@ -314,7 +314,7 @@ open class GLTFMesh: Resource {
             withUnsafePointer(to: additionalData.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GLTFMesh.method_set_additional_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GLTFMesh.method_set_additional_data, handle, pArgs, nil)
                     }
                     
                 }

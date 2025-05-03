@@ -46,9 +46,9 @@ open class AudioStream: Resource {
     @_documentation(visibility: public)
     open func _instantiatePlayback() -> AudioStreamPlayback? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AudioStream.method__instantiate_playback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AudioStream.method__instantiate_playback, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__get_stream_name: GDExtensionMethodBindPtr = {
@@ -67,7 +67,7 @@ open class AudioStream: Resource {
     open func _getStreamName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(AudioStream.method__get_stream_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AudioStream.method__get_stream_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -87,7 +87,7 @@ open class AudioStream: Resource {
     open func _getLength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStream.method__get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStream.method__get_length, handle, nil, &_result)
         return _result
     }
     
@@ -107,7 +107,7 @@ open class AudioStream: Resource {
     open func _isMonophonic() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioStream.method__is_monophonic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStream.method__is_monophonic, handle, nil, &_result)
         return _result
     }
     
@@ -130,7 +130,7 @@ open class AudioStream: Resource {
     open func _getBpm() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStream.method__get_bpm, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStream.method__get_bpm, handle, nil, &_result)
         return _result
     }
     
@@ -153,7 +153,7 @@ open class AudioStream: Resource {
     open func _getBeatCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStream.method__get_beat_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStream.method__get_beat_count, handle, nil, &_result)
         return _result
     }
     
@@ -173,7 +173,7 @@ open class AudioStream: Resource {
     open func _getParameterList() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(AudioStream.method__get_parameter_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStream.method__get_parameter_list, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -193,7 +193,7 @@ open class AudioStream: Resource {
     open func _hasLoop() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioStream.method__has_loop, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStream.method__has_loop, handle, nil, &_result)
         return _result
     }
     
@@ -213,7 +213,7 @@ open class AudioStream: Resource {
     open func _getBarBeats() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStream.method__get_bar_beats, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStream.method__get_bar_beats, handle, nil, &_result)
         return _result
     }
     
@@ -232,7 +232,7 @@ open class AudioStream: Resource {
     public final func getLength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStream.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStream.method_get_length, handle, nil, &_result)
         return _result
     }
     
@@ -251,7 +251,7 @@ open class AudioStream: Resource {
     public final func isMonophonic() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioStream.method_is_monophonic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStream.method_is_monophonic, handle, nil, &_result)
         return _result
     }
     
@@ -269,9 +269,9 @@ open class AudioStream: Resource {
     /// Returns a newly created ``AudioStreamPlayback`` intended to play this audio stream. Useful for when you want to extend ``_instantiatePlayback()`` but call ``instantiatePlayback()`` from an internally held AudioStream subresource. An example of this can be found in the source code for `AudioStreamRandomPitch::instantiate_playback`.
     public final func instantiatePlayback() -> AudioStreamPlayback? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AudioStream.method_instantiate_playback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AudioStream.method_instantiate_playback, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_can_be_sampled: GDExtensionMethodBindPtr = {
@@ -289,7 +289,7 @@ open class AudioStream: Resource {
     public final func canBeSampled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioStream.method_can_be_sampled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStream.method_can_be_sampled, handle, nil, &_result)
         return _result
     }
     
@@ -307,9 +307,9 @@ open class AudioStream: Resource {
     /// Generates an ``AudioSample`` based on the current stream.
     public final func generateSample() -> AudioSample? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AudioStream.method_generate_sample, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AudioStream.method_generate_sample, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_is_meta_stream: GDExtensionMethodBindPtr = {
@@ -327,7 +327,7 @@ open class AudioStream: Resource {
     public final func isMetaStream() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioStream.method_is_meta_stream, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStream.method_is_meta_stream, handle, nil, &_result)
         return _result
     }
     
@@ -440,7 +440,7 @@ func _AudioStream_proxy_instantiate_playback (instance: UnsafeMutableRawPointer?
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? AudioStream else { return }
     let ret = swiftObject._instantiatePlayback ()
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // AudioStreamPlayback
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // AudioStreamPlayback
 }
 
 func _AudioStream_proxy_is_monophonic (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {

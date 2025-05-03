@@ -129,7 +129,7 @@ open class VisualShaderNodeCompare: VisualShaderNode {
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_set_comparison_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_set_comparison_type, handle, pArgs, nil)
                 }
                 
             }
@@ -154,7 +154,7 @@ open class VisualShaderNodeCompare: VisualShaderNode {
     fileprivate final func get_comparison_type() -> VisualShaderNodeCompare.ComparisonType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_get_comparison_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_get_comparison_type, handle, nil, &_result)
         return VisualShaderNodeCompare.ComparisonType (rawValue: _result)!
     }
     
@@ -175,7 +175,7 @@ open class VisualShaderNodeCompare: VisualShaderNode {
         withUnsafePointer(to: `func`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_set_function, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_set_function, handle, pArgs, nil)
                 }
                 
             }
@@ -200,7 +200,7 @@ open class VisualShaderNodeCompare: VisualShaderNode {
     fileprivate final func get_function() -> VisualShaderNodeCompare.Function {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_get_function, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_get_function, handle, nil, &_result)
         return VisualShaderNodeCompare.Function (rawValue: _result)!
     }
     
@@ -221,7 +221,7 @@ open class VisualShaderNodeCompare: VisualShaderNode {
         withUnsafePointer(to: condition.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_set_condition, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_set_condition, handle, pArgs, nil)
                 }
                 
             }
@@ -246,7 +246,7 @@ open class VisualShaderNodeCompare: VisualShaderNode {
     fileprivate final func get_condition() -> VisualShaderNodeCompare.Condition {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_get_condition, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeCompare.method_get_condition, handle, nil, &_result)
         return VisualShaderNodeCompare.Condition (rawValue: _result)!
     }
     

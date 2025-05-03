@@ -80,7 +80,7 @@ open class XRVRS: Object {
     fileprivate final func get_vrs_min_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(XRVRS.method_get_vrs_min_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRVRS.method_get_vrs_min_radius, handle, nil, &_result)
         return _result
     }
     
@@ -101,7 +101,7 @@ open class XRVRS: Object {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRVRS.method_set_vrs_min_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRVRS.method_set_vrs_min_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -126,7 +126,7 @@ open class XRVRS: Object {
     fileprivate final func get_vrs_strength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(XRVRS.method_get_vrs_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRVRS.method_get_vrs_strength, handle, nil, &_result)
         return _result
     }
     
@@ -147,7 +147,7 @@ open class XRVRS: Object {
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRVRS.method_set_vrs_strength, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRVRS.method_set_vrs_strength, handle, pArgs, nil)
                 }
                 
             }
@@ -172,7 +172,7 @@ open class XRVRS: Object {
     fileprivate final func get_vrs_render_region() -> Rect2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2i = Rect2i ()
-        gi.object_method_bind_ptrcall(XRVRS.method_get_vrs_render_region, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRVRS.method_get_vrs_render_region, handle, nil, &_result)
         return _result
     }
     
@@ -193,7 +193,7 @@ open class XRVRS: Object {
         withUnsafePointer(to: renderRegion) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRVRS.method_set_vrs_render_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XRVRS.method_set_vrs_render_region, handle, pArgs, nil)
                 }
                 
             }
@@ -225,7 +225,7 @@ open class XRVRS: Object {
             withUnsafePointer(to: eyeFoci.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(XRVRS.method_make_vrs_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(XRVRS.method_make_vrs_texture, handle, pArgs, &_result.content)
                     }
                     
                 }

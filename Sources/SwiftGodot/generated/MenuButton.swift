@@ -78,9 +78,9 @@ open class MenuButton: Button {
     /// 
     public final func getPopup() -> PopupMenu? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(MenuButton.method_get_popup, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(MenuButton.method_get_popup, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_show_popup: GDExtensionMethodBindPtr = {
@@ -97,7 +97,7 @@ open class MenuButton: Button {
     /// Adjusts popup position and sizing for the ``MenuButton``, then shows the ``PopupMenu``. Prefer this over using `get_popup().popup()`.
     public final func showPopup() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(MenuButton.method_show_popup, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(MenuButton.method_show_popup, handle, nil, nil)
         
     }
     
@@ -118,7 +118,7 @@ open class MenuButton: Button {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuButton.method_set_switch_on_hover, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MenuButton.method_set_switch_on_hover, handle, pArgs, nil)
                 }
                 
             }
@@ -143,7 +143,7 @@ open class MenuButton: Button {
     fileprivate final func is_switch_on_hover() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(MenuButton.method_is_switch_on_hover, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MenuButton.method_is_switch_on_hover, handle, nil, &_result)
         return _result
     }
     
@@ -164,7 +164,7 @@ open class MenuButton: Button {
         withUnsafePointer(to: disabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuButton.method_set_disable_shortcuts, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MenuButton.method_set_disable_shortcuts, handle, pArgs, nil)
                 }
                 
             }
@@ -191,7 +191,7 @@ open class MenuButton: Button {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MenuButton.method_set_item_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MenuButton.method_set_item_count, handle, pArgs, nil)
                 }
                 
             }
@@ -216,7 +216,7 @@ open class MenuButton: Button {
     fileprivate final func get_item_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MenuButton.method_get_item_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MenuButton.method_get_item_count, handle, nil, &_result)
         return _result
     }
     

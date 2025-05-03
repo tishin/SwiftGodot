@@ -58,7 +58,7 @@ open class PacketPeerDTLS: PacketPeer {
     /// Poll the connection to check for incoming packets. Call this frequently to update the status and keep the connection working.
     public final func poll() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(PacketPeerDTLS.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(PacketPeerDTLS.method_poll, handle, nil, nil)
         
     }
     
@@ -83,7 +83,7 @@ open class PacketPeerDTLS: PacketPeer {
                 withUnsafePointer(to: clientOptions?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(PacketPeerDTLS.method_connect_to_peer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(PacketPeerDTLS.method_connect_to_peer, handle, pArgs, &_result)
                         }
                         
                     }
@@ -112,7 +112,7 @@ open class PacketPeerDTLS: PacketPeer {
     public final func getStatus() -> PacketPeerDTLS.Status {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(PacketPeerDTLS.method_get_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PacketPeerDTLS.method_get_status, handle, nil, &_result)
         return PacketPeerDTLS.Status (rawValue: _result)!
     }
     
@@ -130,7 +130,7 @@ open class PacketPeerDTLS: PacketPeer {
     /// Disconnects this peer, terminating the DTLS session.
     public final func disconnectFromPeer() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(PacketPeerDTLS.method_disconnect_from_peer, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(PacketPeerDTLS.method_disconnect_from_peer, handle, nil, nil)
         
     }
     

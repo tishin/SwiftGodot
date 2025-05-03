@@ -61,7 +61,7 @@ open class InputEventPanGesture: InputEventGesture {
         withUnsafePointer(to: delta) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventPanGesture.method_set_delta, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventPanGesture.method_set_delta, handle, pArgs, nil)
                 }
                 
             }
@@ -86,7 +86,7 @@ open class InputEventPanGesture: InputEventGesture {
     fileprivate final func get_delta() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(InputEventPanGesture.method_get_delta, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventPanGesture.method_get_delta, handle, nil, &_result)
         return _result
     }
     

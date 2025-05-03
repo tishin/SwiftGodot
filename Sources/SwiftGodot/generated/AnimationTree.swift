@@ -99,7 +99,7 @@ open class AnimationTree: AnimationMixer {
         withUnsafePointer(to: animationNode?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationTree.method_set_tree_root, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationTree.method_set_tree_root, handle, pArgs, nil)
                 }
                 
             }
@@ -123,9 +123,9 @@ open class AnimationTree: AnimationMixer {
     @inline(__always)
     fileprivate final func get_tree_root() -> AnimationRootNode? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AnimationTree.method_get_tree_root, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AnimationTree.method_get_tree_root, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_advance_expression_base_node: GDExtensionMethodBindPtr = {
@@ -145,7 +145,7 @@ open class AnimationTree: AnimationMixer {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationTree.method_set_advance_expression_base_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationTree.method_set_advance_expression_base_node, handle, pArgs, nil)
                 }
                 
             }
@@ -170,7 +170,7 @@ open class AnimationTree: AnimationMixer {
     fileprivate final func get_advance_expression_base_node() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(AnimationTree.method_get_advance_expression_base_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimationTree.method_get_advance_expression_base_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -191,7 +191,7 @@ open class AnimationTree: AnimationMixer {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationTree.method_set_animation_player, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationTree.method_set_animation_player, handle, pArgs, nil)
                 }
                 
             }
@@ -216,7 +216,7 @@ open class AnimationTree: AnimationMixer {
     fileprivate final func get_animation_player() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(AnimationTree.method_get_animation_player, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimationTree.method_get_animation_player, handle, nil, &_result.content)
         return _result
     }
     
@@ -237,7 +237,7 @@ open class AnimationTree: AnimationMixer {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationTree.method_set_process_callback, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationTree.method_set_process_callback, handle, pArgs, nil)
                 }
                 
             }
@@ -262,7 +262,7 @@ open class AnimationTree: AnimationMixer {
     public final func getProcessCallback() -> AnimationTree.AnimationProcessCallback {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AnimationTree.method_get_process_callback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationTree.method_get_process_callback, handle, nil, &_result)
         return AnimationTree.AnimationProcessCallback (rawValue: _result)!
     }
     

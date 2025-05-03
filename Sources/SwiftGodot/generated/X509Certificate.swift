@@ -48,7 +48,7 @@ open class X509Certificate: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(X509Certificate.method_save, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(X509Certificate.method_save, handle, pArgs, &_result)
                 }
                 
             }
@@ -77,7 +77,7 @@ open class X509Certificate: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(X509Certificate.method_load, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(X509Certificate.method_load, handle, pArgs, &_result)
                 }
                 
             }
@@ -102,7 +102,7 @@ open class X509Certificate: Resource {
     public final func saveToString() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(X509Certificate.method_save_to_string, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(X509Certificate.method_save_to_string, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -125,7 +125,7 @@ open class X509Certificate: Resource {
         withUnsafePointer(to: string.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(X509Certificate.method_load_from_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(X509Certificate.method_load_from_string, handle, pArgs, &_result)
                 }
                 
             }

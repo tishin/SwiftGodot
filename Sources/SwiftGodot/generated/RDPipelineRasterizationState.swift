@@ -178,7 +178,7 @@ open class RDPipelineRasterizationState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_enable_depth_clamp, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_enable_depth_clamp, handle, pArgs, nil)
                 }
                 
             }
@@ -203,7 +203,7 @@ open class RDPipelineRasterizationState: RefCounted {
     fileprivate final func get_enable_depth_clamp() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_enable_depth_clamp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_enable_depth_clamp, handle, nil, &_result)
         return _result
     }
     
@@ -224,7 +224,7 @@ open class RDPipelineRasterizationState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_discard_primitives, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_discard_primitives, handle, pArgs, nil)
                 }
                 
             }
@@ -249,7 +249,7 @@ open class RDPipelineRasterizationState: RefCounted {
     fileprivate final func get_discard_primitives() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_discard_primitives, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_discard_primitives, handle, nil, &_result)
         return _result
     }
     
@@ -270,7 +270,7 @@ open class RDPipelineRasterizationState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_wireframe, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_wireframe, handle, pArgs, nil)
                 }
                 
             }
@@ -295,7 +295,7 @@ open class RDPipelineRasterizationState: RefCounted {
     fileprivate final func get_wireframe() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_wireframe, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_wireframe, handle, nil, &_result)
         return _result
     }
     
@@ -316,7 +316,7 @@ open class RDPipelineRasterizationState: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_cull_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_cull_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -341,7 +341,7 @@ open class RDPipelineRasterizationState: RefCounted {
     fileprivate final func get_cull_mode() -> RenderingDevice.PolygonCullMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_cull_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_cull_mode, handle, nil, &_result)
         return RenderingDevice.PolygonCullMode (rawValue: _result)!
     }
     
@@ -362,7 +362,7 @@ open class RDPipelineRasterizationState: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_front_face, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_front_face, handle, pArgs, nil)
                 }
                 
             }
@@ -387,7 +387,7 @@ open class RDPipelineRasterizationState: RefCounted {
     fileprivate final func get_front_face() -> RenderingDevice.PolygonFrontFace {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_front_face, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_front_face, handle, nil, &_result)
         return RenderingDevice.PolygonFrontFace (rawValue: _result)!
     }
     
@@ -408,7 +408,7 @@ open class RDPipelineRasterizationState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_depth_bias_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_depth_bias_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -433,7 +433,7 @@ open class RDPipelineRasterizationState: RefCounted {
     fileprivate final func get_depth_bias_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_depth_bias_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_depth_bias_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -454,7 +454,7 @@ open class RDPipelineRasterizationState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_depth_bias_constant_factor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_depth_bias_constant_factor, handle, pArgs, nil)
                 }
                 
             }
@@ -479,7 +479,7 @@ open class RDPipelineRasterizationState: RefCounted {
     fileprivate final func get_depth_bias_constant_factor() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_depth_bias_constant_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_depth_bias_constant_factor, handle, nil, &_result)
         return _result
     }
     
@@ -500,7 +500,7 @@ open class RDPipelineRasterizationState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_depth_bias_clamp, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_depth_bias_clamp, handle, pArgs, nil)
                 }
                 
             }
@@ -525,7 +525,7 @@ open class RDPipelineRasterizationState: RefCounted {
     fileprivate final func get_depth_bias_clamp() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_depth_bias_clamp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_depth_bias_clamp, handle, nil, &_result)
         return _result
     }
     
@@ -546,7 +546,7 @@ open class RDPipelineRasterizationState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_depth_bias_slope_factor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_depth_bias_slope_factor, handle, pArgs, nil)
                 }
                 
             }
@@ -571,7 +571,7 @@ open class RDPipelineRasterizationState: RefCounted {
     fileprivate final func get_depth_bias_slope_factor() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_depth_bias_slope_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_depth_bias_slope_factor, handle, nil, &_result)
         return _result
     }
     
@@ -592,7 +592,7 @@ open class RDPipelineRasterizationState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_line_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_line_width, handle, pArgs, nil)
                 }
                 
             }
@@ -617,7 +617,7 @@ open class RDPipelineRasterizationState: RefCounted {
     fileprivate final func get_line_width() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_line_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_line_width, handle, nil, &_result)
         return _result
     }
     
@@ -638,7 +638,7 @@ open class RDPipelineRasterizationState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_patch_control_points, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_set_patch_control_points, handle, pArgs, nil)
                 }
                 
             }
@@ -663,7 +663,7 @@ open class RDPipelineRasterizationState: RefCounted {
     fileprivate final func get_patch_control_points() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_patch_control_points, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineRasterizationState.method_get_patch_control_points, handle, nil, &_result)
         return _result
     }
     

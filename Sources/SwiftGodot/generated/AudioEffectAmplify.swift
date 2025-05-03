@@ -73,7 +73,7 @@ open class AudioEffectAmplify: AudioEffect {
         withUnsafePointer(to: volume) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectAmplify.method_set_volume_db, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectAmplify.method_set_volume_db, handle, pArgs, nil)
                 }
                 
             }
@@ -98,7 +98,7 @@ open class AudioEffectAmplify: AudioEffect {
     fileprivate final func get_volume_db() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectAmplify.method_get_volume_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectAmplify.method_get_volume_db, handle, nil, &_result)
         return _result
     }
     
@@ -119,7 +119,7 @@ open class AudioEffectAmplify: AudioEffect {
         withUnsafePointer(to: volume) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectAmplify.method_set_volume_linear, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectAmplify.method_set_volume_linear, handle, pArgs, nil)
                 }
                 
             }
@@ -144,7 +144,7 @@ open class AudioEffectAmplify: AudioEffect {
     fileprivate final func get_volume_linear() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectAmplify.method_get_volume_linear, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectAmplify.method_get_volume_linear, handle, nil, &_result)
         return _result
     }
     

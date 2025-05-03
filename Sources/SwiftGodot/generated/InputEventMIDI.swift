@@ -166,7 +166,7 @@ open class InputEventMIDI: InputEvent {
         withUnsafePointer(to: channel) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_channel, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_channel, handle, pArgs, nil)
                 }
                 
             }
@@ -191,7 +191,7 @@ open class InputEventMIDI: InputEvent {
     fileprivate final func get_channel() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_channel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_channel, handle, nil, &_result)
         return _result
     }
     
@@ -212,7 +212,7 @@ open class InputEventMIDI: InputEvent {
         withUnsafePointer(to: message.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_message, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_message, handle, pArgs, nil)
                 }
                 
             }
@@ -237,7 +237,7 @@ open class InputEventMIDI: InputEvent {
     fileprivate final func get_message() -> MIDIMessage {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_message, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_message, handle, nil, &_result)
         return MIDIMessage (rawValue: _result)!
     }
     
@@ -258,7 +258,7 @@ open class InputEventMIDI: InputEvent {
         withUnsafePointer(to: pitch) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_pitch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_pitch, handle, pArgs, nil)
                 }
                 
             }
@@ -283,7 +283,7 @@ open class InputEventMIDI: InputEvent {
     fileprivate final func get_pitch() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_pitch, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_pitch, handle, nil, &_result)
         return _result
     }
     
@@ -304,7 +304,7 @@ open class InputEventMIDI: InputEvent {
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -329,7 +329,7 @@ open class InputEventMIDI: InputEvent {
     fileprivate final func get_velocity() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -350,7 +350,7 @@ open class InputEventMIDI: InputEvent {
         withUnsafePointer(to: instrument) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_instrument, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_instrument, handle, pArgs, nil)
                 }
                 
             }
@@ -375,7 +375,7 @@ open class InputEventMIDI: InputEvent {
     fileprivate final func get_instrument() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_instrument, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_instrument, handle, nil, &_result)
         return _result
     }
     
@@ -396,7 +396,7 @@ open class InputEventMIDI: InputEvent {
         withUnsafePointer(to: pressure) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_pressure, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_pressure, handle, pArgs, nil)
                 }
                 
             }
@@ -421,7 +421,7 @@ open class InputEventMIDI: InputEvent {
     fileprivate final func get_pressure() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_pressure, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_pressure, handle, nil, &_result)
         return _result
     }
     
@@ -442,7 +442,7 @@ open class InputEventMIDI: InputEvent {
         withUnsafePointer(to: controllerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_controller_number, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_controller_number, handle, pArgs, nil)
                 }
                 
             }
@@ -467,7 +467,7 @@ open class InputEventMIDI: InputEvent {
     fileprivate final func get_controller_number() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_controller_number, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_controller_number, handle, nil, &_result)
         return _result
     }
     
@@ -488,7 +488,7 @@ open class InputEventMIDI: InputEvent {
         withUnsafePointer(to: controllerValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_controller_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMIDI.method_set_controller_value, handle, pArgs, nil)
                 }
                 
             }
@@ -513,7 +513,7 @@ open class InputEventMIDI: InputEvent {
     fileprivate final func get_controller_value() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_controller_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventMIDI.method_get_controller_value, handle, nil, &_result)
         return _result
     }
     

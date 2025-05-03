@@ -46,7 +46,7 @@ open class ZIPReader: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ZIPReader.method_open, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ZIPReader.method_open, handle, pArgs, &_result)
                 }
                 
             }
@@ -71,7 +71,7 @@ open class ZIPReader: RefCounted {
     public final func close() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ZIPReader.method_close, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ZIPReader.method_close, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -93,7 +93,7 @@ open class ZIPReader: RefCounted {
     public final func getFiles() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(ZIPReader.method_get_files, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ZIPReader.method_get_files, handle, nil, &_result.content)
         return _result
     }
     
@@ -120,7 +120,7 @@ open class ZIPReader: RefCounted {
             withUnsafePointer(to: caseSensitive) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ZIPReader.method_read_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(ZIPReader.method_read_file, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -155,7 +155,7 @@ open class ZIPReader: RefCounted {
             withUnsafePointer(to: caseSensitive) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ZIPReader.method_file_exists, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ZIPReader.method_file_exists, handle, pArgs, &_result)
                     }
                     
                 }

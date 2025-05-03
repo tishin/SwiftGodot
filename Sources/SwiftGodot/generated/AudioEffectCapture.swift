@@ -64,7 +64,7 @@ open class AudioEffectCapture: AudioEffect {
         withUnsafePointer(to: frames) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectCapture.method_can_get_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioEffectCapture.method_can_get_buffer, handle, pArgs, &_result)
                 }
                 
             }
@@ -97,7 +97,7 @@ open class AudioEffectCapture: AudioEffect {
         withUnsafePointer(to: frames) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_buffer, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -124,7 +124,7 @@ open class AudioEffectCapture: AudioEffect {
     /// 
     public final func clearBuffer() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AudioEffectCapture.method_clear_buffer, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AudioEffectCapture.method_clear_buffer, handle, nil, nil)
         
     }
     
@@ -145,7 +145,7 @@ open class AudioEffectCapture: AudioEffect {
         withUnsafePointer(to: bufferLengthSeconds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectCapture.method_set_buffer_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectCapture.method_set_buffer_length, handle, pArgs, nil)
                 }
                 
             }
@@ -170,7 +170,7 @@ open class AudioEffectCapture: AudioEffect {
     fileprivate final func get_buffer_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_buffer_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_buffer_length, handle, nil, &_result)
         return _result
     }
     
@@ -189,7 +189,7 @@ open class AudioEffectCapture: AudioEffect {
     public final func getFramesAvailable() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_frames_available, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_frames_available, handle, nil, &_result)
         return _result
     }
     
@@ -208,7 +208,7 @@ open class AudioEffectCapture: AudioEffect {
     public final func getDiscardedFrames() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_discarded_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_discarded_frames, handle, nil, &_result)
         return _result
     }
     
@@ -227,7 +227,7 @@ open class AudioEffectCapture: AudioEffect {
     public final func getBufferLengthFrames() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_buffer_length_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_buffer_length_frames, handle, nil, &_result)
         return _result
     }
     
@@ -246,7 +246,7 @@ open class AudioEffectCapture: AudioEffect {
     public final func getPushedFrames() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_pushed_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectCapture.method_get_pushed_frames, handle, nil, &_result)
         return _result
     }
     

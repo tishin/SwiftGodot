@@ -101,7 +101,7 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
         withUnsafePointer(to: seconds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_set_buffer_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_set_buffer_length, handle, pArgs, nil)
                 }
                 
             }
@@ -126,7 +126,7 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
     fileprivate final func get_buffer_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_get_buffer_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_get_buffer_length, handle, nil, &_result)
         return _result
     }
     
@@ -147,7 +147,7 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
         withUnsafePointer(to: seconds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_set_tap_back_pos, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_set_tap_back_pos, handle, pArgs, nil)
                 }
                 
             }
@@ -172,7 +172,7 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
     fileprivate final func get_tap_back_pos() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_get_tap_back_pos, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_get_tap_back_pos, handle, nil, &_result)
         return _result
     }
     
@@ -193,7 +193,7 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
         withUnsafePointer(to: size.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_set_fft_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_set_fft_size, handle, pArgs, nil)
                 }
                 
             }
@@ -218,7 +218,7 @@ open class AudioEffectSpectrumAnalyzer: AudioEffect {
     fileprivate final func get_fft_size() -> AudioEffectSpectrumAnalyzer.FFTSize {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_get_fft_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectSpectrumAnalyzer.method_get_fft_size, handle, nil, &_result)
         return AudioEffectSpectrumAnalyzer.FFTSize (rawValue: _result)!
     }
     

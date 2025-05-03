@@ -73,7 +73,7 @@ open class PackedScene: Resource {
         withUnsafePointer(to: path?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PackedScene.method_pack, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PackedScene.method_pack, handle, pArgs, &_result)
                 }
                 
             }
@@ -97,18 +97,18 @@ open class PackedScene: Resource {
     /// Instantiates the scene's node hierarchy. Triggers child scene instantiation(s). Triggers a ``Node/notificationSceneInstantiated`` notification on the root node.
     public final func instantiate(editState: PackedScene.GenEditState = .disabled) -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: editState.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PackedScene.method_instantiate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PackedScene.method_instantiate, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_can_instantiate: GDExtensionMethodBindPtr = {
@@ -126,7 +126,7 @@ open class PackedScene: Resource {
     public final func canInstantiate() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PackedScene.method_can_instantiate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PackedScene.method_can_instantiate, handle, nil, &_result)
         return _result
     }
     
@@ -144,9 +144,9 @@ open class PackedScene: Resource {
     /// Returns the ``SceneState`` representing the scene file contents.
     public final func getState() -> SceneState? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(PackedScene.method_get_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(PackedScene.method_get_state, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

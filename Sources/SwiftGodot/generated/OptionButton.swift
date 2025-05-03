@@ -100,7 +100,7 @@ open class OptionButton: Button {
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OptionButton.method_add_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(OptionButton.method_add_item, handle, pArgs, nil)
                     }
                     
                 }
@@ -132,7 +132,7 @@ open class OptionButton: Button {
                 withUnsafePointer(to: id) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(OptionButton.method_add_icon_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(OptionButton.method_add_icon_item, handle, pArgs, nil)
                         }
                         
                     }
@@ -165,7 +165,7 @@ open class OptionButton: Button {
             withUnsafePointer(to: text.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OptionButton.method_set_item_text, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(OptionButton.method_set_item_text, handle, pArgs, nil)
                     }
                     
                 }
@@ -195,7 +195,7 @@ open class OptionButton: Button {
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OptionButton.method_set_item_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(OptionButton.method_set_item_icon, handle, pArgs, nil)
                     }
                     
                 }
@@ -228,7 +228,7 @@ open class OptionButton: Button {
             withUnsafePointer(to: disabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OptionButton.method_set_item_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(OptionButton.method_set_item_disabled, handle, pArgs, nil)
                     }
                     
                 }
@@ -258,7 +258,7 @@ open class OptionButton: Button {
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OptionButton.method_set_item_id, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(OptionButton.method_set_item_id, handle, pArgs, nil)
                     }
                     
                 }
@@ -288,7 +288,7 @@ open class OptionButton: Button {
             withUnsafePointer(to: metadata.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OptionButton.method_set_item_metadata, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(OptionButton.method_set_item_metadata, handle, pArgs, nil)
                     }
                     
                 }
@@ -319,7 +319,7 @@ open class OptionButton: Button {
             withUnsafePointer(to: tooltip.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OptionButton.method_set_item_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(OptionButton.method_set_item_tooltip, handle, pArgs, nil)
                     }
                     
                 }
@@ -349,7 +349,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_get_item_text, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(OptionButton.method_get_item_text, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -373,18 +373,18 @@ open class OptionButton: Button {
     /// Returns the icon of the item at index `idx`.
     public final func getItemIcon(idx: Int32) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_get_item_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OptionButton.method_get_item_icon, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_item_id: GDExtensionMethodBindPtr = {
@@ -405,7 +405,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_get_item_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OptionButton.method_get_item_id, handle, pArgs, &_result)
                 }
                 
             }
@@ -433,7 +433,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_get_item_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OptionButton.method_get_item_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -461,7 +461,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_get_item_metadata, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OptionButton.method_get_item_metadata, handle, pArgs, &_result)
                 }
                 
             }
@@ -489,7 +489,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_get_item_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(OptionButton.method_get_item_tooltip, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -517,7 +517,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_is_item_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OptionButton.method_is_item_disabled, handle, pArgs, &_result)
                 }
                 
             }
@@ -545,7 +545,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_is_item_separator, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OptionButton.method_is_item_separator, handle, pArgs, &_result)
                 }
                 
             }
@@ -573,7 +573,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: text.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_add_separator, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OptionButton.method_add_separator, handle, pArgs, nil)
                 }
                 
             }
@@ -597,7 +597,7 @@ open class OptionButton: Button {
     /// Clears all the items in the ``OptionButton``.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OptionButton.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OptionButton.method_clear, handle, nil, nil)
         
     }
     
@@ -621,7 +621,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_select, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OptionButton.method_select, handle, pArgs, nil)
                 }
                 
             }
@@ -645,7 +645,7 @@ open class OptionButton: Button {
     public final func getSelected() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(OptionButton.method_get_selected, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OptionButton.method_get_selected, handle, nil, &_result)
         return _result
     }
     
@@ -664,7 +664,7 @@ open class OptionButton: Button {
     public final func getSelectedId() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(OptionButton.method_get_selected_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OptionButton.method_get_selected_id, handle, nil, &_result)
         return _result
     }
     
@@ -683,7 +683,7 @@ open class OptionButton: Button {
     public final func getSelectedMetadata() -> Variant? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        gi.object_method_bind_ptrcall(OptionButton.method_get_selected_metadata, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OptionButton.method_get_selected_metadata, handle, nil, &_result)
         return Variant(takingOver: _result)
     }
     
@@ -704,7 +704,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_remove_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OptionButton.method_remove_item, handle, pArgs, nil)
                 }
                 
             }
@@ -731,9 +731,9 @@ open class OptionButton: Button {
     /// 
     public final func getPopup() -> PopupMenu? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(OptionButton.method_get_popup, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(OptionButton.method_get_popup, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_show_popup: GDExtensionMethodBindPtr = {
@@ -750,7 +750,7 @@ open class OptionButton: Button {
     /// Adjusts popup position and sizing for the ``OptionButton``, then shows the ``PopupMenu``. Prefer this over using `get_popup().popup()`.
     public final func showPopup() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OptionButton.method_show_popup, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OptionButton.method_show_popup, handle, nil, nil)
         
     }
     
@@ -771,7 +771,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_set_item_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OptionButton.method_set_item_count, handle, pArgs, nil)
                 }
                 
             }
@@ -796,7 +796,7 @@ open class OptionButton: Button {
     fileprivate final func get_item_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(OptionButton.method_get_item_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OptionButton.method_get_item_count, handle, nil, &_result)
         return _result
     }
     
@@ -815,7 +815,7 @@ open class OptionButton: Button {
     public final func hasSelectableItems() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OptionButton.method_has_selectable_items, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OptionButton.method_has_selectable_items, handle, nil, &_result)
         return _result
     }
     
@@ -840,7 +840,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: fromLast) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_get_selectable_item, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OptionButton.method_get_selectable_item, handle, pArgs, &_result)
                 }
                 
             }
@@ -867,7 +867,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: fit) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_set_fit_to_longest_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OptionButton.method_set_fit_to_longest_item, handle, pArgs, nil)
                 }
                 
             }
@@ -892,7 +892,7 @@ open class OptionButton: Button {
     fileprivate final func is_fit_to_longest_item() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OptionButton.method_is_fit_to_longest_item, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OptionButton.method_is_fit_to_longest_item, handle, nil, &_result)
         return _result
     }
     
@@ -913,7 +913,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_set_allow_reselect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OptionButton.method_set_allow_reselect, handle, pArgs, nil)
                 }
                 
             }
@@ -938,7 +938,7 @@ open class OptionButton: Button {
     fileprivate final func get_allow_reselect() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OptionButton.method_get_allow_reselect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OptionButton.method_get_allow_reselect, handle, nil, &_result)
         return _result
     }
     
@@ -959,7 +959,7 @@ open class OptionButton: Button {
         withUnsafePointer(to: disabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OptionButton.method_set_disable_shortcuts, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OptionButton.method_set_disable_shortcuts, handle, pArgs, nil)
                 }
                 
             }

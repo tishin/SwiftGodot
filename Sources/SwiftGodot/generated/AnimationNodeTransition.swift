@@ -102,7 +102,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
         withUnsafePointer(to: inputCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeTransition.method_set_input_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeTransition.method_set_input_count, handle, pArgs, nil)
                 }
                 
             }
@@ -130,7 +130,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationNodeTransition.method_set_input_as_auto_advance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationNodeTransition.method_set_input_as_auto_advance, handle, pArgs, nil)
                     }
                     
                 }
@@ -160,7 +160,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
         withUnsafePointer(to: input) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeTransition.method_is_input_set_as_auto_advance, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNodeTransition.method_is_input_set_as_auto_advance, handle, pArgs, &_result)
                 }
                 
             }
@@ -188,7 +188,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationNodeTransition.method_set_input_break_loop_at_end, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationNodeTransition.method_set_input_break_loop_at_end, handle, pArgs, nil)
                     }
                     
                 }
@@ -218,7 +218,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
         withUnsafePointer(to: input) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeTransition.method_is_input_loop_broken_at_end, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNodeTransition.method_is_input_loop_broken_at_end, handle, pArgs, &_result)
                 }
                 
             }
@@ -246,7 +246,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationNodeTransition.method_set_input_reset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationNodeTransition.method_set_input_reset, handle, pArgs, nil)
                     }
                     
                 }
@@ -276,7 +276,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
         withUnsafePointer(to: input) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeTransition.method_is_input_reset, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNodeTransition.method_is_input_reset, handle, pArgs, &_result)
                 }
                 
             }
@@ -303,7 +303,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeTransition.method_set_xfade_time, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeTransition.method_set_xfade_time, handle, pArgs, nil)
                 }
                 
             }
@@ -328,7 +328,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
     fileprivate final func get_xfade_time() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationNodeTransition.method_get_xfade_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeTransition.method_get_xfade_time, handle, nil, &_result)
         return _result
     }
     
@@ -349,7 +349,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeTransition.method_set_xfade_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeTransition.method_set_xfade_curve, handle, pArgs, nil)
                 }
                 
             }
@@ -373,9 +373,9 @@ open class AnimationNodeTransition: AnimationNodeSync {
     @inline(__always)
     fileprivate final func get_xfade_curve() -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AnimationNodeTransition.method_get_xfade_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AnimationNodeTransition.method_get_xfade_curve, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_allow_transition_to_self: GDExtensionMethodBindPtr = {
@@ -395,7 +395,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeTransition.method_set_allow_transition_to_self, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeTransition.method_set_allow_transition_to_self, handle, pArgs, nil)
                 }
                 
             }
@@ -420,7 +420,7 @@ open class AnimationNodeTransition: AnimationNodeSync {
     fileprivate final func is_allow_transition_to_self() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationNodeTransition.method_is_allow_transition_to_self, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeTransition.method_is_allow_transition_to_self, handle, nil, &_result)
         return _result
     }
     

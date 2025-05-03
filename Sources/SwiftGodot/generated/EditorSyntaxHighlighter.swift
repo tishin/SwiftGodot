@@ -45,7 +45,7 @@ open class EditorSyntaxHighlighter: SyntaxHighlighter {
     open func _getName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorSyntaxHighlighter.method__get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorSyntaxHighlighter.method__get_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -65,7 +65,7 @@ open class EditorSyntaxHighlighter: SyntaxHighlighter {
     open func _getSupportedLanguages() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(EditorSyntaxHighlighter.method__get_supported_languages, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorSyntaxHighlighter.method__get_supported_languages, handle, nil, &_result.content)
         return _result
     }
     

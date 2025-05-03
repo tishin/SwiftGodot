@@ -122,7 +122,7 @@ open class CollisionPolygon2D: Node2D {
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionPolygon2D.method_set_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionPolygon2D.method_set_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -147,7 +147,7 @@ open class CollisionPolygon2D: Node2D {
     fileprivate final func get_polygon() -> PackedVector2Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
-        gi.object_method_bind_ptrcall(CollisionPolygon2D.method_get_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CollisionPolygon2D.method_get_polygon, handle, nil, &_result.content)
         return _result
     }
     
@@ -168,7 +168,7 @@ open class CollisionPolygon2D: Node2D {
         withUnsafePointer(to: buildMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionPolygon2D.method_set_build_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionPolygon2D.method_set_build_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -193,7 +193,7 @@ open class CollisionPolygon2D: Node2D {
     fileprivate final func get_build_mode() -> CollisionPolygon2D.BuildMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CollisionPolygon2D.method_get_build_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CollisionPolygon2D.method_get_build_mode, handle, nil, &_result)
         return CollisionPolygon2D.BuildMode (rawValue: _result)!
     }
     
@@ -214,7 +214,7 @@ open class CollisionPolygon2D: Node2D {
         withUnsafePointer(to: disabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionPolygon2D.method_set_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionPolygon2D.method_set_disabled, handle, pArgs, nil)
                 }
                 
             }
@@ -239,7 +239,7 @@ open class CollisionPolygon2D: Node2D {
     fileprivate final func is_disabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CollisionPolygon2D.method_is_disabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CollisionPolygon2D.method_is_disabled, handle, nil, &_result)
         return _result
     }
     
@@ -260,7 +260,7 @@ open class CollisionPolygon2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionPolygon2D.method_set_one_way_collision, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionPolygon2D.method_set_one_way_collision, handle, pArgs, nil)
                 }
                 
             }
@@ -285,7 +285,7 @@ open class CollisionPolygon2D: Node2D {
     fileprivate final func is_one_way_collision_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CollisionPolygon2D.method_is_one_way_collision_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CollisionPolygon2D.method_is_one_way_collision_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -306,7 +306,7 @@ open class CollisionPolygon2D: Node2D {
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CollisionPolygon2D.method_set_one_way_collision_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CollisionPolygon2D.method_set_one_way_collision_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -331,7 +331,7 @@ open class CollisionPolygon2D: Node2D {
     fileprivate final func get_one_way_collision_margin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CollisionPolygon2D.method_get_one_way_collision_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CollisionPolygon2D.method_get_one_way_collision_margin, handle, nil, &_result)
         return _result
     }
     

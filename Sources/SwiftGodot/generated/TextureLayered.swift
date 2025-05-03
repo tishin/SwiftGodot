@@ -60,7 +60,7 @@ open class TextureLayered: Texture {
     open func _getFormat() -> Image.Format {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TextureLayered.method__get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureLayered.method__get_format, handle, nil, &_result)
         return Image.Format (rawValue: _result)!
     }
     
@@ -80,7 +80,7 @@ open class TextureLayered: Texture {
     open func _getLayeredType() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(TextureLayered.method__get_layered_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureLayered.method__get_layered_type, handle, nil, &_result)
         return _result
     }
     
@@ -100,7 +100,7 @@ open class TextureLayered: Texture {
     open func _getWidth() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TextureLayered.method__get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureLayered.method__get_width, handle, nil, &_result)
         return _result
     }
     
@@ -120,7 +120,7 @@ open class TextureLayered: Texture {
     open func _getHeight() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TextureLayered.method__get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureLayered.method__get_height, handle, nil, &_result)
         return _result
     }
     
@@ -140,7 +140,7 @@ open class TextureLayered: Texture {
     open func _getLayers() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TextureLayered.method__get_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureLayered.method__get_layers, handle, nil, &_result)
         return _result
     }
     
@@ -160,7 +160,7 @@ open class TextureLayered: Texture {
     open func _hasMipmaps() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TextureLayered.method__has_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureLayered.method__has_mipmaps, handle, nil, &_result)
         return _result
     }
     
@@ -179,18 +179,18 @@ open class TextureLayered: Texture {
     @_documentation(visibility: public)
     open func _getLayerData(layerIndex: Int32) -> Image? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: layerIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureLayered.method__get_layer_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextureLayered.method__get_layer_data, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_format: GDExtensionMethodBindPtr = {
@@ -208,7 +208,7 @@ open class TextureLayered: Texture {
     public final func getFormat() -> Image.Format {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TextureLayered.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureLayered.method_get_format, handle, nil, &_result)
         return Image.Format (rawValue: _result)!
     }
     
@@ -227,7 +227,7 @@ open class TextureLayered: Texture {
     public final func getLayeredType() -> TextureLayered.LayeredType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TextureLayered.method_get_layered_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureLayered.method_get_layered_type, handle, nil, &_result)
         return TextureLayered.LayeredType (rawValue: _result)!
     }
     
@@ -246,7 +246,7 @@ open class TextureLayered: Texture {
     public final func getWidth() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TextureLayered.method_get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureLayered.method_get_width, handle, nil, &_result)
         return _result
     }
     
@@ -265,7 +265,7 @@ open class TextureLayered: Texture {
     public final func getHeight() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TextureLayered.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureLayered.method_get_height, handle, nil, &_result)
         return _result
     }
     
@@ -284,7 +284,7 @@ open class TextureLayered: Texture {
     public final func getLayers() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TextureLayered.method_get_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureLayered.method_get_layers, handle, nil, &_result)
         return _result
     }
     
@@ -303,7 +303,7 @@ open class TextureLayered: Texture {
     public final func hasMipmaps() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TextureLayered.method_has_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureLayered.method_has_mipmaps, handle, nil, &_result)
         return _result
     }
     
@@ -321,18 +321,18 @@ open class TextureLayered: Texture {
     /// Returns an ``Image`` resource with the data from specified `layer`.
     public final func getLayerData(layer: Int32) -> Image? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureLayered.method_get_layer_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextureLayered.method_get_layer_data, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
@@ -383,7 +383,7 @@ func _TextureLayered_proxy_get_layer_data (instance: UnsafeMutableRawPointer?, a
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? TextureLayered else { return }
     let ret = swiftObject._getLayerData (layerIndex: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Image
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // Image
 }
 
 func _TextureLayered_proxy_get_layered_type (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {

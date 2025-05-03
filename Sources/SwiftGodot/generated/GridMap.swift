@@ -217,7 +217,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_set_collision_layer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMap.method_set_collision_layer, handle, pArgs, nil)
                 }
                 
             }
@@ -242,7 +242,7 @@ open class GridMap: Node3D {
     fileprivate final func get_collision_layer() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(GridMap.method_get_collision_layer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridMap.method_get_collision_layer, handle, nil, &_result)
         return _result
     }
     
@@ -263,7 +263,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_set_collision_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMap.method_set_collision_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -288,7 +288,7 @@ open class GridMap: Node3D {
     fileprivate final func get_collision_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(GridMap.method_get_collision_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridMap.method_get_collision_mask, handle, nil, &_result)
         return _result
     }
     
@@ -310,7 +310,7 @@ open class GridMap: Node3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GridMap.method_set_collision_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GridMap.method_set_collision_mask_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -340,7 +340,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_get_collision_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GridMap.method_get_collision_mask_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -368,7 +368,7 @@ open class GridMap: Node3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GridMap.method_set_collision_layer_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GridMap.method_set_collision_layer_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -398,7 +398,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_get_collision_layer_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GridMap.method_get_collision_layer_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -425,7 +425,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_set_collision_priority, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMap.method_set_collision_priority, handle, pArgs, nil)
                 }
                 
             }
@@ -450,7 +450,7 @@ open class GridMap: Node3D {
     fileprivate final func get_collision_priority() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GridMap.method_get_collision_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridMap.method_get_collision_priority, handle, nil, &_result)
         return _result
     }
     
@@ -471,7 +471,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_set_physics_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMap.method_set_physics_material, handle, pArgs, nil)
                 }
                 
             }
@@ -495,9 +495,9 @@ open class GridMap: Node3D {
     @inline(__always)
     fileprivate final func get_physics_material() -> PhysicsMaterial? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GridMap.method_get_physics_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GridMap.method_get_physics_material, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_bake_navigation: GDExtensionMethodBindPtr = {
@@ -517,7 +517,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: bakeNavigation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_set_bake_navigation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMap.method_set_bake_navigation, handle, pArgs, nil)
                 }
                 
             }
@@ -542,7 +542,7 @@ open class GridMap: Node3D {
     fileprivate final func is_baking_navigation() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GridMap.method_is_baking_navigation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridMap.method_is_baking_navigation, handle, nil, &_result)
         return _result
     }
     
@@ -563,7 +563,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: navigationMap.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_set_navigation_map, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMap.method_set_navigation_map, handle, pArgs, nil)
                 }
                 
             }
@@ -591,7 +591,7 @@ open class GridMap: Node3D {
     public final func getNavigationMap() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(GridMap.method_get_navigation_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GridMap.method_get_navigation_map, handle, nil, &_result.content)
         return _result
     }
     
@@ -612,7 +612,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: meshLibrary?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_set_mesh_library, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMap.method_set_mesh_library, handle, pArgs, nil)
                 }
                 
             }
@@ -636,9 +636,9 @@ open class GridMap: Node3D {
     @inline(__always)
     fileprivate final func get_mesh_library() -> MeshLibrary? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GridMap.method_get_mesh_library, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GridMap.method_get_mesh_library, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_cell_size: GDExtensionMethodBindPtr = {
@@ -658,7 +658,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_set_cell_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMap.method_set_cell_size, handle, pArgs, nil)
                 }
                 
             }
@@ -683,7 +683,7 @@ open class GridMap: Node3D {
     fileprivate final func get_cell_size() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(GridMap.method_get_cell_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridMap.method_get_cell_size, handle, nil, &_result)
         return _result
     }
     
@@ -704,7 +704,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_set_cell_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMap.method_set_cell_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -729,7 +729,7 @@ open class GridMap: Node3D {
     fileprivate final func get_cell_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GridMap.method_get_cell_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridMap.method_get_cell_scale, handle, nil, &_result)
         return _result
     }
     
@@ -750,7 +750,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_set_octant_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMap.method_set_octant_size, handle, pArgs, nil)
                 }
                 
             }
@@ -775,7 +775,7 @@ open class GridMap: Node3D {
     fileprivate final func get_octant_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GridMap.method_get_octant_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridMap.method_get_octant_size, handle, nil, &_result)
         return _result
     }
     
@@ -803,7 +803,7 @@ open class GridMap: Node3D {
                 withUnsafePointer(to: orientation) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(GridMap.method_set_cell_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(GridMap.method_set_cell_item, handle, pArgs, nil)
                         }
                         
                     }
@@ -835,7 +835,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_get_cell_item, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GridMap.method_get_cell_item, handle, pArgs, &_result)
                 }
                 
             }
@@ -863,7 +863,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_get_cell_item_orientation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GridMap.method_get_cell_item_orientation, handle, pArgs, &_result)
                 }
                 
             }
@@ -891,7 +891,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_get_cell_item_basis, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GridMap.method_get_cell_item_basis, handle, pArgs, &_result)
                 }
                 
             }
@@ -919,7 +919,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_get_basis_with_orthogonal_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GridMap.method_get_basis_with_orthogonal_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -947,7 +947,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: basis) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_get_orthogonal_index_from_basis, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GridMap.method_get_orthogonal_index_from_basis, handle, pArgs, &_result)
                 }
                 
             }
@@ -975,7 +975,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: localPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_local_to_map, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GridMap.method_local_to_map, handle, pArgs, &_result)
                 }
                 
             }
@@ -1003,7 +1003,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: mapPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_map_to_local, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GridMap.method_map_to_local, handle, pArgs, &_result)
                 }
                 
             }
@@ -1030,7 +1030,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: resource?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_resource_changed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMap.method_resource_changed, handle, pArgs, nil)
                 }
                 
             }
@@ -1057,7 +1057,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_set_center_x, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMap.method_set_center_x, handle, pArgs, nil)
                 }
                 
             }
@@ -1082,7 +1082,7 @@ open class GridMap: Node3D {
     fileprivate final func get_center_x() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GridMap.method_get_center_x, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridMap.method_get_center_x, handle, nil, &_result)
         return _result
     }
     
@@ -1103,7 +1103,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_set_center_y, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMap.method_set_center_y, handle, pArgs, nil)
                 }
                 
             }
@@ -1128,7 +1128,7 @@ open class GridMap: Node3D {
     fileprivate final func get_center_y() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GridMap.method_get_center_y, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridMap.method_get_center_y, handle, nil, &_result)
         return _result
     }
     
@@ -1149,7 +1149,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_set_center_z, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMap.method_set_center_z, handle, pArgs, nil)
                 }
                 
             }
@@ -1174,7 +1174,7 @@ open class GridMap: Node3D {
     fileprivate final func get_center_z() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GridMap.method_get_center_z, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridMap.method_get_center_z, handle, nil, &_result)
         return _result
     }
     
@@ -1192,7 +1192,7 @@ open class GridMap: Node3D {
     /// Clear all cells.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(GridMap.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(GridMap.method_clear, handle, nil, nil)
         
     }
     
@@ -1211,7 +1211,7 @@ open class GridMap: Node3D {
     public final func getUsedCells() -> TypedArray<Vector3i> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GridMap.method_get_used_cells, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridMap.method_get_used_cells, handle, nil, &_result)
         return TypedArray<Vector3i>(takingOver: _result)
     }
     
@@ -1233,7 +1233,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: item) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_get_used_cells_by_item, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GridMap.method_get_used_cells_by_item, handle, pArgs, &_result)
                 }
                 
             }
@@ -1258,7 +1258,7 @@ open class GridMap: Node3D {
     public final func getMeshes() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(GridMap.method_get_meshes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GridMap.method_get_meshes, handle, nil, &_result.content)
         return _result
     }
     
@@ -1277,7 +1277,7 @@ open class GridMap: Node3D {
     public final func getBakeMeshes() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(GridMap.method_get_bake_meshes, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GridMap.method_get_bake_meshes, handle, nil, &_result.content)
         return _result
     }
     
@@ -1299,7 +1299,7 @@ open class GridMap: Node3D {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMap.method_get_bake_mesh_instance, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(GridMap.method_get_bake_mesh_instance, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1323,7 +1323,7 @@ open class GridMap: Node3D {
     /// Clears all baked meshes. See ``makeBakedMeshes(genLightmapUv:lightmapUvTexelSize:)``.
     public final func clearBakedMeshes() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(GridMap.method_clear_baked_meshes, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(GridMap.method_clear_baked_meshes, handle, nil, nil)
         
     }
     
@@ -1345,7 +1345,7 @@ open class GridMap: Node3D {
             withUnsafePointer(to: lightmapUvTexelSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GridMap.method_make_baked_meshes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GridMap.method_make_baked_meshes, handle, pArgs, nil)
                     }
                     
                 }

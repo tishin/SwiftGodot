@@ -101,7 +101,7 @@ open class OpenXRAction: Resource {
         withUnsafePointer(to: localizedName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAction.method_set_localized_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAction.method_set_localized_name, handle, pArgs, nil)
                 }
                 
             }
@@ -126,7 +126,7 @@ open class OpenXRAction: Resource {
     fileprivate final func get_localized_name() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(OpenXRAction.method_get_localized_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRAction.method_get_localized_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -147,7 +147,7 @@ open class OpenXRAction: Resource {
         withUnsafePointer(to: actionType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAction.method_set_action_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAction.method_set_action_type, handle, pArgs, nil)
                 }
                 
             }
@@ -172,7 +172,7 @@ open class OpenXRAction: Resource {
     fileprivate final func get_action_type() -> OpenXRAction.ActionType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(OpenXRAction.method_get_action_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRAction.method_get_action_type, handle, nil, &_result)
         return OpenXRAction.ActionType (rawValue: _result)!
     }
     
@@ -193,7 +193,7 @@ open class OpenXRAction: Resource {
         withUnsafePointer(to: toplevelPaths.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRAction.method_set_toplevel_paths, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRAction.method_set_toplevel_paths, handle, pArgs, nil)
                 }
                 
             }
@@ -218,7 +218,7 @@ open class OpenXRAction: Resource {
     fileprivate final func get_toplevel_paths() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(OpenXRAction.method_get_toplevel_paths, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRAction.method_get_toplevel_paths, handle, nil, &_result.content)
         return _result
     }
     

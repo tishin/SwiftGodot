@@ -163,7 +163,7 @@ open class CameraAttributesPractical: CameraAttributes {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_dof_blur_far_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_dof_blur_far_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -188,7 +188,7 @@ open class CameraAttributesPractical: CameraAttributes {
     fileprivate final func is_dof_blur_far_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_is_dof_blur_far_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_is_dof_blur_far_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -209,7 +209,7 @@ open class CameraAttributesPractical: CameraAttributes {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_dof_blur_far_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_dof_blur_far_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -234,7 +234,7 @@ open class CameraAttributesPractical: CameraAttributes {
     fileprivate final func get_dof_blur_far_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_get_dof_blur_far_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_get_dof_blur_far_distance, handle, nil, &_result)
         return _result
     }
     
@@ -255,7 +255,7 @@ open class CameraAttributesPractical: CameraAttributes {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_dof_blur_far_transition, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_dof_blur_far_transition, handle, pArgs, nil)
                 }
                 
             }
@@ -280,7 +280,7 @@ open class CameraAttributesPractical: CameraAttributes {
     fileprivate final func get_dof_blur_far_transition() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_get_dof_blur_far_transition, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_get_dof_blur_far_transition, handle, nil, &_result)
         return _result
     }
     
@@ -301,7 +301,7 @@ open class CameraAttributesPractical: CameraAttributes {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_dof_blur_near_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_dof_blur_near_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -326,7 +326,7 @@ open class CameraAttributesPractical: CameraAttributes {
     fileprivate final func is_dof_blur_near_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_is_dof_blur_near_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_is_dof_blur_near_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -347,7 +347,7 @@ open class CameraAttributesPractical: CameraAttributes {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_dof_blur_near_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_dof_blur_near_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -372,7 +372,7 @@ open class CameraAttributesPractical: CameraAttributes {
     fileprivate final func get_dof_blur_near_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_get_dof_blur_near_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_get_dof_blur_near_distance, handle, nil, &_result)
         return _result
     }
     
@@ -393,7 +393,7 @@ open class CameraAttributesPractical: CameraAttributes {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_dof_blur_near_transition, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_dof_blur_near_transition, handle, pArgs, nil)
                 }
                 
             }
@@ -418,7 +418,7 @@ open class CameraAttributesPractical: CameraAttributes {
     fileprivate final func get_dof_blur_near_transition() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_get_dof_blur_near_transition, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_get_dof_blur_near_transition, handle, nil, &_result)
         return _result
     }
     
@@ -439,7 +439,7 @@ open class CameraAttributesPractical: CameraAttributes {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_dof_blur_amount, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_dof_blur_amount, handle, pArgs, nil)
                 }
                 
             }
@@ -464,7 +464,7 @@ open class CameraAttributesPractical: CameraAttributes {
     fileprivate final func get_dof_blur_amount() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_get_dof_blur_amount, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_get_dof_blur_amount, handle, nil, &_result)
         return _result
     }
     
@@ -485,7 +485,7 @@ open class CameraAttributesPractical: CameraAttributes {
         withUnsafePointer(to: maxSensitivity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_auto_exposure_max_sensitivity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_auto_exposure_max_sensitivity, handle, pArgs, nil)
                 }
                 
             }
@@ -510,7 +510,7 @@ open class CameraAttributesPractical: CameraAttributes {
     fileprivate final func get_auto_exposure_max_sensitivity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_get_auto_exposure_max_sensitivity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_get_auto_exposure_max_sensitivity, handle, nil, &_result)
         return _result
     }
     
@@ -531,7 +531,7 @@ open class CameraAttributesPractical: CameraAttributes {
         withUnsafePointer(to: minSensitivity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_auto_exposure_min_sensitivity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraAttributesPractical.method_set_auto_exposure_min_sensitivity, handle, pArgs, nil)
                 }
                 
             }
@@ -556,7 +556,7 @@ open class CameraAttributesPractical: CameraAttributes {
     fileprivate final func get_auto_exposure_min_sensitivity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_get_auto_exposure_min_sensitivity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraAttributesPractical.method_get_auto_exposure_min_sensitivity, handle, nil, &_result)
         return _result
     }
     

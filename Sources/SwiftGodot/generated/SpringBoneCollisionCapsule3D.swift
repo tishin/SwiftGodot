@@ -82,7 +82,7 @@ open class SpringBoneCollisionCapsule3D: SpringBoneCollision3D {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneCollisionCapsule3D.method_set_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringBoneCollisionCapsule3D.method_set_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -107,7 +107,7 @@ open class SpringBoneCollisionCapsule3D: SpringBoneCollision3D {
     fileprivate final func get_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SpringBoneCollisionCapsule3D.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpringBoneCollisionCapsule3D.method_get_radius, handle, nil, &_result)
         return _result
     }
     
@@ -128,7 +128,7 @@ open class SpringBoneCollisionCapsule3D: SpringBoneCollision3D {
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneCollisionCapsule3D.method_set_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringBoneCollisionCapsule3D.method_set_height, handle, pArgs, nil)
                 }
                 
             }
@@ -153,7 +153,7 @@ open class SpringBoneCollisionCapsule3D: SpringBoneCollision3D {
     fileprivate final func get_height() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SpringBoneCollisionCapsule3D.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpringBoneCollisionCapsule3D.method_get_height, handle, nil, &_result)
         return _result
     }
     
@@ -174,7 +174,7 @@ open class SpringBoneCollisionCapsule3D: SpringBoneCollision3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpringBoneCollisionCapsule3D.method_set_inside, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpringBoneCollisionCapsule3D.method_set_inside, handle, pArgs, nil)
                 }
                 
             }
@@ -199,7 +199,7 @@ open class SpringBoneCollisionCapsule3D: SpringBoneCollision3D {
     fileprivate final func is_inside() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SpringBoneCollisionCapsule3D.method_is_inside, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpringBoneCollisionCapsule3D.method_is_inside, handle, nil, &_result)
         return _result
     }
     

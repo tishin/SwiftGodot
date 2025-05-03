@@ -46,7 +46,7 @@ open class SkeletonModification2DStackHolder: SkeletonModification2D {
         withUnsafePointer(to: heldModificationStack?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2DStackHolder.method_set_held_modification_stack, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2DStackHolder.method_set_held_modification_stack, handle, pArgs, nil)
                 }
                 
             }
@@ -70,9 +70,9 @@ open class SkeletonModification2DStackHolder: SkeletonModification2D {
     /// Returns the ``SkeletonModificationStack2D`` that this modification is holding.
     public final func getHeldModificationStack() -> SkeletonModificationStack2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(SkeletonModification2DStackHolder.method_get_held_modification_stack, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(SkeletonModification2DStackHolder.method_get_held_modification_stack, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

@@ -183,7 +183,7 @@ open class TileData: Object {
         withUnsafePointer(to: flipH) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_set_flip_h, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileData.method_set_flip_h, handle, pArgs, nil)
                 }
                 
             }
@@ -208,7 +208,7 @@ open class TileData: Object {
     fileprivate final func get_flip_h() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TileData.method_get_flip_h, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileData.method_get_flip_h, handle, nil, &_result)
         return _result
     }
     
@@ -229,7 +229,7 @@ open class TileData: Object {
         withUnsafePointer(to: flipV) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_set_flip_v, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileData.method_set_flip_v, handle, pArgs, nil)
                 }
                 
             }
@@ -254,7 +254,7 @@ open class TileData: Object {
     fileprivate final func get_flip_v() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TileData.method_get_flip_v, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileData.method_get_flip_v, handle, nil, &_result)
         return _result
     }
     
@@ -275,7 +275,7 @@ open class TileData: Object {
         withUnsafePointer(to: transpose) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_set_transpose, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileData.method_set_transpose, handle, pArgs, nil)
                 }
                 
             }
@@ -300,7 +300,7 @@ open class TileData: Object {
     fileprivate final func get_transpose() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TileData.method_get_transpose, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileData.method_get_transpose, handle, nil, &_result)
         return _result
     }
     
@@ -321,7 +321,7 @@ open class TileData: Object {
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_set_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileData.method_set_material, handle, pArgs, nil)
                 }
                 
             }
@@ -345,9 +345,9 @@ open class TileData: Object {
     @inline(__always)
     fileprivate final func get_material() -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TileData.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TileData.method_get_material, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_texture_origin: GDExtensionMethodBindPtr = {
@@ -367,7 +367,7 @@ open class TileData: Object {
         withUnsafePointer(to: textureOrigin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_set_texture_origin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileData.method_set_texture_origin, handle, pArgs, nil)
                 }
                 
             }
@@ -392,7 +392,7 @@ open class TileData: Object {
     fileprivate final func get_texture_origin() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(TileData.method_get_texture_origin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileData.method_get_texture_origin, handle, nil, &_result)
         return _result
     }
     
@@ -413,7 +413,7 @@ open class TileData: Object {
         withUnsafePointer(to: modulate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_set_modulate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileData.method_set_modulate, handle, pArgs, nil)
                 }
                 
             }
@@ -438,7 +438,7 @@ open class TileData: Object {
     fileprivate final func get_modulate() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(TileData.method_get_modulate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileData.method_get_modulate, handle, nil, &_result)
         return _result
     }
     
@@ -459,7 +459,7 @@ open class TileData: Object {
         withUnsafePointer(to: zIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_set_z_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileData.method_set_z_index, handle, pArgs, nil)
                 }
                 
             }
@@ -484,7 +484,7 @@ open class TileData: Object {
     fileprivate final func get_z_index() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TileData.method_get_z_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileData.method_get_z_index, handle, nil, &_result)
         return _result
     }
     
@@ -505,7 +505,7 @@ open class TileData: Object {
         withUnsafePointer(to: ySortOrigin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_set_y_sort_origin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileData.method_set_y_sort_origin, handle, pArgs, nil)
                 }
                 
             }
@@ -530,7 +530,7 @@ open class TileData: Object {
     fileprivate final func get_y_sort_origin() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TileData.method_get_y_sort_origin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileData.method_get_y_sort_origin, handle, nil, &_result)
         return _result
     }
     
@@ -552,7 +552,7 @@ open class TileData: Object {
             withUnsafePointer(to: polygonsCount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileData.method_set_occluder_polygons_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileData.method_set_occluder_polygons_count, handle, pArgs, nil)
                     }
                     
                 }
@@ -582,7 +582,7 @@ open class TileData: Object {
         withUnsafePointer(to: layerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_get_occluder_polygons_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileData.method_get_occluder_polygons_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -609,7 +609,7 @@ open class TileData: Object {
         withUnsafePointer(to: layerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_add_occluder_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileData.method_add_occluder_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -637,7 +637,7 @@ open class TileData: Object {
             withUnsafePointer(to: polygonIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileData.method_remove_occluder_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileData.method_remove_occluder_polygon, handle, pArgs, nil)
                     }
                     
                 }
@@ -668,7 +668,7 @@ open class TileData: Object {
                 withUnsafePointer(to: polygon?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TileData.method_set_occluder_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TileData.method_set_occluder_polygon, handle, pArgs, nil)
                         }
                         
                     }
@@ -699,7 +699,7 @@ open class TileData: Object {
     /// 
     public final func getOccluderPolygon(layerId: Int32, polygonIndex: Int32, flipH: Bool = false, flipV: Bool = false, transpose: Bool = false) -> OccluderPolygon2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: layerId) { pArg0 in
             withUnsafePointer(to: polygonIndex) { pArg1 in
                 withUnsafePointer(to: flipH) { pArg2 in
@@ -707,7 +707,7 @@ open class TileData: Object {
                         withUnsafePointer(to: transpose) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(TileData.method_get_occluder_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(TileData.method_get_occluder_polygon, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -722,7 +722,7 @@ open class TileData: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_occluder: GDExtensionMethodBindPtr = {
@@ -743,7 +743,7 @@ open class TileData: Object {
             withUnsafePointer(to: occluderPolygon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileData.method_set_occluder, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileData.method_set_occluder, handle, pArgs, nil)
                     }
                     
                 }
@@ -772,14 +772,14 @@ open class TileData: Object {
     /// 
     public final func getOccluder(layerId: Int32, flipH: Bool = false, flipV: Bool = false, transpose: Bool = false) -> OccluderPolygon2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: layerId) { pArg0 in
             withUnsafePointer(to: flipH) { pArg1 in
                 withUnsafePointer(to: flipV) { pArg2 in
                     withUnsafePointer(to: transpose) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TileData.method_get_occluder, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(TileData.method_get_occluder, handle, pArgs, &_result)
                             }
                             
                         }
@@ -792,7 +792,7 @@ open class TileData: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_constant_linear_velocity: GDExtensionMethodBindPtr = {
@@ -813,7 +813,7 @@ open class TileData: Object {
             withUnsafePointer(to: velocity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileData.method_set_constant_linear_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileData.method_set_constant_linear_velocity, handle, pArgs, nil)
                     }
                     
                 }
@@ -843,7 +843,7 @@ open class TileData: Object {
         withUnsafePointer(to: layerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_get_constant_linear_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileData.method_get_constant_linear_velocity, handle, pArgs, &_result)
                 }
                 
             }
@@ -871,7 +871,7 @@ open class TileData: Object {
             withUnsafePointer(to: velocity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileData.method_set_constant_angular_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileData.method_set_constant_angular_velocity, handle, pArgs, nil)
                     }
                     
                 }
@@ -901,7 +901,7 @@ open class TileData: Object {
         withUnsafePointer(to: layerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_get_constant_angular_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileData.method_get_constant_angular_velocity, handle, pArgs, &_result)
                 }
                 
             }
@@ -929,7 +929,7 @@ open class TileData: Object {
             withUnsafePointer(to: polygonsCount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileData.method_set_collision_polygons_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileData.method_set_collision_polygons_count, handle, pArgs, nil)
                     }
                     
                 }
@@ -959,7 +959,7 @@ open class TileData: Object {
         withUnsafePointer(to: layerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_get_collision_polygons_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileData.method_get_collision_polygons_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -986,7 +986,7 @@ open class TileData: Object {
         withUnsafePointer(to: layerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_add_collision_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileData.method_add_collision_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -1014,7 +1014,7 @@ open class TileData: Object {
             withUnsafePointer(to: polygonIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileData.method_remove_collision_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileData.method_remove_collision_polygon, handle, pArgs, nil)
                     }
                     
                 }
@@ -1045,7 +1045,7 @@ open class TileData: Object {
                 withUnsafePointer(to: polygon.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TileData.method_set_collision_polygon_points, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TileData.method_set_collision_polygon_points, handle, pArgs, nil)
                         }
                         
                     }
@@ -1078,7 +1078,7 @@ open class TileData: Object {
             withUnsafePointer(to: polygonIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileData.method_get_collision_polygon_points, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(TileData.method_get_collision_polygon_points, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1109,7 +1109,7 @@ open class TileData: Object {
                 withUnsafePointer(to: oneWay) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TileData.method_set_collision_polygon_one_way, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TileData.method_set_collision_polygon_one_way, handle, pArgs, nil)
                         }
                         
                     }
@@ -1142,7 +1142,7 @@ open class TileData: Object {
             withUnsafePointer(to: polygonIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileData.method_is_collision_polygon_one_way, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TileData.method_is_collision_polygon_one_way, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1173,7 +1173,7 @@ open class TileData: Object {
                 withUnsafePointer(to: oneWayMargin) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TileData.method_set_collision_polygon_one_way_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TileData.method_set_collision_polygon_one_way_margin, handle, pArgs, nil)
                         }
                         
                     }
@@ -1206,7 +1206,7 @@ open class TileData: Object {
             withUnsafePointer(to: polygonIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileData.method_get_collision_polygon_one_way_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TileData.method_get_collision_polygon_one_way_margin, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1235,7 +1235,7 @@ open class TileData: Object {
         withUnsafePointer(to: terrainSet) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_set_terrain_set, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileData.method_set_terrain_set, handle, pArgs, nil)
                 }
                 
             }
@@ -1260,7 +1260,7 @@ open class TileData: Object {
     fileprivate final func get_terrain_set() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TileData.method_get_terrain_set, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileData.method_get_terrain_set, handle, nil, &_result)
         return _result
     }
     
@@ -1281,7 +1281,7 @@ open class TileData: Object {
         withUnsafePointer(to: terrain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_set_terrain, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileData.method_set_terrain, handle, pArgs, nil)
                 }
                 
             }
@@ -1306,7 +1306,7 @@ open class TileData: Object {
     fileprivate final func get_terrain() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TileData.method_get_terrain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileData.method_get_terrain, handle, nil, &_result)
         return _result
     }
     
@@ -1328,7 +1328,7 @@ open class TileData: Object {
             withUnsafePointer(to: terrain) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileData.method_set_terrain_peering_bit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileData.method_set_terrain_peering_bit, handle, pArgs, nil)
                     }
                     
                 }
@@ -1358,7 +1358,7 @@ open class TileData: Object {
         withUnsafePointer(to: peeringBit.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_get_terrain_peering_bit, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileData.method_get_terrain_peering_bit, handle, pArgs, &_result)
                 }
                 
             }
@@ -1386,7 +1386,7 @@ open class TileData: Object {
         withUnsafePointer(to: peeringBit.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_is_valid_terrain_peering_bit, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileData.method_is_valid_terrain_peering_bit, handle, pArgs, &_result)
                 }
                 
             }
@@ -1414,7 +1414,7 @@ open class TileData: Object {
             withUnsafePointer(to: navigationPolygon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileData.method_set_navigation_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileData.method_set_navigation_polygon, handle, pArgs, nil)
                     }
                     
                 }
@@ -1443,14 +1443,14 @@ open class TileData: Object {
     /// 
     public final func getNavigationPolygon(layerId: Int32, flipH: Bool = false, flipV: Bool = false, transpose: Bool = false) -> NavigationPolygon? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: layerId) { pArg0 in
             withUnsafePointer(to: flipH) { pArg1 in
                 withUnsafePointer(to: flipV) { pArg2 in
                     withUnsafePointer(to: transpose) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TileData.method_get_navigation_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(TileData.method_get_navigation_polygon, handle, pArgs, &_result)
                             }
                             
                         }
@@ -1463,7 +1463,7 @@ open class TileData: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_probability: GDExtensionMethodBindPtr = {
@@ -1483,7 +1483,7 @@ open class TileData: Object {
         withUnsafePointer(to: probability) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_set_probability, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileData.method_set_probability, handle, pArgs, nil)
                 }
                 
             }
@@ -1508,7 +1508,7 @@ open class TileData: Object {
     fileprivate final func get_probability() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(TileData.method_get_probability, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileData.method_get_probability, handle, nil, &_result)
         return _result
     }
     
@@ -1531,7 +1531,7 @@ open class TileData: Object {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileData.method_set_custom_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileData.method_set_custom_data, handle, pArgs, nil)
                     }
                     
                 }
@@ -1562,7 +1562,7 @@ open class TileData: Object {
         withUnsafePointer(to: layerName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_get_custom_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileData.method_get_custom_data, handle, pArgs, &_result)
                 }
                 
             }
@@ -1591,7 +1591,7 @@ open class TileData: Object {
         withUnsafePointer(to: layerName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_has_custom_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileData.method_has_custom_data, handle, pArgs, &_result)
                 }
                 
             }
@@ -1619,7 +1619,7 @@ open class TileData: Object {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileData.method_set_custom_data_by_layer_id, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileData.method_set_custom_data_by_layer_id, handle, pArgs, nil)
                     }
                     
                 }
@@ -1649,7 +1649,7 @@ open class TileData: Object {
         withUnsafePointer(to: layerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileData.method_get_custom_data_by_layer_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileData.method_get_custom_data_by_layer_id, handle, pArgs, &_result)
                 }
                 
             }

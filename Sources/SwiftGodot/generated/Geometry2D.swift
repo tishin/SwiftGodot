@@ -26,7 +26,7 @@ open class Geometry2D: Object {
     /// The shared instance of this class
     public static var shared: Geometry2D {
         return withUnsafePointer(to: &Geometry2D.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -86,7 +86,7 @@ open class Geometry2D: Object {
                 withUnsafePointer(to: circleRadius) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_is_point_in_circle, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_is_point_in_circle, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -120,7 +120,7 @@ open class Geometry2D: Object {
                     withUnsafePointer(to: circleRadius) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_segment_intersects_circle, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(method_segment_intersects_circle, shared.handle, pArgs, &_result)
                             }
                             
                         }
@@ -156,7 +156,7 @@ open class Geometry2D: Object {
                     withUnsafePointer(to: toB) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_segment_intersects_segment, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(method_segment_intersects_segment, shared.handle, pArgs, &_result)
                             }
                             
                         }
@@ -195,7 +195,7 @@ open class Geometry2D: Object {
                     withUnsafePointer(to: dirB) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_line_intersects_line, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(method_line_intersects_line, shared.handle, pArgs, &_result)
                             }
                             
                         }
@@ -231,7 +231,7 @@ open class Geometry2D: Object {
                     withUnsafePointer(to: q2) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_get_closest_points_between_segments, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(method_get_closest_points_between_segments, shared.handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -266,7 +266,7 @@ open class Geometry2D: Object {
                 withUnsafePointer(to: s2) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_get_closest_point_to_segment, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_get_closest_point_to_segment, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -299,7 +299,7 @@ open class Geometry2D: Object {
                 withUnsafePointer(to: s2) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_get_closest_point_to_segment_uncapped, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_get_closest_point_to_segment_uncapped, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -333,7 +333,7 @@ open class Geometry2D: Object {
                     withUnsafePointer(to: c) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_point_is_inside_triangle, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(method_point_is_inside_triangle, shared.handle, pArgs, &_result)
                             }
                             
                         }
@@ -369,7 +369,7 @@ open class Geometry2D: Object {
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_polygon_clockwise, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_polygon_clockwise, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -397,7 +397,7 @@ open class Geometry2D: Object {
             withUnsafePointer(to: polygon.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_is_point_in_polygon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_is_point_in_polygon, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -426,7 +426,7 @@ open class Geometry2D: Object {
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_triangulate_polygon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_triangulate_polygon, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -453,7 +453,7 @@ open class Geometry2D: Object {
         withUnsafePointer(to: points.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_triangulate_delaunay, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_triangulate_delaunay, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -480,7 +480,7 @@ open class Geometry2D: Object {
         withUnsafePointer(to: points.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_convex_hull, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_convex_hull, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -507,7 +507,7 @@ open class Geometry2D: Object {
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_decompose_polygon_in_convex, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_decompose_polygon_in_convex, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -538,7 +538,7 @@ open class Geometry2D: Object {
             withUnsafePointer(to: polygonB.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_merge_polygons, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_merge_polygons, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -571,7 +571,7 @@ open class Geometry2D: Object {
             withUnsafePointer(to: polygonB.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_clip_polygons, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_clip_polygons, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -604,7 +604,7 @@ open class Geometry2D: Object {
             withUnsafePointer(to: polygonB.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_intersect_polygons, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_intersect_polygons, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -637,7 +637,7 @@ open class Geometry2D: Object {
             withUnsafePointer(to: polygonB.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_exclude_polygons, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_exclude_polygons, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -667,7 +667,7 @@ open class Geometry2D: Object {
             withUnsafePointer(to: polygon.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_clip_polyline_with_polygon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_clip_polyline_with_polygon, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -697,7 +697,7 @@ open class Geometry2D: Object {
             withUnsafePointer(to: polygon.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_intersect_polyline_with_polygon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_intersect_polyline_with_polygon, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -735,7 +735,7 @@ open class Geometry2D: Object {
                 withUnsafePointer(to: joinType.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_offset_polygon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_offset_polygon, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -776,7 +776,7 @@ open class Geometry2D: Object {
                     withUnsafePointer(to: endType.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_offset_polyline, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(method_offset_polyline, shared.handle, pArgs, &_result)
                             }
                             
                         }
@@ -809,7 +809,7 @@ open class Geometry2D: Object {
         withUnsafePointer(to: sizes.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_make_atlas, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_make_atlas, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -840,7 +840,7 @@ open class Geometry2D: Object {
             withUnsafePointer(to: to) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_bresenham_line, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_bresenham_line, shared.handle, pArgs, &_result)
                     }
                     
                 }

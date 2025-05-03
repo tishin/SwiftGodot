@@ -149,7 +149,7 @@ open class OpenXRHand: Node3D {
         withUnsafePointer(to: hand.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRHand.method_set_hand, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRHand.method_set_hand, handle, pArgs, nil)
                 }
                 
             }
@@ -174,7 +174,7 @@ open class OpenXRHand: Node3D {
     fileprivate final func get_hand() -> OpenXRHand.Hands {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(OpenXRHand.method_get_hand, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRHand.method_get_hand, handle, nil, &_result)
         return OpenXRHand.Hands (rawValue: _result)!
     }
     
@@ -195,7 +195,7 @@ open class OpenXRHand: Node3D {
         withUnsafePointer(to: handSkeleton.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRHand.method_set_hand_skeleton, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRHand.method_set_hand_skeleton, handle, pArgs, nil)
                 }
                 
             }
@@ -220,7 +220,7 @@ open class OpenXRHand: Node3D {
     fileprivate final func get_hand_skeleton() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(OpenXRHand.method_get_hand_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRHand.method_get_hand_skeleton, handle, nil, &_result.content)
         return _result
     }
     
@@ -241,7 +241,7 @@ open class OpenXRHand: Node3D {
         withUnsafePointer(to: motionRange.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRHand.method_set_motion_range, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRHand.method_set_motion_range, handle, pArgs, nil)
                 }
                 
             }
@@ -266,7 +266,7 @@ open class OpenXRHand: Node3D {
     fileprivate final func get_motion_range() -> OpenXRHand.MotionRange {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(OpenXRHand.method_get_motion_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRHand.method_get_motion_range, handle, nil, &_result)
         return OpenXRHand.MotionRange (rawValue: _result)!
     }
     
@@ -287,7 +287,7 @@ open class OpenXRHand: Node3D {
         withUnsafePointer(to: skeletonRig.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRHand.method_set_skeleton_rig, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRHand.method_set_skeleton_rig, handle, pArgs, nil)
                 }
                 
             }
@@ -312,7 +312,7 @@ open class OpenXRHand: Node3D {
     fileprivate final func get_skeleton_rig() -> OpenXRHand.SkeletonRig {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(OpenXRHand.method_get_skeleton_rig, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRHand.method_get_skeleton_rig, handle, nil, &_result)
         return OpenXRHand.SkeletonRig (rawValue: _result)!
     }
     
@@ -333,7 +333,7 @@ open class OpenXRHand: Node3D {
         withUnsafePointer(to: boneUpdate.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRHand.method_set_bone_update, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRHand.method_set_bone_update, handle, pArgs, nil)
                 }
                 
             }
@@ -358,7 +358,7 @@ open class OpenXRHand: Node3D {
     fileprivate final func get_bone_update() -> OpenXRHand.BoneUpdate {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(OpenXRHand.method_get_bone_update, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRHand.method_get_bone_update, handle, nil, &_result)
         return OpenXRHand.BoneUpdate (rawValue: _result)!
     }
     

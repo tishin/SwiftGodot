@@ -54,7 +54,7 @@ open class GLTFDocumentExtension: Resource {
             withUnsafePointer(to: extensions.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__import_preflight, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__import_preflight, handle, pArgs, &_result)
                     }
                     
                 }
@@ -85,7 +85,7 @@ open class GLTFDocumentExtension: Resource {
     open func _getSupportedExtensions() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__get_supported_extensions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__get_supported_extensions, handle, nil, &_result.content)
         return _result
     }
     
@@ -113,7 +113,7 @@ open class GLTFDocumentExtension: Resource {
                 withUnsafePointer(to: extensions.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__parse_node_extensions, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__parse_node_extensions, handle, pArgs, &_result)
                         }
                         
                     }
@@ -153,7 +153,7 @@ open class GLTFDocumentExtension: Resource {
                     withUnsafePointer(to: retImage?.handle) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__parse_image_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__parse_image_data, handle, pArgs, &_result)
                             }
                             
                         }
@@ -185,7 +185,7 @@ open class GLTFDocumentExtension: Resource {
     open func _getImageFileExtension() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__get_image_file_extension, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__get_image_file_extension, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -213,7 +213,7 @@ open class GLTFDocumentExtension: Resource {
                 withUnsafePointer(to: retGltfTexture?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__parse_texture_json, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__parse_texture_json, handle, pArgs, &_result)
                         }
                         
                     }
@@ -247,13 +247,13 @@ open class GLTFDocumentExtension: Resource {
     @_documentation(visibility: public)
     open func _importObjectModelProperty(state: GLTFState?, splitJsonPointer: PackedStringArray, partialPaths: TypedArray<NodePath>) -> GLTFObjectModelProperty? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: splitJsonPointer.content) { pArg1 in
                 withUnsafePointer(to: partialPaths.array.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__import_object_model_property, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__import_object_model_property, handle, pArgs, &_result)
                         }
                         
                     }
@@ -264,7 +264,7 @@ open class GLTFDocumentExtension: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__import_post_parse: GDExtensionMethodBindPtr = {
@@ -289,7 +289,7 @@ open class GLTFDocumentExtension: Resource {
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__import_post_parse, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__import_post_parse, handle, pArgs, &_result)
                 }
                 
             }
@@ -321,7 +321,7 @@ open class GLTFDocumentExtension: Resource {
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__import_pre_generate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__import_pre_generate, handle, pArgs, &_result)
                 }
                 
             }
@@ -351,13 +351,13 @@ open class GLTFDocumentExtension: Resource {
     @_documentation(visibility: public)
     open func _generateSceneNode(state: GLTFState?, gltfNode: GLTFNode?, sceneParent: Node?) -> Node3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: gltfNode?.handle) { pArg1 in
                 withUnsafePointer(to: sceneParent?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__generate_scene_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__generate_scene_node, handle, pArgs, &_result)
                         }
                         
                     }
@@ -368,7 +368,7 @@ open class GLTFDocumentExtension: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__import_node: GDExtensionMethodBindPtr = {
@@ -396,7 +396,7 @@ open class GLTFDocumentExtension: Resource {
                     withUnsafePointer(to: node?.handle) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__import_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__import_node, handle, pArgs, &_result)
                             }
                             
                         }
@@ -435,7 +435,7 @@ open class GLTFDocumentExtension: Resource {
             withUnsafePointer(to: root?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__import_post, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__import_post, handle, pArgs, &_result)
                     }
                     
                 }
@@ -470,7 +470,7 @@ open class GLTFDocumentExtension: Resource {
             withUnsafePointer(to: root?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__export_preflight, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__export_preflight, handle, pArgs, &_result)
                     }
                     
                 }
@@ -505,7 +505,7 @@ open class GLTFDocumentExtension: Resource {
                 withUnsafePointer(to: sceneNode?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__convert_scene_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__convert_scene_node, handle, pArgs, nil)
                         }
                         
                     }
@@ -542,7 +542,7 @@ open class GLTFDocumentExtension: Resource {
             withUnsafePointer(to: root?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__export_post_convert, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__export_post_convert, handle, pArgs, &_result)
                     }
                     
                 }
@@ -576,7 +576,7 @@ open class GLTFDocumentExtension: Resource {
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__export_preserialize, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__export_preserialize, handle, pArgs, &_result)
                 }
                 
             }
@@ -606,7 +606,7 @@ open class GLTFDocumentExtension: Resource {
     @_documentation(visibility: public)
     open func _exportObjectModelProperty(state: GLTFState?, nodePath: NodePath, godotNode: Node?, gltfNodeIndex: Int32, targetObject: Object?, targetDepth: Int32) -> GLTFObjectModelProperty? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: nodePath.content) { pArg1 in
                 withUnsafePointer(to: godotNode?.handle) { pArg2 in
@@ -615,7 +615,7 @@ open class GLTFDocumentExtension: Resource {
                             withUnsafePointer(to: targetDepth) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__export_object_model_property, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__export_object_model_property, handle, pArgs, &_result)
                                     }
                                     
                                 }
@@ -632,7 +632,7 @@ open class GLTFDocumentExtension: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__get_saveable_image_formats: GDExtensionMethodBindPtr = {
@@ -654,7 +654,7 @@ open class GLTFDocumentExtension: Resource {
     open func _getSaveableImageFormats() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__get_saveable_image_formats, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__get_saveable_image_formats, handle, nil, &_result.content)
         return _result
     }
     
@@ -687,7 +687,7 @@ open class GLTFDocumentExtension: Resource {
                         withUnsafePointer(to: lossyQuality) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__serialize_image_to_bytes, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                    gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__serialize_image_to_bytes, handle, pArgs, &_result.content)
                                 }
                                 
                             }
@@ -733,7 +733,7 @@ open class GLTFDocumentExtension: Resource {
                         withUnsafePointer(to: lossyQuality) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__save_image_at_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__save_image_at_path, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -777,7 +777,7 @@ open class GLTFDocumentExtension: Resource {
                     withUnsafePointer(to: imageFormat.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__serialize_texture_json, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__serialize_texture_json, handle, pArgs, &_result)
                             }
                             
                         }
@@ -818,7 +818,7 @@ open class GLTFDocumentExtension: Resource {
                     withUnsafePointer(to: node?.handle) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__export_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__export_node, handle, pArgs, &_result)
                             }
                             
                         }
@@ -856,7 +856,7 @@ open class GLTFDocumentExtension: Resource {
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__export_post, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFDocumentExtension.method__export_post, handle, pArgs, &_result)
                 }
                 
             }
@@ -929,11 +929,11 @@ func _GLTFDocumentExtension_proxy_convert_scene_node (instance: UnsafeMutableRaw
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
-    let resolved_2 = args [2]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_2 = args [2]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._convertSceneNode (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, gltfNode: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? GLTFNode, sceneNode: resolved_2 == nil ? nil : lookupObject (nativeHandle: resolved_2!, ownsRef: false) as? Node)
+    swiftObject._convertSceneNode (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, gltfNode: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? GLTFNode, sceneNode: resolved_2 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_2!, ownsRef: false) as? Node)
 }
 
 func _GLTFDocumentExtension_proxy_export_node (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -941,11 +941,11 @@ func _GLTFDocumentExtension_proxy_export_node (instance: UnsafeMutableRawPointer
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
-    let resolved_3 = args [3]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_3 = args [3]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._exportNode (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, gltfNode: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? GLTFNode, json: VariantDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee), node: resolved_3 == nil ? nil : lookupObject (nativeHandle: resolved_3!, ownsRef: false) as? Node)
+    let ret = swiftObject._exportNode (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, gltfNode: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? GLTFNode, json: VariantDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee), node: resolved_3 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_3!, ownsRef: false) as? Node)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -954,12 +954,12 @@ func _GLTFDocumentExtension_proxy_export_object_model_property (instance: Unsafe
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_2 = args [2]!.load (as: UnsafeRawPointer?.self)
-    let resolved_4 = args [4]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_2 = args [2]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_4 = args [4]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._exportObjectModelProperty (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, nodePath: NodePath (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee), godotNode: resolved_2 == nil ? nil : lookupObject (nativeHandle: resolved_2!, ownsRef: false) as? Node, gltfNodeIndex: args [3]!.assumingMemoryBound (to: Int32.self).pointee, targetObject: resolved_4 == nil ? nil : lookupObject (nativeHandle: resolved_4!, ownsRef: false) as? Object, targetDepth: args [5]!.assumingMemoryBound (to: Int32.self).pointee)
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // GLTFObjectModelProperty
+    let ret = swiftObject._exportObjectModelProperty (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, nodePath: NodePath (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee), godotNode: resolved_2 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_2!, ownsRef: false) as? Node, gltfNodeIndex: args [3]!.assumingMemoryBound (to: Int32.self).pointee, targetObject: resolved_4 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_4!, ownsRef: false) as? Object, targetDepth: args [5]!.assumingMemoryBound (to: Int32.self).pointee)
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // GLTFObjectModelProperty
 }
 
 func _GLTFDocumentExtension_proxy_export_post (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -967,9 +967,9 @@ func _GLTFDocumentExtension_proxy_export_post (instance: UnsafeMutableRawPointer
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._exportPost (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState)
+    let ret = swiftObject._exportPost (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -978,10 +978,10 @@ func _GLTFDocumentExtension_proxy_export_post_convert (instance: UnsafeMutableRa
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._exportPostConvert (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, root: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? Node)
+    let ret = swiftObject._exportPostConvert (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, root: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? Node)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -990,10 +990,10 @@ func _GLTFDocumentExtension_proxy_export_preflight (instance: UnsafeMutableRawPo
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._exportPreflight (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, root: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? Node)
+    let ret = swiftObject._exportPreflight (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, root: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? Node)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1002,9 +1002,9 @@ func _GLTFDocumentExtension_proxy_export_preserialize (instance: UnsafeMutableRa
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._exportPreserialize (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState)
+    let ret = swiftObject._exportPreserialize (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1013,12 +1013,12 @@ func _GLTFDocumentExtension_proxy_generate_scene_node (instance: UnsafeMutableRa
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
-    let resolved_2 = args [2]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_2 = args [2]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._generateSceneNode (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, gltfNode: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? GLTFNode, sceneParent: resolved_2 == nil ? nil : lookupObject (nativeHandle: resolved_2!, ownsRef: false) as? Node)
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Node3D
+    let ret = swiftObject._generateSceneNode (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, gltfNode: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? GLTFNode, sceneParent: resolved_2 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_2!, ownsRef: false) as? Node)
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // Node3D
 }
 
 func _GLTFDocumentExtension_proxy_get_image_file_extension (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -1053,11 +1053,11 @@ func _GLTFDocumentExtension_proxy_import_node (instance: UnsafeMutableRawPointer
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
-    let resolved_3 = args [3]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_3 = args [3]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._importNode (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, gltfNode: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? GLTFNode, json: VariantDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee), node: resolved_3 == nil ? nil : lookupObject (nativeHandle: resolved_3!, ownsRef: false) as? Node)
+    let ret = swiftObject._importNode (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, gltfNode: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? GLTFNode, json: VariantDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee), node: resolved_3 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_3!, ownsRef: false) as? Node)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1066,10 +1066,10 @@ func _GLTFDocumentExtension_proxy_import_object_model_property (instance: Unsafe
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._importObjectModelProperty (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, splitJsonPointer: PackedStringArray (content: args [1]!.assumingMemoryBound (to: (Int64, Int64).self).pointee), partialPaths: args [2]!.assumingMemoryBound (to: TypedArray<NodePath>.self).pointee)
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // GLTFObjectModelProperty
+    let ret = swiftObject._importObjectModelProperty (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, splitJsonPointer: PackedStringArray (content: args [1]!.assumingMemoryBound (to: (Int64, Int64).self).pointee), partialPaths: args [2]!.assumingMemoryBound (to: TypedArray<NodePath>.self).pointee)
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // GLTFObjectModelProperty
 }
 
 func _GLTFDocumentExtension_proxy_import_post (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -1077,10 +1077,10 @@ func _GLTFDocumentExtension_proxy_import_post (instance: UnsafeMutableRawPointer
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._importPost (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, root: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? Node)
+    let ret = swiftObject._importPost (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, root: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? Node)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1089,9 +1089,9 @@ func _GLTFDocumentExtension_proxy_import_post_parse (instance: UnsafeMutableRawP
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._importPostParse (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState)
+    let ret = swiftObject._importPostParse (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1100,9 +1100,9 @@ func _GLTFDocumentExtension_proxy_import_pre_generate (instance: UnsafeMutableRa
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._importPreGenerate (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState)
+    let ret = swiftObject._importPreGenerate (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1111,9 +1111,9 @@ func _GLTFDocumentExtension_proxy_import_preflight (instance: UnsafeMutableRawPo
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._importPreflight (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, extensions: PackedStringArray (content: args [1]!.assumingMemoryBound (to: (Int64, Int64).self).pointee))
+    let ret = swiftObject._importPreflight (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, extensions: PackedStringArray (content: args [1]!.assumingMemoryBound (to: (Int64, Int64).self).pointee))
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1122,10 +1122,10 @@ func _GLTFDocumentExtension_proxy_parse_image_data (instance: UnsafeMutableRawPo
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_3 = args [3]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_3 = args [3]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._parseImageData (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, imageData: PackedByteArray (content: args [1]!.assumingMemoryBound (to: (Int64, Int64).self).pointee), mimeType: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", retImage: resolved_3 == nil ? nil : lookupObject (nativeHandle: resolved_3!, ownsRef: false) as? Image)
+    let ret = swiftObject._parseImageData (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, imageData: PackedByteArray (content: args [1]!.assumingMemoryBound (to: (Int64, Int64).self).pointee), mimeType: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", retImage: resolved_3 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_3!, ownsRef: false) as? Image)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1134,10 +1134,10 @@ func _GLTFDocumentExtension_proxy_parse_node_extensions (instance: UnsafeMutable
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._parseNodeExtensions (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, gltfNode: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? GLTFNode, extensions: VariantDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee))
+    let ret = swiftObject._parseNodeExtensions (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, gltfNode: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? GLTFNode, extensions: VariantDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee))
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1146,10 +1146,10 @@ func _GLTFDocumentExtension_proxy_parse_texture_json (instance: UnsafeMutableRaw
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_2 = args [2]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_2 = args [2]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._parseTextureJson (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, textureJson: VariantDictionary (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee), retGltfTexture: resolved_2 == nil ? nil : lookupObject (nativeHandle: resolved_2!, ownsRef: false) as? GLTFTexture)
+    let ret = swiftObject._parseTextureJson (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, textureJson: VariantDictionary (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee), retGltfTexture: resolved_2 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_2!, ownsRef: false) as? GLTFTexture)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1158,10 +1158,10 @@ func _GLTFDocumentExtension_proxy_save_image_at_path (instance: UnsafeMutableRaw
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._saveImageAtPath (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, image: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? Image, filePath: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", imageFormat: GString.stringFromGStringPtr (ptr: args [3]!) ?? "", lossyQuality: args [4]!.assumingMemoryBound (to: Double.self).pointee)
+    let ret = swiftObject._saveImageAtPath (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, image: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? Image, filePath: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", imageFormat: GString.stringFromGStringPtr (ptr: args [3]!) ?? "", lossyQuality: args [4]!.assumingMemoryBound (to: Double.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -1170,10 +1170,10 @@ func _GLTFDocumentExtension_proxy_serialize_image_to_bytes (instance: UnsafeMuta
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._serializeImageToBytes (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, image: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? Image, imageDict: VariantDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee), imageFormat: GString.stringFromGStringPtr (ptr: args [3]!) ?? "", lossyQuality: args [4]!.assumingMemoryBound (to: Double.self).pointee)
+    let ret = swiftObject._serializeImageToBytes (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, image: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? Image, imageDict: VariantDictionary (content: args [2]!.assumingMemoryBound (to: Int64.self).pointee), imageFormat: GString.stringFromGStringPtr (ptr: args [3]!) ?? "", lossyQuality: args [4]!.assumingMemoryBound (to: Double.self).pointee)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedByteArray
     ret.content = PackedByteArray.zero
 }
@@ -1183,10 +1183,10 @@ func _GLTFDocumentExtension_proxy_serialize_texture_json (instance: UnsafeMutabl
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? GLTFDocumentExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_2 = args [2]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_2 = args [2]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._serializeTextureJson (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, textureJson: VariantDictionary (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee), gltfTexture: resolved_2 == nil ? nil : lookupObject (nativeHandle: resolved_2!, ownsRef: false) as? GLTFTexture, imageFormat: GString.stringFromGStringPtr (ptr: args [3]!) ?? "")
+    let ret = swiftObject._serializeTextureJson (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? GLTFState, textureJson: VariantDictionary (content: args [1]!.assumingMemoryBound (to: Int64.self).pointee), gltfTexture: resolved_2 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_2!, ownsRef: false) as? GLTFTexture, imageFormat: GString.stringFromGStringPtr (ptr: args [3]!) ?? "")
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 

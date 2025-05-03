@@ -63,7 +63,7 @@ open class XMLParser: RefCounted {
     public final func read() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(XMLParser.method_read, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XMLParser.method_read, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -82,7 +82,7 @@ open class XMLParser: RefCounted {
     public final func getNodeType() -> XMLParser.NodeType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(XMLParser.method_get_node_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XMLParser.method_get_node_type, handle, nil, &_result)
         return XMLParser.NodeType (rawValue: _result)!
     }
     
@@ -104,7 +104,7 @@ open class XMLParser: RefCounted {
     public final func getNodeName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(XMLParser.method_get_node_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XMLParser.method_get_node_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -123,7 +123,7 @@ open class XMLParser: RefCounted {
     public final func getNodeData() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(XMLParser.method_get_node_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(XMLParser.method_get_node_data, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -142,7 +142,7 @@ open class XMLParser: RefCounted {
     public final func getNodeOffset() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(XMLParser.method_get_node_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XMLParser.method_get_node_offset, handle, nil, &_result)
         return _result
     }
     
@@ -164,7 +164,7 @@ open class XMLParser: RefCounted {
     public final func getAttributeCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(XMLParser.method_get_attribute_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XMLParser.method_get_attribute_count, handle, nil, &_result)
         return _result
     }
     
@@ -186,7 +186,7 @@ open class XMLParser: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XMLParser.method_get_attribute_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(XMLParser.method_get_attribute_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -214,7 +214,7 @@ open class XMLParser: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XMLParser.method_get_attribute_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(XMLParser.method_get_attribute_value, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -243,7 +243,7 @@ open class XMLParser: RefCounted {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XMLParser.method_has_attribute, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XMLParser.method_has_attribute, handle, pArgs, &_result)
                 }
                 
             }
@@ -272,7 +272,7 @@ open class XMLParser: RefCounted {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XMLParser.method_get_named_attribute_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(XMLParser.method_get_named_attribute_value, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -301,7 +301,7 @@ open class XMLParser: RefCounted {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XMLParser.method_get_named_attribute_value_safe, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(XMLParser.method_get_named_attribute_value_safe, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -326,7 +326,7 @@ open class XMLParser: RefCounted {
     public final func isEmpty() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XMLParser.method_is_empty, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XMLParser.method_is_empty, handle, nil, &_result)
         return _result
     }
     
@@ -345,7 +345,7 @@ open class XMLParser: RefCounted {
     public final func getCurrentLine() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(XMLParser.method_get_current_line, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XMLParser.method_get_current_line, handle, nil, &_result)
         return _result
     }
     
@@ -363,7 +363,7 @@ open class XMLParser: RefCounted {
     /// Skips the current section. If the currently parsed node contains more inner nodes, they will be ignored and the cursor will go to the closing of the current element.
     public final func skipSection() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(XMLParser.method_skip_section, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(XMLParser.method_skip_section, handle, nil, nil)
         
     }
     
@@ -385,7 +385,7 @@ open class XMLParser: RefCounted {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XMLParser.method_seek, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XMLParser.method_seek, handle, pArgs, &_result)
                 }
                 
             }
@@ -414,7 +414,7 @@ open class XMLParser: RefCounted {
         withUnsafePointer(to: file.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XMLParser.method_open, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XMLParser.method_open, handle, pArgs, &_result)
                 }
                 
             }
@@ -442,7 +442,7 @@ open class XMLParser: RefCounted {
         withUnsafePointer(to: buffer.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XMLParser.method_open_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XMLParser.method_open_buffer, handle, pArgs, &_result)
                 }
                 
             }

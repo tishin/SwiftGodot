@@ -62,7 +62,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_data, handle, pArgs, &_result)
                 }
                 
             }
@@ -90,7 +90,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_partial_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_partial_data, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -118,7 +118,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: bytes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_get_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_get_data, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -146,7 +146,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: bytes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_get_partial_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_get_partial_data, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -171,7 +171,7 @@ open class StreamPeer: RefCounted {
     public final func getAvailableBytes() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(StreamPeer.method_get_available_bytes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeer.method_get_available_bytes, handle, nil, &_result)
         return _result
     }
     
@@ -192,7 +192,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_set_big_endian, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_set_big_endian, handle, pArgs, nil)
                 }
                 
             }
@@ -217,7 +217,7 @@ open class StreamPeer: RefCounted {
     fileprivate final func is_big_endian_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(StreamPeer.method_is_big_endian_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeer.method_is_big_endian_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -238,7 +238,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_8, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_8, handle, pArgs, nil)
                 }
                 
             }
@@ -265,7 +265,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_u8, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_u8, handle, pArgs, nil)
                 }
                 
             }
@@ -292,7 +292,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_16, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_16, handle, pArgs, nil)
                 }
                 
             }
@@ -319,7 +319,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_u16, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_u16, handle, pArgs, nil)
                 }
                 
             }
@@ -346,7 +346,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_32, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_32, handle, pArgs, nil)
                 }
                 
             }
@@ -373,7 +373,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_u32, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_u32, handle, pArgs, nil)
                 }
                 
             }
@@ -400,7 +400,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_64, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_64, handle, pArgs, nil)
                 }
                 
             }
@@ -427,7 +427,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_u64, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_u64, handle, pArgs, nil)
                 }
                 
             }
@@ -454,7 +454,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_half, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_half, handle, pArgs, nil)
                 }
                 
             }
@@ -481,7 +481,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_float, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_float, handle, pArgs, nil)
                 }
                 
             }
@@ -508,7 +508,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_double, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_double, handle, pArgs, nil)
                 }
                 
             }
@@ -539,7 +539,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_string, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_string, handle, pArgs, nil)
                 }
                 
             }
@@ -570,7 +570,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: value.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_put_utf8_string, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_put_utf8_string, handle, pArgs, nil)
                 }
                 
             }
@@ -601,7 +601,7 @@ open class StreamPeer: RefCounted {
             withUnsafePointer(to: fullObjects) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(StreamPeer.method_put_var, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(StreamPeer.method_put_var, handle, pArgs, nil)
                     }
                     
                 }
@@ -628,7 +628,7 @@ open class StreamPeer: RefCounted {
     public final func get8() -> Int8 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int8 = 0
-        gi.object_method_bind_ptrcall(StreamPeer.method_get_8, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeer.method_get_8, handle, nil, &_result)
         return _result
     }
     
@@ -647,7 +647,7 @@ open class StreamPeer: RefCounted {
     public final func getU8() -> UInt8 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt8 = 0
-        gi.object_method_bind_ptrcall(StreamPeer.method_get_u8, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeer.method_get_u8, handle, nil, &_result)
         return _result
     }
     
@@ -666,7 +666,7 @@ open class StreamPeer: RefCounted {
     public final func get16() -> Int16 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int16 = 0
-        gi.object_method_bind_ptrcall(StreamPeer.method_get_16, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeer.method_get_16, handle, nil, &_result)
         return _result
     }
     
@@ -685,7 +685,7 @@ open class StreamPeer: RefCounted {
     public final func getU16() -> UInt16 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt16 = 0
-        gi.object_method_bind_ptrcall(StreamPeer.method_get_u16, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeer.method_get_u16, handle, nil, &_result)
         return _result
     }
     
@@ -704,7 +704,7 @@ open class StreamPeer: RefCounted {
     public final func get32() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(StreamPeer.method_get_32, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeer.method_get_32, handle, nil, &_result)
         return _result
     }
     
@@ -723,7 +723,7 @@ open class StreamPeer: RefCounted {
     public final func getU32() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(StreamPeer.method_get_u32, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeer.method_get_u32, handle, nil, &_result)
         return _result
     }
     
@@ -742,7 +742,7 @@ open class StreamPeer: RefCounted {
     public final func get64() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(StreamPeer.method_get_64, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeer.method_get_64, handle, nil, &_result)
         return _result
     }
     
@@ -761,7 +761,7 @@ open class StreamPeer: RefCounted {
     public final func getU64() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(StreamPeer.method_get_u64, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeer.method_get_u64, handle, nil, &_result)
         return _result
     }
     
@@ -780,7 +780,7 @@ open class StreamPeer: RefCounted {
     public final func getHalf() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(StreamPeer.method_get_half, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeer.method_get_half, handle, nil, &_result)
         return _result
     }
     
@@ -799,7 +799,7 @@ open class StreamPeer: RefCounted {
     public final func getFloat() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(StreamPeer.method_get_float, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeer.method_get_float, handle, nil, &_result)
         return _result
     }
     
@@ -818,7 +818,7 @@ open class StreamPeer: RefCounted {
     public final func getDouble() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(StreamPeer.method_get_double, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeer.method_get_double, handle, nil, &_result)
         return _result
     }
     
@@ -840,7 +840,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: bytes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_get_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_get_string, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -868,7 +868,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: bytes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_get_utf8_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_get_utf8_string, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -901,7 +901,7 @@ open class StreamPeer: RefCounted {
         withUnsafePointer(to: allowObjects) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeer.method_get_var, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(StreamPeer.method_get_var, handle, pArgs, &_result)
                 }
                 
             }

@@ -145,7 +145,7 @@ open class TubeTrailMesh: PrimitiveMesh {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -170,7 +170,7 @@ open class TubeTrailMesh: PrimitiveMesh {
     fileprivate final func get_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(TubeTrailMesh.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TubeTrailMesh.method_get_radius, handle, nil, &_result)
         return _result
     }
     
@@ -191,7 +191,7 @@ open class TubeTrailMesh: PrimitiveMesh {
         withUnsafePointer(to: radialSteps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_radial_steps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_radial_steps, handle, pArgs, nil)
                 }
                 
             }
@@ -216,7 +216,7 @@ open class TubeTrailMesh: PrimitiveMesh {
     fileprivate final func get_radial_steps() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TubeTrailMesh.method_get_radial_steps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TubeTrailMesh.method_get_radial_steps, handle, nil, &_result)
         return _result
     }
     
@@ -237,7 +237,7 @@ open class TubeTrailMesh: PrimitiveMesh {
         withUnsafePointer(to: sections) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_sections, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_sections, handle, pArgs, nil)
                 }
                 
             }
@@ -262,7 +262,7 @@ open class TubeTrailMesh: PrimitiveMesh {
     fileprivate final func get_sections() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TubeTrailMesh.method_get_sections, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TubeTrailMesh.method_get_sections, handle, nil, &_result)
         return _result
     }
     
@@ -283,7 +283,7 @@ open class TubeTrailMesh: PrimitiveMesh {
         withUnsafePointer(to: sectionLength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_section_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_section_length, handle, pArgs, nil)
                 }
                 
             }
@@ -308,7 +308,7 @@ open class TubeTrailMesh: PrimitiveMesh {
     fileprivate final func get_section_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(TubeTrailMesh.method_get_section_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TubeTrailMesh.method_get_section_length, handle, nil, &_result)
         return _result
     }
     
@@ -329,7 +329,7 @@ open class TubeTrailMesh: PrimitiveMesh {
         withUnsafePointer(to: sectionRings) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_section_rings, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_section_rings, handle, pArgs, nil)
                 }
                 
             }
@@ -354,7 +354,7 @@ open class TubeTrailMesh: PrimitiveMesh {
     fileprivate final func get_section_rings() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TubeTrailMesh.method_get_section_rings, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TubeTrailMesh.method_get_section_rings, handle, nil, &_result)
         return _result
     }
     
@@ -375,7 +375,7 @@ open class TubeTrailMesh: PrimitiveMesh {
         withUnsafePointer(to: capTop) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_cap_top, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_cap_top, handle, pArgs, nil)
                 }
                 
             }
@@ -400,7 +400,7 @@ open class TubeTrailMesh: PrimitiveMesh {
     fileprivate final func is_cap_top() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TubeTrailMesh.method_is_cap_top, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TubeTrailMesh.method_is_cap_top, handle, nil, &_result)
         return _result
     }
     
@@ -421,7 +421,7 @@ open class TubeTrailMesh: PrimitiveMesh {
         withUnsafePointer(to: capBottom) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_cap_bottom, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_cap_bottom, handle, pArgs, nil)
                 }
                 
             }
@@ -446,7 +446,7 @@ open class TubeTrailMesh: PrimitiveMesh {
     fileprivate final func is_cap_bottom() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TubeTrailMesh.method_is_cap_bottom, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TubeTrailMesh.method_is_cap_bottom, handle, nil, &_result)
         return _result
     }
     
@@ -467,7 +467,7 @@ open class TubeTrailMesh: PrimitiveMesh {
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TubeTrailMesh.method_set_curve, handle, pArgs, nil)
                 }
                 
             }
@@ -491,9 +491,9 @@ open class TubeTrailMesh: PrimitiveMesh {
     @inline(__always)
     fileprivate final func get_curve() -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TubeTrailMesh.method_get_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TubeTrailMesh.method_get_curve, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

@@ -58,7 +58,7 @@ open class VisualShaderNodeCurveXYZTexture: VisualShaderNodeResizableBase {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCurveXYZTexture.method_set_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCurveXYZTexture.method_set_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -82,9 +82,9 @@ open class VisualShaderNodeCurveXYZTexture: VisualShaderNodeResizableBase {
     @inline(__always)
     fileprivate final func get_texture() -> CurveXYZTexture? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(VisualShaderNodeCurveXYZTexture.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(VisualShaderNodeCurveXYZTexture.method_get_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

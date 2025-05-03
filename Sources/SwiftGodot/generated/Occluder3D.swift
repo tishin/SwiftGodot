@@ -44,7 +44,7 @@ open class Occluder3D: Resource {
     public final func getVertices() -> PackedVector3Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
-        gi.object_method_bind_ptrcall(Occluder3D.method_get_vertices, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Occluder3D.method_get_vertices, handle, nil, &_result.content)
         return _result
     }
     
@@ -63,7 +63,7 @@ open class Occluder3D: Resource {
     public final func getIndices() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(Occluder3D.method_get_indices, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Occluder3D.method_get_indices, handle, nil, &_result.content)
         return _result
     }
     

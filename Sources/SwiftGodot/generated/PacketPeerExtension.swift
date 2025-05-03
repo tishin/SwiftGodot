@@ -39,7 +39,7 @@ open class PacketPeerExtension: PacketPeer {
     open func _getAvailablePacketCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PacketPeerExtension.method__get_available_packet_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PacketPeerExtension.method__get_available_packet_count, handle, nil, &_result)
         return _result
     }
     
@@ -59,7 +59,7 @@ open class PacketPeerExtension: PacketPeer {
     open func _getMaxPacketSize() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PacketPeerExtension.method__get_max_packet_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PacketPeerExtension.method__get_max_packet_size, handle, nil, &_result)
         return _result
     }
     

@@ -49,7 +49,7 @@ open class ImmediateMesh: Mesh {
             withUnsafePointer(to: material?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_begin, handle, pArgs, nil)
                     }
                     
                 }
@@ -78,7 +78,7 @@ open class ImmediateMesh: Mesh {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_set_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_set_color, handle, pArgs, nil)
                 }
                 
             }
@@ -105,7 +105,7 @@ open class ImmediateMesh: Mesh {
         withUnsafePointer(to: normal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_set_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_set_normal, handle, pArgs, nil)
                 }
                 
             }
@@ -132,7 +132,7 @@ open class ImmediateMesh: Mesh {
         withUnsafePointer(to: tangent) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_set_tangent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_set_tangent, handle, pArgs, nil)
                 }
                 
             }
@@ -159,7 +159,7 @@ open class ImmediateMesh: Mesh {
         withUnsafePointer(to: uv) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_set_uv, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_set_uv, handle, pArgs, nil)
                 }
                 
             }
@@ -186,7 +186,7 @@ open class ImmediateMesh: Mesh {
         withUnsafePointer(to: uv2) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_set_uv2, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_set_uv2, handle, pArgs, nil)
                 }
                 
             }
@@ -213,7 +213,7 @@ open class ImmediateMesh: Mesh {
         withUnsafePointer(to: vertex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_add_vertex, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_add_vertex, handle, pArgs, nil)
                 }
                 
             }
@@ -240,7 +240,7 @@ open class ImmediateMesh: Mesh {
         withUnsafePointer(to: vertex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_add_vertex_2d, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_add_vertex_2d, handle, pArgs, nil)
                 }
                 
             }
@@ -264,7 +264,7 @@ open class ImmediateMesh: Mesh {
     /// End and commit current surface. Note that surface being created will not be visible until this function is called.
     public final func surfaceEnd() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_end, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ImmediateMesh.method_surface_end, handle, nil, nil)
         
     }
     
@@ -282,7 +282,7 @@ open class ImmediateMesh: Mesh {
     /// Clear all surfaces.
     public final func clearSurfaces() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ImmediateMesh.method_clear_surfaces, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ImmediateMesh.method_clear_surfaces, handle, nil, nil)
         
     }
     

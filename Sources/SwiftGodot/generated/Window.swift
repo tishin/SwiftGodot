@@ -692,7 +692,7 @@ open class Window: Viewport {
     open func _getContentsMinimumSize() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Window.method__get_contents_minimum_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method__get_contents_minimum_size, handle, nil, &_result)
         return _result
     }
     
@@ -714,7 +714,7 @@ open class Window: Viewport {
         withUnsafePointer(to: title.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_title, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_title, handle, pArgs, nil)
                 }
                 
             }
@@ -739,7 +739,7 @@ open class Window: Viewport {
     fileprivate final func get_title() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Window.method_get_title, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Window.method_get_title, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -758,7 +758,7 @@ open class Window: Viewport {
     public final func getWindowId() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Window.method_get_window_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_window_id, handle, nil, &_result)
         return _result
     }
     
@@ -779,7 +779,7 @@ open class Window: Viewport {
         withUnsafePointer(to: initialPosition.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_initial_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_initial_position, handle, pArgs, nil)
                 }
                 
             }
@@ -804,7 +804,7 @@ open class Window: Viewport {
     fileprivate final func get_initial_position() -> Window.WindowInitialPosition {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Window.method_get_initial_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_initial_position, handle, nil, &_result)
         return Window.WindowInitialPosition (rawValue: _result)!
     }
     
@@ -825,7 +825,7 @@ open class Window: Viewport {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_current_screen, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_current_screen, handle, pArgs, nil)
                 }
                 
             }
@@ -850,7 +850,7 @@ open class Window: Viewport {
     fileprivate final func get_current_screen() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Window.method_get_current_screen, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_current_screen, handle, nil, &_result)
         return _result
     }
     
@@ -871,7 +871,7 @@ open class Window: Viewport {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_position, handle, pArgs, nil)
                 }
                 
             }
@@ -896,7 +896,7 @@ open class Window: Viewport {
     fileprivate final func get_position() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(Window.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_position, handle, nil, &_result)
         return _result
     }
     
@@ -914,7 +914,7 @@ open class Window: Viewport {
     /// Centers a native window on the current screen and an embedded window on its embedder ``Viewport``.
     public final func moveToCenter() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Window.method_move_to_center, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Window.method_move_to_center, handle, nil, nil)
         
     }
     
@@ -935,7 +935,7 @@ open class Window: Viewport {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_size, handle, pArgs, nil)
                 }
                 
             }
@@ -960,7 +960,7 @@ open class Window: Viewport {
     fileprivate final func get_size() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(Window.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -978,7 +978,7 @@ open class Window: Viewport {
     /// Resets the size to the minimum size, which is the max of ``minSize`` and (if ``wrapControls`` is enabled) ``getContentsMinimumSize()``. This is equivalent to calling `set_size(Vector2i())` (or any size below the minimum).
     public final func resetSize() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Window.method_reset_size, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Window.method_reset_size, handle, nil, nil)
         
     }
     
@@ -1000,7 +1000,7 @@ open class Window: Viewport {
     public final func getPositionWithDecorations() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(Window.method_get_position_with_decorations, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_position_with_decorations, handle, nil, &_result)
         return _result
     }
     
@@ -1022,7 +1022,7 @@ open class Window: Viewport {
     public final func getSizeWithDecorations() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(Window.method_get_size_with_decorations, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_size_with_decorations, handle, nil, &_result)
         return _result
     }
     
@@ -1043,7 +1043,7 @@ open class Window: Viewport {
         withUnsafePointer(to: maxSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_max_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_max_size, handle, pArgs, nil)
                 }
                 
             }
@@ -1068,7 +1068,7 @@ open class Window: Viewport {
     fileprivate final func get_max_size() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(Window.method_get_max_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_max_size, handle, nil, &_result)
         return _result
     }
     
@@ -1089,7 +1089,7 @@ open class Window: Viewport {
         withUnsafePointer(to: minSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_min_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_min_size, handle, pArgs, nil)
                 }
                 
             }
@@ -1114,7 +1114,7 @@ open class Window: Viewport {
     fileprivate final func get_min_size() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(Window.method_get_min_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_min_size, handle, nil, &_result)
         return _result
     }
     
@@ -1135,7 +1135,7 @@ open class Window: Viewport {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -1160,7 +1160,7 @@ open class Window: Viewport {
     fileprivate final func get_mode() -> Window.Mode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Window.method_get_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_mode, handle, nil, &_result)
         return Window.Mode (rawValue: _result)!
     }
     
@@ -1183,7 +1183,7 @@ open class Window: Viewport {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_set_flag, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Window.method_set_flag, handle, pArgs, nil)
                     }
                     
                 }
@@ -1214,7 +1214,7 @@ open class Window: Viewport {
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_get_flag, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Window.method_get_flag, handle, pArgs, &_result)
                 }
                 
             }
@@ -1239,7 +1239,7 @@ open class Window: Viewport {
     public final func isMaximizeAllowed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Window.method_is_maximize_allowed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_is_maximize_allowed, handle, nil, &_result)
         return _result
     }
     
@@ -1257,7 +1257,7 @@ open class Window: Viewport {
     /// Tells the OS that the ``Window`` needs an attention. This makes the window stand out in some way depending on the system, e.g. it might blink on the task bar.
     public final func requestAttention() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Window.method_request_attention, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Window.method_request_attention, handle, nil, nil)
         
     }
     
@@ -1275,7 +1275,7 @@ open class Window: Viewport {
     /// Causes the window to grab focus, allowing it to receive user input.
     public final func moveToForeground() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Window.method_move_to_foreground, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Window.method_move_to_foreground, handle, nil, nil)
         
     }
     
@@ -1296,7 +1296,7 @@ open class Window: Viewport {
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -1321,7 +1321,7 @@ open class Window: Viewport {
     fileprivate final func is_visible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Window.method_is_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_is_visible, handle, nil, &_result)
         return _result
     }
     
@@ -1342,7 +1342,7 @@ open class Window: Viewport {
         withUnsafePointer(to: nativeSurface?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_native_surface, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_native_surface, handle, pArgs, nil)
                 }
                 
             }
@@ -1366,9 +1366,9 @@ open class Window: Viewport {
     /// 
     public final func getNativeSurface() -> RenderingNativeSurface? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Window.method_get_native_surface, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Window.method_get_native_surface, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_hide: GDExtensionMethodBindPtr = {
@@ -1385,7 +1385,7 @@ open class Window: Viewport {
     /// Hides the window. This is not the same as minimized state. Hidden window can't be interacted with and needs to be made visible with ``show()``.
     public final func hide() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Window.method_hide, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Window.method_hide, handle, nil, nil)
         
     }
     
@@ -1403,7 +1403,7 @@ open class Window: Viewport {
     /// Makes the ``Window`` appear. This enables interactions with the ``Window`` and doesn't change any of its property other than visibility (unlike e.g. ``popup(rect:)``).
     public final func show() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Window.method_show, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Window.method_show, handle, nil, nil)
         
     }
     
@@ -1424,7 +1424,7 @@ open class Window: Viewport {
         withUnsafePointer(to: transient) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_transient, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_transient, handle, pArgs, nil)
                 }
                 
             }
@@ -1449,7 +1449,7 @@ open class Window: Viewport {
     fileprivate final func is_transient() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Window.method_is_transient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_is_transient, handle, nil, &_result)
         return _result
     }
     
@@ -1470,7 +1470,7 @@ open class Window: Viewport {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_transient_to_focused, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_transient_to_focused, handle, pArgs, nil)
                 }
                 
             }
@@ -1495,7 +1495,7 @@ open class Window: Viewport {
     fileprivate final func is_transient_to_focused() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Window.method_is_transient_to_focused, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_is_transient_to_focused, handle, nil, &_result)
         return _result
     }
     
@@ -1516,7 +1516,7 @@ open class Window: Viewport {
         withUnsafePointer(to: exclusive) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_exclusive, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_exclusive, handle, pArgs, nil)
                 }
                 
             }
@@ -1541,7 +1541,7 @@ open class Window: Viewport {
     fileprivate final func is_exclusive() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Window.method_is_exclusive, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_is_exclusive, handle, nil, &_result)
         return _result
     }
     
@@ -1565,7 +1565,7 @@ open class Window: Viewport {
         withUnsafePointer(to: unparent) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_unparent_when_invisible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_unparent_when_invisible, handle, pArgs, nil)
                 }
                 
             }
@@ -1590,7 +1590,7 @@ open class Window: Viewport {
     public final func canDraw() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Window.method_can_draw, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_can_draw, handle, nil, &_result)
         return _result
     }
     
@@ -1609,7 +1609,7 @@ open class Window: Viewport {
     public final func hasFocus() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Window.method_has_focus, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_has_focus, handle, nil, &_result)
         return _result
     }
     
@@ -1627,7 +1627,7 @@ open class Window: Viewport {
     /// Causes the window to grab focus, allowing it to receive user input.
     public final func grabFocus() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Window.method_grab_focus, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Window.method_grab_focus, handle, nil, nil)
         
     }
     
@@ -1645,7 +1645,7 @@ open class Window: Viewport {
     /// Starts an interactive drag operation on the window, using the current mouse position. Call this method when handling a mouse button being pressed to simulate a pressed event on the window's title bar. Using this method allows the window to participate in space switching, tiling, and other system features.
     public final func startDrag() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Window.method_start_drag, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Window.method_start_drag, handle, nil, nil)
         
     }
     
@@ -1666,7 +1666,7 @@ open class Window: Viewport {
         withUnsafePointer(to: edge.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_start_resize, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_start_resize, handle, pArgs, nil)
                 }
                 
             }
@@ -1693,7 +1693,7 @@ open class Window: Viewport {
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_ime_active, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_ime_active, handle, pArgs, nil)
                 }
                 
             }
@@ -1720,7 +1720,7 @@ open class Window: Viewport {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_ime_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_ime_position, handle, pArgs, nil)
                 }
                 
             }
@@ -1745,7 +1745,7 @@ open class Window: Viewport {
     public final func isEmbedded() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Window.method_is_embedded, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_is_embedded, handle, nil, &_result)
         return _result
     }
     
@@ -1767,7 +1767,7 @@ open class Window: Viewport {
     public final func getContentsMinimumSize() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Window.method_get_contents_minimum_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_contents_minimum_size, handle, nil, &_result)
         return _result
     }
     
@@ -1788,7 +1788,7 @@ open class Window: Viewport {
         withUnsafePointer(to: forceNative) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_force_native, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_force_native, handle, pArgs, nil)
                 }
                 
             }
@@ -1813,7 +1813,7 @@ open class Window: Viewport {
     fileprivate final func get_force_native() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Window.method_get_force_native, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_force_native, handle, nil, &_result)
         return _result
     }
     
@@ -1834,7 +1834,7 @@ open class Window: Viewport {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_content_scale_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_content_scale_size, handle, pArgs, nil)
                 }
                 
             }
@@ -1859,7 +1859,7 @@ open class Window: Viewport {
     fileprivate final func get_content_scale_size() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(Window.method_get_content_scale_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_content_scale_size, handle, nil, &_result)
         return _result
     }
     
@@ -1880,7 +1880,7 @@ open class Window: Viewport {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_content_scale_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_content_scale_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -1905,7 +1905,7 @@ open class Window: Viewport {
     fileprivate final func get_content_scale_mode() -> Window.ContentScaleMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Window.method_get_content_scale_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_content_scale_mode, handle, nil, &_result)
         return Window.ContentScaleMode (rawValue: _result)!
     }
     
@@ -1926,7 +1926,7 @@ open class Window: Viewport {
         withUnsafePointer(to: aspect.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_content_scale_aspect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_content_scale_aspect, handle, pArgs, nil)
                 }
                 
             }
@@ -1951,7 +1951,7 @@ open class Window: Viewport {
     fileprivate final func get_content_scale_aspect() -> Window.ContentScaleAspect {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Window.method_get_content_scale_aspect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_content_scale_aspect, handle, nil, &_result)
         return Window.ContentScaleAspect (rawValue: _result)!
     }
     
@@ -1972,7 +1972,7 @@ open class Window: Viewport {
         withUnsafePointer(to: stretch.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_content_scale_stretch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_content_scale_stretch, handle, pArgs, nil)
                 }
                 
             }
@@ -1997,7 +1997,7 @@ open class Window: Viewport {
     fileprivate final func get_content_scale_stretch() -> Window.ContentScaleStretch {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Window.method_get_content_scale_stretch, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_content_scale_stretch, handle, nil, &_result)
         return Window.ContentScaleStretch (rawValue: _result)!
     }
     
@@ -2018,7 +2018,7 @@ open class Window: Viewport {
         withUnsafePointer(to: titleVisible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_keep_title_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_keep_title_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -2043,7 +2043,7 @@ open class Window: Viewport {
     fileprivate final func get_keep_title_visible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Window.method_get_keep_title_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_keep_title_visible, handle, nil, &_result)
         return _result
     }
     
@@ -2064,7 +2064,7 @@ open class Window: Viewport {
         withUnsafePointer(to: factor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_content_scale_factor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_content_scale_factor, handle, pArgs, nil)
                 }
                 
             }
@@ -2089,7 +2089,7 @@ open class Window: Viewport {
     fileprivate final func get_content_scale_factor() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Window.method_get_content_scale_factor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_content_scale_factor, handle, nil, &_result)
         return _result
     }
     
@@ -2110,7 +2110,7 @@ open class Window: Viewport {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_use_font_oversampling, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_use_font_oversampling, handle, pArgs, nil)
                 }
                 
             }
@@ -2135,7 +2135,7 @@ open class Window: Viewport {
     public final func isUsingFontOversampling() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Window.method_is_using_font_oversampling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_is_using_font_oversampling, handle, nil, &_result)
         return _result
     }
     
@@ -2156,7 +2156,7 @@ open class Window: Viewport {
         withUnsafePointer(to: polygon.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_mouse_passthrough_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_mouse_passthrough_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -2181,7 +2181,7 @@ open class Window: Viewport {
     fileprivate final func get_mouse_passthrough_polygon() -> PackedVector2Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
-        gi.object_method_bind_ptrcall(Window.method_get_mouse_passthrough_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Window.method_get_mouse_passthrough_polygon, handle, nil, &_result.content)
         return _result
     }
     
@@ -2202,7 +2202,7 @@ open class Window: Viewport {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_wrap_controls, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_wrap_controls, handle, pArgs, nil)
                 }
                 
             }
@@ -2227,7 +2227,7 @@ open class Window: Viewport {
     fileprivate final func is_wrapping_controls() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Window.method_is_wrapping_controls, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_is_wrapping_controls, handle, nil, &_result)
         return _result
     }
     
@@ -2245,7 +2245,7 @@ open class Window: Viewport {
     /// Requests an update of the ``Window`` size to fit underlying ``Control`` nodes.
     public final func childControlsChanged() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Window.method_child_controls_changed, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Window.method_child_controls_changed, handle, nil, nil)
         
     }
     
@@ -2266,7 +2266,7 @@ open class Window: Viewport {
         withUnsafePointer(to: theme?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_theme, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_theme, handle, pArgs, nil)
                 }
                 
             }
@@ -2290,9 +2290,9 @@ open class Window: Viewport {
     @inline(__always)
     fileprivate final func get_theme() -> Theme? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Window.method_get_theme, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Window.method_get_theme, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_theme_type_variation: GDExtensionMethodBindPtr = {
@@ -2312,7 +2312,7 @@ open class Window: Viewport {
         withUnsafePointer(to: themeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_theme_type_variation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_theme_type_variation, handle, pArgs, nil)
                 }
                 
             }
@@ -2337,7 +2337,7 @@ open class Window: Viewport {
     fileprivate final func get_theme_type_variation() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(Window.method_get_theme_type_variation, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Window.method_get_theme_type_variation, handle, nil, &_result.content)
         return _result
     }
     
@@ -2355,7 +2355,7 @@ open class Window: Viewport {
     /// Prevents `*_theme_*_override` methods from emitting ``notificationThemeChanged`` until ``endBulkThemeOverride()`` is called.
     public final func beginBulkThemeOverride() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Window.method_begin_bulk_theme_override, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Window.method_begin_bulk_theme_override, handle, nil, nil)
         
     }
     
@@ -2373,7 +2373,7 @@ open class Window: Viewport {
     /// Ends a bulk theme override update. See ``beginBulkThemeOverride()``.
     public final func endBulkThemeOverride() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Window.method_end_bulk_theme_override, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Window.method_end_bulk_theme_override, handle, nil, nil)
         
     }
     
@@ -2398,7 +2398,7 @@ open class Window: Viewport {
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_add_theme_icon_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Window.method_add_theme_icon_override, handle, pArgs, nil)
                     }
                     
                 }
@@ -2431,7 +2431,7 @@ open class Window: Viewport {
             withUnsafePointer(to: stylebox?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_add_theme_stylebox_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Window.method_add_theme_stylebox_override, handle, pArgs, nil)
                     }
                     
                 }
@@ -2464,7 +2464,7 @@ open class Window: Viewport {
             withUnsafePointer(to: font?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_add_theme_font_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Window.method_add_theme_font_override, handle, pArgs, nil)
                     }
                     
                 }
@@ -2497,7 +2497,7 @@ open class Window: Viewport {
             withUnsafePointer(to: fontSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_add_theme_font_size_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Window.method_add_theme_font_size_override, handle, pArgs, nil)
                     }
                     
                 }
@@ -2530,7 +2530,7 @@ open class Window: Viewport {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_add_theme_color_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Window.method_add_theme_color_override, handle, pArgs, nil)
                     }
                     
                 }
@@ -2563,7 +2563,7 @@ open class Window: Viewport {
             withUnsafePointer(to: constant) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_add_theme_constant_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Window.method_add_theme_constant_override, handle, pArgs, nil)
                     }
                     
                 }
@@ -2592,7 +2592,7 @@ open class Window: Viewport {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_remove_theme_icon_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_remove_theme_icon_override, handle, pArgs, nil)
                 }
                 
             }
@@ -2619,7 +2619,7 @@ open class Window: Viewport {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_remove_theme_stylebox_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_remove_theme_stylebox_override, handle, pArgs, nil)
                 }
                 
             }
@@ -2646,7 +2646,7 @@ open class Window: Viewport {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_remove_theme_font_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_remove_theme_font_override, handle, pArgs, nil)
                 }
                 
             }
@@ -2673,7 +2673,7 @@ open class Window: Viewport {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_remove_theme_font_size_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_remove_theme_font_size_override, handle, pArgs, nil)
                 }
                 
             }
@@ -2700,7 +2700,7 @@ open class Window: Viewport {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_remove_theme_color_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_remove_theme_color_override, handle, pArgs, nil)
                 }
                 
             }
@@ -2727,7 +2727,7 @@ open class Window: Viewport {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_remove_theme_constant_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_remove_theme_constant_override, handle, pArgs, nil)
                 }
                 
             }
@@ -2754,12 +2754,12 @@ open class Window: Viewport {
     /// 
     public final func getThemeIcon(name: StringName, themeType: StringName = StringName ("")) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_get_theme_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Window.method_get_theme_icon, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2768,7 +2768,7 @@ open class Window: Viewport {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_theme_stylebox: GDExtensionMethodBindPtr = {
@@ -2788,12 +2788,12 @@ open class Window: Viewport {
     /// 
     public final func getThemeStylebox(name: StringName, themeType: StringName = StringName ("")) -> StyleBox? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_get_theme_stylebox, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Window.method_get_theme_stylebox, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2802,7 +2802,7 @@ open class Window: Viewport {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_theme_font: GDExtensionMethodBindPtr = {
@@ -2822,12 +2822,12 @@ open class Window: Viewport {
     /// 
     public final func getThemeFont(name: StringName, themeType: StringName = StringName ("")) -> Font? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_get_theme_font, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Window.method_get_theme_font, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2836,7 +2836,7 @@ open class Window: Viewport {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_theme_font_size: GDExtensionMethodBindPtr = {
@@ -2861,7 +2861,7 @@ open class Window: Viewport {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_get_theme_font_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Window.method_get_theme_font_size, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2895,7 +2895,7 @@ open class Window: Viewport {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_get_theme_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Window.method_get_theme_color, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2929,7 +2929,7 @@ open class Window: Viewport {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_get_theme_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Window.method_get_theme_constant, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2962,7 +2962,7 @@ open class Window: Viewport {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_has_theme_icon_override, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Window.method_has_theme_icon_override, handle, pArgs, &_result)
                 }
                 
             }
@@ -2993,7 +2993,7 @@ open class Window: Viewport {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_has_theme_stylebox_override, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Window.method_has_theme_stylebox_override, handle, pArgs, &_result)
                 }
                 
             }
@@ -3024,7 +3024,7 @@ open class Window: Viewport {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_has_theme_font_override, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Window.method_has_theme_font_override, handle, pArgs, &_result)
                 }
                 
             }
@@ -3055,7 +3055,7 @@ open class Window: Viewport {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_has_theme_font_size_override, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Window.method_has_theme_font_size_override, handle, pArgs, &_result)
                 }
                 
             }
@@ -3086,7 +3086,7 @@ open class Window: Viewport {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_has_theme_color_override, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Window.method_has_theme_color_override, handle, pArgs, &_result)
                 }
                 
             }
@@ -3117,7 +3117,7 @@ open class Window: Viewport {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_has_theme_constant_override, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Window.method_has_theme_constant_override, handle, pArgs, &_result)
                 }
                 
             }
@@ -3149,7 +3149,7 @@ open class Window: Viewport {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_has_theme_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Window.method_has_theme_icon, handle, pArgs, &_result)
                     }
                     
                 }
@@ -3183,7 +3183,7 @@ open class Window: Viewport {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_has_theme_stylebox, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Window.method_has_theme_stylebox, handle, pArgs, &_result)
                     }
                     
                 }
@@ -3217,7 +3217,7 @@ open class Window: Viewport {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_has_theme_font, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Window.method_has_theme_font, handle, pArgs, &_result)
                     }
                     
                 }
@@ -3251,7 +3251,7 @@ open class Window: Viewport {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_has_theme_font_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Window.method_has_theme_font_size, handle, pArgs, &_result)
                     }
                     
                 }
@@ -3285,7 +3285,7 @@ open class Window: Viewport {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_has_theme_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Window.method_has_theme_color, handle, pArgs, &_result)
                     }
                     
                 }
@@ -3319,7 +3319,7 @@ open class Window: Viewport {
             withUnsafePointer(to: themeType.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_has_theme_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Window.method_has_theme_constant, handle, pArgs, &_result)
                     }
                     
                 }
@@ -3349,7 +3349,7 @@ open class Window: Viewport {
     public final func getThemeDefaultBaseScale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Window.method_get_theme_default_base_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_theme_default_base_scale, handle, nil, &_result)
         return _result
     }
     
@@ -3370,9 +3370,9 @@ open class Window: Viewport {
     /// 
     public final func getThemeDefaultFont() -> Font? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Window.method_get_theme_default_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Window.method_get_theme_default_font, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_theme_default_font_size: GDExtensionMethodBindPtr = {
@@ -3393,7 +3393,7 @@ open class Window: Viewport {
     public final func getThemeDefaultFontSize() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Window.method_get_theme_default_font_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_theme_default_font_size, handle, nil, &_result)
         return _result
     }
     
@@ -3414,7 +3414,7 @@ open class Window: Viewport {
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_layout_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_layout_direction, handle, pArgs, nil)
                 }
                 
             }
@@ -3439,7 +3439,7 @@ open class Window: Viewport {
     public final func getLayoutDirection() -> Window.LayoutDirection {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Window.method_get_layout_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_get_layout_direction, handle, nil, &_result)
         return Window.LayoutDirection (rawValue: _result)!
     }
     
@@ -3458,7 +3458,7 @@ open class Window: Viewport {
     public final func isLayoutRtl() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Window.method_is_layout_rtl, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_is_layout_rtl, handle, nil, &_result)
         return _result
     }
     
@@ -3479,7 +3479,7 @@ open class Window: Viewport {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_set_auto_translate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_set_auto_translate, handle, pArgs, nil)
                 }
                 
             }
@@ -3504,7 +3504,7 @@ open class Window: Viewport {
     fileprivate final func is_auto_translating() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Window.method_is_auto_translating, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Window.method_is_auto_translating, handle, nil, &_result)
         return _result
     }
     
@@ -3532,7 +3532,7 @@ open class Window: Viewport {
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_popup, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_popup, handle, pArgs, nil)
                 }
                 
             }
@@ -3559,7 +3559,7 @@ open class Window: Viewport {
         withUnsafePointer(to: parentRect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_popup_on_parent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_popup_on_parent, handle, pArgs, nil)
                 }
                 
             }
@@ -3589,7 +3589,7 @@ open class Window: Viewport {
         withUnsafePointer(to: minsize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_popup_centered, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_popup_centered, handle, pArgs, nil)
                 }
                 
             }
@@ -3619,7 +3619,7 @@ open class Window: Viewport {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Window.method_popup_centered_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Window.method_popup_centered_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -3650,7 +3650,7 @@ open class Window: Viewport {
             withUnsafePointer(to: fallbackRatio) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_popup_centered_clamped, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Window.method_popup_centered_clamped, handle, pArgs, nil)
                     }
                     
                 }
@@ -3683,7 +3683,7 @@ open class Window: Viewport {
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_popup_exclusive, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Window.method_popup_exclusive, handle, pArgs, nil)
                     }
                     
                 }
@@ -3716,7 +3716,7 @@ open class Window: Viewport {
             withUnsafePointer(to: parentRect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_popup_exclusive_on_parent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Window.method_popup_exclusive_on_parent, handle, pArgs, nil)
                     }
                     
                 }
@@ -3749,7 +3749,7 @@ open class Window: Viewport {
             withUnsafePointer(to: minsize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_popup_exclusive_centered, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Window.method_popup_exclusive_centered, handle, pArgs, nil)
                     }
                     
                 }
@@ -3782,7 +3782,7 @@ open class Window: Viewport {
             withUnsafePointer(to: ratio) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Window.method_popup_exclusive_centered_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Window.method_popup_exclusive_centered_ratio, handle, pArgs, nil)
                     }
                     
                 }
@@ -3816,7 +3816,7 @@ open class Window: Viewport {
                 withUnsafePointer(to: fallbackRatio) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Window.method_popup_exclusive_centered_clamped, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Window.method_popup_exclusive_centered_clamped, handle, pArgs, nil)
                         }
                         
                     }

@@ -74,7 +74,7 @@ open class SkeletonModification2D: Resource {
         withUnsafePointer(to: delta) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2D.method__execute, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2D.method__execute, handle, pArgs, nil)
                 }
                 
             }
@@ -102,7 +102,7 @@ open class SkeletonModification2D: Resource {
         withUnsafePointer(to: modificationStack?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2D.method__setup_modification, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2D.method__setup_modification, handle, pArgs, nil)
                 }
                 
             }
@@ -130,7 +130,7 @@ open class SkeletonModification2D: Resource {
     @_documentation(visibility: public)
     open func _drawEditorGizmo() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(SkeletonModification2D.method__draw_editor_gizmo, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(SkeletonModification2D.method__draw_editor_gizmo, handle, nil, nil)
         
     }
     
@@ -151,7 +151,7 @@ open class SkeletonModification2D: Resource {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2D.method_set_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2D.method_set_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -176,7 +176,7 @@ open class SkeletonModification2D: Resource {
     fileprivate final func get_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SkeletonModification2D.method_get_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2D.method_get_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -194,9 +194,9 @@ open class SkeletonModification2D: Resource {
     /// Returns the ``SkeletonModificationStack2D`` that this modification is bound to. Through the modification stack, you can access the Skeleton2D the modification is operating on.
     public final func getModificationStack() -> SkeletonModificationStack2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(SkeletonModification2D.method_get_modification_stack, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(SkeletonModification2D.method_get_modification_stack, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_is_setup: GDExtensionMethodBindPtr = {
@@ -216,7 +216,7 @@ open class SkeletonModification2D: Resource {
         withUnsafePointer(to: isSetup) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2D.method_set_is_setup, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2D.method_set_is_setup, handle, pArgs, nil)
                 }
                 
             }
@@ -241,7 +241,7 @@ open class SkeletonModification2D: Resource {
     public final func getIsSetup() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SkeletonModification2D.method_get_is_setup, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2D.method_get_is_setup, handle, nil, &_result)
         return _result
     }
     
@@ -262,7 +262,7 @@ open class SkeletonModification2D: Resource {
         withUnsafePointer(to: executionMode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2D.method_set_execution_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2D.method_set_execution_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -287,7 +287,7 @@ open class SkeletonModification2D: Resource {
     fileprivate final func get_execution_mode() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SkeletonModification2D.method_get_execution_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2D.method_get_execution_mode, handle, nil, &_result)
         return _result
     }
     
@@ -312,7 +312,7 @@ open class SkeletonModification2D: Resource {
                     withUnsafePointer(to: invert) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(SkeletonModification2D.method_clamp_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(SkeletonModification2D.method_clamp_angle, handle, pArgs, &_result)
                             }
                             
                         }
@@ -345,7 +345,7 @@ open class SkeletonModification2D: Resource {
         withUnsafePointer(to: drawGizmo) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SkeletonModification2D.method_set_editor_draw_gizmo, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SkeletonModification2D.method_set_editor_draw_gizmo, handle, pArgs, nil)
                 }
                 
             }
@@ -370,7 +370,7 @@ open class SkeletonModification2D: Resource {
     public final func getEditorDrawGizmo() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SkeletonModification2D.method_get_editor_draw_gizmo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SkeletonModification2D.method_get_editor_draw_gizmo, handle, nil, &_result)
         return _result
     }
     
@@ -412,8 +412,8 @@ func _SkeletonModification2D_proxy_setup_modification (instance: UnsafeMutableRa
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? SkeletonModification2D else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._setupModification (modificationStack: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? SkeletonModificationStack2D)
+    swiftObject._setupModification (modificationStack: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? SkeletonModificationStack2D)
 }
 

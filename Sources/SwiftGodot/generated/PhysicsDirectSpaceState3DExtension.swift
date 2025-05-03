@@ -49,7 +49,7 @@ open class PhysicsDirectSpaceState3DExtension: PhysicsDirectSpaceState3D {
             withUnsafePointer(to: point) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3DExtension.method__get_closest_point_to_object_volume, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3DExtension.method__get_closest_point_to_object_volume, handle, pArgs, &_result)
                     }
                     
                 }
@@ -79,7 +79,7 @@ open class PhysicsDirectSpaceState3DExtension: PhysicsDirectSpaceState3D {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3DExtension.method_is_body_excluded_from_query, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3DExtension.method_is_body_excluded_from_query, handle, pArgs, &_result)
                 }
                 
             }

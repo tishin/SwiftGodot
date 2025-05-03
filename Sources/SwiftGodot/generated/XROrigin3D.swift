@@ -77,7 +77,7 @@ open class XROrigin3D: Node3D {
         withUnsafePointer(to: worldScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XROrigin3D.method_set_world_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XROrigin3D.method_set_world_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -102,7 +102,7 @@ open class XROrigin3D: Node3D {
     fileprivate final func get_world_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(XROrigin3D.method_get_world_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XROrigin3D.method_get_world_scale, handle, nil, &_result)
         return _result
     }
     
@@ -123,7 +123,7 @@ open class XROrigin3D: Node3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XROrigin3D.method_set_current, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(XROrigin3D.method_set_current, handle, pArgs, nil)
                 }
                 
             }
@@ -148,7 +148,7 @@ open class XROrigin3D: Node3D {
     fileprivate final func is_current() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(XROrigin3D.method_is_current, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XROrigin3D.method_is_current, handle, nil, &_result)
         return _result
     }
     

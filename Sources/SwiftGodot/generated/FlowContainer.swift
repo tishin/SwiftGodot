@@ -118,7 +118,7 @@ open class FlowContainer: Container {
     public final func getLineCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(FlowContainer.method_get_line_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FlowContainer.method_get_line_count, handle, nil, &_result)
         return _result
     }
     
@@ -139,7 +139,7 @@ open class FlowContainer: Container {
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FlowContainer.method_set_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FlowContainer.method_set_alignment, handle, pArgs, nil)
                 }
                 
             }
@@ -164,7 +164,7 @@ open class FlowContainer: Container {
     fileprivate final func get_alignment() -> FlowContainer.AlignmentMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FlowContainer.method_get_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FlowContainer.method_get_alignment, handle, nil, &_result)
         return FlowContainer.AlignmentMode (rawValue: _result)!
     }
     
@@ -185,7 +185,7 @@ open class FlowContainer: Container {
         withUnsafePointer(to: lastWrapAlignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FlowContainer.method_set_last_wrap_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FlowContainer.method_set_last_wrap_alignment, handle, pArgs, nil)
                 }
                 
             }
@@ -210,7 +210,7 @@ open class FlowContainer: Container {
     fileprivate final func get_last_wrap_alignment() -> FlowContainer.LastWrapAlignmentMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FlowContainer.method_get_last_wrap_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FlowContainer.method_get_last_wrap_alignment, handle, nil, &_result)
         return FlowContainer.LastWrapAlignmentMode (rawValue: _result)!
     }
     
@@ -231,7 +231,7 @@ open class FlowContainer: Container {
         withUnsafePointer(to: vertical) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FlowContainer.method_set_vertical, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FlowContainer.method_set_vertical, handle, pArgs, nil)
                 }
                 
             }
@@ -256,7 +256,7 @@ open class FlowContainer: Container {
     fileprivate final func is_vertical() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FlowContainer.method_is_vertical, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FlowContainer.method_is_vertical, handle, nil, &_result)
         return _result
     }
     
@@ -277,7 +277,7 @@ open class FlowContainer: Container {
         withUnsafePointer(to: reverseFill) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FlowContainer.method_set_reverse_fill, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FlowContainer.method_set_reverse_fill, handle, pArgs, nil)
                 }
                 
             }
@@ -302,7 +302,7 @@ open class FlowContainer: Container {
     fileprivate final func is_reverse_fill() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FlowContainer.method_is_reverse_fill, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FlowContainer.method_is_reverse_fill, handle, nil, &_result)
         return _result
     }
     

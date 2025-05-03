@@ -60,7 +60,7 @@ open class XRController3D: XRNode3D {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRController3D.method_is_button_pressed, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRController3D.method_is_button_pressed, handle, pArgs, &_result)
                 }
                 
             }
@@ -88,7 +88,7 @@ open class XRController3D: XRNode3D {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRController3D.method_get_input, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRController3D.method_get_input, handle, pArgs, &_result)
                 }
                 
             }
@@ -116,7 +116,7 @@ open class XRController3D: XRNode3D {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRController3D.method_get_float, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRController3D.method_get_float, handle, pArgs, &_result)
                 }
                 
             }
@@ -144,7 +144,7 @@ open class XRController3D: XRNode3D {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(XRController3D.method_get_vector2, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(XRController3D.method_get_vector2, handle, pArgs, &_result)
                 }
                 
             }
@@ -169,7 +169,7 @@ open class XRController3D: XRNode3D {
     public final func getTrackerHand() -> XRPositionalTracker.TrackerHand {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(XRController3D.method_get_tracker_hand, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRController3D.method_get_tracker_hand, handle, nil, &_result)
         return XRPositionalTracker.TrackerHand (rawValue: _result)!
     }
     

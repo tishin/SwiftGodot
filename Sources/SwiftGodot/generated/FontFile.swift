@@ -327,7 +327,7 @@ open class FontFile: Font {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_load_bitmap_font, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FontFile.method_load_bitmap_font, handle, pArgs, &_result)
                 }
                 
             }
@@ -359,7 +359,7 @@ open class FontFile: Font {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_load_dynamic_font, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FontFile.method_load_dynamic_font, handle, pArgs, &_result)
                 }
                 
             }
@@ -386,7 +386,7 @@ open class FontFile: Font {
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_data, handle, pArgs, nil)
                 }
                 
             }
@@ -411,7 +411,7 @@ open class FontFile: Font {
     fileprivate final func get_data() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(FontFile.method_get_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FontFile.method_get_data, handle, nil, &_result.content)
         return _result
     }
     
@@ -433,7 +433,7 @@ open class FontFile: Font {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_font_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_font_name, handle, pArgs, nil)
                 }
                 
             }
@@ -461,7 +461,7 @@ open class FontFile: Font {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_font_style_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_font_style_name, handle, pArgs, nil)
                 }
                 
             }
@@ -488,7 +488,7 @@ open class FontFile: Font {
         withUnsafePointer(to: style.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_font_style, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_font_style, handle, pArgs, nil)
                 }
                 
             }
@@ -515,7 +515,7 @@ open class FontFile: Font {
         withUnsafePointer(to: weight) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_font_weight, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_font_weight, handle, pArgs, nil)
                 }
                 
             }
@@ -542,7 +542,7 @@ open class FontFile: Font {
         withUnsafePointer(to: stretch) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_font_stretch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_font_stretch, handle, pArgs, nil)
                 }
                 
             }
@@ -569,7 +569,7 @@ open class FontFile: Font {
         withUnsafePointer(to: antialiasing.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_antialiasing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_antialiasing, handle, pArgs, nil)
                 }
                 
             }
@@ -594,7 +594,7 @@ open class FontFile: Font {
     fileprivate final func get_antialiasing() -> TextServer.FontAntialiasing {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FontFile.method_get_antialiasing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_get_antialiasing, handle, nil, &_result)
         return TextServer.FontAntialiasing (rawValue: _result)!
     }
     
@@ -615,7 +615,7 @@ open class FontFile: Font {
         withUnsafePointer(to: disableEmbeddedBitmaps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_disable_embedded_bitmaps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_disable_embedded_bitmaps, handle, pArgs, nil)
                 }
                 
             }
@@ -640,7 +640,7 @@ open class FontFile: Font {
     fileprivate final func get_disable_embedded_bitmaps() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FontFile.method_get_disable_embedded_bitmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_get_disable_embedded_bitmaps, handle, nil, &_result)
         return _result
     }
     
@@ -661,7 +661,7 @@ open class FontFile: Font {
         withUnsafePointer(to: generateMipmaps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_generate_mipmaps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_generate_mipmaps, handle, pArgs, nil)
                 }
                 
             }
@@ -686,7 +686,7 @@ open class FontFile: Font {
     fileprivate final func get_generate_mipmaps() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FontFile.method_get_generate_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_get_generate_mipmaps, handle, nil, &_result)
         return _result
     }
     
@@ -707,7 +707,7 @@ open class FontFile: Font {
         withUnsafePointer(to: msdf) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_multichannel_signed_distance_field, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_multichannel_signed_distance_field, handle, pArgs, nil)
                 }
                 
             }
@@ -732,7 +732,7 @@ open class FontFile: Font {
     fileprivate final func is_multichannel_signed_distance_field() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FontFile.method_is_multichannel_signed_distance_field, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_is_multichannel_signed_distance_field, handle, nil, &_result)
         return _result
     }
     
@@ -753,7 +753,7 @@ open class FontFile: Font {
         withUnsafePointer(to: msdfPixelRange) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_msdf_pixel_range, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_msdf_pixel_range, handle, pArgs, nil)
                 }
                 
             }
@@ -778,7 +778,7 @@ open class FontFile: Font {
     fileprivate final func get_msdf_pixel_range() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(FontFile.method_get_msdf_pixel_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_get_msdf_pixel_range, handle, nil, &_result)
         return _result
     }
     
@@ -799,7 +799,7 @@ open class FontFile: Font {
         withUnsafePointer(to: msdfSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_msdf_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_msdf_size, handle, pArgs, nil)
                 }
                 
             }
@@ -824,7 +824,7 @@ open class FontFile: Font {
     fileprivate final func get_msdf_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(FontFile.method_get_msdf_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_get_msdf_size, handle, nil, &_result)
         return _result
     }
     
@@ -845,7 +845,7 @@ open class FontFile: Font {
         withUnsafePointer(to: fixedSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_fixed_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_fixed_size, handle, pArgs, nil)
                 }
                 
             }
@@ -870,7 +870,7 @@ open class FontFile: Font {
     fileprivate final func get_fixed_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(FontFile.method_get_fixed_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_get_fixed_size, handle, nil, &_result)
         return _result
     }
     
@@ -891,7 +891,7 @@ open class FontFile: Font {
         withUnsafePointer(to: fixedSizeScaleMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_fixed_size_scale_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_fixed_size_scale_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -916,7 +916,7 @@ open class FontFile: Font {
     fileprivate final func get_fixed_size_scale_mode() -> TextServer.FixedSizeScaleMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FontFile.method_get_fixed_size_scale_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_get_fixed_size_scale_mode, handle, nil, &_result)
         return TextServer.FixedSizeScaleMode (rawValue: _result)!
     }
     
@@ -937,7 +937,7 @@ open class FontFile: Font {
         withUnsafePointer(to: allowSystemFallback) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_allow_system_fallback, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_allow_system_fallback, handle, pArgs, nil)
                 }
                 
             }
@@ -962,7 +962,7 @@ open class FontFile: Font {
     fileprivate final func is_allow_system_fallback() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FontFile.method_is_allow_system_fallback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_is_allow_system_fallback, handle, nil, &_result)
         return _result
     }
     
@@ -983,7 +983,7 @@ open class FontFile: Font {
         withUnsafePointer(to: forceAutohinter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_force_autohinter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_force_autohinter, handle, pArgs, nil)
                 }
                 
             }
@@ -1008,7 +1008,7 @@ open class FontFile: Font {
     fileprivate final func is_force_autohinter() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FontFile.method_is_force_autohinter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_is_force_autohinter, handle, nil, &_result)
         return _result
     }
     
@@ -1029,7 +1029,7 @@ open class FontFile: Font {
         withUnsafePointer(to: hinting.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_hinting, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_hinting, handle, pArgs, nil)
                 }
                 
             }
@@ -1054,7 +1054,7 @@ open class FontFile: Font {
     fileprivate final func get_hinting() -> TextServer.Hinting {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FontFile.method_get_hinting, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_get_hinting, handle, nil, &_result)
         return TextServer.Hinting (rawValue: _result)!
     }
     
@@ -1075,7 +1075,7 @@ open class FontFile: Font {
         withUnsafePointer(to: subpixelPositioning.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_subpixel_positioning, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_subpixel_positioning, handle, pArgs, nil)
                 }
                 
             }
@@ -1100,7 +1100,7 @@ open class FontFile: Font {
     fileprivate final func get_subpixel_positioning() -> TextServer.SubpixelPositioning {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(FontFile.method_get_subpixel_positioning, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_get_subpixel_positioning, handle, nil, &_result)
         return TextServer.SubpixelPositioning (rawValue: _result)!
     }
     
@@ -1121,7 +1121,7 @@ open class FontFile: Font {
         withUnsafePointer(to: keepRoundingRemainders) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_keep_rounding_remainders, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_keep_rounding_remainders, handle, pArgs, nil)
                 }
                 
             }
@@ -1146,7 +1146,7 @@ open class FontFile: Font {
     fileprivate final func get_keep_rounding_remainders() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(FontFile.method_get_keep_rounding_remainders, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_get_keep_rounding_remainders, handle, nil, &_result)
         return _result
     }
     
@@ -1167,7 +1167,7 @@ open class FontFile: Font {
         withUnsafePointer(to: oversampling) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_oversampling, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_oversampling, handle, pArgs, nil)
                 }
                 
             }
@@ -1192,7 +1192,7 @@ open class FontFile: Font {
     fileprivate final func get_oversampling() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(FontFile.method_get_oversampling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_get_oversampling, handle, nil, &_result)
         return _result
     }
     
@@ -1211,7 +1211,7 @@ open class FontFile: Font {
     public final func getCacheCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(FontFile.method_get_cache_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(FontFile.method_get_cache_count, handle, nil, &_result)
         return _result
     }
     
@@ -1229,7 +1229,7 @@ open class FontFile: Font {
     /// Removes all font cache entries.
     public final func clearCache() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(FontFile.method_clear_cache, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(FontFile.method_clear_cache, handle, nil, nil)
         
     }
     
@@ -1250,7 +1250,7 @@ open class FontFile: Font {
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_remove_cache, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_remove_cache, handle, pArgs, nil)
                 }
                 
             }
@@ -1278,7 +1278,7 @@ open class FontFile: Font {
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_get_size_cache_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FontFile.method_get_size_cache_list, handle, pArgs, &_result)
                 }
                 
             }
@@ -1305,7 +1305,7 @@ open class FontFile: Font {
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_clear_size_cache, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_clear_size_cache, handle, pArgs, nil)
                 }
                 
             }
@@ -1333,7 +1333,7 @@ open class FontFile: Font {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_remove_size_cache, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FontFile.method_remove_size_cache, handle, pArgs, nil)
                     }
                     
                 }
@@ -1363,7 +1363,7 @@ open class FontFile: Font {
             withUnsafePointer(to: variationCoordinates.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_set_variation_coordinates, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FontFile.method_set_variation_coordinates, handle, pArgs, nil)
                     }
                     
                 }
@@ -1393,7 +1393,7 @@ open class FontFile: Font {
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_get_variation_coordinates, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(FontFile.method_get_variation_coordinates, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1421,7 +1421,7 @@ open class FontFile: Font {
             withUnsafePointer(to: strength) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_set_embolden, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FontFile.method_set_embolden, handle, pArgs, nil)
                     }
                     
                 }
@@ -1451,7 +1451,7 @@ open class FontFile: Font {
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_get_embolden, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FontFile.method_get_embolden, handle, pArgs, &_result)
                 }
                 
             }
@@ -1479,7 +1479,7 @@ open class FontFile: Font {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_set_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FontFile.method_set_transform, handle, pArgs, nil)
                     }
                     
                 }
@@ -1509,7 +1509,7 @@ open class FontFile: Font {
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_get_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FontFile.method_get_transform, handle, pArgs, &_result)
                 }
                 
             }
@@ -1538,7 +1538,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: value) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_set_extra_spacing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(FontFile.method_set_extra_spacing, handle, pArgs, nil)
                         }
                         
                     }
@@ -1571,7 +1571,7 @@ open class FontFile: Font {
             withUnsafePointer(to: spacing.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_get_extra_spacing, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(FontFile.method_get_extra_spacing, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1601,7 +1601,7 @@ open class FontFile: Font {
             withUnsafePointer(to: baselineOffset) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_set_extra_baseline_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FontFile.method_set_extra_baseline_offset, handle, pArgs, nil)
                     }
                     
                 }
@@ -1631,7 +1631,7 @@ open class FontFile: Font {
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_get_extra_baseline_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FontFile.method_get_extra_baseline_offset, handle, pArgs, &_result)
                 }
                 
             }
@@ -1659,7 +1659,7 @@ open class FontFile: Font {
             withUnsafePointer(to: faceIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_set_face_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FontFile.method_set_face_index, handle, pArgs, nil)
                     }
                     
                 }
@@ -1689,7 +1689,7 @@ open class FontFile: Font {
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_get_face_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FontFile.method_get_face_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -1718,7 +1718,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: ascent) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_set_cache_ascent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(FontFile.method_set_cache_ascent, handle, pArgs, nil)
                         }
                         
                     }
@@ -1751,7 +1751,7 @@ open class FontFile: Font {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_get_cache_ascent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(FontFile.method_get_cache_ascent, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1782,7 +1782,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: descent) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_set_cache_descent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(FontFile.method_set_cache_descent, handle, pArgs, nil)
                         }
                         
                     }
@@ -1815,7 +1815,7 @@ open class FontFile: Font {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_get_cache_descent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(FontFile.method_get_cache_descent, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1846,7 +1846,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: underlinePosition) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_set_cache_underline_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(FontFile.method_set_cache_underline_position, handle, pArgs, nil)
                         }
                         
                     }
@@ -1879,7 +1879,7 @@ open class FontFile: Font {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_get_cache_underline_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(FontFile.method_get_cache_underline_position, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1910,7 +1910,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: underlineThickness) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_set_cache_underline_thickness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(FontFile.method_set_cache_underline_thickness, handle, pArgs, nil)
                         }
                         
                     }
@@ -1943,7 +1943,7 @@ open class FontFile: Font {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_get_cache_underline_thickness, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(FontFile.method_get_cache_underline_thickness, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1974,7 +1974,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: scale) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_set_cache_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(FontFile.method_set_cache_scale, handle, pArgs, nil)
                         }
                         
                     }
@@ -2007,7 +2007,7 @@ open class FontFile: Font {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_get_cache_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(FontFile.method_get_cache_scale, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2038,7 +2038,7 @@ open class FontFile: Font {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_get_texture_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(FontFile.method_get_texture_count, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2071,7 +2071,7 @@ open class FontFile: Font {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_clear_textures, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FontFile.method_clear_textures, handle, pArgs, nil)
                     }
                     
                 }
@@ -2105,7 +2105,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: textureIndex) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_remove_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(FontFile.method_remove_texture, handle, pArgs, nil)
                         }
                         
                     }
@@ -2139,7 +2139,7 @@ open class FontFile: Font {
                     withUnsafePointer(to: image?.handle) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(FontFile.method_set_texture_image, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(FontFile.method_set_texture_image, handle, pArgs, nil)
                             }
                             
                         }
@@ -2169,13 +2169,13 @@ open class FontFile: Font {
     /// Returns a copy of the font cache texture image.
     public final func getTextureImage(cacheIndex: Int32, size: Vector2i, textureIndex: Int32) -> Image? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: cacheIndex) { pArg0 in
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: textureIndex) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_get_texture_image, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(FontFile.method_get_texture_image, handle, pArgs, &_result)
                         }
                         
                     }
@@ -2186,7 +2186,7 @@ open class FontFile: Font {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_texture_offsets: GDExtensionMethodBindPtr = {
@@ -2209,7 +2209,7 @@ open class FontFile: Font {
                     withUnsafePointer(to: offset.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(FontFile.method_set_texture_offsets, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(FontFile.method_set_texture_offsets, handle, pArgs, nil)
                             }
                             
                         }
@@ -2245,7 +2245,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: textureIndex) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_get_texture_offsets, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(FontFile.method_get_texture_offsets, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -2278,7 +2278,7 @@ open class FontFile: Font {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_get_glyph_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(FontFile.method_get_glyph_list, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -2311,7 +2311,7 @@ open class FontFile: Font {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_clear_glyphs, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FontFile.method_clear_glyphs, handle, pArgs, nil)
                     }
                     
                 }
@@ -2345,7 +2345,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: glyph) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_remove_glyph, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(FontFile.method_remove_glyph, handle, pArgs, nil)
                         }
                         
                     }
@@ -2382,7 +2382,7 @@ open class FontFile: Font {
                     withUnsafePointer(to: advance) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(FontFile.method_set_glyph_advance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(FontFile.method_set_glyph_advance, handle, pArgs, nil)
                             }
                             
                         }
@@ -2421,7 +2421,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: glyph) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_get_glyph_advance, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(FontFile.method_get_glyph_advance, handle, pArgs, &_result)
                         }
                         
                     }
@@ -2455,7 +2455,7 @@ open class FontFile: Font {
                     withUnsafePointer(to: offset) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(FontFile.method_set_glyph_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(FontFile.method_set_glyph_offset, handle, pArgs, nil)
                             }
                             
                         }
@@ -2491,7 +2491,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: glyph) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_get_glyph_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(FontFile.method_get_glyph_offset, handle, pArgs, &_result)
                         }
                         
                     }
@@ -2525,7 +2525,7 @@ open class FontFile: Font {
                     withUnsafePointer(to: glSize) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(FontFile.method_set_glyph_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(FontFile.method_set_glyph_size, handle, pArgs, nil)
                             }
                             
                         }
@@ -2561,7 +2561,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: glyph) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_get_glyph_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(FontFile.method_get_glyph_size, handle, pArgs, &_result)
                         }
                         
                     }
@@ -2595,7 +2595,7 @@ open class FontFile: Font {
                     withUnsafePointer(to: uvRect) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(FontFile.method_set_glyph_uv_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(FontFile.method_set_glyph_uv_rect, handle, pArgs, nil)
                             }
                             
                         }
@@ -2631,7 +2631,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: glyph) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_get_glyph_uv_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(FontFile.method_get_glyph_uv_rect, handle, pArgs, &_result)
                         }
                         
                     }
@@ -2665,7 +2665,7 @@ open class FontFile: Font {
                     withUnsafePointer(to: textureIdx) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(FontFile.method_set_glyph_texture_idx, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(FontFile.method_set_glyph_texture_idx, handle, pArgs, nil)
                             }
                             
                         }
@@ -2701,7 +2701,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: glyph) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_get_glyph_texture_idx, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(FontFile.method_get_glyph_texture_idx, handle, pArgs, &_result)
                         }
                         
                     }
@@ -2734,7 +2734,7 @@ open class FontFile: Font {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_get_kerning_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(FontFile.method_get_kerning_list, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2764,7 +2764,7 @@ open class FontFile: Font {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_clear_kerning_map, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FontFile.method_clear_kerning_map, handle, pArgs, nil)
                     }
                     
                 }
@@ -2795,7 +2795,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: glyphPair) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_remove_kerning, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(FontFile.method_remove_kerning, handle, pArgs, nil)
                         }
                         
                     }
@@ -2829,7 +2829,7 @@ open class FontFile: Font {
                     withUnsafePointer(to: kerning) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(FontFile.method_set_kerning, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(FontFile.method_set_kerning, handle, pArgs, nil)
                             }
                             
                         }
@@ -2865,7 +2865,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: glyphPair) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_get_kerning, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(FontFile.method_get_kerning, handle, pArgs, &_result)
                         }
                         
                     }
@@ -2899,7 +2899,7 @@ open class FontFile: Font {
                     withUnsafePointer(to: end) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(FontFile.method_render_range, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(FontFile.method_render_range, handle, pArgs, nil)
                             }
                             
                         }
@@ -2934,7 +2934,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: index) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_render_glyph, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(FontFile.method_render_glyph, handle, pArgs, nil)
                         }
                         
                     }
@@ -2967,7 +2967,7 @@ open class FontFile: Font {
             withUnsafePointer(to: supported) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_set_language_support_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FontFile.method_set_language_support_override, handle, pArgs, nil)
                     }
                     
                 }
@@ -2998,7 +2998,7 @@ open class FontFile: Font {
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_get_language_support_override, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FontFile.method_get_language_support_override, handle, pArgs, &_result)
                 }
                 
             }
@@ -3026,7 +3026,7 @@ open class FontFile: Font {
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_remove_language_support_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_remove_language_support_override, handle, pArgs, nil)
                 }
                 
             }
@@ -3051,7 +3051,7 @@ open class FontFile: Font {
     public final func getLanguageSupportOverrides() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(FontFile.method_get_language_support_overrides, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FontFile.method_get_language_support_overrides, handle, nil, &_result.content)
         return _result
     }
     
@@ -3074,7 +3074,7 @@ open class FontFile: Font {
             withUnsafePointer(to: supported) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_set_script_support_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(FontFile.method_set_script_support_override, handle, pArgs, nil)
                     }
                     
                 }
@@ -3105,7 +3105,7 @@ open class FontFile: Font {
         withUnsafePointer(to: script.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_get_script_support_override, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(FontFile.method_get_script_support_override, handle, pArgs, &_result)
                 }
                 
             }
@@ -3133,7 +3133,7 @@ open class FontFile: Font {
         withUnsafePointer(to: script.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_remove_script_support_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_remove_script_support_override, handle, pArgs, nil)
                 }
                 
             }
@@ -3158,7 +3158,7 @@ open class FontFile: Font {
     public final func getScriptSupportOverrides() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(FontFile.method_get_script_support_overrides, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FontFile.method_get_script_support_overrides, handle, nil, &_result.content)
         return _result
     }
     
@@ -3179,7 +3179,7 @@ open class FontFile: Font {
         withUnsafePointer(to: overrides.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FontFile.method_set_opentype_feature_overrides, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FontFile.method_set_opentype_feature_overrides, handle, pArgs, nil)
                 }
                 
             }
@@ -3204,7 +3204,7 @@ open class FontFile: Font {
     fileprivate final func get_opentype_feature_overrides() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(FontFile.method_get_opentype_feature_overrides, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(FontFile.method_get_opentype_feature_overrides, handle, nil, &_result.content)
         return _result
     }
     
@@ -3228,7 +3228,7 @@ open class FontFile: Font {
                 withUnsafePointer(to: variationSelector) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(FontFile.method_get_glyph_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(FontFile.method_get_glyph_index, handle, pArgs, &_result)
                         }
                         
                     }
@@ -3261,7 +3261,7 @@ open class FontFile: Font {
             withUnsafePointer(to: glyphIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(FontFile.method_get_char_from_glyph_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(FontFile.method_get_char_from_glyph_index, handle, pArgs, &_result)
                     }
                     
                 }

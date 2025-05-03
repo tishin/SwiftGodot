@@ -49,7 +49,7 @@ open class RenderingServer: Object {
     /// The shared instance of this class
     public static var shared: RenderingServer {
         return withUnsafePointer(to: &RenderingServer.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -1411,7 +1411,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: image?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_texture_2d_create, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_texture_2d_create, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1444,7 +1444,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: layeredType.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_texture_2d_layered_create, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_texture_2d_layered_create, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1478,7 +1478,7 @@ open class RenderingServer: Object {
                             withUnsafePointer(to: data.array.content) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_texture_3d_create, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                                        gi.object_method_bind_ptrcall(method_texture_3d_create, shared.handle, pArgs, &_result.content)
                                     }
                                     
                                 }
@@ -1515,7 +1515,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: base.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_texture_proxy_create, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_texture_proxy_create, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1552,7 +1552,7 @@ open class RenderingServer: Object {
                                     withUnsafePointer(to: layeredType.rawValue) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                gi.object_method_bind_ptrcall(method_texture_create_from_native_handle, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                                                gi.object_method_bind_ptrcall(method_texture_create_from_native_handle, shared.handle, pArgs, &_result.content)
                                             }
                                             
                                         }
@@ -1597,7 +1597,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: layer) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_texture_2d_update, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_texture_2d_update, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1631,7 +1631,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: data.array.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_texture_3d_update, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_texture_3d_update, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1660,7 +1660,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: proxyTo.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_texture_proxy_update, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_texture_proxy_update, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1691,7 +1691,7 @@ open class RenderingServer: Object {
     /// 
     public static func texture2dPlaceholderCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_texture_2d_placeholder_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_texture_2d_placeholder_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -1715,7 +1715,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: layeredType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_texture_2d_layered_placeholder_create, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_texture_2d_layered_placeholder_create, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1744,7 +1744,7 @@ open class RenderingServer: Object {
     /// 
     public static func texture3dPlaceholderCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_texture_3d_placeholder_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_texture_3d_placeholder_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -1764,18 +1764,18 @@ open class RenderingServer: Object {
     /// **Example:** Get the test texture from ``getTestTexture()`` and apply it to a ``Sprite2D`` node:
     /// 
     public static func texture2dGet(texture: RID) -> Image? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_texture_2d_get, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_texture_2d_get, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_texture_2d_layer_get: GDExtensionMethodBindPtr = {
@@ -1791,12 +1791,12 @@ open class RenderingServer: Object {
     
     /// Returns an ``Image`` instance from the given `texture` ``RID`` and `layer`.
     public static func texture2dLayerGet(texture: RID, layer: Int32) -> Image? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: layer) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_texture_2d_layer_get, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_texture_2d_layer_get, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1805,7 +1805,7 @@ open class RenderingServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_texture_3d_get: GDExtensionMethodBindPtr = {
@@ -1825,7 +1825,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_texture_3d_get, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_texture_3d_get, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1852,7 +1852,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: byTexture.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_texture_replace, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_texture_replace, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1882,7 +1882,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: height) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_texture_set_size_override, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_texture_set_size_override, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1914,7 +1914,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: path.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_texture_set_path, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_texture_set_path, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1943,7 +1943,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_texture_get_path, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_texture_get_path, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1970,7 +1970,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: texture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_texture_get_format, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_texture_get_format, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1997,7 +1997,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_texture_set_force_redraw_if_visible, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_texture_set_force_redraw_if_visible, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2027,7 +2027,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: layerType.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_texture_rd_create, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_texture_rd_create, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -2057,7 +2057,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: srgb) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_texture_get_rd_texture, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_texture_get_rd_texture, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -2090,7 +2090,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: srgb) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_texture_get_native_handle, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_texture_get_native_handle, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -2121,7 +2121,7 @@ open class RenderingServer: Object {
     /// 
     public static func shaderCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_shader_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_shader_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -2143,7 +2143,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: code.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_shader_set_code, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_shader_set_code, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2173,7 +2173,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: path.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_shader_set_path_hint, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_shader_set_path_hint, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2202,7 +2202,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: shader.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_shader_get_code, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_shader_get_code, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2229,7 +2229,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: shader.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_shader_parameter_list, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_shader_parameter_list, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2257,7 +2257,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_shader_get_parameter_default, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_shader_get_parameter_default, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -2291,7 +2291,7 @@ open class RenderingServer: Object {
                     withUnsafePointer(to: index) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_shader_set_default_texture_parameter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_shader_set_default_texture_parameter, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -2329,7 +2329,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: index) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_shader_get_default_texture_parameter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(method_shader_get_default_texture_parameter, shared.handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -2362,7 +2362,7 @@ open class RenderingServer: Object {
     /// 
     public static func materialCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_material_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_material_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -2383,7 +2383,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: shader.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_material_set_shader, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_material_set_shader, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2413,7 +2413,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: value.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_material_set_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_material_set_param, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2445,7 +2445,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: parameter.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_material_get_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_material_get_param, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -2474,7 +2474,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: priority) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_material_set_render_priority, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_material_set_render_priority, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2503,7 +2503,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: nextMaterial.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_material_set_next_pass, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_material_set_next_pass, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2533,7 +2533,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: blendShapeCount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_mesh_create_from_surfaces, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_mesh_create_from_surfaces, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -2566,7 +2566,7 @@ open class RenderingServer: Object {
     /// 
     public static func meshCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_mesh_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_mesh_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -2589,7 +2589,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: arrayIndex) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_mesh_surface_get_format_offset, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_mesh_surface_get_format_offset, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -2621,7 +2621,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: vertexCount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_mesh_surface_get_format_vertex_stride, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_mesh_surface_get_format_vertex_stride, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -2651,7 +2651,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: vertexCount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_mesh_surface_get_format_normal_tangent_stride, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_mesh_surface_get_format_normal_tangent_stride, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -2681,7 +2681,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: vertexCount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_mesh_surface_get_format_attribute_stride, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_mesh_surface_get_format_attribute_stride, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -2711,7 +2711,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: vertexCount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_mesh_surface_get_format_skin_stride, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_mesh_surface_get_format_skin_stride, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -2740,7 +2740,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: surface.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_mesh_add_surface, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_mesh_add_surface, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2773,7 +2773,7 @@ open class RenderingServer: Object {
                             withUnsafePointer(to: compressFormat.rawValue) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_mesh_add_surface_from_arrays, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(method_mesh_add_surface_from_arrays, shared.handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -2810,7 +2810,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: mesh.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_mesh_get_blend_shape_count, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_mesh_get_blend_shape_count, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2837,7 +2837,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_mesh_set_blend_shape_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_mesh_set_blend_shape_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2866,7 +2866,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: mesh.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_mesh_get_blend_shape_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_mesh_get_blend_shape_mode, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2894,7 +2894,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: material.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_mesh_surface_set_material, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_mesh_surface_set_material, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2926,7 +2926,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: surface) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_mesh_surface_get_material, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_mesh_surface_get_material, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -2956,7 +2956,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: surface) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_mesh_get_surface, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_mesh_get_surface, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -2986,7 +2986,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: surface) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_mesh_surface_get_arrays, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_mesh_surface_get_arrays, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -3016,7 +3016,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: surface) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_mesh_surface_get_blend_shape_arrays, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_mesh_surface_get_blend_shape_arrays, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -3045,7 +3045,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: mesh.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_mesh_get_surface_count, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_mesh_get_surface_count, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3072,7 +3072,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: aabb) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_mesh_set_custom_aabb, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_mesh_set_custom_aabb, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3101,7 +3101,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: mesh.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_mesh_get_custom_aabb, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_mesh_get_custom_aabb, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3128,7 +3128,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: surface) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_mesh_surface_remove, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_mesh_surface_remove, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3156,7 +3156,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: mesh.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_mesh_clear, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_mesh_clear, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -3185,7 +3185,7 @@ open class RenderingServer: Object {
                     withUnsafePointer(to: data.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_mesh_surface_update_vertex_region, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_mesh_surface_update_vertex_region, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -3220,7 +3220,7 @@ open class RenderingServer: Object {
                     withUnsafePointer(to: data.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_mesh_surface_update_attribute_region, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_mesh_surface_update_attribute_region, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -3255,7 +3255,7 @@ open class RenderingServer: Object {
                     withUnsafePointer(to: data.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_mesh_surface_update_skin_region, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_mesh_surface_update_skin_region, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -3288,7 +3288,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: shadowMesh.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_mesh_set_shadow_mesh, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_mesh_set_shadow_mesh, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3321,7 +3321,7 @@ open class RenderingServer: Object {
     /// 
     public static func multimeshCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_multimesh_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_multimesh_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -3346,7 +3346,7 @@ open class RenderingServer: Object {
                             withUnsafePointer(to: useIndirect) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_multimesh_allocate_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(method_multimesh_allocate_data, shared.handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -3383,7 +3383,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: multimesh.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_multimesh_get_instance_count, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_multimesh_get_instance_count, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3410,7 +3410,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mesh.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_multimesh_set_mesh, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_multimesh_set_mesh, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3440,7 +3440,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: transform) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_multimesh_instance_set_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_multimesh_instance_set_transform, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -3472,7 +3472,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: transform) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_multimesh_instance_set_transform_2d, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_multimesh_instance_set_transform_2d, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -3504,7 +3504,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: color) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_multimesh_instance_set_color, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_multimesh_instance_set_color, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -3536,7 +3536,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: customData) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_multimesh_instance_set_custom_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_multimesh_instance_set_custom_data, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -3567,7 +3567,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: multimesh.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_multimesh_get_mesh, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_multimesh_get_mesh, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -3594,7 +3594,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: multimesh.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_multimesh_get_aabb, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_multimesh_get_aabb, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3621,7 +3621,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: aabb) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_multimesh_set_custom_aabb, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_multimesh_set_custom_aabb, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3650,7 +3650,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: multimesh.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_multimesh_get_custom_aabb, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_multimesh_get_custom_aabb, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3678,7 +3678,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_multimesh_instance_get_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_multimesh_instance_get_transform, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -3708,7 +3708,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_multimesh_instance_get_transform_2d, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_multimesh_instance_get_transform_2d, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -3738,7 +3738,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_multimesh_instance_get_color, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_multimesh_instance_get_color, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -3768,7 +3768,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_multimesh_instance_get_custom_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_multimesh_instance_get_custom_data, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -3797,7 +3797,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: visible) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_multimesh_set_visible_instances, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_multimesh_set_visible_instances, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3826,7 +3826,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: multimesh.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_multimesh_get_visible_instances, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_multimesh_get_visible_instances, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3862,7 +3862,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: buffer.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_multimesh_set_buffer, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_multimesh_set_buffer, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3896,7 +3896,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: multimesh.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_multimesh_get_command_buffer_rd_rid, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_multimesh_get_command_buffer_rd_rid, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -3923,7 +3923,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: multimesh.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_multimesh_get_buffer_rd_rid, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_multimesh_get_buffer_rd_rid, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -3953,7 +3953,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: multimesh.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_multimesh_get_buffer, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_multimesh_get_buffer, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -3984,7 +3984,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: bufferPrevious.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_multimesh_set_buffer_interpolated, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_multimesh_set_buffer_interpolated, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -4015,7 +4015,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: interpolated) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_multimesh_set_physics_interpolated, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_multimesh_set_physics_interpolated, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4047,7 +4047,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: quality.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_multimesh_set_physics_interpolation_quality, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_multimesh_set_physics_interpolation_quality, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4079,7 +4079,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_multimesh_instance_reset_physics_interpolation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_multimesh_instance_reset_physics_interpolation, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4108,7 +4108,7 @@ open class RenderingServer: Object {
     /// 
     public static func skeletonCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_skeleton_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_skeleton_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -4130,7 +4130,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: is2dSkeleton) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_skeleton_allocate_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_skeleton_allocate_data, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -4161,7 +4161,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: skeleton.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_skeleton_get_bone_count, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_skeleton_get_bone_count, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4189,7 +4189,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: transform) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_skeleton_bone_set_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_skeleton_bone_set_transform, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -4221,7 +4221,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: bone) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_skeleton_bone_get_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_skeleton_bone_get_transform, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -4251,7 +4251,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: transform) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_skeleton_bone_set_transform_2d, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_skeleton_bone_set_transform_2d, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -4283,7 +4283,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: bone) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_skeleton_bone_get_transform_2d, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_skeleton_bone_get_transform_2d, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -4312,7 +4312,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: baseTransform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_skeleton_set_base_transform_2d, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_skeleton_set_base_transform_2d, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4345,7 +4345,7 @@ open class RenderingServer: Object {
     /// 
     public static func directionalLightCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_directional_light_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_directional_light_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -4370,7 +4370,7 @@ open class RenderingServer: Object {
     /// 
     public static func omniLightCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_omni_light_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_omni_light_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -4393,7 +4393,7 @@ open class RenderingServer: Object {
     /// 
     public static func spotLightCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_spot_light_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_spot_light_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -4414,7 +4414,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_light_set_color, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_light_set_color, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4444,7 +4444,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: value) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_light_set_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_light_set_param, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -4475,7 +4475,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_light_set_shadow, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_light_set_shadow, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4504,7 +4504,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: texture.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_light_set_projector, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_light_set_projector, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4533,7 +4533,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_light_set_negative, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_light_set_negative, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4562,7 +4562,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mask) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_light_set_cull_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_light_set_cull_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4594,7 +4594,7 @@ open class RenderingServer: Object {
                         withUnsafePointer(to: length) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_light_set_distance_fade, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(method_light_set_distance_fade, shared.handle, pArgs, nil)
                                 }
                                 
                             }
@@ -4629,7 +4629,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_light_set_reverse_cull_face_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_light_set_reverse_cull_face_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4658,7 +4658,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mask) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_light_set_shadow_caster_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_light_set_shadow_caster_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4687,7 +4687,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: bakeMode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_light_set_bake_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_light_set_bake_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4716,7 +4716,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: cascade) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_light_set_max_sdfgi_cascade, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_light_set_max_sdfgi_cascade, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4745,7 +4745,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_light_omni_set_shadow_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_light_omni_set_shadow_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4774,7 +4774,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_light_directional_set_shadow_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_light_directional_set_shadow_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4803,7 +4803,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_light_directional_set_blend_splits, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_light_directional_set_blend_splits, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4832,7 +4832,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_light_directional_set_sky_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_light_directional_set_sky_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4860,7 +4860,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: filter.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_light_projectors_set_filter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_light_projectors_set_filter, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -4886,7 +4886,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_lightmaps_set_bicubic_filter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_lightmaps_set_bicubic_filter, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -4912,7 +4912,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: quality.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_positional_soft_shadow_filter_set_quality, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_positional_soft_shadow_filter_set_quality, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -4938,7 +4938,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: quality.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_directional_soft_shadow_filter_set_quality, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_directional_soft_shadow_filter_set_quality, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -4965,7 +4965,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: is16bits) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_directional_shadow_atlas_set_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_directional_shadow_atlas_set_size, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4998,7 +4998,7 @@ open class RenderingServer: Object {
     /// 
     public static func reflectionProbeCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_reflection_probe_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_reflection_probe_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -5019,7 +5019,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_update_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_update_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5048,7 +5048,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: intensity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_intensity, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_intensity, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5077,7 +5077,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: blendDistance) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_blend_distance, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_blend_distance, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5106,7 +5106,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_ambient_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_ambient_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5135,7 +5135,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_ambient_color, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_ambient_color, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5164,7 +5164,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: energy) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_ambient_energy, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_ambient_energy, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5193,7 +5193,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: distance) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_max_distance, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_max_distance, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5222,7 +5222,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_size, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5251,7 +5251,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: offset) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_origin_offset, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_origin_offset, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5280,7 +5280,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_as_interior, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_as_interior, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5309,7 +5309,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_enable_box_projection, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_enable_box_projection, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5338,7 +5338,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_enable_shadows, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_enable_shadows, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5367,7 +5367,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: layers) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_cull_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_cull_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5396,7 +5396,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: layers) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_reflection_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_reflection_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5425,7 +5425,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: resolution) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_resolution, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_resolution, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5454,7 +5454,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: pixels) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_reflection_probe_set_mesh_lod_threshold, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_reflection_probe_set_mesh_lod_threshold, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5487,7 +5487,7 @@ open class RenderingServer: Object {
     /// 
     public static func decalCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_decal_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_decal_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -5508,7 +5508,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_decal_set_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_decal_set_size, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5538,7 +5538,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: texture.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_decal_set_texture, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_decal_set_texture, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -5569,7 +5569,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: energy) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_decal_set_emission_energy, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_decal_set_emission_energy, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5598,7 +5598,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: albedoMix) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_decal_set_albedo_mix, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_decal_set_albedo_mix, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5627,7 +5627,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_decal_set_modulate, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_decal_set_modulate, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5656,7 +5656,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mask) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_decal_set_cull_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_decal_set_cull_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5687,7 +5687,7 @@ open class RenderingServer: Object {
                     withUnsafePointer(to: length) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_decal_set_distance_fade, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_decal_set_distance_fade, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -5721,7 +5721,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: below) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_decal_set_fade, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_decal_set_fade, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -5752,7 +5752,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: fade) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_decal_set_normal_fade, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_decal_set_normal_fade, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5780,7 +5780,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: filter.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_decals_set_filter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_decals_set_filter, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -5806,7 +5806,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: halfResolution) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_gi_set_use_half_resolution, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_gi_set_use_half_resolution, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -5835,7 +5835,7 @@ open class RenderingServer: Object {
     /// 
     public static func voxelGiCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_voxel_gi_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_voxel_gi_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -5862,7 +5862,7 @@ open class RenderingServer: Object {
                                     withUnsafePointer(to: levelCounts.content) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                gi.object_method_bind_ptrcall(method_voxel_gi_allocate_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                                gi.object_method_bind_ptrcall(method_voxel_gi_allocate_data, shared.handle, pArgs, nil)
                                             }
                                             
                                         }
@@ -5903,7 +5903,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: voxelGi.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_voxel_gi_get_octree_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_voxel_gi_get_octree_size, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -5930,7 +5930,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: voxelGi.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_voxel_gi_get_octree_cells, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_voxel_gi_get_octree_cells, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -5957,7 +5957,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: voxelGi.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_voxel_gi_get_data_cells, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_voxel_gi_get_data_cells, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -5984,7 +5984,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: voxelGi.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_voxel_gi_get_distance_field, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_voxel_gi_get_distance_field, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -6011,7 +6011,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: voxelGi.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_voxel_gi_get_level_counts, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_voxel_gi_get_level_counts, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -6038,7 +6038,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: voxelGi.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_voxel_gi_get_to_cell_xform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_voxel_gi_get_to_cell_xform, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -6065,7 +6065,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: range) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_voxel_gi_set_dynamic_range, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_voxel_gi_set_dynamic_range, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6094,7 +6094,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: amount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_voxel_gi_set_propagation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_voxel_gi_set_propagation, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6123,7 +6123,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: energy) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_voxel_gi_set_energy, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_voxel_gi_set_energy, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6152,7 +6152,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: bakedExposure) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_voxel_gi_set_baked_exposure_normalization, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_voxel_gi_set_baked_exposure_normalization, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6181,7 +6181,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: bias) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_voxel_gi_set_bias, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_voxel_gi_set_bias, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6210,7 +6210,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: bias) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_voxel_gi_set_normal_bias, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_voxel_gi_set_normal_bias, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6239,7 +6239,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_voxel_gi_set_interior, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_voxel_gi_set_interior, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6268,7 +6268,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_voxel_gi_set_use_two_bounces, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_voxel_gi_set_use_two_bounces, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6296,7 +6296,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: quality.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_voxel_gi_set_quality, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_voxel_gi_set_quality, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -6325,7 +6325,7 @@ open class RenderingServer: Object {
     /// 
     public static func lightmapCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_lightmap_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_lightmap_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -6347,7 +6347,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: usesSh) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_lightmap_set_textures, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_lightmap_set_textures, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -6378,7 +6378,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: bounds) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_lightmap_set_probe_bounds, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_lightmap_set_probe_bounds, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6407,7 +6407,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: interior) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_lightmap_set_probe_interior, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_lightmap_set_probe_interior, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6439,7 +6439,7 @@ open class RenderingServer: Object {
                         withUnsafePointer(to: bspTree.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_lightmap_set_probe_capture_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(method_lightmap_set_probe_capture_data, shared.handle, pArgs, nil)
                                 }
                                 
                             }
@@ -6474,7 +6474,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: lightmap.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_lightmap_get_probe_capture_points, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_lightmap_get_probe_capture_points, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -6501,7 +6501,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: lightmap.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_lightmap_get_probe_capture_sh, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_lightmap_get_probe_capture_sh, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -6528,7 +6528,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: lightmap.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_lightmap_get_probe_capture_tetrahedra, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_lightmap_get_probe_capture_tetrahedra, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -6555,7 +6555,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: lightmap.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_lightmap_get_probe_capture_bsp_tree, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_lightmap_get_probe_capture_bsp_tree, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -6582,7 +6582,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: bakedExposure) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_lightmap_set_baked_exposure_normalization, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_lightmap_set_baked_exposure_normalization, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6610,7 +6610,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: speed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_lightmap_set_probe_capture_update_speed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_lightmap_set_probe_capture_update_speed, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -6643,7 +6643,7 @@ open class RenderingServer: Object {
     /// 
     public static func particlesCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_particles_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_particles_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -6664,7 +6664,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6693,7 +6693,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: emitting) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_emitting, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_emitting, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6722,7 +6722,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: particles.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_particles_get_emitting, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_particles_get_emitting, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -6749,7 +6749,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: amount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_amount, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_amount, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6778,7 +6778,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: ratio) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_amount_ratio, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_amount_ratio, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6807,7 +6807,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: lifetime) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_lifetime, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_lifetime, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6836,7 +6836,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: oneShot) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_one_shot, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_one_shot, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6865,7 +6865,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: time) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_pre_process_time, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_pre_process_time, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6894,7 +6894,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: time) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_request_process_time, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_request_process_time, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6923,7 +6923,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: ratio) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_explosiveness_ratio, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_explosiveness_ratio, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6952,7 +6952,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: ratio) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_randomness_ratio, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_randomness_ratio, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6981,7 +6981,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: factor) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_interp_to_end, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_interp_to_end, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7010,7 +7010,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: velocity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_emitter_velocity, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_emitter_velocity, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7039,7 +7039,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: aabb) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_custom_aabb, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_custom_aabb, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7068,7 +7068,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: scale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_speed_scale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_speed_scale, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7097,7 +7097,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_use_local_coordinates, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_use_local_coordinates, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7129,7 +7129,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: material.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_process_material, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_process_material, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7158,7 +7158,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: fps) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_fixed_fps, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_fixed_fps, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7187,7 +7187,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_interpolate, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_interpolate, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7216,7 +7216,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_fractional_delta, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_fractional_delta, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7245,7 +7245,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_collision_base_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_collision_base_size, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7274,7 +7274,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: align.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_transform_align, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_transform_align, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7304,7 +7304,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: lengthSec) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_particles_set_trails, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_particles_set_trails, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -7335,7 +7335,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: bindPoses.array.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_trail_bind_poses, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_trail_bind_poses, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7364,7 +7364,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: particles.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_particles_is_inactive, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_particles_is_inactive, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -7390,7 +7390,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: particles.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_particles_request_process, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_particles_request_process, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -7416,7 +7416,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: particles.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_particles_restart, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_particles_restart, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -7443,7 +7443,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: subemitterParticles.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_subemitter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_subemitter, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7476,7 +7476,7 @@ open class RenderingServer: Object {
                             withUnsafePointer(to: emitFlags) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_particles_emit, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(method_particles_emit, shared.handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -7513,7 +7513,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: order.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_draw_order, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_draw_order, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7542,7 +7542,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: count) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_draw_passes, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_draw_passes, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7572,7 +7572,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: mesh.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_particles_set_draw_pass_mesh, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_particles_set_draw_pass_mesh, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -7603,7 +7603,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: particles.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_particles_get_current_aabb, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_particles_get_current_aabb, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -7630,7 +7630,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_set_emission_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_set_emission_transform, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7659,7 +7659,7 @@ open class RenderingServer: Object {
     /// 
     public static func particlesCollisionCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_particles_collision_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_particles_collision_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -7680,7 +7680,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: type.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_collision_set_collision_type, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_collision_set_collision_type, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7709,7 +7709,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mask) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_collision_set_cull_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_collision_set_cull_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7738,7 +7738,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: radius) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_collision_set_sphere_radius, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_collision_set_sphere_radius, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7767,7 +7767,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: extents) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_collision_set_box_extents, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_collision_set_box_extents, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7796,7 +7796,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: strength) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_collision_set_attractor_strength, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_collision_set_attractor_strength, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7825,7 +7825,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: amount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_collision_set_attractor_directionality, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_collision_set_attractor_directionality, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7854,7 +7854,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: curve) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_collision_set_attractor_attenuation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_collision_set_attractor_attenuation, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7883,7 +7883,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: texture.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_collision_set_field_texture, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_collision_set_field_texture, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7911,7 +7911,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: particlesCollision.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_particles_collision_height_field_update, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_particles_collision_height_field_update, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -7938,7 +7938,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: resolution.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_collision_set_height_field_resolution, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_collision_set_height_field_resolution, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7967,7 +7967,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mask) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_particles_collision_set_height_field_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_particles_collision_set_height_field_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -7998,7 +7998,7 @@ open class RenderingServer: Object {
     /// 
     public static func fogVolumeCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_fog_volume_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_fog_volume_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -8019,7 +8019,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: shape.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_fog_volume_set_shape, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_fog_volume_set_shape, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8048,7 +8048,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_fog_volume_set_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_fog_volume_set_size, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8077,7 +8077,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: material.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_fog_volume_set_material, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_fog_volume_set_material, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8110,7 +8110,7 @@ open class RenderingServer: Object {
     /// 
     public static func visibilityNotifierCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_visibility_notifier_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_visibility_notifier_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -8131,7 +8131,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: aabb) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_visibility_notifier_set_aabb, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_visibility_notifier_set_aabb, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8161,7 +8161,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: exitCallable.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_visibility_notifier_set_callbacks, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_visibility_notifier_set_callbacks, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -8194,7 +8194,7 @@ open class RenderingServer: Object {
     /// 
     public static func occluderCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_occluder_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_occluder_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -8216,7 +8216,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: indices.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_occluder_set_mesh, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_occluder_set_mesh, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -8249,7 +8249,7 @@ open class RenderingServer: Object {
     /// 
     public static func cameraCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_camera_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_camera_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -8272,7 +8272,7 @@ open class RenderingServer: Object {
                     withUnsafePointer(to: zFar) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_camera_set_perspective, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_camera_set_perspective, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -8307,7 +8307,7 @@ open class RenderingServer: Object {
                     withUnsafePointer(to: zFar) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_camera_set_orthogonal, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_camera_set_orthogonal, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -8343,7 +8343,7 @@ open class RenderingServer: Object {
                         withUnsafePointer(to: zFar) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_camera_set_frustum, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(method_camera_set_frustum, shared.handle, pArgs, nil)
                                 }
                                 
                             }
@@ -8378,7 +8378,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_camera_set_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_camera_set_transform, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8407,7 +8407,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: layers) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_camera_set_cull_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_camera_set_cull_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8436,7 +8436,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: env.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_camera_set_environment, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_camera_set_environment, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8465,7 +8465,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: effects.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_camera_set_camera_attributes, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_camera_set_camera_attributes, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8494,7 +8494,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: compositor.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_camera_set_compositor, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_camera_set_compositor, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8523,7 +8523,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_camera_set_use_vertical_aspect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_camera_set_use_vertical_aspect, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8554,7 +8554,7 @@ open class RenderingServer: Object {
     /// 
     public static func viewportCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_viewport_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_viewport_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -8575,7 +8575,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: useXr) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_use_xr, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_use_xr, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8605,7 +8605,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: height) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_viewport_set_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_viewport_set_size, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -8636,7 +8636,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: active) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_active, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_active, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8665,7 +8665,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: parentViewport.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_parent_viewport, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_parent_viewport, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8700,7 +8700,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: screen) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_viewport_attach_to_screen, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_viewport_attach_to_screen, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -8731,7 +8731,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_render_direct_to_screen, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_render_direct_to_screen, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8760,7 +8760,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: canvasCullMask) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_canvas_cull_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_canvas_cull_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8789,7 +8789,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: scaling3dMode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_scaling_3d_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_scaling_3d_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8821,7 +8821,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: scale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_scaling_3d_scale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_scaling_3d_scale, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8850,7 +8850,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: sharpness) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_fsr_sharpness, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_fsr_sharpness, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8882,7 +8882,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mipmapBias) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_texture_mipmap_bias, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_texture_mipmap_bias, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8918,7 +8918,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: anisotropicFilteringLevel.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_anisotropic_filtering_level, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_anisotropic_filtering_level, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8947,7 +8947,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: updateMode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_update_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_update_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -8979,7 +8979,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: viewport.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_viewport_get_update_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_viewport_get_update_mode, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -9006,7 +9006,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: clearMode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_clear_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_clear_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9035,7 +9035,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: viewport.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_viewport_get_render_target, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_viewport_get_render_target, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -9062,7 +9062,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: viewport.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_viewport_get_texture, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_viewport_get_texture, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -9089,7 +9089,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: disable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_disable_3d, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_disable_3d, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9118,7 +9118,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: disable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_disable_2d, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_disable_2d, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9147,7 +9147,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_environment_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_environment_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9176,7 +9176,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: camera.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_attach_camera, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_attach_camera, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9205,7 +9205,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: scenario.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_scenario, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_scenario, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9234,7 +9234,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: canvas.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_attach_canvas, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_attach_canvas, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9263,7 +9263,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: canvas.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_remove_canvas, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_remove_canvas, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9292,7 +9292,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_snap_2d_transforms_to_pixel, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_snap_2d_transforms_to_pixel, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9321,7 +9321,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_snap_2d_vertices_to_pixel, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_snap_2d_vertices_to_pixel, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9350,7 +9350,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: filter.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_default_canvas_item_texture_filter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_default_canvas_item_texture_filter, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9379,7 +9379,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: `repeat`.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_default_canvas_item_texture_repeat, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_default_canvas_item_texture_repeat, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9409,7 +9409,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: offset) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_viewport_set_canvas_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_viewport_set_canvas_transform, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -9445,7 +9445,7 @@ open class RenderingServer: Object {
                     withUnsafePointer(to: sublayer) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_viewport_set_canvas_stacking, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_viewport_set_canvas_stacking, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -9478,7 +9478,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_transparent_background, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_transparent_background, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9507,7 +9507,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_global_canvas_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_global_canvas_transform, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9537,7 +9537,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: scale.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_viewport_set_sdf_oversize_and_scale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_viewport_set_sdf_oversize_and_scale, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -9572,7 +9572,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: use16Bits) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_viewport_set_positional_shadow_atlas_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_viewport_set_positional_shadow_atlas_size, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -9604,7 +9604,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: subdivision) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_viewport_set_positional_shadow_atlas_quadrant_subdivision, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_viewport_set_positional_shadow_atlas_quadrant_subdivision, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -9635,7 +9635,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: msaa.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_msaa_3d, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_msaa_3d, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9664,7 +9664,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: msaa.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_msaa_2d, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_msaa_2d, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9696,7 +9696,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_use_hdr_2d, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_use_hdr_2d, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9725,7 +9725,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_screen_space_aa, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_screen_space_aa, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9754,7 +9754,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_use_taa, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_use_taa, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9783,7 +9783,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_use_debanding, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_use_debanding, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9812,7 +9812,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_use_occlusion_culling, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_use_occlusion_culling, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9840,7 +9840,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: raysPerThread) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_viewport_set_occlusion_rays_per_thread, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_viewport_set_occlusion_rays_per_thread, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -9866,7 +9866,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: quality.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_viewport_set_occlusion_culling_build_quality, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_viewport_set_occlusion_culling_build_quality, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -9900,7 +9900,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: info.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_viewport_get_render_info, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_viewport_get_render_info, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -9931,7 +9931,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: draw.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_debug_draw, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_debug_draw, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9960,7 +9960,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_measure_render_time, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_measure_render_time, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -9992,7 +9992,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: viewport.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_viewport_get_measured_render_time_cpu, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_viewport_get_measured_render_time_cpu, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -10024,7 +10024,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: viewport.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_viewport_get_measured_render_time_gpu, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_viewport_get_measured_render_time_gpu, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -10051,7 +10051,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_vrs_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_vrs_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10083,7 +10083,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_vrs_update_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_vrs_update_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10112,7 +10112,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: texture.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_viewport_set_vrs_texture, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_viewport_set_vrs_texture, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10141,7 +10141,7 @@ open class RenderingServer: Object {
     /// 
     public static func skyCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_sky_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_sky_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -10162,7 +10162,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: radianceSize) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_sky_set_radiance_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_sky_set_radiance_size, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10191,7 +10191,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_sky_set_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_sky_set_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10220,7 +10220,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: material.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_sky_set_material, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_sky_set_material, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10250,14 +10250,14 @@ open class RenderingServer: Object {
     /// > Note: `size` should be a 2:1 aspect ratio for the generated panorama to have square pixels. For radiance maps, there is no point in using a height greater than ``Sky/radianceSize``, as it won't increase detail. Irradiance maps only contain low-frequency data, so there is usually no point in going past a size of 128×64 pixels when saving an irradiance map.
     /// 
     public static func skyBakePanorama(sky: RID, energy: Double, bakeIrradiance: Bool, size: Vector2i) -> Image? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: sky.content) { pArg0 in
             withUnsafePointer(to: energy) { pArg1 in
                 withUnsafePointer(to: bakeIrradiance) { pArg2 in
                     withUnsafePointer(to: size) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_sky_bake_panorama, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(method_sky_bake_panorama, shared.handle, pArgs, &_result)
                             }
                             
                         }
@@ -10270,7 +10270,7 @@ open class RenderingServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_compositor_effect_create: GDExtensionMethodBindPtr = {
@@ -10290,7 +10290,7 @@ open class RenderingServer: Object {
     /// 
     public static func compositorEffectCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_compositor_effect_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_compositor_effect_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -10311,7 +10311,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_compositor_effect_set_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_compositor_effect_set_enabled, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10341,7 +10341,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: callback.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_compositor_effect_set_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_compositor_effect_set_callback, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -10373,7 +10373,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: set) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_compositor_effect_set_flag, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_compositor_effect_set_flag, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -10404,7 +10404,7 @@ open class RenderingServer: Object {
     /// 
     public static func compositorCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_compositor_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_compositor_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -10425,7 +10425,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: effects.array.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_compositor_set_compositor_effects, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_compositor_set_compositor_effects, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10456,7 +10456,7 @@ open class RenderingServer: Object {
     /// 
     public static func environmentCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_environment_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_environment_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -10477,7 +10477,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: bg.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_environment_set_background, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_environment_set_background, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10506,7 +10506,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_environment_set_camera_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_environment_set_camera_id, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10535,7 +10535,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: sky.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_environment_set_sky, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_environment_set_sky, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10564,7 +10564,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: scale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_environment_set_sky_custom_fov, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_environment_set_sky_custom_fov, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10593,7 +10593,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: orientation) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_environment_set_sky_orientation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_environment_set_sky_orientation, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10622,7 +10622,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_environment_set_bg_color, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_environment_set_bg_color, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10652,7 +10652,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: exposureValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_environment_set_bg_energy, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_environment_set_bg_energy, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -10683,7 +10683,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: maxLayer) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_environment_set_canvas_max_layer, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_environment_set_canvas_max_layer, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -10716,7 +10716,7 @@ open class RenderingServer: Object {
                             withUnsafePointer(to: reflectionSource.rawValue) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_environment_set_ambient_light, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(method_environment_set_ambient_light, shared.handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -10764,7 +10764,7 @@ open class RenderingServer: Object {
                                                         withUnsafePointer(to: glowMap.content) { pArg12 in
                                                             withUnsafePointer(to: UnsafeRawPointersN13(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9, pArg10, pArg11, pArg12)) { pArgs in
                                                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 13) { pArgs in
-                                                                    gi.object_method_bind_ptrcall(method_environment_set_glow, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                                                    gi.object_method_bind_ptrcall(method_environment_set_glow, shared.handle, pArgs, nil)
                                                                 }
                                                                 
                                                             }
@@ -10817,7 +10817,7 @@ open class RenderingServer: Object {
                     withUnsafePointer(to: white) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_environment_set_tonemap, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_environment_set_tonemap, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -10855,7 +10855,7 @@ open class RenderingServer: Object {
                                 withUnsafePointer(to: colorCorrection.content) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(method_environment_set_adjustment, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                            gi.object_method_bind_ptrcall(method_environment_set_adjustment, shared.handle, pArgs, nil)
                                         }
                                         
                                     }
@@ -10898,7 +10898,7 @@ open class RenderingServer: Object {
                             withUnsafePointer(to: depthTolerance) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_environment_set_ssr, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(method_environment_set_ssr, shared.handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -10943,7 +10943,7 @@ open class RenderingServer: Object {
                                             withUnsafePointer(to: aoChannelAffect) { pArg9 in
                                                 withUnsafePointer(to: UnsafeRawPointersN10(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9)) { pArgs in
                                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 10) { pArgs in
-                                                        gi.object_method_bind_ptrcall(method_environment_set_ssao, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                                        gi.object_method_bind_ptrcall(method_environment_set_ssao, shared.handle, pArgs, nil)
                                                     }
                                                     
                                                 }
@@ -10997,7 +10997,7 @@ open class RenderingServer: Object {
                                                 withUnsafePointer(to: fogMode.rawValue) { pArg10 in
                                                     withUnsafePointer(to: UnsafeRawPointersN11(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9, pArg10)) { pArgs in
                                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 11) { pArgs in
-                                                            gi.object_method_bind_ptrcall(method_environment_set_fog, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                                            gi.object_method_bind_ptrcall(method_environment_set_fog, shared.handle, pArgs, nil)
                                                         }
                                                         
                                                     }
@@ -11053,7 +11053,7 @@ open class RenderingServer: Object {
                                                 withUnsafePointer(to: probeBias) { pArg10 in
                                                     withUnsafePointer(to: UnsafeRawPointersN11(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9, pArg10)) { pArgs in
                                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 11) { pArgs in
-                                                            gi.object_method_bind_ptrcall(method_environment_set_sdfgi, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                                            gi.object_method_bind_ptrcall(method_environment_set_sdfgi, shared.handle, pArgs, nil)
                                                         }
                                                         
                                                     }
@@ -11112,7 +11112,7 @@ open class RenderingServer: Object {
                                                             withUnsafePointer(to: skyAffect) { pArg13 in
                                                                 withUnsafePointer(to: UnsafeRawPointersN14(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9, pArg10, pArg11, pArg12, pArg13)) { pArgs in
                                                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 14) { pArgs in
-                                                                        gi.object_method_bind_ptrcall(method_environment_set_volumetric_fog, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                                                        gi.object_method_bind_ptrcall(method_environment_set_volumetric_fog, shared.handle, pArgs, nil)
                                                                     }
                                                                     
                                                                 }
@@ -11164,7 +11164,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_environment_glow_set_use_bicubic_upscale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_environment_glow_set_use_bicubic_upscale, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -11190,7 +11190,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: quality.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_environment_set_ssr_roughness_quality, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_environment_set_ssr_roughness_quality, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -11221,7 +11221,7 @@ open class RenderingServer: Object {
                             withUnsafePointer(to: fadeoutTo) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_environment_set_ssao_quality, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(method_environment_set_ssao_quality, shared.handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -11262,7 +11262,7 @@ open class RenderingServer: Object {
                             withUnsafePointer(to: fadeoutTo) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_environment_set_ssil_quality, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(method_environment_set_ssil_quality, shared.handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -11298,7 +11298,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: rayCount.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_environment_set_sdfgi_ray_count, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_environment_set_sdfgi_ray_count, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -11324,7 +11324,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: frames.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_environment_set_sdfgi_frames_to_converge, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_environment_set_sdfgi_frames_to_converge, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -11350,7 +11350,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: frames.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_environment_set_sdfgi_frames_to_update_light, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_environment_set_sdfgi_frames_to_update_light, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -11377,7 +11377,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: depth) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_environment_set_volumetric_fog_volume_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_environment_set_volumetric_fog_volume_size, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -11405,7 +11405,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_environment_set_volumetric_fog_filter_active, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_environment_set_volumetric_fog_filter_active, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -11433,13 +11433,13 @@ open class RenderingServer: Object {
     /// > Note: `size` should be a 2:1 aspect ratio for the generated panorama to have square pixels. For radiance maps, there is no point in using a height greater than ``Sky/radianceSize``, as it won't increase detail. Irradiance maps only contain low-frequency data, so there is usually no point in going past a size of 128×64 pixels when saving an irradiance map.
     /// 
     public static func environmentBakePanorama(environment: RID, bakeIrradiance: Bool, size: Vector2i) -> Image? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: environment.content) { pArg0 in
             withUnsafePointer(to: bakeIrradiance) { pArg1 in
                 withUnsafePointer(to: size) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_environment_bake_panorama, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_environment_bake_panorama, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -11450,7 +11450,7 @@ open class RenderingServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_screen_space_roughness_limiter_set_active: GDExtensionMethodBindPtr = {
@@ -11471,7 +11471,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: limit) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_screen_space_roughness_limiter_set_active, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_screen_space_roughness_limiter_set_active, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -11501,7 +11501,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: quality.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_sub_surface_scattering_set_quality, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_sub_surface_scattering_set_quality, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -11528,7 +11528,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: depthScale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_sub_surface_scattering_set_scale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_sub_surface_scattering_set_scale, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -11559,7 +11559,7 @@ open class RenderingServer: Object {
     /// 
     public static func cameraAttributesCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_camera_attributes_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_camera_attributes_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -11580,7 +11580,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: useJitter) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_camera_attributes_set_dof_blur_quality, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_camera_attributes_set_dof_blur_quality, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -11608,7 +11608,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: shape.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_camera_attributes_set_dof_blur_bokeh_shape, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_camera_attributes_set_dof_blur_bokeh_shape, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -11641,7 +11641,7 @@ open class RenderingServer: Object {
                                     withUnsafePointer(to: amount) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                gi.object_method_bind_ptrcall(method_camera_attributes_set_dof_blur, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                                gi.object_method_bind_ptrcall(method_camera_attributes_set_dof_blur, shared.handle, pArgs, nil)
                                             }
                                             
                                         }
@@ -11688,7 +11688,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: normalization) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_camera_attributes_set_exposure, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_camera_attributes_set_exposure, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -11723,7 +11723,7 @@ open class RenderingServer: Object {
                             withUnsafePointer(to: scale) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_camera_attributes_set_auto_exposure, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(method_camera_attributes_set_auto_exposure, shared.handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -11762,7 +11762,7 @@ open class RenderingServer: Object {
     /// 
     public static func scenarioCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_scenario_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_scenario_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -11783,7 +11783,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: environment.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_scenario_set_environment, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_scenario_set_environment, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -11812,7 +11812,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: environment.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_scenario_set_fallback_environment, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_scenario_set_fallback_environment, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -11841,7 +11841,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: effects.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_scenario_set_camera_attributes, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_scenario_set_camera_attributes, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -11870,7 +11870,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: compositor.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_scenario_set_compositor, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_scenario_set_compositor, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -11903,7 +11903,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: scenario.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_create2, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_instance_create2, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -11936,7 +11936,7 @@ open class RenderingServer: Object {
     /// 
     public static func instanceCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_instance_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_instance_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -11957,7 +11957,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: base.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_set_base, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_set_base, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -11986,7 +11986,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: scenario.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_set_scenario, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_set_scenario, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12015,7 +12015,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mask) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_set_layer_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_set_layer_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12045,7 +12045,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: useAabbCenter) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_instance_set_pivot_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_instance_set_pivot_data, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -12076,7 +12076,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_set_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_set_transform, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12105,7 +12105,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: interpolated) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_set_interpolated, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_set_interpolated, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12136,7 +12136,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: instance.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_instance_reset_physics_interpolation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_instance_reset_physics_interpolation, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -12163,7 +12163,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_attach_object_instance_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_attach_object_instance_id, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12193,7 +12193,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: weight) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_instance_set_blend_shape_weight, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_instance_set_blend_shape_weight, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -12225,7 +12225,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: material.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_instance_set_surface_override_material, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_instance_set_surface_override_material, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -12256,7 +12256,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: visible) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_set_visible, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_set_visible, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12292,7 +12292,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: transparency) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_geometry_set_transparency, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_geometry_set_transparency, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12321,7 +12321,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: aabb) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_set_custom_aabb, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_set_custom_aabb, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12350,7 +12350,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: skeleton.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_attach_skeleton, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_attach_skeleton, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12379,7 +12379,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: margin) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_set_extra_visibility_margin, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_set_extra_visibility_margin, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12408,7 +12408,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: parent.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_set_visibility_parent, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_set_visibility_parent, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12437,7 +12437,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_set_ignore_culling, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_set_ignore_culling, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12467,7 +12467,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: enabled) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_instance_geometry_set_flag, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_instance_geometry_set_flag, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -12498,7 +12498,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: shadowCastingSetting.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_geometry_set_cast_shadows_setting, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_geometry_set_cast_shadows_setting, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12527,7 +12527,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: material.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_geometry_set_material_override, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_geometry_set_material_override, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12556,7 +12556,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: material.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_geometry_set_material_overlay, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_geometry_set_material_overlay, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12589,7 +12589,7 @@ open class RenderingServer: Object {
                             withUnsafePointer(to: fadeMode.rawValue) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_instance_geometry_set_visibility_range, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(method_instance_geometry_set_visibility_range, shared.handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -12628,7 +12628,7 @@ open class RenderingServer: Object {
                     withUnsafePointer(to: lightmapSlice) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_instance_geometry_set_lightmap, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_instance_geometry_set_lightmap, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -12661,7 +12661,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: lodBias) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_geometry_set_lod_bias, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_instance_geometry_set_lod_bias, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -12691,7 +12691,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: value.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_instance_geometry_set_shader_parameter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_instance_geometry_set_shader_parameter, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -12726,7 +12726,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: parameter.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_geometry_get_shader_parameter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_instance_geometry_get_shader_parameter, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -12756,7 +12756,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: parameter.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instance_geometry_get_shader_parameter_default_value, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_instance_geometry_get_shader_parameter_default_value, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -12785,7 +12785,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: instance.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_instance_geometry_get_shader_parameter_list, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_instance_geometry_get_shader_parameter_list, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -12816,7 +12816,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: scenario.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instances_cull_aabb, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_instances_cull_aabb, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -12850,7 +12850,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: scenario.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_instances_cull_ray, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(method_instances_cull_ray, shared.handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -12885,7 +12885,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: scenario.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_instances_cull_convex, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_instances_cull_convex, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -12916,7 +12916,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: imageSize) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_bake_render_uv2, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_bake_render_uv2, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -12949,7 +12949,7 @@ open class RenderingServer: Object {
     /// 
     public static func canvasCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_canvas_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_canvas_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -12974,7 +12974,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: mirroring) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_canvas_set_item_mirroring, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_canvas_set_item_mirroring, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -13006,7 +13006,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: repeatTimes) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_canvas_set_item_repeat, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_canvas_set_item_repeat, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -13037,7 +13037,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_set_modulate, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_set_modulate, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13065,7 +13065,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: disable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_canvas_set_disable_scale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_canvas_set_disable_scale, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -13094,7 +13094,7 @@ open class RenderingServer: Object {
     /// 
     public static func canvasTextureCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_canvas_texture_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_canvas_texture_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -13116,7 +13116,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: texture.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_canvas_texture_set_channel, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_canvas_texture_set_channel, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -13148,7 +13148,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: shininess) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_canvas_texture_set_shading_parameters, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_canvas_texture_set_shading_parameters, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -13179,7 +13179,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: filter.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_texture_set_texture_filter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_texture_set_texture_filter, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13208,7 +13208,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: `repeat`.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_texture_set_texture_repeat, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_texture_set_texture_repeat, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13239,7 +13239,7 @@ open class RenderingServer: Object {
     /// 
     public static func canvasItemCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_canvas_item_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_canvas_item_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -13260,7 +13260,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: parent.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_parent, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_parent, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13289,7 +13289,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: filter.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_default_texture_filter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_default_texture_filter, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13318,7 +13318,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: `repeat`.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_default_texture_repeat, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_default_texture_repeat, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13347,7 +13347,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: visible) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_visible, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_visible, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13376,7 +13376,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mask) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_light_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_light_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13405,7 +13405,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: visibilityLayer) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_visibility_layer, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_visibility_layer, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13434,7 +13434,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_transform, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13466,7 +13466,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: clip) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_clip, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_clip, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13495,7 +13495,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_distance_field_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_distance_field_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13525,7 +13525,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: rect) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_canvas_item_set_custom_rect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_canvas_item_set_custom_rect, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -13556,7 +13556,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_modulate, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_modulate, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13585,7 +13585,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_self_modulate, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_self_modulate, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13614,7 +13614,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_draw_behind_parent, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_draw_behind_parent, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13643,7 +13643,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: interpolated) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_interpolated, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_interpolated, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13674,7 +13674,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: item.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_canvas_item_reset_physics_interpolation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_canvas_item_reset_physics_interpolation, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -13704,7 +13704,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_transform_physics_interpolation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_transform_physics_interpolation, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -13737,7 +13737,7 @@ open class RenderingServer: Object {
                             withUnsafePointer(to: antialiased) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_canvas_item_add_line, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(method_canvas_item_add_line, shared.handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -13777,7 +13777,7 @@ open class RenderingServer: Object {
                         withUnsafePointer(to: antialiased) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_canvas_item_add_polyline, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(method_canvas_item_add_polyline, shared.handle, pArgs, nil)
                                 }
                                 
                             }
@@ -13815,7 +13815,7 @@ open class RenderingServer: Object {
                         withUnsafePointer(to: antialiased) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_canvas_item_add_multiline, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(method_canvas_item_add_multiline, shared.handle, pArgs, nil)
                                 }
                                 
                             }
@@ -13852,7 +13852,7 @@ open class RenderingServer: Object {
                     withUnsafePointer(to: antialiased) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_canvas_item_add_rect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_canvas_item_add_rect, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -13888,7 +13888,7 @@ open class RenderingServer: Object {
                         withUnsafePointer(to: antialiased) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_canvas_item_add_circle, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(method_canvas_item_add_circle, shared.handle, pArgs, nil)
                                 }
                                 
                             }
@@ -13927,7 +13927,7 @@ open class RenderingServer: Object {
                             withUnsafePointer(to: transpose) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_canvas_item_add_texture_rect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(method_canvas_item_add_texture_rect, shared.handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -13970,7 +13970,7 @@ open class RenderingServer: Object {
                                     withUnsafePointer(to: scale) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                gi.object_method_bind_ptrcall(method_canvas_item_add_msdf_texture_rect_region, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                                gi.object_method_bind_ptrcall(method_canvas_item_add_msdf_texture_rect_region, shared.handle, pArgs, nil)
                                             }
                                             
                                         }
@@ -14014,7 +14014,7 @@ open class RenderingServer: Object {
                         withUnsafePointer(to: modulate) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_canvas_item_add_lcd_texture_rect_region, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(method_canvas_item_add_lcd_texture_rect_region, shared.handle, pArgs, nil)
                                 }
                                 
                             }
@@ -14054,7 +14054,7 @@ open class RenderingServer: Object {
                                 withUnsafePointer(to: clipUv) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(method_canvas_item_add_texture_rect_region, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                            gi.object_method_bind_ptrcall(method_canvas_item_add_texture_rect_region, shared.handle, pArgs, nil)
                                         }
                                         
                                     }
@@ -14101,7 +14101,7 @@ open class RenderingServer: Object {
                                             withUnsafePointer(to: modulate) { pArg9 in
                                                 withUnsafePointer(to: UnsafeRawPointersN10(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9)) { pArgs in
                                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 10) { pArgs in
-                                                        gi.object_method_bind_ptrcall(method_canvas_item_add_nine_patch, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                                        gi.object_method_bind_ptrcall(method_canvas_item_add_nine_patch, shared.handle, pArgs, nil)
                                                     }
                                                     
                                                 }
@@ -14149,7 +14149,7 @@ open class RenderingServer: Object {
                         withUnsafePointer(to: texture.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_canvas_item_add_primitive, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(method_canvas_item_add_primitive, shared.handle, pArgs, nil)
                                 }
                                 
                             }
@@ -14190,7 +14190,7 @@ open class RenderingServer: Object {
                         withUnsafePointer(to: texture.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_canvas_item_add_polygon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(method_canvas_item_add_polygon, shared.handle, pArgs, nil)
                                 }
                                 
                             }
@@ -14235,7 +14235,7 @@ open class RenderingServer: Object {
                                         withUnsafePointer(to: count) { pArg8 in
                                             withUnsafePointer(to: UnsafeRawPointersN9(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8)) { pArgs in
                                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 9) { pArgs in
-                                                    gi.object_method_bind_ptrcall(method_canvas_item_add_triangle_array, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                                    gi.object_method_bind_ptrcall(method_canvas_item_add_triangle_array, shared.handle, pArgs, nil)
                                                 }
                                                 
                                             }
@@ -14281,7 +14281,7 @@ open class RenderingServer: Object {
                         withUnsafePointer(to: texture.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_canvas_item_add_mesh, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(method_canvas_item_add_mesh, shared.handle, pArgs, nil)
                                 }
                                 
                             }
@@ -14317,7 +14317,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: texture.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_canvas_item_add_multimesh, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_canvas_item_add_multimesh, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -14349,7 +14349,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: texture.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_canvas_item_add_particles, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_canvas_item_add_particles, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -14380,7 +14380,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_add_set_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_add_set_transform, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -14409,7 +14409,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: ignore) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_add_clip_ignore, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_add_clip_ignore, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -14441,7 +14441,7 @@ open class RenderingServer: Object {
                         withUnsafePointer(to: offset) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_canvas_item_add_animation_slice, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(method_canvas_item_add_animation_slice, shared.handle, pArgs, nil)
                                 }
                                 
                             }
@@ -14476,7 +14476,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_sort_children_by_y, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_sort_children_by_y, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -14505,7 +14505,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: zIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_z_index, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_z_index, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -14534,7 +14534,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_z_as_relative_to_parent, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_z_as_relative_to_parent, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -14564,7 +14564,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: rect) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_canvas_item_set_copy_to_backbuffer, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_canvas_item_set_copy_to_backbuffer, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -14595,7 +14595,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: skeleton.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_attach_skeleton, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_attach_skeleton, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -14623,7 +14623,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: item.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_canvas_item_clear, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_canvas_item_clear, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -14650,7 +14650,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_draw_index, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_draw_index, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -14679,7 +14679,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: material.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_material, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_material, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -14708,7 +14708,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_set_use_parent_material, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_item_set_use_parent_material, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -14738,7 +14738,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: value.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_canvas_item_set_instance_shader_parameter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_canvas_item_set_instance_shader_parameter, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -14770,7 +14770,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: parameter.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_get_instance_shader_parameter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_canvas_item_get_instance_shader_parameter, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -14800,7 +14800,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: parameter.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_item_get_instance_shader_parameter_default_value, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_canvas_item_get_instance_shader_parameter_default_value, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -14832,7 +14832,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: instance.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_canvas_item_get_instance_shader_parameter_list, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_canvas_item_get_instance_shader_parameter_list, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -14865,7 +14865,7 @@ open class RenderingServer: Object {
                         withUnsafePointer(to: exitCallable.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_canvas_item_set_visibility_notifier, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(method_canvas_item_set_visibility_notifier, shared.handle, pArgs, nil)
                                 }
                                 
                             }
@@ -14907,7 +14907,7 @@ open class RenderingServer: Object {
                             withUnsafePointer(to: blurMipmaps) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_canvas_item_set_canvas_group_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(method_canvas_item_set_canvas_group_mode, shared.handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -14947,7 +14947,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: item.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_debug_canvas_item_get_rect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_debug_canvas_item_get_rect, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -14976,7 +14976,7 @@ open class RenderingServer: Object {
     /// 
     public static func canvasLightCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_canvas_light_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_canvas_light_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -14997,7 +14997,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: canvas.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_attach_to_canvas, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_attach_to_canvas, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15026,7 +15026,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_enabled, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15055,7 +15055,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: scale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_texture_scale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_texture_scale, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15084,7 +15084,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_transform, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15113,7 +15113,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: texture.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_texture, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_texture, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15142,7 +15142,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: offset) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_texture_offset, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_texture_offset, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15171,7 +15171,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_color, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_color, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15200,7 +15200,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: height) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_height, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_height, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15229,7 +15229,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: energy) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_energy, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_energy, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15259,7 +15259,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: maxZ) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_canvas_light_set_z_range, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_canvas_light_set_z_range, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -15291,7 +15291,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: maxLayer) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_canvas_light_set_layer_range, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_canvas_light_set_layer_range, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -15322,7 +15322,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mask) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_item_cull_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_item_cull_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15351,7 +15351,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mask) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_item_shadow_cull_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_item_shadow_cull_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15380,7 +15380,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15409,7 +15409,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_shadow_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_shadow_enabled, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15438,7 +15438,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: filter.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_shadow_filter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_shadow_filter, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15467,7 +15467,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_shadow_color, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_shadow_color, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15496,7 +15496,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: smooth) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_shadow_smooth, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_shadow_smooth, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15525,7 +15525,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_blend_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_blend_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15554,7 +15554,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: interpolated) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_set_interpolated, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_set_interpolated, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15585,7 +15585,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: light.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_canvas_light_reset_physics_interpolation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_canvas_light_reset_physics_interpolation, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -15615,7 +15615,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_transform_physics_interpolation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_transform_physics_interpolation, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15646,7 +15646,7 @@ open class RenderingServer: Object {
     /// 
     public static func canvasLightOccluderCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_canvas_light_occluder_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_canvas_light_occluder_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -15667,7 +15667,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: canvas.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_attach_to_canvas, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_attach_to_canvas, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15696,7 +15696,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_set_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_set_enabled, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15725,7 +15725,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: polygon.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_set_polygon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_set_polygon, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15754,7 +15754,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_set_as_sdf_collision, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_set_as_sdf_collision, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15783,7 +15783,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_set_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_set_transform, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15812,7 +15812,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mask) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_set_light_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_set_light_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15841,7 +15841,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: interpolated) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_set_interpolated, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_set_interpolated, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15872,7 +15872,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: occluder.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_canvas_light_occluder_reset_physics_interpolation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_canvas_light_occluder_reset_physics_interpolation, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -15902,7 +15902,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_transform_physics_interpolation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_light_occluder_transform_physics_interpolation, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -15933,7 +15933,7 @@ open class RenderingServer: Object {
     /// 
     public static func canvasOccluderPolygonCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_canvas_occluder_polygon_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_canvas_occluder_polygon_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -15955,7 +15955,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: closed) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_canvas_occluder_polygon_set_shape, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_canvas_occluder_polygon_set_shape, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -15986,7 +15986,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_canvas_occluder_polygon_set_cull_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_canvas_occluder_polygon_set_cull_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -16014,7 +16014,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_canvas_set_shadow_texture_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_canvas_set_shadow_texture_size, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -16045,7 +16045,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: defaultValue.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_shader_parameter_add, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_shader_parameter_add, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -16075,7 +16075,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_global_shader_parameter_remove, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_global_shader_parameter_remove, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -16102,7 +16102,7 @@ open class RenderingServer: Object {
     /// 
     public static func globalShaderParameterGetList() -> TypedArray<StringName> {
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(method_global_shader_parameter_get_list, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_global_shader_parameter_get_list, shared.handle, nil, &_result)
         return TypedArray<StringName>(takingOver: _result)
     }
     
@@ -16123,7 +16123,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_shader_parameter_set, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_global_shader_parameter_set, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -16152,7 +16152,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_shader_parameter_set_override, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_global_shader_parameter_set_override, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -16184,7 +16184,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_global_shader_parameter_get, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_global_shader_parameter_get, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -16214,7 +16214,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_global_shader_parameter_get_type, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_global_shader_parameter_get_type, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -16240,7 +16240,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_free_rid, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_free_rid, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -16266,7 +16266,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: callable.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_request_frame_drawn_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_request_frame_drawn_callback, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -16290,7 +16290,7 @@ open class RenderingServer: Object {
     /// Returns `true` if changes have been made to the RenderingServer's data. ``forceDraw(swapBuffers:frameStep:)`` is usually called if this happens.
     public static func hasChanged() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_has_changed, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_has_changed, shared.handle, nil, &_result)
         return _result
     }
     
@@ -16316,7 +16316,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: info.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_rendering_info, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_rendering_info, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -16345,7 +16345,7 @@ open class RenderingServer: Object {
     /// 
     public static func getVideoAdapterName() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_video_adapter_name, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_video_adapter_name, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -16366,7 +16366,7 @@ open class RenderingServer: Object {
     /// 
     public static func getVideoAdapterVendor() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_video_adapter_vendor, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_video_adapter_vendor, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -16387,7 +16387,7 @@ open class RenderingServer: Object {
     /// 
     public static func getVideoAdapterType() -> RenderingDevice.DeviceType {
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(method_get_video_adapter_type, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_video_adapter_type, shared.handle, nil, &_result)
         return RenderingDevice.DeviceType (rawValue: _result)!
     }
     
@@ -16408,7 +16408,7 @@ open class RenderingServer: Object {
     /// 
     public static func getVideoAdapterApiVersion() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_video_adapter_api_version, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_video_adapter_api_version, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -16429,7 +16429,7 @@ open class RenderingServer: Object {
     /// 
     public static func getCurrentRenderingDriverName() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_current_rendering_driver_name, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_current_rendering_driver_name, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -16450,7 +16450,7 @@ open class RenderingServer: Object {
     /// 
     public static func getCurrentRenderingMethod() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_current_rendering_method, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_current_rendering_method, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -16473,7 +16473,7 @@ open class RenderingServer: Object {
                 withUnsafePointer(to: radius) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_make_sphere_mesh, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(method_make_sphere_mesh, shared.handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -16501,7 +16501,7 @@ open class RenderingServer: Object {
     /// Returns the RID of the test cube. This mesh will be created and returned on the first call to ``getTestCube()``, then it will be cached for subsequent calls. See also ``makeSphereMesh(latitudes:longitudes:radius:)``.
     public static func getTestCube() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_get_test_cube, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_test_cube, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -16522,7 +16522,7 @@ open class RenderingServer: Object {
     /// 
     public static func getTestTexture() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_get_test_texture, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_test_texture, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -16543,7 +16543,7 @@ open class RenderingServer: Object {
     /// 
     public static func getWhiteTexture() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_get_white_texture, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_white_texture, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -16567,7 +16567,7 @@ open class RenderingServer: Object {
                         withUnsafePointer(to: useFilter) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_set_boot_image, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(method_set_boot_image, shared.handle, pArgs, nil)
                                 }
                                 
                             }
@@ -16599,7 +16599,7 @@ open class RenderingServer: Object {
     /// Returns the default clear color which is used when a specific clear color has not been selected. See also ``setDefaultClearColor(_:)``.
     public static func getDefaultClearColor() -> Color {
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(method_get_default_clear_color, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_default_clear_color, shared.handle, nil, &_result)
         return _result
     }
     
@@ -16619,7 +16619,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_default_clear_color, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_default_clear_color, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -16647,7 +16647,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: feature.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_os_feature, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_os_feature, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -16676,7 +16676,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: generate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_debug_generate_wireframes, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_debug_generate_wireframes, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -16700,7 +16700,7 @@ open class RenderingServer: Object {
     @inline(__always)
     fileprivate static func is_render_loop_enabled() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_render_loop_enabled, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_render_loop_enabled, shared.handle, nil, &_result)
         return _result
     }
     
@@ -16720,7 +16720,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_render_loop_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_render_loop_enabled, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -16744,7 +16744,7 @@ open class RenderingServer: Object {
     /// Returns the time taken to setup rendering on the CPU in milliseconds. This value is shared across all viewports and does _not_ require ``viewportSetMeasureRenderTime(viewport:enable:)`` to be enabled on a viewport to be queried. See also ``viewportGetMeasuredRenderTimeCpu(viewport:)``.
     public static func getFrameSetupTimeCpu() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_get_frame_setup_time_cpu, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_frame_setup_time_cpu, shared.handle, nil, &_result)
         return _result
     }
     
@@ -16761,7 +16761,7 @@ open class RenderingServer: Object {
     
     /// Forces a synchronization between the CPU and GPU, which may be required in certain cases. Only call this when needed, as CPU-GPU synchronization has a performance cost.
     public static func forceSync() {
-        gi.object_method_bind_ptrcall(method_force_sync, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_force_sync, shared.handle, nil, nil)
         
     }
     
@@ -16782,7 +16782,7 @@ open class RenderingServer: Object {
             withUnsafePointer(to: frameStep) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_force_draw, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_force_draw, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -16810,9 +16810,9 @@ open class RenderingServer: Object {
     /// > Note: When using the OpenGL rendering driver or when running in headless mode, this function always returns `null`.
     /// 
     public static func getRenderingDevice() -> RenderingDevice {
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(method_get_rendering_device, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { fatalError ("Unexpected nil return from a method that should never return nil") } ; return lookupObject (nativeHandle: _result, ownsRef: true)!
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(method_get_rendering_device, shared.handle, nil, &_result)
+        guard let _result else { fatalError ("Unexpected nil return from a method that should never return nil") } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)!
     }
     
     fileprivate static let method_create_local_rendering_device: GDExtensionMethodBindPtr = {
@@ -16831,9 +16831,9 @@ open class RenderingServer: Object {
     /// > Note: When using the OpenGL rendering driver or when running in headless mode, this function always returns `null`.
     /// 
     public static func createLocalRenderingDevice() -> RenderingDevice? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(method_create_local_rendering_device, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(method_create_local_rendering_device, shared.handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_is_on_render_thread: GDExtensionMethodBindPtr = {
@@ -16850,7 +16850,7 @@ open class RenderingServer: Object {
     /// Returns `true` if our code is currently executing on the rendering thread.
     public static func isOnRenderThread() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_on_render_thread, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_on_render_thread, shared.handle, nil, &_result)
         return _result
     }
     
@@ -16870,7 +16870,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: callable.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_call_on_render_thread, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_call_on_render_thread, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -16897,7 +16897,7 @@ open class RenderingServer: Object {
         withUnsafePointer(to: feature.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_feature, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_feature, shared.handle, pArgs, &_result)
                 }
                 
             }

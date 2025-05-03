@@ -56,7 +56,7 @@ open class PhysicsDirectSpaceState3D: Object {
             withUnsafePointer(to: maxResults) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3D.method_intersect_point, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3D.method_intersect_point, handle, pArgs, &_result)
                     }
                     
                 }
@@ -105,7 +105,7 @@ open class PhysicsDirectSpaceState3D: Object {
         withUnsafePointer(to: parameters?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3D.method_intersect_ray, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3D.method_intersect_ray, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -147,7 +147,7 @@ open class PhysicsDirectSpaceState3D: Object {
             withUnsafePointer(to: maxResults) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3D.method_intersect_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3D.method_intersect_shape, handle, pArgs, &_result)
                     }
                     
                 }
@@ -182,7 +182,7 @@ open class PhysicsDirectSpaceState3D: Object {
         withUnsafePointer(to: parameters?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3D.method_cast_motion, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3D.method_cast_motion, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -216,7 +216,7 @@ open class PhysicsDirectSpaceState3D: Object {
             withUnsafePointer(to: maxResults) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3D.method_collide_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3D.method_collide_shape, handle, pArgs, &_result)
                     }
                     
                 }
@@ -263,7 +263,7 @@ open class PhysicsDirectSpaceState3D: Object {
         withUnsafePointer(to: parameters?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3D.method_get_rest_info, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(PhysicsDirectSpaceState3D.method_get_rest_info, handle, pArgs, &_result.content)
                 }
                 
             }

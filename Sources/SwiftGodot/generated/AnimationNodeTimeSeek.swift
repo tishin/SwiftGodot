@@ -61,7 +61,7 @@ open class AnimationNodeTimeSeek: AnimationNode {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeTimeSeek.method_set_explicit_elapse, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeTimeSeek.method_set_explicit_elapse, handle, pArgs, nil)
                 }
                 
             }
@@ -86,7 +86,7 @@ open class AnimationNodeTimeSeek: AnimationNode {
     fileprivate final func is_explicit_elapse() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationNodeTimeSeek.method_is_explicit_elapse, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeTimeSeek.method_is_explicit_elapse, handle, nil, &_result)
         return _result
     }
     

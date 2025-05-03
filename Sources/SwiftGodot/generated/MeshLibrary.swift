@@ -46,7 +46,7 @@ open class MeshLibrary: Resource {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshLibrary.method_create_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MeshLibrary.method_create_item, handle, pArgs, nil)
                 }
                 
             }
@@ -78,7 +78,7 @@ open class MeshLibrary: Resource {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -108,7 +108,7 @@ open class MeshLibrary: Resource {
             withUnsafePointer(to: mesh?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_mesh, handle, pArgs, nil)
                     }
                     
                 }
@@ -138,7 +138,7 @@ open class MeshLibrary: Resource {
             withUnsafePointer(to: meshTransform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_mesh_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_mesh_transform, handle, pArgs, nil)
                     }
                     
                 }
@@ -168,7 +168,7 @@ open class MeshLibrary: Resource {
             withUnsafePointer(to: shadowCastingSetting.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_mesh_cast_shadow, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_mesh_cast_shadow, handle, pArgs, nil)
                     }
                     
                 }
@@ -198,7 +198,7 @@ open class MeshLibrary: Resource {
             withUnsafePointer(to: navigationMesh?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_navigation_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_navigation_mesh, handle, pArgs, nil)
                     }
                     
                 }
@@ -228,7 +228,7 @@ open class MeshLibrary: Resource {
             withUnsafePointer(to: navigationMesh) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_navigation_mesh_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_navigation_mesh_transform, handle, pArgs, nil)
                     }
                     
                 }
@@ -258,7 +258,7 @@ open class MeshLibrary: Resource {
             withUnsafePointer(to: navigationLayers) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_navigation_layers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_navigation_layers, handle, pArgs, nil)
                     }
                     
                 }
@@ -291,7 +291,7 @@ open class MeshLibrary: Resource {
             withUnsafePointer(to: shapes.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_shapes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_shapes, handle, pArgs, nil)
                     }
                     
                 }
@@ -321,7 +321,7 @@ open class MeshLibrary: Resource {
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_preview, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshLibrary.method_set_item_preview, handle, pArgs, nil)
                     }
                     
                 }
@@ -351,7 +351,7 @@ open class MeshLibrary: Resource {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -375,18 +375,18 @@ open class MeshLibrary: Resource {
     /// Returns the item's mesh.
     public final func getItemMesh(id: Int32) -> Mesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_mesh, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_item_mesh_transform: GDExtensionMethodBindPtr = {
@@ -407,7 +407,7 @@ open class MeshLibrary: Resource {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_mesh_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_mesh_transform, handle, pArgs, &_result)
                 }
                 
             }
@@ -435,7 +435,7 @@ open class MeshLibrary: Resource {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_mesh_cast_shadow, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_mesh_cast_shadow, handle, pArgs, &_result)
                 }
                 
             }
@@ -459,18 +459,18 @@ open class MeshLibrary: Resource {
     /// Returns the item's navigation mesh.
     public final func getItemNavigationMesh(id: Int32) -> NavigationMesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_navigation_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_navigation_mesh, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_item_navigation_mesh_transform: GDExtensionMethodBindPtr = {
@@ -491,7 +491,7 @@ open class MeshLibrary: Resource {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_navigation_mesh_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_navigation_mesh_transform, handle, pArgs, &_result)
                 }
                 
             }
@@ -519,7 +519,7 @@ open class MeshLibrary: Resource {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_navigation_layers, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_navigation_layers, handle, pArgs, &_result)
                 }
                 
             }
@@ -550,7 +550,7 @@ open class MeshLibrary: Resource {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_shapes, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_shapes, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -574,18 +574,18 @@ open class MeshLibrary: Resource {
     /// When running in the editor, returns a generated item preview (a 3D rendering in isometric perspective). When used in a running project, returns the manually-defined item preview which can be set using ``setItemPreview(id:texture:)``. Returns an empty ``Texture2D`` if no preview was manually set in a running project.
     public final func getItemPreview(id: Int32) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_preview, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_preview, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_remove_item: GDExtensionMethodBindPtr = {
@@ -605,7 +605,7 @@ open class MeshLibrary: Resource {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshLibrary.method_remove_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MeshLibrary.method_remove_item, handle, pArgs, nil)
                 }
                 
             }
@@ -634,7 +634,7 @@ open class MeshLibrary: Resource {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshLibrary.method_find_item_by_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshLibrary.method_find_item_by_name, handle, pArgs, &_result)
                 }
                 
             }
@@ -658,7 +658,7 @@ open class MeshLibrary: Resource {
     /// Clears the library.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(MeshLibrary.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(MeshLibrary.method_clear, handle, nil, nil)
         
     }
     
@@ -677,7 +677,7 @@ open class MeshLibrary: Resource {
     public final func getItemList() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(MeshLibrary.method_get_item_list, handle, nil, &_result.content)
         return _result
     }
     
@@ -696,7 +696,7 @@ open class MeshLibrary: Resource {
     public final func getLastUnusedItemId() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MeshLibrary.method_get_last_unused_item_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MeshLibrary.method_get_last_unused_item_id, handle, nil, &_result)
         return _result
     }
     

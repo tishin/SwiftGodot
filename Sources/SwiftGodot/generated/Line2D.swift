@@ -254,7 +254,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: points.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_set_points, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_set_points, handle, pArgs, nil)
                 }
                 
             }
@@ -279,7 +279,7 @@ open class Line2D: Node2D {
     fileprivate final func get_points() -> PackedVector2Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
-        gi.object_method_bind_ptrcall(Line2D.method_get_points, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Line2D.method_get_points, handle, nil, &_result.content)
         return _result
     }
     
@@ -301,7 +301,7 @@ open class Line2D: Node2D {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Line2D.method_set_point_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Line2D.method_set_point_position, handle, pArgs, nil)
                     }
                     
                 }
@@ -331,7 +331,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_get_point_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Line2D.method_get_point_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -356,7 +356,7 @@ open class Line2D: Node2D {
     public final func getPointCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Line2D.method_get_point_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Line2D.method_get_point_count, handle, nil, &_result)
         return _result
     }
     
@@ -381,7 +381,7 @@ open class Line2D: Node2D {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Line2D.method_add_point, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Line2D.method_add_point, handle, pArgs, nil)
                     }
                     
                 }
@@ -410,7 +410,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_remove_point, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_remove_point, handle, pArgs, nil)
                 }
                 
             }
@@ -434,7 +434,7 @@ open class Line2D: Node2D {
     /// Removes all points from the polyline, making it empty.
     public final func clearPoints() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Line2D.method_clear_points, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Line2D.method_clear_points, handle, nil, nil)
         
     }
     
@@ -455,7 +455,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: closed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_set_closed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_set_closed, handle, pArgs, nil)
                 }
                 
             }
@@ -480,7 +480,7 @@ open class Line2D: Node2D {
     fileprivate final func is_closed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Line2D.method_is_closed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Line2D.method_is_closed, handle, nil, &_result)
         return _result
     }
     
@@ -501,7 +501,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_set_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_set_width, handle, pArgs, nil)
                 }
                 
             }
@@ -526,7 +526,7 @@ open class Line2D: Node2D {
     fileprivate final func get_width() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Line2D.method_get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Line2D.method_get_width, handle, nil, &_result)
         return _result
     }
     
@@ -547,7 +547,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: curve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_set_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_set_curve, handle, pArgs, nil)
                 }
                 
             }
@@ -571,9 +571,9 @@ open class Line2D: Node2D {
     @inline(__always)
     fileprivate final func get_curve() -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Line2D.method_get_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Line2D.method_get_curve, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_default_color: GDExtensionMethodBindPtr = {
@@ -593,7 +593,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_set_default_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_set_default_color, handle, pArgs, nil)
                 }
                 
             }
@@ -618,7 +618,7 @@ open class Line2D: Node2D {
     fileprivate final func get_default_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(Line2D.method_get_default_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Line2D.method_get_default_color, handle, nil, &_result)
         return _result
     }
     
@@ -639,7 +639,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: color?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_set_gradient, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_set_gradient, handle, pArgs, nil)
                 }
                 
             }
@@ -663,9 +663,9 @@ open class Line2D: Node2D {
     @inline(__always)
     fileprivate final func get_gradient() -> Gradient? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Line2D.method_get_gradient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Line2D.method_get_gradient, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_texture: GDExtensionMethodBindPtr = {
@@ -685,7 +685,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_set_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_set_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -709,9 +709,9 @@ open class Line2D: Node2D {
     @inline(__always)
     fileprivate final func get_texture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Line2D.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Line2D.method_get_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_texture_mode: GDExtensionMethodBindPtr = {
@@ -731,7 +731,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_set_texture_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_set_texture_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -756,7 +756,7 @@ open class Line2D: Node2D {
     fileprivate final func get_texture_mode() -> Line2D.LineTextureMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Line2D.method_get_texture_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Line2D.method_get_texture_mode, handle, nil, &_result)
         return Line2D.LineTextureMode (rawValue: _result)!
     }
     
@@ -777,7 +777,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_set_joint_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_set_joint_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -802,7 +802,7 @@ open class Line2D: Node2D {
     fileprivate final func get_joint_mode() -> Line2D.LineJointMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Line2D.method_get_joint_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Line2D.method_get_joint_mode, handle, nil, &_result)
         return Line2D.LineJointMode (rawValue: _result)!
     }
     
@@ -823,7 +823,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_set_begin_cap_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_set_begin_cap_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -848,7 +848,7 @@ open class Line2D: Node2D {
     fileprivate final func get_begin_cap_mode() -> Line2D.LineCapMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Line2D.method_get_begin_cap_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Line2D.method_get_begin_cap_mode, handle, nil, &_result)
         return Line2D.LineCapMode (rawValue: _result)!
     }
     
@@ -869,7 +869,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_set_end_cap_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_set_end_cap_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -894,7 +894,7 @@ open class Line2D: Node2D {
     fileprivate final func get_end_cap_mode() -> Line2D.LineCapMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Line2D.method_get_end_cap_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Line2D.method_get_end_cap_mode, handle, nil, &_result)
         return Line2D.LineCapMode (rawValue: _result)!
     }
     
@@ -915,7 +915,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: limit) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_set_sharp_limit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_set_sharp_limit, handle, pArgs, nil)
                 }
                 
             }
@@ -940,7 +940,7 @@ open class Line2D: Node2D {
     fileprivate final func get_sharp_limit() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Line2D.method_get_sharp_limit, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Line2D.method_get_sharp_limit, handle, nil, &_result)
         return _result
     }
     
@@ -961,7 +961,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: precision) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_set_round_precision, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_set_round_precision, handle, pArgs, nil)
                 }
                 
             }
@@ -986,7 +986,7 @@ open class Line2D: Node2D {
     fileprivate final func get_round_precision() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Line2D.method_get_round_precision, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Line2D.method_get_round_precision, handle, nil, &_result)
         return _result
     }
     
@@ -1007,7 +1007,7 @@ open class Line2D: Node2D {
         withUnsafePointer(to: antialiased) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Line2D.method_set_antialiased, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Line2D.method_set_antialiased, handle, pArgs, nil)
                 }
                 
             }
@@ -1032,7 +1032,7 @@ open class Line2D: Node2D {
     fileprivate final func get_antialiased() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Line2D.method_get_antialiased, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Line2D.method_get_antialiased, handle, nil, &_result)
         return _result
     }
     

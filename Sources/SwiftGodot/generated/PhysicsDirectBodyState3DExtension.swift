@@ -45,7 +45,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getTotalGravity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_total_gravity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_total_gravity, handle, nil, &_result)
         return _result
     }
     
@@ -65,7 +65,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getTotalLinearDamp() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_total_linear_damp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_total_linear_damp, handle, nil, &_result)
         return _result
     }
     
@@ -85,7 +85,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getTotalAngularDamp() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_total_angular_damp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_total_angular_damp, handle, nil, &_result)
         return _result
     }
     
@@ -105,7 +105,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getCenterOfMass() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_center_of_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_center_of_mass, handle, nil, &_result)
         return _result
     }
     
@@ -125,7 +125,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getCenterOfMassLocal() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_center_of_mass_local, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_center_of_mass_local, handle, nil, &_result)
         return _result
     }
     
@@ -145,7 +145,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getPrincipalInertiaAxes() -> Basis {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Basis = Basis ()
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_principal_inertia_axes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_principal_inertia_axes, handle, nil, &_result)
         return _result
     }
     
@@ -165,7 +165,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getInverseMass() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_inverse_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_inverse_mass, handle, nil, &_result)
         return _result
     }
     
@@ -185,7 +185,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getInverseInertia() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_inverse_inertia, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_inverse_inertia, handle, nil, &_result)
         return _result
     }
     
@@ -205,7 +205,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getInverseInertiaTensor() -> Basis {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Basis = Basis ()
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_inverse_inertia_tensor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_inverse_inertia_tensor, handle, nil, &_result)
         return _result
     }
     
@@ -227,7 +227,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__set_linear_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__set_linear_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -253,7 +253,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getLinearVelocity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_linear_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_linear_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -275,7 +275,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__set_angular_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__set_angular_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -301,7 +301,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getAngularVelocity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_angular_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_angular_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -323,7 +323,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: transform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__set_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__set_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -349,7 +349,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getTransform() -> Transform3D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_transform, handle, nil, &_result)
         return _result
     }
     
@@ -372,7 +372,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: localPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_velocity_at_local_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_velocity_at_local_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -400,7 +400,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: impulse) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__apply_central_impulse, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__apply_central_impulse, handle, pArgs, nil)
                 }
                 
             }
@@ -429,7 +429,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__apply_impulse, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__apply_impulse, handle, pArgs, nil)
                     }
                     
                 }
@@ -459,7 +459,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: impulse) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__apply_torque_impulse, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__apply_torque_impulse, handle, pArgs, nil)
                 }
                 
             }
@@ -487,7 +487,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: force) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__apply_central_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__apply_central_force, handle, pArgs, nil)
                 }
                 
             }
@@ -516,7 +516,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__apply_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__apply_force, handle, pArgs, nil)
                     }
                     
                 }
@@ -546,7 +546,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: torque) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__apply_torque, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__apply_torque, handle, pArgs, nil)
                 }
                 
             }
@@ -574,7 +574,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: force) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__add_constant_central_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__add_constant_central_force, handle, pArgs, nil)
                 }
                 
             }
@@ -603,7 +603,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__add_constant_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__add_constant_force, handle, pArgs, nil)
                     }
                     
                 }
@@ -633,7 +633,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: torque) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__add_constant_torque, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__add_constant_torque, handle, pArgs, nil)
                 }
                 
             }
@@ -661,7 +661,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: force) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__set_constant_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__set_constant_force, handle, pArgs, nil)
                 }
                 
             }
@@ -687,7 +687,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getConstantForce() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_constant_force, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_constant_force, handle, nil, &_result)
         return _result
     }
     
@@ -709,7 +709,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: torque) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__set_constant_torque, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__set_constant_torque, handle, pArgs, nil)
                 }
                 
             }
@@ -735,7 +735,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getConstantTorque() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_constant_torque, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_constant_torque, handle, nil, &_result)
         return _result
     }
     
@@ -757,7 +757,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__set_sleep_state, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__set_sleep_state, handle, pArgs, nil)
                 }
                 
             }
@@ -783,7 +783,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _isSleeping() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__is_sleeping, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__is_sleeping, handle, nil, &_result)
         return _result
     }
     
@@ -803,7 +803,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getContactCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_count, handle, nil, &_result)
         return _result
     }
     
@@ -826,7 +826,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_local_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_local_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -855,7 +855,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_local_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_local_normal, handle, pArgs, &_result)
                 }
                 
             }
@@ -884,7 +884,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_impulse, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_impulse, handle, pArgs, &_result)
                 }
                 
             }
@@ -913,7 +913,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_local_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_local_shape, handle, pArgs, &_result)
                 }
                 
             }
@@ -942,7 +942,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_local_velocity_at_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_local_velocity_at_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -971,7 +971,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_collider, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_collider, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1000,7 +1000,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_collider_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_collider_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -1029,7 +1029,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_collider_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_collider_id, handle, pArgs, &_result)
                 }
                 
             }
@@ -1054,18 +1054,18 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     @_documentation(visibility: public)
     open func _getContactColliderObject(contactIdx: Int32) -> Object? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_collider_object, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_collider_object, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__get_contact_collider_shape: GDExtensionMethodBindPtr = {
@@ -1087,7 +1087,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_collider_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_collider_shape, handle, pArgs, &_result)
                 }
                 
             }
@@ -1116,7 +1116,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
         withUnsafePointer(to: contactIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_collider_velocity_at_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_contact_collider_velocity_at_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -1142,7 +1142,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     open func _getStep() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_step, handle, nil, &_result)
         return _result
     }
     
@@ -1161,7 +1161,7 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     @_documentation(visibility: public)
     open func _integrateForces() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__integrate_forces, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__integrate_forces, handle, nil, nil)
         
     }
     
@@ -1180,9 +1180,9 @@ open class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
     @_documentation(visibility: public)
     open func _getSpaceState() -> PhysicsDirectSpaceState3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_space_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(PhysicsDirectBodyState3DExtension.method__get_space_state, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
@@ -1426,7 +1426,7 @@ func _PhysicsDirectBodyState3DExtension_proxy_get_contact_collider_object (insta
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? PhysicsDirectBodyState3DExtension else { return }
     let ret = swiftObject._getContactColliderObject (contactIdx: args [0]!.assumingMemoryBound (to: Int32.self).pointee)
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Object
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // Object
 }
 
 func _PhysicsDirectBodyState3DExtension_proxy_get_contact_collider_position (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -1554,7 +1554,7 @@ func _PhysicsDirectBodyState3DExtension_proxy_get_space_state (instance: UnsafeM
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? PhysicsDirectBodyState3DExtension else { return }
     let ret = swiftObject._getSpaceState ()
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // PhysicsDirectSpaceState3D
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // PhysicsDirectSpaceState3D
 }
 
 func _PhysicsDirectBodyState3DExtension_proxy_get_step (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {

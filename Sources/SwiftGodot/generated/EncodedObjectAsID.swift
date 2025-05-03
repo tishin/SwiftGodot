@@ -61,7 +61,7 @@ open class EncodedObjectAsID: RefCounted {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EncodedObjectAsID.method_set_object_id, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EncodedObjectAsID.method_set_object_id, handle, pArgs, nil)
                 }
                 
             }
@@ -86,7 +86,7 @@ open class EncodedObjectAsID: RefCounted {
     fileprivate final func get_object_id() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(EncodedObjectAsID.method_get_object_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EncodedObjectAsID.method_get_object_id, handle, nil, &_result)
         return _result
     }
     

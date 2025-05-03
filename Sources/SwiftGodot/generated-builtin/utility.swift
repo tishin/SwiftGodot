@@ -2402,7 +2402,7 @@ public class GD {
     /// Returns the ``Object`` that corresponds to `instanceId`. All Objects have a unique instance ID. See also ``Object/getInstanceId()``.
     /// 
     public static func instanceFromId(instanceId: Int64) -> Object? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: instanceId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -2413,7 +2413,7 @@ public class GD {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_is_instance_id_valid: GDExtensionPtrUtilityFunction = {

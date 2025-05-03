@@ -67,7 +67,7 @@ open class SceneState: RefCounted {
     public final func getNodeCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SceneState.method_get_node_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneState.method_get_node_count, handle, nil, &_result)
         return _result
     }
     
@@ -89,7 +89,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_node_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_node_type, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -117,7 +117,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_node_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_node_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -149,7 +149,7 @@ open class SceneState: RefCounted {
             withUnsafePointer(to: forParent) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SceneState.method_get_node_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(SceneState.method_get_node_path, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -179,7 +179,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_node_owner_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_node_owner_path, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -207,7 +207,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_is_node_instance_placeholder, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneState.method_is_node_instance_placeholder, handle, pArgs, &_result)
                 }
                 
             }
@@ -235,7 +235,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_node_instance_placeholder, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_node_instance_placeholder, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -259,18 +259,18 @@ open class SceneState: RefCounted {
     /// Returns a ``PackedScene`` for the node at `idx` (i.e. the whole branch starting at this node, with its child nodes and resources), or `null` if the node is not an instance.
     public final func getNodeInstance(idx: Int32) -> PackedScene? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_node_instance, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_node_instance, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_node_groups: GDExtensionMethodBindPtr = {
@@ -291,7 +291,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_node_groups, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_node_groups, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -319,7 +319,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_node_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_node_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -350,7 +350,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_node_property_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_node_property_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -379,7 +379,7 @@ open class SceneState: RefCounted {
             withUnsafePointer(to: propIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SceneState.method_get_node_property_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(SceneState.method_get_node_property_name, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -410,7 +410,7 @@ open class SceneState: RefCounted {
             withUnsafePointer(to: propIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SceneState.method_get_node_property_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(SceneState.method_get_node_property_value, handle, pArgs, &_result)
                     }
                     
                 }
@@ -440,7 +440,7 @@ open class SceneState: RefCounted {
     public final func getConnectionCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SceneState.method_get_connection_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneState.method_get_connection_count, handle, nil, &_result)
         return _result
     }
     
@@ -462,7 +462,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_connection_source, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_connection_source, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -490,7 +490,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_connection_signal, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_connection_signal, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -518,7 +518,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_connection_target, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_connection_target, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -546,7 +546,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_connection_method, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_connection_method, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -574,7 +574,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_connection_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_connection_flags, handle, pArgs, &_result)
                 }
                 
             }
@@ -602,7 +602,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_connection_binds, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_connection_binds, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -630,7 +630,7 @@ open class SceneState: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneState.method_get_connection_unbinds, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneState.method_get_connection_unbinds, handle, pArgs, &_result)
                 }
                 
             }

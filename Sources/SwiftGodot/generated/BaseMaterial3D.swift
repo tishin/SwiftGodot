@@ -1825,7 +1825,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: albedo) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_albedo, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_albedo, handle, pArgs, nil)
                 }
                 
             }
@@ -1850,7 +1850,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_albedo() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_albedo, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_albedo, handle, nil, &_result)
         return _result
     }
     
@@ -1871,7 +1871,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: transparency.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_transparency, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_transparency, handle, pArgs, nil)
                 }
                 
             }
@@ -1896,7 +1896,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_transparency() -> BaseMaterial3D.Transparency {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_transparency, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_transparency, handle, nil, &_result)
         return BaseMaterial3D.Transparency (rawValue: _result)!
     }
     
@@ -1917,7 +1917,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: alphaAa.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_alpha_antialiasing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_alpha_antialiasing, handle, pArgs, nil)
                 }
                 
             }
@@ -1942,7 +1942,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_alpha_antialiasing() -> BaseMaterial3D.AlphaAntiAliasing {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_alpha_antialiasing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_alpha_antialiasing, handle, nil, &_result)
         return BaseMaterial3D.AlphaAntiAliasing (rawValue: _result)!
     }
     
@@ -1963,7 +1963,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: edge) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_alpha_antialiasing_edge, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_alpha_antialiasing_edge, handle, pArgs, nil)
                 }
                 
             }
@@ -1988,7 +1988,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_alpha_antialiasing_edge() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_alpha_antialiasing_edge, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_alpha_antialiasing_edge, handle, nil, &_result)
         return _result
     }
     
@@ -2009,7 +2009,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: shadingMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_shading_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_shading_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -2034,7 +2034,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_shading_mode() -> BaseMaterial3D.ShadingMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_shading_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_shading_mode, handle, nil, &_result)
         return BaseMaterial3D.ShadingMode (rawValue: _result)!
     }
     
@@ -2055,7 +2055,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: specular) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_specular, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_specular, handle, pArgs, nil)
                 }
                 
             }
@@ -2080,7 +2080,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_specular() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_specular, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_specular, handle, nil, &_result)
         return _result
     }
     
@@ -2101,7 +2101,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: metallic) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_metallic, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_metallic, handle, pArgs, nil)
                 }
                 
             }
@@ -2126,7 +2126,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_metallic() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_metallic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_metallic, handle, nil, &_result)
         return _result
     }
     
@@ -2147,7 +2147,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: roughness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_roughness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_roughness, handle, pArgs, nil)
                 }
                 
             }
@@ -2172,7 +2172,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_roughness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_roughness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_roughness, handle, nil, &_result)
         return _result
     }
     
@@ -2193,7 +2193,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: emission) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_emission, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_emission, handle, pArgs, nil)
                 }
                 
             }
@@ -2218,7 +2218,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_emission() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_emission, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_emission, handle, nil, &_result)
         return _result
     }
     
@@ -2239,7 +2239,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: emissionEnergyMultiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_emission_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_emission_energy_multiplier, handle, pArgs, nil)
                 }
                 
             }
@@ -2264,7 +2264,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_emission_energy_multiplier() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_emission_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_emission_energy_multiplier, handle, nil, &_result)
         return _result
     }
     
@@ -2285,7 +2285,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: emissionEnergyMultiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_emission_intensity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_emission_intensity, handle, pArgs, nil)
                 }
                 
             }
@@ -2310,7 +2310,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_emission_intensity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_emission_intensity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_emission_intensity, handle, nil, &_result)
         return _result
     }
     
@@ -2331,7 +2331,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: normalScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_normal_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_normal_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -2356,7 +2356,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_normal_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_normal_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_normal_scale, handle, nil, &_result)
         return _result
     }
     
@@ -2377,7 +2377,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: rim) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_rim, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_rim, handle, pArgs, nil)
                 }
                 
             }
@@ -2402,7 +2402,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_rim() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_rim, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_rim, handle, nil, &_result)
         return _result
     }
     
@@ -2423,7 +2423,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: rimTint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_rim_tint, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_rim_tint, handle, pArgs, nil)
                 }
                 
             }
@@ -2448,7 +2448,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_rim_tint() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_rim_tint, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_rim_tint, handle, nil, &_result)
         return _result
     }
     
@@ -2469,7 +2469,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: clearcoat) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_clearcoat, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_clearcoat, handle, pArgs, nil)
                 }
                 
             }
@@ -2494,7 +2494,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_clearcoat() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_clearcoat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_clearcoat, handle, nil, &_result)
         return _result
     }
     
@@ -2515,7 +2515,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: clearcoatRoughness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_clearcoat_roughness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_clearcoat_roughness, handle, pArgs, nil)
                 }
                 
             }
@@ -2540,7 +2540,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_clearcoat_roughness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_clearcoat_roughness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_clearcoat_roughness, handle, nil, &_result)
         return _result
     }
     
@@ -2561,7 +2561,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: anisotropy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_anisotropy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_anisotropy, handle, pArgs, nil)
                 }
                 
             }
@@ -2586,7 +2586,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_anisotropy() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_anisotropy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_anisotropy, handle, nil, &_result)
         return _result
     }
     
@@ -2607,7 +2607,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: heightmapScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_heightmap_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_heightmap_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -2632,7 +2632,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_heightmap_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_scale, handle, nil, &_result)
         return _result
     }
     
@@ -2653,7 +2653,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: strength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_subsurface_scattering_strength, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_subsurface_scattering_strength, handle, pArgs, nil)
                 }
                 
             }
@@ -2678,7 +2678,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_subsurface_scattering_strength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_subsurface_scattering_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_subsurface_scattering_strength, handle, nil, &_result)
         return _result
     }
     
@@ -2699,7 +2699,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_transmittance_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_transmittance_color, handle, pArgs, nil)
                 }
                 
             }
@@ -2724,7 +2724,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_transmittance_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_transmittance_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_transmittance_color, handle, nil, &_result)
         return _result
     }
     
@@ -2745,7 +2745,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: depth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_transmittance_depth, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_transmittance_depth, handle, pArgs, nil)
                 }
                 
             }
@@ -2770,7 +2770,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_transmittance_depth() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_transmittance_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_transmittance_depth, handle, nil, &_result)
         return _result
     }
     
@@ -2791,7 +2791,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: boost) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_transmittance_boost, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_transmittance_boost, handle, pArgs, nil)
                 }
                 
             }
@@ -2816,7 +2816,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_transmittance_boost() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_transmittance_boost, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_transmittance_boost, handle, nil, &_result)
         return _result
     }
     
@@ -2837,7 +2837,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: backlight) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_backlight, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_backlight, handle, pArgs, nil)
                 }
                 
             }
@@ -2862,7 +2862,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_backlight() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_backlight, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_backlight, handle, nil, &_result)
         return _result
     }
     
@@ -2883,7 +2883,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: refraction) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_refraction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_refraction, handle, pArgs, nil)
                 }
                 
             }
@@ -2908,7 +2908,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_refraction() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_refraction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_refraction, handle, nil, &_result)
         return _result
     }
     
@@ -2929,7 +2929,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: pointSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_point_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_point_size, handle, pArgs, nil)
                 }
                 
             }
@@ -2954,7 +2954,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_point_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_point_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_point_size, handle, nil, &_result)
         return _result
     }
     
@@ -2975,7 +2975,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: detailUv.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_detail_uv, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_detail_uv, handle, pArgs, nil)
                 }
                 
             }
@@ -3000,7 +3000,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_detail_uv() -> BaseMaterial3D.DetailUV {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_detail_uv, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_detail_uv, handle, nil, &_result)
         return BaseMaterial3D.DetailUV (rawValue: _result)!
     }
     
@@ -3021,7 +3021,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: blendMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_blend_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_blend_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -3046,7 +3046,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_blend_mode() -> BaseMaterial3D.BlendMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_blend_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_blend_mode, handle, nil, &_result)
         return BaseMaterial3D.BlendMode (rawValue: _result)!
     }
     
@@ -3067,7 +3067,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: depthDrawMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_depth_draw_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_depth_draw_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -3092,7 +3092,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_depth_draw_mode() -> BaseMaterial3D.DepthDrawMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_depth_draw_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_depth_draw_mode, handle, nil, &_result)
         return BaseMaterial3D.DepthDrawMode (rawValue: _result)!
     }
     
@@ -3113,7 +3113,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: cullMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_cull_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_cull_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -3138,7 +3138,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_cull_mode() -> BaseMaterial3D.CullMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_cull_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_cull_mode, handle, nil, &_result)
         return BaseMaterial3D.CullMode (rawValue: _result)!
     }
     
@@ -3159,7 +3159,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: diffuseMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_diffuse_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_diffuse_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -3184,7 +3184,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_diffuse_mode() -> BaseMaterial3D.DiffuseMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_diffuse_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_diffuse_mode, handle, nil, &_result)
         return BaseMaterial3D.DiffuseMode (rawValue: _result)!
     }
     
@@ -3205,7 +3205,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: specularMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_specular_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_specular_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -3230,7 +3230,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_specular_mode() -> BaseMaterial3D.SpecularMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_specular_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_specular_mode, handle, nil, &_result)
         return BaseMaterial3D.SpecularMode (rawValue: _result)!
     }
     
@@ -3253,7 +3253,7 @@ open class BaseMaterial3D: Material {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_flag, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_flag, handle, pArgs, nil)
                     }
                     
                 }
@@ -3284,7 +3284,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_flag, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_flag, handle, pArgs, &_result)
                 }
                 
             }
@@ -3311,7 +3311,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_texture_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_texture_filter, handle, pArgs, nil)
                 }
                 
             }
@@ -3336,7 +3336,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_texture_filter() -> BaseMaterial3D.TextureFilter {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_texture_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_texture_filter, handle, nil, &_result)
         return BaseMaterial3D.TextureFilter (rawValue: _result)!
     }
     
@@ -3359,7 +3359,7 @@ open class BaseMaterial3D: Material {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_feature, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_feature, handle, pArgs, nil)
                     }
                     
                 }
@@ -3390,7 +3390,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: feature.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_feature, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_feature, handle, pArgs, &_result)
                 }
                 
             }
@@ -3419,7 +3419,7 @@ open class BaseMaterial3D: Material {
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_texture, handle, pArgs, nil)
                     }
                     
                 }
@@ -3446,18 +3446,18 @@ open class BaseMaterial3D: Material {
     /// Returns the ``Texture2D`` associated with the specified ``BaseMaterial3D/TextureParam``.
     fileprivate final func get_texture(_ param: BaseMaterial3D.TextureParam) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_texture, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_detail_blend_mode: GDExtensionMethodBindPtr = {
@@ -3477,7 +3477,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: detailBlendMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_detail_blend_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_detail_blend_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -3502,7 +3502,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_detail_blend_mode() -> BaseMaterial3D.BlendMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_detail_blend_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_detail_blend_mode, handle, nil, &_result)
         return BaseMaterial3D.BlendMode (rawValue: _result)!
     }
     
@@ -3523,7 +3523,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_uv1_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_uv1_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -3548,7 +3548,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_uv1_scale() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv1_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv1_scale, handle, nil, &_result)
         return _result
     }
     
@@ -3569,7 +3569,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_uv1_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_uv1_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -3594,7 +3594,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_uv1_offset() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv1_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv1_offset, handle, nil, &_result)
         return _result
     }
     
@@ -3615,7 +3615,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: sharpness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_uv1_triplanar_blend_sharpness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_uv1_triplanar_blend_sharpness, handle, pArgs, nil)
                 }
                 
             }
@@ -3640,7 +3640,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_uv1_triplanar_blend_sharpness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv1_triplanar_blend_sharpness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv1_triplanar_blend_sharpness, handle, nil, &_result)
         return _result
     }
     
@@ -3661,7 +3661,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_uv2_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_uv2_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -3686,7 +3686,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_uv2_scale() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv2_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv2_scale, handle, nil, &_result)
         return _result
     }
     
@@ -3707,7 +3707,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_uv2_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_uv2_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -3732,7 +3732,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_uv2_offset() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv2_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv2_offset, handle, nil, &_result)
         return _result
     }
     
@@ -3753,7 +3753,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: sharpness) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_uv2_triplanar_blend_sharpness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_uv2_triplanar_blend_sharpness, handle, pArgs, nil)
                 }
                 
             }
@@ -3778,7 +3778,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_uv2_triplanar_blend_sharpness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv2_triplanar_blend_sharpness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_uv2_triplanar_blend_sharpness, handle, nil, &_result)
         return _result
     }
     
@@ -3799,7 +3799,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_billboard_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_billboard_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -3824,7 +3824,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_billboard_mode() -> BaseMaterial3D.BillboardMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_billboard_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_billboard_mode, handle, nil, &_result)
         return BaseMaterial3D.BillboardMode (rawValue: _result)!
     }
     
@@ -3845,7 +3845,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: frames) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_particles_anim_h_frames, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_particles_anim_h_frames, handle, pArgs, nil)
                 }
                 
             }
@@ -3870,7 +3870,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_particles_anim_h_frames() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_particles_anim_h_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_particles_anim_h_frames, handle, nil, &_result)
         return _result
     }
     
@@ -3891,7 +3891,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: frames) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_particles_anim_v_frames, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_particles_anim_v_frames, handle, pArgs, nil)
                 }
                 
             }
@@ -3916,7 +3916,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_particles_anim_v_frames() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_particles_anim_v_frames, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_particles_anim_v_frames, handle, nil, &_result)
         return _result
     }
     
@@ -3937,7 +3937,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: loop) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_particles_anim_loop, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_particles_anim_loop, handle, pArgs, nil)
                 }
                 
             }
@@ -3962,7 +3962,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_particles_anim_loop() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_particles_anim_loop, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_particles_anim_loop, handle, nil, &_result)
         return _result
     }
     
@@ -3983,7 +3983,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_heightmap_deep_parallax, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_heightmap_deep_parallax, handle, pArgs, nil)
                 }
                 
             }
@@ -4008,7 +4008,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func is_heightmap_deep_parallax_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_is_heightmap_deep_parallax_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_is_heightmap_deep_parallax_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -4029,7 +4029,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_heightmap_deep_parallax_min_layers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_heightmap_deep_parallax_min_layers, handle, pArgs, nil)
                 }
                 
             }
@@ -4054,7 +4054,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_heightmap_deep_parallax_min_layers() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_deep_parallax_min_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_deep_parallax_min_layers, handle, nil, &_result)
         return _result
     }
     
@@ -4075,7 +4075,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_heightmap_deep_parallax_max_layers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_heightmap_deep_parallax_max_layers, handle, pArgs, nil)
                 }
                 
             }
@@ -4100,7 +4100,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_heightmap_deep_parallax_max_layers() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_deep_parallax_max_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_deep_parallax_max_layers, handle, nil, &_result)
         return _result
     }
     
@@ -4121,7 +4121,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: flip) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_heightmap_deep_parallax_flip_tangent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_heightmap_deep_parallax_flip_tangent, handle, pArgs, nil)
                 }
                 
             }
@@ -4146,7 +4146,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_heightmap_deep_parallax_flip_tangent() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_deep_parallax_flip_tangent, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_deep_parallax_flip_tangent, handle, nil, &_result)
         return _result
     }
     
@@ -4167,7 +4167,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: flip) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_heightmap_deep_parallax_flip_binormal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_heightmap_deep_parallax_flip_binormal, handle, pArgs, nil)
                 }
                 
             }
@@ -4192,7 +4192,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_heightmap_deep_parallax_flip_binormal() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_deep_parallax_flip_binormal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_heightmap_deep_parallax_flip_binormal, handle, nil, &_result)
         return _result
     }
     
@@ -4213,7 +4213,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_grow, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_grow, handle, pArgs, nil)
                 }
                 
             }
@@ -4238,7 +4238,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_grow() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_grow, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_grow, handle, nil, &_result)
         return _result
     }
     
@@ -4259,7 +4259,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: `operator`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_emission_operator, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_emission_operator, handle, pArgs, nil)
                 }
                 
             }
@@ -4284,7 +4284,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_emission_operator() -> BaseMaterial3D.EmissionOperator {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_emission_operator, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_emission_operator, handle, nil, &_result)
         return BaseMaterial3D.EmissionOperator (rawValue: _result)!
     }
     
@@ -4305,7 +4305,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_ao_light_affect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_ao_light_affect, handle, pArgs, nil)
                 }
                 
             }
@@ -4330,7 +4330,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_ao_light_affect() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_ao_light_affect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_ao_light_affect, handle, nil, &_result)
         return _result
     }
     
@@ -4351,7 +4351,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_alpha_scissor_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_alpha_scissor_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -4376,7 +4376,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_alpha_scissor_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_alpha_scissor_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_alpha_scissor_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -4397,7 +4397,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_alpha_hash_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_alpha_hash_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -4422,7 +4422,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_alpha_hash_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_alpha_hash_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_alpha_hash_scale, handle, nil, &_result)
         return _result
     }
     
@@ -4443,7 +4443,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_grow_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_grow_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -4468,7 +4468,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func is_grow_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_is_grow_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_is_grow_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -4489,7 +4489,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: channel.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_metallic_texture_channel, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_metallic_texture_channel, handle, pArgs, nil)
                 }
                 
             }
@@ -4514,7 +4514,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_metallic_texture_channel() -> BaseMaterial3D.TextureChannel {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_metallic_texture_channel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_metallic_texture_channel, handle, nil, &_result)
         return BaseMaterial3D.TextureChannel (rawValue: _result)!
     }
     
@@ -4535,7 +4535,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: channel.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_roughness_texture_channel, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_roughness_texture_channel, handle, pArgs, nil)
                 }
                 
             }
@@ -4560,7 +4560,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_roughness_texture_channel() -> BaseMaterial3D.TextureChannel {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_roughness_texture_channel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_roughness_texture_channel, handle, nil, &_result)
         return BaseMaterial3D.TextureChannel (rawValue: _result)!
     }
     
@@ -4581,7 +4581,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: channel.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_ao_texture_channel, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_ao_texture_channel, handle, pArgs, nil)
                 }
                 
             }
@@ -4606,7 +4606,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_ao_texture_channel() -> BaseMaterial3D.TextureChannel {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_ao_texture_channel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_ao_texture_channel, handle, nil, &_result)
         return BaseMaterial3D.TextureChannel (rawValue: _result)!
     }
     
@@ -4627,7 +4627,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: channel.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_refraction_texture_channel, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_refraction_texture_channel, handle, pArgs, nil)
                 }
                 
             }
@@ -4652,7 +4652,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_refraction_texture_channel() -> BaseMaterial3D.TextureChannel {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_refraction_texture_channel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_refraction_texture_channel, handle, nil, &_result)
         return BaseMaterial3D.TextureChannel (rawValue: _result)!
     }
     
@@ -4673,7 +4673,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_proximity_fade_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_proximity_fade_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -4698,7 +4698,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func is_proximity_fade_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_is_proximity_fade_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_is_proximity_fade_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -4719,7 +4719,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_proximity_fade_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_proximity_fade_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -4744,7 +4744,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_proximity_fade_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_proximity_fade_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_proximity_fade_distance, handle, nil, &_result)
         return _result
     }
     
@@ -4765,7 +4765,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: range) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_msdf_pixel_range, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_msdf_pixel_range, handle, pArgs, nil)
                 }
                 
             }
@@ -4790,7 +4790,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_msdf_pixel_range() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_msdf_pixel_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_msdf_pixel_range, handle, nil, &_result)
         return _result
     }
     
@@ -4811,7 +4811,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_msdf_outline_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_msdf_outline_size, handle, pArgs, nil)
                 }
                 
             }
@@ -4836,7 +4836,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_msdf_outline_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_msdf_outline_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_msdf_outline_size, handle, nil, &_result)
         return _result
     }
     
@@ -4857,7 +4857,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_distance_fade, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_distance_fade, handle, pArgs, nil)
                 }
                 
             }
@@ -4882,7 +4882,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_distance_fade() -> BaseMaterial3D.DistanceFadeMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_distance_fade, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_distance_fade, handle, nil, &_result)
         return BaseMaterial3D.DistanceFadeMode (rawValue: _result)!
     }
     
@@ -4903,7 +4903,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_distance_fade_max_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_distance_fade_max_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -4928,7 +4928,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_distance_fade_max_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_distance_fade_max_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_distance_fade_max_distance, handle, nil, &_result)
         return _result
     }
     
@@ -4949,7 +4949,7 @@ open class BaseMaterial3D: Material {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_distance_fade_min_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BaseMaterial3D.method_set_distance_fade_min_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -4974,7 +4974,7 @@ open class BaseMaterial3D: Material {
     fileprivate final func get_distance_fade_min_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_distance_fade_min_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(BaseMaterial3D.method_get_distance_fade_min_distance, handle, nil, &_result)
         return _result
     }
     

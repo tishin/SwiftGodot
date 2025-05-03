@@ -102,7 +102,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _getName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -121,7 +121,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     @_documentation(visibility: public)
     open func _init() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__init, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__init, handle, nil, nil)
         
     }
     
@@ -141,7 +141,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _getType() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_type, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -161,7 +161,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _getExtension() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_extension, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_extension, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -180,7 +180,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     @_documentation(visibility: public)
     open func _finish() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__finish, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__finish, handle, nil, nil)
         
     }
     
@@ -200,7 +200,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _getReservedWords() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_reserved_words, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_reserved_words, handle, nil, &_result.content)
         return _result
     }
     
@@ -224,7 +224,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
         withUnsafePointer(to: keyword.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__is_control_flow_keyword, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__is_control_flow_keyword, handle, pArgs, &_result)
                 }
                 
             }
@@ -250,7 +250,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _getCommentDelimiters() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_comment_delimiters, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_comment_delimiters, handle, nil, &_result.content)
         return _result
     }
     
@@ -270,7 +270,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _getDocCommentDelimiters() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_doc_comment_delimiters, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_doc_comment_delimiters, handle, nil, &_result.content)
         return _result
     }
     
@@ -290,7 +290,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _getStringDelimiters() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_string_delimiters, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_string_delimiters, handle, nil, &_result.content)
         return _result
     }
     
@@ -309,7 +309,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     @_documentation(visibility: public)
     open func _makeTemplate(_ template: String, className: String, baseClassName: String) -> Script? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let template = GString(template)
         withUnsafePointer(to: template.content) { pArg0 in
             let className = GString(className)
@@ -318,7 +318,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
                 withUnsafePointer(to: baseClassName.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__make_template, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__make_template, handle, pArgs, &_result)
                         }
                         
                     }
@@ -329,7 +329,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__get_built_in_templates: GDExtensionMethodBindPtr = {
@@ -351,7 +351,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
         withUnsafePointer(to: object.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_built_in_templates, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_built_in_templates, handle, pArgs, &_result)
                 }
                 
             }
@@ -377,7 +377,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _isUsingTemplates() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__is_using_templates, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__is_using_templates, handle, nil, &_result)
         return _result
     }
     
@@ -407,7 +407,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
                             withUnsafePointer(to: validateSafeLines) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__validate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__validate, handle, pArgs, &_result.content)
                                     }
                                     
                                 }
@@ -447,7 +447,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__validate_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__validate_path, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -472,9 +472,9 @@ open class ScriptLanguageExtension: ScriptLanguage {
     @_documentation(visibility: public)
     open func _createScript() -> Object? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__create_script, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__create_script, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__has_named_classes: GDExtensionMethodBindPtr = {
@@ -493,7 +493,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _hasNamedClasses() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__has_named_classes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__has_named_classes, handle, nil, &_result)
         return _result
     }
     
@@ -513,7 +513,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _supportsBuiltinMode() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__supports_builtin_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__supports_builtin_mode, handle, nil, &_result)
         return _result
     }
     
@@ -533,7 +533,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _supportsDocumentation() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__supports_documentation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__supports_documentation, handle, nil, &_result)
         return _result
     }
     
@@ -553,7 +553,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _canInheritFromFile() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__can_inherit_from_file, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__can_inherit_from_file, handle, nil, &_result)
         return _result
     }
     
@@ -579,7 +579,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
             withUnsafePointer(to: code.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__find_function, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__find_function, handle, pArgs, &_result)
                     }
                     
                 }
@@ -614,7 +614,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
                 withUnsafePointer(to: functionArgs.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__make_function, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__make_function, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -644,7 +644,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _canMakeFunction() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__can_make_function, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__can_make_function, handle, nil, &_result)
         return _result
     }
     
@@ -669,7 +669,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
                 withUnsafePointer(to: column) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__open_in_external_editor, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__open_in_external_editor, handle, pArgs, &_result)
                         }
                         
                     }
@@ -699,7 +699,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _overridesExternalEditor() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__overrides_external_editor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__overrides_external_editor, handle, nil, &_result)
         return _result
     }
     
@@ -719,7 +719,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _preferredFileNameCasing() -> ScriptLanguage.ScriptNameCasing {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__preferred_file_name_casing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__preferred_file_name_casing, handle, nil, &_result)
         return ScriptLanguage.ScriptNameCasing (rawValue: _result)!
     }
     
@@ -746,7 +746,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
                 withUnsafePointer(to: owner?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__complete_code, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__complete_code, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -785,7 +785,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
                     withUnsafePointer(to: owner?.handle) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__lookup_code, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__lookup_code, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -823,7 +823,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
                 withUnsafePointer(to: toLine) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__auto_indent_code, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__auto_indent_code, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -856,7 +856,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__add_global_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__add_global_constant, handle, pArgs, nil)
                     }
                     
                 }
@@ -887,7 +887,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__add_named_global_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__add_named_global_constant, handle, pArgs, nil)
                     }
                     
                 }
@@ -917,7 +917,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__remove_named_global_constant, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__remove_named_global_constant, handle, pArgs, nil)
                 }
                 
             }
@@ -942,7 +942,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     @_documentation(visibility: public)
     open func _threadEnter() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__thread_enter, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__thread_enter, handle, nil, nil)
         
     }
     
@@ -961,7 +961,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     @_documentation(visibility: public)
     open func _threadExit() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__thread_exit, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__thread_exit, handle, nil, nil)
         
     }
     
@@ -981,7 +981,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _debugGetError() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_error, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_error, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1001,7 +1001,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _debugGetStackLevelCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_count, handle, nil, &_result)
         return _result
     }
     
@@ -1024,7 +1024,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
         withUnsafePointer(to: level) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_line, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_line, handle, pArgs, &_result)
                 }
                 
             }
@@ -1053,7 +1053,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
         withUnsafePointer(to: level) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_function, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_function, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1082,7 +1082,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
         withUnsafePointer(to: level) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_source, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_source, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1113,7 +1113,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
                 withUnsafePointer(to: maxDepth) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_locals, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_locals, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -1148,7 +1148,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
                 withUnsafePointer(to: maxDepth) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_members, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_members, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -1181,7 +1181,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
         withUnsafePointer(to: level) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_instance, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_stack_level_instance, handle, pArgs, &_result)
                 }
                 
             }
@@ -1211,7 +1211,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
             withUnsafePointer(to: maxDepth) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_globals, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_globals, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1246,7 +1246,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
                     withUnsafePointer(to: maxDepth) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_parse_stack_level_expression, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_parse_stack_level_expression, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -1278,7 +1278,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _debugGetCurrentStackInfo() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_current_stack_info, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__debug_get_current_stack_info, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -1297,7 +1297,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     @_documentation(visibility: public)
     open func _reloadAllScripts() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__reload_all_scripts, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__reload_all_scripts, handle, nil, nil)
         
     }
     
@@ -1320,7 +1320,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
             withUnsafePointer(to: softReload) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__reload_scripts, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__reload_scripts, handle, pArgs, nil)
                     }
                     
                 }
@@ -1351,7 +1351,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
             withUnsafePointer(to: softReload) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__reload_tool_script, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__reload_tool_script, handle, pArgs, nil)
                     }
                     
                 }
@@ -1379,7 +1379,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _getRecognizedExtensions() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_recognized_extensions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_recognized_extensions, handle, nil, &_result.content)
         return _result
     }
     
@@ -1399,7 +1399,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _getPublicFunctions() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_public_functions, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_public_functions, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -1419,7 +1419,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _getPublicConstants() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_public_constants, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_public_constants, handle, nil, &_result.content)
         return _result
     }
     
@@ -1439,7 +1439,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     open func _getPublicAnnotations() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_public_annotations, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_public_annotations, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -1458,7 +1458,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     @_documentation(visibility: public)
     open func _profilingStart() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__profiling_start, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__profiling_start, handle, nil, nil)
         
     }
     
@@ -1477,7 +1477,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     @_documentation(visibility: public)
     open func _profilingStop() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__profiling_stop, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__profiling_stop, handle, nil, nil)
         
     }
     
@@ -1499,7 +1499,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__profiling_set_save_native_calls, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__profiling_set_save_native_calls, handle, pArgs, nil)
                 }
                 
             }
@@ -1524,7 +1524,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
     @_documentation(visibility: public)
     open func _frame() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__frame, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__frame, handle, nil, nil)
         
     }
     
@@ -1548,7 +1548,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
         withUnsafePointer(to: type.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__handles_global_class_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__handles_global_class_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -1578,7 +1578,7 @@ open class ScriptLanguageExtension: ScriptLanguage {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_global_class_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ScriptLanguageExtension.method__get_global_class_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1763,9 +1763,9 @@ func _ScriptLanguageExtension_proxy_complete_code (instance: UnsafeMutableRawPoi
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
-    let resolved_2 = args [2]!.load (as: UnsafeRawPointer?.self)
+    let resolved_2 = args [2]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._completeCode (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", path: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", owner: resolved_2 == nil ? nil : lookupObject (nativeHandle: resolved_2!, ownsRef: false) as? Object)
+    let ret = swiftObject._completeCode (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", path: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", owner: resolved_2 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_2!, ownsRef: false) as? Object)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // Dictionary
     ret.content = VariantDictionary.zero
 }
@@ -1775,7 +1775,7 @@ func _ScriptLanguageExtension_proxy_create_script (instance: UnsafeMutableRawPoi
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._createScript ()
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Object
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // Object
 }
 
 func _ScriptLanguageExtension_proxy_debug_get_current_stack_info (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -2066,9 +2066,9 @@ func _ScriptLanguageExtension_proxy_lookup_code (instance: UnsafeMutableRawPoint
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
-    let resolved_3 = args [3]!.load (as: UnsafeRawPointer?.self)
+    let resolved_3 = args [3]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._lookupCode (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", symbol: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", path: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", owner: resolved_3 == nil ? nil : lookupObject (nativeHandle: resolved_3!, ownsRef: false) as? Object)
+    let ret = swiftObject._lookupCode (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", symbol: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", path: GString.stringFromGStringPtr (ptr: args [2]!) ?? "", owner: resolved_3 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_3!, ownsRef: false) as? Object)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // Dictionary
     ret.content = VariantDictionary.zero
 }
@@ -2089,7 +2089,7 @@ func _ScriptLanguageExtension_proxy_make_template (instance: UnsafeMutableRawPoi
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
     let ret = swiftObject._makeTemplate (GString.stringFromGStringPtr (ptr: args [0]!) ?? "", className: GString.stringFromGStringPtr (ptr: args [1]!) ?? "", baseClassName: GString.stringFromGStringPtr (ptr: args [2]!) ?? "")
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // Script
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // Script
 }
 
 func _ScriptLanguageExtension_proxy_open_in_external_editor (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -2097,9 +2097,9 @@ func _ScriptLanguageExtension_proxy_open_in_external_editor (instance: UnsafeMut
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._openInExternalEditor (script: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Script, line: args [1]!.assumingMemoryBound (to: Int32.self).pointee, column: args [2]!.assumingMemoryBound (to: Int32.self).pointee)
+    let ret = swiftObject._openInExternalEditor (script: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Script, line: args [1]!.assumingMemoryBound (to: Int32.self).pointee, column: args [2]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: Int32 (ret.rawValue), as: Int32.self)
 }
 
@@ -2161,9 +2161,9 @@ func _ScriptLanguageExtension_proxy_reload_tool_script (instance: UnsafeMutableR
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? ScriptLanguageExtension else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._reloadToolScript (resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Script, softReload: args [1]!.assumingMemoryBound (to: Bool.self).pointee)
+    swiftObject._reloadToolScript (resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Script, softReload: args [1]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _ScriptLanguageExtension_proxy_remove_named_global_constant (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {

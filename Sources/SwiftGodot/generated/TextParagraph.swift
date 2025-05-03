@@ -199,7 +199,7 @@ open class TextParagraph: RefCounted {
     /// Clears text paragraph (removes text and inline objects).
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(TextParagraph.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(TextParagraph.method_clear, handle, nil, nil)
         
     }
     
@@ -220,7 +220,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: direction.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_set_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_set_direction, handle, pArgs, nil)
                 }
                 
             }
@@ -245,7 +245,7 @@ open class TextParagraph: RefCounted {
     fileprivate final func get_direction() -> TextServer.Direction {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_direction, handle, nil, &_result)
         return TextServer.Direction (rawValue: _result)!
     }
     
@@ -267,7 +267,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: customPunctuation.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_set_custom_punctuation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_set_custom_punctuation, handle, pArgs, nil)
                 }
                 
             }
@@ -292,7 +292,7 @@ open class TextParagraph: RefCounted {
     fileprivate final func get_custom_punctuation() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_custom_punctuation, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_custom_punctuation, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -313,7 +313,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: orientation.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_set_orientation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_set_orientation, handle, pArgs, nil)
                 }
                 
             }
@@ -338,7 +338,7 @@ open class TextParagraph: RefCounted {
     fileprivate final func get_orientation() -> TextServer.Orientation {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_orientation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_orientation, handle, nil, &_result)
         return TextServer.Orientation (rawValue: _result)!
     }
     
@@ -359,7 +359,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_set_preserve_invalid, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_set_preserve_invalid, handle, pArgs, nil)
                 }
                 
             }
@@ -384,7 +384,7 @@ open class TextParagraph: RefCounted {
     fileprivate final func get_preserve_invalid() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_preserve_invalid, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_preserve_invalid, handle, nil, &_result)
         return _result
     }
     
@@ -405,7 +405,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_set_preserve_control, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_set_preserve_control, handle, pArgs, nil)
                 }
                 
             }
@@ -430,7 +430,7 @@ open class TextParagraph: RefCounted {
     fileprivate final func get_preserve_control() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_preserve_control, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_preserve_control, handle, nil, &_result)
         return _result
     }
     
@@ -454,7 +454,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: override.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_set_bidi_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_set_bidi_override, handle, pArgs, nil)
                 }
                 
             }
@@ -488,7 +488,7 @@ open class TextParagraph: RefCounted {
                         withUnsafePointer(to: language.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(TextParagraph.method_set_dropcap, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(TextParagraph.method_set_dropcap, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -520,7 +520,7 @@ open class TextParagraph: RefCounted {
     /// Removes dropcap.
     public final func clearDropcap() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(TextParagraph.method_clear_dropcap, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(TextParagraph.method_clear_dropcap, handle, nil, nil)
         
     }
     
@@ -548,7 +548,7 @@ open class TextParagraph: RefCounted {
                         withUnsafePointer(to: meta.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(TextParagraph.method_add_string, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(TextParagraph.method_add_string, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -588,7 +588,7 @@ open class TextParagraph: RefCounted {
                         withUnsafePointer(to: baseline) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(TextParagraph.method_add_object, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(TextParagraph.method_add_object, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -627,7 +627,7 @@ open class TextParagraph: RefCounted {
                     withUnsafePointer(to: baseline) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextParagraph.method_resize_object, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(TextParagraph.method_resize_object, handle, pArgs, &_result)
                             }
                             
                         }
@@ -660,7 +660,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: alignment.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_set_alignment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_set_alignment, handle, pArgs, nil)
                 }
                 
             }
@@ -685,7 +685,7 @@ open class TextParagraph: RefCounted {
     fileprivate final func get_alignment() -> HorizontalAlignment {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_alignment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_alignment, handle, nil, &_result)
         return HorizontalAlignment (rawValue: _result)!
     }
     
@@ -706,7 +706,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: tabStops.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_tab_align, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_tab_align, handle, pArgs, nil)
                 }
                 
             }
@@ -733,7 +733,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: flags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_set_break_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_set_break_flags, handle, pArgs, nil)
                 }
                 
             }
@@ -758,7 +758,7 @@ open class TextParagraph: RefCounted {
     fileprivate final func get_break_flags() -> TextServer.LineBreakFlag {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: TextServer.LineBreakFlag = TextServer.LineBreakFlag ()
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_break_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_break_flags, handle, nil, &_result)
         return _result
     }
     
@@ -779,7 +779,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: flags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_set_justification_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_set_justification_flags, handle, pArgs, nil)
                 }
                 
             }
@@ -804,7 +804,7 @@ open class TextParagraph: RefCounted {
     fileprivate final func get_justification_flags() -> TextServer.JustificationFlag {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: TextServer.JustificationFlag = TextServer.JustificationFlag ()
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_justification_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_justification_flags, handle, nil, &_result)
         return _result
     }
     
@@ -825,7 +825,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: overrunBehavior.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_set_text_overrun_behavior, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_set_text_overrun_behavior, handle, pArgs, nil)
                 }
                 
             }
@@ -850,7 +850,7 @@ open class TextParagraph: RefCounted {
     fileprivate final func get_text_overrun_behavior() -> TextServer.OverrunBehavior {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_text_overrun_behavior, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_text_overrun_behavior, handle, nil, &_result)
         return TextServer.OverrunBehavior (rawValue: _result)!
     }
     
@@ -872,7 +872,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: char.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_set_ellipsis_char, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_set_ellipsis_char, handle, pArgs, nil)
                 }
                 
             }
@@ -897,7 +897,7 @@ open class TextParagraph: RefCounted {
     fileprivate final func get_ellipsis_char() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_ellipsis_char, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_ellipsis_char, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -918,7 +918,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_set_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_set_width, handle, pArgs, nil)
                 }
                 
             }
@@ -943,7 +943,7 @@ open class TextParagraph: RefCounted {
     fileprivate final func get_width() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_width, handle, nil, &_result)
         return _result
     }
     
@@ -962,7 +962,7 @@ open class TextParagraph: RefCounted {
     public final func getNonWrappedSize() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_non_wrapped_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_non_wrapped_size, handle, nil, &_result)
         return _result
     }
     
@@ -981,7 +981,7 @@ open class TextParagraph: RefCounted {
     public final func getSize() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -1000,7 +1000,7 @@ open class TextParagraph: RefCounted {
     public final func getRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -1022,7 +1022,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_rid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_rid, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1047,7 +1047,7 @@ open class TextParagraph: RefCounted {
     public final func getDropcapRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_dropcap_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_dropcap_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -1066,7 +1066,7 @@ open class TextParagraph: RefCounted {
     public final func getLineCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_line_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_line_count, handle, nil, &_result)
         return _result
     }
     
@@ -1087,7 +1087,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: maxLinesVisible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_set_max_lines_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_set_max_lines_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -1112,7 +1112,7 @@ open class TextParagraph: RefCounted {
     fileprivate final func get_max_lines_visible() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_max_lines_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_max_lines_visible, handle, nil, &_result)
         return _result
     }
     
@@ -1133,7 +1133,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: lineSpacing) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_set_line_spacing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_set_line_spacing, handle, pArgs, nil)
                 }
                 
             }
@@ -1158,7 +1158,7 @@ open class TextParagraph: RefCounted {
     fileprivate final func get_line_spacing() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_line_spacing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_line_spacing, handle, nil, &_result)
         return _result
     }
     
@@ -1180,7 +1180,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_objects, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_objects, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1209,7 +1209,7 @@ open class TextParagraph: RefCounted {
             withUnsafePointer(to: key.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextParagraph.method_get_line_object_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TextParagraph.method_get_line_object_rect, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1239,7 +1239,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_size, handle, pArgs, &_result)
                 }
                 
             }
@@ -1267,7 +1267,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_range, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_range, handle, pArgs, &_result)
                 }
                 
             }
@@ -1295,7 +1295,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_ascent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_ascent, handle, pArgs, &_result)
                 }
                 
             }
@@ -1323,7 +1323,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_descent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_descent, handle, pArgs, &_result)
                 }
                 
             }
@@ -1351,7 +1351,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_width, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_width, handle, pArgs, &_result)
                 }
                 
             }
@@ -1379,7 +1379,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_underline_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_underline_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -1407,7 +1407,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: line) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_underline_thickness, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_get_line_underline_thickness, handle, pArgs, &_result)
                 }
                 
             }
@@ -1432,7 +1432,7 @@ open class TextParagraph: RefCounted {
     public final func getDropcapSize() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_dropcap_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_dropcap_size, handle, nil, &_result)
         return _result
     }
     
@@ -1451,7 +1451,7 @@ open class TextParagraph: RefCounted {
     public final func getDropcapLines() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TextParagraph.method_get_dropcap_lines, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextParagraph.method_get_dropcap_lines, handle, nil, &_result)
         return _result
     }
     
@@ -1475,7 +1475,7 @@ open class TextParagraph: RefCounted {
                     withUnsafePointer(to: dcColor) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextParagraph.method_draw, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TextParagraph.method_draw, handle, pArgs, nil)
                             }
                             
                         }
@@ -1512,7 +1512,7 @@ open class TextParagraph: RefCounted {
                         withUnsafePointer(to: dcColor) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(TextParagraph.method_draw_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(TextParagraph.method_draw_outline, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -1550,7 +1550,7 @@ open class TextParagraph: RefCounted {
                     withUnsafePointer(to: color) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextParagraph.method_draw_line, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TextParagraph.method_draw_line, handle, pArgs, nil)
                             }
                             
                         }
@@ -1587,7 +1587,7 @@ open class TextParagraph: RefCounted {
                         withUnsafePointer(to: color) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(TextParagraph.method_draw_line_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(TextParagraph.method_draw_line_outline, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -1624,7 +1624,7 @@ open class TextParagraph: RefCounted {
                 withUnsafePointer(to: color) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TextParagraph.method_draw_dropcap, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TextParagraph.method_draw_dropcap, handle, pArgs, nil)
                         }
                         
                     }
@@ -1658,7 +1658,7 @@ open class TextParagraph: RefCounted {
                     withUnsafePointer(to: color) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TextParagraph.method_draw_dropcap_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TextParagraph.method_draw_dropcap_outline, handle, pArgs, nil)
                             }
                             
                         }
@@ -1692,7 +1692,7 @@ open class TextParagraph: RefCounted {
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextParagraph.method_hit_test, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextParagraph.method_hit_test, handle, pArgs, &_result)
                 }
                 
             }

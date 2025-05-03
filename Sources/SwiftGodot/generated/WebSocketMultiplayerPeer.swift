@@ -127,7 +127,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
             withUnsafePointer(to: tlsClientOptions?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_create_client, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_create_client, handle, pArgs, &_result)
                     }
                     
                 }
@@ -160,7 +160,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
                 withUnsafePointer(to: tlsServerOptions?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_create_server, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_create_server, handle, pArgs, &_result)
                         }
                         
                     }
@@ -188,18 +188,18 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     /// Returns the ``WebSocketPeer`` associated to the given `peerId`.
     public final func getPeer(peerId: Int32) -> WebSocketPeer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: peerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_peer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_peer, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_peer_address: GDExtensionMethodBindPtr = {
@@ -220,7 +220,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_peer_address, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_peer_address, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -248,7 +248,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_peer_port, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_peer_port, handle, pArgs, &_result)
                 }
                 
             }
@@ -273,7 +273,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     fileprivate final func get_supported_protocols() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_supported_protocols, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_supported_protocols, handle, nil, &_result.content)
         return _result
     }
     
@@ -294,7 +294,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         withUnsafePointer(to: protocols.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_set_supported_protocols, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_set_supported_protocols, handle, pArgs, nil)
                 }
                 
             }
@@ -319,7 +319,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     fileprivate final func get_handshake_headers() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_handshake_headers, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_handshake_headers, handle, nil, &_result.content)
         return _result
     }
     
@@ -340,7 +340,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         withUnsafePointer(to: protocols.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_set_handshake_headers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_set_handshake_headers, handle, pArgs, nil)
                 }
                 
             }
@@ -365,7 +365,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     fileprivate final func get_inbound_buffer_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_inbound_buffer_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_inbound_buffer_size, handle, nil, &_result)
         return _result
     }
     
@@ -386,7 +386,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         withUnsafePointer(to: bufferSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_set_inbound_buffer_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_set_inbound_buffer_size, handle, pArgs, nil)
                 }
                 
             }
@@ -411,7 +411,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     fileprivate final func get_outbound_buffer_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_outbound_buffer_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_outbound_buffer_size, handle, nil, &_result)
         return _result
     }
     
@@ -432,7 +432,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         withUnsafePointer(to: bufferSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_set_outbound_buffer_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_set_outbound_buffer_size, handle, pArgs, nil)
                 }
                 
             }
@@ -457,7 +457,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     fileprivate final func get_handshake_timeout() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_handshake_timeout, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_handshake_timeout, handle, nil, &_result)
         return _result
     }
     
@@ -478,7 +478,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         withUnsafePointer(to: timeout) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_set_handshake_timeout, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_set_handshake_timeout, handle, pArgs, nil)
                 }
                 
             }
@@ -505,7 +505,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
         withUnsafePointer(to: maxQueuedPackets) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_set_max_queued_packets, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_set_max_queued_packets, handle, pArgs, nil)
                 }
                 
             }
@@ -530,7 +530,7 @@ open class WebSocketMultiplayerPeer: MultiplayerPeer {
     fileprivate final func get_max_queued_packets() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_max_queued_packets, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebSocketMultiplayerPeer.method_get_max_queued_packets, handle, nil, &_result)
         return _result
     }
     

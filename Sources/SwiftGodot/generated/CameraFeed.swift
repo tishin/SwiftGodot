@@ -110,7 +110,7 @@ open class CameraFeed: RefCounted {
     open func _activateFeed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CameraFeed.method__activate_feed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraFeed.method__activate_feed, handle, nil, &_result)
         return _result
     }
     
@@ -129,7 +129,7 @@ open class CameraFeed: RefCounted {
     @_documentation(visibility: public)
     open func _deactivateFeed() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CameraFeed.method__deactivate_feed, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CameraFeed.method__deactivate_feed, handle, nil, nil)
         
     }
     
@@ -148,7 +148,7 @@ open class CameraFeed: RefCounted {
     public final func getId() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CameraFeed.method_get_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraFeed.method_get_id, handle, nil, &_result)
         return _result
     }
     
@@ -167,7 +167,7 @@ open class CameraFeed: RefCounted {
     fileprivate final func is_active() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CameraFeed.method_is_active, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraFeed.method_is_active, handle, nil, &_result)
         return _result
     }
     
@@ -188,7 +188,7 @@ open class CameraFeed: RefCounted {
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraFeed.method_set_active, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraFeed.method_set_active, handle, pArgs, nil)
                 }
                 
             }
@@ -213,7 +213,7 @@ open class CameraFeed: RefCounted {
     public final func getName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(CameraFeed.method_get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CameraFeed.method_get_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -235,7 +235,7 @@ open class CameraFeed: RefCounted {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraFeed.method_set_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraFeed.method_set_name, handle, pArgs, nil)
                 }
                 
             }
@@ -260,7 +260,7 @@ open class CameraFeed: RefCounted {
     public final func getPosition() -> CameraFeed.FeedPosition {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CameraFeed.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraFeed.method_get_position, handle, nil, &_result)
         return CameraFeed.FeedPosition (rawValue: _result)!
     }
     
@@ -281,7 +281,7 @@ open class CameraFeed: RefCounted {
         withUnsafePointer(to: position.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraFeed.method_set_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraFeed.method_set_position, handle, pArgs, nil)
                 }
                 
             }
@@ -306,7 +306,7 @@ open class CameraFeed: RefCounted {
     fileprivate final func get_transform() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(CameraFeed.method_get_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraFeed.method_get_transform, handle, nil, &_result)
         return _result
     }
     
@@ -327,7 +327,7 @@ open class CameraFeed: RefCounted {
         withUnsafePointer(to: transform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraFeed.method_set_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraFeed.method_set_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -354,7 +354,7 @@ open class CameraFeed: RefCounted {
         withUnsafePointer(to: rgbImage?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraFeed.method_set_rgb_image, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraFeed.method_set_rgb_image, handle, pArgs, nil)
                 }
                 
             }
@@ -381,7 +381,7 @@ open class CameraFeed: RefCounted {
         withUnsafePointer(to: ycbcrImage?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraFeed.method_set_ycbcr_image, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CameraFeed.method_set_ycbcr_image, handle, pArgs, nil)
                 }
                 
             }
@@ -409,7 +409,7 @@ open class CameraFeed: RefCounted {
             withUnsafePointer(to: height) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CameraFeed.method_set_external, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CameraFeed.method_set_external, handle, pArgs, nil)
                     }
                     
                 }
@@ -439,7 +439,7 @@ open class CameraFeed: RefCounted {
         withUnsafePointer(to: feedImageType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CameraFeed.method_get_texture_tex_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CameraFeed.method_get_texture_tex_id, handle, pArgs, &_result)
                 }
                 
             }
@@ -464,7 +464,7 @@ open class CameraFeed: RefCounted {
     public final func getDatatype() -> CameraFeed.FeedDataType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CameraFeed.method_get_datatype, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CameraFeed.method_get_datatype, handle, nil, &_result)
         return CameraFeed.FeedDataType (rawValue: _result)!
     }
     
@@ -483,7 +483,7 @@ open class CameraFeed: RefCounted {
     fileprivate final func get_formats() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(CameraFeed.method_get_formats, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CameraFeed.method_get_formats, handle, nil, &_result.content)
         return _result
     }
     
@@ -513,7 +513,7 @@ open class CameraFeed: RefCounted {
             withUnsafePointer(to: parameters.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CameraFeed.method_set_format, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(CameraFeed.method_set_format, handle, pArgs, &_result)
                     }
                     
                 }

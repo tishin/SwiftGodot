@@ -69,7 +69,7 @@ open class VisibleOnScreenNotifier2D: Node2D {
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisibleOnScreenNotifier2D.method_set_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisibleOnScreenNotifier2D.method_set_rect, handle, pArgs, nil)
                 }
                 
             }
@@ -94,7 +94,7 @@ open class VisibleOnScreenNotifier2D: Node2D {
     fileprivate final func get_rect() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(VisibleOnScreenNotifier2D.method_get_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisibleOnScreenNotifier2D.method_get_rect, handle, nil, &_result)
         return _result
     }
     
@@ -116,7 +116,7 @@ open class VisibleOnScreenNotifier2D: Node2D {
     public final func isOnScreen() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VisibleOnScreenNotifier2D.method_is_on_screen, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisibleOnScreenNotifier2D.method_is_on_screen, handle, nil, &_result)
         return _result
     }
     

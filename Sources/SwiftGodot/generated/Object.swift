@@ -107,7 +107,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     public final func getClass() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Object.method_get_class, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Object.method_get_class, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -133,7 +133,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: `class`.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_is_class, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Object.method_is_class, handle, pArgs, &_result)
                 }
                 
             }
@@ -164,7 +164,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Object.method_set, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Object.method_set, handle, pArgs, nil)
                     }
                     
                 }
@@ -197,7 +197,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: property.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_get, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Object.method_get, handle, pArgs, &_result)
                 }
                 
             }
@@ -228,7 +228,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Object.method_set_indexed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Object.method_set_indexed, handle, pArgs, nil)
                     }
                     
                 }
@@ -265,7 +265,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: propertyPath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_get_indexed, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Object.method_get_indexed, handle, pArgs, &_result)
                 }
                 
             }
@@ -305,7 +305,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     public final func getPropertyList() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Object.method_get_property_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Object.method_get_property_list, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -339,7 +339,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     public final func getMethodList() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Object.method_get_method_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Object.method_get_method_list, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -364,7 +364,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: property.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_property_can_revert, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Object.method_property_can_revert, handle, pArgs, &_result)
                 }
                 
             }
@@ -395,7 +395,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: property.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_property_get_revert, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Object.method_property_get_revert, handle, pArgs, &_result)
                 }
                 
             }
@@ -426,7 +426,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
             withUnsafePointer(to: reversed) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Object.method_notification, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Object.method_notification, handle, pArgs, nil)
                     }
                     
                 }
@@ -453,7 +453,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     public final func toString() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Object.method_to_string, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Object.method_to_string, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -475,7 +475,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     public final func getInstanceId() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(Object.method_get_instance_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Object.method_get_instance_id, handle, nil, &_result)
         return _result
     }
     
@@ -499,7 +499,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: script.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_set_script, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Object.method_set_script, handle, pArgs, nil)
                 }
                 
             }
@@ -524,7 +524,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     public final func getScript() -> Variant? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        gi.object_method_bind_ptrcall(Object.method_get_script, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Object.method_get_script, handle, nil, &_result)
         return Variant(takingOver: _result)
     }
     
@@ -553,7 +553,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Object.method_set_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Object.method_set_meta, handle, pArgs, nil)
                     }
                     
                 }
@@ -587,7 +587,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_remove_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Object.method_remove_meta, handle, pArgs, nil)
                 }
                 
             }
@@ -621,7 +621,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
             withUnsafePointer(to: `default`.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Object.method_get_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Object.method_get_meta, handle, pArgs, &_result)
                     }
                     
                 }
@@ -656,7 +656,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_has_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Object.method_has_meta, handle, pArgs, &_result)
                 }
                 
             }
@@ -681,7 +681,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     public final func getMetaList() -> TypedArray<StringName> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Object.method_get_meta_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Object.method_get_meta_list, handle, nil, &_result)
         return TypedArray<StringName>(takingOver: _result)
     }
     
@@ -705,7 +705,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
             withUnsafePointer(to: arguments.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Object.method_add_user_signal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Object.method_add_user_signal, handle, pArgs, nil)
                     }
                     
                 }
@@ -735,7 +735,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: signal.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_has_user_signal, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Object.method_has_user_signal, handle, pArgs, &_result)
                 }
                 
             }
@@ -762,7 +762,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: signal.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_remove_user_signal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Object.method_remove_user_signal, handle, pArgs, nil)
                 }
                 
             }
@@ -798,7 +798,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
             if arguments.isEmpty {
                 withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                        gi.object_method_bind_call(Object.method_emit_signal, UnsafeMutableRawPointer(mutating: handle), pArgs, 1, &_result, nil)
+                        gi.object_method_bind_call(Object.method_emit_signal, handle, pArgs, 1, &_result, nil)
                     }
                     
                 }
@@ -825,7 +825,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
                             pArgsBuffer.initializeElement(at: 1 + i, to: contentsPtr + i)
                         }
                     
-                        gi.object_method_bind_call(Object.method_emit_signal, UnsafeMutableRawPointer(mutating: handle), pArgs, Int64(1 + arguments.count), &_result, nil)
+                        gi.object_method_bind_call(Object.method_emit_signal, handle, pArgs, Int64(1 + arguments.count), &_result, nil)
                     }                           
                 }
                 
@@ -866,7 +866,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
             if arguments.isEmpty {
                 withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                        gi.object_method_bind_call(Object.method_call, UnsafeMutableRawPointer(mutating: handle), pArgs, 1, &_result, nil)
+                        gi.object_method_bind_call(Object.method_call, handle, pArgs, 1, &_result, nil)
                     }
                     
                 }
@@ -893,7 +893,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
                             pArgsBuffer.initializeElement(at: 1 + i, to: contentsPtr + i)
                         }
                     
-                        gi.object_method_bind_call(Object.method_call, UnsafeMutableRawPointer(mutating: handle), pArgs, Int64(1 + arguments.count), &_result, nil)
+                        gi.object_method_bind_call(Object.method_call, handle, pArgs, Int64(1 + arguments.count), &_result, nil)
                     }                           
                 }
                 
@@ -934,7 +934,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
             if arguments.isEmpty {
                 withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                        gi.object_method_bind_call(Object.method_call_deferred, UnsafeMutableRawPointer(mutating: handle), pArgs, 1, &_result, nil)
+                        gi.object_method_bind_call(Object.method_call_deferred, handle, pArgs, 1, &_result, nil)
                     }
                     
                 }
@@ -961,7 +961,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
                             pArgsBuffer.initializeElement(at: 1 + i, to: contentsPtr + i)
                         }
                     
-                        gi.object_method_bind_call(Object.method_call_deferred, UnsafeMutableRawPointer(mutating: handle), pArgs, Int64(1 + arguments.count), &_result, nil)
+                        gi.object_method_bind_call(Object.method_call_deferred, handle, pArgs, Int64(1 + arguments.count), &_result, nil)
                     }                           
                 }
                 
@@ -992,7 +992,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Object.method_set_deferred, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Object.method_set_deferred, handle, pArgs, nil)
                     }
                     
                 }
@@ -1026,7 +1026,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
             withUnsafePointer(to: argArray.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Object.method_callv, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Object.method_callv, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1059,7 +1059,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_has_method, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Object.method_has_method, handle, pArgs, &_result)
                 }
                 
             }
@@ -1090,7 +1090,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: method.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_get_method_argument_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Object.method_get_method_argument_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -1121,7 +1121,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: signal.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_has_signal, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Object.method_has_signal, handle, pArgs, &_result)
                 }
                 
             }
@@ -1149,7 +1149,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     public final func getSignalList() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Object.method_get_signal_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Object.method_get_signal_list, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -1178,7 +1178,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: signal.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_get_signal_connection_list, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Object.method_get_signal_connection_list, handle, pArgs, &_result)
                 }
                 
             }
@@ -1210,7 +1210,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     public final func getIncomingConnections() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Object.method_get_incoming_connections, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Object.method_get_incoming_connections, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -1255,7 +1255,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
                 withUnsafePointer(to: flags) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Object.method_connect, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Object.method_connect, handle, pArgs, &_result)
                         }
                         
                     }
@@ -1287,7 +1287,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
             withUnsafePointer(to: callable.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Object.method_disconnect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Object.method_disconnect, handle, pArgs, nil)
                     }
                     
                 }
@@ -1321,7 +1321,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
             withUnsafePointer(to: callable.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Object.method_is_connected, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Object.method_is_connected, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1354,7 +1354,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: signal.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_has_connections, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Object.method_has_connections, handle, pArgs, &_result)
                 }
                 
             }
@@ -1381,7 +1381,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_set_block_signals, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Object.method_set_block_signals, handle, pArgs, nil)
                 }
                 
             }
@@ -1406,7 +1406,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     public final func isBlockingSignals() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Object.method_is_blocking_signals, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Object.method_is_blocking_signals, handle, nil, &_result)
         return _result
     }
     
@@ -1424,7 +1424,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     /// Emits the [signal property_list_changed] signal. This is mainly used to refresh the editor, so that the Inspector and editor plugins are properly updated.
     public final func notifyPropertyListChanged() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Object.method_notify_property_list_changed, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Object.method_notify_property_list_changed, handle, nil, nil)
         
     }
     
@@ -1445,7 +1445,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_set_message_translation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Object.method_set_message_translation, handle, pArgs, nil)
                 }
                 
             }
@@ -1470,7 +1470,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     public final func canTranslateMessages() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Object.method_can_translate_messages, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Object.method_can_translate_messages, handle, nil, &_result)
         return _result
     }
     
@@ -1500,7 +1500,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
             withUnsafePointer(to: context.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Object.method_tr, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Object.method_tr, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1544,7 +1544,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
                     withUnsafePointer(to: context.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Object.method_tr_n, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(Object.method_tr_n, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -1575,7 +1575,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     public final func getTranslationDomain() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(Object.method_get_translation_domain, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Object.method_get_translation_domain, handle, nil, &_result.content)
         return _result
     }
     
@@ -1596,7 +1596,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
         withUnsafePointer(to: domain.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Object.method_set_translation_domain, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Object.method_set_translation_domain, handle, pArgs, nil)
                 }
                 
             }
@@ -1621,7 +1621,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     public final func isQueuedForDeletion() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Object.method_is_queued_for_deletion, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Object.method_is_queued_for_deletion, handle, nil, &_result)
         return _result
     }
     
@@ -1639,7 +1639,7 @@ open class Object: Wrapped, _GodotBridgeable, _GodotNullableBridgeable {
     /// If this method is called during ``notificationPredelete``, this object will reject being freed and will remain allocated. This is mostly an internal function used for error handling to avoid the user from freeing objects when they are not intended to.
     public final func cancelFree() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Object.method_cancel_free, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Object.method_cancel_free, handle, nil, nil)
         
     }
     

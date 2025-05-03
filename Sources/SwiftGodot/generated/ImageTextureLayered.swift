@@ -47,7 +47,7 @@ open class ImageTextureLayered: TextureLayered {
         withUnsafePointer(to: images.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImageTextureLayered.method_create_from_images, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ImageTextureLayered.method_create_from_images, handle, pArgs, &_result)
                 }
                 
             }
@@ -82,7 +82,7 @@ open class ImageTextureLayered: TextureLayered {
             withUnsafePointer(to: layer) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ImageTextureLayered.method_update_layer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ImageTextureLayered.method_update_layer, handle, pArgs, nil)
                     }
                     
                 }

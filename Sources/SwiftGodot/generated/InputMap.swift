@@ -26,7 +26,7 @@ open class InputMap: Object {
     /// The shared instance of this class
     public static var shared: InputMap {
         return withUnsafePointer(to: &InputMap.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -51,7 +51,7 @@ open class InputMap: Object {
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_action, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_action, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -75,7 +75,7 @@ open class InputMap: Object {
     /// Returns an array of all actions in the ``InputMap``.
     public static func getActions() -> TypedArray<StringName> {
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(method_get_actions, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_actions, shared.handle, nil, &_result)
         return TypedArray<StringName>(takingOver: _result)
     }
     
@@ -99,7 +99,7 @@ open class InputMap: Object {
             withUnsafePointer(to: deadzone) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_add_action, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_add_action, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -127,7 +127,7 @@ open class InputMap: Object {
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_erase_action, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_erase_action, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -154,7 +154,7 @@ open class InputMap: Object {
             withUnsafePointer(to: deadzone) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_action_set_deadzone, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_action_set_deadzone, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -183,7 +183,7 @@ open class InputMap: Object {
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_action_get_deadzone, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_action_get_deadzone, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -210,7 +210,7 @@ open class InputMap: Object {
             withUnsafePointer(to: event?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_action_add_event, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_action_add_event, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -240,7 +240,7 @@ open class InputMap: Object {
             withUnsafePointer(to: event?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_action_has_event, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_action_has_event, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -269,7 +269,7 @@ open class InputMap: Object {
             withUnsafePointer(to: event?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_action_erase_event, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_action_erase_event, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -297,7 +297,7 @@ open class InputMap: Object {
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_action_erase_events, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_action_erase_events, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -327,7 +327,7 @@ open class InputMap: Object {
         withUnsafePointer(to: action.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_action_get_events, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_action_get_events, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -359,7 +359,7 @@ open class InputMap: Object {
                 withUnsafePointer(to: exactMatch) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_event_is_action, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_event_is_action, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -386,7 +386,7 @@ open class InputMap: Object {
     
     /// Clears all ``InputEventAction`` in the ``InputMap`` and load it anew from ``ProjectSettings``.
     public static func loadFromProjectSettings() {
-        gi.object_method_bind_ptrcall(method_load_from_project_settings, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_load_from_project_settings, shared.handle, nil, nil)
         
     }
     

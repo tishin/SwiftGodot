@@ -82,7 +82,7 @@ open class AudioEffectChorus: AudioEffect {
         withUnsafePointer(to: voices) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_voice_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_voice_count, handle, pArgs, nil)
                 }
                 
             }
@@ -107,7 +107,7 @@ open class AudioEffectChorus: AudioEffect {
     fileprivate final func get_voice_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_voice_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_voice_count, handle, nil, &_result)
         return _result
     }
     
@@ -129,7 +129,7 @@ open class AudioEffectChorus: AudioEffect {
             withUnsafePointer(to: delayMs) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_voice_delay_ms, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_voice_delay_ms, handle, pArgs, nil)
                     }
                     
                 }
@@ -159,7 +159,7 @@ open class AudioEffectChorus: AudioEffect {
         withUnsafePointer(to: voiceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_voice_delay_ms, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_voice_delay_ms, handle, pArgs, &_result)
                 }
                 
             }
@@ -187,7 +187,7 @@ open class AudioEffectChorus: AudioEffect {
             withUnsafePointer(to: rateHz) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_voice_rate_hz, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_voice_rate_hz, handle, pArgs, nil)
                     }
                     
                 }
@@ -217,7 +217,7 @@ open class AudioEffectChorus: AudioEffect {
         withUnsafePointer(to: voiceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_voice_rate_hz, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_voice_rate_hz, handle, pArgs, &_result)
                 }
                 
             }
@@ -245,7 +245,7 @@ open class AudioEffectChorus: AudioEffect {
             withUnsafePointer(to: depthMs) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_voice_depth_ms, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_voice_depth_ms, handle, pArgs, nil)
                     }
                     
                 }
@@ -275,7 +275,7 @@ open class AudioEffectChorus: AudioEffect {
         withUnsafePointer(to: voiceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_voice_depth_ms, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_voice_depth_ms, handle, pArgs, &_result)
                 }
                 
             }
@@ -303,7 +303,7 @@ open class AudioEffectChorus: AudioEffect {
             withUnsafePointer(to: levelDb) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_voice_level_db, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_voice_level_db, handle, pArgs, nil)
                     }
                     
                 }
@@ -333,7 +333,7 @@ open class AudioEffectChorus: AudioEffect {
         withUnsafePointer(to: voiceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_voice_level_db, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_voice_level_db, handle, pArgs, &_result)
                 }
                 
             }
@@ -361,7 +361,7 @@ open class AudioEffectChorus: AudioEffect {
             withUnsafePointer(to: cutoffHz) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_voice_cutoff_hz, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_voice_cutoff_hz, handle, pArgs, nil)
                     }
                     
                 }
@@ -391,7 +391,7 @@ open class AudioEffectChorus: AudioEffect {
         withUnsafePointer(to: voiceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_voice_cutoff_hz, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_voice_cutoff_hz, handle, pArgs, &_result)
                 }
                 
             }
@@ -419,7 +419,7 @@ open class AudioEffectChorus: AudioEffect {
             withUnsafePointer(to: pan) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_voice_pan, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_voice_pan, handle, pArgs, nil)
                     }
                     
                 }
@@ -449,7 +449,7 @@ open class AudioEffectChorus: AudioEffect {
         withUnsafePointer(to: voiceIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_voice_pan, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_voice_pan, handle, pArgs, &_result)
                 }
                 
             }
@@ -476,7 +476,7 @@ open class AudioEffectChorus: AudioEffect {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_wet, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_wet, handle, pArgs, nil)
                 }
                 
             }
@@ -501,7 +501,7 @@ open class AudioEffectChorus: AudioEffect {
     fileprivate final func get_wet() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_wet, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_wet, handle, nil, &_result)
         return _result
     }
     
@@ -522,7 +522,7 @@ open class AudioEffectChorus: AudioEffect {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_dry, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectChorus.method_set_dry, handle, pArgs, nil)
                 }
                 
             }
@@ -547,7 +547,7 @@ open class AudioEffectChorus: AudioEffect {
     fileprivate final func get_dry() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_dry, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectChorus.method_get_dry, handle, nil, &_result)
         return _result
     }
     

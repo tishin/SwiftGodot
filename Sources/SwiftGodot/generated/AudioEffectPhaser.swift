@@ -109,7 +109,7 @@ open class AudioEffectPhaser: AudioEffect {
         withUnsafePointer(to: hz) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectPhaser.method_set_range_min_hz, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectPhaser.method_set_range_min_hz, handle, pArgs, nil)
                 }
                 
             }
@@ -134,7 +134,7 @@ open class AudioEffectPhaser: AudioEffect {
     fileprivate final func get_range_min_hz() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_range_min_hz, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_range_min_hz, handle, nil, &_result)
         return _result
     }
     
@@ -155,7 +155,7 @@ open class AudioEffectPhaser: AudioEffect {
         withUnsafePointer(to: hz) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectPhaser.method_set_range_max_hz, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectPhaser.method_set_range_max_hz, handle, pArgs, nil)
                 }
                 
             }
@@ -180,7 +180,7 @@ open class AudioEffectPhaser: AudioEffect {
     fileprivate final func get_range_max_hz() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_range_max_hz, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_range_max_hz, handle, nil, &_result)
         return _result
     }
     
@@ -201,7 +201,7 @@ open class AudioEffectPhaser: AudioEffect {
         withUnsafePointer(to: hz) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectPhaser.method_set_rate_hz, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectPhaser.method_set_rate_hz, handle, pArgs, nil)
                 }
                 
             }
@@ -226,7 +226,7 @@ open class AudioEffectPhaser: AudioEffect {
     fileprivate final func get_rate_hz() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_rate_hz, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_rate_hz, handle, nil, &_result)
         return _result
     }
     
@@ -247,7 +247,7 @@ open class AudioEffectPhaser: AudioEffect {
         withUnsafePointer(to: fbk) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectPhaser.method_set_feedback, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectPhaser.method_set_feedback, handle, pArgs, nil)
                 }
                 
             }
@@ -272,7 +272,7 @@ open class AudioEffectPhaser: AudioEffect {
     fileprivate final func get_feedback() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_feedback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_feedback, handle, nil, &_result)
         return _result
     }
     
@@ -293,7 +293,7 @@ open class AudioEffectPhaser: AudioEffect {
         withUnsafePointer(to: depth) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectPhaser.method_set_depth, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectPhaser.method_set_depth, handle, pArgs, nil)
                 }
                 
             }
@@ -318,7 +318,7 @@ open class AudioEffectPhaser: AudioEffect {
     fileprivate final func get_depth() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectPhaser.method_get_depth, handle, nil, &_result)
         return _result
     }
     

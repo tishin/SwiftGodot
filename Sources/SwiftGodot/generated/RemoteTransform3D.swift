@@ -109,7 +109,7 @@ open class RemoteTransform3D: Node3D {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RemoteTransform3D.method_set_remote_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RemoteTransform3D.method_set_remote_node, handle, pArgs, nil)
                 }
                 
             }
@@ -134,7 +134,7 @@ open class RemoteTransform3D: Node3D {
     fileprivate final func get_remote_node() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_remote_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_remote_node, handle, nil, &_result.content)
         return _result
     }
     
@@ -152,7 +152,7 @@ open class RemoteTransform3D: Node3D {
     /// ``RemoteTransform3D`` caches the remote node. It may not notice if the remote node disappears; ``forceUpdateCache()`` forces it to update the cache again.
     public final func forceUpdateCache() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(RemoteTransform3D.method_force_update_cache, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(RemoteTransform3D.method_force_update_cache, handle, nil, nil)
         
     }
     
@@ -173,7 +173,7 @@ open class RemoteTransform3D: Node3D {
         withUnsafePointer(to: useGlobalCoordinates) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RemoteTransform3D.method_set_use_global_coordinates, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RemoteTransform3D.method_set_use_global_coordinates, handle, pArgs, nil)
                 }
                 
             }
@@ -198,7 +198,7 @@ open class RemoteTransform3D: Node3D {
     fileprivate final func get_use_global_coordinates() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_use_global_coordinates, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_use_global_coordinates, handle, nil, &_result)
         return _result
     }
     
@@ -219,7 +219,7 @@ open class RemoteTransform3D: Node3D {
         withUnsafePointer(to: updateRemotePosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RemoteTransform3D.method_set_update_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RemoteTransform3D.method_set_update_position, handle, pArgs, nil)
                 }
                 
             }
@@ -244,7 +244,7 @@ open class RemoteTransform3D: Node3D {
     fileprivate final func get_update_position() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_update_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_update_position, handle, nil, &_result)
         return _result
     }
     
@@ -265,7 +265,7 @@ open class RemoteTransform3D: Node3D {
         withUnsafePointer(to: updateRemoteRotation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RemoteTransform3D.method_set_update_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RemoteTransform3D.method_set_update_rotation, handle, pArgs, nil)
                 }
                 
             }
@@ -290,7 +290,7 @@ open class RemoteTransform3D: Node3D {
     fileprivate final func get_update_rotation() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_update_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_update_rotation, handle, nil, &_result)
         return _result
     }
     
@@ -311,7 +311,7 @@ open class RemoteTransform3D: Node3D {
         withUnsafePointer(to: updateRemoteScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RemoteTransform3D.method_set_update_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RemoteTransform3D.method_set_update_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -336,7 +336,7 @@ open class RemoteTransform3D: Node3D {
     fileprivate final func get_update_scale() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_update_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RemoteTransform3D.method_get_update_scale, handle, nil, &_result)
         return _result
     }
     

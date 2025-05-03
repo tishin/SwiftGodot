@@ -229,7 +229,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_mag_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_mag_filter, handle, pArgs, nil)
                 }
                 
             }
@@ -254,7 +254,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_mag_filter() -> RenderingDevice.SamplerFilter {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_mag_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_mag_filter, handle, nil, &_result)
         return RenderingDevice.SamplerFilter (rawValue: _result)!
     }
     
@@ -275,7 +275,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_min_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_min_filter, handle, pArgs, nil)
                 }
                 
             }
@@ -300,7 +300,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_min_filter() -> RenderingDevice.SamplerFilter {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_min_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_min_filter, handle, nil, &_result)
         return RenderingDevice.SamplerFilter (rawValue: _result)!
     }
     
@@ -321,7 +321,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_mip_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_mip_filter, handle, pArgs, nil)
                 }
                 
             }
@@ -346,7 +346,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_mip_filter() -> RenderingDevice.SamplerFilter {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_mip_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_mip_filter, handle, nil, &_result)
         return RenderingDevice.SamplerFilter (rawValue: _result)!
     }
     
@@ -367,7 +367,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_repeat_u, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_repeat_u, handle, pArgs, nil)
                 }
                 
             }
@@ -392,7 +392,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_repeat_u() -> RenderingDevice.SamplerRepeatMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_repeat_u, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_repeat_u, handle, nil, &_result)
         return RenderingDevice.SamplerRepeatMode (rawValue: _result)!
     }
     
@@ -413,7 +413,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_repeat_v, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_repeat_v, handle, pArgs, nil)
                 }
                 
             }
@@ -438,7 +438,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_repeat_v() -> RenderingDevice.SamplerRepeatMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_repeat_v, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_repeat_v, handle, nil, &_result)
         return RenderingDevice.SamplerRepeatMode (rawValue: _result)!
     }
     
@@ -459,7 +459,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_repeat_w, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_repeat_w, handle, pArgs, nil)
                 }
                 
             }
@@ -484,7 +484,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_repeat_w() -> RenderingDevice.SamplerRepeatMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_repeat_w, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_repeat_w, handle, nil, &_result)
         return RenderingDevice.SamplerRepeatMode (rawValue: _result)!
     }
     
@@ -505,7 +505,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_lod_bias, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_lod_bias, handle, pArgs, nil)
                 }
                 
             }
@@ -530,7 +530,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_lod_bias() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_lod_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_lod_bias, handle, nil, &_result)
         return _result
     }
     
@@ -551,7 +551,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_use_anisotropy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_use_anisotropy, handle, pArgs, nil)
                 }
                 
             }
@@ -576,7 +576,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_use_anisotropy() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_use_anisotropy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_use_anisotropy, handle, nil, &_result)
         return _result
     }
     
@@ -597,7 +597,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_anisotropy_max, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_anisotropy_max, handle, pArgs, nil)
                 }
                 
             }
@@ -622,7 +622,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_anisotropy_max() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_anisotropy_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_anisotropy_max, handle, nil, &_result)
         return _result
     }
     
@@ -643,7 +643,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_enable_compare, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_enable_compare, handle, pArgs, nil)
                 }
                 
             }
@@ -668,7 +668,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_enable_compare() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_enable_compare, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_enable_compare, handle, nil, &_result)
         return _result
     }
     
@@ -689,7 +689,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_compare_op, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_compare_op, handle, pArgs, nil)
                 }
                 
             }
@@ -714,7 +714,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_compare_op() -> RenderingDevice.CompareOperator {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_compare_op, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_compare_op, handle, nil, &_result)
         return RenderingDevice.CompareOperator (rawValue: _result)!
     }
     
@@ -735,7 +735,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_min_lod, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_min_lod, handle, pArgs, nil)
                 }
                 
             }
@@ -760,7 +760,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_min_lod() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_min_lod, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_min_lod, handle, nil, &_result)
         return _result
     }
     
@@ -781,7 +781,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_max_lod, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_max_lod, handle, pArgs, nil)
                 }
                 
             }
@@ -806,7 +806,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_max_lod() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_max_lod, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_max_lod, handle, nil, &_result)
         return _result
     }
     
@@ -827,7 +827,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_border_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_border_color, handle, pArgs, nil)
                 }
                 
             }
@@ -852,7 +852,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_border_color() -> RenderingDevice.SamplerBorderColor {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_border_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_border_color, handle, nil, &_result)
         return RenderingDevice.SamplerBorderColor (rawValue: _result)!
     }
     
@@ -873,7 +873,7 @@ open class RDSamplerState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_unnormalized_uvw, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDSamplerState.method_set_unnormalized_uvw, handle, pArgs, nil)
                 }
                 
             }
@@ -898,7 +898,7 @@ open class RDSamplerState: RefCounted {
     fileprivate final func get_unnormalized_uvw() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RDSamplerState.method_get_unnormalized_uvw, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDSamplerState.method_get_unnormalized_uvw, handle, nil, &_result)
         return _result
     }
     

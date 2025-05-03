@@ -70,7 +70,7 @@ open class VisualShaderNodeUIntParameter: VisualShaderNodeParameter {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeUIntParameter.method_set_default_value_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeUIntParameter.method_set_default_value_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -95,7 +95,7 @@ open class VisualShaderNodeUIntParameter: VisualShaderNodeParameter {
     fileprivate final func is_default_value_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VisualShaderNodeUIntParameter.method_is_default_value_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeUIntParameter.method_is_default_value_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -116,7 +116,7 @@ open class VisualShaderNodeUIntParameter: VisualShaderNodeParameter {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeUIntParameter.method_set_default_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeUIntParameter.method_set_default_value, handle, pArgs, nil)
                 }
                 
             }
@@ -141,7 +141,7 @@ open class VisualShaderNodeUIntParameter: VisualShaderNodeParameter {
     fileprivate final func get_default_value() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(VisualShaderNodeUIntParameter.method_get_default_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeUIntParameter.method_get_default_value, handle, nil, &_result)
         return _result
     }
     

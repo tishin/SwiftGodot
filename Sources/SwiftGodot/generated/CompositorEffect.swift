@@ -161,7 +161,7 @@ open class CompositorEffect: Resource {
             withUnsafePointer(to: renderData?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CompositorEffect.method__render_callback, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CompositorEffect.method__render_callback, handle, pArgs, nil)
                     }
                     
                 }
@@ -190,7 +190,7 @@ open class CompositorEffect: Resource {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CompositorEffect.method_set_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CompositorEffect.method_set_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -215,7 +215,7 @@ open class CompositorEffect: Resource {
     fileprivate final func get_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CompositorEffect.method_get_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CompositorEffect.method_get_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -236,7 +236,7 @@ open class CompositorEffect: Resource {
         withUnsafePointer(to: effectCallbackType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CompositorEffect.method_set_effect_callback_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CompositorEffect.method_set_effect_callback_type, handle, pArgs, nil)
                 }
                 
             }
@@ -261,7 +261,7 @@ open class CompositorEffect: Resource {
     fileprivate final func get_effect_callback_type() -> CompositorEffect.EffectCallbackType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CompositorEffect.method_get_effect_callback_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CompositorEffect.method_get_effect_callback_type, handle, nil, &_result)
         return CompositorEffect.EffectCallbackType (rawValue: _result)!
     }
     
@@ -282,7 +282,7 @@ open class CompositorEffect: Resource {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CompositorEffect.method_set_access_resolved_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CompositorEffect.method_set_access_resolved_color, handle, pArgs, nil)
                 }
                 
             }
@@ -307,7 +307,7 @@ open class CompositorEffect: Resource {
     fileprivate final func get_access_resolved_color() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CompositorEffect.method_get_access_resolved_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CompositorEffect.method_get_access_resolved_color, handle, nil, &_result)
         return _result
     }
     
@@ -328,7 +328,7 @@ open class CompositorEffect: Resource {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CompositorEffect.method_set_access_resolved_depth, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CompositorEffect.method_set_access_resolved_depth, handle, pArgs, nil)
                 }
                 
             }
@@ -353,7 +353,7 @@ open class CompositorEffect: Resource {
     fileprivate final func get_access_resolved_depth() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CompositorEffect.method_get_access_resolved_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CompositorEffect.method_get_access_resolved_depth, handle, nil, &_result)
         return _result
     }
     
@@ -374,7 +374,7 @@ open class CompositorEffect: Resource {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CompositorEffect.method_set_needs_motion_vectors, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CompositorEffect.method_set_needs_motion_vectors, handle, pArgs, nil)
                 }
                 
             }
@@ -399,7 +399,7 @@ open class CompositorEffect: Resource {
     fileprivate final func get_needs_motion_vectors() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CompositorEffect.method_get_needs_motion_vectors, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CompositorEffect.method_get_needs_motion_vectors, handle, nil, &_result)
         return _result
     }
     
@@ -420,7 +420,7 @@ open class CompositorEffect: Resource {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CompositorEffect.method_set_needs_normal_roughness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CompositorEffect.method_set_needs_normal_roughness, handle, pArgs, nil)
                 }
                 
             }
@@ -445,7 +445,7 @@ open class CompositorEffect: Resource {
     fileprivate final func get_needs_normal_roughness() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CompositorEffect.method_get_needs_normal_roughness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CompositorEffect.method_get_needs_normal_roughness, handle, nil, &_result)
         return _result
     }
     
@@ -466,7 +466,7 @@ open class CompositorEffect: Resource {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CompositorEffect.method_set_needs_separate_specular, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CompositorEffect.method_set_needs_separate_specular, handle, pArgs, nil)
                 }
                 
             }
@@ -491,7 +491,7 @@ open class CompositorEffect: Resource {
     fileprivate final func get_needs_separate_specular() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CompositorEffect.method_get_needs_separate_specular, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CompositorEffect.method_get_needs_separate_specular, handle, nil, &_result)
         return _result
     }
     
@@ -514,8 +514,8 @@ func _CompositorEffect_proxy_render_callback (instance: UnsafeMutableRawPointer?
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? CompositorEffect else { return }
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._renderCallback (effectCallbackType: args [0]!.assumingMemoryBound (to: Int32.self).pointee, renderData: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? RenderData)
+    swiftObject._renderCallback (effectCallbackType: args [0]!.assumingMemoryBound (to: Int32.self).pointee, renderData: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? RenderData)
 }
 

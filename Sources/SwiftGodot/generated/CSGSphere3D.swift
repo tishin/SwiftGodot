@@ -109,7 +109,7 @@ open class CSGSphere3D: CSGPrimitive3D {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGSphere3D.method_set_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGSphere3D.method_set_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -134,7 +134,7 @@ open class CSGSphere3D: CSGPrimitive3D {
     fileprivate final func get_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CSGSphere3D.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGSphere3D.method_get_radius, handle, nil, &_result)
         return _result
     }
     
@@ -155,7 +155,7 @@ open class CSGSphere3D: CSGPrimitive3D {
         withUnsafePointer(to: radialSegments) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGSphere3D.method_set_radial_segments, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGSphere3D.method_set_radial_segments, handle, pArgs, nil)
                 }
                 
             }
@@ -180,7 +180,7 @@ open class CSGSphere3D: CSGPrimitive3D {
     fileprivate final func get_radial_segments() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CSGSphere3D.method_get_radial_segments, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGSphere3D.method_get_radial_segments, handle, nil, &_result)
         return _result
     }
     
@@ -201,7 +201,7 @@ open class CSGSphere3D: CSGPrimitive3D {
         withUnsafePointer(to: rings) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGSphere3D.method_set_rings, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGSphere3D.method_set_rings, handle, pArgs, nil)
                 }
                 
             }
@@ -226,7 +226,7 @@ open class CSGSphere3D: CSGPrimitive3D {
     fileprivate final func get_rings() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CSGSphere3D.method_get_rings, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGSphere3D.method_get_rings, handle, nil, &_result)
         return _result
     }
     
@@ -247,7 +247,7 @@ open class CSGSphere3D: CSGPrimitive3D {
         withUnsafePointer(to: smoothFaces) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGSphere3D.method_set_smooth_faces, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGSphere3D.method_set_smooth_faces, handle, pArgs, nil)
                 }
                 
             }
@@ -272,7 +272,7 @@ open class CSGSphere3D: CSGPrimitive3D {
     fileprivate final func get_smooth_faces() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CSGSphere3D.method_get_smooth_faces, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGSphere3D.method_get_smooth_faces, handle, nil, &_result)
         return _result
     }
     
@@ -293,7 +293,7 @@ open class CSGSphere3D: CSGPrimitive3D {
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGSphere3D.method_set_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGSphere3D.method_set_material, handle, pArgs, nil)
                 }
                 
             }
@@ -317,9 +317,9 @@ open class CSGSphere3D: CSGPrimitive3D {
     @inline(__always)
     fileprivate final func get_material() -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CSGSphere3D.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CSGSphere3D.method_get_material, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

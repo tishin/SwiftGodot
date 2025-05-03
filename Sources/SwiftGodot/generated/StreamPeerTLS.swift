@@ -56,7 +56,7 @@ open class StreamPeerTLS: StreamPeer {
     /// Poll the connection to check for incoming bytes. Call this right before ``StreamPeer/getAvailableBytes()`` for it to work properly.
     public final func poll() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(StreamPeerTLS.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(StreamPeerTLS.method_poll, handle, nil, nil)
         
     }
     
@@ -79,7 +79,7 @@ open class StreamPeerTLS: StreamPeer {
             withUnsafePointer(to: serverOptions?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(StreamPeerTLS.method_accept_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(StreamPeerTLS.method_accept_stream, handle, pArgs, &_result)
                     }
                     
                 }
@@ -112,7 +112,7 @@ open class StreamPeerTLS: StreamPeer {
                 withUnsafePointer(to: clientOptions?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(StreamPeerTLS.method_connect_to_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(StreamPeerTLS.method_connect_to_stream, handle, pArgs, &_result)
                         }
                         
                     }
@@ -141,7 +141,7 @@ open class StreamPeerTLS: StreamPeer {
     public final func getStatus() -> StreamPeerTLS.Status {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(StreamPeerTLS.method_get_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeerTLS.method_get_status, handle, nil, &_result)
         return StreamPeerTLS.Status (rawValue: _result)!
     }
     
@@ -159,9 +159,9 @@ open class StreamPeerTLS: StreamPeer {
     /// Returns the underlying ``StreamPeer`` connection, used in ``acceptStream(_:serverOptions:)`` or ``connectToStream(_:commonName:clientOptions:)``.
     public final func getStream() -> StreamPeer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(StreamPeerTLS.method_get_stream, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(StreamPeerTLS.method_get_stream, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_disconnect_from_stream: GDExtensionMethodBindPtr = {
@@ -178,7 +178,7 @@ open class StreamPeerTLS: StreamPeer {
     /// Disconnects from host.
     public final func disconnectFromStream() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(StreamPeerTLS.method_disconnect_from_stream, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(StreamPeerTLS.method_disconnect_from_stream, handle, nil, nil)
         
     }
     

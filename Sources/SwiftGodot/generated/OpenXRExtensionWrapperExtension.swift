@@ -47,7 +47,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     open func _getRequestedExtensions() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__get_requested_extensions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__get_requested_extensions, handle, nil, &_result.content)
         return _result
     }
     
@@ -70,7 +70,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     open func _getCompositionLayerCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__get_composition_layer_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__get_composition_layer_count, handle, nil, &_result)
         return _result
     }
     
@@ -96,7 +96,7 @@ open class OpenXRExtensionWrapperExtension: Object {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__get_composition_layer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__get_composition_layer, handle, pArgs, &_result)
                 }
                 
             }
@@ -128,7 +128,7 @@ open class OpenXRExtensionWrapperExtension: Object {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__get_composition_layer_order, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__get_composition_layer_order, handle, pArgs, &_result)
                 }
                 
             }
@@ -154,7 +154,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     open func _getSuggestedTrackerNames() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__get_suggested_tracker_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__get_suggested_tracker_names, handle, nil, &_result.content)
         return _result
     }
     
@@ -176,7 +176,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onRegisterMetadata() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_register_metadata, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_register_metadata, handle, nil, nil)
         
     }
     
@@ -195,7 +195,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onBeforeInstanceCreated() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_before_instance_created, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_before_instance_created, handle, nil, nil)
         
     }
     
@@ -217,7 +217,7 @@ open class OpenXRExtensionWrapperExtension: Object {
         withUnsafePointer(to: instance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_instance_created, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_instance_created, handle, pArgs, nil)
                 }
                 
             }
@@ -242,7 +242,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onInstanceDestroyed() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_instance_destroyed, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_instance_destroyed, handle, nil, nil)
         
     }
     
@@ -264,7 +264,7 @@ open class OpenXRExtensionWrapperExtension: Object {
         withUnsafePointer(to: session) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_session_created, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_session_created, handle, pArgs, nil)
                 }
                 
             }
@@ -289,7 +289,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onProcess() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_process, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_process, handle, nil, nil)
         
     }
     
@@ -308,7 +308,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onPreRender() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_pre_render, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_pre_render, handle, nil, nil)
         
     }
     
@@ -327,7 +327,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onMainSwapchainsCreated() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_main_swapchains_created, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_main_swapchains_created, handle, nil, nil)
         
     }
     
@@ -349,7 +349,7 @@ open class OpenXRExtensionWrapperExtension: Object {
         withUnsafePointer(to: viewport.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_pre_draw_viewport, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_pre_draw_viewport, handle, pArgs, nil)
                 }
                 
             }
@@ -380,7 +380,7 @@ open class OpenXRExtensionWrapperExtension: Object {
         withUnsafePointer(to: viewport.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_post_draw_viewport, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_post_draw_viewport, handle, pArgs, nil)
                 }
                 
             }
@@ -405,7 +405,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onSessionDestroyed() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_session_destroyed, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_session_destroyed, handle, nil, nil)
         
     }
     
@@ -424,7 +424,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onStateIdle() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_idle, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_idle, handle, nil, nil)
         
     }
     
@@ -443,7 +443,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onStateReady() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_ready, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_ready, handle, nil, nil)
         
     }
     
@@ -462,7 +462,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onStateSynchronized() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_synchronized, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_synchronized, handle, nil, nil)
         
     }
     
@@ -481,7 +481,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onStateVisible() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_visible, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_visible, handle, nil, nil)
         
     }
     
@@ -500,7 +500,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onStateFocused() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_focused, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_focused, handle, nil, nil)
         
     }
     
@@ -519,7 +519,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onStateStopping() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_stopping, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_stopping, handle, nil, nil)
         
     }
     
@@ -538,7 +538,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onStateLossPending() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_loss_pending, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_loss_pending, handle, nil, nil)
         
     }
     
@@ -557,7 +557,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     @_documentation(visibility: public)
     open func _onStateExiting() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_exiting, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_state_exiting, handle, nil, nil)
         
     }
     
@@ -580,7 +580,7 @@ open class OpenXRExtensionWrapperExtension: Object {
         withUnsafePointer(to: event) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_event_polled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_event_polled, handle, pArgs, &_result)
                 }
                 
             }
@@ -606,7 +606,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     open func _getViewportCompositionLayerExtensionProperties() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__get_viewport_composition_layer_extension_properties, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__get_viewport_composition_layer_extension_properties, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -626,7 +626,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     open func _getViewportCompositionLayerExtensionPropertyDefaults() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__get_viewport_composition_layer_extension_property_defaults, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__get_viewport_composition_layer_extension_property_defaults, handle, nil, &_result.content)
         return _result
     }
     
@@ -651,7 +651,7 @@ open class OpenXRExtensionWrapperExtension: Object {
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_viewport_composition_layer_destroyed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method__on_viewport_composition_layer_destroyed, handle, pArgs, nil)
                 }
                 
             }
@@ -675,9 +675,9 @@ open class OpenXRExtensionWrapperExtension: Object {
     /// Returns the created ``OpenXRAPIExtension``, which can be used to access the OpenXR API.
     public final func getOpenxrApi() -> OpenXRAPIExtension? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method_get_openxr_api, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method_get_openxr_api, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_register_extension_wrapper: GDExtensionMethodBindPtr = {
@@ -694,7 +694,7 @@ open class OpenXRExtensionWrapperExtension: Object {
     /// Registers the extension. This should happen at core module initialization level.
     public final func registerExtensionWrapper() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method_register_extension_wrapper, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(OpenXRExtensionWrapperExtension.method_register_extension_wrapper, handle, nil, nil)
         
     }
     

@@ -411,7 +411,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -436,7 +436,7 @@ open class Camera2D: Node2D {
     fileprivate final func get_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Camera2D.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_get_offset, handle, nil, &_result)
         return _result
     }
     
@@ -457,7 +457,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: anchorMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_anchor_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_anchor_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -482,7 +482,7 @@ open class Camera2D: Node2D {
     fileprivate final func get_anchor_mode() -> Camera2D.AnchorMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Camera2D.method_get_anchor_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_get_anchor_mode, handle, nil, &_result)
         return Camera2D.AnchorMode (rawValue: _result)!
     }
     
@@ -503,7 +503,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: ignore) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_ignore_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_ignore_rotation, handle, pArgs, nil)
                 }
                 
             }
@@ -528,7 +528,7 @@ open class Camera2D: Node2D {
     fileprivate final func is_ignoring_rotation() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Camera2D.method_is_ignoring_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_is_ignoring_rotation, handle, nil, &_result)
         return _result
     }
     
@@ -549,7 +549,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_process_callback, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_process_callback, handle, pArgs, nil)
                 }
                 
             }
@@ -574,7 +574,7 @@ open class Camera2D: Node2D {
     fileprivate final func get_process_callback() -> Camera2D.Camera2DProcessCallback {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Camera2D.method_get_process_callback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_get_process_callback, handle, nil, &_result)
         return Camera2D.Camera2DProcessCallback (rawValue: _result)!
     }
     
@@ -595,7 +595,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -620,7 +620,7 @@ open class Camera2D: Node2D {
     fileprivate final func is_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Camera2D.method_is_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_is_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -638,7 +638,7 @@ open class Camera2D: Node2D {
     /// Forces this ``Camera2D`` to become the current active one. ``enabled`` must be `true`.
     public final func makeCurrent() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Camera2D.method_make_current, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Camera2D.method_make_current, handle, nil, nil)
         
     }
     
@@ -657,7 +657,7 @@ open class Camera2D: Node2D {
     public final func isCurrent() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Camera2D.method_is_current, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_is_current, handle, nil, &_result)
         return _result
     }
     
@@ -680,7 +680,7 @@ open class Camera2D: Node2D {
             withUnsafePointer(to: limit) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Camera2D.method_set_limit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Camera2D.method_set_limit, handle, pArgs, nil)
                     }
                     
                 }
@@ -711,7 +711,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_get_limit, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Camera2D.method_get_limit, handle, pArgs, &_result)
                 }
                 
             }
@@ -738,7 +738,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: limitSmoothingEnabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_limit_smoothing_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_limit_smoothing_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -763,7 +763,7 @@ open class Camera2D: Node2D {
     fileprivate final func is_limit_smoothing_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Camera2D.method_is_limit_smoothing_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_is_limit_smoothing_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -784,7 +784,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_drag_vertical_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_drag_vertical_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -809,7 +809,7 @@ open class Camera2D: Node2D {
     fileprivate final func is_drag_vertical_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Camera2D.method_is_drag_vertical_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_is_drag_vertical_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -830,7 +830,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_drag_horizontal_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_drag_horizontal_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -855,7 +855,7 @@ open class Camera2D: Node2D {
     fileprivate final func is_drag_horizontal_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Camera2D.method_is_drag_horizontal_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_is_drag_horizontal_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -876,7 +876,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_drag_vertical_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_drag_vertical_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -901,7 +901,7 @@ open class Camera2D: Node2D {
     fileprivate final func get_drag_vertical_offset() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Camera2D.method_get_drag_vertical_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_get_drag_vertical_offset, handle, nil, &_result)
         return _result
     }
     
@@ -922,7 +922,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_drag_horizontal_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_drag_horizontal_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -947,7 +947,7 @@ open class Camera2D: Node2D {
     fileprivate final func get_drag_horizontal_offset() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Camera2D.method_get_drag_horizontal_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_get_drag_horizontal_offset, handle, nil, &_result)
         return _result
     }
     
@@ -970,7 +970,7 @@ open class Camera2D: Node2D {
             withUnsafePointer(to: dragMargin) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Camera2D.method_set_drag_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Camera2D.method_set_drag_margin, handle, pArgs, nil)
                     }
                     
                 }
@@ -1001,7 +1001,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_get_drag_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Camera2D.method_get_drag_margin, handle, pArgs, &_result)
                 }
                 
             }
@@ -1029,7 +1029,7 @@ open class Camera2D: Node2D {
     public final func getTargetPosition() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Camera2D.method_get_target_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_get_target_position, handle, nil, &_result)
         return _result
     }
     
@@ -1051,7 +1051,7 @@ open class Camera2D: Node2D {
     public final func getScreenCenterPosition() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Camera2D.method_get_screen_center_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_get_screen_center_position, handle, nil, &_result)
         return _result
     }
     
@@ -1072,7 +1072,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: zoom) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_zoom, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_zoom, handle, pArgs, nil)
                 }
                 
             }
@@ -1097,7 +1097,7 @@ open class Camera2D: Node2D {
     fileprivate final func get_zoom() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Camera2D.method_get_zoom, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_get_zoom, handle, nil, &_result)
         return _result
     }
     
@@ -1118,7 +1118,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: viewport?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_custom_viewport, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_custom_viewport, handle, pArgs, nil)
                 }
                 
             }
@@ -1142,9 +1142,9 @@ open class Camera2D: Node2D {
     @inline(__always)
     fileprivate final func get_custom_viewport() -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Camera2D.method_get_custom_viewport, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Camera2D.method_get_custom_viewport, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_position_smoothing_speed: GDExtensionMethodBindPtr = {
@@ -1164,7 +1164,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: positionSmoothingSpeed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_position_smoothing_speed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_position_smoothing_speed, handle, pArgs, nil)
                 }
                 
             }
@@ -1189,7 +1189,7 @@ open class Camera2D: Node2D {
     fileprivate final func get_position_smoothing_speed() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Camera2D.method_get_position_smoothing_speed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_get_position_smoothing_speed, handle, nil, &_result)
         return _result
     }
     
@@ -1210,7 +1210,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: positionSmoothingSpeed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_position_smoothing_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_position_smoothing_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1235,7 +1235,7 @@ open class Camera2D: Node2D {
     fileprivate final func is_position_smoothing_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Camera2D.method_is_position_smoothing_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_is_position_smoothing_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1256,7 +1256,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_rotation_smoothing_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_rotation_smoothing_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1281,7 +1281,7 @@ open class Camera2D: Node2D {
     fileprivate final func is_rotation_smoothing_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Camera2D.method_is_rotation_smoothing_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_is_rotation_smoothing_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1302,7 +1302,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: speed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_rotation_smoothing_speed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_rotation_smoothing_speed, handle, pArgs, nil)
                 }
                 
             }
@@ -1327,7 +1327,7 @@ open class Camera2D: Node2D {
     fileprivate final func get_rotation_smoothing_speed() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Camera2D.method_get_rotation_smoothing_speed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_get_rotation_smoothing_speed, handle, nil, &_result)
         return _result
     }
     
@@ -1345,7 +1345,7 @@ open class Camera2D: Node2D {
     /// Forces the camera to update scroll immediately.
     public final func forceUpdateScroll() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Camera2D.method_force_update_scroll, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Camera2D.method_force_update_scroll, handle, nil, nil)
         
     }
     
@@ -1366,7 +1366,7 @@ open class Camera2D: Node2D {
     /// 
     public final func resetSmoothing() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Camera2D.method_reset_smoothing, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Camera2D.method_reset_smoothing, handle, nil, nil)
         
     }
     
@@ -1384,7 +1384,7 @@ open class Camera2D: Node2D {
     /// Aligns the camera to the tracked node.
     public final func align() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Camera2D.method_align, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Camera2D.method_align, handle, nil, nil)
         
     }
     
@@ -1405,7 +1405,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: screenDrawingEnabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_screen_drawing_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_screen_drawing_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1430,7 +1430,7 @@ open class Camera2D: Node2D {
     fileprivate final func is_screen_drawing_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Camera2D.method_is_screen_drawing_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_is_screen_drawing_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1451,7 +1451,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: limitDrawingEnabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_limit_drawing_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_limit_drawing_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1476,7 +1476,7 @@ open class Camera2D: Node2D {
     fileprivate final func is_limit_drawing_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Camera2D.method_is_limit_drawing_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_is_limit_drawing_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1497,7 +1497,7 @@ open class Camera2D: Node2D {
         withUnsafePointer(to: marginDrawingEnabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Camera2D.method_set_margin_drawing_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Camera2D.method_set_margin_drawing_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1522,7 +1522,7 @@ open class Camera2D: Node2D {
     fileprivate final func is_margin_drawing_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Camera2D.method_is_margin_drawing_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Camera2D.method_is_margin_drawing_enabled, handle, nil, &_result)
         return _result
     }
     

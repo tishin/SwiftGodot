@@ -60,7 +60,7 @@ open class EditorSettings: Resource {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSettings.method_has_setting, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorSettings.method_has_setting, handle, pArgs, &_result)
                 }
                 
             }
@@ -89,7 +89,7 @@ open class EditorSettings: Resource {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorSettings.method_set_setting, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorSettings.method_set_setting, handle, pArgs, nil)
                     }
                     
                 }
@@ -120,7 +120,7 @@ open class EditorSettings: Resource {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSettings.method_get_setting, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorSettings.method_get_setting, handle, pArgs, &_result)
                 }
                 
             }
@@ -148,7 +148,7 @@ open class EditorSettings: Resource {
         withUnsafePointer(to: property.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSettings.method_erase, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorSettings.method_erase, handle, pArgs, nil)
                 }
                 
             }
@@ -177,7 +177,7 @@ open class EditorSettings: Resource {
                 withUnsafePointer(to: updateCurrent) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorSettings.method_set_initial_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorSettings.method_set_initial_value, handle, pArgs, nil)
                         }
                         
                     }
@@ -215,7 +215,7 @@ open class EditorSettings: Resource {
         withUnsafePointer(to: info.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSettings.method_add_property_info, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorSettings.method_add_property_info, handle, pArgs, nil)
                 }
                 
             }
@@ -246,7 +246,7 @@ open class EditorSettings: Resource {
                 withUnsafePointer(to: data.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorSettings.method_set_project_metadata, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorSettings.method_set_project_metadata, handle, pArgs, nil)
                         }
                         
                     }
@@ -282,7 +282,7 @@ open class EditorSettings: Resource {
                 withUnsafePointer(to: `default`.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorSettings.method_get_project_metadata, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(EditorSettings.method_get_project_metadata, handle, pArgs, &_result)
                         }
                         
                     }
@@ -313,7 +313,7 @@ open class EditorSettings: Resource {
         withUnsafePointer(to: dirs.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSettings.method_set_favorites, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorSettings.method_set_favorites, handle, pArgs, nil)
                 }
                 
             }
@@ -338,7 +338,7 @@ open class EditorSettings: Resource {
     public final func getFavorites() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(EditorSettings.method_get_favorites, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorSettings.method_get_favorites, handle, nil, &_result.content)
         return _result
     }
     
@@ -359,7 +359,7 @@ open class EditorSettings: Resource {
         withUnsafePointer(to: dirs.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSettings.method_set_recent_dirs, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorSettings.method_set_recent_dirs, handle, pArgs, nil)
                 }
                 
             }
@@ -384,7 +384,7 @@ open class EditorSettings: Resource {
     public final func getRecentDirs() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(EditorSettings.method_get_recent_dirs, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorSettings.method_get_recent_dirs, handle, nil, &_result.content)
         return _result
     }
     
@@ -407,7 +407,7 @@ open class EditorSettings: Resource {
             withUnsafePointer(to: actionsList.array.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorSettings.method_set_builtin_action_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorSettings.method_set_builtin_action_override, handle, pArgs, nil)
                     }
                     
                 }
@@ -438,7 +438,7 @@ open class EditorSettings: Resource {
         withUnsafePointer(to: settingPrefix.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSettings.method_check_changed_settings_in_group, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorSettings.method_check_changed_settings_in_group, handle, pArgs, &_result)
                 }
                 
             }
@@ -463,7 +463,7 @@ open class EditorSettings: Resource {
     public final func getChangedSettings() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(EditorSettings.method_get_changed_settings, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorSettings.method_get_changed_settings, handle, nil, &_result.content)
         return _result
     }
     
@@ -485,7 +485,7 @@ open class EditorSettings: Resource {
         withUnsafePointer(to: setting.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorSettings.method_mark_setting_changed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorSettings.method_mark_setting_changed, handle, pArgs, nil)
                 }
                 
             }

@@ -109,7 +109,7 @@ open class RootMotionView: VisualInstance3D {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RootMotionView.method_set_animation_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RootMotionView.method_set_animation_path, handle, pArgs, nil)
                 }
                 
             }
@@ -134,7 +134,7 @@ open class RootMotionView: VisualInstance3D {
     fileprivate final func get_animation_path() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(RootMotionView.method_get_animation_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RootMotionView.method_get_animation_path, handle, nil, &_result.content)
         return _result
     }
     
@@ -155,7 +155,7 @@ open class RootMotionView: VisualInstance3D {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RootMotionView.method_set_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RootMotionView.method_set_color, handle, pArgs, nil)
                 }
                 
             }
@@ -180,7 +180,7 @@ open class RootMotionView: VisualInstance3D {
     fileprivate final func get_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(RootMotionView.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RootMotionView.method_get_color, handle, nil, &_result)
         return _result
     }
     
@@ -201,7 +201,7 @@ open class RootMotionView: VisualInstance3D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RootMotionView.method_set_cell_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RootMotionView.method_set_cell_size, handle, pArgs, nil)
                 }
                 
             }
@@ -226,7 +226,7 @@ open class RootMotionView: VisualInstance3D {
     fileprivate final func get_cell_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RootMotionView.method_get_cell_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RootMotionView.method_get_cell_size, handle, nil, &_result)
         return _result
     }
     
@@ -247,7 +247,7 @@ open class RootMotionView: VisualInstance3D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RootMotionView.method_set_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RootMotionView.method_set_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -272,7 +272,7 @@ open class RootMotionView: VisualInstance3D {
     fileprivate final func get_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RootMotionView.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RootMotionView.method_get_radius, handle, nil, &_result)
         return _result
     }
     
@@ -293,7 +293,7 @@ open class RootMotionView: VisualInstance3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RootMotionView.method_set_zero_y, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RootMotionView.method_set_zero_y, handle, pArgs, nil)
                 }
                 
             }
@@ -318,7 +318,7 @@ open class RootMotionView: VisualInstance3D {
     fileprivate final func get_zero_y() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RootMotionView.method_get_zero_y, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RootMotionView.method_get_zero_y, handle, nil, &_result)
         return _result
     }
     

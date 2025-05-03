@@ -58,7 +58,7 @@ open class AudioEffectPanner: AudioEffect {
         withUnsafePointer(to: cpanume) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectPanner.method_set_pan, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectPanner.method_set_pan, handle, pArgs, nil)
                 }
                 
             }
@@ -83,7 +83,7 @@ open class AudioEffectPanner: AudioEffect {
     fileprivate final func get_pan() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectPanner.method_get_pan, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectPanner.method_get_pan, handle, nil, &_result)
         return _result
     }
     

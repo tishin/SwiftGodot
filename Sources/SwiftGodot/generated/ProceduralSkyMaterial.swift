@@ -219,7 +219,7 @@ open class ProceduralSkyMaterial: Material {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sky_top_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sky_top_color, handle, pArgs, nil)
                 }
                 
             }
@@ -244,7 +244,7 @@ open class ProceduralSkyMaterial: Material {
     fileprivate final func get_sky_top_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_top_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_top_color, handle, nil, &_result)
         return _result
     }
     
@@ -265,7 +265,7 @@ open class ProceduralSkyMaterial: Material {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sky_horizon_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sky_horizon_color, handle, pArgs, nil)
                 }
                 
             }
@@ -290,7 +290,7 @@ open class ProceduralSkyMaterial: Material {
     fileprivate final func get_sky_horizon_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_horizon_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_horizon_color, handle, nil, &_result)
         return _result
     }
     
@@ -311,7 +311,7 @@ open class ProceduralSkyMaterial: Material {
         withUnsafePointer(to: curve) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sky_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sky_curve, handle, pArgs, nil)
                 }
                 
             }
@@ -336,7 +336,7 @@ open class ProceduralSkyMaterial: Material {
     fileprivate final func get_sky_curve() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_curve, handle, nil, &_result)
         return _result
     }
     
@@ -357,7 +357,7 @@ open class ProceduralSkyMaterial: Material {
         withUnsafePointer(to: multiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sky_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sky_energy_multiplier, handle, pArgs, nil)
                 }
                 
             }
@@ -382,7 +382,7 @@ open class ProceduralSkyMaterial: Material {
     fileprivate final func get_sky_energy_multiplier() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_energy_multiplier, handle, nil, &_result)
         return _result
     }
     
@@ -403,7 +403,7 @@ open class ProceduralSkyMaterial: Material {
         withUnsafePointer(to: skyCover?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sky_cover, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sky_cover, handle, pArgs, nil)
                 }
                 
             }
@@ -427,9 +427,9 @@ open class ProceduralSkyMaterial: Material {
     @inline(__always)
     fileprivate final func get_sky_cover() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_cover, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_cover, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_sky_cover_modulate: GDExtensionMethodBindPtr = {
@@ -449,7 +449,7 @@ open class ProceduralSkyMaterial: Material {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sky_cover_modulate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sky_cover_modulate, handle, pArgs, nil)
                 }
                 
             }
@@ -474,7 +474,7 @@ open class ProceduralSkyMaterial: Material {
     fileprivate final func get_sky_cover_modulate() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_cover_modulate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sky_cover_modulate, handle, nil, &_result)
         return _result
     }
     
@@ -495,7 +495,7 @@ open class ProceduralSkyMaterial: Material {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_ground_bottom_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_ground_bottom_color, handle, pArgs, nil)
                 }
                 
             }
@@ -520,7 +520,7 @@ open class ProceduralSkyMaterial: Material {
     fileprivate final func get_ground_bottom_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_ground_bottom_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_ground_bottom_color, handle, nil, &_result)
         return _result
     }
     
@@ -541,7 +541,7 @@ open class ProceduralSkyMaterial: Material {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_ground_horizon_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_ground_horizon_color, handle, pArgs, nil)
                 }
                 
             }
@@ -566,7 +566,7 @@ open class ProceduralSkyMaterial: Material {
     fileprivate final func get_ground_horizon_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_ground_horizon_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_ground_horizon_color, handle, nil, &_result)
         return _result
     }
     
@@ -587,7 +587,7 @@ open class ProceduralSkyMaterial: Material {
         withUnsafePointer(to: curve) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_ground_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_ground_curve, handle, pArgs, nil)
                 }
                 
             }
@@ -612,7 +612,7 @@ open class ProceduralSkyMaterial: Material {
     fileprivate final func get_ground_curve() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_ground_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_ground_curve, handle, nil, &_result)
         return _result
     }
     
@@ -633,7 +633,7 @@ open class ProceduralSkyMaterial: Material {
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_ground_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_ground_energy_multiplier, handle, pArgs, nil)
                 }
                 
             }
@@ -658,7 +658,7 @@ open class ProceduralSkyMaterial: Material {
     fileprivate final func get_ground_energy_multiplier() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_ground_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_ground_energy_multiplier, handle, nil, &_result)
         return _result
     }
     
@@ -679,7 +679,7 @@ open class ProceduralSkyMaterial: Material {
         withUnsafePointer(to: degrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sun_angle_max, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sun_angle_max, handle, pArgs, nil)
                 }
                 
             }
@@ -704,7 +704,7 @@ open class ProceduralSkyMaterial: Material {
     fileprivate final func get_sun_angle_max() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sun_angle_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sun_angle_max, handle, nil, &_result)
         return _result
     }
     
@@ -725,7 +725,7 @@ open class ProceduralSkyMaterial: Material {
         withUnsafePointer(to: curve) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sun_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_sun_curve, handle, pArgs, nil)
                 }
                 
             }
@@ -750,7 +750,7 @@ open class ProceduralSkyMaterial: Material {
     fileprivate final func get_sun_curve() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sun_curve, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_sun_curve, handle, nil, &_result)
         return _result
     }
     
@@ -771,7 +771,7 @@ open class ProceduralSkyMaterial: Material {
         withUnsafePointer(to: useDebanding) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_use_debanding, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_use_debanding, handle, pArgs, nil)
                 }
                 
             }
@@ -796,7 +796,7 @@ open class ProceduralSkyMaterial: Material {
     fileprivate final func get_use_debanding() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_use_debanding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_use_debanding, handle, nil, &_result)
         return _result
     }
     
@@ -817,7 +817,7 @@ open class ProceduralSkyMaterial: Material {
         withUnsafePointer(to: multiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_set_energy_multiplier, handle, pArgs, nil)
                 }
                 
             }
@@ -842,7 +842,7 @@ open class ProceduralSkyMaterial: Material {
     fileprivate final func get_energy_multiplier() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ProceduralSkyMaterial.method_get_energy_multiplier, handle, nil, &_result)
         return _result
     }
     

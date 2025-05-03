@@ -40,9 +40,9 @@ open class GridMapEditorPlugin: EditorPlugin {
     /// Returns the ``GridMap`` node currently edited by the grid map editor.
     public final func getCurrentGridMap() -> GridMap? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_get_current_grid_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_get_current_grid_map, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_selection: GDExtensionMethodBindPtr = {
@@ -63,7 +63,7 @@ open class GridMapEditorPlugin: EditorPlugin {
             withUnsafePointer(to: end) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_set_selection, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_set_selection, handle, pArgs, nil)
                     }
                     
                 }
@@ -89,7 +89,7 @@ open class GridMapEditorPlugin: EditorPlugin {
     /// Deselects any currently selected cells.
     public final func clearSelection() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_clear_selection, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_clear_selection, handle, nil, nil)
         
     }
     
@@ -108,7 +108,7 @@ open class GridMapEditorPlugin: EditorPlugin {
     public final func getSelection() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_get_selection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_get_selection, handle, nil, &_result)
         return _result
     }
     
@@ -127,7 +127,7 @@ open class GridMapEditorPlugin: EditorPlugin {
     public final func hasSelection() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_has_selection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_has_selection, handle, nil, &_result)
         return _result
     }
     
@@ -146,7 +146,7 @@ open class GridMapEditorPlugin: EditorPlugin {
     public final func getSelectedCells() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_get_selected_cells, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_get_selected_cells, handle, nil, &_result.content)
         return _result
     }
     
@@ -170,7 +170,7 @@ open class GridMapEditorPlugin: EditorPlugin {
         withUnsafePointer(to: item) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_set_selected_palette_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_set_selected_palette_item, handle, pArgs, nil)
                 }
                 
             }
@@ -198,7 +198,7 @@ open class GridMapEditorPlugin: EditorPlugin {
     public final func getSelectedPaletteItem() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_get_selected_palette_item, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GridMapEditorPlugin.method_get_selected_palette_item, handle, nil, &_result)
         return _result
     }
     

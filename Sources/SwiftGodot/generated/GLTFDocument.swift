@@ -103,7 +103,7 @@ open class GLTFDocument: Resource {
         withUnsafePointer(to: imageFormat.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFDocument.method_set_image_format, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFDocument.method_set_image_format, handle, pArgs, nil)
                 }
                 
             }
@@ -128,7 +128,7 @@ open class GLTFDocument: Resource {
     fileprivate final func get_image_format() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(GLTFDocument.method_get_image_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFDocument.method_get_image_format, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -149,7 +149,7 @@ open class GLTFDocument: Resource {
         withUnsafePointer(to: lossyQuality) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFDocument.method_set_lossy_quality, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFDocument.method_set_lossy_quality, handle, pArgs, nil)
                 }
                 
             }
@@ -174,7 +174,7 @@ open class GLTFDocument: Resource {
     fileprivate final func get_lossy_quality() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GLTFDocument.method_get_lossy_quality, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFDocument.method_get_lossy_quality, handle, nil, &_result)
         return _result
     }
     
@@ -195,7 +195,7 @@ open class GLTFDocument: Resource {
         withUnsafePointer(to: rootNodeMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFDocument.method_set_root_node_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFDocument.method_set_root_node_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -220,7 +220,7 @@ open class GLTFDocument: Resource {
     fileprivate final func get_root_node_mode() -> GLTFDocument.RootNodeMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GLTFDocument.method_get_root_node_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFDocument.method_get_root_node_mode, handle, nil, &_result)
         return GLTFDocument.RootNodeMode (rawValue: _result)!
     }
     
@@ -250,7 +250,7 @@ open class GLTFDocument: Resource {
                     withUnsafePointer(to: basePath.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(GLTFDocument.method_append_from_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(GLTFDocument.method_append_from_file, handle, pArgs, &_result)
                             }
                             
                         }
@@ -291,7 +291,7 @@ open class GLTFDocument: Resource {
                     withUnsafePointer(to: flags) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(GLTFDocument.method_append_from_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(GLTFDocument.method_append_from_buffer, handle, pArgs, &_result)
                             }
                             
                         }
@@ -327,7 +327,7 @@ open class GLTFDocument: Resource {
                 withUnsafePointer(to: flags) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(GLTFDocument.method_append_from_scene, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(GLTFDocument.method_append_from_scene, handle, pArgs, &_result)
                         }
                         
                     }
@@ -358,14 +358,14 @@ open class GLTFDocument: Resource {
     /// 
     public final func generateScene(state: GLTFState?, bakeFps: Double = 30, trimming: Bool = false, removeImmutableTracks: Bool = true) -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: bakeFps) { pArg1 in
                 withUnsafePointer(to: trimming) { pArg2 in
                     withUnsafePointer(to: removeImmutableTracks) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(GLTFDocument.method_generate_scene, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(GLTFDocument.method_generate_scene, handle, pArgs, &_result)
                             }
                             
                         }
@@ -378,7 +378,7 @@ open class GLTFDocument: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_generate_buffer: GDExtensionMethodBindPtr = {
@@ -399,7 +399,7 @@ open class GLTFDocument: Resource {
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFDocument.method_generate_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(GLTFDocument.method_generate_buffer, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -432,7 +432,7 @@ open class GLTFDocument: Resource {
             withUnsafePointer(to: path.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GLTFDocument.method_write_to_filesystem, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(GLTFDocument.method_write_to_filesystem, handle, pArgs, &_result)
                     }
                     
                 }
@@ -457,7 +457,7 @@ open class GLTFDocument: Resource {
     
     /// Determines a mapping between the given glTF Object Model `jsonPointer` and the corresponding Godot node path(s) in the generated Godot scene. The details of this mapping are returned in a ``GLTFObjectModelProperty`` object. Additional mappings can be supplied via the ``GLTFDocumentExtension/_exportObjectModelProperty(state:nodePath:godotNode:gltfNodeIndex:targetObject:targetDepth:)`` callback method.
     public static func importObjectModelProperty(state: GLTFState?, jsonPointer: String) -> GLTFObjectModelProperty? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: state?.handle) { pArg0 in
             let jsonPointer = GString(jsonPointer)
             withUnsafePointer(to: jsonPointer.content) { pArg1 in
@@ -472,7 +472,7 @@ open class GLTFDocument: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_export_object_model_property: GDExtensionMethodBindPtr = {
@@ -488,7 +488,7 @@ open class GLTFDocument: Resource {
     
     /// Determines a mapping between the given Godot `nodePath` and the corresponding glTF Object Model JSON pointer(s) in the generated glTF file. The details of this mapping are returned in a ``GLTFObjectModelProperty`` object. Additional mappings can be supplied via the ``GLTFDocumentExtension/_importObjectModelProperty(state:splitJsonPointer:partialPaths:)`` callback method.
     public static func exportObjectModelProperty(state: GLTFState?, nodePath: NodePath, godotNode: Node?, gltfNodeIndex: Int32) -> GLTFObjectModelProperty? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: nodePath.content) { pArg1 in
                 withUnsafePointer(to: godotNode?.handle) { pArg2 in
@@ -508,7 +508,7 @@ open class GLTFDocument: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_register_gltf_document_extension: GDExtensionMethodBindPtr = {

@@ -100,7 +100,7 @@ open class MultiplayerSpawner: Node {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSpawner.method_add_spawnable_scene, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerSpawner.method_add_spawnable_scene, handle, pArgs, nil)
                 }
                 
             }
@@ -125,7 +125,7 @@ open class MultiplayerSpawner: Node {
     public final func getSpawnableSceneCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MultiplayerSpawner.method_get_spawnable_scene_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerSpawner.method_get_spawnable_scene_count, handle, nil, &_result)
         return _result
     }
     
@@ -147,7 +147,7 @@ open class MultiplayerSpawner: Node {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSpawner.method_get_spawnable_scene, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(MultiplayerSpawner.method_get_spawnable_scene, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -171,7 +171,7 @@ open class MultiplayerSpawner: Node {
     /// Clears all spawnable scenes. Does not despawn existing instances on remote peers.
     public final func clearSpawnableScenes() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(MultiplayerSpawner.method_clear_spawnable_scenes, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(MultiplayerSpawner.method_clear_spawnable_scenes, handle, nil, nil)
         
     }
     
@@ -192,18 +192,18 @@ open class MultiplayerSpawner: Node {
     /// 
     public final func spawn(data: Variant?) -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSpawner.method_spawn, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MultiplayerSpawner.method_spawn, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_spawn_path: GDExtensionMethodBindPtr = {
@@ -221,7 +221,7 @@ open class MultiplayerSpawner: Node {
     fileprivate final func get_spawn_path() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(MultiplayerSpawner.method_get_spawn_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(MultiplayerSpawner.method_get_spawn_path, handle, nil, &_result.content)
         return _result
     }
     
@@ -242,7 +242,7 @@ open class MultiplayerSpawner: Node {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSpawner.method_set_spawn_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerSpawner.method_set_spawn_path, handle, pArgs, nil)
                 }
                 
             }
@@ -267,7 +267,7 @@ open class MultiplayerSpawner: Node {
     fileprivate final func get_spawn_limit() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(MultiplayerSpawner.method_get_spawn_limit, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MultiplayerSpawner.method_get_spawn_limit, handle, nil, &_result)
         return _result
     }
     
@@ -288,7 +288,7 @@ open class MultiplayerSpawner: Node {
         withUnsafePointer(to: limit) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSpawner.method_set_spawn_limit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerSpawner.method_set_spawn_limit, handle, pArgs, nil)
                 }
                 
             }
@@ -313,7 +313,7 @@ open class MultiplayerSpawner: Node {
     fileprivate final func get_spawn_function() -> Callable {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: Callable = Callable ()
-        gi.object_method_bind_ptrcall(MultiplayerSpawner.method_get_spawn_function, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(MultiplayerSpawner.method_get_spawn_function, handle, nil, &_result.content)
         return _result
     }
     
@@ -334,7 +334,7 @@ open class MultiplayerSpawner: Node {
         withUnsafePointer(to: spawnFunction.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MultiplayerSpawner.method_set_spawn_function, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MultiplayerSpawner.method_set_spawn_function, handle, pArgs, nil)
                 }
                 
             }

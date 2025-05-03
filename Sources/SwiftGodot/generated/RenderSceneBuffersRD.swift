@@ -52,7 +52,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_has_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_has_texture, handle, pArgs, &_result)
                     }
                     
                 }
@@ -91,7 +91,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
                                             withUnsafePointer(to: discardable) { pArg9 in
                                                 withUnsafePointer(to: UnsafeRawPointersN10(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9)) { pArgs in
                                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 10) { pArgs in
-                                                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_create_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_create_texture, handle, pArgs, &_result.content)
                                                     }
                                                     
                                                 }
@@ -141,7 +141,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
                         withUnsafePointer(to: unique) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_create_texture_from_format, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                    gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_create_texture_from_format, handle, pArgs, &_result.content)
                                 }
                                 
                             }
@@ -180,7 +180,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
                     withUnsafePointer(to: view?.handle) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_create_texture_view, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_create_texture_view, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -215,7 +215,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_texture, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -241,12 +241,12 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
     /// Returns the texture format information with which a cached texture was created.
     public final func getTextureFormat(context: StringName, name: StringName) -> RDTextureFormat? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: context.content) { pArg0 in
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_texture_format, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_texture_format, handle, pArgs, &_result)
                     }
                     
                 }
@@ -255,7 +255,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_texture_slice: GDExtensionMethodBindPtr = {
@@ -281,7 +281,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
                             withUnsafePointer(to: mipmaps) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_texture_slice, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_texture_slice, handle, pArgs, &_result.content)
                                     }
                                     
                                 }
@@ -325,7 +325,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
                                 withUnsafePointer(to: view?.handle) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_texture_slice_view, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                            gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_texture_slice_view, handle, pArgs, &_result.content)
                                         }
                                         
                                     }
@@ -367,7 +367,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
                 withUnsafePointer(to: mipmap) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_texture_slice_size, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_texture_slice_size, handle, pArgs, &_result)
                         }
                         
                     }
@@ -398,7 +398,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
         withUnsafePointer(to: context.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_clear_context, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_clear_context, handle, pArgs, nil)
                 }
                 
             }
@@ -429,7 +429,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
         withUnsafePointer(to: msaa) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_color_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_color_texture, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -461,7 +461,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
             withUnsafePointer(to: msaa) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_color_layer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_color_layer, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -494,7 +494,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
         withUnsafePointer(to: msaa) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_depth_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_depth_texture, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -526,7 +526,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
             withUnsafePointer(to: msaa) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_depth_layer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_depth_layer, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -559,7 +559,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
         withUnsafePointer(to: msaa) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_velocity_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_velocity_texture, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -588,7 +588,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
             withUnsafePointer(to: msaa) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_velocity_layer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_velocity_layer, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -615,7 +615,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
     public final func getRenderTarget() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_render_target, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_render_target, handle, nil, &_result.content)
         return _result
     }
     
@@ -634,7 +634,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
     public final func getViewCount() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_view_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_view_count, handle, nil, &_result)
         return _result
     }
     
@@ -653,7 +653,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
     public final func getInternalSize() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_internal_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_internal_size, handle, nil, &_result)
         return _result
     }
     
@@ -672,7 +672,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
     public final func getTargetSize() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_target_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_target_size, handle, nil, &_result)
         return _result
     }
     
@@ -691,7 +691,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
     public final func getScaling3dMode() -> RenderingServer.ViewportScaling3DMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_scaling_3d_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_scaling_3d_mode, handle, nil, &_result)
         return RenderingServer.ViewportScaling3DMode (rawValue: _result)!
     }
     
@@ -710,7 +710,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
     public final func getFsrSharpness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_fsr_sharpness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_fsr_sharpness, handle, nil, &_result)
         return _result
     }
     
@@ -729,7 +729,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
     public final func getMsaa3d() -> RenderingServer.ViewportMSAA {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_msaa_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_msaa_3d, handle, nil, &_result)
         return RenderingServer.ViewportMSAA (rawValue: _result)!
     }
     
@@ -748,7 +748,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
     public final func getTextureSamples() -> RenderingDevice.TextureSamples {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_texture_samples, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_texture_samples, handle, nil, &_result)
         return RenderingDevice.TextureSamples (rawValue: _result)!
     }
     
@@ -767,7 +767,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
     public final func getScreenSpaceAa() -> RenderingServer.ViewportScreenSpaceAA {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_screen_space_aa, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_screen_space_aa, handle, nil, &_result)
         return RenderingServer.ViewportScreenSpaceAA (rawValue: _result)!
     }
     
@@ -786,7 +786,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
     public final func getUseTaa() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_use_taa, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_use_taa, handle, nil, &_result)
         return _result
     }
     
@@ -805,7 +805,7 @@ open class RenderSceneBuffersRD: RenderSceneBuffers {
     public final func getUseDebanding() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_use_debanding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderSceneBuffersRD.method_get_use_debanding, handle, nil, &_result)
         return _result
     }
     

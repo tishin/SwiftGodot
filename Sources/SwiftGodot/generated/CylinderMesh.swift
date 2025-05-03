@@ -136,7 +136,7 @@ open class CylinderMesh: PrimitiveMesh {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CylinderMesh.method_set_top_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CylinderMesh.method_set_top_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -161,7 +161,7 @@ open class CylinderMesh: PrimitiveMesh {
     fileprivate final func get_top_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CylinderMesh.method_get_top_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CylinderMesh.method_get_top_radius, handle, nil, &_result)
         return _result
     }
     
@@ -182,7 +182,7 @@ open class CylinderMesh: PrimitiveMesh {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CylinderMesh.method_set_bottom_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CylinderMesh.method_set_bottom_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -207,7 +207,7 @@ open class CylinderMesh: PrimitiveMesh {
     fileprivate final func get_bottom_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CylinderMesh.method_get_bottom_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CylinderMesh.method_get_bottom_radius, handle, nil, &_result)
         return _result
     }
     
@@ -228,7 +228,7 @@ open class CylinderMesh: PrimitiveMesh {
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CylinderMesh.method_set_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CylinderMesh.method_set_height, handle, pArgs, nil)
                 }
                 
             }
@@ -253,7 +253,7 @@ open class CylinderMesh: PrimitiveMesh {
     fileprivate final func get_height() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CylinderMesh.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CylinderMesh.method_get_height, handle, nil, &_result)
         return _result
     }
     
@@ -274,7 +274,7 @@ open class CylinderMesh: PrimitiveMesh {
         withUnsafePointer(to: segments) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CylinderMesh.method_set_radial_segments, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CylinderMesh.method_set_radial_segments, handle, pArgs, nil)
                 }
                 
             }
@@ -299,7 +299,7 @@ open class CylinderMesh: PrimitiveMesh {
     fileprivate final func get_radial_segments() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CylinderMesh.method_get_radial_segments, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CylinderMesh.method_get_radial_segments, handle, nil, &_result)
         return _result
     }
     
@@ -320,7 +320,7 @@ open class CylinderMesh: PrimitiveMesh {
         withUnsafePointer(to: rings) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CylinderMesh.method_set_rings, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CylinderMesh.method_set_rings, handle, pArgs, nil)
                 }
                 
             }
@@ -345,7 +345,7 @@ open class CylinderMesh: PrimitiveMesh {
     fileprivate final func get_rings() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CylinderMesh.method_get_rings, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CylinderMesh.method_get_rings, handle, nil, &_result)
         return _result
     }
     
@@ -366,7 +366,7 @@ open class CylinderMesh: PrimitiveMesh {
         withUnsafePointer(to: capTop) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CylinderMesh.method_set_cap_top, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CylinderMesh.method_set_cap_top, handle, pArgs, nil)
                 }
                 
             }
@@ -391,7 +391,7 @@ open class CylinderMesh: PrimitiveMesh {
     fileprivate final func is_cap_top() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CylinderMesh.method_is_cap_top, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CylinderMesh.method_is_cap_top, handle, nil, &_result)
         return _result
     }
     
@@ -412,7 +412,7 @@ open class CylinderMesh: PrimitiveMesh {
         withUnsafePointer(to: capBottom) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CylinderMesh.method_set_cap_bottom, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CylinderMesh.method_set_cap_bottom, handle, pArgs, nil)
                 }
                 
             }
@@ -437,7 +437,7 @@ open class CylinderMesh: PrimitiveMesh {
     fileprivate final func is_cap_bottom() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CylinderMesh.method_is_cap_bottom, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CylinderMesh.method_is_cap_bottom, handle, nil, &_result)
         return _result
     }
     

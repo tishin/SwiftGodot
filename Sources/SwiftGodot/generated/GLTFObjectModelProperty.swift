@@ -151,7 +151,7 @@ open class GLTFObjectModelProperty: RefCounted {
         withUnsafePointer(to: nodePath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_append_node_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_append_node_path, handle, pArgs, nil)
                 }
                 
             }
@@ -179,7 +179,7 @@ open class GLTFObjectModelProperty: RefCounted {
             withUnsafePointer(to: propName.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_append_path_to_property, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_append_path_to_property, handle, pArgs, nil)
                     }
                     
                 }
@@ -206,7 +206,7 @@ open class GLTFObjectModelProperty: RefCounted {
     public final func getAccessorType() -> GLTFAccessor.GLTFAccessorType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_get_accessor_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_get_accessor_type, handle, nil, &_result)
         return GLTFAccessor.GLTFAccessorType (rawValue: _result)!
     }
     
@@ -224,9 +224,9 @@ open class GLTFObjectModelProperty: RefCounted {
     @inline(__always)
     fileprivate final func get_gltf_to_godot_expression() -> Expression? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_get_gltf_to_godot_expression, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_get_gltf_to_godot_expression, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_gltf_to_godot_expression: GDExtensionMethodBindPtr = {
@@ -246,7 +246,7 @@ open class GLTFObjectModelProperty: RefCounted {
         withUnsafePointer(to: gltfToGodotExpr?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_set_gltf_to_godot_expression, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_set_gltf_to_godot_expression, handle, pArgs, nil)
                 }
                 
             }
@@ -270,9 +270,9 @@ open class GLTFObjectModelProperty: RefCounted {
     @inline(__always)
     fileprivate final func get_godot_to_gltf_expression() -> Expression? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_get_godot_to_gltf_expression, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_get_godot_to_gltf_expression, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_godot_to_gltf_expression: GDExtensionMethodBindPtr = {
@@ -292,7 +292,7 @@ open class GLTFObjectModelProperty: RefCounted {
         withUnsafePointer(to: godotToGltfExpr?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_set_godot_to_gltf_expression, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_set_godot_to_gltf_expression, handle, pArgs, nil)
                 }
                 
             }
@@ -317,7 +317,7 @@ open class GLTFObjectModelProperty: RefCounted {
     fileprivate final func get_node_paths() -> TypedArray<NodePath> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_get_node_paths, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_get_node_paths, handle, nil, &_result)
         return TypedArray<NodePath>(takingOver: _result)
     }
     
@@ -336,7 +336,7 @@ open class GLTFObjectModelProperty: RefCounted {
     public final func hasNodePaths() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_has_node_paths, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_has_node_paths, handle, nil, &_result)
         return _result
     }
     
@@ -357,7 +357,7 @@ open class GLTFObjectModelProperty: RefCounted {
         withUnsafePointer(to: nodePaths.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_set_node_paths, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_set_node_paths, handle, pArgs, nil)
                 }
                 
             }
@@ -382,7 +382,7 @@ open class GLTFObjectModelProperty: RefCounted {
     fileprivate final func get_object_model_type() -> GLTFObjectModelProperty.GLTFObjectModelType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_get_object_model_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_get_object_model_type, handle, nil, &_result)
         return GLTFObjectModelProperty.GLTFObjectModelType (rawValue: _result)!
     }
     
@@ -403,7 +403,7 @@ open class GLTFObjectModelProperty: RefCounted {
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_set_object_model_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_set_object_model_type, handle, pArgs, nil)
                 }
                 
             }
@@ -428,7 +428,7 @@ open class GLTFObjectModelProperty: RefCounted {
     fileprivate final func get_json_pointers() -> TypedArray<PackedStringArray> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_get_json_pointers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_get_json_pointers, handle, nil, &_result)
         return TypedArray<PackedStringArray>(takingOver: _result)
     }
     
@@ -447,7 +447,7 @@ open class GLTFObjectModelProperty: RefCounted {
     public final func hasJsonPointers() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_has_json_pointers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_has_json_pointers, handle, nil, &_result)
         return _result
     }
     
@@ -468,7 +468,7 @@ open class GLTFObjectModelProperty: RefCounted {
         withUnsafePointer(to: jsonPointers.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_set_json_pointers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_set_json_pointers, handle, pArgs, nil)
                 }
                 
             }
@@ -493,7 +493,7 @@ open class GLTFObjectModelProperty: RefCounted {
     fileprivate final func get_variant_type() -> Variant.GType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_get_variant_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_get_variant_type, handle, nil, &_result)
         return Variant.GType (rawValue: _result)!
     }
     
@@ -514,7 +514,7 @@ open class GLTFObjectModelProperty: RefCounted {
         withUnsafePointer(to: variantType.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_set_variant_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_set_variant_type, handle, pArgs, nil)
                 }
                 
             }
@@ -542,7 +542,7 @@ open class GLTFObjectModelProperty: RefCounted {
             withUnsafePointer(to: objModelType.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_set_types, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GLTFObjectModelProperty.method_set_types, handle, pArgs, nil)
                     }
                     
                 }

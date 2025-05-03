@@ -94,7 +94,7 @@ open class OpenXRCompositionLayerCylinder: OpenXRCompositionLayer {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_set_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_set_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -119,7 +119,7 @@ open class OpenXRCompositionLayerCylinder: OpenXRCompositionLayer {
     fileprivate final func get_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_get_radius, handle, nil, &_result)
         return _result
     }
     
@@ -140,7 +140,7 @@ open class OpenXRCompositionLayerCylinder: OpenXRCompositionLayer {
         withUnsafePointer(to: aspectRatio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_set_aspect_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_set_aspect_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -165,7 +165,7 @@ open class OpenXRCompositionLayerCylinder: OpenXRCompositionLayer {
     fileprivate final func get_aspect_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_get_aspect_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_get_aspect_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -186,7 +186,7 @@ open class OpenXRCompositionLayerCylinder: OpenXRCompositionLayer {
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_set_central_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_set_central_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -211,7 +211,7 @@ open class OpenXRCompositionLayerCylinder: OpenXRCompositionLayer {
     fileprivate final func get_central_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_get_central_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_get_central_angle, handle, nil, &_result)
         return _result
     }
     
@@ -232,7 +232,7 @@ open class OpenXRCompositionLayerCylinder: OpenXRCompositionLayer {
         withUnsafePointer(to: segments) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_set_fallback_segments, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_set_fallback_segments, handle, pArgs, nil)
                 }
                 
             }
@@ -257,7 +257,7 @@ open class OpenXRCompositionLayerCylinder: OpenXRCompositionLayer {
     fileprivate final func get_fallback_segments() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_get_fallback_segments, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRCompositionLayerCylinder.method_get_fallback_segments, handle, nil, &_result)
         return _result
     }
     

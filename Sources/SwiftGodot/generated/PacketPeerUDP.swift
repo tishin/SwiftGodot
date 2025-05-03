@@ -61,7 +61,7 @@ open class PacketPeerUDP: PacketPeer {
                 withUnsafePointer(to: recvBufSize) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(PacketPeerUDP.method_bind, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(PacketPeerUDP.method_bind, handle, pArgs, &_result)
                         }
                         
                     }
@@ -89,7 +89,7 @@ open class PacketPeerUDP: PacketPeer {
     /// Closes the ``PacketPeerUDP``'s underlying UDP socket.
     public final func close() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(PacketPeerUDP.method_close, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(PacketPeerUDP.method_close, handle, nil, nil)
         
     }
     
@@ -111,7 +111,7 @@ open class PacketPeerUDP: PacketPeer {
     public final func wait() -> GodotError {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(PacketPeerUDP.method_wait, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PacketPeerUDP.method_wait, handle, nil, &_result)
         return GodotError (rawValue: _result)!
     }
     
@@ -130,7 +130,7 @@ open class PacketPeerUDP: PacketPeer {
     public final func isBound() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PacketPeerUDP.method_is_bound, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PacketPeerUDP.method_is_bound, handle, nil, &_result)
         return _result
     }
     
@@ -157,7 +157,7 @@ open class PacketPeerUDP: PacketPeer {
             withUnsafePointer(to: port) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PacketPeerUDP.method_connect_to_host, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(PacketPeerUDP.method_connect_to_host, handle, pArgs, &_result)
                     }
                     
                 }
@@ -184,7 +184,7 @@ open class PacketPeerUDP: PacketPeer {
     public final func isSocketConnected() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PacketPeerUDP.method_is_socket_connected, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PacketPeerUDP.method_is_socket_connected, handle, nil, &_result)
         return _result
     }
     
@@ -203,7 +203,7 @@ open class PacketPeerUDP: PacketPeer {
     public final func getPacketIp() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(PacketPeerUDP.method_get_packet_ip, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(PacketPeerUDP.method_get_packet_ip, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -222,7 +222,7 @@ open class PacketPeerUDP: PacketPeer {
     public final func getPacketPort() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PacketPeerUDP.method_get_packet_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PacketPeerUDP.method_get_packet_port, handle, nil, &_result)
         return _result
     }
     
@@ -241,7 +241,7 @@ open class PacketPeerUDP: PacketPeer {
     public final func getLocalPort() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PacketPeerUDP.method_get_local_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PacketPeerUDP.method_get_local_port, handle, nil, &_result)
         return _result
     }
     
@@ -268,7 +268,7 @@ open class PacketPeerUDP: PacketPeer {
             withUnsafePointer(to: port) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PacketPeerUDP.method_set_dest_address, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(PacketPeerUDP.method_set_dest_address, handle, pArgs, &_result)
                     }
                     
                 }
@@ -300,7 +300,7 @@ open class PacketPeerUDP: PacketPeer {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PacketPeerUDP.method_set_broadcast_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PacketPeerUDP.method_set_broadcast_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -336,7 +336,7 @@ open class PacketPeerUDP: PacketPeer {
             withUnsafePointer(to: interfaceName.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PacketPeerUDP.method_join_multicast_group, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(PacketPeerUDP.method_join_multicast_group, handle, pArgs, &_result)
                     }
                     
                 }
@@ -369,7 +369,7 @@ open class PacketPeerUDP: PacketPeer {
             withUnsafePointer(to: interfaceName.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PacketPeerUDP.method_leave_multicast_group, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(PacketPeerUDP.method_leave_multicast_group, handle, pArgs, &_result)
                     }
                     
                 }

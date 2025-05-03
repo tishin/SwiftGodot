@@ -331,7 +331,7 @@ open class CanvasItem: Node {
     @_documentation(visibility: public)
     open func _draw() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CanvasItem.method__draw, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CanvasItem.method__draw, handle, nil, nil)
         
     }
     
@@ -350,7 +350,7 @@ open class CanvasItem: Node {
     public final func getCanvasItem() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_canvas_item, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_canvas_item, handle, nil, &_result.content)
         return _result
     }
     
@@ -371,7 +371,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -396,7 +396,7 @@ open class CanvasItem: Node {
     fileprivate final func is_visible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CanvasItem.method_is_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_is_visible, handle, nil, &_result)
         return _result
     }
     
@@ -420,7 +420,7 @@ open class CanvasItem: Node {
     public final func isVisibleInTree() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CanvasItem.method_is_visible_in_tree, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_is_visible_in_tree, handle, nil, &_result)
         return _result
     }
     
@@ -438,7 +438,7 @@ open class CanvasItem: Node {
     /// Show the ``CanvasItem`` if it's currently hidden. This is equivalent to setting ``visible`` to `true`. For controls that inherit ``Popup``, the correct way to make them visible is to call one of the multiple `popup*()` functions instead.
     public final func show() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CanvasItem.method_show, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CanvasItem.method_show, handle, nil, nil)
         
     }
     
@@ -456,7 +456,7 @@ open class CanvasItem: Node {
     /// Hide the ``CanvasItem`` if it's currently visible. This is equivalent to setting ``visible`` to `false`.
     public final func hide() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CanvasItem.method_hide, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CanvasItem.method_hide, handle, nil, nil)
         
     }
     
@@ -474,7 +474,7 @@ open class CanvasItem: Node {
     /// Queues the ``CanvasItem`` to redraw. During idle time, if ``CanvasItem`` is visible, ``notificationDraw`` is sent and ``_draw()`` is called. This only occurs **once** per frame, even if this method has been called multiple times.
     public final func queueRedraw() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CanvasItem.method_queue_redraw, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CanvasItem.method_queue_redraw, handle, nil, nil)
         
     }
     
@@ -495,7 +495,7 @@ open class CanvasItem: Node {
     /// 
     public final func moveToFront() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CanvasItem.method_move_to_front, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CanvasItem.method_move_to_front, handle, nil, nil)
         
     }
     
@@ -516,7 +516,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_as_top_level, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_as_top_level, handle, pArgs, nil)
                 }
                 
             }
@@ -541,7 +541,7 @@ open class CanvasItem: Node {
     fileprivate final func is_set_as_top_level() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CanvasItem.method_is_set_as_top_level, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_is_set_as_top_level, handle, nil, &_result)
         return _result
     }
     
@@ -562,7 +562,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: lightMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_light_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_light_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -587,7 +587,7 @@ open class CanvasItem: Node {
     fileprivate final func get_light_mask() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_light_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_light_mask, handle, nil, &_result)
         return _result
     }
     
@@ -608,7 +608,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: modulate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_modulate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_modulate, handle, pArgs, nil)
                 }
                 
             }
@@ -633,7 +633,7 @@ open class CanvasItem: Node {
     fileprivate final func get_modulate() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_modulate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_modulate, handle, nil, &_result)
         return _result
     }
     
@@ -654,7 +654,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: selfModulate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_self_modulate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_self_modulate, handle, pArgs, nil)
                 }
                 
             }
@@ -679,7 +679,7 @@ open class CanvasItem: Node {
     fileprivate final func get_self_modulate() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_self_modulate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_self_modulate, handle, nil, &_result)
         return _result
     }
     
@@ -700,7 +700,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: zIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_z_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_z_index, handle, pArgs, nil)
                 }
                 
             }
@@ -725,7 +725,7 @@ open class CanvasItem: Node {
     fileprivate final func get_z_index() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_z_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_z_index, handle, nil, &_result)
         return _result
     }
     
@@ -746,7 +746,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_z_as_relative, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_z_as_relative, handle, pArgs, nil)
                 }
                 
             }
@@ -771,7 +771,7 @@ open class CanvasItem: Node {
     fileprivate final func is_z_relative() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CanvasItem.method_is_z_relative, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_is_z_relative, handle, nil, &_result)
         return _result
     }
     
@@ -792,7 +792,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_y_sort_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_y_sort_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -817,7 +817,7 @@ open class CanvasItem: Node {
     fileprivate final func is_y_sort_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CanvasItem.method_is_y_sort_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_is_y_sort_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -838,7 +838,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_draw_behind_parent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_draw_behind_parent, handle, pArgs, nil)
                 }
                 
             }
@@ -863,7 +863,7 @@ open class CanvasItem: Node {
     fileprivate final func is_draw_behind_parent_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CanvasItem.method_is_draw_behind_parent_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_is_draw_behind_parent_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -891,7 +891,7 @@ open class CanvasItem: Node {
                         withUnsafePointer(to: antialiased) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(CanvasItem.method_draw_line, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(CanvasItem.method_draw_line, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -941,7 +941,7 @@ open class CanvasItem: Node {
                                 withUnsafePointer(to: antialiased) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(CanvasItem.method_draw_dashed_line, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                            gi.object_method_bind_ptrcall(CanvasItem.method_draw_dashed_line, handle, pArgs, nil)
                                         }
                                         
                                     }
@@ -986,7 +986,7 @@ open class CanvasItem: Node {
                     withUnsafePointer(to: antialiased) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_polyline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_polyline, handle, pArgs, nil)
                             }
                             
                         }
@@ -1025,7 +1025,7 @@ open class CanvasItem: Node {
                     withUnsafePointer(to: antialiased) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_polyline_colors, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_polyline_colors, handle, pArgs, nil)
                             }
                             
                         }
@@ -1070,7 +1070,7 @@ open class CanvasItem: Node {
                                     withUnsafePointer(to: antialiased) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_arc, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_arc, handle, pArgs, nil)
                                             }
                                             
                                         }
@@ -1119,7 +1119,7 @@ open class CanvasItem: Node {
                     withUnsafePointer(to: antialiased) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_multiline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_multiline, handle, pArgs, nil)
                             }
                             
                         }
@@ -1160,7 +1160,7 @@ open class CanvasItem: Node {
                     withUnsafePointer(to: antialiased) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_multiline_colors, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_multiline_colors, handle, pArgs, nil)
                             }
                             
                         }
@@ -1206,7 +1206,7 @@ open class CanvasItem: Node {
                         withUnsafePointer(to: antialiased) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(CanvasItem.method_draw_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(CanvasItem.method_draw_rect, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -1255,7 +1255,7 @@ open class CanvasItem: Node {
                             withUnsafePointer(to: antialiased) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(CanvasItem.method_draw_circle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(CanvasItem.method_draw_circle, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -1294,7 +1294,7 @@ open class CanvasItem: Node {
                 withUnsafePointer(to: modulate) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(CanvasItem.method_draw_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(CanvasItem.method_draw_texture, handle, pArgs, nil)
                         }
                         
                     }
@@ -1329,7 +1329,7 @@ open class CanvasItem: Node {
                         withUnsafePointer(to: transpose) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(CanvasItem.method_draw_texture_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(CanvasItem.method_draw_texture_rect, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -1369,7 +1369,7 @@ open class CanvasItem: Node {
                             withUnsafePointer(to: clipUv) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(CanvasItem.method_draw_texture_rect_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(CanvasItem.method_draw_texture_rect_region, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -1417,7 +1417,7 @@ open class CanvasItem: Node {
                                 withUnsafePointer(to: scale) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(CanvasItem.method_draw_msdf_texture_rect_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                            gi.object_method_bind_ptrcall(CanvasItem.method_draw_msdf_texture_rect_region, handle, pArgs, nil)
                                         }
                                         
                                     }
@@ -1462,7 +1462,7 @@ open class CanvasItem: Node {
                     withUnsafePointer(to: modulate) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_lcd_texture_rect_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_lcd_texture_rect_region, handle, pArgs, nil)
                             }
                             
                         }
@@ -1496,7 +1496,7 @@ open class CanvasItem: Node {
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CanvasItem.method_draw_style_box, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CanvasItem.method_draw_style_box, handle, pArgs, nil)
                     }
                     
                 }
@@ -1528,7 +1528,7 @@ open class CanvasItem: Node {
                     withUnsafePointer(to: texture?.handle) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_primitive, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_primitive, handle, pArgs, nil)
                             }
                             
                         }
@@ -1567,7 +1567,7 @@ open class CanvasItem: Node {
                     withUnsafePointer(to: texture?.handle) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_polygon, handle, pArgs, nil)
                             }
                             
                         }
@@ -1606,7 +1606,7 @@ open class CanvasItem: Node {
                     withUnsafePointer(to: texture?.handle) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_colored_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_colored_polygon, handle, pArgs, nil)
                             }
                             
                         }
@@ -1654,7 +1654,7 @@ open class CanvasItem: Node {
                                             withUnsafePointer(to: orientation.rawValue) { pArg9 in
                                                 withUnsafePointer(to: UnsafeRawPointersN10(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9)) { pArgs in
                                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 10) { pArgs in
-                                                        gi.object_method_bind_ptrcall(CanvasItem.method_draw_string, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                                        gi.object_method_bind_ptrcall(CanvasItem.method_draw_string, handle, pArgs, nil)
                                                     }
                                                     
                                                 }
@@ -1711,7 +1711,7 @@ open class CanvasItem: Node {
                                                     withUnsafePointer(to: orientation.rawValue) { pArg11 in
                                                         withUnsafePointer(to: UnsafeRawPointersN12(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9, pArg10, pArg11)) { pArgs in
                                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 12) { pArgs in
-                                                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_multiline_string, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_multiline_string, handle, pArgs, nil)
                                                             }
                                                             
                                                         }
@@ -1771,7 +1771,7 @@ open class CanvasItem: Node {
                                                 withUnsafePointer(to: orientation.rawValue) { pArg10 in
                                                     withUnsafePointer(to: UnsafeRawPointersN11(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9, pArg10)) { pArgs in
                                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 11) { pArgs in
-                                                            gi.object_method_bind_ptrcall(CanvasItem.method_draw_string_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                                            gi.object_method_bind_ptrcall(CanvasItem.method_draw_string_outline, handle, pArgs, nil)
                                                         }
                                                         
                                                     }
@@ -1831,7 +1831,7 @@ open class CanvasItem: Node {
                                                         withUnsafePointer(to: orientation.rawValue) { pArg12 in
                                                             withUnsafePointer(to: UnsafeRawPointersN13(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8, pArg9, pArg10, pArg11, pArg12)) { pArgs in
                                                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 13) { pArgs in
-                                                                    gi.object_method_bind_ptrcall(CanvasItem.method_draw_multiline_string_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                                                    gi.object_method_bind_ptrcall(CanvasItem.method_draw_multiline_string_outline, handle, pArgs, nil)
                                                                 }
                                                                 
                                                             }
@@ -1887,7 +1887,7 @@ open class CanvasItem: Node {
                         withUnsafePointer(to: modulate) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(CanvasItem.method_draw_char, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(CanvasItem.method_draw_char, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -1928,7 +1928,7 @@ open class CanvasItem: Node {
                             withUnsafePointer(to: modulate) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(CanvasItem.method_draw_char_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(CanvasItem.method_draw_char_outline, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -1968,7 +1968,7 @@ open class CanvasItem: Node {
                     withUnsafePointer(to: modulate) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_mesh, handle, pArgs, nil)
                             }
                             
                         }
@@ -2002,7 +2002,7 @@ open class CanvasItem: Node {
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CanvasItem.method_draw_multimesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CanvasItem.method_draw_multimesh, handle, pArgs, nil)
                     }
                     
                 }
@@ -2036,7 +2036,7 @@ open class CanvasItem: Node {
                 withUnsafePointer(to: scale) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(CanvasItem.method_draw_set_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(CanvasItem.method_draw_set_transform, handle, pArgs, nil)
                         }
                         
                     }
@@ -2067,7 +2067,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: xform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_draw_set_transform_matrix, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_draw_set_transform_matrix, handle, pArgs, nil)
                 }
                 
             }
@@ -2097,7 +2097,7 @@ open class CanvasItem: Node {
                     withUnsafePointer(to: offset) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_animation_slice, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(CanvasItem.method_draw_animation_slice, handle, pArgs, nil)
                             }
                             
                         }
@@ -2127,7 +2127,7 @@ open class CanvasItem: Node {
     /// After submitting all animations slices via ``drawAnimationSlice(animationLength:sliceBegin:sliceEnd:offset:)``, this function can be used to revert drawing to its default state (all subsequent drawing commands will be visible). If you don't care about this particular use case, usage of this function after submitting the slices is not required.
     public final func drawEndAnimation() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CanvasItem.method_draw_end_animation, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CanvasItem.method_draw_end_animation, handle, nil, nil)
         
     }
     
@@ -2146,7 +2146,7 @@ open class CanvasItem: Node {
     public final func getTransform() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_transform, handle, nil, &_result)
         return _result
     }
     
@@ -2165,7 +2165,7 @@ open class CanvasItem: Node {
     public final func getGlobalTransform() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_global_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_global_transform, handle, nil, &_result)
         return _result
     }
     
@@ -2184,7 +2184,7 @@ open class CanvasItem: Node {
     public final func getGlobalTransformWithCanvas() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_global_transform_with_canvas, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_global_transform_with_canvas, handle, nil, &_result)
         return _result
     }
     
@@ -2203,7 +2203,7 @@ open class CanvasItem: Node {
     public final func getViewportTransform() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_viewport_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_viewport_transform, handle, nil, &_result)
         return _result
     }
     
@@ -2222,7 +2222,7 @@ open class CanvasItem: Node {
     public final func getViewportRect() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_viewport_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_viewport_rect, handle, nil, &_result)
         return _result
     }
     
@@ -2241,7 +2241,7 @@ open class CanvasItem: Node {
     public final func getCanvasTransform() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_canvas_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_canvas_transform, handle, nil, &_result)
         return _result
     }
     
@@ -2263,7 +2263,7 @@ open class CanvasItem: Node {
     public final func getScreenTransform() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_screen_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_screen_transform, handle, nil, &_result)
         return _result
     }
     
@@ -2282,7 +2282,7 @@ open class CanvasItem: Node {
     public final func getLocalMousePosition() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_local_mouse_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_local_mouse_position, handle, nil, &_result)
         return _result
     }
     
@@ -2304,7 +2304,7 @@ open class CanvasItem: Node {
     public final func getGlobalMousePosition() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_global_mouse_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_global_mouse_position, handle, nil, &_result)
         return _result
     }
     
@@ -2323,7 +2323,7 @@ open class CanvasItem: Node {
     public final func getCanvas() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_canvas, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_canvas, handle, nil, &_result.content)
         return _result
     }
     
@@ -2341,9 +2341,9 @@ open class CanvasItem: Node {
     /// Returns the ``CanvasLayer`` that contains this node, or `null` if the node is not in any ``CanvasLayer``.
     public final func getCanvasLayerNode() -> CanvasLayer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_canvas_layer_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_canvas_layer_node, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_world_2d: GDExtensionMethodBindPtr = {
@@ -2360,9 +2360,9 @@ open class CanvasItem: Node {
     /// Returns the ``World2D`` where this item is in.
     public final func getWorld2d() -> World2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_world_2d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_world_2d, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_material: GDExtensionMethodBindPtr = {
@@ -2382,7 +2382,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_material, handle, pArgs, nil)
                 }
                 
             }
@@ -2406,9 +2406,9 @@ open class CanvasItem: Node {
     @inline(__always)
     fileprivate final func get_material() -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_material, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_instance_shader_parameter: GDExtensionMethodBindPtr = {
@@ -2434,7 +2434,7 @@ open class CanvasItem: Node {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CanvasItem.method_set_instance_shader_parameter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CanvasItem.method_set_instance_shader_parameter, handle, pArgs, nil)
                     }
                     
                 }
@@ -2464,7 +2464,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_get_instance_shader_parameter, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_get_instance_shader_parameter, handle, pArgs, &_result)
                 }
                 
             }
@@ -2491,7 +2491,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_use_parent_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_use_parent_material, handle, pArgs, nil)
                 }
                 
             }
@@ -2516,7 +2516,7 @@ open class CanvasItem: Node {
     fileprivate final func get_use_parent_material() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_use_parent_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_use_parent_material, handle, nil, &_result)
         return _result
     }
     
@@ -2537,7 +2537,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_notify_local_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_notify_local_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -2562,7 +2562,7 @@ open class CanvasItem: Node {
     public final func isLocalTransformNotificationEnabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CanvasItem.method_is_local_transform_notification_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_is_local_transform_notification_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2583,7 +2583,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_notify_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_notify_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -2608,7 +2608,7 @@ open class CanvasItem: Node {
     public final func isTransformNotificationEnabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CanvasItem.method_is_transform_notification_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_is_transform_notification_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2626,7 +2626,7 @@ open class CanvasItem: Node {
     /// Forces the transform to update. Transform changes in physics are not instant for performance reasons. Transforms are accumulated and then set. Use this if you need an up-to-date transform when doing physics operations.
     public final func forceUpdateTransform() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CanvasItem.method_force_update_transform, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CanvasItem.method_force_update_transform, handle, nil, nil)
         
     }
     
@@ -2651,7 +2651,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: viewportPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_make_canvas_position_local, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_make_canvas_position_local, handle, pArgs, &_result)
                 }
                 
             }
@@ -2675,18 +2675,18 @@ open class CanvasItem: Node {
     /// Transformations issued by `event`'s inputs are applied in local space instead of global space.
     public final func makeInputLocal(event: InputEvent?) -> InputEvent? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: event?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_make_input_local, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_make_input_local, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_visibility_layer: GDExtensionMethodBindPtr = {
@@ -2706,7 +2706,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_visibility_layer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_visibility_layer, handle, pArgs, nil)
                 }
                 
             }
@@ -2731,7 +2731,7 @@ open class CanvasItem: Node {
     fileprivate final func get_visibility_layer() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_visibility_layer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_visibility_layer, handle, nil, &_result)
         return _result
     }
     
@@ -2753,7 +2753,7 @@ open class CanvasItem: Node {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CanvasItem.method_set_visibility_layer_bit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CanvasItem.method_set_visibility_layer_bit, handle, pArgs, nil)
                     }
                     
                 }
@@ -2783,7 +2783,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: layer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_get_visibility_layer_bit, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_get_visibility_layer_bit, handle, pArgs, &_result)
                 }
                 
             }
@@ -2810,7 +2810,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_texture_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_texture_filter, handle, pArgs, nil)
                 }
                 
             }
@@ -2835,7 +2835,7 @@ open class CanvasItem: Node {
     fileprivate final func get_texture_filter() -> CanvasItem.TextureFilter {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_texture_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_texture_filter, handle, nil, &_result)
         return CanvasItem.TextureFilter (rawValue: _result)!
     }
     
@@ -2856,7 +2856,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_texture_repeat, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_texture_repeat, handle, pArgs, nil)
                 }
                 
             }
@@ -2881,7 +2881,7 @@ open class CanvasItem: Node {
     fileprivate final func get_texture_repeat() -> CanvasItem.TextureRepeat {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_texture_repeat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_texture_repeat, handle, nil, &_result)
         return CanvasItem.TextureRepeat (rawValue: _result)!
     }
     
@@ -2902,7 +2902,7 @@ open class CanvasItem: Node {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CanvasItem.method_set_clip_children_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CanvasItem.method_set_clip_children_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -2927,7 +2927,7 @@ open class CanvasItem: Node {
     fileprivate final func get_clip_children_mode() -> CanvasItem.ClipChildrenMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CanvasItem.method_get_clip_children_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CanvasItem.method_get_clip_children_mode, handle, nil, &_result)
         return CanvasItem.ClipChildrenMode (rawValue: _result)!
     }
     

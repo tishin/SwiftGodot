@@ -29,7 +29,7 @@ open class DisplayServer: Object {
     /// The shared instance of this class
     public static var shared: DisplayServer {
         return withUnsafePointer(to: &DisplayServer.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -476,7 +476,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: feature.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_feature, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_feature, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -503,7 +503,7 @@ open class DisplayServer: Object {
     /// 
     public static func getName() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_name, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_name, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -531,7 +531,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: actionCallback.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_help_set_search_callbacks, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_help_set_search_callbacks, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -562,7 +562,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: closeCallback.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_popup_callbacks, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_popup_callbacks, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -606,7 +606,7 @@ open class DisplayServer: Object {
                     withUnsafePointer(to: index) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_global_menu_add_submenu_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(method_global_menu_add_submenu_item, shared.handle, pArgs, &_result)
                             }
                             
                         }
@@ -658,7 +658,7 @@ open class DisplayServer: Object {
                                 withUnsafePointer(to: index) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(method_global_menu_add_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                            gi.object_method_bind_ptrcall(method_global_menu_add_item, shared.handle, pArgs, &_result)
                                         }
                                         
                                     }
@@ -716,7 +716,7 @@ open class DisplayServer: Object {
                                 withUnsafePointer(to: index) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(method_global_menu_add_check_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                            gi.object_method_bind_ptrcall(method_global_menu_add_check_item, shared.handle, pArgs, &_result)
                                         }
                                         
                                     }
@@ -775,7 +775,7 @@ open class DisplayServer: Object {
                                     withUnsafePointer(to: index) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                gi.object_method_bind_ptrcall(method_global_menu_add_icon_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                                gi.object_method_bind_ptrcall(method_global_menu_add_icon_item, shared.handle, pArgs, &_result)
                                             }
                                             
                                         }
@@ -836,7 +836,7 @@ open class DisplayServer: Object {
                                     withUnsafePointer(to: index) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                gi.object_method_bind_ptrcall(method_global_menu_add_icon_check_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                                gi.object_method_bind_ptrcall(method_global_menu_add_icon_check_item, shared.handle, pArgs, &_result)
                                             }
                                             
                                         }
@@ -898,7 +898,7 @@ open class DisplayServer: Object {
                                 withUnsafePointer(to: index) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(method_global_menu_add_radio_check_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                            gi.object_method_bind_ptrcall(method_global_menu_add_radio_check_item, shared.handle, pArgs, &_result)
                                         }
                                         
                                     }
@@ -959,7 +959,7 @@ open class DisplayServer: Object {
                                     withUnsafePointer(to: index) { pArg7 in
                                         withUnsafePointer(to: UnsafeRawPointersN8(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7)) { pArgs in
                                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 8) { pArgs in
-                                                gi.object_method_bind_ptrcall(method_global_menu_add_icon_radio_check_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                                gi.object_method_bind_ptrcall(method_global_menu_add_icon_radio_check_item, shared.handle, pArgs, &_result)
                                             }
                                             
                                         }
@@ -1025,7 +1025,7 @@ open class DisplayServer: Object {
                                         withUnsafePointer(to: index) { pArg8 in
                                             withUnsafePointer(to: UnsafeRawPointersN9(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8)) { pArgs in
                                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 9) { pArgs in
-                                                    gi.object_method_bind_ptrcall(method_global_menu_add_multistate_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                                    gi.object_method_bind_ptrcall(method_global_menu_add_multistate_item, shared.handle, pArgs, &_result)
                                                 }
                                                 
                                             }
@@ -1077,7 +1077,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_add_separator, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_global_menu_add_separator, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1112,7 +1112,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: text.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_get_item_index_from_text, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_global_menu_get_item_index_from_text, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1146,7 +1146,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: tag.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_get_item_index_from_tag, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_global_menu_get_item_index_from_tag, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1180,7 +1180,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_is_item_checked, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_global_menu_is_item_checked, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1214,7 +1214,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_is_item_checkable, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_global_menu_is_item_checkable, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1250,7 +1250,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_is_item_radio_checkable, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_global_menu_is_item_radio_checkable, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1284,7 +1284,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_get_item_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_global_menu_get_item_callback, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1318,7 +1318,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_get_item_key_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_global_menu_get_item_key_callback, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1352,7 +1352,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_get_item_tag, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_global_menu_get_item_tag, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1386,7 +1386,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_get_item_text, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_global_menu_get_item_text, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1420,7 +1420,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_get_item_submenu, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_global_menu_get_item_submenu, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1454,7 +1454,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_get_item_accelerator, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_global_menu_get_item_accelerator, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1490,7 +1490,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_is_item_disabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_global_menu_is_item_disabled, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1526,7 +1526,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_is_item_hidden, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_global_menu_is_item_hidden, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1560,7 +1560,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_get_item_tooltip, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_global_menu_get_item_tooltip, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1594,7 +1594,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_get_item_state, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_global_menu_get_item_state, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1628,7 +1628,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_get_item_max_states, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_global_menu_get_item_max_states, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1656,13 +1656,13 @@ open class DisplayServer: Object {
     /// > Note: This method is implemented only on macOS.
     /// 
     public static func globalMenuGetItemIcon(menuRoot: String, idx: Int32) -> Texture2D? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let menuRoot = GString(menuRoot)
         withUnsafePointer(to: menuRoot.content) { pArg0 in
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_get_item_icon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_global_menu_get_item_icon, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1671,7 +1671,7 @@ open class DisplayServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_global_menu_get_item_indentation_level: GDExtensionMethodBindPtr = {
@@ -1696,7 +1696,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_get_item_indentation_level, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_global_menu_get_item_indentation_level, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1730,7 +1730,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: checked) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_checked, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_checked, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1766,7 +1766,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: checkable) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_checkable, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_checkable, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1804,7 +1804,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: checkable) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_radio_checkable, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_radio_checkable, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1842,7 +1842,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: callback.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_callback, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1880,7 +1880,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: callback.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_hover_callbacks, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_hover_callbacks, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1918,7 +1918,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: keyCallback.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_key_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_key_callback, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1954,7 +1954,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: tag.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_tag, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_tag, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1991,7 +1991,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: text.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_text, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_text, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2028,7 +2028,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: submenu.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_submenu, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_submenu, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2064,7 +2064,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: keycode.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_accelerator, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_accelerator, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2100,7 +2100,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: disabled) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_disabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_disabled, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2136,7 +2136,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: hidden) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_hidden, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_hidden, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2173,7 +2173,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: tooltip.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_tooltip, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_tooltip, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2209,7 +2209,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: state) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_state, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_state, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2245,7 +2245,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: maxStates) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_max_states, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_max_states, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2283,7 +2283,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: icon?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_icon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_icon, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2319,7 +2319,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: level) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_global_menu_set_item_indentation_level, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_global_menu_set_item_indentation_level, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2354,7 +2354,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: menuRoot.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_global_menu_get_item_count, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_global_menu_get_item_count, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2387,7 +2387,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: idx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_global_menu_remove_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_global_menu_remove_item, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2421,7 +2421,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: menuRoot.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_global_menu_clear, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_global_menu_clear, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -2448,7 +2448,7 @@ open class DisplayServer: Object {
     /// 
     public static func globalMenuGetSystemMenuRoots() -> VariantDictionary {
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(method_global_menu_get_system_menu_roots, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_global_menu_get_system_menu_roots, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -2471,7 +2471,7 @@ open class DisplayServer: Object {
     /// 
     public static func ttsIsSpeaking() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_tts_is_speaking, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_tts_is_speaking, shared.handle, nil, &_result)
         return _result
     }
     
@@ -2494,7 +2494,7 @@ open class DisplayServer: Object {
     /// 
     public static func ttsIsPaused() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_tts_is_paused, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_tts_is_paused, shared.handle, nil, &_result)
         return _result
     }
     
@@ -2527,7 +2527,7 @@ open class DisplayServer: Object {
     /// 
     public static func ttsGetVoices() -> TypedArray<VariantDictionary> {
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(method_tts_get_voices, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_tts_get_voices, shared.handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -2554,7 +2554,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: language.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_tts_get_voices_for_language, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_tts_get_voices_for_language, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2607,7 +2607,7 @@ open class DisplayServer: Object {
                                 withUnsafePointer(to: interrupt) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(method_tts_speak, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                            gi.object_method_bind_ptrcall(method_tts_speak, shared.handle, pArgs, nil)
                                         }
                                         
                                     }
@@ -2647,7 +2647,7 @@ open class DisplayServer: Object {
     /// > Note: ``ProjectSettings/audio/general/textToSpeech`` should be `true` to use text-to-speech.
     /// 
     public static func ttsPause() {
-        gi.object_method_bind_ptrcall(method_tts_pause, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_tts_pause, shared.handle, nil, nil)
         
     }
     
@@ -2669,7 +2669,7 @@ open class DisplayServer: Object {
     /// > Note: ``ProjectSettings/audio/general/textToSpeech`` should be `true` to use text-to-speech.
     /// 
     public static func ttsResume() {
-        gi.object_method_bind_ptrcall(method_tts_resume, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_tts_resume, shared.handle, nil, nil)
         
     }
     
@@ -2691,7 +2691,7 @@ open class DisplayServer: Object {
     /// > Note: ``ProjectSettings/audio/general/textToSpeech`` should be `true` to use text-to-speech.
     /// 
     public static func ttsStop() {
-        gi.object_method_bind_ptrcall(method_tts_stop, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_tts_stop, shared.handle, nil, nil)
         
     }
     
@@ -2723,7 +2723,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: callable.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_tts_set_utterance_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_tts_set_utterance_callback, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2752,7 +2752,7 @@ open class DisplayServer: Object {
     /// 
     public static func isDarkModeSupported() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_dark_mode_supported, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_dark_mode_supported, shared.handle, nil, &_result)
         return _result
     }
     
@@ -2773,7 +2773,7 @@ open class DisplayServer: Object {
     /// 
     public static func isDarkMode() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_dark_mode, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_dark_mode, shared.handle, nil, &_result)
         return _result
     }
     
@@ -2794,7 +2794,7 @@ open class DisplayServer: Object {
     /// 
     public static func getAccentColor() -> Color {
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(method_get_accent_color, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_accent_color, shared.handle, nil, &_result)
         return _result
     }
     
@@ -2815,7 +2815,7 @@ open class DisplayServer: Object {
     /// 
     public static func getBaseColor() -> Color {
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(method_get_base_color, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_base_color, shared.handle, nil, &_result)
         return _result
     }
     
@@ -2838,7 +2838,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: callable.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_system_theme_change_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_system_theme_change_callback, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -2864,7 +2864,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: mouseMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_mouse_set_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_mouse_set_mode, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -2888,7 +2888,7 @@ open class DisplayServer: Object {
     /// Returns the current mouse mode. See also ``mouseSetMode(mouseMode:)``.
     public static func mouseGetMode() -> DisplayServer.MouseMode {
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(method_mouse_get_mode, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_mouse_get_mode, shared.handle, nil, &_result)
         return DisplayServer.MouseMode (rawValue: _result)!
     }
     
@@ -2911,7 +2911,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_warp_mouse, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_warp_mouse, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -2935,7 +2935,7 @@ open class DisplayServer: Object {
     /// Returns the mouse cursor's current position in screen coordinates.
     public static func mouseGetPosition() -> Vector2i {
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(method_mouse_get_position, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_mouse_get_position, shared.handle, nil, &_result)
         return _result
     }
     
@@ -2953,7 +2953,7 @@ open class DisplayServer: Object {
     /// Returns the current state of mouse buttons (whether each button is pressed) as a bitmask. If multiple mouse buttons are pressed at the same time, the bits are added together. Equivalent to ``Input/getMouseButtonMask()``.
     public static func mouseGetButtonState() -> MouseButtonMask {
         var _result: MouseButtonMask = MouseButtonMask ()
-        gi.object_method_bind_ptrcall(method_mouse_get_button_state, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_mouse_get_button_state, shared.handle, nil, &_result)
         return _result
     }
     
@@ -2974,7 +2974,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: clipboard.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_clipboard_set, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_clipboard_set, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -2998,7 +2998,7 @@ open class DisplayServer: Object {
     /// Returns the user's clipboard as a string if possible.
     public static func clipboardGet() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_clipboard_get, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_clipboard_get, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -3018,9 +3018,9 @@ open class DisplayServer: Object {
     /// > Note: This method uses the copied pixel data, e.g. from a image editing software or a web browser, not an image file copied from file explorer.
     /// 
     public static func clipboardGetImage() -> Image? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(method_clipboard_get_image, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(method_clipboard_get_image, shared.handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_clipboard_has: GDExtensionMethodBindPtr = {
@@ -3037,7 +3037,7 @@ open class DisplayServer: Object {
     /// Returns `true` if there is a text content on the user's clipboard.
     public static func clipboardHas() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_clipboard_has, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_clipboard_has, shared.handle, nil, &_result)
         return _result
     }
     
@@ -3055,7 +3055,7 @@ open class DisplayServer: Object {
     /// Returns `true` if there is an image content on the user's clipboard.
     public static func clipboardHasImage() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_clipboard_has_image, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_clipboard_has_image, shared.handle, nil, &_result)
         return _result
     }
     
@@ -3079,7 +3079,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: clipboardPrimary.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_clipboard_set_primary, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_clipboard_set_primary, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -3106,7 +3106,7 @@ open class DisplayServer: Object {
     /// 
     public static func clipboardGetPrimary() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_clipboard_get_primary, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_clipboard_get_primary, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -3127,7 +3127,7 @@ open class DisplayServer: Object {
     /// 
     public static func getDisplayCutouts() -> TypedArray<Rect2> {
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(method_get_display_cutouts, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_display_cutouts, shared.handle, nil, &_result)
         return TypedArray<Rect2>(takingOver: _result)
     }
     
@@ -3148,7 +3148,7 @@ open class DisplayServer: Object {
     /// 
     public static func getDisplaySafeArea() -> Rect2i {
         var _result: Rect2i = Rect2i ()
-        gi.object_method_bind_ptrcall(method_get_display_safe_area, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_display_safe_area, shared.handle, nil, &_result)
         return _result
     }
     
@@ -3166,7 +3166,7 @@ open class DisplayServer: Object {
     /// Returns the number of displays available.
     public static func getScreenCount() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_screen_count, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_screen_count, shared.handle, nil, &_result)
         return _result
     }
     
@@ -3184,7 +3184,7 @@ open class DisplayServer: Object {
     /// Returns index of the primary screen.
     public static func getPrimaryScreen() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_primary_screen, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_primary_screen, shared.handle, nil, &_result)
         return _result
     }
     
@@ -3202,7 +3202,7 @@ open class DisplayServer: Object {
     /// Returns the index of the screen containing the window with the keyboard focus, or the primary screen if there's no focused window.
     public static func getKeyboardFocusScreen() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_keyboard_focus_screen, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_keyboard_focus_screen, shared.handle, nil, &_result)
         return _result
     }
     
@@ -3223,7 +3223,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_screen_from_rect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_screen_from_rect, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3255,7 +3255,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_screen_get_position, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_screen_get_position, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3282,7 +3282,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_screen_get_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_screen_get_size, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3309,7 +3309,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_screen_get_usable_rect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_screen_get_usable_rect, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3343,7 +3343,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_screen_get_dpi, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_screen_get_dpi, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3377,7 +3377,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_screen_get_scale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_screen_get_scale, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3401,7 +3401,7 @@ open class DisplayServer: Object {
     /// Returns `true` if touch events are available (Android or iOS), the capability is detected on the Web platform or if ``ProjectSettings/inputDevices/pointing/emulateTouchFromMouse`` is `true`.
     public static func isTouchscreenAvailable() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_touchscreen_available, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_touchscreen_available, shared.handle, nil, &_result)
         return _result
     }
     
@@ -3424,7 +3424,7 @@ open class DisplayServer: Object {
     /// 
     public static func screenGetMaxScale() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_screen_get_max_scale, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_screen_get_max_scale, shared.handle, nil, &_result)
         return _result
     }
     
@@ -3450,7 +3450,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_screen_get_refresh_rate, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_screen_get_refresh_rate, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3482,7 +3482,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_screen_get_pixel, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_screen_get_pixel, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3510,18 +3510,18 @@ open class DisplayServer: Object {
     /// > Note: On macOS, this method requires "Screen Recording" permission, if permission is not granted it will return desktop wallpaper color.
     /// 
     public static func screenGetImage(screen: Int32 = -1) -> Image? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_screen_get_image, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_screen_get_image, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_screen_get_image_rect: GDExtensionMethodBindPtr = {
@@ -3542,18 +3542,18 @@ open class DisplayServer: Object {
     /// > Note: On macOS, this method requires "Screen Recording" permission, if permission is not granted it will return desktop wallpaper color.
     /// 
     public static func screenGetImageRect(_ rect: Rect2i) -> Image? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_screen_get_image_rect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_screen_get_image_rect, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_screen_set_orientation: GDExtensionMethodBindPtr = {
@@ -3576,7 +3576,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: screen) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_screen_set_orientation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_screen_set_orientation, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3608,7 +3608,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: screen) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_screen_get_orientation, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_screen_get_orientation, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3634,7 +3634,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_screen_set_keep_on, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_screen_set_keep_on, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -3658,7 +3658,7 @@ open class DisplayServer: Object {
     /// Returns `true` if the screen should never be turned off by the operating system's power-saving measures. See also ``screenSetKeepOn(enable:)``.
     public static func screenIsKeptOn() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_screen_is_kept_on, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_screen_is_kept_on, shared.handle, nil, &_result)
         return _result
     }
     
@@ -3679,7 +3679,7 @@ open class DisplayServer: Object {
     /// 
     public static func getWindowList() -> PackedInt32Array {
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(method_get_window_list, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_window_list, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -3701,7 +3701,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_window_at_screen_position, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_window_at_screen_position, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3732,7 +3732,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_get_native_handle, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_window_get_native_handle, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -3758,7 +3758,7 @@ open class DisplayServer: Object {
     /// Returns ID of the active popup window, or ``invalidWindowId`` if there is none.
     public static func windowGetActivePopup() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_window_get_active_popup, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_window_get_active_popup, shared.handle, nil, &_result)
         return _result
     }
     
@@ -3779,7 +3779,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_popup_safe_rect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_popup_safe_rect, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3808,7 +3808,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: window) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_get_popup_safe_rect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_get_popup_safe_rect, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3841,7 +3841,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_title, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_title, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3875,7 +3875,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_get_title_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_window_get_title_size, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -3911,7 +3911,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_mouse_passthrough, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_mouse_passthrough, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3940,7 +3940,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_get_current_screen, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_get_current_screen, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3967,7 +3967,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_current_screen, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_current_screen, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3996,7 +3996,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_get_position, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_get_position, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4023,7 +4023,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_get_position_with_decorations, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_get_position_with_decorations, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4057,7 +4057,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_position, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_position, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4086,7 +4086,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_get_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_get_size, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4116,7 +4116,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_size, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4148,7 +4148,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_rect_changed_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_rect_changed_callback, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4180,7 +4180,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_window_event_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_window_event_callback, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4212,7 +4212,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_input_event_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_input_event_callback, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4244,7 +4244,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_input_text_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_input_text_callback, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4278,7 +4278,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_drop_files_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_drop_files_callback, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4307,7 +4307,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_get_attached_instance_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_get_attached_instance_id, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4334,7 +4334,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_get_max_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_get_max_size, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4366,7 +4366,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_max_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_max_size, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4395,7 +4395,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_get_min_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_get_min_size, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4429,7 +4429,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_min_size, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_min_size, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4458,7 +4458,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_get_size_with_decorations, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_get_size_with_decorations, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4485,7 +4485,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_get_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_get_mode, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4517,7 +4517,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4547,7 +4547,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: windowId) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_window_set_flag, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_window_set_flag, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -4579,7 +4579,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_get_flag, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_window_get_flag, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -4611,7 +4611,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_window_buttons_offset, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_window_buttons_offset, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4640,7 +4640,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_get_safe_title_margins, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_get_safe_title_margins, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4666,7 +4666,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_request_attention, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_window_request_attention, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -4692,7 +4692,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_move_to_foreground, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_window_move_to_foreground, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -4719,7 +4719,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_is_focused, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_is_focused, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4746,7 +4746,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_can_draw, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_can_draw, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4778,7 +4778,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: parentWindowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_transient, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_transient, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4812,7 +4812,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: exclusive) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_exclusive, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_exclusive, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4841,7 +4841,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_ime_active, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_ime_active, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4870,7 +4870,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_ime_position, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_ime_position, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4906,7 +4906,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_set_vsync_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_set_vsync_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -4935,7 +4935,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_get_vsync_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_get_vsync_mode, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4962,7 +4962,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_is_maximize_allowed, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_window_is_maximize_allowed, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -4989,7 +4989,7 @@ open class DisplayServer: Object {
     /// 
     public static func windowMaximizeOnTitleDblClick() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_window_maximize_on_title_dbl_click, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_window_maximize_on_title_dbl_click, shared.handle, nil, &_result)
         return _result
     }
     
@@ -5010,7 +5010,7 @@ open class DisplayServer: Object {
     /// 
     public static func windowMinimizeOnTitleDblClick() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_window_minimize_on_title_dbl_click, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_window_minimize_on_title_dbl_click, shared.handle, nil, &_result)
         return _result
     }
     
@@ -5033,7 +5033,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: windowId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_window_start_drag, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_window_start_drag, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -5063,7 +5063,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: windowId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_window_start_resize, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_window_start_resize, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -5092,7 +5092,7 @@ open class DisplayServer: Object {
     /// 
     public static func imeGetSelection() -> Vector2i {
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(method_ime_get_selection, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_ime_get_selection, shared.handle, nil, &_result)
         return _result
     }
     
@@ -5113,7 +5113,7 @@ open class DisplayServer: Object {
     /// 
     public static func imeGetText() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_ime_get_text, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_ime_get_text, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -5154,7 +5154,7 @@ open class DisplayServer: Object {
                             withUnsafePointer(to: cursorEnd) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_virtual_keyboard_show, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(method_virtual_keyboard_show, shared.handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -5187,7 +5187,7 @@ open class DisplayServer: Object {
     
     /// Hides the virtual keyboard if it is shown, does nothing otherwise.
     public static func virtualKeyboardHide() {
-        gi.object_method_bind_ptrcall(method_virtual_keyboard_hide, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_virtual_keyboard_hide, shared.handle, nil, nil)
         
     }
     
@@ -5205,7 +5205,7 @@ open class DisplayServer: Object {
     /// Returns the on-screen keyboard's height in pixels. Returns 0 if there is no keyboard or if it is currently hidden.
     public static func virtualKeyboardGetHeight() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_virtual_keyboard_get_height, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_virtual_keyboard_get_height, shared.handle, nil, &_result)
         return _result
     }
     
@@ -5226,7 +5226,7 @@ open class DisplayServer: Object {
     /// 
     public static func hasHardwareKeyboard() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_has_hardware_keyboard, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_has_hardware_keyboard, shared.handle, nil, &_result)
         return _result
     }
     
@@ -5246,7 +5246,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: shape.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_cursor_set_shape, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_cursor_set_shape, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -5270,7 +5270,7 @@ open class DisplayServer: Object {
     /// Returns the default mouse cursor shape set by ``cursorSetShape(_:)``.
     public static func cursorGetShape() -> DisplayServer.CursorShape {
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(method_cursor_get_shape, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_cursor_get_shape, shared.handle, nil, &_result)
         return DisplayServer.CursorShape (rawValue: _result)!
     }
     
@@ -5295,7 +5295,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: hotspot) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_cursor_set_custom_image, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_cursor_set_custom_image, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -5326,7 +5326,7 @@ open class DisplayServer: Object {
     /// 
     public static func getSwapCancelOk() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_get_swap_cancel_ok, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_swap_cancel_ok, shared.handle, nil, &_result)
         return _result
     }
     
@@ -5349,7 +5349,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: processId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_enable_for_stealing_focus, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_enable_for_stealing_focus, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -5384,7 +5384,7 @@ open class DisplayServer: Object {
                     withUnsafePointer(to: callback.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_dialog_show, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(method_dialog_show, shared.handle, pArgs, &_result)
                             }
                             
                         }
@@ -5426,7 +5426,7 @@ open class DisplayServer: Object {
                     withUnsafePointer(to: callback.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_dialog_input_text, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(method_dialog_input_text, shared.handle, pArgs, &_result)
                             }
                             
                         }
@@ -5485,7 +5485,7 @@ open class DisplayServer: Object {
                                 withUnsafePointer(to: callback.content) { pArg6 in
                                     withUnsafePointer(to: UnsafeRawPointersN7(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6)) { pArgs in
                                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 7) { pArgs in
-                                            gi.object_method_bind_ptrcall(method_file_dialog_show, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                            gi.object_method_bind_ptrcall(method_file_dialog_show, shared.handle, pArgs, &_result)
                                         }
                                         
                                     }
@@ -5561,7 +5561,7 @@ open class DisplayServer: Object {
                                         withUnsafePointer(to: callback.content) { pArg8 in
                                             withUnsafePointer(to: UnsafeRawPointersN9(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8)) { pArgs in
                                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 9) { pArgs in
-                                                    gi.object_method_bind_ptrcall(method_file_dialog_with_options_show, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                                                    gi.object_method_bind_ptrcall(method_file_dialog_with_options_show, shared.handle, pArgs, &_result)
                                                 }
                                                 
                                             }
@@ -5603,7 +5603,7 @@ open class DisplayServer: Object {
     /// > Note: This method is implemented on macOS, Linux (X11/Wayland), and Windows.
     /// 
     public static func beep() {
-        gi.object_method_bind_ptrcall(method_beep, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_beep, shared.handle, nil, nil)
         
     }
     
@@ -5624,7 +5624,7 @@ open class DisplayServer: Object {
     /// 
     public static func keyboardGetLayoutCount() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_keyboard_get_layout_count, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_keyboard_get_layout_count, shared.handle, nil, &_result)
         return _result
     }
     
@@ -5645,7 +5645,7 @@ open class DisplayServer: Object {
     /// 
     public static func keyboardGetCurrentLayout() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_keyboard_get_current_layout, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_keyboard_get_current_layout, shared.handle, nil, &_result)
         return _result
     }
     
@@ -5668,7 +5668,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_keyboard_set_current_layout, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_keyboard_set_current_layout, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -5698,7 +5698,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_keyboard_get_layout_language, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_keyboard_get_layout_language, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -5728,7 +5728,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_keyboard_get_layout_name, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_keyboard_get_layout_name, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -5758,7 +5758,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: keycode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_keyboard_get_keycode_from_physical, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_keyboard_get_keycode_from_physical, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -5788,7 +5788,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: keycode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_keyboard_get_label_from_physical, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_keyboard_get_label_from_physical, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -5814,7 +5814,7 @@ open class DisplayServer: Object {
     /// > Note: This method is implemented on macOS and Windows.
     /// 
     public static func showEmojiAndSymbolPicker() {
-        gi.object_method_bind_ptrcall(method_show_emoji_and_symbol_picker, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_show_emoji_and_symbol_picker, shared.handle, nil, nil)
         
     }
     
@@ -5831,7 +5831,7 @@ open class DisplayServer: Object {
     
     /// Perform window manager processing, including input flushing. See also ``forceProcessAndDropEvents()``, ``Input/flushBufferedEvents()`` and ``Input/useAccumulatedInput``.
     public static func processEvents() {
-        gi.object_method_bind_ptrcall(method_process_events, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_process_events, shared.handle, nil, nil)
         
     }
     
@@ -5851,7 +5851,7 @@ open class DisplayServer: Object {
     /// > Note: This method is implemented on Windows and macOS.
     /// 
     public static func forceProcessAndDropEvents() {
-        gi.object_method_bind_ptrcall(method_force_process_and_drop_events, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_force_process_and_drop_events, shared.handle, nil, nil)
         
     }
     
@@ -5875,7 +5875,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: filename.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_native_icon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_native_icon, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -5904,7 +5904,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: image?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_icon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_icon, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -5937,7 +5937,7 @@ open class DisplayServer: Object {
                 withUnsafePointer(to: callback.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_create_status_indicator, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_create_status_indicator, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -5971,7 +5971,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: icon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_status_indicator_set_icon, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_status_indicator_set_icon, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6004,7 +6004,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: tooltip.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_status_indicator_set_tooltip, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_status_indicator_set_tooltip, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6040,7 +6040,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: menuRid.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_status_indicator_set_menu, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_status_indicator_set_menu, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6072,7 +6072,7 @@ open class DisplayServer: Object {
             withUnsafePointer(to: callback.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_status_indicator_set_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_status_indicator_set_callback, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -6104,7 +6104,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_status_indicator_get_rect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_status_indicator_get_rect, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -6130,7 +6130,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_delete_status_indicator, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_delete_status_indicator, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -6157,7 +6157,7 @@ open class DisplayServer: Object {
     /// 
     public static func tabletGetDriverCount() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_tablet_get_driver_count, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_tablet_get_driver_count, shared.handle, nil, &_result)
         return _result
     }
     
@@ -6181,7 +6181,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_tablet_get_driver_name, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_tablet_get_driver_name, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -6208,7 +6208,7 @@ open class DisplayServer: Object {
     /// 
     public static func tabletGetCurrentDriver() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_tablet_get_current_driver, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_tablet_get_current_driver, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -6240,7 +6240,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_tablet_set_current_driver, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_tablet_set_current_driver, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -6264,7 +6264,7 @@ open class DisplayServer: Object {
     /// Returns `true` if the window background can be made transparent. This method returns `false` if ``ProjectSettings/display/window/perPixelTransparency/allowed`` is set to `false`, or if transparency is not supported by the renderer or OS compositor.
     public static func isWindowTransparencyAvailable() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_window_transparency_available, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_window_transparency_available, shared.handle, nil, &_result)
         return _result
     }
     
@@ -6287,7 +6287,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_register_additional_output, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_register_additional_output, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -6313,7 +6313,7 @@ open class DisplayServer: Object {
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_unregister_additional_output, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_unregister_additional_output, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -6337,7 +6337,7 @@ open class DisplayServer: Object {
     /// Returns `true` if any additional outputs have been registered via ``registerAdditionalOutput(object:)``.
     public static func hasAdditionalOutputs() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_has_additional_outputs, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_has_additional_outputs, shared.handle, nil, &_result)
         return _result
     }
     

@@ -26,7 +26,7 @@ open class IP: Object {
     /// The shared instance of this class
     public static var shared: IP {
         return withUnsafePointer(to: &IP.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -80,7 +80,7 @@ open class IP: Object {
             withUnsafePointer(to: ipType.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_resolve_hostname, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_resolve_hostname, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -111,7 +111,7 @@ open class IP: Object {
             withUnsafePointer(to: ipType.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_resolve_hostname_addresses, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_resolve_hostname_addresses, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -142,7 +142,7 @@ open class IP: Object {
             withUnsafePointer(to: ipType.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_resolve_hostname_queue_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_resolve_hostname_queue_item, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -171,7 +171,7 @@ open class IP: Object {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_resolve_item_status, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_resolve_item_status, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -198,7 +198,7 @@ open class IP: Object {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_resolve_item_address, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_resolve_item_address, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -225,7 +225,7 @@ open class IP: Object {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_resolve_item_addresses, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_resolve_item_addresses, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -251,7 +251,7 @@ open class IP: Object {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_erase_resolve_item, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_erase_resolve_item, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -275,7 +275,7 @@ open class IP: Object {
     /// Returns all the user's current IPv4 and IPv6 addresses as an array.
     public static func getLocalAddresses() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_local_addresses, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_local_addresses, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -296,7 +296,7 @@ open class IP: Object {
     /// 
     public static func getLocalInterfaces() -> TypedArray<VariantDictionary> {
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(method_get_local_interfaces, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_local_interfaces, shared.handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -317,7 +317,7 @@ open class IP: Object {
         withUnsafePointer(to: hostname.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_clear_cache, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_clear_cache, shared.handle, pArgs, nil)
                 }
                 
             }

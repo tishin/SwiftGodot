@@ -478,7 +478,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: editorOnly) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_set_editor_only, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light3D.method_set_editor_only, handle, pArgs, nil)
                 }
                 
             }
@@ -503,7 +503,7 @@ open class Light3D: VisualInstance3D {
     fileprivate final func is_editor_only() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Light3D.method_is_editor_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light3D.method_is_editor_only, handle, nil, &_result)
         return _result
     }
     
@@ -526,7 +526,7 @@ open class Light3D: VisualInstance3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Light3D.method_set_param, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Light3D.method_set_param, handle, pArgs, nil)
                     }
                     
                 }
@@ -557,7 +557,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_get_param, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Light3D.method_get_param, handle, pArgs, &_result)
                 }
                 
             }
@@ -584,7 +584,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_set_shadow, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light3D.method_set_shadow, handle, pArgs, nil)
                 }
                 
             }
@@ -609,7 +609,7 @@ open class Light3D: VisualInstance3D {
     fileprivate final func has_shadow() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Light3D.method_has_shadow, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light3D.method_has_shadow, handle, nil, &_result)
         return _result
     }
     
@@ -630,7 +630,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_set_negative, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light3D.method_set_negative, handle, pArgs, nil)
                 }
                 
             }
@@ -655,7 +655,7 @@ open class Light3D: VisualInstance3D {
     fileprivate final func is_negative() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Light3D.method_is_negative, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light3D.method_is_negative, handle, nil, &_result)
         return _result
     }
     
@@ -676,7 +676,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: cullMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_set_cull_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light3D.method_set_cull_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -701,7 +701,7 @@ open class Light3D: VisualInstance3D {
     fileprivate final func get_cull_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(Light3D.method_get_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light3D.method_get_cull_mask, handle, nil, &_result)
         return _result
     }
     
@@ -722,7 +722,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_set_enable_distance_fade, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light3D.method_set_enable_distance_fade, handle, pArgs, nil)
                 }
                 
             }
@@ -747,7 +747,7 @@ open class Light3D: VisualInstance3D {
     fileprivate final func is_distance_fade_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Light3D.method_is_distance_fade_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light3D.method_is_distance_fade_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -768,7 +768,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_set_distance_fade_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light3D.method_set_distance_fade_begin, handle, pArgs, nil)
                 }
                 
             }
@@ -793,7 +793,7 @@ open class Light3D: VisualInstance3D {
     fileprivate final func get_distance_fade_begin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Light3D.method_get_distance_fade_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light3D.method_get_distance_fade_begin, handle, nil, &_result)
         return _result
     }
     
@@ -814,7 +814,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_set_distance_fade_shadow, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light3D.method_set_distance_fade_shadow, handle, pArgs, nil)
                 }
                 
             }
@@ -839,7 +839,7 @@ open class Light3D: VisualInstance3D {
     fileprivate final func get_distance_fade_shadow() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Light3D.method_get_distance_fade_shadow, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light3D.method_get_distance_fade_shadow, handle, nil, &_result)
         return _result
     }
     
@@ -860,7 +860,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_set_distance_fade_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light3D.method_set_distance_fade_length, handle, pArgs, nil)
                 }
                 
             }
@@ -885,7 +885,7 @@ open class Light3D: VisualInstance3D {
     fileprivate final func get_distance_fade_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Light3D.method_get_distance_fade_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light3D.method_get_distance_fade_length, handle, nil, &_result)
         return _result
     }
     
@@ -906,7 +906,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_set_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light3D.method_set_color, handle, pArgs, nil)
                 }
                 
             }
@@ -931,7 +931,7 @@ open class Light3D: VisualInstance3D {
     fileprivate final func get_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(Light3D.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light3D.method_get_color, handle, nil, &_result)
         return _result
     }
     
@@ -952,7 +952,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_set_shadow_reverse_cull_face, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light3D.method_set_shadow_reverse_cull_face, handle, pArgs, nil)
                 }
                 
             }
@@ -977,7 +977,7 @@ open class Light3D: VisualInstance3D {
     fileprivate final func get_shadow_reverse_cull_face() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Light3D.method_get_shadow_reverse_cull_face, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light3D.method_get_shadow_reverse_cull_face, handle, nil, &_result)
         return _result
     }
     
@@ -998,7 +998,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: casterMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_set_shadow_caster_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light3D.method_set_shadow_caster_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -1023,7 +1023,7 @@ open class Light3D: VisualInstance3D {
     fileprivate final func get_shadow_caster_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(Light3D.method_get_shadow_caster_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light3D.method_get_shadow_caster_mask, handle, nil, &_result)
         return _result
     }
     
@@ -1044,7 +1044,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: bakeMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_set_bake_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light3D.method_set_bake_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -1069,7 +1069,7 @@ open class Light3D: VisualInstance3D {
     fileprivate final func get_bake_mode() -> Light3D.BakeMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Light3D.method_get_bake_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light3D.method_get_bake_mode, handle, nil, &_result)
         return Light3D.BakeMode (rawValue: _result)!
     }
     
@@ -1090,7 +1090,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: projector?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_set_projector, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light3D.method_set_projector, handle, pArgs, nil)
                 }
                 
             }
@@ -1114,9 +1114,9 @@ open class Light3D: VisualInstance3D {
     @inline(__always)
     fileprivate final func get_projector() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Light3D.method_get_projector, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Light3D.method_get_projector, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_temperature: GDExtensionMethodBindPtr = {
@@ -1136,7 +1136,7 @@ open class Light3D: VisualInstance3D {
         withUnsafePointer(to: temperature) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Light3D.method_set_temperature, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Light3D.method_set_temperature, handle, pArgs, nil)
                 }
                 
             }
@@ -1161,7 +1161,7 @@ open class Light3D: VisualInstance3D {
     fileprivate final func get_temperature() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Light3D.method_get_temperature, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light3D.method_get_temperature, handle, nil, &_result)
         return _result
     }
     
@@ -1180,7 +1180,7 @@ open class Light3D: VisualInstance3D {
     public final func getCorrelatedColor() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(Light3D.method_get_correlated_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Light3D.method_get_correlated_color, handle, nil, &_result)
         return _result
     }
     

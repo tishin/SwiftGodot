@@ -49,7 +49,7 @@ open class Semaphore: RefCounted {
     /// Waits for the ``Semaphore``, if its value is zero, blocks until non-zero.
     public final func wait() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Semaphore.method_wait, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Semaphore.method_wait, handle, nil, nil)
         
     }
     
@@ -68,7 +68,7 @@ open class Semaphore: RefCounted {
     public final func tryWait() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Semaphore.method_try_wait, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Semaphore.method_try_wait, handle, nil, &_result)
         return _result
     }
     
@@ -89,7 +89,7 @@ open class Semaphore: RefCounted {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Semaphore.method_post, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Semaphore.method_post, handle, pArgs, nil)
                 }
                 
             }

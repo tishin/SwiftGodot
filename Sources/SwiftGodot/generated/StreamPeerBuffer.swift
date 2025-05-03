@@ -61,7 +61,7 @@ open class StreamPeerBuffer: StreamPeer {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeerBuffer.method_seek, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeerBuffer.method_seek, handle, pArgs, nil)
                 }
                 
             }
@@ -86,7 +86,7 @@ open class StreamPeerBuffer: StreamPeer {
     public final func getSize() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(StreamPeerBuffer.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeerBuffer.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -105,7 +105,7 @@ open class StreamPeerBuffer: StreamPeer {
     public final func getPosition() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(StreamPeerBuffer.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StreamPeerBuffer.method_get_position, handle, nil, &_result)
         return _result
     }
     
@@ -126,7 +126,7 @@ open class StreamPeerBuffer: StreamPeer {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeerBuffer.method_resize, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeerBuffer.method_resize, handle, pArgs, nil)
                 }
                 
             }
@@ -153,7 +153,7 @@ open class StreamPeerBuffer: StreamPeer {
         withUnsafePointer(to: data.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StreamPeerBuffer.method_set_data_array, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StreamPeerBuffer.method_set_data_array, handle, pArgs, nil)
                 }
                 
             }
@@ -178,7 +178,7 @@ open class StreamPeerBuffer: StreamPeer {
     fileprivate final func get_data_array() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(StreamPeerBuffer.method_get_data_array, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(StreamPeerBuffer.method_get_data_array, handle, nil, &_result.content)
         return _result
     }
     
@@ -196,7 +196,7 @@ open class StreamPeerBuffer: StreamPeer {
     /// Clears the ``dataArray`` and resets the cursor.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(StreamPeerBuffer.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(StreamPeerBuffer.method_clear, handle, nil, nil)
         
     }
     
@@ -214,9 +214,9 @@ open class StreamPeerBuffer: StreamPeer {
     /// Returns a new ``StreamPeerBuffer`` with the same ``dataArray`` content.
     public final func duplicate() -> StreamPeerBuffer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(StreamPeerBuffer.method_duplicate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(StreamPeerBuffer.method_duplicate, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

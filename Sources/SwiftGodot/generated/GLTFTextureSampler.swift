@@ -92,7 +92,7 @@ open class GLTFTextureSampler: Resource {
     fileprivate final func get_mag_filter() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFTextureSampler.method_get_mag_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFTextureSampler.method_get_mag_filter, handle, nil, &_result)
         return _result
     }
     
@@ -113,7 +113,7 @@ open class GLTFTextureSampler: Resource {
         withUnsafePointer(to: filterMode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFTextureSampler.method_set_mag_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFTextureSampler.method_set_mag_filter, handle, pArgs, nil)
                 }
                 
             }
@@ -138,7 +138,7 @@ open class GLTFTextureSampler: Resource {
     fileprivate final func get_min_filter() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFTextureSampler.method_get_min_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFTextureSampler.method_get_min_filter, handle, nil, &_result)
         return _result
     }
     
@@ -159,7 +159,7 @@ open class GLTFTextureSampler: Resource {
         withUnsafePointer(to: filterMode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFTextureSampler.method_set_min_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFTextureSampler.method_set_min_filter, handle, pArgs, nil)
                 }
                 
             }
@@ -184,7 +184,7 @@ open class GLTFTextureSampler: Resource {
     fileprivate final func get_wrap_s() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFTextureSampler.method_get_wrap_s, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFTextureSampler.method_get_wrap_s, handle, nil, &_result)
         return _result
     }
     
@@ -205,7 +205,7 @@ open class GLTFTextureSampler: Resource {
         withUnsafePointer(to: wrapMode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFTextureSampler.method_set_wrap_s, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFTextureSampler.method_set_wrap_s, handle, pArgs, nil)
                 }
                 
             }
@@ -230,7 +230,7 @@ open class GLTFTextureSampler: Resource {
     fileprivate final func get_wrap_t() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFTextureSampler.method_get_wrap_t, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFTextureSampler.method_get_wrap_t, handle, nil, &_result)
         return _result
     }
     
@@ -251,7 +251,7 @@ open class GLTFTextureSampler: Resource {
         withUnsafePointer(to: wrapMode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFTextureSampler.method_set_wrap_t, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFTextureSampler.method_set_wrap_t, handle, pArgs, nil)
                 }
                 
             }

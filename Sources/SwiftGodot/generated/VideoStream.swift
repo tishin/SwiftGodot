@@ -59,9 +59,9 @@ open class VideoStream: Resource {
     @_documentation(visibility: public)
     open func _instantiatePlayback() -> VideoStreamPlayback? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(VideoStream.method__instantiate_playback, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(VideoStream.method__instantiate_playback, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_file: GDExtensionMethodBindPtr = {
@@ -82,7 +82,7 @@ open class VideoStream: Resource {
         withUnsafePointer(to: file.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VideoStream.method_set_file, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VideoStream.method_set_file, handle, pArgs, nil)
                 }
                 
             }
@@ -107,7 +107,7 @@ open class VideoStream: Resource {
     fileprivate final func get_file() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(VideoStream.method_get_file, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VideoStream.method_get_file, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -130,6 +130,6 @@ func _VideoStream_proxy_instantiate_playback (instance: UnsafeMutableRawPointer?
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? VideoStream else { return }
     let ret = swiftObject._instantiatePlayback ()
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // VideoStreamPlayback
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // VideoStreamPlayback
 }
 

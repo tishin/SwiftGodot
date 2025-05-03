@@ -54,7 +54,7 @@ open class ScriptCreateDialog: ConfirmationDialog {
                     withUnsafePointer(to: loadEnabled) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(ScriptCreateDialog.method_config, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(ScriptCreateDialog.method_config, handle, pArgs, nil)
                             }
                             
                         }

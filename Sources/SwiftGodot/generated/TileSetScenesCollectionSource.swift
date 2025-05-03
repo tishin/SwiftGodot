@@ -48,7 +48,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
     public final func getSceneTilesCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_get_scene_tiles_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_get_scene_tiles_count, handle, nil, &_result)
         return _result
     }
     
@@ -70,7 +70,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_get_scene_tile_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_get_scene_tile_id, handle, pArgs, &_result)
                 }
                 
             }
@@ -98,7 +98,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_has_scene_tile_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_has_scene_tile_id, handle, pArgs, &_result)
                 }
                 
             }
@@ -130,7 +130,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
             withUnsafePointer(to: idOverride) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_create_scene_tile, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_create_scene_tile, handle, pArgs, &_result)
                     }
                     
                 }
@@ -160,7 +160,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
             withUnsafePointer(to: newId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_set_scene_tile_id, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_set_scene_tile_id, handle, pArgs, nil)
                     }
                     
                 }
@@ -190,7 +190,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
             withUnsafePointer(to: packedScene?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_set_scene_tile_scene, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_set_scene_tile_scene, handle, pArgs, nil)
                     }
                     
                 }
@@ -216,18 +216,18 @@ open class TileSetScenesCollectionSource: TileSetSource {
     /// Returns the ``PackedScene`` resource of scene tile with `id`.
     public final func getSceneTileScene(id: Int32) -> PackedScene? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_get_scene_tile_scene, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_get_scene_tile_scene, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_scene_tile_display_placeholder: GDExtensionMethodBindPtr = {
@@ -248,7 +248,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
             withUnsafePointer(to: displayPlaceholder) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_set_scene_tile_display_placeholder, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_set_scene_tile_display_placeholder, handle, pArgs, nil)
                     }
                     
                 }
@@ -278,7 +278,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_get_scene_tile_display_placeholder, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_get_scene_tile_display_placeholder, handle, pArgs, &_result)
                 }
                 
             }
@@ -305,7 +305,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_remove_scene_tile, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_remove_scene_tile, handle, pArgs, nil)
                 }
                 
             }
@@ -330,7 +330,7 @@ open class TileSetScenesCollectionSource: TileSetSource {
     public final func getNextSceneTileId() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_get_next_scene_tile_id, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileSetScenesCollectionSource.method_get_next_scene_tile_id, handle, nil, &_result)
         return _result
     }
     

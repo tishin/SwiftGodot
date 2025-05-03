@@ -157,7 +157,7 @@ open class WebSocketPeer: PacketPeer {
             withUnsafePointer(to: tlsClientOptions?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(WebSocketPeer.method_connect_to_url, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(WebSocketPeer.method_connect_to_url, handle, pArgs, &_result)
                     }
                     
                 }
@@ -190,7 +190,7 @@ open class WebSocketPeer: PacketPeer {
         withUnsafePointer(to: stream?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketPeer.method_accept_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(WebSocketPeer.method_accept_stream, handle, pArgs, &_result)
                 }
                 
             }
@@ -219,7 +219,7 @@ open class WebSocketPeer: PacketPeer {
             withUnsafePointer(to: writeMode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(WebSocketPeer.method_send, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(WebSocketPeer.method_send, handle, pArgs, &_result)
                     }
                     
                 }
@@ -250,7 +250,7 @@ open class WebSocketPeer: PacketPeer {
         withUnsafePointer(to: message.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketPeer.method_send_text, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(WebSocketPeer.method_send_text, handle, pArgs, &_result)
                 }
                 
             }
@@ -275,7 +275,7 @@ open class WebSocketPeer: PacketPeer {
     public final func wasStringPacket() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_was_string_packet, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_was_string_packet, handle, nil, &_result)
         return _result
     }
     
@@ -293,7 +293,7 @@ open class WebSocketPeer: PacketPeer {
     /// Updates the connection state and receive incoming packets. Call this function regularly to keep it in a clean state.
     public final func poll() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_poll, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_poll, handle, nil, nil)
         
     }
     
@@ -321,7 +321,7 @@ open class WebSocketPeer: PacketPeer {
             withUnsafePointer(to: reason.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(WebSocketPeer.method_close, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(WebSocketPeer.method_close, handle, pArgs, nil)
                     }
                     
                 }
@@ -351,7 +351,7 @@ open class WebSocketPeer: PacketPeer {
     public final func getConnectedHost() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_connected_host, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_connected_host, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -373,7 +373,7 @@ open class WebSocketPeer: PacketPeer {
     public final func getConnectedPort() -> UInt16 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt16 = 0
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_connected_port, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_connected_port, handle, nil, &_result)
         return _result
     }
     
@@ -392,7 +392,7 @@ open class WebSocketPeer: PacketPeer {
     public final func getSelectedProtocol() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_selected_protocol, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_selected_protocol, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -411,7 +411,7 @@ open class WebSocketPeer: PacketPeer {
     public final func getRequestedUrl() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_requested_url, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_requested_url, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -435,7 +435,7 @@ open class WebSocketPeer: PacketPeer {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_no_delay, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_no_delay, handle, pArgs, nil)
                 }
                 
             }
@@ -460,7 +460,7 @@ open class WebSocketPeer: PacketPeer {
     public final func getCurrentOutboundBufferedAmount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_current_outbound_buffered_amount, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_current_outbound_buffered_amount, handle, nil, &_result)
         return _result
     }
     
@@ -479,7 +479,7 @@ open class WebSocketPeer: PacketPeer {
     public final func getReadyState() -> WebSocketPeer.State {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_ready_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_ready_state, handle, nil, &_result)
         return WebSocketPeer.State (rawValue: _result)!
     }
     
@@ -498,7 +498,7 @@ open class WebSocketPeer: PacketPeer {
     public final func getCloseCode() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_close_code, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_close_code, handle, nil, &_result)
         return _result
     }
     
@@ -517,7 +517,7 @@ open class WebSocketPeer: PacketPeer {
     public final func getCloseReason() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_close_reason, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_close_reason, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -536,7 +536,7 @@ open class WebSocketPeer: PacketPeer {
     fileprivate final func get_supported_protocols() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_supported_protocols, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_supported_protocols, handle, nil, &_result.content)
         return _result
     }
     
@@ -557,7 +557,7 @@ open class WebSocketPeer: PacketPeer {
         withUnsafePointer(to: protocols.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_supported_protocols, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_supported_protocols, handle, pArgs, nil)
                 }
                 
             }
@@ -582,7 +582,7 @@ open class WebSocketPeer: PacketPeer {
     fileprivate final func get_handshake_headers() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_handshake_headers, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_handshake_headers, handle, nil, &_result.content)
         return _result
     }
     
@@ -603,7 +603,7 @@ open class WebSocketPeer: PacketPeer {
         withUnsafePointer(to: protocols.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_handshake_headers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_handshake_headers, handle, pArgs, nil)
                 }
                 
             }
@@ -628,7 +628,7 @@ open class WebSocketPeer: PacketPeer {
     fileprivate final func get_inbound_buffer_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_inbound_buffer_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_inbound_buffer_size, handle, nil, &_result)
         return _result
     }
     
@@ -649,7 +649,7 @@ open class WebSocketPeer: PacketPeer {
         withUnsafePointer(to: bufferSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_inbound_buffer_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_inbound_buffer_size, handle, pArgs, nil)
                 }
                 
             }
@@ -674,7 +674,7 @@ open class WebSocketPeer: PacketPeer {
     fileprivate final func get_outbound_buffer_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_outbound_buffer_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_outbound_buffer_size, handle, nil, &_result)
         return _result
     }
     
@@ -695,7 +695,7 @@ open class WebSocketPeer: PacketPeer {
         withUnsafePointer(to: bufferSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_outbound_buffer_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_outbound_buffer_size, handle, pArgs, nil)
                 }
                 
             }
@@ -722,7 +722,7 @@ open class WebSocketPeer: PacketPeer {
         withUnsafePointer(to: bufferSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_max_queued_packets, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_max_queued_packets, handle, pArgs, nil)
                 }
                 
             }
@@ -747,7 +747,7 @@ open class WebSocketPeer: PacketPeer {
     fileprivate final func get_max_queued_packets() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_max_queued_packets, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_max_queued_packets, handle, nil, &_result)
         return _result
     }
     
@@ -768,7 +768,7 @@ open class WebSocketPeer: PacketPeer {
         withUnsafePointer(to: interval) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_heartbeat_interval, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebSocketPeer.method_set_heartbeat_interval, handle, pArgs, nil)
                 }
                 
             }
@@ -793,7 +793,7 @@ open class WebSocketPeer: PacketPeer {
     fileprivate final func get_heartbeat_interval() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_heartbeat_interval, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(WebSocketPeer.method_get_heartbeat_interval, handle, nil, &_result)
         return _result
     }
     

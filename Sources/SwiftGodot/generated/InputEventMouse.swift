@@ -88,7 +88,7 @@ open class InputEventMouse: InputEventWithModifiers {
         withUnsafePointer(to: buttonMask.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMouse.method_set_button_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMouse.method_set_button_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -113,7 +113,7 @@ open class InputEventMouse: InputEventWithModifiers {
     fileprivate final func get_button_mask() -> MouseButtonMask {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: MouseButtonMask = MouseButtonMask ()
-        gi.object_method_bind_ptrcall(InputEventMouse.method_get_button_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventMouse.method_get_button_mask, handle, nil, &_result)
         return _result
     }
     
@@ -134,7 +134,7 @@ open class InputEventMouse: InputEventWithModifiers {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMouse.method_set_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMouse.method_set_position, handle, pArgs, nil)
                 }
                 
             }
@@ -159,7 +159,7 @@ open class InputEventMouse: InputEventWithModifiers {
     fileprivate final func get_position() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(InputEventMouse.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventMouse.method_get_position, handle, nil, &_result)
         return _result
     }
     
@@ -180,7 +180,7 @@ open class InputEventMouse: InputEventWithModifiers {
         withUnsafePointer(to: globalPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventMouse.method_set_global_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventMouse.method_set_global_position, handle, pArgs, nil)
                 }
                 
             }
@@ -205,7 +205,7 @@ open class InputEventMouse: InputEventWithModifiers {
     fileprivate final func get_global_position() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(InputEventMouse.method_get_global_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventMouse.method_get_global_position, handle, nil, &_result)
         return _result
     }
     

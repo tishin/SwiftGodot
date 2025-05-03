@@ -60,7 +60,7 @@ open class FileSystemDock: VBoxContainer {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileSystemDock.method_navigate_to_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileSystemDock.method_navigate_to_path, handle, pArgs, nil)
                 }
                 
             }
@@ -87,7 +87,7 @@ open class FileSystemDock: VBoxContainer {
         withUnsafePointer(to: plugin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileSystemDock.method_add_resource_tooltip_plugin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileSystemDock.method_add_resource_tooltip_plugin, handle, pArgs, nil)
                 }
                 
             }
@@ -114,7 +114,7 @@ open class FileSystemDock: VBoxContainer {
         withUnsafePointer(to: plugin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(FileSystemDock.method_remove_resource_tooltip_plugin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(FileSystemDock.method_remove_resource_tooltip_plugin, handle, pArgs, nil)
                 }
                 
             }

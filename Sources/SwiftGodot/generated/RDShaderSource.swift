@@ -127,7 +127,7 @@ open class RDShaderSource: RefCounted {
             withUnsafePointer(to: source.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RDShaderSource.method_set_stage_source, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RDShaderSource.method_set_stage_source, handle, pArgs, nil)
                     }
                     
                 }
@@ -158,7 +158,7 @@ open class RDShaderSource: RefCounted {
         withUnsafePointer(to: stage.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDShaderSource.method_get_stage_source, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(RDShaderSource.method_get_stage_source, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -185,7 +185,7 @@ open class RDShaderSource: RefCounted {
         withUnsafePointer(to: language.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDShaderSource.method_set_language, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDShaderSource.method_set_language, handle, pArgs, nil)
                 }
                 
             }
@@ -210,7 +210,7 @@ open class RDShaderSource: RefCounted {
     fileprivate final func get_language() -> RenderingDevice.ShaderLanguage {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDShaderSource.method_get_language, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDShaderSource.method_get_language, handle, nil, &_result)
         return RenderingDevice.ShaderLanguage (rawValue: _result)!
     }
     

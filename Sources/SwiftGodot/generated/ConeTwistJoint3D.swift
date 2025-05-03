@@ -149,7 +149,7 @@ open class ConeTwistJoint3D: Joint3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ConeTwistJoint3D.method_set_param, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ConeTwistJoint3D.method_set_param, handle, pArgs, nil)
                     }
                     
                 }
@@ -180,7 +180,7 @@ open class ConeTwistJoint3D: Joint3D {
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ConeTwistJoint3D.method_get_param, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ConeTwistJoint3D.method_get_param, handle, pArgs, &_result)
                 }
                 
             }

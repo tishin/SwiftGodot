@@ -104,7 +104,7 @@ open class OmniLight3D: Light3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OmniLight3D.method_set_shadow_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OmniLight3D.method_set_shadow_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -129,7 +129,7 @@ open class OmniLight3D: Light3D {
     fileprivate final func get_shadow_mode() -> OmniLight3D.ShadowMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(OmniLight3D.method_get_shadow_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OmniLight3D.method_get_shadow_mode, handle, nil, &_result)
         return OmniLight3D.ShadowMode (rawValue: _result)!
     }
     

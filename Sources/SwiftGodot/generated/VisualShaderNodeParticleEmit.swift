@@ -71,7 +71,7 @@ open class VisualShaderNodeParticleEmit: VisualShaderNode {
         withUnsafePointer(to: flags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeParticleEmit.method_set_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeParticleEmit.method_set_flags, handle, pArgs, nil)
                 }
                 
             }
@@ -96,7 +96,7 @@ open class VisualShaderNodeParticleEmit: VisualShaderNode {
     fileprivate final func get_flags() -> VisualShaderNodeParticleEmit.EmitFlags {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeParticleEmit.method_get_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeParticleEmit.method_get_flags, handle, nil, &_result)
         return VisualShaderNodeParticleEmit.EmitFlags (rawValue: _result)!
     }
     

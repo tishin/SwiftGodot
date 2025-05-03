@@ -46,7 +46,7 @@ open class XRAnchor3D: XRNode3D {
     public final func getSize() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(XRAnchor3D.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRAnchor3D.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -65,7 +65,7 @@ open class XRAnchor3D: XRNode3D {
     public final func getPlane() -> Plane {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Plane = Plane ()
-        gi.object_method_bind_ptrcall(XRAnchor3D.method_get_plane, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(XRAnchor3D.method_get_plane, handle, nil, &_result)
         return _result
     }
     

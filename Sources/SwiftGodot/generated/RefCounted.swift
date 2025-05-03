@@ -34,15 +34,13 @@ import Musl
 open class RefCounted: Object {
     private static var className = StringName("RefCounted")
     override open class var godotClassName: StringName { className }
-    public required init () {
-        super.init ()
-        _ = initRef()
-    }
+    public override required init(_ context: InitContext) {
+        super.init(context)
     
-    public required init(nativeHandle: UnsafeRawPointer) {
-        super.init (nativeHandle: nativeHandle)
+        if context.origin == .swift {
+            _ = initRef()
+        }                
     }
-    
     /* Methods */
     fileprivate static let method_init_ref: GDExtensionMethodBindPtr = {
         var methodName = FastStringName("init_ref")
@@ -62,7 +60,7 @@ open class RefCounted: Object {
     public final func initRef() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RefCounted.method_init_ref, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RefCounted.method_init_ref, handle, nil, &_result)
         return _result
     }
     
@@ -85,7 +83,7 @@ open class RefCounted: Object {
     public final func reference() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RefCounted.method_reference, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RefCounted.method_reference, handle, nil, &_result)
         return _result
     }
     
@@ -108,7 +106,7 @@ open class RefCounted: Object {
     public final func unreference() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RefCounted.method_unreference, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RefCounted.method_unreference, handle, nil, &_result)
         return _result
     }
     
@@ -127,7 +125,7 @@ open class RefCounted: Object {
     public final func getReferenceCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RefCounted.method_get_reference_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RefCounted.method_get_reference_count, handle, nil, &_result)
         return _result
     }
     

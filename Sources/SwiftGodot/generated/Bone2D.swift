@@ -65,7 +65,7 @@ open class Bone2D: Node2D {
         withUnsafePointer(to: rest) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Bone2D.method_set_rest, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Bone2D.method_set_rest, handle, pArgs, nil)
                 }
                 
             }
@@ -90,7 +90,7 @@ open class Bone2D: Node2D {
     fileprivate final func get_rest() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(Bone2D.method_get_rest, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Bone2D.method_get_rest, handle, nil, &_result)
         return _result
     }
     
@@ -108,7 +108,7 @@ open class Bone2D: Node2D {
     /// Resets the bone to the rest pose. This is equivalent to setting ``Node2D/transform`` to ``rest``.
     public final func applyRest() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Bone2D.method_apply_rest, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Bone2D.method_apply_rest, handle, nil, nil)
         
     }
     
@@ -127,7 +127,7 @@ open class Bone2D: Node2D {
     public final func getSkeletonRest() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(Bone2D.method_get_skeleton_rest, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Bone2D.method_get_skeleton_rest, handle, nil, &_result)
         return _result
     }
     
@@ -146,7 +146,7 @@ open class Bone2D: Node2D {
     public final func getIndexInSkeleton() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Bone2D.method_get_index_in_skeleton, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Bone2D.method_get_index_in_skeleton, handle, nil, &_result)
         return _result
     }
     
@@ -167,7 +167,7 @@ open class Bone2D: Node2D {
         withUnsafePointer(to: autoCalculate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Bone2D.method_set_autocalculate_length_and_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Bone2D.method_set_autocalculate_length_and_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -192,7 +192,7 @@ open class Bone2D: Node2D {
     public final func getAutocalculateLengthAndAngle() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Bone2D.method_get_autocalculate_length_and_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Bone2D.method_get_autocalculate_length_and_angle, handle, nil, &_result)
         return _result
     }
     
@@ -213,7 +213,7 @@ open class Bone2D: Node2D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Bone2D.method_set_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Bone2D.method_set_length, handle, pArgs, nil)
                 }
                 
             }
@@ -238,7 +238,7 @@ open class Bone2D: Node2D {
     public final func getLength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Bone2D.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Bone2D.method_get_length, handle, nil, &_result)
         return _result
     }
     
@@ -262,7 +262,7 @@ open class Bone2D: Node2D {
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Bone2D.method_set_bone_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Bone2D.method_set_bone_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -290,7 +290,7 @@ open class Bone2D: Node2D {
     public final func getBoneAngle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Bone2D.method_get_bone_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Bone2D.method_get_bone_angle, handle, nil, &_result)
         return _result
     }
     

@@ -76,7 +76,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
     /// Clears the internal data.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_clear, handle, nil, nil)
         
     }
     
@@ -95,7 +95,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
     public final func hasData() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_has_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_has_data, handle, nil, &_result)
         return _result
     }
     
@@ -117,7 +117,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
         withUnsafePointer(to: traversableOutlines.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_set_traversable_outlines, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_set_traversable_outlines, handle, pArgs, nil)
                 }
                 
             }
@@ -143,7 +143,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
     fileprivate final func get_traversable_outlines() -> TypedArray<PackedVector2Array> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_get_traversable_outlines, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_get_traversable_outlines, handle, nil, &_result)
         return TypedArray<PackedVector2Array>(takingOver: _result)
     }
     
@@ -165,7 +165,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
         withUnsafePointer(to: obstructionOutlines.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_set_obstruction_outlines, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_set_obstruction_outlines, handle, pArgs, nil)
                 }
                 
             }
@@ -191,7 +191,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
     fileprivate final func get_obstruction_outlines() -> TypedArray<PackedVector2Array> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_get_obstruction_outlines, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_get_obstruction_outlines, handle, nil, &_result)
         return TypedArray<PackedVector2Array>(takingOver: _result)
     }
     
@@ -212,7 +212,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
         withUnsafePointer(to: traversableOutlines.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_append_traversable_outlines, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_append_traversable_outlines, handle, pArgs, nil)
                 }
                 
             }
@@ -239,7 +239,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
         withUnsafePointer(to: obstructionOutlines.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_append_obstruction_outlines, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_append_obstruction_outlines, handle, pArgs, nil)
                 }
                 
             }
@@ -266,7 +266,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
         withUnsafePointer(to: shapeOutline.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_add_traversable_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_add_traversable_outline, handle, pArgs, nil)
                 }
                 
             }
@@ -293,7 +293,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
         withUnsafePointer(to: shapeOutline.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_add_obstruction_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_add_obstruction_outline, handle, pArgs, nil)
                 }
                 
             }
@@ -320,7 +320,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
         withUnsafePointer(to: otherGeometry?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_merge, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_merge, handle, pArgs, nil)
                 }
                 
             }
@@ -348,7 +348,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
             withUnsafePointer(to: carve) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_add_projected_obstruction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_add_projected_obstruction, handle, pArgs, nil)
                     }
                     
                 }
@@ -374,7 +374,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
     /// Clears all projected obstructions.
     public final func clearProjectedObstructions() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_clear_projected_obstructions, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_clear_projected_obstructions, handle, nil, nil)
         
     }
     
@@ -397,7 +397,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
         withUnsafePointer(to: projectedObstructions.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_set_projected_obstructions, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_set_projected_obstructions, handle, pArgs, nil)
                 }
                 
             }
@@ -428,7 +428,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
     fileprivate final func get_projected_obstructions() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_get_projected_obstructions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_get_projected_obstructions, handle, nil, &_result.content)
         return _result
     }
     
@@ -447,7 +447,7 @@ open class NavigationMeshSourceGeometryData2D: Resource {
     public final func getBounds() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_get_bounds, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationMeshSourceGeometryData2D.method_get_bounds, handle, nil, &_result)
         return _result
     }
     

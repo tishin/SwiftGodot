@@ -67,7 +67,7 @@ open class ConcavePolygonShape2D: Shape2D {
         withUnsafePointer(to: segments.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ConcavePolygonShape2D.method_set_segments, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ConcavePolygonShape2D.method_set_segments, handle, pArgs, nil)
                 }
                 
             }
@@ -92,7 +92,7 @@ open class ConcavePolygonShape2D: Shape2D {
     fileprivate final func get_segments() -> PackedVector2Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
-        gi.object_method_bind_ptrcall(ConcavePolygonShape2D.method_get_segments, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ConcavePolygonShape2D.method_get_segments, handle, nil, &_result.content)
         return _result
     }
     

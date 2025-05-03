@@ -38,7 +38,7 @@ open class GodotInstance: Object {
     public final func start() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GodotInstance.method_start, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GodotInstance.method_start, handle, nil, &_result)
         return _result
     }
     
@@ -57,7 +57,7 @@ open class GodotInstance: Object {
     public final func isStarted() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GodotInstance.method_is_started, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GodotInstance.method_is_started, handle, nil, &_result)
         return _result
     }
     
@@ -76,7 +76,7 @@ open class GodotInstance: Object {
     public final func iteration() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GodotInstance.method_iteration, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GodotInstance.method_iteration, handle, nil, &_result)
         return _result
     }
     
@@ -94,7 +94,7 @@ open class GodotInstance: Object {
     /// 
     public final func focusIn() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(GodotInstance.method_focus_in, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(GodotInstance.method_focus_in, handle, nil, nil)
         
     }
     
@@ -112,7 +112,7 @@ open class GodotInstance: Object {
     /// 
     public final func focusOut() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(GodotInstance.method_focus_out, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(GodotInstance.method_focus_out, handle, nil, nil)
         
     }
     
@@ -130,7 +130,7 @@ open class GodotInstance: Object {
     /// 
     public final func pause() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(GodotInstance.method_pause, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(GodotInstance.method_pause, handle, nil, nil)
         
     }
     
@@ -148,7 +148,7 @@ open class GodotInstance: Object {
     /// 
     public final func resume() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(GodotInstance.method_resume, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(GodotInstance.method_resume, handle, nil, nil)
         
     }
     
@@ -170,7 +170,7 @@ open class GodotInstance: Object {
             withUnsafePointer(to: async) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GodotInstance.method_execute, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GodotInstance.method_execute, handle, pArgs, nil)
                     }
                     
                 }

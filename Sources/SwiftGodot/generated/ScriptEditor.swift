@@ -49,9 +49,9 @@ open class ScriptEditor: PanelContainer {
     /// Returns the ``ScriptEditorBase`` object that the user is currently editing.
     public final func getCurrentEditor() -> ScriptEditorBase? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ScriptEditor.method_get_current_editor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ScriptEditor.method_get_current_editor, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_open_script_editors: GDExtensionMethodBindPtr = {
@@ -69,7 +69,7 @@ open class ScriptEditor: PanelContainer {
     public final func getOpenScriptEditors() -> TypedArray<ScriptEditorBase?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(ScriptEditor.method_get_open_script_editors, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScriptEditor.method_get_open_script_editors, handle, nil, &_result)
         return TypedArray<ScriptEditorBase?>(takingOver: _result)
     }
     
@@ -88,7 +88,7 @@ open class ScriptEditor: PanelContainer {
     public final func getBreakpoints() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(ScriptEditor.method_get_breakpoints, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ScriptEditor.method_get_breakpoints, handle, nil, &_result.content)
         return _result
     }
     
@@ -112,7 +112,7 @@ open class ScriptEditor: PanelContainer {
         withUnsafePointer(to: syntaxHighlighter?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptEditor.method_register_syntax_highlighter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScriptEditor.method_register_syntax_highlighter, handle, pArgs, nil)
                 }
                 
             }
@@ -142,7 +142,7 @@ open class ScriptEditor: PanelContainer {
         withUnsafePointer(to: syntaxHighlighter?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptEditor.method_unregister_syntax_highlighter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScriptEditor.method_unregister_syntax_highlighter, handle, pArgs, nil)
                 }
                 
             }
@@ -169,7 +169,7 @@ open class ScriptEditor: PanelContainer {
         withUnsafePointer(to: lineNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptEditor.method_goto_line, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScriptEditor.method_goto_line, handle, pArgs, nil)
                 }
                 
             }
@@ -193,9 +193,9 @@ open class ScriptEditor: PanelContainer {
     /// Returns a ``Script`` that is currently active in editor.
     public final func getCurrentScript() -> Script? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ScriptEditor.method_get_current_script, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ScriptEditor.method_get_current_script, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_open_scripts: GDExtensionMethodBindPtr = {
@@ -213,7 +213,7 @@ open class ScriptEditor: PanelContainer {
     public final func getOpenScripts() -> TypedArray<Script?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(ScriptEditor.method_get_open_scripts, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ScriptEditor.method_get_open_scripts, handle, nil, &_result)
         return TypedArray<Script?>(takingOver: _result)
     }
     
@@ -237,7 +237,7 @@ open class ScriptEditor: PanelContainer {
             withUnsafePointer(to: basePath.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ScriptEditor.method_open_script_create_dialog, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ScriptEditor.method_open_script_create_dialog, handle, pArgs, nil)
                     }
                     
                 }
@@ -270,7 +270,7 @@ open class ScriptEditor: PanelContainer {
         withUnsafePointer(to: topic.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptEditor.method_goto_help, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScriptEditor.method_goto_help, handle, pArgs, nil)
                 }
                 
             }
@@ -300,7 +300,7 @@ open class ScriptEditor: PanelContainer {
         withUnsafePointer(to: script?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ScriptEditor.method_update_docs_from_script, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ScriptEditor.method_update_docs_from_script, handle, pArgs, nil)
                 }
                 
             }

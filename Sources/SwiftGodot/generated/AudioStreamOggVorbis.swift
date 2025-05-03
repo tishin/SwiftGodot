@@ -111,7 +111,7 @@ open class AudioStreamOggVorbis: AudioStream {
     
     /// Creates a new ``AudioStreamOggVorbis`` instance from the given buffer. The buffer must contain Ogg Vorbis data.
     public static func loadFromBuffer(streamData: PackedByteArray) -> AudioStreamOggVorbis? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: streamData.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -122,7 +122,7 @@ open class AudioStreamOggVorbis: AudioStream {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_load_from_file: GDExtensionMethodBindPtr = {
@@ -138,7 +138,7 @@ open class AudioStreamOggVorbis: AudioStream {
     
     /// Creates a new ``AudioStreamOggVorbis`` instance from the given file path. The file must be in Ogg Vorbis format.
     public static func loadFromFile(path: String) -> AudioStreamOggVorbis? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -150,7 +150,7 @@ open class AudioStreamOggVorbis: AudioStream {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_packet_sequence: GDExtensionMethodBindPtr = {
@@ -170,7 +170,7 @@ open class AudioStreamOggVorbis: AudioStream {
         withUnsafePointer(to: packetSequence?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_set_packet_sequence, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_set_packet_sequence, handle, pArgs, nil)
                 }
                 
             }
@@ -194,9 +194,9 @@ open class AudioStreamOggVorbis: AudioStream {
     @inline(__always)
     fileprivate final func get_packet_sequence() -> OggPacketSequence? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_get_packet_sequence, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_get_packet_sequence, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_loop: GDExtensionMethodBindPtr = {
@@ -216,7 +216,7 @@ open class AudioStreamOggVorbis: AudioStream {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_set_loop, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_set_loop, handle, pArgs, nil)
                 }
                 
             }
@@ -241,7 +241,7 @@ open class AudioStreamOggVorbis: AudioStream {
     fileprivate final func has_loop() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_has_loop, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_has_loop, handle, nil, &_result)
         return _result
     }
     
@@ -262,7 +262,7 @@ open class AudioStreamOggVorbis: AudioStream {
         withUnsafePointer(to: seconds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_set_loop_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_set_loop_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -287,7 +287,7 @@ open class AudioStreamOggVorbis: AudioStream {
     fileprivate final func get_loop_offset() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_get_loop_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_get_loop_offset, handle, nil, &_result)
         return _result
     }
     
@@ -308,7 +308,7 @@ open class AudioStreamOggVorbis: AudioStream {
         withUnsafePointer(to: bpm) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_set_bpm, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_set_bpm, handle, pArgs, nil)
                 }
                 
             }
@@ -333,7 +333,7 @@ open class AudioStreamOggVorbis: AudioStream {
     fileprivate final func get_bpm() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_get_bpm, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_get_bpm, handle, nil, &_result)
         return _result
     }
     
@@ -354,7 +354,7 @@ open class AudioStreamOggVorbis: AudioStream {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_set_beat_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_set_beat_count, handle, pArgs, nil)
                 }
                 
             }
@@ -379,7 +379,7 @@ open class AudioStreamOggVorbis: AudioStream {
     fileprivate final func get_beat_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_get_beat_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_get_beat_count, handle, nil, &_result)
         return _result
     }
     
@@ -400,7 +400,7 @@ open class AudioStreamOggVorbis: AudioStream {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_set_bar_beats, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_set_bar_beats, handle, pArgs, nil)
                 }
                 
             }
@@ -425,7 +425,7 @@ open class AudioStreamOggVorbis: AudioStream {
     fileprivate final func get_bar_beats() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_get_bar_beats, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamOggVorbis.method_get_bar_beats, handle, nil, &_result)
         return _result
     }
     

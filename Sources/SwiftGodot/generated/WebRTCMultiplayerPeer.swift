@@ -54,7 +54,7 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
         withUnsafePointer(to: channelsConfig.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_create_server, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_create_server, handle, pArgs, &_result)
                 }
                 
             }
@@ -86,7 +86,7 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
             withUnsafePointer(to: channelsConfig.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_create_client, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_create_client, handle, pArgs, &_result)
                     }
                     
                 }
@@ -117,7 +117,7 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
             withUnsafePointer(to: channelsConfig.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_create_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_create_mesh, handle, pArgs, &_result)
                     }
                     
                 }
@@ -152,7 +152,7 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
                 withUnsafePointer(to: unreliableLifetime) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_add_peer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_add_peer, handle, pArgs, &_result)
                         }
                         
                     }
@@ -183,7 +183,7 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
         withUnsafePointer(to: peerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_remove_peer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_remove_peer, handle, pArgs, nil)
                 }
                 
             }
@@ -211,7 +211,7 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
         withUnsafePointer(to: peerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_has_peer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_has_peer, handle, pArgs, &_result)
                 }
                 
             }
@@ -239,7 +239,7 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
         withUnsafePointer(to: peerId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_get_peer, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_get_peer, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -264,7 +264,7 @@ open class WebRTCMultiplayerPeer: MultiplayerPeer {
     public final func getPeers() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_get_peers, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(WebRTCMultiplayerPeer.method_get_peers, handle, nil, &_result.content)
         return _result
     }
     

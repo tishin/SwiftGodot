@@ -353,7 +353,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_bg_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_bg_color, handle, pArgs, nil)
                 }
                 
             }
@@ -378,7 +378,7 @@ open class StyleBoxFlat: StyleBox {
     fileprivate final func get_bg_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_bg_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_bg_color, handle, nil, &_result)
         return _result
     }
     
@@ -399,7 +399,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_border_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_border_color, handle, pArgs, nil)
                 }
                 
             }
@@ -424,7 +424,7 @@ open class StyleBoxFlat: StyleBox {
     fileprivate final func get_border_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_border_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_border_color, handle, nil, &_result)
         return _result
     }
     
@@ -445,7 +445,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_border_width_all, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_border_width_all, handle, pArgs, nil)
                 }
                 
             }
@@ -470,7 +470,7 @@ open class StyleBoxFlat: StyleBox {
     public final func getBorderWidthMin() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_border_width_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_border_width_min, handle, nil, &_result)
         return _result
     }
     
@@ -493,7 +493,7 @@ open class StyleBoxFlat: StyleBox {
             withUnsafePointer(to: width) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_border_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_border_width, handle, pArgs, nil)
                     }
                     
                 }
@@ -524,7 +524,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_border_width, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_border_width, handle, pArgs, &_result)
                 }
                 
             }
@@ -551,7 +551,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: blend) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_border_blend, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_border_blend, handle, pArgs, nil)
                 }
                 
             }
@@ -576,7 +576,7 @@ open class StyleBoxFlat: StyleBox {
     fileprivate final func get_border_blend() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_border_blend, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_border_blend, handle, nil, &_result)
         return _result
     }
     
@@ -597,7 +597,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_corner_radius_all, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_corner_radius_all, handle, pArgs, nil)
                 }
                 
             }
@@ -626,7 +626,7 @@ open class StyleBoxFlat: StyleBox {
             withUnsafePointer(to: radius) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_corner_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_corner_radius, handle, pArgs, nil)
                     }
                     
                 }
@@ -657,7 +657,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: corner.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_corner_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_corner_radius, handle, pArgs, &_result)
                 }
                 
             }
@@ -686,7 +686,7 @@ open class StyleBoxFlat: StyleBox {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_expand_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_expand_margin, handle, pArgs, nil)
                     }
                     
                 }
@@ -715,7 +715,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_expand_margin_all, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_expand_margin_all, handle, pArgs, nil)
                 }
                 
             }
@@ -744,7 +744,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_expand_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_expand_margin, handle, pArgs, &_result)
                 }
                 
             }
@@ -771,7 +771,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: drawCenter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_draw_center, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_draw_center, handle, pArgs, nil)
                 }
                 
             }
@@ -796,7 +796,7 @@ open class StyleBoxFlat: StyleBox {
     fileprivate final func is_draw_center_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(StyleBoxFlat.method_is_draw_center_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxFlat.method_is_draw_center_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -817,7 +817,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: skew) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_skew, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_skew, handle, pArgs, nil)
                 }
                 
             }
@@ -842,7 +842,7 @@ open class StyleBoxFlat: StyleBox {
     fileprivate final func get_skew() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_skew, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_skew, handle, nil, &_result)
         return _result
     }
     
@@ -863,7 +863,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_shadow_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_shadow_color, handle, pArgs, nil)
                 }
                 
             }
@@ -888,7 +888,7 @@ open class StyleBoxFlat: StyleBox {
     fileprivate final func get_shadow_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_shadow_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_shadow_color, handle, nil, &_result)
         return _result
     }
     
@@ -909,7 +909,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_shadow_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_shadow_size, handle, pArgs, nil)
                 }
                 
             }
@@ -934,7 +934,7 @@ open class StyleBoxFlat: StyleBox {
     fileprivate final func get_shadow_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_shadow_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_shadow_size, handle, nil, &_result)
         return _result
     }
     
@@ -955,7 +955,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_shadow_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_shadow_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -980,7 +980,7 @@ open class StyleBoxFlat: StyleBox {
     fileprivate final func get_shadow_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_shadow_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_shadow_offset, handle, nil, &_result)
         return _result
     }
     
@@ -1001,7 +1001,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: antiAliased) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_anti_aliased, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_anti_aliased, handle, pArgs, nil)
                 }
                 
             }
@@ -1026,7 +1026,7 @@ open class StyleBoxFlat: StyleBox {
     fileprivate final func is_anti_aliased() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(StyleBoxFlat.method_is_anti_aliased, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxFlat.method_is_anti_aliased, handle, nil, &_result)
         return _result
     }
     
@@ -1047,7 +1047,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_aa_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_aa_size, handle, pArgs, nil)
                 }
                 
             }
@@ -1072,7 +1072,7 @@ open class StyleBoxFlat: StyleBox {
     fileprivate final func get_aa_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_aa_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_aa_size, handle, nil, &_result)
         return _result
     }
     
@@ -1093,7 +1093,7 @@ open class StyleBoxFlat: StyleBox {
         withUnsafePointer(to: detail) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_corner_detail, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(StyleBoxFlat.method_set_corner_detail, handle, pArgs, nil)
                 }
                 
             }
@@ -1118,7 +1118,7 @@ open class StyleBoxFlat: StyleBox {
     fileprivate final func get_corner_detail() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_corner_detail, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(StyleBoxFlat.method_get_corner_detail, handle, nil, &_result)
         return _result
     }
     

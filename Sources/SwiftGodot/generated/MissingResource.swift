@@ -74,7 +74,7 @@ open class MissingResource: Resource {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MissingResource.method_set_original_class, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MissingResource.method_set_original_class, handle, pArgs, nil)
                 }
                 
             }
@@ -99,7 +99,7 @@ open class MissingResource: Resource {
     fileprivate final func get_original_class() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(MissingResource.method_get_original_class, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(MissingResource.method_get_original_class, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -120,7 +120,7 @@ open class MissingResource: Resource {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MissingResource.method_set_recording_properties, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MissingResource.method_set_recording_properties, handle, pArgs, nil)
                 }
                 
             }
@@ -145,7 +145,7 @@ open class MissingResource: Resource {
     fileprivate final func is_recording_properties() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(MissingResource.method_is_recording_properties, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MissingResource.method_is_recording_properties, handle, nil, &_result)
         return _result
     }
     

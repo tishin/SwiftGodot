@@ -64,7 +64,7 @@ open class VisualShaderNodeInput: VisualShaderNode {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeInput.method_set_input_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeInput.method_set_input_name, handle, pArgs, nil)
                 }
                 
             }
@@ -89,7 +89,7 @@ open class VisualShaderNodeInput: VisualShaderNode {
     fileprivate final func get_input_name() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeInput.method_get_input_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualShaderNodeInput.method_get_input_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -108,7 +108,7 @@ open class VisualShaderNodeInput: VisualShaderNode {
     public final func getInputRealName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeInput.method_get_input_real_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualShaderNodeInput.method_get_input_real_name, handle, nil, &_result.content)
         return _result.description
     }
     

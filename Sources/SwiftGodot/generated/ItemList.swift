@@ -301,7 +301,7 @@ open class ItemList: Control {
                 withUnsafePointer(to: selectable) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(ItemList.method_add_item, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(ItemList.method_add_item, handle, pArgs, &_result)
                         }
                         
                     }
@@ -334,7 +334,7 @@ open class ItemList: Control {
             withUnsafePointer(to: selectable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_add_icon_item, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ItemList.method_add_icon_item, handle, pArgs, &_result)
                     }
                     
                 }
@@ -365,7 +365,7 @@ open class ItemList: Control {
             withUnsafePointer(to: text.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_text, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_text, handle, pArgs, nil)
                     }
                     
                 }
@@ -395,7 +395,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_get_item_text, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ItemList.method_get_item_text, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -423,7 +423,7 @@ open class ItemList: Control {
             withUnsafePointer(to: icon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_icon, handle, pArgs, nil)
                     }
                     
                 }
@@ -449,18 +449,18 @@ open class ItemList: Control {
     /// Returns the icon associated with the specified index.
     public final func getItemIcon(idx: Int32) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_get_item_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ItemList.method_get_item_icon, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_item_text_direction: GDExtensionMethodBindPtr = {
@@ -481,7 +481,7 @@ open class ItemList: Control {
             withUnsafePointer(to: direction.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_text_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_text_direction, handle, pArgs, nil)
                     }
                     
                 }
@@ -511,7 +511,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_get_item_text_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ItemList.method_get_item_text_direction, handle, pArgs, &_result)
                 }
                 
             }
@@ -540,7 +540,7 @@ open class ItemList: Control {
             withUnsafePointer(to: language.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_language, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_language, handle, pArgs, nil)
                     }
                     
                 }
@@ -570,7 +570,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_get_item_language, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ItemList.method_get_item_language, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -601,7 +601,7 @@ open class ItemList: Control {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_auto_translate_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_auto_translate_mode, handle, pArgs, nil)
                     }
                     
                 }
@@ -631,7 +631,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_get_item_auto_translate_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ItemList.method_get_item_auto_translate_mode, handle, pArgs, &_result)
                 }
                 
             }
@@ -659,7 +659,7 @@ open class ItemList: Control {
             withUnsafePointer(to: transposed) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_icon_transposed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_icon_transposed, handle, pArgs, nil)
                     }
                     
                 }
@@ -689,7 +689,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_is_item_icon_transposed, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ItemList.method_is_item_icon_transposed, handle, pArgs, &_result)
                 }
                 
             }
@@ -717,7 +717,7 @@ open class ItemList: Control {
             withUnsafePointer(to: rect) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_icon_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_icon_region, handle, pArgs, nil)
                     }
                     
                 }
@@ -747,7 +747,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_get_item_icon_region, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ItemList.method_get_item_icon_region, handle, pArgs, &_result)
                 }
                 
             }
@@ -775,7 +775,7 @@ open class ItemList: Control {
             withUnsafePointer(to: modulate) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_icon_modulate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_icon_modulate, handle, pArgs, nil)
                     }
                     
                 }
@@ -805,7 +805,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_get_item_icon_modulate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ItemList.method_get_item_icon_modulate, handle, pArgs, &_result)
                 }
                 
             }
@@ -833,7 +833,7 @@ open class ItemList: Control {
             withUnsafePointer(to: selectable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_selectable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_selectable, handle, pArgs, nil)
                     }
                     
                 }
@@ -863,7 +863,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_is_item_selectable, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ItemList.method_is_item_selectable, handle, pArgs, &_result)
                 }
                 
             }
@@ -894,7 +894,7 @@ open class ItemList: Control {
             withUnsafePointer(to: disabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_disabled, handle, pArgs, nil)
                     }
                     
                 }
@@ -924,7 +924,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_is_item_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ItemList.method_is_item_disabled, handle, pArgs, &_result)
                 }
                 
             }
@@ -952,7 +952,7 @@ open class ItemList: Control {
             withUnsafePointer(to: metadata.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_metadata, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_metadata, handle, pArgs, nil)
                     }
                     
                 }
@@ -982,7 +982,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_get_item_metadata, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ItemList.method_get_item_metadata, handle, pArgs, &_result)
                 }
                 
             }
@@ -1010,7 +1010,7 @@ open class ItemList: Control {
             withUnsafePointer(to: customBgColor) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_custom_bg_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_custom_bg_color, handle, pArgs, nil)
                     }
                     
                 }
@@ -1040,7 +1040,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_get_item_custom_bg_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ItemList.method_get_item_custom_bg_color, handle, pArgs, &_result)
                 }
                 
             }
@@ -1068,7 +1068,7 @@ open class ItemList: Control {
             withUnsafePointer(to: customFgColor) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_custom_fg_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_custom_fg_color, handle, pArgs, nil)
                     }
                     
                 }
@@ -1098,7 +1098,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_get_item_custom_fg_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ItemList.method_get_item_custom_fg_color, handle, pArgs, &_result)
                 }
                 
             }
@@ -1130,7 +1130,7 @@ open class ItemList: Control {
             withUnsafePointer(to: expand) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_get_item_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ItemList.method_get_item_rect, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1160,7 +1160,7 @@ open class ItemList: Control {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_tooltip_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_tooltip_enabled, handle, pArgs, nil)
                     }
                     
                 }
@@ -1190,7 +1190,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_is_item_tooltip_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ItemList.method_is_item_tooltip_enabled, handle, pArgs, &_result)
                 }
                 
             }
@@ -1219,7 +1219,7 @@ open class ItemList: Control {
             withUnsafePointer(to: tooltip.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_set_item_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_set_item_tooltip, handle, pArgs, nil)
                     }
                     
                 }
@@ -1249,7 +1249,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_get_item_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(ItemList.method_get_item_tooltip, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1280,7 +1280,7 @@ open class ItemList: Control {
             withUnsafePointer(to: single) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_select, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_select, handle, pArgs, nil)
                     }
                     
                 }
@@ -1309,7 +1309,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_deselect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_deselect, handle, pArgs, nil)
                 }
                 
             }
@@ -1333,7 +1333,7 @@ open class ItemList: Control {
     /// Ensures there are no items selected.
     public final func deselectAll() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ItemList.method_deselect_all, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ItemList.method_deselect_all, handle, nil, nil)
         
     }
     
@@ -1355,7 +1355,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_is_selected, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(ItemList.method_is_selected, handle, pArgs, &_result)
                 }
                 
             }
@@ -1380,7 +1380,7 @@ open class ItemList: Control {
     public final func getSelectedItems() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(ItemList.method_get_selected_items, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ItemList.method_get_selected_items, handle, nil, &_result.content)
         return _result
     }
     
@@ -1402,7 +1402,7 @@ open class ItemList: Control {
             withUnsafePointer(to: toIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_move_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(ItemList.method_move_item, handle, pArgs, nil)
                     }
                     
                 }
@@ -1431,7 +1431,7 @@ open class ItemList: Control {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_item_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_item_count, handle, pArgs, nil)
                 }
                 
             }
@@ -1456,7 +1456,7 @@ open class ItemList: Control {
     fileprivate final func get_item_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ItemList.method_get_item_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_get_item_count, handle, nil, &_result)
         return _result
     }
     
@@ -1477,7 +1477,7 @@ open class ItemList: Control {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_remove_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_remove_item, handle, pArgs, nil)
                 }
                 
             }
@@ -1501,7 +1501,7 @@ open class ItemList: Control {
     /// Removes all items from the list.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ItemList.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ItemList.method_clear, handle, nil, nil)
         
     }
     
@@ -1519,7 +1519,7 @@ open class ItemList: Control {
     /// Sorts items in the list by their text.
     public final func sortItemsByText() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ItemList.method_sort_items_by_text, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ItemList.method_sort_items_by_text, handle, nil, nil)
         
     }
     
@@ -1540,7 +1540,7 @@ open class ItemList: Control {
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_fixed_column_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_fixed_column_width, handle, pArgs, nil)
                 }
                 
             }
@@ -1565,7 +1565,7 @@ open class ItemList: Control {
     fileprivate final func get_fixed_column_width() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ItemList.method_get_fixed_column_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_get_fixed_column_width, handle, nil, &_result)
         return _result
     }
     
@@ -1586,7 +1586,7 @@ open class ItemList: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_same_column_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_same_column_width, handle, pArgs, nil)
                 }
                 
             }
@@ -1611,7 +1611,7 @@ open class ItemList: Control {
     fileprivate final func is_same_column_width() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ItemList.method_is_same_column_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_is_same_column_width, handle, nil, &_result)
         return _result
     }
     
@@ -1632,7 +1632,7 @@ open class ItemList: Control {
         withUnsafePointer(to: lines) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_max_text_lines, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_max_text_lines, handle, pArgs, nil)
                 }
                 
             }
@@ -1657,7 +1657,7 @@ open class ItemList: Control {
     fileprivate final func get_max_text_lines() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ItemList.method_get_max_text_lines, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_get_max_text_lines, handle, nil, &_result)
         return _result
     }
     
@@ -1678,7 +1678,7 @@ open class ItemList: Control {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_max_columns, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_max_columns, handle, pArgs, nil)
                 }
                 
             }
@@ -1703,7 +1703,7 @@ open class ItemList: Control {
     fileprivate final func get_max_columns() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(ItemList.method_get_max_columns, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_get_max_columns, handle, nil, &_result)
         return _result
     }
     
@@ -1724,7 +1724,7 @@ open class ItemList: Control {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_select_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_select_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -1749,7 +1749,7 @@ open class ItemList: Control {
     fileprivate final func get_select_mode() -> ItemList.SelectMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ItemList.method_get_select_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_get_select_mode, handle, nil, &_result)
         return ItemList.SelectMode (rawValue: _result)!
     }
     
@@ -1770,7 +1770,7 @@ open class ItemList: Control {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_icon_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_icon_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -1795,7 +1795,7 @@ open class ItemList: Control {
     fileprivate final func get_icon_mode() -> ItemList.IconMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ItemList.method_get_icon_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_get_icon_mode, handle, nil, &_result)
         return ItemList.IconMode (rawValue: _result)!
     }
     
@@ -1816,7 +1816,7 @@ open class ItemList: Control {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_fixed_icon_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_fixed_icon_size, handle, pArgs, nil)
                 }
                 
             }
@@ -1841,7 +1841,7 @@ open class ItemList: Control {
     fileprivate final func get_fixed_icon_size() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(ItemList.method_get_fixed_icon_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_get_fixed_icon_size, handle, nil, &_result)
         return _result
     }
     
@@ -1862,7 +1862,7 @@ open class ItemList: Control {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_icon_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_icon_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -1887,7 +1887,7 @@ open class ItemList: Control {
     fileprivate final func get_icon_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ItemList.method_get_icon_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_get_icon_scale, handle, nil, &_result)
         return _result
     }
     
@@ -1908,7 +1908,7 @@ open class ItemList: Control {
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_allow_rmb_select, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_allow_rmb_select, handle, pArgs, nil)
                 }
                 
             }
@@ -1933,7 +1933,7 @@ open class ItemList: Control {
     fileprivate final func get_allow_rmb_select() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ItemList.method_get_allow_rmb_select, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_get_allow_rmb_select, handle, nil, &_result)
         return _result
     }
     
@@ -1954,7 +1954,7 @@ open class ItemList: Control {
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_allow_reselect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_allow_reselect, handle, pArgs, nil)
                 }
                 
             }
@@ -1979,7 +1979,7 @@ open class ItemList: Control {
     fileprivate final func get_allow_reselect() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ItemList.method_get_allow_reselect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_get_allow_reselect, handle, nil, &_result)
         return _result
     }
     
@@ -2000,7 +2000,7 @@ open class ItemList: Control {
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_allow_search, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_allow_search, handle, pArgs, nil)
                 }
                 
             }
@@ -2025,7 +2025,7 @@ open class ItemList: Control {
     fileprivate final func get_allow_search() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ItemList.method_get_allow_search, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_get_allow_search, handle, nil, &_result)
         return _result
     }
     
@@ -2046,7 +2046,7 @@ open class ItemList: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_auto_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_auto_width, handle, pArgs, nil)
                 }
                 
             }
@@ -2071,7 +2071,7 @@ open class ItemList: Control {
     fileprivate final func has_auto_width() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ItemList.method_has_auto_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_has_auto_width, handle, nil, &_result)
         return _result
     }
     
@@ -2092,7 +2092,7 @@ open class ItemList: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_auto_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_auto_height, handle, pArgs, nil)
                 }
                 
             }
@@ -2117,7 +2117,7 @@ open class ItemList: Control {
     fileprivate final func has_auto_height() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ItemList.method_has_auto_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_has_auto_height, handle, nil, &_result)
         return _result
     }
     
@@ -2136,7 +2136,7 @@ open class ItemList: Control {
     public final func isAnythingSelected() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ItemList.method_is_anything_selected, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_is_anything_selected, handle, nil, &_result)
         return _result
     }
     
@@ -2164,7 +2164,7 @@ open class ItemList: Control {
             withUnsafePointer(to: exact) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(ItemList.method_get_item_at_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(ItemList.method_get_item_at_position, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2190,7 +2190,7 @@ open class ItemList: Control {
     /// Ensure current selection is visible, adjusting the scroll position as necessary.
     public final func ensureCurrentIsVisible() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ItemList.method_ensure_current_is_visible, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ItemList.method_ensure_current_is_visible, handle, nil, nil)
         
     }
     
@@ -2211,9 +2211,9 @@ open class ItemList: Control {
     /// 
     public final func getVScrollBar() -> VScrollBar? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ItemList.method_get_v_scroll_bar, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ItemList.method_get_v_scroll_bar, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_h_scroll_bar: GDExtensionMethodBindPtr = {
@@ -2233,9 +2233,9 @@ open class ItemList: Control {
     /// 
     public final func getHScrollBar() -> HScrollBar? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ItemList.method_get_h_scroll_bar, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ItemList.method_get_h_scroll_bar, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_text_overrun_behavior: GDExtensionMethodBindPtr = {
@@ -2255,7 +2255,7 @@ open class ItemList: Control {
         withUnsafePointer(to: overrunBehavior.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_text_overrun_behavior, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_text_overrun_behavior, handle, pArgs, nil)
                 }
                 
             }
@@ -2280,7 +2280,7 @@ open class ItemList: Control {
     fileprivate final func get_text_overrun_behavior() -> TextServer.OverrunBehavior {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ItemList.method_get_text_overrun_behavior, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_get_text_overrun_behavior, handle, nil, &_result)
         return TextServer.OverrunBehavior (rawValue: _result)!
     }
     
@@ -2301,7 +2301,7 @@ open class ItemList: Control {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ItemList.method_set_wraparound_items, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ItemList.method_set_wraparound_items, handle, pArgs, nil)
                 }
                 
             }
@@ -2326,7 +2326,7 @@ open class ItemList: Control {
     fileprivate final func has_wraparound_items() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(ItemList.method_has_wraparound_items, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ItemList.method_has_wraparound_items, handle, nil, &_result)
         return _result
     }
     
@@ -2344,7 +2344,7 @@ open class ItemList: Control {
     /// Forces an update to the list size based on its items. This happens automatically whenever size of the items, or other relevant settings like ``autoHeight``, change. The method can be used to trigger the update ahead of next drawing pass.
     public final func forceUpdateListSize() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(ItemList.method_force_update_list_size, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(ItemList.method_force_update_list_size, handle, nil, nil)
         
     }
     

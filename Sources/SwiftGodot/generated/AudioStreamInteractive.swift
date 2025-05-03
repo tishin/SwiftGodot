@@ -116,7 +116,7 @@ open class AudioStreamInteractive: AudioStream {
         withUnsafePointer(to: clipCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamInteractive.method_set_clip_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamInteractive.method_set_clip_count, handle, pArgs, nil)
                 }
                 
             }
@@ -141,7 +141,7 @@ open class AudioStreamInteractive: AudioStream {
     fileprivate final func get_clip_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_clip_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_clip_count, handle, nil, &_result)
         return _result
     }
     
@@ -162,7 +162,7 @@ open class AudioStreamInteractive: AudioStream {
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamInteractive.method_set_initial_clip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioStreamInteractive.method_set_initial_clip, handle, pArgs, nil)
                 }
                 
             }
@@ -187,7 +187,7 @@ open class AudioStreamInteractive: AudioStream {
     fileprivate final func get_initial_clip() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_initial_clip, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_initial_clip, handle, nil, &_result)
         return _result
     }
     
@@ -209,7 +209,7 @@ open class AudioStreamInteractive: AudioStream {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_set_clip_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_set_clip_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -239,7 +239,7 @@ open class AudioStreamInteractive: AudioStream {
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_clip_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_clip_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -267,7 +267,7 @@ open class AudioStreamInteractive: AudioStream {
             withUnsafePointer(to: stream?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_set_clip_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_set_clip_stream, handle, pArgs, nil)
                     }
                     
                 }
@@ -293,18 +293,18 @@ open class AudioStreamInteractive: AudioStream {
     /// Return the ``AudioStream`` associated with a clip.
     public final func getClipStream(clipIndex: Int32) -> AudioStream? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_clip_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_clip_stream, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_clip_auto_advance: GDExtensionMethodBindPtr = {
@@ -325,7 +325,7 @@ open class AudioStreamInteractive: AudioStream {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_set_clip_auto_advance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_set_clip_auto_advance, handle, pArgs, nil)
                     }
                     
                 }
@@ -355,7 +355,7 @@ open class AudioStreamInteractive: AudioStream {
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_clip_auto_advance, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_clip_auto_advance, handle, pArgs, &_result)
                 }
                 
             }
@@ -383,7 +383,7 @@ open class AudioStreamInteractive: AudioStream {
             withUnsafePointer(to: autoAdvanceNextClip) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_set_clip_auto_advance_next_clip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_set_clip_auto_advance_next_clip, handle, pArgs, nil)
                     }
                     
                 }
@@ -413,7 +413,7 @@ open class AudioStreamInteractive: AudioStream {
         withUnsafePointer(to: clipIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_clip_auto_advance_next_clip, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_clip_auto_advance_next_clip, handle, pArgs, &_result)
                 }
                 
             }
@@ -463,7 +463,7 @@ open class AudioStreamInteractive: AudioStream {
                                         withUnsafePointer(to: holdPrevious) { pArg8 in
                                             withUnsafePointer(to: UnsafeRawPointersN9(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5, pArg6, pArg7, pArg8)) { pArgs in
                                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 9) { pArgs in
-                                                    gi.object_method_bind_ptrcall(AudioStreamInteractive.method_add_transition, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                                    gi.object_method_bind_ptrcall(AudioStreamInteractive.method_add_transition, handle, pArgs, nil)
                                                 }
                                                 
                                             }
@@ -508,7 +508,7 @@ open class AudioStreamInteractive: AudioStream {
             withUnsafePointer(to: toClip) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_has_transition, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_has_transition, handle, pArgs, &_result)
                     }
                     
                 }
@@ -538,7 +538,7 @@ open class AudioStreamInteractive: AudioStream {
             withUnsafePointer(to: toClip) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_erase_transition, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_erase_transition, handle, pArgs, nil)
                     }
                     
                 }
@@ -565,7 +565,7 @@ open class AudioStreamInteractive: AudioStream {
     public final func getTransitionList() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_transition_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_transition_list, handle, nil, &_result.content)
         return _result
     }
     
@@ -588,7 +588,7 @@ open class AudioStreamInteractive: AudioStream {
             withUnsafePointer(to: toClip) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_transition_from_time, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_transition_from_time, handle, pArgs, &_result)
                     }
                     
                 }
@@ -619,7 +619,7 @@ open class AudioStreamInteractive: AudioStream {
             withUnsafePointer(to: toClip) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_transition_to_time, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_transition_to_time, handle, pArgs, &_result)
                     }
                     
                 }
@@ -650,7 +650,7 @@ open class AudioStreamInteractive: AudioStream {
             withUnsafePointer(to: toClip) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_transition_fade_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_transition_fade_mode, handle, pArgs, &_result)
                     }
                     
                 }
@@ -681,7 +681,7 @@ open class AudioStreamInteractive: AudioStream {
             withUnsafePointer(to: toClip) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_transition_fade_beats, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_transition_fade_beats, handle, pArgs, &_result)
                     }
                     
                 }
@@ -712,7 +712,7 @@ open class AudioStreamInteractive: AudioStream {
             withUnsafePointer(to: toClip) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_is_transition_using_filler_clip, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_is_transition_using_filler_clip, handle, pArgs, &_result)
                     }
                     
                 }
@@ -743,7 +743,7 @@ open class AudioStreamInteractive: AudioStream {
             withUnsafePointer(to: toClip) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_transition_filler_clip, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_get_transition_filler_clip, handle, pArgs, &_result)
                     }
                     
                 }
@@ -774,7 +774,7 @@ open class AudioStreamInteractive: AudioStream {
             withUnsafePointer(to: toClip) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_is_transition_holding_previous, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AudioStreamInteractive.method_is_transition_holding_previous, handle, pArgs, &_result)
                     }
                     
                 }

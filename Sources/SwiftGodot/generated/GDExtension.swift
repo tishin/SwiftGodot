@@ -55,7 +55,7 @@ open class GDExtension: Resource {
     public final func isLibraryOpen() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GDExtension.method_is_library_open, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GDExtension.method_is_library_open, handle, nil, &_result)
         return _result
     }
     
@@ -74,7 +74,7 @@ open class GDExtension: Resource {
     public final func getMinimumLibraryInitializationLevel() -> GDExtension.InitializationLevel {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GDExtension.method_get_minimum_library_initialization_level, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GDExtension.method_get_minimum_library_initialization_level, handle, nil, &_result)
         return GDExtension.InitializationLevel (rawValue: _result)!
     }
     

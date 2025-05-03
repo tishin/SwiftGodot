@@ -120,7 +120,7 @@ open class GLTFLight: Resource {
     
     /// Create a new GLTFLight instance from the given Godot ``Light3D`` node.
     public static func fromNode(lightNode: Light3D?) -> GLTFLight? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: lightNode?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -131,7 +131,7 @@ open class GLTFLight: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_to_node: GDExtensionMethodBindPtr = {
@@ -148,9 +148,9 @@ open class GLTFLight: Resource {
     /// Converts this GLTFLight instance into a Godot ``Light3D`` node.
     public final func toNode() -> Light3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GLTFLight.method_to_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GLTFLight.method_to_node, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_from_dictionary: GDExtensionMethodBindPtr = {
@@ -166,7 +166,7 @@ open class GLTFLight: Resource {
     
     /// Creates a new GLTFLight instance by parsing the given ``VariantDictionary``.
     public static func fromDictionary(_ dictionary: VariantDictionary) -> GLTFLight? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: dictionary.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -177,7 +177,7 @@ open class GLTFLight: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_to_dictionary: GDExtensionMethodBindPtr = {
@@ -195,7 +195,7 @@ open class GLTFLight: Resource {
     public final func toDictionary() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(GLTFLight.method_to_dictionary, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFLight.method_to_dictionary, handle, nil, &_result.content)
         return _result
     }
     
@@ -214,7 +214,7 @@ open class GLTFLight: Resource {
     fileprivate final func get_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(GLTFLight.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFLight.method_get_color, handle, nil, &_result)
         return _result
     }
     
@@ -235,7 +235,7 @@ open class GLTFLight: Resource {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFLight.method_set_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFLight.method_set_color, handle, pArgs, nil)
                 }
                 
             }
@@ -260,7 +260,7 @@ open class GLTFLight: Resource {
     fileprivate final func get_intensity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GLTFLight.method_get_intensity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFLight.method_get_intensity, handle, nil, &_result)
         return _result
     }
     
@@ -281,7 +281,7 @@ open class GLTFLight: Resource {
         withUnsafePointer(to: intensity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFLight.method_set_intensity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFLight.method_set_intensity, handle, pArgs, nil)
                 }
                 
             }
@@ -306,7 +306,7 @@ open class GLTFLight: Resource {
     fileprivate final func get_light_type() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(GLTFLight.method_get_light_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFLight.method_get_light_type, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -328,7 +328,7 @@ open class GLTFLight: Resource {
         withUnsafePointer(to: lightType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFLight.method_set_light_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFLight.method_set_light_type, handle, pArgs, nil)
                 }
                 
             }
@@ -353,7 +353,7 @@ open class GLTFLight: Resource {
     fileprivate final func get_range() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GLTFLight.method_get_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFLight.method_get_range, handle, nil, &_result)
         return _result
     }
     
@@ -374,7 +374,7 @@ open class GLTFLight: Resource {
         withUnsafePointer(to: range) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFLight.method_set_range, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFLight.method_set_range, handle, pArgs, nil)
                 }
                 
             }
@@ -399,7 +399,7 @@ open class GLTFLight: Resource {
     fileprivate final func get_inner_cone_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GLTFLight.method_get_inner_cone_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFLight.method_get_inner_cone_angle, handle, nil, &_result)
         return _result
     }
     
@@ -420,7 +420,7 @@ open class GLTFLight: Resource {
         withUnsafePointer(to: innerConeAngle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFLight.method_set_inner_cone_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFLight.method_set_inner_cone_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -445,7 +445,7 @@ open class GLTFLight: Resource {
     fileprivate final func get_outer_cone_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GLTFLight.method_get_outer_cone_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFLight.method_get_outer_cone_angle, handle, nil, &_result)
         return _result
     }
     
@@ -466,7 +466,7 @@ open class GLTFLight: Resource {
         withUnsafePointer(to: outerConeAngle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFLight.method_set_outer_cone_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFLight.method_set_outer_cone_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -494,7 +494,7 @@ open class GLTFLight: Resource {
         withUnsafePointer(to: extensionName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFLight.method_get_additional_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFLight.method_get_additional_data, handle, pArgs, &_result)
                 }
                 
             }
@@ -522,7 +522,7 @@ open class GLTFLight: Resource {
             withUnsafePointer(to: additionalData.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GLTFLight.method_set_additional_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GLTFLight.method_set_additional_data, handle, pArgs, nil)
                     }
                     
                 }

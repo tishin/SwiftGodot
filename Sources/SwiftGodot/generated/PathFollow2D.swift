@@ -141,7 +141,7 @@ open class PathFollow2D: Node2D {
         withUnsafePointer(to: progress) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PathFollow2D.method_set_progress, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PathFollow2D.method_set_progress, handle, pArgs, nil)
                 }
                 
             }
@@ -166,7 +166,7 @@ open class PathFollow2D: Node2D {
     fileprivate final func get_progress() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PathFollow2D.method_get_progress, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PathFollow2D.method_get_progress, handle, nil, &_result)
         return _result
     }
     
@@ -187,7 +187,7 @@ open class PathFollow2D: Node2D {
         withUnsafePointer(to: hOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PathFollow2D.method_set_h_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PathFollow2D.method_set_h_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -212,7 +212,7 @@ open class PathFollow2D: Node2D {
     fileprivate final func get_h_offset() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PathFollow2D.method_get_h_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PathFollow2D.method_get_h_offset, handle, nil, &_result)
         return _result
     }
     
@@ -233,7 +233,7 @@ open class PathFollow2D: Node2D {
         withUnsafePointer(to: vOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PathFollow2D.method_set_v_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PathFollow2D.method_set_v_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -258,7 +258,7 @@ open class PathFollow2D: Node2D {
     fileprivate final func get_v_offset() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PathFollow2D.method_get_v_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PathFollow2D.method_get_v_offset, handle, nil, &_result)
         return _result
     }
     
@@ -279,7 +279,7 @@ open class PathFollow2D: Node2D {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PathFollow2D.method_set_progress_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PathFollow2D.method_set_progress_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -304,7 +304,7 @@ open class PathFollow2D: Node2D {
     fileprivate final func get_progress_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PathFollow2D.method_get_progress_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PathFollow2D.method_get_progress_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -325,7 +325,7 @@ open class PathFollow2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PathFollow2D.method_set_rotates, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PathFollow2D.method_set_rotates, handle, pArgs, nil)
                 }
                 
             }
@@ -350,7 +350,7 @@ open class PathFollow2D: Node2D {
     fileprivate final func is_rotating() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PathFollow2D.method_is_rotating, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PathFollow2D.method_is_rotating, handle, nil, &_result)
         return _result
     }
     
@@ -371,7 +371,7 @@ open class PathFollow2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PathFollow2D.method_set_cubic_interpolation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PathFollow2D.method_set_cubic_interpolation, handle, pArgs, nil)
                 }
                 
             }
@@ -396,7 +396,7 @@ open class PathFollow2D: Node2D {
     fileprivate final func get_cubic_interpolation() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PathFollow2D.method_get_cubic_interpolation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PathFollow2D.method_get_cubic_interpolation, handle, nil, &_result)
         return _result
     }
     
@@ -417,7 +417,7 @@ open class PathFollow2D: Node2D {
         withUnsafePointer(to: loop) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PathFollow2D.method_set_loop, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PathFollow2D.method_set_loop, handle, pArgs, nil)
                 }
                 
             }
@@ -442,7 +442,7 @@ open class PathFollow2D: Node2D {
     fileprivate final func has_loop() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PathFollow2D.method_has_loop, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PathFollow2D.method_has_loop, handle, nil, &_result)
         return _result
     }
     

@@ -188,7 +188,7 @@ open class TextureButton: BaseButton {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureButton.method_set_texture_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureButton.method_set_texture_normal, handle, pArgs, nil)
                 }
                 
             }
@@ -215,7 +215,7 @@ open class TextureButton: BaseButton {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureButton.method_set_texture_pressed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureButton.method_set_texture_pressed, handle, pArgs, nil)
                 }
                 
             }
@@ -242,7 +242,7 @@ open class TextureButton: BaseButton {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureButton.method_set_texture_hover, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureButton.method_set_texture_hover, handle, pArgs, nil)
                 }
                 
             }
@@ -269,7 +269,7 @@ open class TextureButton: BaseButton {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureButton.method_set_texture_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureButton.method_set_texture_disabled, handle, pArgs, nil)
                 }
                 
             }
@@ -296,7 +296,7 @@ open class TextureButton: BaseButton {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureButton.method_set_texture_focused, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureButton.method_set_texture_focused, handle, pArgs, nil)
                 }
                 
             }
@@ -323,7 +323,7 @@ open class TextureButton: BaseButton {
         withUnsafePointer(to: mask?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureButton.method_set_click_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureButton.method_set_click_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -350,7 +350,7 @@ open class TextureButton: BaseButton {
         withUnsafePointer(to: ignore) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureButton.method_set_ignore_texture_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureButton.method_set_ignore_texture_size, handle, pArgs, nil)
                 }
                 
             }
@@ -377,7 +377,7 @@ open class TextureButton: BaseButton {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureButton.method_set_stretch_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureButton.method_set_stretch_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -404,7 +404,7 @@ open class TextureButton: BaseButton {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureButton.method_set_flip_h, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureButton.method_set_flip_h, handle, pArgs, nil)
                 }
                 
             }
@@ -429,7 +429,7 @@ open class TextureButton: BaseButton {
     fileprivate final func is_flipped_h() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TextureButton.method_is_flipped_h, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureButton.method_is_flipped_h, handle, nil, &_result)
         return _result
     }
     
@@ -450,7 +450,7 @@ open class TextureButton: BaseButton {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureButton.method_set_flip_v, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureButton.method_set_flip_v, handle, pArgs, nil)
                 }
                 
             }
@@ -475,7 +475,7 @@ open class TextureButton: BaseButton {
     fileprivate final func is_flipped_v() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TextureButton.method_is_flipped_v, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureButton.method_is_flipped_v, handle, nil, &_result)
         return _result
     }
     
@@ -493,9 +493,9 @@ open class TextureButton: BaseButton {
     @inline(__always)
     fileprivate final func get_texture_normal() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TextureButton.method_get_texture_normal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TextureButton.method_get_texture_normal, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_texture_pressed: GDExtensionMethodBindPtr = {
@@ -512,9 +512,9 @@ open class TextureButton: BaseButton {
     @inline(__always)
     fileprivate final func get_texture_pressed() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TextureButton.method_get_texture_pressed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TextureButton.method_get_texture_pressed, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_texture_hover: GDExtensionMethodBindPtr = {
@@ -531,9 +531,9 @@ open class TextureButton: BaseButton {
     @inline(__always)
     fileprivate final func get_texture_hover() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TextureButton.method_get_texture_hover, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TextureButton.method_get_texture_hover, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_texture_disabled: GDExtensionMethodBindPtr = {
@@ -550,9 +550,9 @@ open class TextureButton: BaseButton {
     @inline(__always)
     fileprivate final func get_texture_disabled() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TextureButton.method_get_texture_disabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TextureButton.method_get_texture_disabled, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_texture_focused: GDExtensionMethodBindPtr = {
@@ -569,9 +569,9 @@ open class TextureButton: BaseButton {
     @inline(__always)
     fileprivate final func get_texture_focused() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TextureButton.method_get_texture_focused, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TextureButton.method_get_texture_focused, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_click_mask: GDExtensionMethodBindPtr = {
@@ -588,9 +588,9 @@ open class TextureButton: BaseButton {
     @inline(__always)
     fileprivate final func get_click_mask() -> BitMap? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TextureButton.method_get_click_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TextureButton.method_get_click_mask, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_ignore_texture_size: GDExtensionMethodBindPtr = {
@@ -608,7 +608,7 @@ open class TextureButton: BaseButton {
     fileprivate final func get_ignore_texture_size() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TextureButton.method_get_ignore_texture_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureButton.method_get_ignore_texture_size, handle, nil, &_result)
         return _result
     }
     
@@ -627,7 +627,7 @@ open class TextureButton: BaseButton {
     fileprivate final func get_stretch_mode() -> TextureButton.StretchMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TextureButton.method_get_stretch_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureButton.method_get_stretch_mode, handle, nil, &_result)
         return TextureButton.StretchMode (rawValue: _result)!
     }
     

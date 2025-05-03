@@ -135,7 +135,7 @@ open class CodeHighlighter: SyntaxHighlighter {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CodeHighlighter.method_add_keyword_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CodeHighlighter.method_add_keyword_color, handle, pArgs, nil)
                     }
                     
                 }
@@ -165,7 +165,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: keyword.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_remove_keyword_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_remove_keyword_color, handle, pArgs, nil)
                 }
                 
             }
@@ -194,7 +194,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: keyword.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_has_keyword_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_has_keyword_color, handle, pArgs, &_result)
                 }
                 
             }
@@ -223,7 +223,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: keyword.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_get_keyword_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_get_keyword_color, handle, pArgs, &_result)
                 }
                 
             }
@@ -250,7 +250,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: keywords.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_set_keyword_colors, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_set_keyword_colors, handle, pArgs, nil)
                 }
                 
             }
@@ -274,7 +274,7 @@ open class CodeHighlighter: SyntaxHighlighter {
     /// Removes all keywords.
     public final func clearKeywordColors() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeHighlighter.method_clear_keyword_colors, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeHighlighter.method_clear_keyword_colors, handle, nil, nil)
         
     }
     
@@ -293,7 +293,7 @@ open class CodeHighlighter: SyntaxHighlighter {
     fileprivate final func get_keyword_colors() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(CodeHighlighter.method_get_keyword_colors, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CodeHighlighter.method_get_keyword_colors, handle, nil, &_result.content)
         return _result
     }
     
@@ -321,7 +321,7 @@ open class CodeHighlighter: SyntaxHighlighter {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CodeHighlighter.method_add_member_keyword_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CodeHighlighter.method_add_member_keyword_color, handle, pArgs, nil)
                     }
                     
                 }
@@ -351,7 +351,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: memberKeyword.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_remove_member_keyword_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_remove_member_keyword_color, handle, pArgs, nil)
                 }
                 
             }
@@ -380,7 +380,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: memberKeyword.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_has_member_keyword_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_has_member_keyword_color, handle, pArgs, &_result)
                 }
                 
             }
@@ -409,7 +409,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: memberKeyword.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_get_member_keyword_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_get_member_keyword_color, handle, pArgs, &_result)
                 }
                 
             }
@@ -436,7 +436,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: memberKeyword.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_set_member_keyword_colors, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_set_member_keyword_colors, handle, pArgs, nil)
                 }
                 
             }
@@ -460,7 +460,7 @@ open class CodeHighlighter: SyntaxHighlighter {
     /// Removes all member keywords.
     public final func clearMemberKeywordColors() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeHighlighter.method_clear_member_keyword_colors, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeHighlighter.method_clear_member_keyword_colors, handle, nil, nil)
         
     }
     
@@ -479,7 +479,7 @@ open class CodeHighlighter: SyntaxHighlighter {
     fileprivate final func get_member_keyword_colors() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(CodeHighlighter.method_get_member_keyword_colors, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CodeHighlighter.method_get_member_keyword_colors, handle, nil, &_result.content)
         return _result
     }
     
@@ -508,7 +508,7 @@ open class CodeHighlighter: SyntaxHighlighter {
                     withUnsafePointer(to: lineOnly) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(CodeHighlighter.method_add_color_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(CodeHighlighter.method_add_color_region, handle, pArgs, nil)
                             }
                             
                         }
@@ -542,7 +542,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: startKey.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_remove_color_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_remove_color_region, handle, pArgs, nil)
                 }
                 
             }
@@ -571,7 +571,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: startKey.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_has_color_region, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_has_color_region, handle, pArgs, &_result)
                 }
                 
             }
@@ -598,7 +598,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: colorRegions.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_set_color_regions, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_set_color_regions, handle, pArgs, nil)
                 }
                 
             }
@@ -622,7 +622,7 @@ open class CodeHighlighter: SyntaxHighlighter {
     /// Removes all color regions.
     public final func clearColorRegions() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CodeHighlighter.method_clear_color_regions, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CodeHighlighter.method_clear_color_regions, handle, nil, nil)
         
     }
     
@@ -641,7 +641,7 @@ open class CodeHighlighter: SyntaxHighlighter {
     fileprivate final func get_color_regions() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(CodeHighlighter.method_get_color_regions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CodeHighlighter.method_get_color_regions, handle, nil, &_result.content)
         return _result
     }
     
@@ -662,7 +662,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_set_function_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_set_function_color, handle, pArgs, nil)
                 }
                 
             }
@@ -687,7 +687,7 @@ open class CodeHighlighter: SyntaxHighlighter {
     fileprivate final func get_function_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(CodeHighlighter.method_get_function_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeHighlighter.method_get_function_color, handle, nil, &_result)
         return _result
     }
     
@@ -708,7 +708,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_set_number_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_set_number_color, handle, pArgs, nil)
                 }
                 
             }
@@ -733,7 +733,7 @@ open class CodeHighlighter: SyntaxHighlighter {
     fileprivate final func get_number_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(CodeHighlighter.method_get_number_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeHighlighter.method_get_number_color, handle, nil, &_result)
         return _result
     }
     
@@ -754,7 +754,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_set_symbol_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_set_symbol_color, handle, pArgs, nil)
                 }
                 
             }
@@ -779,7 +779,7 @@ open class CodeHighlighter: SyntaxHighlighter {
     fileprivate final func get_symbol_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(CodeHighlighter.method_get_symbol_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeHighlighter.method_get_symbol_color, handle, nil, &_result)
         return _result
     }
     
@@ -800,7 +800,7 @@ open class CodeHighlighter: SyntaxHighlighter {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CodeHighlighter.method_set_member_variable_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CodeHighlighter.method_set_member_variable_color, handle, pArgs, nil)
                 }
                 
             }
@@ -825,7 +825,7 @@ open class CodeHighlighter: SyntaxHighlighter {
     fileprivate final func get_member_variable_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(CodeHighlighter.method_get_member_variable_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CodeHighlighter.method_get_member_variable_color, handle, nil, &_result)
         return _result
     }
     

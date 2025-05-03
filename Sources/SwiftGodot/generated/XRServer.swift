@@ -36,7 +36,7 @@ open class XRServer: Object {
     /// The shared instance of this class
     public static var shared: XRServer {
         return withUnsafePointer(to: &XRServer.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -147,7 +147,7 @@ open class XRServer: Object {
     @inline(__always)
     fileprivate static func get_world_scale() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_get_world_scale, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_world_scale, shared.handle, nil, &_result)
         return _result
     }
     
@@ -167,7 +167,7 @@ open class XRServer: Object {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_world_scale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_world_scale, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -191,7 +191,7 @@ open class XRServer: Object {
     @inline(__always)
     fileprivate static func get_world_origin() -> Transform3D {
         var _result: Transform3D = Transform3D ()
-        gi.object_method_bind_ptrcall(method_get_world_origin, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_world_origin, shared.handle, nil, &_result)
         return _result
     }
     
@@ -211,7 +211,7 @@ open class XRServer: Object {
         withUnsafePointer(to: worldOrigin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_world_origin, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_world_origin, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -235,7 +235,7 @@ open class XRServer: Object {
     /// Returns the reference frame transform. Mostly used internally and exposed for GDExtension build interfaces.
     public static func getReferenceFrame() -> Transform3D {
         var _result: Transform3D = Transform3D ()
-        gi.object_method_bind_ptrcall(method_get_reference_frame, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_reference_frame, shared.handle, nil, &_result)
         return _result
     }
     
@@ -252,7 +252,7 @@ open class XRServer: Object {
     
     /// Clears the reference frame that was set by previous calls to ``centerOnHmd(rotationMode:keepHeight:)``.
     public static func clearReferenceFrame() {
-        gi.object_method_bind_ptrcall(method_clear_reference_frame, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_clear_reference_frame, shared.handle, nil, nil)
         
     }
     
@@ -284,7 +284,7 @@ open class XRServer: Object {
             withUnsafePointer(to: keepHeight) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_center_on_hmd, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_center_on_hmd, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -310,7 +310,7 @@ open class XRServer: Object {
     /// Returns the primary interface's transformation.
     public static func getHmdTransform() -> Transform3D {
         var _result: Transform3D = Transform3D ()
-        gi.object_method_bind_ptrcall(method_get_hmd_transform, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_hmd_transform, shared.handle, nil, &_result)
         return _result
     }
     
@@ -330,7 +330,7 @@ open class XRServer: Object {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_camera_locked_to_origin, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_camera_locked_to_origin, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -354,7 +354,7 @@ open class XRServer: Object {
     @inline(__always)
     fileprivate static func is_camera_locked_to_origin() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_camera_locked_to_origin, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_camera_locked_to_origin, shared.handle, nil, &_result)
         return _result
     }
     
@@ -374,7 +374,7 @@ open class XRServer: Object {
         withUnsafePointer(to: interface?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_add_interface, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_add_interface, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -398,7 +398,7 @@ open class XRServer: Object {
     /// Returns the number of interfaces currently registered with the AR/VR server. If your project supports multiple AR/VR platforms, you can look through the available interface, and either present the user with a selection or simply try to initialize each interface and use the first one that returns `true`.
     public static func getInterfaceCount() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_interface_count, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_interface_count, shared.handle, nil, &_result)
         return _result
     }
     
@@ -418,7 +418,7 @@ open class XRServer: Object {
         withUnsafePointer(to: interface?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_remove_interface, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_remove_interface, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -441,18 +441,18 @@ open class XRServer: Object {
     
     /// Returns the interface registered at the given `idx` index in the list of interfaces.
     public static func getInterface(idx: Int32) -> XRInterface? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_interface, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_interface, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_interfaces: GDExtensionMethodBindPtr = {
@@ -469,7 +469,7 @@ open class XRServer: Object {
     /// Returns a list of available interfaces the ID and name of each interface.
     public static func getInterfaces() -> TypedArray<VariantDictionary> {
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(method_get_interfaces, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_interfaces, shared.handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -486,19 +486,19 @@ open class XRServer: Object {
     
     /// Finds an interface by its `name`. For example, if your project uses capabilities of an AR/VR platform, you can find the interface for that platform by name and initialize it.
     public static func findInterface(name: String) -> XRInterface? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_find_interface, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_find_interface, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_add_tracker: GDExtensionMethodBindPtr = {
@@ -517,7 +517,7 @@ open class XRServer: Object {
         withUnsafePointer(to: tracker?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_add_tracker, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_add_tracker, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -543,7 +543,7 @@ open class XRServer: Object {
         withUnsafePointer(to: tracker?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_remove_tracker, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_remove_tracker, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -570,7 +570,7 @@ open class XRServer: Object {
         withUnsafePointer(to: trackerTypes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_trackers, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_trackers, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -593,18 +593,18 @@ open class XRServer: Object {
     
     /// Returns the positional tracker with the given `trackerName`.
     public static func getTracker(trackerName: StringName) -> XRTracker? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: trackerName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_tracker, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_tracker, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_primary_interface: GDExtensionMethodBindPtr = {
@@ -620,9 +620,9 @@ open class XRServer: Object {
     
     @inline(__always)
     fileprivate static func get_primary_interface() -> XRInterface? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(method_get_primary_interface, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(method_get_primary_interface, shared.handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_primary_interface: GDExtensionMethodBindPtr = {
@@ -641,7 +641,7 @@ open class XRServer: Object {
         withUnsafePointer(to: interface?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_primary_interface, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_primary_interface, shared.handle, pArgs, nil)
                 }
                 
             }

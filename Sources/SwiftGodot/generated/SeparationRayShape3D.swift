@@ -73,7 +73,7 @@ open class SeparationRayShape3D: Shape3D {
         withUnsafePointer(to: length) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SeparationRayShape3D.method_set_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SeparationRayShape3D.method_set_length, handle, pArgs, nil)
                 }
                 
             }
@@ -98,7 +98,7 @@ open class SeparationRayShape3D: Shape3D {
     fileprivate final func get_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SeparationRayShape3D.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SeparationRayShape3D.method_get_length, handle, nil, &_result)
         return _result
     }
     
@@ -119,7 +119,7 @@ open class SeparationRayShape3D: Shape3D {
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SeparationRayShape3D.method_set_slide_on_slope, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SeparationRayShape3D.method_set_slide_on_slope, handle, pArgs, nil)
                 }
                 
             }
@@ -144,7 +144,7 @@ open class SeparationRayShape3D: Shape3D {
     fileprivate final func get_slide_on_slope() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SeparationRayShape3D.method_get_slide_on_slope, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SeparationRayShape3D.method_get_slide_on_slope, handle, nil, &_result)
         return _result
     }
     

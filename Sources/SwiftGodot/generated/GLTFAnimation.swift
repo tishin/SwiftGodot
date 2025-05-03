@@ -64,7 +64,7 @@ open class GLTFAnimation: Resource {
     fileprivate final func get_original_name() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(GLTFAnimation.method_get_original_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFAnimation.method_get_original_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -86,7 +86,7 @@ open class GLTFAnimation: Resource {
         withUnsafePointer(to: originalName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAnimation.method_set_original_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAnimation.method_set_original_name, handle, pArgs, nil)
                 }
                 
             }
@@ -111,7 +111,7 @@ open class GLTFAnimation: Resource {
     fileprivate final func get_loop() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GLTFAnimation.method_get_loop, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFAnimation.method_get_loop, handle, nil, &_result)
         return _result
     }
     
@@ -132,7 +132,7 @@ open class GLTFAnimation: Resource {
         withUnsafePointer(to: loop) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAnimation.method_set_loop, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFAnimation.method_set_loop, handle, pArgs, nil)
                 }
                 
             }
@@ -163,7 +163,7 @@ open class GLTFAnimation: Resource {
         withUnsafePointer(to: extensionName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFAnimation.method_get_additional_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFAnimation.method_get_additional_data, handle, pArgs, &_result)
                 }
                 
             }
@@ -194,7 +194,7 @@ open class GLTFAnimation: Resource {
             withUnsafePointer(to: additionalData.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GLTFAnimation.method_set_additional_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GLTFAnimation.method_set_additional_data, handle, pArgs, nil)
                     }
                     
                 }

@@ -328,7 +328,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: centered) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_centered, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_centered, handle, pArgs, nil)
                 }
                 
             }
@@ -353,7 +353,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func is_centered() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_is_centered, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_is_centered, handle, nil, &_result)
         return _result
     }
     
@@ -374,7 +374,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -399,7 +399,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func get_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_offset, handle, nil, &_result)
         return _result
     }
     
@@ -420,7 +420,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: flipH) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_flip_h, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_flip_h, handle, pArgs, nil)
                 }
                 
             }
@@ -445,7 +445,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func is_flipped_h() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_is_flipped_h, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_is_flipped_h, handle, nil, &_result)
         return _result
     }
     
@@ -466,7 +466,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: flipV) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_flip_v, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_flip_v, handle, pArgs, nil)
                 }
                 
             }
@@ -491,7 +491,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func is_flipped_v() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_is_flipped_v, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_is_flipped_v, handle, nil, &_result)
         return _result
     }
     
@@ -512,7 +512,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: modulate) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_modulate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_modulate, handle, pArgs, nil)
                 }
                 
             }
@@ -537,7 +537,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func get_modulate() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_modulate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_modulate, handle, nil, &_result)
         return _result
     }
     
@@ -558,7 +558,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_render_priority, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_render_priority, handle, pArgs, nil)
                 }
                 
             }
@@ -583,7 +583,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func get_render_priority() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_render_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_render_priority, handle, nil, &_result)
         return _result
     }
     
@@ -604,7 +604,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: pixelSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_pixel_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_pixel_size, handle, pArgs, nil)
                 }
                 
             }
@@ -629,7 +629,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func get_pixel_size() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_pixel_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_pixel_size, handle, nil, &_result)
         return _result
     }
     
@@ -650,7 +650,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: axis.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_axis, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_axis, handle, pArgs, nil)
                 }
                 
             }
@@ -675,7 +675,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func get_axis() -> Vector3.Axis {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_axis, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_axis, handle, nil, &_result)
         return Vector3.Axis (rawValue: _result)!
     }
     
@@ -698,7 +698,7 @@ open class SpriteBase3D: GeometryInstance3D {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SpriteBase3D.method_set_draw_flag, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SpriteBase3D.method_set_draw_flag, handle, pArgs, nil)
                     }
                     
                 }
@@ -729,7 +729,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_get_draw_flag, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_get_draw_flag, handle, pArgs, &_result)
                 }
                 
             }
@@ -756,7 +756,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_alpha_cut_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_alpha_cut_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -781,7 +781,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func get_alpha_cut_mode() -> SpriteBase3D.AlphaCutMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_alpha_cut_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_alpha_cut_mode, handle, nil, &_result)
         return SpriteBase3D.AlphaCutMode (rawValue: _result)!
     }
     
@@ -802,7 +802,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_alpha_scissor_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_alpha_scissor_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -827,7 +827,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func get_alpha_scissor_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_alpha_scissor_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_alpha_scissor_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -848,7 +848,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_alpha_hash_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_alpha_hash_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -873,7 +873,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func get_alpha_hash_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_alpha_hash_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_alpha_hash_scale, handle, nil, &_result)
         return _result
     }
     
@@ -894,7 +894,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: alphaAa.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_alpha_antialiasing, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_alpha_antialiasing, handle, pArgs, nil)
                 }
                 
             }
@@ -919,7 +919,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func get_alpha_antialiasing() -> BaseMaterial3D.AlphaAntiAliasing {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_alpha_antialiasing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_alpha_antialiasing, handle, nil, &_result)
         return BaseMaterial3D.AlphaAntiAliasing (rawValue: _result)!
     }
     
@@ -940,7 +940,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: edge) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_alpha_antialiasing_edge, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_alpha_antialiasing_edge, handle, pArgs, nil)
                 }
                 
             }
@@ -965,7 +965,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func get_alpha_antialiasing_edge() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_alpha_antialiasing_edge, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_alpha_antialiasing_edge, handle, nil, &_result)
         return _result
     }
     
@@ -986,7 +986,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_billboard_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_billboard_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -1011,7 +1011,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func get_billboard_mode() -> BaseMaterial3D.BillboardMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_billboard_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_billboard_mode, handle, nil, &_result)
         return BaseMaterial3D.BillboardMode (rawValue: _result)!
     }
     
@@ -1032,7 +1032,7 @@ open class SpriteBase3D: GeometryInstance3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_texture_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SpriteBase3D.method_set_texture_filter, handle, pArgs, nil)
                 }
                 
             }
@@ -1057,7 +1057,7 @@ open class SpriteBase3D: GeometryInstance3D {
     fileprivate final func get_texture_filter() -> BaseMaterial3D.TextureFilter {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_texture_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_texture_filter, handle, nil, &_result)
         return BaseMaterial3D.TextureFilter (rawValue: _result)!
     }
     
@@ -1076,7 +1076,7 @@ open class SpriteBase3D: GeometryInstance3D {
     public final func getItemRect() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_item_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_get_item_rect, handle, nil, &_result)
         return _result
     }
     
@@ -1094,9 +1094,9 @@ open class SpriteBase3D: GeometryInstance3D {
     /// Returns a ``TriangleMesh`` with the sprite's vertices following its current configuration (such as its ``axis`` and ``pixelSize``).
     public final func generateTriangleMesh() -> TriangleMesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(SpriteBase3D.method_generate_triangle_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(SpriteBase3D.method_generate_triangle_mesh, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

@@ -271,7 +271,7 @@ open class TextureProgressBar: Range {
         withUnsafePointer(to: tex?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_under_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_under_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -295,9 +295,9 @@ open class TextureProgressBar: Range {
     @inline(__always)
     fileprivate final func get_under_texture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_under_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_under_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_progress_texture: GDExtensionMethodBindPtr = {
@@ -317,7 +317,7 @@ open class TextureProgressBar: Range {
         withUnsafePointer(to: tex?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_progress_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_progress_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -341,9 +341,9 @@ open class TextureProgressBar: Range {
     @inline(__always)
     fileprivate final func get_progress_texture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_progress_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_progress_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_over_texture: GDExtensionMethodBindPtr = {
@@ -363,7 +363,7 @@ open class TextureProgressBar: Range {
         withUnsafePointer(to: tex?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_over_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_over_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -387,9 +387,9 @@ open class TextureProgressBar: Range {
     @inline(__always)
     fileprivate final func get_over_texture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_over_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_over_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_fill_mode: GDExtensionMethodBindPtr = {
@@ -409,7 +409,7 @@ open class TextureProgressBar: Range {
         withUnsafePointer(to: mode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_fill_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_fill_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -434,7 +434,7 @@ open class TextureProgressBar: Range {
     fileprivate final func get_fill_mode() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_fill_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_fill_mode, handle, nil, &_result)
         return _result
     }
     
@@ -455,7 +455,7 @@ open class TextureProgressBar: Range {
         withUnsafePointer(to: tint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_tint_under, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_tint_under, handle, pArgs, nil)
                 }
                 
             }
@@ -480,7 +480,7 @@ open class TextureProgressBar: Range {
     fileprivate final func get_tint_under() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_tint_under, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_tint_under, handle, nil, &_result)
         return _result
     }
     
@@ -501,7 +501,7 @@ open class TextureProgressBar: Range {
         withUnsafePointer(to: tint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_tint_progress, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_tint_progress, handle, pArgs, nil)
                 }
                 
             }
@@ -526,7 +526,7 @@ open class TextureProgressBar: Range {
     fileprivate final func get_tint_progress() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_tint_progress, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_tint_progress, handle, nil, &_result)
         return _result
     }
     
@@ -547,7 +547,7 @@ open class TextureProgressBar: Range {
         withUnsafePointer(to: tint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_tint_over, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_tint_over, handle, pArgs, nil)
                 }
                 
             }
@@ -572,7 +572,7 @@ open class TextureProgressBar: Range {
     fileprivate final func get_tint_over() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_tint_over, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_tint_over, handle, nil, &_result)
         return _result
     }
     
@@ -593,7 +593,7 @@ open class TextureProgressBar: Range {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_texture_progress_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_texture_progress_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -618,7 +618,7 @@ open class TextureProgressBar: Range {
     fileprivate final func get_texture_progress_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_texture_progress_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_texture_progress_offset, handle, nil, &_result)
         return _result
     }
     
@@ -639,7 +639,7 @@ open class TextureProgressBar: Range {
         withUnsafePointer(to: mode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_radial_initial_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_radial_initial_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -664,7 +664,7 @@ open class TextureProgressBar: Range {
     fileprivate final func get_radial_initial_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_radial_initial_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_radial_initial_angle, handle, nil, &_result)
         return _result
     }
     
@@ -685,7 +685,7 @@ open class TextureProgressBar: Range {
         withUnsafePointer(to: mode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_radial_center_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_radial_center_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -710,7 +710,7 @@ open class TextureProgressBar: Range {
     fileprivate final func get_radial_center_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_radial_center_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_radial_center_offset, handle, nil, &_result)
         return _result
     }
     
@@ -731,7 +731,7 @@ open class TextureProgressBar: Range {
         withUnsafePointer(to: mode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_fill_degrees, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_fill_degrees, handle, pArgs, nil)
                 }
                 
             }
@@ -756,7 +756,7 @@ open class TextureProgressBar: Range {
     fileprivate final func get_fill_degrees() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_fill_degrees, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_fill_degrees, handle, nil, &_result)
         return _result
     }
     
@@ -779,7 +779,7 @@ open class TextureProgressBar: Range {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TextureProgressBar.method_set_stretch_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TextureProgressBar.method_set_stretch_margin, handle, pArgs, nil)
                     }
                     
                 }
@@ -810,7 +810,7 @@ open class TextureProgressBar: Range {
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureProgressBar.method_get_stretch_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TextureProgressBar.method_get_stretch_margin, handle, pArgs, &_result)
                 }
                 
             }
@@ -837,7 +837,7 @@ open class TextureProgressBar: Range {
         withUnsafePointer(to: stretch) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_nine_patch_stretch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TextureProgressBar.method_set_nine_patch_stretch, handle, pArgs, nil)
                 }
                 
             }
@@ -862,7 +862,7 @@ open class TextureProgressBar: Range {
     fileprivate final func get_nine_patch_stretch() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_nine_patch_stretch, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TextureProgressBar.method_get_nine_patch_stretch, handle, nil, &_result)
         return _result
     }
     

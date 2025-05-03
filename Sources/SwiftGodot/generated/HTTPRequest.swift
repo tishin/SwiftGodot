@@ -202,7 +202,7 @@ open class HTTPRequest: Node {
                     withUnsafePointer(to: requestData.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(HTTPRequest.method_request, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(HTTPRequest.method_request, handle, pArgs, &_result)
                             }
                             
                         }
@@ -243,7 +243,7 @@ open class HTTPRequest: Node {
                     withUnsafePointer(to: requestDataRaw.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(HTTPRequest.method_request_raw, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(HTTPRequest.method_request_raw, handle, pArgs, &_result)
                             }
                             
                         }
@@ -273,7 +273,7 @@ open class HTTPRequest: Node {
     /// Cancels the current request.
     public final func cancelRequest() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(HTTPRequest.method_cancel_request, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(HTTPRequest.method_cancel_request, handle, nil, nil)
         
     }
     
@@ -294,7 +294,7 @@ open class HTTPRequest: Node {
         withUnsafePointer(to: clientOptions?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_tls_options, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_tls_options, handle, pArgs, nil)
                 }
                 
             }
@@ -319,7 +319,7 @@ open class HTTPRequest: Node {
     public final func getHttpClientStatus() -> HTTPClient.Status {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(HTTPRequest.method_get_http_client_status, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPRequest.method_get_http_client_status, handle, nil, &_result)
         return HTTPClient.Status (rawValue: _result)!
     }
     
@@ -340,7 +340,7 @@ open class HTTPRequest: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_use_threads, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_use_threads, handle, pArgs, nil)
                 }
                 
             }
@@ -365,7 +365,7 @@ open class HTTPRequest: Node {
     fileprivate final func is_using_threads() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(HTTPRequest.method_is_using_threads, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPRequest.method_is_using_threads, handle, nil, &_result)
         return _result
     }
     
@@ -386,7 +386,7 @@ open class HTTPRequest: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_accept_gzip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_accept_gzip, handle, pArgs, nil)
                 }
                 
             }
@@ -411,7 +411,7 @@ open class HTTPRequest: Node {
     fileprivate final func is_accepting_gzip() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(HTTPRequest.method_is_accepting_gzip, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPRequest.method_is_accepting_gzip, handle, nil, &_result)
         return _result
     }
     
@@ -432,7 +432,7 @@ open class HTTPRequest: Node {
         withUnsafePointer(to: bytes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_body_size_limit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_body_size_limit, handle, pArgs, nil)
                 }
                 
             }
@@ -457,7 +457,7 @@ open class HTTPRequest: Node {
     fileprivate final func get_body_size_limit() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(HTTPRequest.method_get_body_size_limit, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPRequest.method_get_body_size_limit, handle, nil, &_result)
         return _result
     }
     
@@ -478,7 +478,7 @@ open class HTTPRequest: Node {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_max_redirects, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_max_redirects, handle, pArgs, nil)
                 }
                 
             }
@@ -503,7 +503,7 @@ open class HTTPRequest: Node {
     fileprivate final func get_max_redirects() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(HTTPRequest.method_get_max_redirects, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPRequest.method_get_max_redirects, handle, nil, &_result)
         return _result
     }
     
@@ -525,7 +525,7 @@ open class HTTPRequest: Node {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_download_file, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_download_file, handle, pArgs, nil)
                 }
                 
             }
@@ -550,7 +550,7 @@ open class HTTPRequest: Node {
     fileprivate final func get_download_file() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(HTTPRequest.method_get_download_file, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(HTTPRequest.method_get_download_file, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -569,7 +569,7 @@ open class HTTPRequest: Node {
     public final func getDownloadedBytes() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(HTTPRequest.method_get_downloaded_bytes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPRequest.method_get_downloaded_bytes, handle, nil, &_result)
         return _result
     }
     
@@ -591,7 +591,7 @@ open class HTTPRequest: Node {
     public final func getBodySize() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(HTTPRequest.method_get_body_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPRequest.method_get_body_size, handle, nil, &_result)
         return _result
     }
     
@@ -612,7 +612,7 @@ open class HTTPRequest: Node {
         withUnsafePointer(to: timeout) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_timeout, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_timeout, handle, pArgs, nil)
                 }
                 
             }
@@ -637,7 +637,7 @@ open class HTTPRequest: Node {
     fileprivate final func get_timeout() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(HTTPRequest.method_get_timeout, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPRequest.method_get_timeout, handle, nil, &_result)
         return _result
     }
     
@@ -658,7 +658,7 @@ open class HTTPRequest: Node {
         withUnsafePointer(to: chunkSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_download_chunk_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(HTTPRequest.method_set_download_chunk_size, handle, pArgs, nil)
                 }
                 
             }
@@ -683,7 +683,7 @@ open class HTTPRequest: Node {
     fileprivate final func get_download_chunk_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(HTTPRequest.method_get_download_chunk_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(HTTPRequest.method_get_download_chunk_size, handle, nil, &_result)
         return _result
     }
     
@@ -709,7 +709,7 @@ open class HTTPRequest: Node {
             withUnsafePointer(to: port) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(HTTPRequest.method_set_http_proxy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(HTTPRequest.method_set_http_proxy, handle, pArgs, nil)
                     }
                     
                 }
@@ -743,7 +743,7 @@ open class HTTPRequest: Node {
             withUnsafePointer(to: port) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(HTTPRequest.method_set_https_proxy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(HTTPRequest.method_set_https_proxy, handle, pArgs, nil)
                     }
                     
                 }

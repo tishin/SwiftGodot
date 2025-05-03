@@ -64,7 +64,7 @@ open class Shortcut: Resource {
         withUnsafePointer(to: events.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Shortcut.method_set_events, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Shortcut.method_set_events, handle, pArgs, nil)
                 }
                 
             }
@@ -89,7 +89,7 @@ open class Shortcut: Resource {
     fileprivate final func get_events() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(Shortcut.method_get_events, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Shortcut.method_get_events, handle, nil, &_result.content)
         return _result
     }
     
@@ -108,7 +108,7 @@ open class Shortcut: Resource {
     public final func hasValidEvent() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Shortcut.method_has_valid_event, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Shortcut.method_has_valid_event, handle, nil, &_result)
         return _result
     }
     
@@ -130,7 +130,7 @@ open class Shortcut: Resource {
         withUnsafePointer(to: event?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Shortcut.method_matches_event, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Shortcut.method_matches_event, handle, pArgs, &_result)
                 }
                 
             }
@@ -155,7 +155,7 @@ open class Shortcut: Resource {
     public final func getAsText() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Shortcut.method_get_as_text, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Shortcut.method_get_as_text, handle, nil, &_result.content)
         return _result.description
     }
     

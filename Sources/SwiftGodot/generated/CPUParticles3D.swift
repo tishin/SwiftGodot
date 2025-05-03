@@ -1064,7 +1064,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: emitting) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emitting, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emitting, handle, pArgs, nil)
                 }
                 
             }
@@ -1091,7 +1091,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_amount, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_amount, handle, pArgs, nil)
                 }
                 
             }
@@ -1118,7 +1118,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: secs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_lifetime, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_lifetime, handle, pArgs, nil)
                 }
                 
             }
@@ -1145,7 +1145,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_one_shot, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_one_shot, handle, pArgs, nil)
                 }
                 
             }
@@ -1172,7 +1172,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: secs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_pre_process_time, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_pre_process_time, handle, pArgs, nil)
                 }
                 
             }
@@ -1199,7 +1199,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_explosiveness_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_explosiveness_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -1226,7 +1226,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_randomness_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_randomness_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -1253,7 +1253,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: aabb) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_visibility_aabb, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_visibility_aabb, handle, pArgs, nil)
                 }
                 
             }
@@ -1280,7 +1280,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: random) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_lifetime_randomness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_lifetime_randomness, handle, pArgs, nil)
                 }
                 
             }
@@ -1307,7 +1307,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_use_local_coordinates, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_use_local_coordinates, handle, pArgs, nil)
                 }
                 
             }
@@ -1334,7 +1334,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: fps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_fixed_fps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_fixed_fps, handle, pArgs, nil)
                 }
                 
             }
@@ -1361,7 +1361,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_fractional_delta, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_fractional_delta, handle, pArgs, nil)
                 }
                 
             }
@@ -1388,7 +1388,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_speed_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_speed_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -1413,7 +1413,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func is_emitting() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_is_emitting, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_is_emitting, handle, nil, &_result)
         return _result
     }
     
@@ -1432,7 +1432,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_amount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_amount, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_amount, handle, nil, &_result)
         return _result
     }
     
@@ -1451,7 +1451,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_lifetime() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_lifetime, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_lifetime, handle, nil, &_result)
         return _result
     }
     
@@ -1470,7 +1470,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_one_shot() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_one_shot, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_one_shot, handle, nil, &_result)
         return _result
     }
     
@@ -1489,7 +1489,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_pre_process_time() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_pre_process_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_pre_process_time, handle, nil, &_result)
         return _result
     }
     
@@ -1508,7 +1508,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_explosiveness_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_explosiveness_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_explosiveness_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -1527,7 +1527,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_randomness_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_randomness_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_randomness_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -1546,7 +1546,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_visibility_aabb() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_visibility_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_visibility_aabb, handle, nil, &_result)
         return _result
     }
     
@@ -1565,7 +1565,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_lifetime_randomness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_lifetime_randomness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_lifetime_randomness, handle, nil, &_result)
         return _result
     }
     
@@ -1584,7 +1584,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_use_local_coordinates() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_use_local_coordinates, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_use_local_coordinates, handle, nil, &_result)
         return _result
     }
     
@@ -1603,7 +1603,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_fixed_fps() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_fixed_fps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_fixed_fps, handle, nil, &_result)
         return _result
     }
     
@@ -1622,7 +1622,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_fractional_delta() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_fractional_delta, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_fractional_delta, handle, nil, &_result)
         return _result
     }
     
@@ -1641,7 +1641,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_speed_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_speed_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_speed_scale, handle, nil, &_result)
         return _result
     }
     
@@ -1662,7 +1662,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: order.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_draw_order, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_draw_order, handle, pArgs, nil)
                 }
                 
             }
@@ -1687,7 +1687,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_draw_order() -> CPUParticles3D.DrawOrder {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_draw_order, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_draw_order, handle, nil, &_result)
         return CPUParticles3D.DrawOrder (rawValue: _result)!
     }
     
@@ -1708,7 +1708,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_mesh, handle, pArgs, nil)
                 }
                 
             }
@@ -1732,9 +1732,9 @@ open class CPUParticles3D: GeometryInstance3D {
     @inline(__always)
     fileprivate final func get_mesh() -> Mesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_mesh, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_use_fixed_seed: GDExtensionMethodBindPtr = {
@@ -1754,7 +1754,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: useFixedSeed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_use_fixed_seed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_use_fixed_seed, handle, pArgs, nil)
                 }
                 
             }
@@ -1779,7 +1779,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_use_fixed_seed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_use_fixed_seed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_use_fixed_seed, handle, nil, &_result)
         return _result
     }
     
@@ -1800,7 +1800,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: seed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_seed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_seed, handle, pArgs, nil)
                 }
                 
             }
@@ -1825,7 +1825,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_seed() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_seed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_seed, handle, nil, &_result)
         return _result
     }
     
@@ -1849,7 +1849,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: keepSeed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_restart, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_restart, handle, pArgs, nil)
                 }
                 
             }
@@ -1879,7 +1879,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: processTime) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_request_particles_process, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_request_particles_process, handle, pArgs, nil)
                 }
                 
             }
@@ -1904,7 +1904,7 @@ open class CPUParticles3D: GeometryInstance3D {
     public final func captureAabb() -> AABB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: AABB = AABB ()
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_capture_aabb, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_capture_aabb, handle, nil, &_result)
         return _result
     }
     
@@ -1925,7 +1925,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: direction) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_direction, handle, pArgs, nil)
                 }
                 
             }
@@ -1950,7 +1950,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_direction() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_direction, handle, nil, &_result)
         return _result
     }
     
@@ -1971,7 +1971,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: degrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_spread, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_spread, handle, pArgs, nil)
                 }
                 
             }
@@ -1996,7 +1996,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_spread() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_spread, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_spread, handle, nil, &_result)
         return _result
     }
     
@@ -2017,7 +2017,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_flatness, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_flatness, handle, pArgs, nil)
                 }
                 
             }
@@ -2042,7 +2042,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_flatness() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_flatness, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_flatness, handle, nil, &_result)
         return _result
     }
     
@@ -2065,7 +2065,7 @@ open class CPUParticles3D: GeometryInstance3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CPUParticles3D.method_set_param_min, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CPUParticles3D.method_set_param_min, handle, pArgs, nil)
                     }
                     
                 }
@@ -2096,7 +2096,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_get_param_min, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_get_param_min, handle, pArgs, &_result)
                 }
                 
             }
@@ -2125,7 +2125,7 @@ open class CPUParticles3D: GeometryInstance3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CPUParticles3D.method_set_param_max, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CPUParticles3D.method_set_param_max, handle, pArgs, nil)
                     }
                     
                 }
@@ -2156,7 +2156,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_get_param_max, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_get_param_max, handle, pArgs, &_result)
                 }
                 
             }
@@ -2185,7 +2185,7 @@ open class CPUParticles3D: GeometryInstance3D {
             withUnsafePointer(to: curve?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CPUParticles3D.method_set_param_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CPUParticles3D.method_set_param_curve, handle, pArgs, nil)
                     }
                     
                 }
@@ -2212,18 +2212,18 @@ open class CPUParticles3D: GeometryInstance3D {
     /// Returns the ``Curve`` of the parameter specified by ``CPUParticles3D/Parameter``.
     fileprivate final func get_param_curve(_ param: CPUParticles3D.Parameter) -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_get_param_curve, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_get_param_curve, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_color: GDExtensionMethodBindPtr = {
@@ -2243,7 +2243,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_color, handle, pArgs, nil)
                 }
                 
             }
@@ -2268,7 +2268,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_color, handle, nil, &_result)
         return _result
     }
     
@@ -2289,7 +2289,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: ramp?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_color_ramp, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_color_ramp, handle, pArgs, nil)
                 }
                 
             }
@@ -2313,9 +2313,9 @@ open class CPUParticles3D: GeometryInstance3D {
     @inline(__always)
     fileprivate final func get_color_ramp() -> Gradient? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_color_ramp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_color_ramp, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_color_initial_ramp: GDExtensionMethodBindPtr = {
@@ -2335,7 +2335,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: ramp?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_color_initial_ramp, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_color_initial_ramp, handle, pArgs, nil)
                 }
                 
             }
@@ -2359,9 +2359,9 @@ open class CPUParticles3D: GeometryInstance3D {
     @inline(__always)
     fileprivate final func get_color_initial_ramp() -> Gradient? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_color_initial_ramp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_color_initial_ramp, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_particle_flag: GDExtensionMethodBindPtr = {
@@ -2383,7 +2383,7 @@ open class CPUParticles3D: GeometryInstance3D {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(CPUParticles3D.method_set_particle_flag, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(CPUParticles3D.method_set_particle_flag, handle, pArgs, nil)
                     }
                     
                 }
@@ -2414,7 +2414,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: particleFlag.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_get_particle_flag, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_get_particle_flag, handle, pArgs, &_result)
                 }
                 
             }
@@ -2441,7 +2441,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: shape.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_shape, handle, pArgs, nil)
                 }
                 
             }
@@ -2466,7 +2466,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_emission_shape() -> CPUParticles3D.EmissionShape {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_shape, handle, nil, &_result)
         return CPUParticles3D.EmissionShape (rawValue: _result)!
     }
     
@@ -2487,7 +2487,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_sphere_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_sphere_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -2512,7 +2512,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_emission_sphere_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_sphere_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_sphere_radius, handle, nil, &_result)
         return _result
     }
     
@@ -2533,7 +2533,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: extents) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_box_extents, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_box_extents, handle, pArgs, nil)
                 }
                 
             }
@@ -2558,7 +2558,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_emission_box_extents() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_box_extents, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_box_extents, handle, nil, &_result)
         return _result
     }
     
@@ -2579,7 +2579,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_points, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_points, handle, pArgs, nil)
                 }
                 
             }
@@ -2604,7 +2604,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_emission_points() -> PackedVector3Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_points, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_points, handle, nil, &_result.content)
         return _result
     }
     
@@ -2625,7 +2625,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_normals, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_normals, handle, pArgs, nil)
                 }
                 
             }
@@ -2650,7 +2650,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_emission_normals() -> PackedVector3Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector3Array = PackedVector3Array ()
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_normals, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_normals, handle, nil, &_result.content)
         return _result
     }
     
@@ -2671,7 +2671,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_colors, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_colors, handle, pArgs, nil)
                 }
                 
             }
@@ -2696,7 +2696,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_emission_colors() -> PackedColorArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedColorArray = PackedColorArray ()
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_colors, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_colors, handle, nil, &_result.content)
         return _result
     }
     
@@ -2717,7 +2717,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: axis) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_ring_axis, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_ring_axis, handle, pArgs, nil)
                 }
                 
             }
@@ -2742,7 +2742,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_emission_ring_axis() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_ring_axis, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_ring_axis, handle, nil, &_result)
         return _result
     }
     
@@ -2763,7 +2763,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_ring_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_ring_height, handle, pArgs, nil)
                 }
                 
             }
@@ -2788,7 +2788,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_emission_ring_height() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_ring_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_ring_height, handle, nil, &_result)
         return _result
     }
     
@@ -2809,7 +2809,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_ring_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_ring_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -2834,7 +2834,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_emission_ring_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_ring_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_ring_radius, handle, nil, &_result)
         return _result
     }
     
@@ -2855,7 +2855,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: innerRadius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_ring_inner_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_ring_inner_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -2880,7 +2880,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_emission_ring_inner_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_ring_inner_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_ring_inner_radius, handle, nil, &_result)
         return _result
     }
     
@@ -2901,7 +2901,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: coneAngle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_ring_cone_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_emission_ring_cone_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -2926,7 +2926,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_emission_ring_cone_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_ring_cone_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_emission_ring_cone_angle, handle, nil, &_result)
         return _result
     }
     
@@ -2945,7 +2945,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_gravity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_gravity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_gravity, handle, nil, &_result)
         return _result
     }
     
@@ -2966,7 +2966,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: accelVec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_gravity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_gravity, handle, pArgs, nil)
                 }
                 
             }
@@ -2991,7 +2991,7 @@ open class CPUParticles3D: GeometryInstance3D {
     fileprivate final func get_split_scale() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_split_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_split_scale, handle, nil, &_result)
         return _result
     }
     
@@ -3012,7 +3012,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: splitScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_split_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_split_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -3036,9 +3036,9 @@ open class CPUParticles3D: GeometryInstance3D {
     @inline(__always)
     fileprivate final func get_scale_curve_x() -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_scale_curve_x, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_scale_curve_x, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_scale_curve_x: GDExtensionMethodBindPtr = {
@@ -3058,7 +3058,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: scaleCurve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_scale_curve_x, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_scale_curve_x, handle, pArgs, nil)
                 }
                 
             }
@@ -3082,9 +3082,9 @@ open class CPUParticles3D: GeometryInstance3D {
     @inline(__always)
     fileprivate final func get_scale_curve_y() -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_scale_curve_y, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_scale_curve_y, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_scale_curve_y: GDExtensionMethodBindPtr = {
@@ -3104,7 +3104,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: scaleCurve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_scale_curve_y, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_scale_curve_y, handle, pArgs, nil)
                 }
                 
             }
@@ -3128,9 +3128,9 @@ open class CPUParticles3D: GeometryInstance3D {
     @inline(__always)
     fileprivate final func get_scale_curve_z() -> Curve? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_scale_curve_z, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CPUParticles3D.method_get_scale_curve_z, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_scale_curve_z: GDExtensionMethodBindPtr = {
@@ -3150,7 +3150,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: scaleCurve?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_scale_curve_z, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_set_scale_curve_z, handle, pArgs, nil)
                 }
                 
             }
@@ -3177,7 +3177,7 @@ open class CPUParticles3D: GeometryInstance3D {
         withUnsafePointer(to: particles?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CPUParticles3D.method_convert_from_particles, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CPUParticles3D.method_convert_from_particles, handle, pArgs, nil)
                 }
                 
             }

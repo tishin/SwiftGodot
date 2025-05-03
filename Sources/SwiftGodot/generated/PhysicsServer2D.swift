@@ -41,7 +41,7 @@ open class PhysicsServer2D: Object {
     /// The shared instance of this class
     public static var shared: PhysicsServer2D {
         return withUnsafePointer(to: &PhysicsServer2D.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -286,7 +286,7 @@ open class PhysicsServer2D: Object {
     /// Creates a 2D world boundary shape in the physics server, and returns the ``RID`` that identifies it. Use ``shapeSetData(shape:data:)`` to set the shape's normal direction and distance properties.
     public static func worldBoundaryShapeCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_world_boundary_shape_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_world_boundary_shape_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -304,7 +304,7 @@ open class PhysicsServer2D: Object {
     /// Creates a 2D separation ray shape in the physics server, and returns the ``RID`` that identifies it. Use ``shapeSetData(shape:data:)`` to set the shape's `length` and `slide_on_slope` properties.
     public static func separationRayShapeCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_separation_ray_shape_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_separation_ray_shape_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -322,7 +322,7 @@ open class PhysicsServer2D: Object {
     /// Creates a 2D segment shape in the physics server, and returns the ``RID`` that identifies it. Use ``shapeSetData(shape:data:)`` to set the segment's start and end points.
     public static func segmentShapeCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_segment_shape_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_segment_shape_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -340,7 +340,7 @@ open class PhysicsServer2D: Object {
     /// Creates a 2D circle shape in the physics server, and returns the ``RID`` that identifies it. Use ``shapeSetData(shape:data:)`` to set the circle's radius.
     public static func circleShapeCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_circle_shape_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_circle_shape_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -358,7 +358,7 @@ open class PhysicsServer2D: Object {
     /// Creates a 2D rectangle shape in the physics server, and returns the ``RID`` that identifies it. Use ``shapeSetData(shape:data:)`` to set the rectangle's half-extents.
     public static func rectangleShapeCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_rectangle_shape_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_rectangle_shape_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -376,7 +376,7 @@ open class PhysicsServer2D: Object {
     /// Creates a 2D capsule shape in the physics server, and returns the ``RID`` that identifies it. Use ``shapeSetData(shape:data:)`` to set the capsule's height and radius.
     public static func capsuleShapeCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_capsule_shape_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_capsule_shape_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -394,7 +394,7 @@ open class PhysicsServer2D: Object {
     /// Creates a 2D convex polygon shape in the physics server, and returns the ``RID`` that identifies it. Use ``shapeSetData(shape:data:)`` to set the convex polygon's points.
     public static func convexPolygonShapeCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_convex_polygon_shape_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_convex_polygon_shape_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -412,7 +412,7 @@ open class PhysicsServer2D: Object {
     /// Creates a 2D concave polygon shape in the physics server, and returns the ``RID`` that identifies it. Use ``shapeSetData(shape:data:)`` to set the concave polygon's segments.
     public static func concavePolygonShapeCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_concave_polygon_shape_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_concave_polygon_shape_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -452,7 +452,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: data.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_shape_set_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_shape_set_data, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -481,7 +481,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: shape.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_shape_get_type, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_shape_get_type, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -508,7 +508,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: shape.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_shape_get_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_shape_get_data, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -532,7 +532,7 @@ open class PhysicsServer2D: Object {
     /// Creates a 2D space in the physics server, and returns the ``RID`` that identifies it. A space contains bodies and areas, and controls the stepping of the physics simulation of the objects in it.
     public static func spaceCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_space_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_space_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -553,7 +553,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: active) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_space_set_active, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_space_set_active, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -582,7 +582,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: space.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_space_is_active, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_space_is_active, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -610,7 +610,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: value) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_space_set_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_space_set_param, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -642,7 +642,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: param.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_space_get_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_space_get_param, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -667,18 +667,18 @@ open class PhysicsServer2D: Object {
     
     /// Returns the state of a space, a ``PhysicsDirectSpaceState2D``. This object can be used for collision/intersection queries.
     public static func spaceGetDirectState(space: RID) -> PhysicsDirectSpaceState2D? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: space.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_space_get_direct_state, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_space_get_direct_state, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_area_create: GDExtensionMethodBindPtr = {
@@ -698,7 +698,7 @@ open class PhysicsServer2D: Object {
     /// 
     public static func areaCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_area_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_area_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -722,7 +722,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: space.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_area_set_space, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_area_set_space, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -751,7 +751,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: area.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_area_get_space, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_area_get_space, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -780,7 +780,7 @@ open class PhysicsServer2D: Object {
                     withUnsafePointer(to: disabled) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_area_add_shape, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_area_add_shape, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -814,7 +814,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: shape.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_area_set_shape, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_area_set_shape, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -846,7 +846,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: transform) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_area_set_shape_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_area_set_shape_transform, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -878,7 +878,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: disabled) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_area_set_shape_disabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_area_set_shape_disabled, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -909,7 +909,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: area.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_area_get_shape_count, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_area_get_shape_count, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -937,7 +937,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: shapeIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_area_get_shape, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_area_get_shape, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -967,7 +967,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: shapeIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_area_get_shape_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_area_get_shape_transform, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -996,7 +996,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: shapeIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_area_remove_shape, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_area_remove_shape, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1024,7 +1024,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: area.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_area_clear_shapes, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_area_clear_shapes, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1051,7 +1051,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: layer) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_area_set_collision_layer, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_area_set_collision_layer, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1080,7 +1080,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: area.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_area_get_collision_layer, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_area_get_collision_layer, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1107,7 +1107,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: mask) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_area_set_collision_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_area_set_collision_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1136,7 +1136,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: area.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_area_get_collision_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_area_get_collision_mask, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1164,7 +1164,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: value.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_area_set_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_area_set_param, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1195,7 +1195,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: transform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_area_set_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_area_set_transform, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1225,7 +1225,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: param.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_area_get_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_area_get_param, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1254,7 +1254,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: area.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_area_get_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_area_get_transform, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1281,7 +1281,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_area_attach_object_instance_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_area_attach_object_instance_id, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1310,7 +1310,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: area.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_area_get_object_instance_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_area_get_object_instance_id, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1337,7 +1337,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_area_attach_canvas_instance_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_area_attach_canvas_instance_id, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1366,7 +1366,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: area.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_area_get_canvas_instance_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_area_get_canvas_instance_id, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1406,7 +1406,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: callback.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_area_set_monitor_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_area_set_monitor_callback, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1448,7 +1448,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: callback.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_area_set_area_monitor_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_area_set_area_monitor_callback, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1477,7 +1477,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: monitorable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_area_set_monitorable, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_area_set_monitorable, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1506,7 +1506,7 @@ open class PhysicsServer2D: Object {
     /// 
     public static func bodyCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_body_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_body_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -1534,7 +1534,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: space.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_set_space, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_set_space, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1563,7 +1563,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_get_space, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_body_get_space, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1590,7 +1590,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_set_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_set_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1619,7 +1619,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_get_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_body_get_mode, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1648,7 +1648,7 @@ open class PhysicsServer2D: Object {
                     withUnsafePointer(to: disabled) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_body_add_shape, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_body_add_shape, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -1682,7 +1682,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: shape.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_body_set_shape, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_body_set_shape, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1714,7 +1714,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: transform) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_body_set_shape_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_body_set_shape_transform, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1745,7 +1745,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_get_shape_count, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_body_get_shape_count, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1773,7 +1773,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: shapeIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_get_shape, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_body_get_shape, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1803,7 +1803,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: shapeIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_get_shape_transform, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_body_get_shape_transform, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1832,7 +1832,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: shapeIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_remove_shape, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_remove_shape, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1860,7 +1860,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_clear_shapes, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_body_clear_shapes, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1888,7 +1888,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: disabled) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_body_set_shape_disabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_body_set_shape_disabled, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -1921,7 +1921,7 @@ open class PhysicsServer2D: Object {
                     withUnsafePointer(to: margin) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_body_set_shape_as_one_way_collision, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_body_set_shape_as_one_way_collision, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -1954,7 +1954,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_attach_object_instance_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_attach_object_instance_id, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -1983,7 +1983,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_get_object_instance_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_body_get_object_instance_id, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2010,7 +2010,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_attach_canvas_instance_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_attach_canvas_instance_id, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2039,7 +2039,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_get_canvas_instance_id, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_body_get_canvas_instance_id, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2069,7 +2069,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_set_continuous_collision_detection_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_set_continuous_collision_detection_mode, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2098,7 +2098,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_get_continuous_collision_detection_mode, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_body_get_continuous_collision_detection_mode, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2125,7 +2125,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: layer) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_set_collision_layer, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_set_collision_layer, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2154,7 +2154,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_get_collision_layer, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_body_get_collision_layer, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2181,7 +2181,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: mask) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_set_collision_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_set_collision_mask, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2210,7 +2210,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_get_collision_mask, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_body_get_collision_mask, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2237,7 +2237,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: priority) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_set_collision_priority, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_set_collision_priority, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2266,7 +2266,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_get_collision_priority, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_body_get_collision_priority, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2294,7 +2294,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: value.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_body_set_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_body_set_param, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2326,7 +2326,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: param.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_get_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_body_get_param, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -2354,7 +2354,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_reset_mass_properties, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_body_reset_mass_properties, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -2385,7 +2385,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: value.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_body_set_state, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_body_set_state, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2417,7 +2417,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: state.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_get_state, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_body_get_state, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -2451,7 +2451,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: impulse) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_apply_central_impulse, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_apply_central_impulse, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2483,7 +2483,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: impulse) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_apply_torque_impulse, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_apply_torque_impulse, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2518,7 +2518,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: position) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_body_apply_impulse, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_body_apply_impulse, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2552,7 +2552,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: force) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_apply_central_force, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_apply_central_force, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2585,7 +2585,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: position) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_body_apply_force, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_body_apply_force, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2616,7 +2616,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: torque) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_apply_torque, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_apply_torque, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2648,7 +2648,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: force) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_add_constant_central_force, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_add_constant_central_force, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2681,7 +2681,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: position) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_body_add_constant_force, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_body_add_constant_force, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -2712,7 +2712,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: torque) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_add_constant_torque, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_add_constant_torque, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2744,7 +2744,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: force) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_set_constant_force, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_set_constant_force, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2776,7 +2776,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_get_constant_force, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_body_get_constant_force, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2806,7 +2806,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: torque) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_set_constant_torque, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_set_constant_torque, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2838,7 +2838,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_get_constant_torque, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_body_get_constant_torque, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -2865,7 +2865,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: axisVelocity) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_set_axis_velocity, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_set_axis_velocity, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2894,7 +2894,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: exceptedBody.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_add_collision_exception, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_add_collision_exception, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2923,7 +2923,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: exceptedBody.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_remove_collision_exception, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_remove_collision_exception, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2952,7 +2952,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: amount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_set_max_contacts_reported, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_set_max_contacts_reported, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -2981,7 +2981,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_get_max_contacts_reported, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_body_get_max_contacts_reported, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3011,7 +3011,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_set_omit_force_integration, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_set_omit_force_integration, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3040,7 +3040,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_is_omitting_force_integration, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_body_is_omitting_force_integration, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3074,7 +3074,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: callable.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_body_set_state_sync_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_body_set_state_sync_callback, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3115,7 +3115,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: userdata.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_body_set_force_integration_callback, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_body_set_force_integration_callback, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -3148,7 +3148,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: result?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_body_test_motion, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_body_test_motion, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -3175,18 +3175,18 @@ open class PhysicsServer2D: Object {
     
     /// Returns the ``PhysicsDirectBodyState2D`` of the body. Returns `null` if the body is destroyed or not assigned to a space.
     public static func bodyGetDirectState(body: RID) -> PhysicsDirectBodyState2D? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_body_get_direct_state, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_body_get_direct_state, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_joint_create: GDExtensionMethodBindPtr = {
@@ -3203,7 +3203,7 @@ open class PhysicsServer2D: Object {
     /// Creates a 2D joint in the physics server, and returns the ``RID`` that identifies it. To set the joint type, use ``jointMakeDampedSpring(joint:anchorA:anchorB:bodyA:bodyB:)``, ``jointMakeGroove(joint:groove1A:groove2A:anchorB:bodyA:bodyB:)`` or ``jointMakePin(joint:anchor:bodyA:bodyB:)``. Use ``jointSetParam(joint:param:value:)`` to set generic joint parameters.
     public static func jointCreate() -> RID {
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(method_joint_create, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_joint_create, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -3223,7 +3223,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: joint.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_joint_clear, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_joint_clear, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -3251,7 +3251,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: value) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_joint_set_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_joint_set_param, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -3283,7 +3283,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: param.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_joint_get_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_joint_get_param, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -3312,7 +3312,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: disable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_joint_disable_collisions_between_bodies, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_joint_disable_collisions_between_bodies, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -3341,7 +3341,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: joint.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_joint_is_disabled_collisions_between_bodies, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_joint_is_disabled_collisions_between_bodies, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3370,7 +3370,7 @@ open class PhysicsServer2D: Object {
                     withUnsafePointer(to: bodyB.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_joint_make_pin, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_joint_make_pin, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -3407,7 +3407,7 @@ open class PhysicsServer2D: Object {
                             withUnsafePointer(to: bodyB.content) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(method_joint_make_groove, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(method_joint_make_groove, shared.handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -3447,7 +3447,7 @@ open class PhysicsServer2D: Object {
                         withUnsafePointer(to: bodyB.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(method_joint_make_damped_spring, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(method_joint_make_damped_spring, shared.handle, pArgs, nil)
                                 }
                                 
                             }
@@ -3483,7 +3483,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: enabled) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_pin_joint_set_flag, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_pin_joint_set_flag, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -3515,7 +3515,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: flag.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_pin_joint_get_flag, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_pin_joint_get_flag, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -3545,7 +3545,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: value) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_pin_joint_set_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_pin_joint_set_param, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -3577,7 +3577,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: param.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_pin_joint_get_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_pin_joint_get_param, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -3607,7 +3607,7 @@ open class PhysicsServer2D: Object {
                 withUnsafePointer(to: value) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_damped_spring_joint_set_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_damped_spring_joint_set_param, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -3639,7 +3639,7 @@ open class PhysicsServer2D: Object {
             withUnsafePointer(to: param.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_damped_spring_joint_get_param, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_damped_spring_joint_get_param, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -3668,7 +3668,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: joint.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_joint_get_type, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_joint_get_type, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -3694,7 +3694,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: rid.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_free_rid, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_free_rid, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -3720,7 +3720,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: active) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_active, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_active, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -3747,7 +3747,7 @@ open class PhysicsServer2D: Object {
         withUnsafePointer(to: processInfo.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_process_info, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_process_info, shared.handle, pArgs, &_result)
                 }
                 
             }

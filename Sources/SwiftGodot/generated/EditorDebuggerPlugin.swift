@@ -55,7 +55,7 @@ open class EditorDebuggerPlugin: RefCounted {
         withUnsafePointer(to: sessionId) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method__setup_session, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method__setup_session, handle, pArgs, nil)
                 }
                 
             }
@@ -85,7 +85,7 @@ open class EditorDebuggerPlugin: RefCounted {
         withUnsafePointer(to: capture.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method__has_capture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method__has_capture, handle, pArgs, &_result)
                 }
                 
             }
@@ -117,7 +117,7 @@ open class EditorDebuggerPlugin: RefCounted {
                 withUnsafePointer(to: sessionId) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method__capture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method__capture, handle, pArgs, &_result)
                         }
                         
                     }
@@ -150,7 +150,7 @@ open class EditorDebuggerPlugin: RefCounted {
             withUnsafePointer(to: line) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method__goto_script_line, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method__goto_script_line, handle, pArgs, nil)
                     }
                     
                 }
@@ -177,7 +177,7 @@ open class EditorDebuggerPlugin: RefCounted {
     @_documentation(visibility: public)
     open func _breakpointsClearedInTree() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method__breakpoints_cleared_in_tree, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method__breakpoints_cleared_in_tree, handle, nil, nil)
         
     }
     
@@ -201,7 +201,7 @@ open class EditorDebuggerPlugin: RefCounted {
                 withUnsafePointer(to: enabled) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method__breakpoint_set_in_tree, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method__breakpoint_set_in_tree, handle, pArgs, nil)
                         }
                         
                     }
@@ -229,18 +229,18 @@ open class EditorDebuggerPlugin: RefCounted {
     /// Returns the ``EditorDebuggerSession`` with the given `id`.
     public final func getSession(id: Int32) -> EditorDebuggerSession? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method_get_session, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method_get_session, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_sessions: GDExtensionMethodBindPtr = {
@@ -261,7 +261,7 @@ open class EditorDebuggerPlugin: RefCounted {
     public final func getSessions() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method_get_sessions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorDebuggerPlugin.method_get_sessions, handle, nil, &_result.content)
         return _result
     }
     
@@ -294,9 +294,9 @@ func _EditorDebuggerPlugin_proxy_breakpoint_set_in_tree (instance: UnsafeMutable
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorDebuggerPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._breakpointSetInTree (script: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Script, line: args [1]!.assumingMemoryBound (to: Int32.self).pointee, enabled: args [2]!.assumingMemoryBound (to: Bool.self).pointee)
+    swiftObject._breakpointSetInTree (script: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Script, line: args [1]!.assumingMemoryBound (to: Int32.self).pointee, enabled: args [2]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _EditorDebuggerPlugin_proxy_breakpoints_cleared_in_tree (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -320,9 +320,9 @@ func _EditorDebuggerPlugin_proxy_goto_script_line (instance: UnsafeMutableRawPoi
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorDebuggerPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._gotoScriptLine (script: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Script, line: args [1]!.assumingMemoryBound (to: Int32.self).pointee)
+    swiftObject._gotoScriptLine (script: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Script, line: args [1]!.assumingMemoryBound (to: Int32.self).pointee)
 }
 
 func _EditorDebuggerPlugin_proxy_has_capture (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {

@@ -173,7 +173,7 @@ open class Range: Control {
         withUnsafePointer(to: newValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Range.method__value_changed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Range.method__value_changed, handle, pArgs, nil)
                 }
                 
             }
@@ -198,7 +198,7 @@ open class Range: Control {
     fileprivate final func get_value() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Range.method_get_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Range.method_get_value, handle, nil, &_result)
         return _result
     }
     
@@ -217,7 +217,7 @@ open class Range: Control {
     fileprivate final func get_min() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Range.method_get_min, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Range.method_get_min, handle, nil, &_result)
         return _result
     }
     
@@ -236,7 +236,7 @@ open class Range: Control {
     fileprivate final func get_max() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Range.method_get_max, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Range.method_get_max, handle, nil, &_result)
         return _result
     }
     
@@ -255,7 +255,7 @@ open class Range: Control {
     fileprivate final func get_step() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Range.method_get_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Range.method_get_step, handle, nil, &_result)
         return _result
     }
     
@@ -274,7 +274,7 @@ open class Range: Control {
     fileprivate final func get_page() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Range.method_get_page, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Range.method_get_page, handle, nil, &_result)
         return _result
     }
     
@@ -293,7 +293,7 @@ open class Range: Control {
     fileprivate final func get_as_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Range.method_get_as_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Range.method_get_as_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -314,7 +314,7 @@ open class Range: Control {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Range.method_set_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Range.method_set_value, handle, pArgs, nil)
                 }
                 
             }
@@ -341,7 +341,7 @@ open class Range: Control {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Range.method_set_value_no_signal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Range.method_set_value_no_signal, handle, pArgs, nil)
                 }
                 
             }
@@ -368,7 +368,7 @@ open class Range: Control {
         withUnsafePointer(to: minimum) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Range.method_set_min, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Range.method_set_min, handle, pArgs, nil)
                 }
                 
             }
@@ -395,7 +395,7 @@ open class Range: Control {
         withUnsafePointer(to: maximum) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Range.method_set_max, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Range.method_set_max, handle, pArgs, nil)
                 }
                 
             }
@@ -422,7 +422,7 @@ open class Range: Control {
         withUnsafePointer(to: step) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Range.method_set_step, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Range.method_set_step, handle, pArgs, nil)
                 }
                 
             }
@@ -449,7 +449,7 @@ open class Range: Control {
         withUnsafePointer(to: pagesize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Range.method_set_page, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Range.method_set_page, handle, pArgs, nil)
                 }
                 
             }
@@ -476,7 +476,7 @@ open class Range: Control {
         withUnsafePointer(to: value) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Range.method_set_as_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Range.method_set_as_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -503,7 +503,7 @@ open class Range: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Range.method_set_use_rounded_values, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Range.method_set_use_rounded_values, handle, pArgs, nil)
                 }
                 
             }
@@ -528,7 +528,7 @@ open class Range: Control {
     fileprivate final func is_using_rounded_values() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Range.method_is_using_rounded_values, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Range.method_is_using_rounded_values, handle, nil, &_result)
         return _result
     }
     
@@ -549,7 +549,7 @@ open class Range: Control {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Range.method_set_exp_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Range.method_set_exp_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -574,7 +574,7 @@ open class Range: Control {
     fileprivate final func is_ratio_exp() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Range.method_is_ratio_exp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Range.method_is_ratio_exp, handle, nil, &_result)
         return _result
     }
     
@@ -595,7 +595,7 @@ open class Range: Control {
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Range.method_set_allow_greater, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Range.method_set_allow_greater, handle, pArgs, nil)
                 }
                 
             }
@@ -620,7 +620,7 @@ open class Range: Control {
     fileprivate final func is_greater_allowed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Range.method_is_greater_allowed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Range.method_is_greater_allowed, handle, nil, &_result)
         return _result
     }
     
@@ -641,7 +641,7 @@ open class Range: Control {
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Range.method_set_allow_lesser, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Range.method_set_allow_lesser, handle, pArgs, nil)
                 }
                 
             }
@@ -666,7 +666,7 @@ open class Range: Control {
     fileprivate final func is_lesser_allowed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Range.method_is_lesser_allowed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Range.method_is_lesser_allowed, handle, nil, &_result)
         return _result
     }
     
@@ -687,7 +687,7 @@ open class Range: Control {
         withUnsafePointer(to: with?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Range.method_share, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Range.method_share, handle, pArgs, nil)
                 }
                 
             }
@@ -711,7 +711,7 @@ open class Range: Control {
     /// Stops the ``Range`` from sharing its member variables with any other.
     public final func unshare() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Range.method_unshare, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Range.method_unshare, handle, nil, nil)
         
     }
     

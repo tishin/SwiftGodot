@@ -144,7 +144,7 @@ open class AudioEffectCompressor: AudioEffect {
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectCompressor.method_set_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectCompressor.method_set_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -169,7 +169,7 @@ open class AudioEffectCompressor: AudioEffect {
     fileprivate final func get_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -190,7 +190,7 @@ open class AudioEffectCompressor: AudioEffect {
         withUnsafePointer(to: ratio) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectCompressor.method_set_ratio, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectCompressor.method_set_ratio, handle, pArgs, nil)
                 }
                 
             }
@@ -215,7 +215,7 @@ open class AudioEffectCompressor: AudioEffect {
     fileprivate final func get_ratio() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_ratio, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_ratio, handle, nil, &_result)
         return _result
     }
     
@@ -236,7 +236,7 @@ open class AudioEffectCompressor: AudioEffect {
         withUnsafePointer(to: gain) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectCompressor.method_set_gain, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectCompressor.method_set_gain, handle, pArgs, nil)
                 }
                 
             }
@@ -261,7 +261,7 @@ open class AudioEffectCompressor: AudioEffect {
     fileprivate final func get_gain() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_gain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_gain, handle, nil, &_result)
         return _result
     }
     
@@ -282,7 +282,7 @@ open class AudioEffectCompressor: AudioEffect {
         withUnsafePointer(to: attackUs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectCompressor.method_set_attack_us, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectCompressor.method_set_attack_us, handle, pArgs, nil)
                 }
                 
             }
@@ -307,7 +307,7 @@ open class AudioEffectCompressor: AudioEffect {
     fileprivate final func get_attack_us() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_attack_us, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_attack_us, handle, nil, &_result)
         return _result
     }
     
@@ -328,7 +328,7 @@ open class AudioEffectCompressor: AudioEffect {
         withUnsafePointer(to: releaseMs) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectCompressor.method_set_release_ms, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectCompressor.method_set_release_ms, handle, pArgs, nil)
                 }
                 
             }
@@ -353,7 +353,7 @@ open class AudioEffectCompressor: AudioEffect {
     fileprivate final func get_release_ms() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_release_ms, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_release_ms, handle, nil, &_result)
         return _result
     }
     
@@ -374,7 +374,7 @@ open class AudioEffectCompressor: AudioEffect {
         withUnsafePointer(to: mix) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectCompressor.method_set_mix, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectCompressor.method_set_mix, handle, pArgs, nil)
                 }
                 
             }
@@ -399,7 +399,7 @@ open class AudioEffectCompressor: AudioEffect {
     fileprivate final func get_mix() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_mix, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_mix, handle, nil, &_result)
         return _result
     }
     
@@ -420,7 +420,7 @@ open class AudioEffectCompressor: AudioEffect {
         withUnsafePointer(to: sidechain.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectCompressor.method_set_sidechain, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectCompressor.method_set_sidechain, handle, pArgs, nil)
                 }
                 
             }
@@ -445,7 +445,7 @@ open class AudioEffectCompressor: AudioEffect {
     fileprivate final func get_sidechain() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_sidechain, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AudioEffectCompressor.method_get_sidechain, handle, nil, &_result.content)
         return _result
     }
     

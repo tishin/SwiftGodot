@@ -70,7 +70,7 @@ open class EditorVCSInterface: Object {
         withUnsafePointer(to: projectPath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__initialize, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__initialize, handle, pArgs, &_result)
                 }
                 
             }
@@ -107,7 +107,7 @@ open class EditorVCSInterface: Object {
                         withUnsafePointer(to: sshPassphrase.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__set_credentials, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__set_credentials, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -141,7 +141,7 @@ open class EditorVCSInterface: Object {
     open func _getModifiedFilesData() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_modified_files_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_modified_files_data, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -164,7 +164,7 @@ open class EditorVCSInterface: Object {
         withUnsafePointer(to: filePath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__stage_file, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__stage_file, handle, pArgs, nil)
                 }
                 
             }
@@ -193,7 +193,7 @@ open class EditorVCSInterface: Object {
         withUnsafePointer(to: filePath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__unstage_file, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__unstage_file, handle, pArgs, nil)
                 }
                 
             }
@@ -222,7 +222,7 @@ open class EditorVCSInterface: Object {
         withUnsafePointer(to: filePath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__discard_file, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__discard_file, handle, pArgs, nil)
                 }
                 
             }
@@ -251,7 +251,7 @@ open class EditorVCSInterface: Object {
         withUnsafePointer(to: msg.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__commit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__commit, handle, pArgs, nil)
                 }
                 
             }
@@ -282,7 +282,7 @@ open class EditorVCSInterface: Object {
             withUnsafePointer(to: area) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_diff, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_diff, handle, pArgs, &_result)
                     }
                     
                 }
@@ -310,7 +310,7 @@ open class EditorVCSInterface: Object {
     open func _shutDown() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorVCSInterface.method__shut_down, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorVCSInterface.method__shut_down, handle, nil, &_result)
         return _result
     }
     
@@ -330,7 +330,7 @@ open class EditorVCSInterface: Object {
     open func _getVcsName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_vcs_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_vcs_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -353,7 +353,7 @@ open class EditorVCSInterface: Object {
         withUnsafePointer(to: maxCommits) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_previous_commits, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_previous_commits, handle, pArgs, &_result)
                 }
                 
             }
@@ -379,7 +379,7 @@ open class EditorVCSInterface: Object {
     open func _getBranchList() -> TypedArray<String> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_branch_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_branch_list, handle, nil, &_result)
         return TypedArray<String>(takingOver: _result)
     }
     
@@ -399,7 +399,7 @@ open class EditorVCSInterface: Object {
     open func _getRemotes() -> TypedArray<String> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_remotes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_remotes, handle, nil, &_result)
         return TypedArray<String>(takingOver: _result)
     }
     
@@ -422,7 +422,7 @@ open class EditorVCSInterface: Object {
         withUnsafePointer(to: branchName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__create_branch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__create_branch, handle, pArgs, nil)
                 }
                 
             }
@@ -451,7 +451,7 @@ open class EditorVCSInterface: Object {
         withUnsafePointer(to: branchName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__remove_branch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__remove_branch, handle, pArgs, nil)
                 }
                 
             }
@@ -482,7 +482,7 @@ open class EditorVCSInterface: Object {
             withUnsafePointer(to: remoteUrl.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorVCSInterface.method__create_remote, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorVCSInterface.method__create_remote, handle, pArgs, nil)
                     }
                     
                 }
@@ -513,7 +513,7 @@ open class EditorVCSInterface: Object {
         withUnsafePointer(to: remoteName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__remove_remote, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__remove_remote, handle, pArgs, nil)
                 }
                 
             }
@@ -539,7 +539,7 @@ open class EditorVCSInterface: Object {
     open func _getCurrentBranchName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_current_branch_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_current_branch_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -563,7 +563,7 @@ open class EditorVCSInterface: Object {
         withUnsafePointer(to: branchName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__checkout_branch, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__checkout_branch, handle, pArgs, &_result)
                 }
                 
             }
@@ -592,7 +592,7 @@ open class EditorVCSInterface: Object {
         withUnsafePointer(to: remote.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__pull, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__pull, handle, pArgs, nil)
                 }
                 
             }
@@ -622,7 +622,7 @@ open class EditorVCSInterface: Object {
             withUnsafePointer(to: force) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorVCSInterface.method__push, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorVCSInterface.method__push, handle, pArgs, nil)
                     }
                     
                 }
@@ -653,7 +653,7 @@ open class EditorVCSInterface: Object {
         withUnsafePointer(to: remote.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__fetch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorVCSInterface.method__fetch, handle, pArgs, nil)
                 }
                 
             }
@@ -685,7 +685,7 @@ open class EditorVCSInterface: Object {
             withUnsafePointer(to: text.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_line_diff, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(EditorVCSInterface.method__get_line_diff, handle, pArgs, &_result)
                     }
                     
                 }
@@ -720,7 +720,7 @@ open class EditorVCSInterface: Object {
                     withUnsafePointer(to: status.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorVCSInterface.method_create_diff_line, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(EditorVCSInterface.method_create_diff_line, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -757,7 +757,7 @@ open class EditorVCSInterface: Object {
                     withUnsafePointer(to: newLines) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorVCSInterface.method_create_diff_hunk, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(EditorVCSInterface.method_create_diff_hunk, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -794,7 +794,7 @@ open class EditorVCSInterface: Object {
             withUnsafePointer(to: oldFile.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorVCSInterface.method_create_diff_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(EditorVCSInterface.method_create_diff_file, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -831,7 +831,7 @@ open class EditorVCSInterface: Object {
                         withUnsafePointer(to: offsetMinutes) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(EditorVCSInterface.method_create_commit, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                    gi.object_method_bind_ptrcall(EditorVCSInterface.method_create_commit, handle, pArgs, &_result.content)
                                 }
                                 
                             }
@@ -870,7 +870,7 @@ open class EditorVCSInterface: Object {
                 withUnsafePointer(to: area.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorVCSInterface.method_create_status_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(EditorVCSInterface.method_create_status_file, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -903,7 +903,7 @@ open class EditorVCSInterface: Object {
             withUnsafePointer(to: diffHunks.array.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorVCSInterface.method_add_diff_hunks_into_diff_file, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(EditorVCSInterface.method_add_diff_hunks_into_diff_file, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -934,7 +934,7 @@ open class EditorVCSInterface: Object {
             withUnsafePointer(to: lineDiffs.array.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorVCSInterface.method_add_line_diffs_into_diff_hunk, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(EditorVCSInterface.method_add_line_diffs_into_diff_hunk, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -964,7 +964,7 @@ open class EditorVCSInterface: Object {
         withUnsafePointer(to: msg.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorVCSInterface.method_popup_error, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorVCSInterface.method_popup_error, handle, pArgs, nil)
                 }
                 
             }

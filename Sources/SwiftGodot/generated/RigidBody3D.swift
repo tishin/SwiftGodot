@@ -405,7 +405,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: state?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method__integrate_forces, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method__integrate_forces, handle, pArgs, nil)
                 }
                 
             }
@@ -432,7 +432,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: mass) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_mass, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_mass, handle, pArgs, nil)
                 }
                 
             }
@@ -457,7 +457,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_mass() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_mass, handle, nil, &_result)
         return _result
     }
     
@@ -478,7 +478,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: inertia) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_inertia, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_inertia, handle, pArgs, nil)
                 }
                 
             }
@@ -503,7 +503,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_inertia() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_inertia, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_inertia, handle, nil, &_result)
         return _result
     }
     
@@ -524,7 +524,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_center_of_mass_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_center_of_mass_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -549,7 +549,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_center_of_mass_mode() -> RigidBody3D.CenterOfMassMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_center_of_mass_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_center_of_mass_mode, handle, nil, &_result)
         return RigidBody3D.CenterOfMassMode (rawValue: _result)!
     }
     
@@ -570,7 +570,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: centerOfMass) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_center_of_mass, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_center_of_mass, handle, pArgs, nil)
                 }
                 
             }
@@ -595,7 +595,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_center_of_mass() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_center_of_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_center_of_mass, handle, nil, &_result)
         return _result
     }
     
@@ -616,7 +616,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: physicsMaterialOverride?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_physics_material_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_physics_material_override, handle, pArgs, nil)
                 }
                 
             }
@@ -640,9 +640,9 @@ open class RigidBody3D: PhysicsBody3D {
     @inline(__always)
     fileprivate final func get_physics_material_override() -> PhysicsMaterial? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_physics_material_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_physics_material_override, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_linear_velocity: GDExtensionMethodBindPtr = {
@@ -662,7 +662,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: linearVelocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_linear_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_linear_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -687,7 +687,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_linear_velocity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_linear_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_linear_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -708,7 +708,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: angularVelocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_angular_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_angular_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -733,7 +733,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_angular_velocity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_angular_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_angular_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -752,7 +752,7 @@ open class RigidBody3D: PhysicsBody3D {
     public final func getInverseInertiaTensor() -> Basis {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Basis = Basis ()
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_inverse_inertia_tensor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_inverse_inertia_tensor, handle, nil, &_result)
         return _result
     }
     
@@ -773,7 +773,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: gravityScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_gravity_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_gravity_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -798,7 +798,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_gravity_scale() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_gravity_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_gravity_scale, handle, nil, &_result)
         return _result
     }
     
@@ -819,7 +819,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: linearDampMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_linear_damp_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_linear_damp_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -844,7 +844,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_linear_damp_mode() -> RigidBody3D.DampMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_linear_damp_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_linear_damp_mode, handle, nil, &_result)
         return RigidBody3D.DampMode (rawValue: _result)!
     }
     
@@ -865,7 +865,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: angularDampMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_angular_damp_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_angular_damp_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -890,7 +890,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_angular_damp_mode() -> RigidBody3D.DampMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_angular_damp_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_angular_damp_mode, handle, nil, &_result)
         return RigidBody3D.DampMode (rawValue: _result)!
     }
     
@@ -911,7 +911,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: linearDamp) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_linear_damp, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_linear_damp, handle, pArgs, nil)
                 }
                 
             }
@@ -936,7 +936,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_linear_damp() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_linear_damp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_linear_damp, handle, nil, &_result)
         return _result
     }
     
@@ -957,7 +957,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: angularDamp) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_angular_damp, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_angular_damp, handle, pArgs, nil)
                 }
                 
             }
@@ -982,7 +982,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_angular_damp() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_angular_damp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_angular_damp, handle, nil, &_result)
         return _result
     }
     
@@ -1003,7 +1003,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_max_contacts_reported, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_max_contacts_reported, handle, pArgs, nil)
                 }
                 
             }
@@ -1028,7 +1028,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_max_contacts_reported() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_max_contacts_reported, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_max_contacts_reported, handle, nil, &_result)
         return _result
     }
     
@@ -1050,7 +1050,7 @@ open class RigidBody3D: PhysicsBody3D {
     public final func getContactCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_contact_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_contact_count, handle, nil, &_result)
         return _result
     }
     
@@ -1071,7 +1071,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_use_custom_integrator, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_use_custom_integrator, handle, pArgs, nil)
                 }
                 
             }
@@ -1096,7 +1096,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func is_using_custom_integrator() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RigidBody3D.method_is_using_custom_integrator, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_is_using_custom_integrator, handle, nil, &_result)
         return _result
     }
     
@@ -1117,7 +1117,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_contact_monitor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_contact_monitor, handle, pArgs, nil)
                 }
                 
             }
@@ -1142,7 +1142,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func is_contact_monitor_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RigidBody3D.method_is_contact_monitor_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_is_contact_monitor_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1163,7 +1163,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_use_continuous_collision_detection, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_use_continuous_collision_detection, handle, pArgs, nil)
                 }
                 
             }
@@ -1188,7 +1188,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func is_using_continuous_collision_detection() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RigidBody3D.method_is_using_continuous_collision_detection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_is_using_continuous_collision_detection, handle, nil, &_result)
         return _result
     }
     
@@ -1209,7 +1209,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: axisVelocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_axis_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_axis_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -1241,7 +1241,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: impulse) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_apply_central_impulse, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_apply_central_impulse, handle, pArgs, nil)
                 }
                 
             }
@@ -1274,7 +1274,7 @@ open class RigidBody3D: PhysicsBody3D {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RigidBody3D.method_apply_impulse, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RigidBody3D.method_apply_impulse, handle, pArgs, nil)
                     }
                     
                 }
@@ -1308,7 +1308,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: impulse) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_apply_torque_impulse, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_apply_torque_impulse, handle, pArgs, nil)
                 }
                 
             }
@@ -1338,7 +1338,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: force) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_apply_central_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_apply_central_force, handle, pArgs, nil)
                 }
                 
             }
@@ -1369,7 +1369,7 @@ open class RigidBody3D: PhysicsBody3D {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RigidBody3D.method_apply_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RigidBody3D.method_apply_force, handle, pArgs, nil)
                     }
                     
                 }
@@ -1401,7 +1401,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: torque) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_apply_torque, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_apply_torque, handle, pArgs, nil)
                 }
                 
             }
@@ -1431,7 +1431,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: force) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_add_constant_central_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_add_constant_central_force, handle, pArgs, nil)
                 }
                 
             }
@@ -1462,7 +1462,7 @@ open class RigidBody3D: PhysicsBody3D {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(RigidBody3D.method_add_constant_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(RigidBody3D.method_add_constant_force, handle, pArgs, nil)
                     }
                     
                 }
@@ -1491,7 +1491,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: torque) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_add_constant_torque, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_add_constant_torque, handle, pArgs, nil)
                 }
                 
             }
@@ -1518,7 +1518,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: force) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_constant_force, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_constant_force, handle, pArgs, nil)
                 }
                 
             }
@@ -1543,7 +1543,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_constant_force() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_constant_force, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_constant_force, handle, nil, &_result)
         return _result
     }
     
@@ -1564,7 +1564,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: torque) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_constant_torque, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_constant_torque, handle, pArgs, nil)
                 }
                 
             }
@@ -1589,7 +1589,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_constant_torque() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_constant_torque, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_constant_torque, handle, nil, &_result)
         return _result
     }
     
@@ -1610,7 +1610,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: sleeping) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_sleeping, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_sleeping, handle, pArgs, nil)
                 }
                 
             }
@@ -1635,7 +1635,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func is_sleeping() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RigidBody3D.method_is_sleeping, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_is_sleeping, handle, nil, &_result)
         return _result
     }
     
@@ -1656,7 +1656,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: ableToSleep) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_can_sleep, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_can_sleep, handle, pArgs, nil)
                 }
                 
             }
@@ -1681,7 +1681,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func is_able_to_sleep() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RigidBody3D.method_is_able_to_sleep, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_is_able_to_sleep, handle, nil, &_result)
         return _result
     }
     
@@ -1702,7 +1702,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: lockRotation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_lock_rotation_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_lock_rotation_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1727,7 +1727,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func is_lock_rotation_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RigidBody3D.method_is_lock_rotation_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_is_lock_rotation_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1748,7 +1748,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: freezeMode) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_freeze_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_freeze_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1773,7 +1773,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func is_freeze_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RigidBody3D.method_is_freeze_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_is_freeze_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1794,7 +1794,7 @@ open class RigidBody3D: PhysicsBody3D {
         withUnsafePointer(to: freezeMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_freeze_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RigidBody3D.method_set_freeze_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -1819,7 +1819,7 @@ open class RigidBody3D: PhysicsBody3D {
     fileprivate final func get_freeze_mode() -> RigidBody3D.FreezeMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_freeze_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_freeze_mode, handle, nil, &_result)
         return RigidBody3D.FreezeMode (rawValue: _result)!
     }
     
@@ -1841,7 +1841,7 @@ open class RigidBody3D: PhysicsBody3D {
     public final func getCollidingBodies() -> TypedArray<Node3D?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(RigidBody3D.method_get_colliding_bodies, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RigidBody3D.method_get_colliding_bodies, handle, nil, &_result)
         return TypedArray<Node3D?>(takingOver: _result)
     }
     
@@ -1972,8 +1972,8 @@ func _RigidBody3D_proxy_integrate_forces (instance: UnsafeMutableRawPointer?, ar
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? RigidBody3D else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._integrateForces (state: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? PhysicsDirectBodyState3D)
+    swiftObject._integrateForces (state: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? PhysicsDirectBodyState3D)
 }
 

@@ -125,7 +125,7 @@ open class Gradient: Resource {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Gradient.method_add_point, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Gradient.method_add_point, handle, pArgs, nil)
                     }
                     
                 }
@@ -154,7 +154,7 @@ open class Gradient: Resource {
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Gradient.method_remove_point, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Gradient.method_remove_point, handle, pArgs, nil)
                 }
                 
             }
@@ -182,7 +182,7 @@ open class Gradient: Resource {
             withUnsafePointer(to: offset) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Gradient.method_set_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Gradient.method_set_offset, handle, pArgs, nil)
                     }
                     
                 }
@@ -212,7 +212,7 @@ open class Gradient: Resource {
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Gradient.method_get_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Gradient.method_get_offset, handle, pArgs, &_result)
                 }
                 
             }
@@ -239,7 +239,7 @@ open class Gradient: Resource {
     /// 
     public final func reverse() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Gradient.method_reverse, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Gradient.method_reverse, handle, nil, nil)
         
     }
     
@@ -261,7 +261,7 @@ open class Gradient: Resource {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Gradient.method_set_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Gradient.method_set_color, handle, pArgs, nil)
                     }
                     
                 }
@@ -291,7 +291,7 @@ open class Gradient: Resource {
         withUnsafePointer(to: point) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Gradient.method_get_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Gradient.method_get_color, handle, pArgs, &_result)
                 }
                 
             }
@@ -319,7 +319,7 @@ open class Gradient: Resource {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Gradient.method_sample, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Gradient.method_sample, handle, pArgs, &_result)
                 }
                 
             }
@@ -344,7 +344,7 @@ open class Gradient: Resource {
     public final func getPointCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Gradient.method_get_point_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Gradient.method_get_point_count, handle, nil, &_result)
         return _result
     }
     
@@ -365,7 +365,7 @@ open class Gradient: Resource {
         withUnsafePointer(to: offsets.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Gradient.method_set_offsets, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Gradient.method_set_offsets, handle, pArgs, nil)
                 }
                 
             }
@@ -390,7 +390,7 @@ open class Gradient: Resource {
     fileprivate final func get_offsets() -> PackedFloat32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedFloat32Array = PackedFloat32Array ()
-        gi.object_method_bind_ptrcall(Gradient.method_get_offsets, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Gradient.method_get_offsets, handle, nil, &_result.content)
         return _result
     }
     
@@ -411,7 +411,7 @@ open class Gradient: Resource {
         withUnsafePointer(to: colors.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Gradient.method_set_colors, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Gradient.method_set_colors, handle, pArgs, nil)
                 }
                 
             }
@@ -436,7 +436,7 @@ open class Gradient: Resource {
     fileprivate final func get_colors() -> PackedColorArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedColorArray = PackedColorArray ()
-        gi.object_method_bind_ptrcall(Gradient.method_get_colors, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Gradient.method_get_colors, handle, nil, &_result.content)
         return _result
     }
     
@@ -457,7 +457,7 @@ open class Gradient: Resource {
         withUnsafePointer(to: interpolationMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Gradient.method_set_interpolation_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Gradient.method_set_interpolation_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -482,7 +482,7 @@ open class Gradient: Resource {
     fileprivate final func get_interpolation_mode() -> Gradient.InterpolationMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Gradient.method_get_interpolation_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Gradient.method_get_interpolation_mode, handle, nil, &_result)
         return Gradient.InterpolationMode (rawValue: _result)!
     }
     
@@ -503,7 +503,7 @@ open class Gradient: Resource {
         withUnsafePointer(to: interpolationColorSpace.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Gradient.method_set_interpolation_color_space, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Gradient.method_set_interpolation_color_space, handle, pArgs, nil)
                 }
                 
             }
@@ -528,7 +528,7 @@ open class Gradient: Resource {
     fileprivate final func get_interpolation_color_space() -> Gradient.ColorSpace {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Gradient.method_get_interpolation_color_space, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Gradient.method_get_interpolation_color_space, handle, nil, &_result)
         return Gradient.ColorSpace (rawValue: _result)!
     }
     

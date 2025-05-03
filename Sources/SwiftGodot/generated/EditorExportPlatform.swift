@@ -85,7 +85,7 @@ open class EditorExportPlatform: RefCounted {
     public final func getOsName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_os_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_os_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -103,9 +103,9 @@ open class EditorExportPlatform: RefCounted {
     /// Create a new preset for this platform.
     public final func createPreset() -> EditorExportPreset? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorExportPlatform.method_create_preset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorExportPlatform.method_create_preset, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_find_export_template: GDExtensionMethodBindPtr = {
@@ -127,7 +127,7 @@ open class EditorExportPlatform: RefCounted {
         withUnsafePointer(to: templateFileName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_find_export_template, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_find_export_template, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -152,7 +152,7 @@ open class EditorExportPlatform: RefCounted {
     public final func getCurrentPresets() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_current_presets, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_current_presets, handle, nil, &_result.content)
         return _result
     }
     
@@ -181,7 +181,7 @@ open class EditorExportPlatform: RefCounted {
                     withUnsafePointer(to: embed) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorExportPlatform.method_save_pack, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(EditorExportPlatform.method_save_pack, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -218,7 +218,7 @@ open class EditorExportPlatform: RefCounted {
                 withUnsafePointer(to: path.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorExportPlatform.method_save_zip, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(EditorExportPlatform.method_save_zip, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -253,7 +253,7 @@ open class EditorExportPlatform: RefCounted {
                 withUnsafePointer(to: path.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorExportPlatform.method_save_pack_patch, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(EditorExportPlatform.method_save_pack_patch, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -288,7 +288,7 @@ open class EditorExportPlatform: RefCounted {
                 withUnsafePointer(to: path.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorExportPlatform.method_save_zip_patch, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(EditorExportPlatform.method_save_zip_patch, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -320,7 +320,7 @@ open class EditorExportPlatform: RefCounted {
         withUnsafePointer(to: flags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_gen_export_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_gen_export_flags, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -358,7 +358,7 @@ open class EditorExportPlatform: RefCounted {
                     withUnsafePointer(to: sharedCb.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorExportPlatform.method_export_project_files, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(EditorExportPlatform.method_export_project_files, handle, pArgs, &_result)
                             }
                             
                         }
@@ -396,7 +396,7 @@ open class EditorExportPlatform: RefCounted {
                     withUnsafePointer(to: flags.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorExportPlatform.method_export_project, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(EditorExportPlatform.method_export_project, handle, pArgs, &_result)
                             }
                             
                         }
@@ -434,7 +434,7 @@ open class EditorExportPlatform: RefCounted {
                     withUnsafePointer(to: flags.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorExportPlatform.method_export_pack, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(EditorExportPlatform.method_export_pack, handle, pArgs, &_result)
                             }
                             
                         }
@@ -472,7 +472,7 @@ open class EditorExportPlatform: RefCounted {
                     withUnsafePointer(to: flags.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorExportPlatform.method_export_zip, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(EditorExportPlatform.method_export_zip, handle, pArgs, &_result)
                             }
                             
                         }
@@ -514,7 +514,7 @@ open class EditorExportPlatform: RefCounted {
                         withUnsafePointer(to: flags.rawValue) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_export_pack_patch, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_export_pack_patch, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -558,7 +558,7 @@ open class EditorExportPlatform: RefCounted {
                         withUnsafePointer(to: flags.rawValue) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_export_zip_patch, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_export_zip_patch, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -590,7 +590,7 @@ open class EditorExportPlatform: RefCounted {
     /// Clears the export log.
     public final func clearMessages() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(EditorExportPlatform.method_clear_messages, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(EditorExportPlatform.method_clear_messages, handle, nil, nil)
         
     }
     
@@ -615,7 +615,7 @@ open class EditorExportPlatform: RefCounted {
                 withUnsafePointer(to: message.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorExportPlatform.method_add_message, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorExportPlatform.method_add_message, handle, pArgs, nil)
                         }
                         
                     }
@@ -644,7 +644,7 @@ open class EditorExportPlatform: RefCounted {
     public final func getMessageCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_message_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_message_count, handle, nil, &_result)
         return _result
     }
     
@@ -666,7 +666,7 @@ open class EditorExportPlatform: RefCounted {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_message_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_message_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -694,7 +694,7 @@ open class EditorExportPlatform: RefCounted {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_message_category, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_message_category, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -722,7 +722,7 @@ open class EditorExportPlatform: RefCounted {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_message_text, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_message_text, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -747,7 +747,7 @@ open class EditorExportPlatform: RefCounted {
     public final func getWorstMessageType() -> EditorExportPlatform.ExportMessageType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_worst_message_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_worst_message_type, handle, nil, &_result)
         return EditorExportPlatform.ExportMessageType (rawValue: _result)!
     }
     
@@ -777,7 +777,7 @@ open class EditorExportPlatform: RefCounted {
                             withUnsafePointer(to: portFwd) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(EditorExportPlatform.method_ssh_run_on_remote, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                        gi.object_method_bind_ptrcall(EditorExportPlatform.method_ssh_run_on_remote, handle, pArgs, &_result)
                                     }
                                     
                                 }
@@ -822,7 +822,7 @@ open class EditorExportPlatform: RefCounted {
                         withUnsafePointer(to: portFwd) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_ssh_run_on_remote_no_wait, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_ssh_run_on_remote_no_wait, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -866,7 +866,7 @@ open class EditorExportPlatform: RefCounted {
                         withUnsafePointer(to: dstFile.content) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_ssh_push_to_remote, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(EditorExportPlatform.method_ssh_push_to_remote, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -903,7 +903,7 @@ open class EditorExportPlatform: RefCounted {
             withUnsafePointer(to: debug) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_internal_export_files, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(EditorExportPlatform.method_get_internal_export_files, handle, pArgs, &_result.content)
                     }
                     
                 }

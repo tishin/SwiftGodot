@@ -59,7 +59,7 @@ open class VisualShaderNodeComment: VisualShaderNodeFrame {
         withUnsafePointer(to: description.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeComment.method_set_description, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeComment.method_set_description, handle, pArgs, nil)
                 }
                 
             }
@@ -84,7 +84,7 @@ open class VisualShaderNodeComment: VisualShaderNodeFrame {
     fileprivate final func get_description() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeComment.method_get_description, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualShaderNodeComment.method_get_description, handle, nil, &_result.content)
         return _result.description
     }
     

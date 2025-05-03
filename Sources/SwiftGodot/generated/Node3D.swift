@@ -301,7 +301,7 @@ open class Node3D: Node {
         withUnsafePointer(to: local) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -326,7 +326,7 @@ open class Node3D: Node {
     fileprivate final func get_transform() -> Transform3D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
-        gi.object_method_bind_ptrcall(Node3D.method_get_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_transform, handle, nil, &_result)
         return _result
     }
     
@@ -347,7 +347,7 @@ open class Node3D: Node {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_position, handle, pArgs, nil)
                 }
                 
             }
@@ -372,7 +372,7 @@ open class Node3D: Node {
     fileprivate final func get_position() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(Node3D.method_get_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_position, handle, nil, &_result)
         return _result
     }
     
@@ -393,7 +393,7 @@ open class Node3D: Node {
         withUnsafePointer(to: eulerRadians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_rotation, handle, pArgs, nil)
                 }
                 
             }
@@ -418,7 +418,7 @@ open class Node3D: Node {
     fileprivate final func get_rotation() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(Node3D.method_get_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_rotation, handle, nil, &_result)
         return _result
     }
     
@@ -439,7 +439,7 @@ open class Node3D: Node {
         withUnsafePointer(to: eulerDegrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_rotation_degrees, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_rotation_degrees, handle, pArgs, nil)
                 }
                 
             }
@@ -464,7 +464,7 @@ open class Node3D: Node {
     fileprivate final func get_rotation_degrees() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(Node3D.method_get_rotation_degrees, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_rotation_degrees, handle, nil, &_result)
         return _result
     }
     
@@ -485,7 +485,7 @@ open class Node3D: Node {
         withUnsafePointer(to: order.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_rotation_order, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_rotation_order, handle, pArgs, nil)
                 }
                 
             }
@@ -510,7 +510,7 @@ open class Node3D: Node {
     fileprivate final func get_rotation_order() -> EulerOrder {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Node3D.method_get_rotation_order, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_rotation_order, handle, nil, &_result)
         return EulerOrder (rawValue: _result)!
     }
     
@@ -531,7 +531,7 @@ open class Node3D: Node {
         withUnsafePointer(to: editMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_rotation_edit_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_rotation_edit_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -556,7 +556,7 @@ open class Node3D: Node {
     fileprivate final func get_rotation_edit_mode() -> Node3D.RotationEditMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Node3D.method_get_rotation_edit_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_rotation_edit_mode, handle, nil, &_result)
         return Node3D.RotationEditMode (rawValue: _result)!
     }
     
@@ -577,7 +577,7 @@ open class Node3D: Node {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -602,7 +602,7 @@ open class Node3D: Node {
     fileprivate final func get_scale() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(Node3D.method_get_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_scale, handle, nil, &_result)
         return _result
     }
     
@@ -623,7 +623,7 @@ open class Node3D: Node {
         withUnsafePointer(to: quaternion) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_quaternion, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_quaternion, handle, pArgs, nil)
                 }
                 
             }
@@ -648,7 +648,7 @@ open class Node3D: Node {
     fileprivate final func get_quaternion() -> Quaternion {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Quaternion = Quaternion ()
-        gi.object_method_bind_ptrcall(Node3D.method_get_quaternion, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_quaternion, handle, nil, &_result)
         return _result
     }
     
@@ -669,7 +669,7 @@ open class Node3D: Node {
         withUnsafePointer(to: basis) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_basis, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_basis, handle, pArgs, nil)
                 }
                 
             }
@@ -694,7 +694,7 @@ open class Node3D: Node {
     fileprivate final func get_basis() -> Basis {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Basis = Basis ()
-        gi.object_method_bind_ptrcall(Node3D.method_get_basis, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_basis, handle, nil, &_result)
         return _result
     }
     
@@ -715,7 +715,7 @@ open class Node3D: Node {
         withUnsafePointer(to: global) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_global_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_global_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -740,7 +740,7 @@ open class Node3D: Node {
     fileprivate final func get_global_transform() -> Transform3D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
-        gi.object_method_bind_ptrcall(Node3D.method_get_global_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_global_transform, handle, nil, &_result)
         return _result
     }
     
@@ -764,7 +764,7 @@ open class Node3D: Node {
     public final func getGlobalTransformInterpolated() -> Transform3D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
-        gi.object_method_bind_ptrcall(Node3D.method_get_global_transform_interpolated, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_global_transform_interpolated, handle, nil, &_result)
         return _result
     }
     
@@ -785,7 +785,7 @@ open class Node3D: Node {
         withUnsafePointer(to: position) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_global_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_global_position, handle, pArgs, nil)
                 }
                 
             }
@@ -810,7 +810,7 @@ open class Node3D: Node {
     fileprivate final func get_global_position() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(Node3D.method_get_global_position, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_global_position, handle, nil, &_result)
         return _result
     }
     
@@ -831,7 +831,7 @@ open class Node3D: Node {
         withUnsafePointer(to: basis) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_global_basis, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_global_basis, handle, pArgs, nil)
                 }
                 
             }
@@ -856,7 +856,7 @@ open class Node3D: Node {
     fileprivate final func get_global_basis() -> Basis {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Basis = Basis ()
-        gi.object_method_bind_ptrcall(Node3D.method_get_global_basis, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_global_basis, handle, nil, &_result)
         return _result
     }
     
@@ -877,7 +877,7 @@ open class Node3D: Node {
         withUnsafePointer(to: eulerRadians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_global_rotation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_global_rotation, handle, pArgs, nil)
                 }
                 
             }
@@ -902,7 +902,7 @@ open class Node3D: Node {
     fileprivate final func get_global_rotation() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(Node3D.method_get_global_rotation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_global_rotation, handle, nil, &_result)
         return _result
     }
     
@@ -923,7 +923,7 @@ open class Node3D: Node {
         withUnsafePointer(to: eulerDegrees) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_global_rotation_degrees, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_global_rotation_degrees, handle, pArgs, nil)
                 }
                 
             }
@@ -948,7 +948,7 @@ open class Node3D: Node {
     fileprivate final func get_global_rotation_degrees() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(Node3D.method_get_global_rotation_degrees, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_global_rotation_degrees, handle, nil, &_result)
         return _result
     }
     
@@ -969,9 +969,9 @@ open class Node3D: Node {
     /// 
     public final func getParentNode3d() -> Node3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Node3D.method_get_parent_node_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Node3D.method_get_parent_node_3d, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_ignore_transform_notification: GDExtensionMethodBindPtr = {
@@ -991,7 +991,7 @@ open class Node3D: Node {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_ignore_transform_notification, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_ignore_transform_notification, handle, pArgs, nil)
                 }
                 
             }
@@ -1018,7 +1018,7 @@ open class Node3D: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_as_top_level, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_as_top_level, handle, pArgs, nil)
                 }
                 
             }
@@ -1043,7 +1043,7 @@ open class Node3D: Node {
     fileprivate final func is_set_as_top_level() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node3D.method_is_set_as_top_level, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_is_set_as_top_level, handle, nil, &_result)
         return _result
     }
     
@@ -1064,7 +1064,7 @@ open class Node3D: Node {
         withUnsafePointer(to: disable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_disable_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_disable_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -1089,7 +1089,7 @@ open class Node3D: Node {
     public final func isScaleDisabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node3D.method_is_scale_disabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_is_scale_disabled, handle, nil, &_result)
         return _result
     }
     
@@ -1107,9 +1107,9 @@ open class Node3D: Node {
     /// Returns the current ``World3D`` resource this ``Node3D`` node is registered to.
     public final func getWorld3d() -> World3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Node3D.method_get_world_3d, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Node3D.method_get_world_3d, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_force_update_transform: GDExtensionMethodBindPtr = {
@@ -1126,7 +1126,7 @@ open class Node3D: Node {
     /// Forces the transform to update. Transform changes in physics are not instant for performance reasons. Transforms are accumulated and then set. Use this if you need an up-to-date transform when doing physics operations.
     public final func forceUpdateTransform() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node3D.method_force_update_transform, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node3D.method_force_update_transform, handle, nil, nil)
         
     }
     
@@ -1147,7 +1147,7 @@ open class Node3D: Node {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_visibility_parent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_visibility_parent, handle, pArgs, nil)
                 }
                 
             }
@@ -1172,7 +1172,7 @@ open class Node3D: Node {
     fileprivate final func get_visibility_parent() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(Node3D.method_get_visibility_parent, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Node3D.method_get_visibility_parent, handle, nil, &_result.content)
         return _result
     }
     
@@ -1190,7 +1190,7 @@ open class Node3D: Node {
     /// Updates all the ``Node3D`` gizmos attached to this node.
     public final func updateGizmos() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node3D.method_update_gizmos, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node3D.method_update_gizmos, handle, nil, nil)
         
     }
     
@@ -1214,7 +1214,7 @@ open class Node3D: Node {
         withUnsafePointer(to: gizmo?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_add_gizmo, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_add_gizmo, handle, pArgs, nil)
                 }
                 
             }
@@ -1239,7 +1239,7 @@ open class Node3D: Node {
     public final func getGizmos() -> TypedArray<Node3DGizmo?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Node3D.method_get_gizmos, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_get_gizmos, handle, nil, &_result)
         return TypedArray<Node3DGizmo?>(takingOver: _result)
     }
     
@@ -1257,7 +1257,7 @@ open class Node3D: Node {
     /// Clear all gizmos attached to this ``Node3D``.
     public final func clearGizmos() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node3D.method_clear_gizmos, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node3D.method_clear_gizmos, handle, nil, nil)
         
     }
     
@@ -1283,7 +1283,7 @@ open class Node3D: Node {
                 withUnsafePointer(to: transform) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Node3D.method_set_subgizmo_selection, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Node3D.method_set_subgizmo_selection, handle, pArgs, nil)
                         }
                         
                     }
@@ -1311,7 +1311,7 @@ open class Node3D: Node {
     /// Clears subgizmo selection for this node in the editor. Useful when subgizmo IDs become invalid after a property change.
     public final func clearSubgizmoSelection() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node3D.method_clear_subgizmo_selection, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node3D.method_clear_subgizmo_selection, handle, nil, nil)
         
     }
     
@@ -1332,7 +1332,7 @@ open class Node3D: Node {
         withUnsafePointer(to: visible) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_visible, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_visible, handle, pArgs, nil)
                 }
                 
             }
@@ -1357,7 +1357,7 @@ open class Node3D: Node {
     fileprivate final func is_visible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node3D.method_is_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_is_visible, handle, nil, &_result)
         return _result
     }
     
@@ -1381,7 +1381,7 @@ open class Node3D: Node {
     public final func isVisibleInTree() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node3D.method_is_visible_in_tree, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_is_visible_in_tree, handle, nil, &_result)
         return _result
     }
     
@@ -1399,7 +1399,7 @@ open class Node3D: Node {
     /// Enables rendering of this node. Changes ``visible`` to `true`.
     public final func show() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node3D.method_show, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node3D.method_show, handle, nil, nil)
         
     }
     
@@ -1417,7 +1417,7 @@ open class Node3D: Node {
     /// Disables rendering of this node. Changes ``visible`` to `false`.
     public final func hide() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node3D.method_hide, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node3D.method_hide, handle, nil, nil)
         
     }
     
@@ -1438,7 +1438,7 @@ open class Node3D: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_notify_local_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_notify_local_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -1463,7 +1463,7 @@ open class Node3D: Node {
     public final func isLocalTransformNotificationEnabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node3D.method_is_local_transform_notification_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_is_local_transform_notification_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1484,7 +1484,7 @@ open class Node3D: Node {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_set_notify_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_set_notify_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -1509,7 +1509,7 @@ open class Node3D: Node {
     public final func isTransformNotificationEnabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node3D.method_is_transform_notification_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node3D.method_is_transform_notification_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1531,7 +1531,7 @@ open class Node3D: Node {
             withUnsafePointer(to: angle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node3D.method_rotate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node3D.method_rotate, handle, pArgs, nil)
                     }
                     
                 }
@@ -1561,7 +1561,7 @@ open class Node3D: Node {
             withUnsafePointer(to: angle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node3D.method_global_rotate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node3D.method_global_rotate, handle, pArgs, nil)
                     }
                     
                 }
@@ -1590,7 +1590,7 @@ open class Node3D: Node {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_global_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_global_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -1617,7 +1617,7 @@ open class Node3D: Node {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_global_translate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_global_translate, handle, pArgs, nil)
                 }
                 
             }
@@ -1645,7 +1645,7 @@ open class Node3D: Node {
             withUnsafePointer(to: angle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node3D.method_rotate_object_local, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node3D.method_rotate_object_local, handle, pArgs, nil)
                     }
                     
                 }
@@ -1674,7 +1674,7 @@ open class Node3D: Node {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_scale_object_local, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_scale_object_local, handle, pArgs, nil)
                 }
                 
             }
@@ -1701,7 +1701,7 @@ open class Node3D: Node {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_translate_object_local, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_translate_object_local, handle, pArgs, nil)
                 }
                 
             }
@@ -1728,7 +1728,7 @@ open class Node3D: Node {
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_rotate_x, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_rotate_x, handle, pArgs, nil)
                 }
                 
             }
@@ -1755,7 +1755,7 @@ open class Node3D: Node {
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_rotate_y, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_rotate_y, handle, pArgs, nil)
                 }
                 
             }
@@ -1782,7 +1782,7 @@ open class Node3D: Node {
         withUnsafePointer(to: angle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_rotate_z, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_rotate_z, handle, pArgs, nil)
                 }
                 
             }
@@ -1812,7 +1812,7 @@ open class Node3D: Node {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_translate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node3D.method_translate, handle, pArgs, nil)
                 }
                 
             }
@@ -1836,7 +1836,7 @@ open class Node3D: Node {
     /// Resets this node's transformations (like scale, skew and taper) preserving its rotation and translation by performing Gram-Schmidt orthonormalization on this node's ``Transform3D``.
     public final func orthonormalize() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node3D.method_orthonormalize, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node3D.method_orthonormalize, handle, nil, nil)
         
     }
     
@@ -1854,7 +1854,7 @@ open class Node3D: Node {
     /// Reset all transformations for this node (sets its ``Transform3D`` to the identity matrix).
     public final func setIdentity() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node3D.method_set_identity, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node3D.method_set_identity, handle, nil, nil)
         
     }
     
@@ -1888,7 +1888,7 @@ open class Node3D: Node {
                 withUnsafePointer(to: useModelFront) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Node3D.method_look_at, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Node3D.method_look_at, handle, pArgs, nil)
                         }
                         
                     }
@@ -1922,7 +1922,7 @@ open class Node3D: Node {
                     withUnsafePointer(to: useModelFront) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Node3D.method_look_at_from_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(Node3D.method_look_at_from_position, handle, pArgs, nil)
                             }
                             
                         }
@@ -1956,7 +1956,7 @@ open class Node3D: Node {
         withUnsafePointer(to: globalPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_to_local, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node3D.method_to_local, handle, pArgs, &_result)
                 }
                 
             }
@@ -1984,7 +1984,7 @@ open class Node3D: Node {
         withUnsafePointer(to: localPoint) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node3D.method_to_global, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node3D.method_to_global, handle, pArgs, &_result)
                 }
                 
             }

@@ -223,7 +223,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method__use_tile_data_runtime_update, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method__use_tile_data_runtime_update, handle, pArgs, &_result)
                 }
                 
             }
@@ -259,7 +259,7 @@ open class TileMapLayer: Node2D {
             withUnsafePointer(to: tileData?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileMapLayer.method__tile_data_runtime_update, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileMapLayer.method__tile_data_runtime_update, handle, pArgs, nil)
                     }
                     
                 }
@@ -305,7 +305,7 @@ open class TileMapLayer: Node2D {
             withUnsafePointer(to: forcedCleanup) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileMapLayer.method__update_cells, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileMapLayer.method__update_cells, handle, pArgs, nil)
                     }
                     
                 }
@@ -346,7 +346,7 @@ open class TileMapLayer: Node2D {
                     withUnsafePointer(to: alternativeTile) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TileMapLayer.method_set_cell, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TileMapLayer.method_set_cell, handle, pArgs, nil)
                             }
                             
                         }
@@ -379,7 +379,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_erase_cell, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_erase_cell, handle, pArgs, nil)
                 }
                 
             }
@@ -403,7 +403,7 @@ open class TileMapLayer: Node2D {
     /// Clears cells containing tiles that do not exist in the ``tileSet``.
     public final func fixInvalidTiles() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(TileMapLayer.method_fix_invalid_tiles, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_fix_invalid_tiles, handle, nil, nil)
         
     }
     
@@ -421,7 +421,7 @@ open class TileMapLayer: Node2D {
     /// Clears all cells.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(TileMapLayer.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_clear, handle, nil, nil)
         
     }
     
@@ -443,7 +443,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_get_cell_source_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_get_cell_source_id, handle, pArgs, &_result)
                 }
                 
             }
@@ -471,7 +471,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_get_cell_atlas_coords, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_get_cell_atlas_coords, handle, pArgs, &_result)
                 }
                 
             }
@@ -499,7 +499,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_get_cell_alternative_tile, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_get_cell_alternative_tile, handle, pArgs, &_result)
                 }
                 
             }
@@ -524,18 +524,18 @@ open class TileMapLayer: Node2D {
     /// 
     public final func getCellTileData(coords: Vector2i) -> TileData? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_get_cell_tile_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_get_cell_tile_data, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_is_cell_flipped_h: GDExtensionMethodBindPtr = {
@@ -556,7 +556,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_is_cell_flipped_h, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_is_cell_flipped_h, handle, pArgs, &_result)
                 }
                 
             }
@@ -584,7 +584,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_is_cell_flipped_v, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_is_cell_flipped_v, handle, pArgs, &_result)
                 }
                 
             }
@@ -612,7 +612,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_is_cell_transposed, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_is_cell_transposed, handle, pArgs, &_result)
                 }
                 
             }
@@ -637,7 +637,7 @@ open class TileMapLayer: Node2D {
     public final func getUsedCells() -> TypedArray<Vector2i> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(TileMapLayer.method_get_used_cells, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_get_used_cells, handle, nil, &_result)
         return TypedArray<Vector2i>(takingOver: _result)
     }
     
@@ -666,7 +666,7 @@ open class TileMapLayer: Node2D {
                 withUnsafePointer(to: alternativeTile) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TileMapLayer.method_get_used_cells_by_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(TileMapLayer.method_get_used_cells_by_id, handle, pArgs, &_result)
                         }
                         
                     }
@@ -695,7 +695,7 @@ open class TileMapLayer: Node2D {
     public final func getUsedRect() -> Rect2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2i = Rect2i ()
-        gi.object_method_bind_ptrcall(TileMapLayer.method_get_used_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_get_used_rect, handle, nil, &_result)
         return _result
     }
     
@@ -713,18 +713,18 @@ open class TileMapLayer: Node2D {
     /// Creates and returns a new ``TileMapPattern`` from the given array of cells. See also ``setPattern(position:pattern:)``.
     public final func getPattern(coordsArray: TypedArray<Vector2i>) -> TileMapPattern? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: coordsArray.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_get_pattern, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_get_pattern, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_pattern: GDExtensionMethodBindPtr = {
@@ -745,7 +745,7 @@ open class TileMapLayer: Node2D {
             withUnsafePointer(to: pattern?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileMapLayer.method_set_pattern, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileMapLayer.method_set_pattern, handle, pArgs, nil)
                     }
                     
                 }
@@ -782,7 +782,7 @@ open class TileMapLayer: Node2D {
                     withUnsafePointer(to: ignoreEmptyTerrains) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TileMapLayer.method_set_cells_terrain_connect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TileMapLayer.method_set_cells_terrain_connect, handle, pArgs, nil)
                             }
                             
                         }
@@ -823,7 +823,7 @@ open class TileMapLayer: Node2D {
                     withUnsafePointer(to: ignoreEmptyTerrains) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TileMapLayer.method_set_cells_terrain_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(TileMapLayer.method_set_cells_terrain_path, handle, pArgs, nil)
                             }
                             
                         }
@@ -857,7 +857,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_has_body_rid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_has_body_rid, handle, pArgs, &_result)
                 }
                 
             }
@@ -885,7 +885,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: body.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_get_coords_for_body_rid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_get_coords_for_body_rid, handle, pArgs, &_result)
                 }
                 
             }
@@ -914,7 +914,7 @@ open class TileMapLayer: Node2D {
     /// 
     public final func updateInternals() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(TileMapLayer.method_update_internals, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_update_internals, handle, nil, nil)
         
     }
     
@@ -937,7 +937,7 @@ open class TileMapLayer: Node2D {
     /// 
     public final func notifyRuntimeTileDataUpdate() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(TileMapLayer.method_notify_runtime_tile_data_update, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_notify_runtime_tile_data_update, handle, nil, nil)
         
     }
     
@@ -961,7 +961,7 @@ open class TileMapLayer: Node2D {
                 withUnsafePointer(to: pattern?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TileMapLayer.method_map_pattern, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(TileMapLayer.method_map_pattern, handle, pArgs, &_result)
                         }
                         
                     }
@@ -993,7 +993,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: coords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_get_surrounding_cells, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_get_surrounding_cells, handle, pArgs, &_result)
                 }
                 
             }
@@ -1022,7 +1022,7 @@ open class TileMapLayer: Node2D {
             withUnsafePointer(to: neighbor.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileMapLayer.method_get_neighbor_cell, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TileMapLayer.method_get_neighbor_cell, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1055,7 +1055,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: mapPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_map_to_local, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_map_to_local, handle, pArgs, &_result)
                 }
                 
             }
@@ -1083,7 +1083,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: localPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_local_to_map, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_local_to_map, handle, pArgs, &_result)
                 }
                 
             }
@@ -1110,7 +1110,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: tileMapLayerData.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_tile_map_data_from_array, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_tile_map_data_from_array, handle, pArgs, nil)
                 }
                 
             }
@@ -1135,7 +1135,7 @@ open class TileMapLayer: Node2D {
     fileprivate final func get_tile_map_data_as_array() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(TileMapLayer.method_get_tile_map_data_as_array, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_get_tile_map_data_as_array, handle, nil, &_result.content)
         return _result
     }
     
@@ -1156,7 +1156,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1181,7 +1181,7 @@ open class TileMapLayer: Node2D {
     fileprivate final func is_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TileMapLayer.method_is_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_is_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1202,7 +1202,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: tileSet?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_tile_set, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_tile_set, handle, pArgs, nil)
                 }
                 
             }
@@ -1226,9 +1226,9 @@ open class TileMapLayer: Node2D {
     @inline(__always)
     fileprivate final func get_tile_set() -> TileSet? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TileMapLayer.method_get_tile_set, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_get_tile_set, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_y_sort_origin: GDExtensionMethodBindPtr = {
@@ -1248,7 +1248,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: ySortOrigin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_y_sort_origin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_y_sort_origin, handle, pArgs, nil)
                 }
                 
             }
@@ -1273,7 +1273,7 @@ open class TileMapLayer: Node2D {
     fileprivate final func get_y_sort_origin() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TileMapLayer.method_get_y_sort_origin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_get_y_sort_origin, handle, nil, &_result)
         return _result
     }
     
@@ -1294,7 +1294,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: xDrawOrderReversed) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_x_draw_order_reversed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_x_draw_order_reversed, handle, pArgs, nil)
                 }
                 
             }
@@ -1319,7 +1319,7 @@ open class TileMapLayer: Node2D {
     fileprivate final func is_x_draw_order_reversed() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TileMapLayer.method_is_x_draw_order_reversed, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_is_x_draw_order_reversed, handle, nil, &_result)
         return _result
     }
     
@@ -1340,7 +1340,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_rendering_quadrant_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_rendering_quadrant_size, handle, pArgs, nil)
                 }
                 
             }
@@ -1365,7 +1365,7 @@ open class TileMapLayer: Node2D {
     fileprivate final func get_rendering_quadrant_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TileMapLayer.method_get_rendering_quadrant_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_get_rendering_quadrant_size, handle, nil, &_result)
         return _result
     }
     
@@ -1386,7 +1386,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_collision_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_collision_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1411,7 +1411,7 @@ open class TileMapLayer: Node2D {
     fileprivate final func is_collision_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TileMapLayer.method_is_collision_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_is_collision_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1432,7 +1432,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: useKinematicBodies) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_use_kinematic_bodies, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_use_kinematic_bodies, handle, pArgs, nil)
                 }
                 
             }
@@ -1457,7 +1457,7 @@ open class TileMapLayer: Node2D {
     fileprivate final func is_using_kinematic_bodies() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TileMapLayer.method_is_using_kinematic_bodies, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_is_using_kinematic_bodies, handle, nil, &_result)
         return _result
     }
     
@@ -1478,7 +1478,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: visibilityMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_collision_visibility_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_collision_visibility_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -1503,7 +1503,7 @@ open class TileMapLayer: Node2D {
     fileprivate final func get_collision_visibility_mode() -> TileMapLayer.DebugVisibilityMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TileMapLayer.method_get_collision_visibility_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_get_collision_visibility_mode, handle, nil, &_result)
         return TileMapLayer.DebugVisibilityMode (rawValue: _result)!
     }
     
@@ -1524,7 +1524,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_occlusion_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_occlusion_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1549,7 +1549,7 @@ open class TileMapLayer: Node2D {
     fileprivate final func is_occlusion_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TileMapLayer.method_is_occlusion_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_is_occlusion_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1570,7 +1570,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_navigation_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_navigation_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -1595,7 +1595,7 @@ open class TileMapLayer: Node2D {
     fileprivate final func is_navigation_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TileMapLayer.method_is_navigation_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_is_navigation_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -1616,7 +1616,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: map.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_navigation_map, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_navigation_map, handle, pArgs, nil)
                 }
                 
             }
@@ -1644,7 +1644,7 @@ open class TileMapLayer: Node2D {
     public final func getNavigationMap() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(TileMapLayer.method_get_navigation_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_get_navigation_map, handle, nil, &_result.content)
         return _result
     }
     
@@ -1665,7 +1665,7 @@ open class TileMapLayer: Node2D {
         withUnsafePointer(to: showNavigation.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_navigation_visibility_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileMapLayer.method_set_navigation_visibility_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -1690,7 +1690,7 @@ open class TileMapLayer: Node2D {
     fileprivate final func get_navigation_visibility_mode() -> TileMapLayer.DebugVisibilityMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(TileMapLayer.method_get_navigation_visibility_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileMapLayer.method_get_navigation_visibility_mode, handle, nil, &_result)
         return TileMapLayer.DebugVisibilityMode (rawValue: _result)!
     }
     
@@ -1737,9 +1737,9 @@ func _TileMapLayer_proxy_tile_data_runtime_update (instance: UnsafeMutableRawPoi
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? TileMapLayer else { return }
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._tileDataRuntimeUpdate (coords: args [0]!.assumingMemoryBound (to: Vector2i.self).pointee, tileData: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? TileData)
+    swiftObject._tileDataRuntimeUpdate (coords: args [0]!.assumingMemoryBound (to: Vector2i.self).pointee, tileData: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? TileData)
 }
 
 func _TileMapLayer_proxy_update_cells (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {

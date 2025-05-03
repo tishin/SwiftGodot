@@ -29,7 +29,7 @@ open class PhysicsServer2DManager: Object {
     /// The shared instance of this class
     public static var shared: PhysicsServer2DManager {
         return withUnsafePointer(to: &PhysicsServer2DManager.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -55,7 +55,7 @@ open class PhysicsServer2DManager: Object {
             withUnsafePointer(to: createCallback.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_register_server, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_register_server, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -85,7 +85,7 @@ open class PhysicsServer2DManager: Object {
             withUnsafePointer(to: priority) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_set_default_server, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_set_default_server, shared.handle, pArgs, nil)
                     }
                     
                 }

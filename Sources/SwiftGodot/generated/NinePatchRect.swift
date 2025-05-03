@@ -168,7 +168,7 @@ open class NinePatchRect: Control {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NinePatchRect.method_set_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NinePatchRect.method_set_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -192,9 +192,9 @@ open class NinePatchRect: Control {
     @inline(__always)
     fileprivate final func get_texture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(NinePatchRect.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(NinePatchRect.method_get_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_patch_margin: GDExtensionMethodBindPtr = {
@@ -216,7 +216,7 @@ open class NinePatchRect: Control {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NinePatchRect.method_set_patch_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NinePatchRect.method_set_patch_margin, handle, pArgs, nil)
                     }
                     
                 }
@@ -247,7 +247,7 @@ open class NinePatchRect: Control {
         withUnsafePointer(to: margin.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NinePatchRect.method_get_patch_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(NinePatchRect.method_get_patch_margin, handle, pArgs, &_result)
                 }
                 
             }
@@ -274,7 +274,7 @@ open class NinePatchRect: Control {
         withUnsafePointer(to: rect) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NinePatchRect.method_set_region_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NinePatchRect.method_set_region_rect, handle, pArgs, nil)
                 }
                 
             }
@@ -299,7 +299,7 @@ open class NinePatchRect: Control {
     fileprivate final func get_region_rect() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(NinePatchRect.method_get_region_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NinePatchRect.method_get_region_rect, handle, nil, &_result)
         return _result
     }
     
@@ -320,7 +320,7 @@ open class NinePatchRect: Control {
         withUnsafePointer(to: drawCenter) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NinePatchRect.method_set_draw_center, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NinePatchRect.method_set_draw_center, handle, pArgs, nil)
                 }
                 
             }
@@ -345,7 +345,7 @@ open class NinePatchRect: Control {
     fileprivate final func is_draw_center_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NinePatchRect.method_is_draw_center_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NinePatchRect.method_is_draw_center_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -366,7 +366,7 @@ open class NinePatchRect: Control {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NinePatchRect.method_set_h_axis_stretch_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NinePatchRect.method_set_h_axis_stretch_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -391,7 +391,7 @@ open class NinePatchRect: Control {
     fileprivate final func get_h_axis_stretch_mode() -> NinePatchRect.AxisStretchMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(NinePatchRect.method_get_h_axis_stretch_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NinePatchRect.method_get_h_axis_stretch_mode, handle, nil, &_result)
         return NinePatchRect.AxisStretchMode (rawValue: _result)!
     }
     
@@ -412,7 +412,7 @@ open class NinePatchRect: Control {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NinePatchRect.method_set_v_axis_stretch_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NinePatchRect.method_set_v_axis_stretch_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -437,7 +437,7 @@ open class NinePatchRect: Control {
     fileprivate final func get_v_axis_stretch_mode() -> NinePatchRect.AxisStretchMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(NinePatchRect.method_get_v_axis_stretch_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NinePatchRect.method_get_v_axis_stretch_mode, handle, nil, &_result)
         return NinePatchRect.AxisStretchMode (rawValue: _result)!
     }
     

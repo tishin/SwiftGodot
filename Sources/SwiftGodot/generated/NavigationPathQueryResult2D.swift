@@ -101,7 +101,7 @@ open class NavigationPathQueryResult2D: RefCounted {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_set_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_set_path, handle, pArgs, nil)
                 }
                 
             }
@@ -126,7 +126,7 @@ open class NavigationPathQueryResult2D: RefCounted {
     fileprivate final func get_path() -> PackedVector2Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
-        gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_get_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_get_path, handle, nil, &_result.content)
         return _result
     }
     
@@ -147,7 +147,7 @@ open class NavigationPathQueryResult2D: RefCounted {
         withUnsafePointer(to: pathTypes.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_set_path_types, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_set_path_types, handle, pArgs, nil)
                 }
                 
             }
@@ -172,7 +172,7 @@ open class NavigationPathQueryResult2D: RefCounted {
     fileprivate final func get_path_types() -> PackedInt32Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt32Array = PackedInt32Array ()
-        gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_get_path_types, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_get_path_types, handle, nil, &_result.content)
         return _result
     }
     
@@ -193,7 +193,7 @@ open class NavigationPathQueryResult2D: RefCounted {
         withUnsafePointer(to: pathRids.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_set_path_rids, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_set_path_rids, handle, pArgs, nil)
                 }
                 
             }
@@ -218,7 +218,7 @@ open class NavigationPathQueryResult2D: RefCounted {
     fileprivate final func get_path_rids() -> TypedArray<RID> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_get_path_rids, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_get_path_rids, handle, nil, &_result)
         return TypedArray<RID>(takingOver: _result)
     }
     
@@ -239,7 +239,7 @@ open class NavigationPathQueryResult2D: RefCounted {
         withUnsafePointer(to: pathOwnerIds.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_set_path_owner_ids, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_set_path_owner_ids, handle, pArgs, nil)
                 }
                 
             }
@@ -264,7 +264,7 @@ open class NavigationPathQueryResult2D: RefCounted {
     fileprivate final func get_path_owner_ids() -> PackedInt64Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedInt64Array = PackedInt64Array ()
-        gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_get_path_owner_ids, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_get_path_owner_ids, handle, nil, &_result.content)
         return _result
     }
     
@@ -282,7 +282,7 @@ open class NavigationPathQueryResult2D: RefCounted {
     /// Reset the result object to its initial state. This is useful to reuse the object across multiple queries.
     public final func reset() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_reset, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(NavigationPathQueryResult2D.method_reset, handle, nil, nil)
         
     }
     

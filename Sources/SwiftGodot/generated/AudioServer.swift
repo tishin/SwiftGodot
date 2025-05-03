@@ -32,7 +32,7 @@ open class AudioServer: Object {
     /// The shared instance of this class
     public static var shared: AudioServer {
         return withUnsafePointer(to: &AudioServer.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -137,7 +137,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_bus_count, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_bus_count, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -161,7 +161,7 @@ open class AudioServer: Object {
     @inline(__always)
     fileprivate static func get_bus_count() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_bus_count, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_bus_count, shared.handle, nil, &_result)
         return _result
     }
     
@@ -181,7 +181,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_remove_bus, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_remove_bus, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -207,7 +207,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: atPosition) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_add_bus, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_add_bus, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -234,7 +234,7 @@ open class AudioServer: Object {
             withUnsafePointer(to: toIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_move_bus, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_move_bus, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -264,7 +264,7 @@ open class AudioServer: Object {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_set_bus_name, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_set_bus_name, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -293,7 +293,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: busIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_bus_name, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_bus_name, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -320,7 +320,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: busName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_bus_index, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_bus_index, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -347,7 +347,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: busIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_bus_channels, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_bus_channels, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -374,7 +374,7 @@ open class AudioServer: Object {
             withUnsafePointer(to: volumeDb) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_set_bus_volume_db, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_set_bus_volume_db, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -403,7 +403,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: busIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_bus_volume_db, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_bus_volume_db, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -433,7 +433,7 @@ open class AudioServer: Object {
             withUnsafePointer(to: volumeLinear) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_set_bus_volume_linear, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_set_bus_volume_linear, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -465,7 +465,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: busIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_bus_volume_linear, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_bus_volume_linear, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -492,7 +492,7 @@ open class AudioServer: Object {
             withUnsafePointer(to: send.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_set_bus_send, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_set_bus_send, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -521,7 +521,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: busIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_bus_send, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_bus_send, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -548,7 +548,7 @@ open class AudioServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_set_bus_solo, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_set_bus_solo, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -577,7 +577,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: busIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_bus_solo, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_bus_solo, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -604,7 +604,7 @@ open class AudioServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_set_bus_mute, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_set_bus_mute, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -633,7 +633,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: busIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_bus_mute, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_bus_mute, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -660,7 +660,7 @@ open class AudioServer: Object {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_set_bus_bypass_effects, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_set_bus_bypass_effects, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -689,7 +689,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: busIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_bus_bypassing_effects, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_bus_bypassing_effects, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -717,7 +717,7 @@ open class AudioServer: Object {
                 withUnsafePointer(to: atPosition) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_add_bus_effect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_add_bus_effect, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -748,7 +748,7 @@ open class AudioServer: Object {
             withUnsafePointer(to: effectIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_remove_bus_effect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_remove_bus_effect, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -777,7 +777,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: busIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_bus_effect_count, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_bus_effect_count, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -800,12 +800,12 @@ open class AudioServer: Object {
     
     /// Returns the ``AudioEffect`` at position `effectIdx` in bus `busIdx`.
     public static func getBusEffect(busIdx: Int32, effectIdx: Int32) -> AudioEffect? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: busIdx) { pArg0 in
             withUnsafePointer(to: effectIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_bus_effect, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_get_bus_effect, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -814,7 +814,7 @@ open class AudioServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_bus_effect_instance: GDExtensionMethodBindPtr = {
@@ -830,13 +830,13 @@ open class AudioServer: Object {
     
     /// Returns the ``AudioEffectInstance`` assigned to the given bus and effect indices (and optionally channel).
     public static func getBusEffectInstance(busIdx: Int32, effectIdx: Int32, channel: Int32 = 0) -> AudioEffectInstance? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: busIdx) { pArg0 in
             withUnsafePointer(to: effectIdx) { pArg1 in
                 withUnsafePointer(to: channel) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_get_bus_effect_instance, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_get_bus_effect_instance, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -847,7 +847,7 @@ open class AudioServer: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_swap_bus_effects: GDExtensionMethodBindPtr = {
@@ -868,7 +868,7 @@ open class AudioServer: Object {
                 withUnsafePointer(to: byEffectIdx) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_swap_bus_effects, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_swap_bus_effects, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -900,7 +900,7 @@ open class AudioServer: Object {
                 withUnsafePointer(to: enabled) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_set_bus_effect_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_set_bus_effect_enabled, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -932,7 +932,7 @@ open class AudioServer: Object {
             withUnsafePointer(to: effectIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_is_bus_effect_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_is_bus_effect_enabled, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -962,7 +962,7 @@ open class AudioServer: Object {
             withUnsafePointer(to: channel) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_bus_peak_volume_left_db, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_get_bus_peak_volume_left_db, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -992,7 +992,7 @@ open class AudioServer: Object {
             withUnsafePointer(to: channel) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_bus_peak_volume_right_db, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_get_bus_peak_volume_right_db, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -1020,7 +1020,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: scale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_playback_speed_scale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_playback_speed_scale, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1044,7 +1044,7 @@ open class AudioServer: Object {
     @inline(__always)
     fileprivate static func get_playback_speed_scale() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_get_playback_speed_scale, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_playback_speed_scale, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1064,7 +1064,7 @@ open class AudioServer: Object {
     /// > Note: Remember to unlock it afterwards.
     /// 
     public static func lock() {
-        gi.object_method_bind_ptrcall(method_lock, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_lock, shared.handle, nil, nil)
         
     }
     
@@ -1081,7 +1081,7 @@ open class AudioServer: Object {
     
     /// Unlocks the audio driver's main loop. (After locking it, you should always unlock it.)
     public static func unlock() {
-        gi.object_method_bind_ptrcall(method_unlock, UnsafeMutableRawPointer(mutating: shared.handle), nil, nil)
+        gi.object_method_bind_ptrcall(method_unlock, shared.handle, nil, nil)
         
     }
     
@@ -1099,7 +1099,7 @@ open class AudioServer: Object {
     /// Returns the speaker configuration.
     public static func getSpeakerMode() -> AudioServer.SpeakerMode {
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(method_get_speaker_mode, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_speaker_mode, shared.handle, nil, &_result)
         return AudioServer.SpeakerMode (rawValue: _result)!
     }
     
@@ -1117,7 +1117,7 @@ open class AudioServer: Object {
     /// Returns the sample rate at the output of the ``AudioServer``.
     public static func getMixRate() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_get_mix_rate, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_mix_rate, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1135,7 +1135,7 @@ open class AudioServer: Object {
     /// Returns the sample rate at the input of the ``AudioServer``.
     public static func getInputMixRate() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_get_input_mix_rate, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_input_mix_rate, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1153,7 +1153,7 @@ open class AudioServer: Object {
     /// Returns the name of the current audio driver. The default usually depends on the operating system, but may be overridden via the `--audio-driver` <a href="https://docs.godotengine.org/en//tutorials/editor/command_line_tutorial.html">command line argument</a>. `--headless` also automatically sets the audio driver to `Dummy`. See also ``ProjectSettings/audio/driver/driver``.
     public static func getDriverName() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_driver_name, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_driver_name, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1171,7 +1171,7 @@ open class AudioServer: Object {
     /// Returns the names of all audio output devices detected on the system.
     public static func getOutputDeviceList() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_output_device_list, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_output_device_list, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -1189,7 +1189,7 @@ open class AudioServer: Object {
     @inline(__always)
     fileprivate static func get_output_device() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_output_device, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_output_device, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1210,7 +1210,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_output_device, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_output_device, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1234,7 +1234,7 @@ open class AudioServer: Object {
     /// Returns the relative time until the next mix occurs.
     public static func getTimeToNextMix() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_get_time_to_next_mix, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_time_to_next_mix, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1252,7 +1252,7 @@ open class AudioServer: Object {
     /// Returns the relative time since the last mix occurred.
     public static func getTimeSinceLastMix() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_get_time_since_last_mix, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_time_since_last_mix, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1273,7 +1273,7 @@ open class AudioServer: Object {
     /// 
     public static func getOutputLatency() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_get_output_latency, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_output_latency, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1294,7 +1294,7 @@ open class AudioServer: Object {
     /// 
     public static func getInputDeviceList() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_input_device_list, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_input_device_list, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -1312,7 +1312,7 @@ open class AudioServer: Object {
     @inline(__always)
     fileprivate static func get_input_device() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_input_device, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_input_device, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1333,7 +1333,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_input_device, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_input_device, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1359,7 +1359,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: busLayout?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_bus_layout, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_bus_layout, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1382,9 +1382,9 @@ open class AudioServer: Object {
     
     /// Generates an ``AudioBusLayout`` using the available buses and effects.
     public static func generateBusLayout() -> AudioBusLayout? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(method_generate_bus_layout, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(method_generate_bus_layout, shared.handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_enable_tagging_used_audio_streams: GDExtensionMethodBindPtr = {
@@ -1406,7 +1406,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_enable_tagging_used_audio_streams, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_enable_tagging_used_audio_streams, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1436,7 +1436,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: stream?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_stream_registered_as_sample, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_stream_registered_as_sample, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -1465,7 +1465,7 @@ open class AudioServer: Object {
         withUnsafePointer(to: stream?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_register_stream_as_sample, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_register_stream_as_sample, shared.handle, pArgs, nil)
                 }
                 
             }

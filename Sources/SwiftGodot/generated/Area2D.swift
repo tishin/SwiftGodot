@@ -265,7 +265,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: spaceOverrideMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_gravity_space_override_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_gravity_space_override_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -290,7 +290,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func get_gravity_space_override_mode() -> Area2D.SpaceOverride {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Area2D.method_get_gravity_space_override_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_get_gravity_space_override_mode, handle, nil, &_result)
         return Area2D.SpaceOverride (rawValue: _result)!
     }
     
@@ -311,7 +311,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_gravity_is_point, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_gravity_is_point, handle, pArgs, nil)
                 }
                 
             }
@@ -336,7 +336,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func is_gravity_a_point() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Area2D.method_is_gravity_a_point, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_is_gravity_a_point, handle, nil, &_result)
         return _result
     }
     
@@ -357,7 +357,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: distanceScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_gravity_point_unit_distance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_gravity_point_unit_distance, handle, pArgs, nil)
                 }
                 
             }
@@ -382,7 +382,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func get_gravity_point_unit_distance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Area2D.method_get_gravity_point_unit_distance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_get_gravity_point_unit_distance, handle, nil, &_result)
         return _result
     }
     
@@ -403,7 +403,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: center) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_gravity_point_center, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_gravity_point_center, handle, pArgs, nil)
                 }
                 
             }
@@ -428,7 +428,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func get_gravity_point_center() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Area2D.method_get_gravity_point_center, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_get_gravity_point_center, handle, nil, &_result)
         return _result
     }
     
@@ -449,7 +449,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: direction) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_gravity_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_gravity_direction, handle, pArgs, nil)
                 }
                 
             }
@@ -474,7 +474,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func get_gravity_direction() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Area2D.method_get_gravity_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_get_gravity_direction, handle, nil, &_result)
         return _result
     }
     
@@ -495,7 +495,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: gravity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_gravity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_gravity, handle, pArgs, nil)
                 }
                 
             }
@@ -520,7 +520,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func get_gravity() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Area2D.method_get_gravity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_get_gravity, handle, nil, &_result)
         return _result
     }
     
@@ -541,7 +541,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: spaceOverrideMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_linear_damp_space_override_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_linear_damp_space_override_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -566,7 +566,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func get_linear_damp_space_override_mode() -> Area2D.SpaceOverride {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Area2D.method_get_linear_damp_space_override_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_get_linear_damp_space_override_mode, handle, nil, &_result)
         return Area2D.SpaceOverride (rawValue: _result)!
     }
     
@@ -587,7 +587,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: spaceOverrideMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_angular_damp_space_override_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_angular_damp_space_override_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -612,7 +612,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func get_angular_damp_space_override_mode() -> Area2D.SpaceOverride {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Area2D.method_get_angular_damp_space_override_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_get_angular_damp_space_override_mode, handle, nil, &_result)
         return Area2D.SpaceOverride (rawValue: _result)!
     }
     
@@ -633,7 +633,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: linearDamp) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_linear_damp, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_linear_damp, handle, pArgs, nil)
                 }
                 
             }
@@ -658,7 +658,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func get_linear_damp() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Area2D.method_get_linear_damp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_get_linear_damp, handle, nil, &_result)
         return _result
     }
     
@@ -679,7 +679,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: angularDamp) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_angular_damp, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_angular_damp, handle, pArgs, nil)
                 }
                 
             }
@@ -704,7 +704,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func get_angular_damp() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Area2D.method_get_angular_damp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_get_angular_damp, handle, nil, &_result)
         return _result
     }
     
@@ -725,7 +725,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_priority, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_priority, handle, pArgs, nil)
                 }
                 
             }
@@ -750,7 +750,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func get_priority() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Area2D.method_get_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_get_priority, handle, nil, &_result)
         return _result
     }
     
@@ -771,7 +771,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_monitoring, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_monitoring, handle, pArgs, nil)
                 }
                 
             }
@@ -796,7 +796,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func is_monitoring() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Area2D.method_is_monitoring, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_is_monitoring, handle, nil, &_result)
         return _result
     }
     
@@ -817,7 +817,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_monitorable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_monitorable, handle, pArgs, nil)
                 }
                 
             }
@@ -842,7 +842,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func is_monitorable() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Area2D.method_is_monitorable, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_is_monitorable, handle, nil, &_result)
         return _result
     }
     
@@ -864,7 +864,7 @@ open class Area2D: CollisionObject2D {
     public final func getOverlappingBodies() -> TypedArray<Node2D?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Area2D.method_get_overlapping_bodies, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_get_overlapping_bodies, handle, nil, &_result)
         return TypedArray<Node2D?>(takingOver: _result)
     }
     
@@ -886,7 +886,7 @@ open class Area2D: CollisionObject2D {
     public final func getOverlappingAreas() -> TypedArray<Area2D?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Area2D.method_get_overlapping_areas, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_get_overlapping_areas, handle, nil, &_result)
         return TypedArray<Area2D?>(takingOver: _result)
     }
     
@@ -908,7 +908,7 @@ open class Area2D: CollisionObject2D {
     public final func hasOverlappingBodies() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Area2D.method_has_overlapping_bodies, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_has_overlapping_bodies, handle, nil, &_result)
         return _result
     }
     
@@ -930,7 +930,7 @@ open class Area2D: CollisionObject2D {
     public final func hasOverlappingAreas() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Area2D.method_has_overlapping_areas, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_has_overlapping_areas, handle, nil, &_result)
         return _result
     }
     
@@ -957,7 +957,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: body?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_overlaps_body, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Area2D.method_overlaps_body, handle, pArgs, &_result)
                 }
                 
             }
@@ -988,7 +988,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: area?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_overlaps_area, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Area2D.method_overlaps_area, handle, pArgs, &_result)
                 }
                 
             }
@@ -1015,7 +1015,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_audio_bus_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_audio_bus_name, handle, pArgs, nil)
                 }
                 
             }
@@ -1040,7 +1040,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func get_audio_bus_name() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(Area2D.method_get_audio_bus_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Area2D.method_get_audio_bus_name, handle, nil, &_result.content)
         return _result
     }
     
@@ -1061,7 +1061,7 @@ open class Area2D: CollisionObject2D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Area2D.method_set_audio_bus_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Area2D.method_set_audio_bus_override, handle, pArgs, nil)
                 }
                 
             }
@@ -1086,7 +1086,7 @@ open class Area2D: CollisionObject2D {
     fileprivate final func is_overriding_audio_bus() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Area2D.method_is_overriding_audio_bus, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Area2D.method_is_overriding_audio_bus, handle, nil, &_result)
         return _result
     }
     

@@ -29,7 +29,7 @@ open class ResourceSaver: Object {
     /// The shared instance of this class
     public static var shared: ResourceSaver {
         return withUnsafePointer(to: &ResourceSaver.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -100,7 +100,7 @@ open class ResourceSaver: Object {
                 withUnsafePointer(to: flags.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_save, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_save, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -131,7 +131,7 @@ open class ResourceSaver: Object {
         withUnsafePointer(to: type?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_recognized_extensions, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_recognized_extensions, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -161,7 +161,7 @@ open class ResourceSaver: Object {
             withUnsafePointer(to: atFront) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_add_resource_format_saver, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_add_resource_format_saver, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -189,7 +189,7 @@ open class ResourceSaver: Object {
         withUnsafePointer(to: formatSaver?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_remove_resource_format_saver, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_remove_resource_format_saver, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -218,7 +218,7 @@ open class ResourceSaver: Object {
             withUnsafePointer(to: generate) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_resource_id_for_path, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_get_resource_id_for_path, shared.handle, pArgs, &_result)
                     }
                     
                 }

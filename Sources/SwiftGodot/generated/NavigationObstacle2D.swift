@@ -138,7 +138,7 @@ open class NavigationObstacle2D: Node2D {
     public final func getRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -159,7 +159,7 @@ open class NavigationObstacle2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_avoidance_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_avoidance_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -184,7 +184,7 @@ open class NavigationObstacle2D: Node2D {
     fileprivate final func get_avoidance_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_avoidance_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_avoidance_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -205,7 +205,7 @@ open class NavigationObstacle2D: Node2D {
         withUnsafePointer(to: navigationMap.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_navigation_map, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_navigation_map, handle, pArgs, nil)
                 }
                 
             }
@@ -230,7 +230,7 @@ open class NavigationObstacle2D: Node2D {
     public final func getNavigationMap() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_navigation_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_navigation_map, handle, nil, &_result.content)
         return _result
     }
     
@@ -251,7 +251,7 @@ open class NavigationObstacle2D: Node2D {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -276,7 +276,7 @@ open class NavigationObstacle2D: Node2D {
     fileprivate final func get_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_radius, handle, nil, &_result)
         return _result
     }
     
@@ -297,7 +297,7 @@ open class NavigationObstacle2D: Node2D {
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -322,7 +322,7 @@ open class NavigationObstacle2D: Node2D {
     fileprivate final func get_velocity() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -343,7 +343,7 @@ open class NavigationObstacle2D: Node2D {
         withUnsafePointer(to: vertices.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_vertices, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_vertices, handle, pArgs, nil)
                 }
                 
             }
@@ -368,7 +368,7 @@ open class NavigationObstacle2D: Node2D {
     fileprivate final func get_vertices() -> PackedVector2Array {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedVector2Array = PackedVector2Array ()
-        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_vertices, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_vertices, handle, nil, &_result.content)
         return _result
     }
     
@@ -389,7 +389,7 @@ open class NavigationObstacle2D: Node2D {
         withUnsafePointer(to: layers) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_avoidance_layers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_avoidance_layers, handle, pArgs, nil)
                 }
                 
             }
@@ -414,7 +414,7 @@ open class NavigationObstacle2D: Node2D {
     fileprivate final func get_avoidance_layers() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_avoidance_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_avoidance_layers, handle, nil, &_result)
         return _result
     }
     
@@ -436,7 +436,7 @@ open class NavigationObstacle2D: Node2D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_avoidance_layer_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_avoidance_layer_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -466,7 +466,7 @@ open class NavigationObstacle2D: Node2D {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_avoidance_layer_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_avoidance_layer_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -493,7 +493,7 @@ open class NavigationObstacle2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_affect_navigation_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_affect_navigation_mesh, handle, pArgs, nil)
                 }
                 
             }
@@ -518,7 +518,7 @@ open class NavigationObstacle2D: Node2D {
     fileprivate final func get_affect_navigation_mesh() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_affect_navigation_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_affect_navigation_mesh, handle, nil, &_result)
         return _result
     }
     
@@ -539,7 +539,7 @@ open class NavigationObstacle2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_carve_navigation_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationObstacle2D.method_set_carve_navigation_mesh, handle, pArgs, nil)
                 }
                 
             }
@@ -564,7 +564,7 @@ open class NavigationObstacle2D: Node2D {
     fileprivate final func get_carve_navigation_mesh() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_carve_navigation_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationObstacle2D.method_get_carve_navigation_mesh, handle, nil, &_result)
         return _result
     }
     

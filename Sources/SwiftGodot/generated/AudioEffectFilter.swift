@@ -105,7 +105,7 @@ open class AudioEffectFilter: AudioEffect {
         withUnsafePointer(to: freq) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectFilter.method_set_cutoff, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectFilter.method_set_cutoff, handle, pArgs, nil)
                 }
                 
             }
@@ -130,7 +130,7 @@ open class AudioEffectFilter: AudioEffect {
     fileprivate final func get_cutoff() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectFilter.method_get_cutoff, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectFilter.method_get_cutoff, handle, nil, &_result)
         return _result
     }
     
@@ -151,7 +151,7 @@ open class AudioEffectFilter: AudioEffect {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectFilter.method_set_resonance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectFilter.method_set_resonance, handle, pArgs, nil)
                 }
                 
             }
@@ -176,7 +176,7 @@ open class AudioEffectFilter: AudioEffect {
     fileprivate final func get_resonance() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectFilter.method_get_resonance, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectFilter.method_get_resonance, handle, nil, &_result)
         return _result
     }
     
@@ -197,7 +197,7 @@ open class AudioEffectFilter: AudioEffect {
         withUnsafePointer(to: amount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectFilter.method_set_gain, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectFilter.method_set_gain, handle, pArgs, nil)
                 }
                 
             }
@@ -222,7 +222,7 @@ open class AudioEffectFilter: AudioEffect {
     fileprivate final func get_gain() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AudioEffectFilter.method_get_gain, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectFilter.method_get_gain, handle, nil, &_result)
         return _result
     }
     
@@ -243,7 +243,7 @@ open class AudioEffectFilter: AudioEffect {
         withUnsafePointer(to: amount.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AudioEffectFilter.method_set_db, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AudioEffectFilter.method_set_db, handle, pArgs, nil)
                 }
                 
             }
@@ -268,7 +268,7 @@ open class AudioEffectFilter: AudioEffect {
     fileprivate final func get_db() -> AudioEffectFilter.FilterDB {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AudioEffectFilter.method_get_db, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AudioEffectFilter.method_get_db, handle, nil, &_result)
         return AudioEffectFilter.FilterDB (rawValue: _result)!
     }
     

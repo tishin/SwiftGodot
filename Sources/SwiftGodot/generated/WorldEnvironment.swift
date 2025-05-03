@@ -87,7 +87,7 @@ open class WorldEnvironment: Node {
         withUnsafePointer(to: env?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WorldEnvironment.method_set_environment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WorldEnvironment.method_set_environment, handle, pArgs, nil)
                 }
                 
             }
@@ -111,9 +111,9 @@ open class WorldEnvironment: Node {
     @inline(__always)
     fileprivate final func get_environment() -> Environment? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(WorldEnvironment.method_get_environment, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(WorldEnvironment.method_get_environment, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_camera_attributes: GDExtensionMethodBindPtr = {
@@ -133,7 +133,7 @@ open class WorldEnvironment: Node {
         withUnsafePointer(to: cameraAttributes?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WorldEnvironment.method_set_camera_attributes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WorldEnvironment.method_set_camera_attributes, handle, pArgs, nil)
                 }
                 
             }
@@ -157,9 +157,9 @@ open class WorldEnvironment: Node {
     @inline(__always)
     fileprivate final func get_camera_attributes() -> CameraAttributes? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(WorldEnvironment.method_get_camera_attributes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(WorldEnvironment.method_get_camera_attributes, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_compositor: GDExtensionMethodBindPtr = {
@@ -179,7 +179,7 @@ open class WorldEnvironment: Node {
         withUnsafePointer(to: compositor?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(WorldEnvironment.method_set_compositor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(WorldEnvironment.method_set_compositor, handle, pArgs, nil)
                 }
                 
             }
@@ -203,9 +203,9 @@ open class WorldEnvironment: Node {
     @inline(__always)
     fileprivate final func get_compositor() -> Compositor? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(WorldEnvironment.method_get_compositor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(WorldEnvironment.method_get_compositor, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

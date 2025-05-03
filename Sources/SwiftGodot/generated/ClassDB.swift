@@ -26,7 +26,7 @@ open class ClassDB: Object {
     /// The shared instance of this class
     public static var shared: ClassDB {
         return withUnsafePointer(to: &ClassDB.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -61,7 +61,7 @@ open class ClassDB: Object {
     /// Returns the names of all the classes available.
     public static func getClassList() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_class_list, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_class_list, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -82,7 +82,7 @@ open class ClassDB: Object {
         withUnsafePointer(to: `class`.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_inheriters_from_class, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_inheriters_from_class, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -109,7 +109,7 @@ open class ClassDB: Object {
         withUnsafePointer(to: `class`.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_parent_class, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_parent_class, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -136,7 +136,7 @@ open class ClassDB: Object {
         withUnsafePointer(to: `class`.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_class_exists, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_class_exists, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -164,7 +164,7 @@ open class ClassDB: Object {
             withUnsafePointer(to: inherits.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_is_parent_class, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_is_parent_class, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -193,7 +193,7 @@ open class ClassDB: Object {
         withUnsafePointer(to: `class`.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_can_instantiate, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_can_instantiate, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -220,7 +220,7 @@ open class ClassDB: Object {
         withUnsafePointer(to: `class`.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_instantiate, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_instantiate, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -247,7 +247,7 @@ open class ClassDB: Object {
         withUnsafePointer(to: `class`.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_class_get_api_type, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_class_get_api_type, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -275,7 +275,7 @@ open class ClassDB: Object {
             withUnsafePointer(to: signal.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_class_has_signal, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_class_has_signal, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -305,7 +305,7 @@ open class ClassDB: Object {
             withUnsafePointer(to: signal.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_class_get_signal, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_class_get_signal, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -335,7 +335,7 @@ open class ClassDB: Object {
             withUnsafePointer(to: noInheritance) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_class_get_signal_list, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_class_get_signal_list, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -365,7 +365,7 @@ open class ClassDB: Object {
             withUnsafePointer(to: noInheritance) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_class_get_property_list, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_class_get_property_list, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -395,7 +395,7 @@ open class ClassDB: Object {
             withUnsafePointer(to: property.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_class_get_property_getter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_class_get_property_getter, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -425,7 +425,7 @@ open class ClassDB: Object {
             withUnsafePointer(to: property.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_class_get_property_setter, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_class_get_property_setter, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -455,7 +455,7 @@ open class ClassDB: Object {
             withUnsafePointer(to: property.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_class_get_property, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_class_get_property, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -486,7 +486,7 @@ open class ClassDB: Object {
                 withUnsafePointer(to: value.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_class_set_property, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_class_set_property, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -518,7 +518,7 @@ open class ClassDB: Object {
             withUnsafePointer(to: property.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_class_get_property_default_value, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_class_get_property_default_value, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -549,7 +549,7 @@ open class ClassDB: Object {
                 withUnsafePointer(to: noInheritance) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_class_has_method, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_class_has_method, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -582,7 +582,7 @@ open class ClassDB: Object {
                 withUnsafePointer(to: noInheritance) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_class_get_method_argument_count, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_class_get_method_argument_count, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -617,7 +617,7 @@ open class ClassDB: Object {
             withUnsafePointer(to: noInheritance) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_class_get_method_list, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_class_get_method_list, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -650,7 +650,7 @@ open class ClassDB: Object {
                 if arguments.isEmpty {
                     withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                            gi.object_method_bind_call(method_class_call_static, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, 2, &_result, nil)
+                            gi.object_method_bind_call(method_class_call_static, shared.handle, pArgs, 2, &_result, nil)
                         }
                         
                     }
@@ -678,7 +678,7 @@ open class ClassDB: Object {
                                 pArgsBuffer.initializeElement(at: 2 + i, to: contentsPtr + i)
                             }
                         
-                            gi.object_method_bind_call(method_class_call_static, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, Int64(2 + arguments.count), &_result, nil)
+                            gi.object_method_bind_call(method_class_call_static, shared.handle, pArgs, Int64(2 + arguments.count), &_result, nil)
                         }                           
                     }
                     
@@ -708,7 +708,7 @@ open class ClassDB: Object {
             withUnsafePointer(to: noInheritance) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_class_get_integer_constant_list, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_class_get_integer_constant_list, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -738,7 +738,7 @@ open class ClassDB: Object {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_class_has_integer_constant, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_class_has_integer_constant, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -768,7 +768,7 @@ open class ClassDB: Object {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_class_get_integer_constant, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(method_class_get_integer_constant, shared.handle, pArgs, &_result)
                     }
                     
                 }
@@ -799,7 +799,7 @@ open class ClassDB: Object {
                 withUnsafePointer(to: noInheritance) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_class_has_enum, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_class_has_enum, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -831,7 +831,7 @@ open class ClassDB: Object {
             withUnsafePointer(to: noInheritance) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_class_get_enum_list, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_class_get_enum_list, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -862,7 +862,7 @@ open class ClassDB: Object {
                 withUnsafePointer(to: noInheritance) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_class_get_enum_constants, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(method_class_get_enum_constants, shared.handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -895,7 +895,7 @@ open class ClassDB: Object {
                 withUnsafePointer(to: noInheritance) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_class_get_integer_constant_enum, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(method_class_get_integer_constant_enum, shared.handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -928,7 +928,7 @@ open class ClassDB: Object {
                 withUnsafePointer(to: noInheritance) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_is_class_enum_bitfield, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(method_is_class_enum_bitfield, shared.handle, pArgs, &_result)
                         }
                         
                     }
@@ -959,7 +959,7 @@ open class ClassDB: Object {
         withUnsafePointer(to: `class`.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_is_class_enabled, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_is_class_enabled, shared.handle, pArgs, &_result)
                 }
                 
             }

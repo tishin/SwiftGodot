@@ -97,7 +97,7 @@ open class Joint2D: Node2D {
         withUnsafePointer(to: node.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Joint2D.method_set_node_a, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Joint2D.method_set_node_a, handle, pArgs, nil)
                 }
                 
             }
@@ -122,7 +122,7 @@ open class Joint2D: Node2D {
     fileprivate final func get_node_a() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(Joint2D.method_get_node_a, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Joint2D.method_get_node_a, handle, nil, &_result.content)
         return _result
     }
     
@@ -143,7 +143,7 @@ open class Joint2D: Node2D {
         withUnsafePointer(to: node.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Joint2D.method_set_node_b, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Joint2D.method_set_node_b, handle, pArgs, nil)
                 }
                 
             }
@@ -168,7 +168,7 @@ open class Joint2D: Node2D {
     fileprivate final func get_node_b() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(Joint2D.method_get_node_b, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Joint2D.method_get_node_b, handle, nil, &_result.content)
         return _result
     }
     
@@ -189,7 +189,7 @@ open class Joint2D: Node2D {
         withUnsafePointer(to: bias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Joint2D.method_set_bias, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Joint2D.method_set_bias, handle, pArgs, nil)
                 }
                 
             }
@@ -214,7 +214,7 @@ open class Joint2D: Node2D {
     fileprivate final func get_bias() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Joint2D.method_get_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Joint2D.method_get_bias, handle, nil, &_result)
         return _result
     }
     
@@ -235,7 +235,7 @@ open class Joint2D: Node2D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Joint2D.method_set_exclude_nodes_from_collision, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Joint2D.method_set_exclude_nodes_from_collision, handle, pArgs, nil)
                 }
                 
             }
@@ -260,7 +260,7 @@ open class Joint2D: Node2D {
     fileprivate final func get_exclude_nodes_from_collision() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Joint2D.method_get_exclude_nodes_from_collision, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Joint2D.method_get_exclude_nodes_from_collision, handle, nil, &_result)
         return _result
     }
     
@@ -279,7 +279,7 @@ open class Joint2D: Node2D {
     public final func getRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(Joint2D.method_get_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Joint2D.method_get_rid, handle, nil, &_result.content)
         return _result
     }
     

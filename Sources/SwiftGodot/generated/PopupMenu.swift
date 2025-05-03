@@ -169,7 +169,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: forGlobalOnly) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_activate_item_by_event, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_activate_item_by_event, handle, pArgs, &_result)
                     }
                     
                 }
@@ -198,7 +198,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_set_prefer_native_menu, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_set_prefer_native_menu, handle, pArgs, nil)
                 }
                 
             }
@@ -223,7 +223,7 @@ open class PopupMenu: Popup {
     fileprivate final func is_prefer_native_menu() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PopupMenu.method_is_prefer_native_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PopupMenu.method_is_prefer_native_menu, handle, nil, &_result)
         return _result
     }
     
@@ -242,7 +242,7 @@ open class PopupMenu: Popup {
     public final func isNativeMenu() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PopupMenu.method_is_native_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PopupMenu.method_is_native_menu, handle, nil, &_result)
         return _result
     }
     
@@ -271,7 +271,7 @@ open class PopupMenu: Popup {
                 withUnsafePointer(to: accel.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(PopupMenu.method_add_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(PopupMenu.method_add_item, handle, pArgs, nil)
                         }
                         
                     }
@@ -309,7 +309,7 @@ open class PopupMenu: Popup {
                     withUnsafePointer(to: accel.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(PopupMenu.method_add_icon_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(PopupMenu.method_add_icon_item, handle, pArgs, nil)
                             }
                             
                         }
@@ -350,7 +350,7 @@ open class PopupMenu: Popup {
                 withUnsafePointer(to: accel.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(PopupMenu.method_add_check_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(PopupMenu.method_add_check_item, handle, pArgs, nil)
                         }
                         
                     }
@@ -390,7 +390,7 @@ open class PopupMenu: Popup {
                     withUnsafePointer(to: accel.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(PopupMenu.method_add_icon_check_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(PopupMenu.method_add_icon_check_item, handle, pArgs, nil)
                             }
                             
                         }
@@ -431,7 +431,7 @@ open class PopupMenu: Popup {
                 withUnsafePointer(to: accel.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(PopupMenu.method_add_radio_check_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(PopupMenu.method_add_radio_check_item, handle, pArgs, nil)
                         }
                         
                     }
@@ -466,7 +466,7 @@ open class PopupMenu: Popup {
                     withUnsafePointer(to: accel.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(PopupMenu.method_add_icon_radio_check_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(PopupMenu.method_add_icon_radio_check_item, handle, pArgs, nil)
                             }
                             
                         }
@@ -511,7 +511,7 @@ open class PopupMenu: Popup {
                         withUnsafePointer(to: accel.rawValue) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(PopupMenu.method_add_multistate_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(PopupMenu.method_add_multistate_item, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -554,7 +554,7 @@ open class PopupMenu: Popup {
                     withUnsafePointer(to: allowEcho) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(PopupMenu.method_add_shortcut, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(PopupMenu.method_add_shortcut, handle, pArgs, nil)
                             }
                             
                         }
@@ -596,7 +596,7 @@ open class PopupMenu: Popup {
                         withUnsafePointer(to: allowEcho) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(PopupMenu.method_add_icon_shortcut, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(PopupMenu.method_add_icon_shortcut, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -638,7 +638,7 @@ open class PopupMenu: Popup {
                 withUnsafePointer(to: global) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(PopupMenu.method_add_check_shortcut, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(PopupMenu.method_add_check_shortcut, handle, pArgs, nil)
                         }
                         
                     }
@@ -677,7 +677,7 @@ open class PopupMenu: Popup {
                     withUnsafePointer(to: global) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(PopupMenu.method_add_icon_check_shortcut, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(PopupMenu.method_add_icon_check_shortcut, handle, pArgs, nil)
                             }
                             
                         }
@@ -717,7 +717,7 @@ open class PopupMenu: Popup {
                 withUnsafePointer(to: global) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(PopupMenu.method_add_radio_check_shortcut, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(PopupMenu.method_add_radio_check_shortcut, handle, pArgs, nil)
                         }
                         
                     }
@@ -751,7 +751,7 @@ open class PopupMenu: Popup {
                     withUnsafePointer(to: global) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(PopupMenu.method_add_icon_radio_check_shortcut, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(PopupMenu.method_add_icon_radio_check_shortcut, handle, pArgs, nil)
                             }
                             
                         }
@@ -791,7 +791,7 @@ open class PopupMenu: Popup {
                 withUnsafePointer(to: id) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(PopupMenu.method_add_submenu_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(PopupMenu.method_add_submenu_item, handle, pArgs, nil)
                         }
                         
                     }
@@ -830,7 +830,7 @@ open class PopupMenu: Popup {
                 withUnsafePointer(to: id) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(PopupMenu.method_add_submenu_node_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(PopupMenu.method_add_submenu_node_item, handle, pArgs, nil)
                         }
                         
                     }
@@ -863,7 +863,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: text.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_text, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_text, handle, pArgs, nil)
                     }
                     
                 }
@@ -893,7 +893,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: direction.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_text_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_text_direction, handle, pArgs, nil)
                     }
                     
                 }
@@ -924,7 +924,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: language.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_language, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_language, handle, pArgs, nil)
                     }
                     
                 }
@@ -954,7 +954,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: icon?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_icon, handle, pArgs, nil)
                     }
                     
                 }
@@ -984,7 +984,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: width) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_icon_max_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_icon_max_width, handle, pArgs, nil)
                     }
                     
                 }
@@ -1014,7 +1014,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: modulate) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_icon_modulate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_icon_modulate, handle, pArgs, nil)
                     }
                     
                 }
@@ -1044,7 +1044,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: checked) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_checked, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_checked, handle, pArgs, nil)
                     }
                     
                 }
@@ -1077,7 +1077,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_id, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_id, handle, pArgs, nil)
                     }
                     
                 }
@@ -1107,7 +1107,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: accel.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_accelerator, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_accelerator, handle, pArgs, nil)
                     }
                     
                 }
@@ -1137,7 +1137,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: metadata.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_metadata, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_metadata, handle, pArgs, nil)
                     }
                     
                 }
@@ -1167,7 +1167,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: disabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_disabled, handle, pArgs, nil)
                     }
                     
                 }
@@ -1198,7 +1198,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: submenu.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_submenu, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_submenu, handle, pArgs, nil)
                     }
                     
                 }
@@ -1228,7 +1228,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: submenu?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_submenu_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_submenu_node, handle, pArgs, nil)
                     }
                     
                 }
@@ -1258,7 +1258,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_as_separator, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_as_separator, handle, pArgs, nil)
                     }
                     
                 }
@@ -1291,7 +1291,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_as_checkable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_as_checkable, handle, pArgs, nil)
                     }
                     
                 }
@@ -1321,7 +1321,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_as_radio_checkable, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_as_radio_checkable, handle, pArgs, nil)
                     }
                     
                 }
@@ -1352,7 +1352,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: tooltip.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_tooltip, handle, pArgs, nil)
                     }
                     
                 }
@@ -1383,7 +1383,7 @@ open class PopupMenu: Popup {
                 withUnsafePointer(to: global) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(PopupMenu.method_set_item_shortcut, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(PopupMenu.method_set_item_shortcut, handle, pArgs, nil)
                         }
                         
                     }
@@ -1415,7 +1415,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: indent) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_indent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_indent, handle, pArgs, nil)
                     }
                     
                 }
@@ -1445,7 +1445,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: state) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_multistate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_multistate, handle, pArgs, nil)
                     }
                     
                 }
@@ -1475,7 +1475,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: maxStates) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_multistate_max, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_multistate_max, handle, pArgs, nil)
                     }
                     
                 }
@@ -1505,7 +1505,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: disabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_shortcut_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_set_item_shortcut_disabled, handle, pArgs, nil)
                     }
                     
                 }
@@ -1534,7 +1534,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_toggle_item_checked, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_toggle_item_checked, handle, pArgs, nil)
                 }
                 
             }
@@ -1561,7 +1561,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_toggle_item_multistate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_toggle_item_multistate, handle, pArgs, nil)
                 }
                 
             }
@@ -1589,7 +1589,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_text, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_text, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1617,7 +1617,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_text_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_text_direction, handle, pArgs, &_result)
                 }
                 
             }
@@ -1645,7 +1645,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_language, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_language, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1669,18 +1669,18 @@ open class PopupMenu: Popup {
     /// Returns the icon of the item at the given `index`.
     public final func getItemIcon(index: Int32) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_icon, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_icon, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_item_icon_max_width: GDExtensionMethodBindPtr = {
@@ -1701,7 +1701,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_icon_max_width, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_icon_max_width, handle, pArgs, &_result)
                 }
                 
             }
@@ -1729,7 +1729,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_icon_modulate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_icon_modulate, handle, pArgs, &_result)
                 }
                 
             }
@@ -1757,7 +1757,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_is_item_checked, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_is_item_checked, handle, pArgs, &_result)
                 }
                 
             }
@@ -1785,7 +1785,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_id, handle, pArgs, &_result)
                 }
                 
             }
@@ -1813,7 +1813,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -1841,7 +1841,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_accelerator, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_accelerator, handle, pArgs, &_result)
                 }
                 
             }
@@ -1869,7 +1869,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_metadata, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_metadata, handle, pArgs, &_result)
                 }
                 
             }
@@ -1900,7 +1900,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_is_item_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_is_item_disabled, handle, pArgs, &_result)
                 }
                 
             }
@@ -1928,7 +1928,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_submenu, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_submenu, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1952,18 +1952,18 @@ open class PopupMenu: Popup {
     /// Returns the submenu of the item at the given `index`, or `null` if no submenu was added. See ``addSubmenuNodeItem(label:submenu:id:)`` for more info on how to add a submenu.
     public final func getItemSubmenuNode(index: Int32) -> PopupMenu? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_submenu_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_submenu_node, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_is_item_separator: GDExtensionMethodBindPtr = {
@@ -1984,7 +1984,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_is_item_separator, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_is_item_separator, handle, pArgs, &_result)
                 }
                 
             }
@@ -2015,7 +2015,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_is_item_checkable, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_is_item_checkable, handle, pArgs, &_result)
                 }
                 
             }
@@ -2046,7 +2046,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_is_item_radio_checkable, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_is_item_radio_checkable, handle, pArgs, &_result)
                 }
                 
             }
@@ -2074,7 +2074,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_is_item_shortcut_disabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_is_item_shortcut_disabled, handle, pArgs, &_result)
                 }
                 
             }
@@ -2102,7 +2102,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_tooltip, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_tooltip, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2126,18 +2126,18 @@ open class PopupMenu: Popup {
     /// Returns the ``Shortcut`` associated with the item at the given `index`.
     public final func getItemShortcut(index: Int32) -> Shortcut? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_shortcut, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_shortcut, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_item_indent: GDExtensionMethodBindPtr = {
@@ -2158,7 +2158,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_indent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_indent, handle, pArgs, &_result)
                 }
                 
             }
@@ -2186,7 +2186,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_multistate_max, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_multistate_max, handle, pArgs, &_result)
                 }
                 
             }
@@ -2214,7 +2214,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_multistate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_get_item_multistate, handle, pArgs, &_result)
                 }
                 
             }
@@ -2244,7 +2244,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_set_focused_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_set_focused_item, handle, pArgs, nil)
                 }
                 
             }
@@ -2269,7 +2269,7 @@ open class PopupMenu: Popup {
     public final func getFocusedItem() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PopupMenu.method_get_focused_item, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PopupMenu.method_get_focused_item, handle, nil, &_result)
         return _result
     }
     
@@ -2290,7 +2290,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: count) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_set_item_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_set_item_count, handle, pArgs, nil)
                 }
                 
             }
@@ -2315,7 +2315,7 @@ open class PopupMenu: Popup {
     fileprivate final func get_item_count() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PopupMenu.method_get_item_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PopupMenu.method_get_item_count, handle, nil, &_result)
         return _result
     }
     
@@ -2336,7 +2336,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_scroll_to_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_scroll_to_item, handle, pArgs, nil)
                 }
                 
             }
@@ -2366,7 +2366,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_remove_item, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_remove_item, handle, pArgs, nil)
                 }
                 
             }
@@ -2398,7 +2398,7 @@ open class PopupMenu: Popup {
             withUnsafePointer(to: id) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(PopupMenu.method_add_separator, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(PopupMenu.method_add_separator, handle, pArgs, nil)
                     }
                     
                 }
@@ -2427,7 +2427,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: freeSubmenus) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_clear, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_clear, handle, pArgs, nil)
                 }
                 
             }
@@ -2454,7 +2454,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_set_hide_on_item_selection, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_set_hide_on_item_selection, handle, pArgs, nil)
                 }
                 
             }
@@ -2479,7 +2479,7 @@ open class PopupMenu: Popup {
     fileprivate final func is_hide_on_item_selection() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PopupMenu.method_is_hide_on_item_selection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PopupMenu.method_is_hide_on_item_selection, handle, nil, &_result)
         return _result
     }
     
@@ -2500,7 +2500,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_set_hide_on_checkable_item_selection, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_set_hide_on_checkable_item_selection, handle, pArgs, nil)
                 }
                 
             }
@@ -2525,7 +2525,7 @@ open class PopupMenu: Popup {
     fileprivate final func is_hide_on_checkable_item_selection() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PopupMenu.method_is_hide_on_checkable_item_selection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PopupMenu.method_is_hide_on_checkable_item_selection, handle, nil, &_result)
         return _result
     }
     
@@ -2546,7 +2546,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_set_hide_on_state_item_selection, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_set_hide_on_state_item_selection, handle, pArgs, nil)
                 }
                 
             }
@@ -2571,7 +2571,7 @@ open class PopupMenu: Popup {
     fileprivate final func is_hide_on_state_item_selection() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PopupMenu.method_is_hide_on_state_item_selection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PopupMenu.method_is_hide_on_state_item_selection, handle, nil, &_result)
         return _result
     }
     
@@ -2592,7 +2592,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: seconds) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_set_submenu_popup_delay, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_set_submenu_popup_delay, handle, pArgs, nil)
                 }
                 
             }
@@ -2617,7 +2617,7 @@ open class PopupMenu: Popup {
     fileprivate final func get_submenu_popup_delay() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PopupMenu.method_get_submenu_popup_delay, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PopupMenu.method_get_submenu_popup_delay, handle, nil, &_result)
         return _result
     }
     
@@ -2638,7 +2638,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: allow) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_set_allow_search, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_set_allow_search, handle, pArgs, nil)
                 }
                 
             }
@@ -2663,7 +2663,7 @@ open class PopupMenu: Popup {
     fileprivate final func get_allow_search() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PopupMenu.method_get_allow_search, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PopupMenu.method_get_allow_search, handle, nil, &_result)
         return _result
     }
     
@@ -2682,7 +2682,7 @@ open class PopupMenu: Popup {
     public final func isSystemMenu() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PopupMenu.method_is_system_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PopupMenu.method_is_system_menu, handle, nil, &_result)
         return _result
     }
     
@@ -2703,7 +2703,7 @@ open class PopupMenu: Popup {
         withUnsafePointer(to: systemMenuId.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PopupMenu.method_set_system_menu, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PopupMenu.method_set_system_menu, handle, pArgs, nil)
                 }
                 
             }
@@ -2728,7 +2728,7 @@ open class PopupMenu: Popup {
     fileprivate final func get_system_menu() -> NativeMenu.SystemMenus {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(PopupMenu.method_get_system_menu, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PopupMenu.method_get_system_menu, handle, nil, &_result)
         return NativeMenu.SystemMenus (rawValue: _result)!
     }
     

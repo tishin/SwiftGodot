@@ -102,7 +102,7 @@ open class LightmapGIData: Resource {
         withUnsafePointer(to: lightTextures.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LightmapGIData.method_set_lightmap_textures, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LightmapGIData.method_set_lightmap_textures, handle, pArgs, nil)
                 }
                 
             }
@@ -127,7 +127,7 @@ open class LightmapGIData: Resource {
     fileprivate final func get_lightmap_textures() -> TypedArray<TextureLayered?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(LightmapGIData.method_get_lightmap_textures, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LightmapGIData.method_get_lightmap_textures, handle, nil, &_result)
         return TypedArray<TextureLayered?>(takingOver: _result)
     }
     
@@ -148,7 +148,7 @@ open class LightmapGIData: Resource {
         withUnsafePointer(to: shadowmaskTextures.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LightmapGIData.method_set_shadowmask_textures, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LightmapGIData.method_set_shadowmask_textures, handle, pArgs, nil)
                 }
                 
             }
@@ -173,7 +173,7 @@ open class LightmapGIData: Resource {
     fileprivate final func get_shadowmask_textures() -> TypedArray<TextureLayered?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(LightmapGIData.method_get_shadowmask_textures, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LightmapGIData.method_get_shadowmask_textures, handle, nil, &_result)
         return TypedArray<TextureLayered?>(takingOver: _result)
     }
     
@@ -198,7 +198,7 @@ open class LightmapGIData: Resource {
         withUnsafePointer(to: usesSphericalHarmonics) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LightmapGIData.method_set_uses_spherical_harmonics, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LightmapGIData.method_set_uses_spherical_harmonics, handle, pArgs, nil)
                 }
                 
             }
@@ -224,7 +224,7 @@ open class LightmapGIData: Resource {
     fileprivate final func is_using_spherical_harmonics() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(LightmapGIData.method_is_using_spherical_harmonics, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LightmapGIData.method_is_using_spherical_harmonics, handle, nil, &_result)
         return _result
     }
     
@@ -248,7 +248,7 @@ open class LightmapGIData: Resource {
                     withUnsafePointer(to: subInstance) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(LightmapGIData.method_add_user, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(LightmapGIData.method_add_user, handle, pArgs, nil)
                             }
                             
                         }
@@ -279,7 +279,7 @@ open class LightmapGIData: Resource {
     public final func getUserCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(LightmapGIData.method_get_user_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(LightmapGIData.method_get_user_count, handle, nil, &_result)
         return _result
     }
     
@@ -301,7 +301,7 @@ open class LightmapGIData: Resource {
         withUnsafePointer(to: userIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LightmapGIData.method_get_user_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(LightmapGIData.method_get_user_path, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -325,7 +325,7 @@ open class LightmapGIData: Resource {
     /// Clear all objects that are considered baked within this ``LightmapGIData``.
     public final func clearUsers() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(LightmapGIData.method_clear_users, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(LightmapGIData.method_clear_users, handle, nil, nil)
         
     }
     
@@ -346,7 +346,7 @@ open class LightmapGIData: Resource {
         withUnsafePointer(to: lightTexture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(LightmapGIData.method_set_light_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(LightmapGIData.method_set_light_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -370,9 +370,9 @@ open class LightmapGIData: Resource {
     @inline(__always)
     fileprivate final func get_light_texture() -> TextureLayered? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(LightmapGIData.method_get_light_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(LightmapGIData.method_get_light_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

@@ -127,7 +127,7 @@ open class GraphFrame: GraphElement {
         withUnsafePointer(to: title.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphFrame.method_set_title, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphFrame.method_set_title, handle, pArgs, nil)
                 }
                 
             }
@@ -152,7 +152,7 @@ open class GraphFrame: GraphElement {
     fileprivate final func get_title() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(GraphFrame.method_get_title, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GraphFrame.method_get_title, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -173,9 +173,9 @@ open class GraphFrame: GraphElement {
     /// 
     public final func getTitlebarHbox() -> HBoxContainer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GraphFrame.method_get_titlebar_hbox, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GraphFrame.method_get_titlebar_hbox, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_autoshrink_enabled: GDExtensionMethodBindPtr = {
@@ -195,7 +195,7 @@ open class GraphFrame: GraphElement {
         withUnsafePointer(to: shrink) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphFrame.method_set_autoshrink_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphFrame.method_set_autoshrink_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -220,7 +220,7 @@ open class GraphFrame: GraphElement {
     fileprivate final func is_autoshrink_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphFrame.method_is_autoshrink_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphFrame.method_is_autoshrink_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -241,7 +241,7 @@ open class GraphFrame: GraphElement {
         withUnsafePointer(to: autoshrinkMargin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphFrame.method_set_autoshrink_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphFrame.method_set_autoshrink_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -266,7 +266,7 @@ open class GraphFrame: GraphElement {
     fileprivate final func get_autoshrink_margin() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GraphFrame.method_get_autoshrink_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphFrame.method_get_autoshrink_margin, handle, nil, &_result)
         return _result
     }
     
@@ -287,7 +287,7 @@ open class GraphFrame: GraphElement {
         withUnsafePointer(to: dragMargin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphFrame.method_set_drag_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphFrame.method_set_drag_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -312,7 +312,7 @@ open class GraphFrame: GraphElement {
     fileprivate final func get_drag_margin() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GraphFrame.method_get_drag_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphFrame.method_get_drag_margin, handle, nil, &_result)
         return _result
     }
     
@@ -333,7 +333,7 @@ open class GraphFrame: GraphElement {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphFrame.method_set_tint_color_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphFrame.method_set_tint_color_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -358,7 +358,7 @@ open class GraphFrame: GraphElement {
     fileprivate final func is_tint_color_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GraphFrame.method_is_tint_color_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphFrame.method_is_tint_color_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -379,7 +379,7 @@ open class GraphFrame: GraphElement {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GraphFrame.method_set_tint_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GraphFrame.method_set_tint_color, handle, pArgs, nil)
                 }
                 
             }
@@ -404,7 +404,7 @@ open class GraphFrame: GraphElement {
     fileprivate final func get_tint_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(GraphFrame.method_get_tint_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GraphFrame.method_get_tint_color, handle, nil, &_result)
         return _result
     }
     

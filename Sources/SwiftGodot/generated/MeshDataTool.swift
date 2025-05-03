@@ -49,7 +49,7 @@ open class MeshDataTool: RefCounted {
     /// Clears all data currently in MeshDataTool.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(MeshDataTool.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(MeshDataTool.method_clear, handle, nil, nil)
         
     }
     
@@ -75,7 +75,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: surface) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_create_from_surface, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_create_from_surface, handle, pArgs, &_result)
                     }
                     
                 }
@@ -106,7 +106,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: compressionFlags) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_commit_to_surface, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_commit_to_surface, handle, pArgs, &_result)
                     }
                     
                 }
@@ -133,7 +133,7 @@ open class MeshDataTool: RefCounted {
     public final func getFormat() -> UInt {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(MeshDataTool.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MeshDataTool.method_get_format, handle, nil, &_result)
         return _result
     }
     
@@ -152,7 +152,7 @@ open class MeshDataTool: RefCounted {
     public final func getVertexCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_count, handle, nil, &_result)
         return _result
     }
     
@@ -171,7 +171,7 @@ open class MeshDataTool: RefCounted {
     public final func getEdgeCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MeshDataTool.method_get_edge_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MeshDataTool.method_get_edge_count, handle, nil, &_result)
         return _result
     }
     
@@ -190,7 +190,7 @@ open class MeshDataTool: RefCounted {
     public final func getFaceCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(MeshDataTool.method_get_face_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(MeshDataTool.method_get_face_count, handle, nil, &_result)
         return _result
     }
     
@@ -212,7 +212,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: vertex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex, handle, pArgs, nil)
                     }
                     
                 }
@@ -242,7 +242,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex, handle, pArgs, &_result)
                 }
                 
             }
@@ -270,7 +270,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: normal) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_normal, handle, pArgs, nil)
                     }
                     
                 }
@@ -300,7 +300,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_normal, handle, pArgs, &_result)
                 }
                 
             }
@@ -328,7 +328,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: tangent) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_tangent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_tangent, handle, pArgs, nil)
                     }
                     
                 }
@@ -358,7 +358,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_tangent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_tangent, handle, pArgs, &_result)
                 }
                 
             }
@@ -386,7 +386,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: uv) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_uv, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_uv, handle, pArgs, nil)
                     }
                     
                 }
@@ -416,7 +416,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_uv, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_uv, handle, pArgs, &_result)
                 }
                 
             }
@@ -444,7 +444,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: uv2) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_uv2, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_uv2, handle, pArgs, nil)
                     }
                     
                 }
@@ -474,7 +474,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_uv2, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_uv2, handle, pArgs, &_result)
                 }
                 
             }
@@ -502,7 +502,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_color, handle, pArgs, nil)
                     }
                     
                 }
@@ -532,7 +532,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_color, handle, pArgs, &_result)
                 }
                 
             }
@@ -560,7 +560,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: bones.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_bones, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_bones, handle, pArgs, nil)
                     }
                     
                 }
@@ -590,7 +590,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_bones, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_bones, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -618,7 +618,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: weights.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_weights, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_weights, handle, pArgs, nil)
                     }
                     
                 }
@@ -648,7 +648,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_weights, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_weights, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -676,7 +676,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: meta.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_vertex_meta, handle, pArgs, nil)
                     }
                     
                 }
@@ -706,7 +706,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_meta, handle, pArgs, &_result)
                 }
                 
             }
@@ -734,7 +734,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_edges, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_edges, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -762,7 +762,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_faces, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_vertex_faces, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -794,7 +794,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: vertex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_get_edge_vertex, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_get_edge_vertex, handle, pArgs, &_result)
                     }
                     
                 }
@@ -824,7 +824,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_edge_faces, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_edge_faces, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -852,7 +852,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: meta.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_edge_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_edge_meta, handle, pArgs, nil)
                     }
                     
                 }
@@ -882,7 +882,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_edge_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_edge_meta, handle, pArgs, &_result)
                 }
                 
             }
@@ -914,7 +914,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: vertex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_get_face_vertex, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_get_face_vertex, handle, pArgs, &_result)
                     }
                     
                 }
@@ -948,7 +948,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: edge) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_get_face_edge, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_get_face_edge, handle, pArgs, &_result)
                     }
                     
                 }
@@ -978,7 +978,7 @@ open class MeshDataTool: RefCounted {
             withUnsafePointer(to: meta.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_face_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(MeshDataTool.method_set_face_meta, handle, pArgs, nil)
                     }
                     
                 }
@@ -1008,7 +1008,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_face_meta, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_face_meta, handle, pArgs, &_result)
                 }
                 
             }
@@ -1036,7 +1036,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_face_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_get_face_normal, handle, pArgs, &_result)
                 }
                 
             }
@@ -1063,7 +1063,7 @@ open class MeshDataTool: RefCounted {
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(MeshDataTool.method_set_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(MeshDataTool.method_set_material, handle, pArgs, nil)
                 }
                 
             }
@@ -1087,9 +1087,9 @@ open class MeshDataTool: RefCounted {
     /// Returns the material assigned to the ``Mesh``.
     public final func getMaterial() -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(MeshDataTool.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(MeshDataTool.method_get_material, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

@@ -47,7 +47,7 @@ open class RenderSceneData: Object {
     public final func getCamTransform() -> Transform3D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform3D = Transform3D ()
-        gi.object_method_bind_ptrcall(RenderSceneData.method_get_cam_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderSceneData.method_get_cam_transform, handle, nil, &_result)
         return _result
     }
     
@@ -69,7 +69,7 @@ open class RenderSceneData: Object {
     public final func getCamProjection() -> Projection {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Projection = Projection ()
-        gi.object_method_bind_ptrcall(RenderSceneData.method_get_cam_projection, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderSceneData.method_get_cam_projection, handle, nil, &_result)
         return _result
     }
     
@@ -88,7 +88,7 @@ open class RenderSceneData: Object {
     public final func getViewCount() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RenderSceneData.method_get_view_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RenderSceneData.method_get_view_count, handle, nil, &_result)
         return _result
     }
     
@@ -110,7 +110,7 @@ open class RenderSceneData: Object {
         withUnsafePointer(to: view) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderSceneData.method_get_view_eye_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderSceneData.method_get_view_eye_offset, handle, pArgs, &_result)
                 }
                 
             }
@@ -141,7 +141,7 @@ open class RenderSceneData: Object {
         withUnsafePointer(to: view) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RenderSceneData.method_get_view_projection, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(RenderSceneData.method_get_view_projection, handle, pArgs, &_result)
                 }
                 
             }
@@ -166,7 +166,7 @@ open class RenderSceneData: Object {
     public final func getUniformBuffer() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(RenderSceneData.method_get_uniform_buffer, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(RenderSceneData.method_get_uniform_buffer, handle, nil, &_result.content)
         return _result
     }
     

@@ -144,7 +144,7 @@ open class GLTFPhysicsBody: Resource {
     
     /// Creates a new GLTFPhysicsBody instance from the given Godot ``CollisionObject3D`` node.
     public static func fromNode(bodyNode: CollisionObject3D?) -> GLTFPhysicsBody? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: bodyNode?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -155,7 +155,7 @@ open class GLTFPhysicsBody: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_to_node: GDExtensionMethodBindPtr = {
@@ -172,9 +172,9 @@ open class GLTFPhysicsBody: Resource {
     /// Converts this GLTFPhysicsBody instance into a Godot ``CollisionObject3D`` node.
     public final func toNode() -> CollisionObject3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_to_node, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_to_node, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_from_dictionary: GDExtensionMethodBindPtr = {
@@ -190,7 +190,7 @@ open class GLTFPhysicsBody: Resource {
     
     /// Creates a new GLTFPhysicsBody instance by parsing the given ``VariantDictionary`` in the `OMI_physics_body` glTF extension format.
     public static func fromDictionary(_ dictionary: VariantDictionary) -> GLTFPhysicsBody? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: dictionary.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -201,7 +201,7 @@ open class GLTFPhysicsBody: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_to_dictionary: GDExtensionMethodBindPtr = {
@@ -219,7 +219,7 @@ open class GLTFPhysicsBody: Resource {
     public final func toDictionary() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_to_dictionary, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_to_dictionary, handle, nil, &_result.content)
         return _result
     }
     
@@ -238,7 +238,7 @@ open class GLTFPhysicsBody: Resource {
     fileprivate final func get_body_type() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_body_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_body_type, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -260,7 +260,7 @@ open class GLTFPhysicsBody: Resource {
         withUnsafePointer(to: bodyType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_body_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_body_type, handle, pArgs, nil)
                 }
                 
             }
@@ -285,7 +285,7 @@ open class GLTFPhysicsBody: Resource {
     fileprivate final func get_mass() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_mass, handle, nil, &_result)
         return _result
     }
     
@@ -306,7 +306,7 @@ open class GLTFPhysicsBody: Resource {
         withUnsafePointer(to: mass) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_mass, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_mass, handle, pArgs, nil)
                 }
                 
             }
@@ -331,7 +331,7 @@ open class GLTFPhysicsBody: Resource {
     fileprivate final func get_linear_velocity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_linear_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_linear_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -352,7 +352,7 @@ open class GLTFPhysicsBody: Resource {
         withUnsafePointer(to: linearVelocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_linear_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_linear_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -377,7 +377,7 @@ open class GLTFPhysicsBody: Resource {
     fileprivate final func get_angular_velocity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_angular_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_angular_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -398,7 +398,7 @@ open class GLTFPhysicsBody: Resource {
         withUnsafePointer(to: angularVelocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_angular_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_angular_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -423,7 +423,7 @@ open class GLTFPhysicsBody: Resource {
     fileprivate final func get_center_of_mass() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_center_of_mass, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_center_of_mass, handle, nil, &_result)
         return _result
     }
     
@@ -444,7 +444,7 @@ open class GLTFPhysicsBody: Resource {
         withUnsafePointer(to: centerOfMass) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_center_of_mass, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_center_of_mass, handle, pArgs, nil)
                 }
                 
             }
@@ -469,7 +469,7 @@ open class GLTFPhysicsBody: Resource {
     fileprivate final func get_inertia_diagonal() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_inertia_diagonal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_inertia_diagonal, handle, nil, &_result)
         return _result
     }
     
@@ -490,7 +490,7 @@ open class GLTFPhysicsBody: Resource {
         withUnsafePointer(to: inertiaDiagonal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_inertia_diagonal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_inertia_diagonal, handle, pArgs, nil)
                 }
                 
             }
@@ -515,7 +515,7 @@ open class GLTFPhysicsBody: Resource {
     fileprivate final func get_inertia_orientation() -> Quaternion {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Quaternion = Quaternion ()
-        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_inertia_orientation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_inertia_orientation, handle, nil, &_result)
         return _result
     }
     
@@ -536,7 +536,7 @@ open class GLTFPhysicsBody: Resource {
         withUnsafePointer(to: inertiaOrientation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_inertia_orientation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_inertia_orientation, handle, pArgs, nil)
                 }
                 
             }
@@ -561,7 +561,7 @@ open class GLTFPhysicsBody: Resource {
     fileprivate final func get_inertia_tensor() -> Basis {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Basis = Basis ()
-        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_inertia_tensor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_get_inertia_tensor, handle, nil, &_result)
         return _result
     }
     
@@ -582,7 +582,7 @@ open class GLTFPhysicsBody: Resource {
         withUnsafePointer(to: inertiaTensor) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_inertia_tensor, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsBody.method_set_inertia_tensor, handle, pArgs, nil)
                 }
                 
             }

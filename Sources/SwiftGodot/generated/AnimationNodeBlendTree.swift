@@ -81,7 +81,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
                 withUnsafePointer(to: position) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_add_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_add_node, handle, pArgs, nil)
                         }
                         
                     }
@@ -109,18 +109,18 @@ open class AnimationNodeBlendTree: AnimationRootNode {
     /// Returns the sub animation node with the specified `name`.
     public final func getNode(name: StringName) -> AnimationNode? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_get_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_get_node, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_remove_node: GDExtensionMethodBindPtr = {
@@ -140,7 +140,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_remove_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_remove_node, handle, pArgs, nil)
                 }
                 
             }
@@ -168,7 +168,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
             withUnsafePointer(to: newName.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_rename_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_rename_node, handle, pArgs, nil)
                     }
                     
                 }
@@ -198,7 +198,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_has_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_has_node, handle, pArgs, &_result)
                 }
                 
             }
@@ -227,7 +227,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
                 withUnsafePointer(to: outputNode.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_connect_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_connect_node, handle, pArgs, nil)
                         }
                         
                     }
@@ -259,7 +259,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
             withUnsafePointer(to: inputIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_disconnect_node, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_disconnect_node, handle, pArgs, nil)
                     }
                     
                 }
@@ -289,7 +289,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
             withUnsafePointer(to: position) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_set_node_position, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_set_node_position, handle, pArgs, nil)
                     }
                     
                 }
@@ -319,7 +319,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_get_node_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_get_node_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -346,7 +346,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_set_graph_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_set_graph_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -371,7 +371,7 @@ open class AnimationNodeBlendTree: AnimationRootNode {
     fileprivate final func get_graph_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_get_graph_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeBlendTree.method_get_graph_offset, handle, nil, &_result)
         return _result
     }
     

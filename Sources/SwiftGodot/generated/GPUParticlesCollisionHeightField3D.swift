@@ -147,7 +147,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_set_size, handle, pArgs, nil)
                 }
                 
             }
@@ -172,7 +172,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
     fileprivate final func get_size() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -193,7 +193,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
         withUnsafePointer(to: resolution.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_set_resolution, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_set_resolution, handle, pArgs, nil)
                 }
                 
             }
@@ -218,7 +218,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
     fileprivate final func get_resolution() -> GPUParticlesCollisionHeightField3D.Resolution {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_resolution, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_resolution, handle, nil, &_result)
         return GPUParticlesCollisionHeightField3D.Resolution (rawValue: _result)!
     }
     
@@ -239,7 +239,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
         withUnsafePointer(to: updateMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_set_update_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_set_update_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -264,7 +264,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
     fileprivate final func get_update_mode() -> GPUParticlesCollisionHeightField3D.UpdateMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_update_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_update_mode, handle, nil, &_result)
         return GPUParticlesCollisionHeightField3D.UpdateMode (rawValue: _result)!
     }
     
@@ -285,7 +285,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
         withUnsafePointer(to: heightfieldMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_set_heightfield_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_set_heightfield_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -310,7 +310,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
     fileprivate final func get_heightfield_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_heightfield_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_heightfield_mask, handle, nil, &_result)
         return _result
     }
     
@@ -332,7 +332,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_set_heightfield_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_set_heightfield_mask_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -362,7 +362,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_heightfield_mask_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_get_heightfield_mask_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -389,7 +389,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_set_follow_camera_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_set_follow_camera_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -414,7 +414,7 @@ open class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
     fileprivate final func is_follow_camera_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_is_follow_camera_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GPUParticlesCollisionHeightField3D.method_is_follow_camera_enabled, handle, nil, &_result)
         return _result
     }
     

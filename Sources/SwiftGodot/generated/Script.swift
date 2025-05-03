@@ -61,7 +61,7 @@ open class Script: Resource {
     public final func canInstantiate() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Script.method_can_instantiate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Script.method_can_instantiate, handle, nil, &_result)
         return _result
     }
     
@@ -83,7 +83,7 @@ open class Script: Resource {
         withUnsafePointer(to: baseObject?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Script.method_instance_has, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Script.method_instance_has, handle, pArgs, &_result)
                 }
                 
             }
@@ -111,7 +111,7 @@ open class Script: Resource {
     public final func hasSourceCode() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Script.method_has_source_code, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Script.method_has_source_code, handle, nil, &_result)
         return _result
     }
     
@@ -130,7 +130,7 @@ open class Script: Resource {
     fileprivate final func get_source_code() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Script.method_get_source_code, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Script.method_get_source_code, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -152,7 +152,7 @@ open class Script: Resource {
         withUnsafePointer(to: source.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Script.method_set_source_code, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Script.method_set_source_code, handle, pArgs, nil)
                 }
                 
             }
@@ -180,7 +180,7 @@ open class Script: Resource {
         withUnsafePointer(to: keepState) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Script.method_reload, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Script.method_reload, handle, pArgs, &_result)
                 }
                 
             }
@@ -204,9 +204,9 @@ open class Script: Resource {
     /// Returns the script directly inherited by this script.
     public final func getBaseScript() -> Script? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Script.method_get_base_script, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Script.method_get_base_script, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_instance_base_type: GDExtensionMethodBindPtr = {
@@ -224,7 +224,7 @@ open class Script: Resource {
     public final func getInstanceBaseType() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(Script.method_get_instance_base_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Script.method_get_instance_base_type, handle, nil, &_result.content)
         return _result
     }
     
@@ -246,7 +246,7 @@ open class Script: Resource {
     public final func getGlobalName() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(Script.method_get_global_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Script.method_get_global_name, handle, nil, &_result.content)
         return _result
     }
     
@@ -268,7 +268,7 @@ open class Script: Resource {
         withUnsafePointer(to: signalName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Script.method_has_script_signal, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Script.method_has_script_signal, handle, pArgs, &_result)
                 }
                 
             }
@@ -293,7 +293,7 @@ open class Script: Resource {
     public final func getScriptPropertyList() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Script.method_get_script_property_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Script.method_get_script_property_list, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -312,7 +312,7 @@ open class Script: Resource {
     public final func getScriptMethodList() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Script.method_get_script_method_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Script.method_get_script_method_list, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -331,7 +331,7 @@ open class Script: Resource {
     public final func getScriptSignalList() -> TypedArray<VariantDictionary> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Script.method_get_script_signal_list, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Script.method_get_script_signal_list, handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -350,7 +350,7 @@ open class Script: Resource {
     public final func getScriptConstantMap() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(Script.method_get_script_constant_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Script.method_get_script_constant_map, handle, nil, &_result.content)
         return _result
     }
     
@@ -372,7 +372,7 @@ open class Script: Resource {
         withUnsafePointer(to: property.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Script.method_get_property_default_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Script.method_get_property_default_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -397,7 +397,7 @@ open class Script: Resource {
     public final func isTool() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Script.method_is_tool, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Script.method_is_tool, handle, nil, &_result)
         return _result
     }
     
@@ -416,7 +416,7 @@ open class Script: Resource {
     public final func isAbstract() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Script.method_is_abstract, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Script.method_is_abstract, handle, nil, &_result)
         return _result
     }
     
@@ -435,7 +435,7 @@ open class Script: Resource {
     public final func getRpcConfig() -> Variant? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        gi.object_method_bind_ptrcall(Script.method_get_rpc_config, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Script.method_get_rpc_config, handle, nil, &_result)
         return Variant(takingOver: _result)
     }
     

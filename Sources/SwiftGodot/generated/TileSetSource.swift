@@ -50,7 +50,7 @@ open class TileSetSource: Resource {
     public final func getTilesCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(TileSetSource.method_get_tiles_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileSetSource.method_get_tiles_count, handle, nil, &_result)
         return _result
     }
     
@@ -72,7 +72,7 @@ open class TileSetSource: Resource {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetSource.method_get_tile_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetSource.method_get_tile_id, handle, pArgs, &_result)
                 }
                 
             }
@@ -100,7 +100,7 @@ open class TileSetSource: Resource {
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetSource.method_has_tile, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetSource.method_has_tile, handle, pArgs, &_result)
                 }
                 
             }
@@ -133,7 +133,7 @@ open class TileSetSource: Resource {
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetSource.method_get_alternative_tiles_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetSource.method_get_alternative_tiles_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -162,7 +162,7 @@ open class TileSetSource: Resource {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetSource.method_get_alternative_tile_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TileSetSource.method_get_alternative_tile_id, handle, pArgs, &_result)
                     }
                     
                 }
@@ -193,7 +193,7 @@ open class TileSetSource: Resource {
             withUnsafePointer(to: alternativeTile) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetSource.method_has_alternative_tile, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TileSetSource.method_has_alternative_tile, handle, pArgs, &_result)
                     }
                     
                 }

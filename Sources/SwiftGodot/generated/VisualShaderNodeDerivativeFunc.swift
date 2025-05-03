@@ -117,7 +117,7 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_set_op_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_set_op_type, handle, pArgs, nil)
                 }
                 
             }
@@ -142,7 +142,7 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
     fileprivate final func get_op_type() -> VisualShaderNodeDerivativeFunc.OpType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_get_op_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_get_op_type, handle, nil, &_result)
         return VisualShaderNodeDerivativeFunc.OpType (rawValue: _result)!
     }
     
@@ -163,7 +163,7 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
         withUnsafePointer(to: `func`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_set_function, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_set_function, handle, pArgs, nil)
                 }
                 
             }
@@ -188,7 +188,7 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
     fileprivate final func get_function() -> VisualShaderNodeDerivativeFunc.Function {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_get_function, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_get_function, handle, nil, &_result)
         return VisualShaderNodeDerivativeFunc.Function (rawValue: _result)!
     }
     
@@ -209,7 +209,7 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
         withUnsafePointer(to: precision.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_set_precision, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_set_precision, handle, pArgs, nil)
                 }
                 
             }
@@ -234,7 +234,7 @@ open class VisualShaderNodeDerivativeFunc: VisualShaderNode {
     fileprivate final func get_precision() -> VisualShaderNodeDerivativeFunc.Precision {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_get_precision, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeDerivativeFunc.method_get_precision, handle, nil, &_result)
         return VisualShaderNodeDerivativeFunc.Precision (rawValue: _result)!
     }
     

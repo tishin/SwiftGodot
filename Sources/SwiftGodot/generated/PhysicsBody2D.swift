@@ -49,14 +49,14 @@ open class PhysicsBody2D: CollisionObject2D {
     /// 
     public final func moveAndCollide(motion: Vector2, testOnly: Bool = false, safeMargin: Double = 0.08, recoveryAsCollision: Bool = false) -> KinematicCollision2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: motion) { pArg0 in
             withUnsafePointer(to: testOnly) { pArg1 in
                 withUnsafePointer(to: safeMargin) { pArg2 in
                     withUnsafePointer(to: recoveryAsCollision) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(PhysicsBody2D.method_move_and_collide, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(PhysicsBody2D.method_move_and_collide, handle, pArgs, &_result)
                             }
                             
                         }
@@ -69,7 +69,7 @@ open class PhysicsBody2D: CollisionObject2D {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_test_move: GDExtensionMethodBindPtr = {
@@ -103,7 +103,7 @@ open class PhysicsBody2D: CollisionObject2D {
                         withUnsafePointer(to: recoveryAsCollision) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(PhysicsBody2D.method_test_move, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(PhysicsBody2D.method_test_move, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -136,7 +136,7 @@ open class PhysicsBody2D: CollisionObject2D {
     public final func getGravity() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(PhysicsBody2D.method_get_gravity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsBody2D.method_get_gravity, handle, nil, &_result)
         return _result
     }
     
@@ -155,7 +155,7 @@ open class PhysicsBody2D: CollisionObject2D {
     public final func getCollisionExceptions() -> TypedArray<PhysicsBody2D?> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(PhysicsBody2D.method_get_collision_exceptions, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PhysicsBody2D.method_get_collision_exceptions, handle, nil, &_result)
         return TypedArray<PhysicsBody2D?>(takingOver: _result)
     }
     
@@ -176,7 +176,7 @@ open class PhysicsBody2D: CollisionObject2D {
         withUnsafePointer(to: body?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsBody2D.method_add_collision_exception_with, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsBody2D.method_add_collision_exception_with, handle, pArgs, nil)
                 }
                 
             }
@@ -203,7 +203,7 @@ open class PhysicsBody2D: CollisionObject2D {
         withUnsafePointer(to: body?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PhysicsBody2D.method_remove_collision_exception_with, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PhysicsBody2D.method_remove_collision_exception_with, handle, pArgs, nil)
                 }
                 
             }

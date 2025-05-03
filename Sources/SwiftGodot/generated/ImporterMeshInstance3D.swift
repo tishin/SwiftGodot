@@ -153,7 +153,7 @@ open class ImporterMeshInstance3D: Node3D {
         withUnsafePointer(to: mesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_mesh, handle, pArgs, nil)
                 }
                 
             }
@@ -177,9 +177,9 @@ open class ImporterMeshInstance3D: Node3D {
     @inline(__always)
     fileprivate final func get_mesh() -> ImporterMesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_mesh, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_skin: GDExtensionMethodBindPtr = {
@@ -199,7 +199,7 @@ open class ImporterMeshInstance3D: Node3D {
         withUnsafePointer(to: skin?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_skin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_skin, handle, pArgs, nil)
                 }
                 
             }
@@ -223,9 +223,9 @@ open class ImporterMeshInstance3D: Node3D {
     @inline(__always)
     fileprivate final func get_skin() -> Skin? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_skin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_skin, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_skeleton_path: GDExtensionMethodBindPtr = {
@@ -245,7 +245,7 @@ open class ImporterMeshInstance3D: Node3D {
         withUnsafePointer(to: skeletonPath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_skeleton_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_skeleton_path, handle, pArgs, nil)
                 }
                 
             }
@@ -270,7 +270,7 @@ open class ImporterMeshInstance3D: Node3D {
     fileprivate final func get_skeleton_path() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_skeleton_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_skeleton_path, handle, nil, &_result.content)
         return _result
     }
     
@@ -291,7 +291,7 @@ open class ImporterMeshInstance3D: Node3D {
         withUnsafePointer(to: layerMask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_layer_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_layer_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -316,7 +316,7 @@ open class ImporterMeshInstance3D: Node3D {
     fileprivate final func get_layer_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_layer_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_layer_mask, handle, nil, &_result)
         return _result
     }
     
@@ -337,7 +337,7 @@ open class ImporterMeshInstance3D: Node3D {
         withUnsafePointer(to: shadowCastingSetting.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_cast_shadows_setting, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_cast_shadows_setting, handle, pArgs, nil)
                 }
                 
             }
@@ -362,7 +362,7 @@ open class ImporterMeshInstance3D: Node3D {
     fileprivate final func get_cast_shadows_setting() -> GeometryInstance3D.ShadowCastingSetting {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_cast_shadows_setting, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_cast_shadows_setting, handle, nil, &_result)
         return GeometryInstance3D.ShadowCastingSetting (rawValue: _result)!
     }
     
@@ -383,7 +383,7 @@ open class ImporterMeshInstance3D: Node3D {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_visibility_range_end_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_visibility_range_end_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -408,7 +408,7 @@ open class ImporterMeshInstance3D: Node3D {
     fileprivate final func get_visibility_range_end_margin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_visibility_range_end_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_visibility_range_end_margin, handle, nil, &_result)
         return _result
     }
     
@@ -429,7 +429,7 @@ open class ImporterMeshInstance3D: Node3D {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_visibility_range_end, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_visibility_range_end, handle, pArgs, nil)
                 }
                 
             }
@@ -454,7 +454,7 @@ open class ImporterMeshInstance3D: Node3D {
     fileprivate final func get_visibility_range_end() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_visibility_range_end, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_visibility_range_end, handle, nil, &_result)
         return _result
     }
     
@@ -475,7 +475,7 @@ open class ImporterMeshInstance3D: Node3D {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_visibility_range_begin_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_visibility_range_begin_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -500,7 +500,7 @@ open class ImporterMeshInstance3D: Node3D {
     fileprivate final func get_visibility_range_begin_margin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_visibility_range_begin_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_visibility_range_begin_margin, handle, nil, &_result)
         return _result
     }
     
@@ -521,7 +521,7 @@ open class ImporterMeshInstance3D: Node3D {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_visibility_range_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_visibility_range_begin, handle, pArgs, nil)
                 }
                 
             }
@@ -546,7 +546,7 @@ open class ImporterMeshInstance3D: Node3D {
     fileprivate final func get_visibility_range_begin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_visibility_range_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_visibility_range_begin, handle, nil, &_result)
         return _result
     }
     
@@ -567,7 +567,7 @@ open class ImporterMeshInstance3D: Node3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_visibility_range_fade_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_set_visibility_range_fade_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -592,7 +592,7 @@ open class ImporterMeshInstance3D: Node3D {
     fileprivate final func get_visibility_range_fade_mode() -> GeometryInstance3D.VisibilityRangeFadeMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_visibility_range_fade_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(ImporterMeshInstance3D.method_get_visibility_range_fade_mode, handle, nil, &_result)
         return GeometryInstance3D.VisibilityRangeFadeMode (rawValue: _result)!
     }
     

@@ -51,7 +51,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     open func _getName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -74,7 +74,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     open func _getDescription() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_description, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_description, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -97,7 +97,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     open func _getCategory() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_category, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_category, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -120,7 +120,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     open func _getReturnIconType() -> VisualShaderNode.PortType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_return_icon_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_return_icon_type, handle, nil, &_result)
         return VisualShaderNode.PortType (rawValue: _result)!
     }
     
@@ -143,7 +143,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     open func _getInputPortCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_input_port_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_input_port_count, handle, nil, &_result)
         return _result
     }
     
@@ -169,7 +169,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
         withUnsafePointer(to: port) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_input_port_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_input_port_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -201,7 +201,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
         withUnsafePointer(to: port) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_input_port_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_input_port_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -233,7 +233,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
         withUnsafePointer(to: port) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_input_port_default_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_input_port_default_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -265,7 +265,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_default_input_port, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_default_input_port, handle, pArgs, &_result)
                 }
                 
             }
@@ -294,7 +294,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     open func _getOutputPortCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_output_port_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_output_port_count, handle, nil, &_result)
         return _result
     }
     
@@ -320,7 +320,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
         withUnsafePointer(to: port) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_output_port_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_output_port_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -352,7 +352,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
         withUnsafePointer(to: port) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_output_port_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_output_port_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -381,7 +381,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     open func _getPropertyCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_property_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_property_count, handle, nil, &_result)
         return _result
     }
     
@@ -407,7 +407,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_property_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_property_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -439,7 +439,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_property_default_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_property_default_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -471,7 +471,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_property_options, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_property_options, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -512,7 +512,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
                     withUnsafePointer(to: type.rawValue) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_code, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_code, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -555,7 +555,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
             withUnsafePointer(to: type.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_func_code, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_func_code, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -593,7 +593,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_global_code, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__get_global_code, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -622,7 +622,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
     open func _isHighend() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__is_highend, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__is_highend, handle, nil, &_result)
         return _result
     }
     
@@ -649,7 +649,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
             withUnsafePointer(to: type.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__is_available, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method__is_available, handle, pArgs, &_result)
                     }
                     
                 }
@@ -679,7 +679,7 @@ open class VisualShaderNodeCustom: VisualShaderNode {
         withUnsafePointer(to: option) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method_get_option_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeCustom.method_get_option_index, handle, pArgs, &_result)
                 }
                 
             }

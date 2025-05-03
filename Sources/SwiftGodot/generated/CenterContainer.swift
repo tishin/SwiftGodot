@@ -58,7 +58,7 @@ open class CenterContainer: Container {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CenterContainer.method_set_use_top_left, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CenterContainer.method_set_use_top_left, handle, pArgs, nil)
                 }
                 
             }
@@ -83,7 +83,7 @@ open class CenterContainer: Container {
     fileprivate final func is_using_top_left() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CenterContainer.method_is_using_top_left, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CenterContainer.method_is_using_top_left, handle, nil, &_result)
         return _result
     }
     

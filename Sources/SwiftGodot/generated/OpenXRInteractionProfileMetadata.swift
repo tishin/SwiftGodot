@@ -46,7 +46,7 @@ open class OpenXRInteractionProfileMetadata: Object {
             withUnsafePointer(to: newName.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OpenXRInteractionProfileMetadata.method_register_profile_rename, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(OpenXRInteractionProfileMetadata.method_register_profile_rename, handle, pArgs, nil)
                     }
                     
                 }
@@ -85,7 +85,7 @@ open class OpenXRInteractionProfileMetadata: Object {
                 withUnsafePointer(to: openxrExtensionName.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(OpenXRInteractionProfileMetadata.method_register_top_level_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(OpenXRInteractionProfileMetadata.method_register_top_level_path, handle, pArgs, nil)
                         }
                         
                     }
@@ -124,7 +124,7 @@ open class OpenXRInteractionProfileMetadata: Object {
                 withUnsafePointer(to: openxrExtensionName.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(OpenXRInteractionProfileMetadata.method_register_interaction_profile, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(OpenXRInteractionProfileMetadata.method_register_interaction_profile, handle, pArgs, nil)
                         }
                         
                     }
@@ -165,7 +165,7 @@ open class OpenXRInteractionProfileMetadata: Object {
                             withUnsafePointer(to: actionType.rawValue) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(OpenXRInteractionProfileMetadata.method_register_io_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(OpenXRInteractionProfileMetadata.method_register_io_path, handle, pArgs, nil)
                                     }
                                     
                                 }

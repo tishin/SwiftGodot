@@ -67,7 +67,7 @@ open class VisualShaderNodeSample3D: VisualShaderNode {
         withUnsafePointer(to: value.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeSample3D.method_set_source, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeSample3D.method_set_source, handle, pArgs, nil)
                 }
                 
             }
@@ -92,7 +92,7 @@ open class VisualShaderNodeSample3D: VisualShaderNode {
     fileprivate final func get_source() -> VisualShaderNodeSample3D.Source {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeSample3D.method_get_source, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeSample3D.method_get_source, handle, nil, &_result)
         return VisualShaderNodeSample3D.Source (rawValue: _result)!
     }
     

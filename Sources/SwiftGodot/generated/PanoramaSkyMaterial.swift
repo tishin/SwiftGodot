@@ -87,7 +87,7 @@ open class PanoramaSkyMaterial: Material {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_set_panorama, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_set_panorama, handle, pArgs, nil)
                 }
                 
             }
@@ -111,9 +111,9 @@ open class PanoramaSkyMaterial: Material {
     @inline(__always)
     fileprivate final func get_panorama() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_get_panorama, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_get_panorama, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_filtering_enabled: GDExtensionMethodBindPtr = {
@@ -133,7 +133,7 @@ open class PanoramaSkyMaterial: Material {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_set_filtering_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_set_filtering_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -158,7 +158,7 @@ open class PanoramaSkyMaterial: Material {
     fileprivate final func is_filtering_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_is_filtering_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_is_filtering_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -179,7 +179,7 @@ open class PanoramaSkyMaterial: Material {
         withUnsafePointer(to: multiplier) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_set_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_set_energy_multiplier, handle, pArgs, nil)
                 }
                 
             }
@@ -204,7 +204,7 @@ open class PanoramaSkyMaterial: Material {
     fileprivate final func get_energy_multiplier() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_get_energy_multiplier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PanoramaSkyMaterial.method_get_energy_multiplier, handle, nil, &_result)
         return _result
     }
     

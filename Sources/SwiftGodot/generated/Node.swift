@@ -531,7 +531,7 @@ open class Node: Object {
         withUnsafePointer(to: delta) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method__process, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method__process, handle, pArgs, nil)
                 }
                 
             }
@@ -570,7 +570,7 @@ open class Node: Object {
         withUnsafePointer(to: delta) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method__physics_process, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method__physics_process, handle, pArgs, nil)
                 }
                 
             }
@@ -598,7 +598,7 @@ open class Node: Object {
     @_documentation(visibility: public)
     open func _enterTree() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node.method__enter_tree, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node.method__enter_tree, handle, nil, nil)
         
     }
     
@@ -620,7 +620,7 @@ open class Node: Object {
     @_documentation(visibility: public)
     open func _exitTree() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node.method__exit_tree, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node.method__exit_tree, handle, nil, nil)
         
     }
     
@@ -646,7 +646,7 @@ open class Node: Object {
     @_documentation(visibility: public)
     open func _ready() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node.method__ready, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node.method__ready, handle, nil, nil)
         
     }
     
@@ -671,7 +671,7 @@ open class Node: Object {
     open func _getConfigurationWarnings() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(Node.method__get_configuration_warnings, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Node.method__get_configuration_warnings, handle, nil, &_result.content)
         return _result
     }
     
@@ -702,7 +702,7 @@ open class Node: Object {
         withUnsafePointer(to: event.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method__input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method__input, handle, pArgs, nil)
                 }
                 
             }
@@ -739,7 +739,7 @@ open class Node: Object {
         withUnsafePointer(to: event?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method__shortcut_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method__shortcut_input, handle, pArgs, nil)
                 }
                 
             }
@@ -776,7 +776,7 @@ open class Node: Object {
         withUnsafePointer(to: event?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method__unhandled_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method__unhandled_input, handle, pArgs, nil)
                 }
                 
             }
@@ -815,7 +815,7 @@ open class Node: Object {
         withUnsafePointer(to: event?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method__unhandled_key_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method__unhandled_key_input, handle, pArgs, nil)
                 }
                 
             }
@@ -870,7 +870,7 @@ open class Node: Object {
             withUnsafePointer(to: forceReadableName) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node.method_add_sibling, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node.method_add_sibling, handle, pArgs, nil)
                     }
                     
                 }
@@ -900,7 +900,7 @@ open class Node: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_name, handle, pArgs, nil)
                 }
                 
             }
@@ -925,7 +925,7 @@ open class Node: Object {
     fileprivate final func get_name() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(Node.method_get_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Node.method_get_name, handle, nil, &_result.content)
         return _result
     }
     
@@ -959,7 +959,7 @@ open class Node: Object {
                 withUnsafePointer(to: `internal`.rawValue) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Node.method_add_child, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Node.method_add_child, handle, pArgs, nil)
                         }
                         
                     }
@@ -993,7 +993,7 @@ open class Node: Object {
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_remove_child, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_remove_child, handle, pArgs, nil)
                 }
                 
             }
@@ -1024,7 +1024,7 @@ open class Node: Object {
             withUnsafePointer(to: keepGlobalTransform) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node.method_reparent, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node.method_reparent, handle, pArgs, nil)
                     }
                     
                 }
@@ -1057,7 +1057,7 @@ open class Node: Object {
         withUnsafePointer(to: includeInternal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_get_child_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node.method_get_child_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -1088,7 +1088,7 @@ open class Node: Object {
         withUnsafePointer(to: includeInternal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_get_children, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node.method_get_children, handle, pArgs, &_result)
                 }
                 
             }
@@ -1117,12 +1117,12 @@ open class Node: Object {
     /// 
     public final func getChild(idx: Int32, includeInternal: Bool = false) -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: idx) { pArg0 in
             withUnsafePointer(to: includeInternal) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node.method_get_child, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Node.method_get_child, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1131,7 +1131,7 @@ open class Node: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_has_node: GDExtensionMethodBindPtr = {
@@ -1152,7 +1152,7 @@ open class Node: Object {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_has_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node.method_has_node, handle, pArgs, &_result)
                 }
                 
             }
@@ -1183,18 +1183,18 @@ open class Node: Object {
     /// 
     public final func getNode(path: NodePath) -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_get_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node.method_get_node, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_node_or_null: GDExtensionMethodBindPtr = {
@@ -1211,18 +1211,18 @@ open class Node: Object {
     /// Fetches a node by ``NodePath``. Similar to ``getNode(path:)``, but does not generate an error if `path` does not point to a valid node.
     public final func getNodeOrNull(path: NodePath) -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_get_node_or_null, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node.method_get_node_or_null, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_parent: GDExtensionMethodBindPtr = {
@@ -1239,9 +1239,9 @@ open class Node: Object {
     /// Returns this node's parent node, or `null` if the node doesn't have a parent.
     public final func getParent() -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Node.method_get_parent, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Node.method_get_parent, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_find_child: GDExtensionMethodBindPtr = {
@@ -1267,14 +1267,14 @@ open class Node: Object {
     /// 
     public final func findChild(pattern: String, recursive: Bool = true, owned: Bool = true) -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let pattern = GString(pattern)
         withUnsafePointer(to: pattern.content) { pArg0 in
             withUnsafePointer(to: recursive) { pArg1 in
                 withUnsafePointer(to: owned) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Node.method_find_child, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Node.method_find_child, handle, pArgs, &_result)
                         }
                         
                     }
@@ -1285,7 +1285,7 @@ open class Node: Object {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_find_children: GDExtensionMethodBindPtr = {
@@ -1322,7 +1322,7 @@ open class Node: Object {
                     withUnsafePointer(to: owned) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Node.method_find_children, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(Node.method_find_children, handle, pArgs, &_result)
                             }
                             
                         }
@@ -1355,19 +1355,19 @@ open class Node: Object {
     /// 
     public final func findParent(pattern: String) -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let pattern = GString(pattern)
         withUnsafePointer(to: pattern.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_find_parent, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node.method_find_parent, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_has_node_and_resource: GDExtensionMethodBindPtr = {
@@ -1388,7 +1388,7 @@ open class Node: Object {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_has_node_and_resource, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node.method_has_node_and_resource, handle, pArgs, &_result)
                 }
                 
             }
@@ -1425,7 +1425,7 @@ open class Node: Object {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_get_node_and_resource, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Node.method_get_node_and_resource, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -1450,7 +1450,7 @@ open class Node: Object {
     public final func isInsideTree() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_inside_tree, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_inside_tree, handle, nil, &_result)
         return _result
     }
     
@@ -1469,7 +1469,7 @@ open class Node: Object {
     public final func isPartOfEditedScene() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_part_of_edited_scene, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_part_of_edited_scene, handle, nil, &_result)
         return _result
     }
     
@@ -1491,7 +1491,7 @@ open class Node: Object {
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_is_ancestor_of, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node.method_is_ancestor_of, handle, pArgs, &_result)
                 }
                 
             }
@@ -1519,7 +1519,7 @@ open class Node: Object {
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_is_greater_than, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node.method_is_greater_than, handle, pArgs, &_result)
                 }
                 
             }
@@ -1544,7 +1544,7 @@ open class Node: Object {
     public final func getPath() -> NodePath {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: NodePath = NodePath ()
-        gi.object_method_bind_ptrcall(Node.method_get_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Node.method_get_path, handle, nil, &_result.content)
         return _result
     }
     
@@ -1572,7 +1572,7 @@ open class Node: Object {
             withUnsafePointer(to: useUniquePath) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node.method_get_path_to, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Node.method_get_path_to, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1609,7 +1609,7 @@ open class Node: Object {
             withUnsafePointer(to: persistent) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node.method_add_to_group, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node.method_add_to_group, handle, pArgs, nil)
                     }
                     
                 }
@@ -1638,7 +1638,7 @@ open class Node: Object {
         withUnsafePointer(to: group.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_remove_from_group, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_remove_from_group, handle, pArgs, nil)
                 }
                 
             }
@@ -1666,7 +1666,7 @@ open class Node: Object {
         withUnsafePointer(to: group.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_is_in_group, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node.method_is_in_group, handle, pArgs, &_result)
                 }
                 
             }
@@ -1697,7 +1697,7 @@ open class Node: Object {
             withUnsafePointer(to: toIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node.method_move_child, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node.method_move_child, handle, pArgs, nil)
                     }
                     
                 }
@@ -1729,7 +1729,7 @@ open class Node: Object {
     public final func getGroups() -> TypedArray<StringName> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(Node.method_get_groups, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_get_groups, handle, nil, &_result)
         return TypedArray<StringName>(takingOver: _result)
     }
     
@@ -1750,7 +1750,7 @@ open class Node: Object {
         withUnsafePointer(to: owner?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_owner, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_owner, handle, pArgs, nil)
                 }
                 
             }
@@ -1774,9 +1774,9 @@ open class Node: Object {
     @inline(__always)
     fileprivate final func get_owner() -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Node.method_get_owner, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Node.method_get_owner, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_index: GDExtensionMethodBindPtr = {
@@ -1800,7 +1800,7 @@ open class Node: Object {
         withUnsafePointer(to: includeInternal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_get_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node.method_get_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -1827,7 +1827,7 @@ open class Node: Object {
     /// 
     public final func printTree() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node.method_print_tree, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node.method_print_tree, handle, nil, nil)
         
     }
     
@@ -1848,7 +1848,7 @@ open class Node: Object {
     /// 
     public final func printTreePretty() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node.method_print_tree_pretty, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node.method_print_tree_pretty, handle, nil, nil)
         
     }
     
@@ -1870,7 +1870,7 @@ open class Node: Object {
     public final func getTreeString() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Node.method_get_tree_string, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Node.method_get_tree_string, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1892,7 +1892,7 @@ open class Node: Object {
     public final func getTreeStringPretty() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Node.method_get_tree_string_pretty, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Node.method_get_tree_string_pretty, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1914,7 +1914,7 @@ open class Node: Object {
         withUnsafePointer(to: sceneFilePath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_scene_file_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_scene_file_path, handle, pArgs, nil)
                 }
                 
             }
@@ -1939,7 +1939,7 @@ open class Node: Object {
     fileprivate final func get_scene_file_path() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Node.method_get_scene_file_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Node.method_get_scene_file_path, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1960,7 +1960,7 @@ open class Node: Object {
         withUnsafePointer(to: what) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_propagate_notification, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_propagate_notification, handle, pArgs, nil)
                 }
                 
             }
@@ -1992,7 +1992,7 @@ open class Node: Object {
                 withUnsafePointer(to: parentFirst) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Node.method_propagate_call, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Node.method_propagate_call, handle, pArgs, nil)
                         }
                         
                     }
@@ -2026,7 +2026,7 @@ open class Node: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_physics_process, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_physics_process, handle, pArgs, nil)
                 }
                 
             }
@@ -2054,7 +2054,7 @@ open class Node: Object {
     public final func getPhysicsProcessDeltaTime() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Node.method_get_physics_process_delta_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_get_physics_process_delta_time, handle, nil, &_result)
         return _result
     }
     
@@ -2073,7 +2073,7 @@ open class Node: Object {
     public final func isPhysicsProcessing() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_physics_processing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_physics_processing, handle, nil, &_result)
         return _result
     }
     
@@ -2095,7 +2095,7 @@ open class Node: Object {
     public final func getProcessDeltaTime() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Node.method_get_process_delta_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_get_process_delta_time, handle, nil, &_result)
         return _result
     }
     
@@ -2121,7 +2121,7 @@ open class Node: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_process, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_process, handle, pArgs, nil)
                 }
                 
             }
@@ -2148,7 +2148,7 @@ open class Node: Object {
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_process_priority, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_process_priority, handle, pArgs, nil)
                 }
                 
             }
@@ -2173,7 +2173,7 @@ open class Node: Object {
     fileprivate final func get_process_priority() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Node.method_get_process_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_get_process_priority, handle, nil, &_result)
         return _result
     }
     
@@ -2194,7 +2194,7 @@ open class Node: Object {
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_physics_process_priority, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_physics_process_priority, handle, pArgs, nil)
                 }
                 
             }
@@ -2219,7 +2219,7 @@ open class Node: Object {
     fileprivate final func get_physics_process_priority() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Node.method_get_physics_process_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_get_physics_process_priority, handle, nil, &_result)
         return _result
     }
     
@@ -2238,7 +2238,7 @@ open class Node: Object {
     public final func isProcessing() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_processing, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_processing, handle, nil, &_result)
         return _result
     }
     
@@ -2262,7 +2262,7 @@ open class Node: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_process_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_process_input, handle, pArgs, nil)
                 }
                 
             }
@@ -2287,7 +2287,7 @@ open class Node: Object {
     public final func isProcessingInput() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_processing_input, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_processing_input, handle, nil, &_result)
         return _result
     }
     
@@ -2311,7 +2311,7 @@ open class Node: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_process_shortcut_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_process_shortcut_input, handle, pArgs, nil)
                 }
                 
             }
@@ -2336,7 +2336,7 @@ open class Node: Object {
     public final func isProcessingShortcutInput() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_processing_shortcut_input, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_processing_shortcut_input, handle, nil, &_result)
         return _result
     }
     
@@ -2360,7 +2360,7 @@ open class Node: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_process_unhandled_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_process_unhandled_input, handle, pArgs, nil)
                 }
                 
             }
@@ -2385,7 +2385,7 @@ open class Node: Object {
     public final func isProcessingUnhandledInput() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_processing_unhandled_input, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_processing_unhandled_input, handle, nil, &_result)
         return _result
     }
     
@@ -2409,7 +2409,7 @@ open class Node: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_process_unhandled_key_input, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_process_unhandled_key_input, handle, pArgs, nil)
                 }
                 
             }
@@ -2434,7 +2434,7 @@ open class Node: Object {
     public final func isProcessingUnhandledKeyInput() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_processing_unhandled_key_input, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_processing_unhandled_key_input, handle, nil, &_result)
         return _result
     }
     
@@ -2455,7 +2455,7 @@ open class Node: Object {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_process_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_process_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -2480,7 +2480,7 @@ open class Node: Object {
     fileprivate final func get_process_mode() -> Node.ProcessMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Node.method_get_process_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_get_process_mode, handle, nil, &_result)
         return Node.ProcessMode (rawValue: _result)!
     }
     
@@ -2512,7 +2512,7 @@ open class Node: Object {
     public final func canProcess() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_can_process, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_can_process, handle, nil, &_result)
         return _result
     }
     
@@ -2533,7 +2533,7 @@ open class Node: Object {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_process_thread_group, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_process_thread_group, handle, pArgs, nil)
                 }
                 
             }
@@ -2558,7 +2558,7 @@ open class Node: Object {
     fileprivate final func get_process_thread_group() -> Node.ProcessThreadGroup {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Node.method_get_process_thread_group, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_get_process_thread_group, handle, nil, &_result)
         return Node.ProcessThreadGroup (rawValue: _result)!
     }
     
@@ -2579,7 +2579,7 @@ open class Node: Object {
         withUnsafePointer(to: flags.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_process_thread_messages, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_process_thread_messages, handle, pArgs, nil)
                 }
                 
             }
@@ -2604,7 +2604,7 @@ open class Node: Object {
     fileprivate final func get_process_thread_messages() -> Node.ProcessThreadMessages {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Node.ProcessThreadMessages = Node.ProcessThreadMessages ()
-        gi.object_method_bind_ptrcall(Node.method_get_process_thread_messages, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_get_process_thread_messages, handle, nil, &_result)
         return _result
     }
     
@@ -2625,7 +2625,7 @@ open class Node: Object {
         withUnsafePointer(to: order) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_process_thread_group_order, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_process_thread_group_order, handle, pArgs, nil)
                 }
                 
             }
@@ -2650,7 +2650,7 @@ open class Node: Object {
     fileprivate final func get_process_thread_group_order() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Node.method_get_process_thread_group_order, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_get_process_thread_group_order, handle, nil, &_result)
         return _result
     }
     
@@ -2671,7 +2671,7 @@ open class Node: Object {
         withUnsafePointer(to: fold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_display_folded, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_display_folded, handle, pArgs, nil)
                 }
                 
             }
@@ -2696,7 +2696,7 @@ open class Node: Object {
     public final func isDisplayedFolded() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_displayed_folded, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_displayed_folded, handle, nil, &_result)
         return _result
     }
     
@@ -2720,7 +2720,7 @@ open class Node: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_process_internal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_process_internal, handle, pArgs, nil)
                 }
                 
             }
@@ -2745,7 +2745,7 @@ open class Node: Object {
     public final func isProcessingInternal() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_processing_internal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_processing_internal, handle, nil, &_result)
         return _result
     }
     
@@ -2769,7 +2769,7 @@ open class Node: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_physics_process_internal, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_physics_process_internal, handle, pArgs, nil)
                 }
                 
             }
@@ -2794,7 +2794,7 @@ open class Node: Object {
     public final func isPhysicsProcessingInternal() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_physics_processing_internal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_physics_processing_internal, handle, nil, &_result)
         return _result
     }
     
@@ -2815,7 +2815,7 @@ open class Node: Object {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_physics_interpolation_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_physics_interpolation_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -2840,7 +2840,7 @@ open class Node: Object {
     fileprivate final func get_physics_interpolation_mode() -> Node.PhysicsInterpolationMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Node.method_get_physics_interpolation_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_get_physics_interpolation_mode, handle, nil, &_result)
         return Node.PhysicsInterpolationMode (rawValue: _result)!
     }
     
@@ -2862,7 +2862,7 @@ open class Node: Object {
     public final func isPhysicsInterpolated() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_physics_interpolated, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_physics_interpolated, handle, nil, &_result)
         return _result
     }
     
@@ -2886,7 +2886,7 @@ open class Node: Object {
     public final func isPhysicsInterpolatedAndEnabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_physics_interpolated_and_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_physics_interpolated_and_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -2911,7 +2911,7 @@ open class Node: Object {
     /// 
     public final func resetPhysicsInterpolation() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node.method_reset_physics_interpolation, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node.method_reset_physics_interpolation, handle, nil, nil)
         
     }
     
@@ -2932,7 +2932,7 @@ open class Node: Object {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_auto_translate_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_auto_translate_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -2957,7 +2957,7 @@ open class Node: Object {
     fileprivate final func get_auto_translate_mode() -> Node.AutoTranslateMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Node.method_get_auto_translate_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_get_auto_translate_mode, handle, nil, &_result)
         return Node.AutoTranslateMode (rawValue: _result)!
     }
     
@@ -2978,7 +2978,7 @@ open class Node: Object {
     /// 
     public final func setTranslationDomainInherited() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node.method_set_translation_domain_inherited, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node.method_set_translation_domain_inherited, handle, nil, nil)
         
     }
     
@@ -2996,9 +2996,9 @@ open class Node: Object {
     /// Returns the ``Window`` that contains this node. If the node is in the main window, this is equivalent to getting the root node (`get_tree().get_root()`).
     public final func getWindow() -> Window? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Node.method_get_window, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Node.method_get_window, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_last_exclusive_window: GDExtensionMethodBindPtr = {
@@ -3015,9 +3015,9 @@ open class Node: Object {
     /// Returns the ``Window`` that contains this node, or the last exclusive child in a chain of windows starting with the one that contains this node.
     public final func getLastExclusiveWindow() -> Window? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Node.method_get_last_exclusive_window, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Node.method_get_last_exclusive_window, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_tree: GDExtensionMethodBindPtr = {
@@ -3034,9 +3034,9 @@ open class Node: Object {
     /// Returns the ``SceneTree`` that contains this node. If this node is not inside the tree, generates an error and returns `null`. See also ``isInsideTree()``.
     public final func getTree() -> SceneTree? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Node.method_get_tree, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Node.method_get_tree, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_create_tween: GDExtensionMethodBindPtr = {
@@ -3060,9 +3060,9 @@ open class Node: Object {
     /// 
     public final func createTween() -> Tween? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Node.method_create_tween, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Node.method_create_tween, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_duplicate: GDExtensionMethodBindPtr = {
@@ -3082,18 +3082,18 @@ open class Node: Object {
     /// 
     public final func duplicate(flags: Int32 = 15) -> Node? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: flags) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_duplicate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node.method_duplicate, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_replace_by: GDExtensionMethodBindPtr = {
@@ -3119,7 +3119,7 @@ open class Node: Object {
             withUnsafePointer(to: keepGroups) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node.method_replace_by, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node.method_replace_by, handle, pArgs, nil)
                     }
                     
                 }
@@ -3148,7 +3148,7 @@ open class Node: Object {
         withUnsafePointer(to: loadPlaceholder) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_scene_instance_load_placeholder, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_scene_instance_load_placeholder, handle, pArgs, nil)
                 }
                 
             }
@@ -3173,7 +3173,7 @@ open class Node: Object {
     public final func getSceneInstanceLoadPlaceholder() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_get_scene_instance_load_placeholder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_get_scene_instance_load_placeholder, handle, nil, &_result)
         return _result
     }
     
@@ -3195,7 +3195,7 @@ open class Node: Object {
             withUnsafePointer(to: isEditable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node.method_set_editable_instance, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node.method_set_editable_instance, handle, pArgs, nil)
                     }
                     
                 }
@@ -3225,7 +3225,7 @@ open class Node: Object {
         withUnsafePointer(to: node?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_is_editable_instance, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Node.method_is_editable_instance, handle, pArgs, &_result)
                 }
                 
             }
@@ -3249,9 +3249,9 @@ open class Node: Object {
     /// Returns the node's closest ``Viewport`` ancestor, if the node is inside the tree. Otherwise, returns `null`.
     public final func getViewport() -> Viewport? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Node.method_get_viewport, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Node.method_get_viewport, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_queue_free: GDExtensionMethodBindPtr = {
@@ -3273,7 +3273,7 @@ open class Node: Object {
     /// 
     public final func queueFree() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node.method_queue_free, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node.method_queue_free, handle, nil, nil)
         
     }
     
@@ -3294,7 +3294,7 @@ open class Node: Object {
     /// 
     public final func requestReady() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node.method_request_ready, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node.method_request_ready, handle, nil, nil)
         
     }
     
@@ -3316,7 +3316,7 @@ open class Node: Object {
     public final func isNodeReady() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_node_ready, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_node_ready, handle, nil, &_result)
         return _result
     }
     
@@ -3343,7 +3343,7 @@ open class Node: Object {
             withUnsafePointer(to: recursive) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node.method_set_multiplayer_authority, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node.method_set_multiplayer_authority, handle, pArgs, nil)
                     }
                     
                 }
@@ -3370,7 +3370,7 @@ open class Node: Object {
     public final func getMultiplayerAuthority() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Node.method_get_multiplayer_authority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_get_multiplayer_authority, handle, nil, &_result)
         return _result
     }
     
@@ -3389,7 +3389,7 @@ open class Node: Object {
     public final func isMultiplayerAuthority() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_multiplayer_authority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_multiplayer_authority, handle, nil, &_result)
         return _result
     }
     
@@ -3407,9 +3407,9 @@ open class Node: Object {
     @inline(__always)
     fileprivate final func get_multiplayer() -> MultiplayerAPI? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Node.method_get_multiplayer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Node.method_get_multiplayer, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_rpc_config: GDExtensionMethodBindPtr = {
@@ -3441,7 +3441,7 @@ open class Node: Object {
             withUnsafePointer(to: config.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node.method_rpc_config, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node.method_rpc_config, handle, pArgs, nil)
                     }
                     
                 }
@@ -3468,7 +3468,7 @@ open class Node: Object {
     public final func getRpcConfig() -> Variant? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
-        gi.object_method_bind_ptrcall(Node.method_get_rpc_config, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_get_rpc_config, handle, nil, &_result)
         return Variant(takingOver: _result)
     }
     
@@ -3490,7 +3490,7 @@ open class Node: Object {
         withUnsafePointer(to: editorDescription.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_editor_description, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_editor_description, handle, pArgs, nil)
                 }
                 
             }
@@ -3515,7 +3515,7 @@ open class Node: Object {
     fileprivate final func get_editor_description() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(Node.method_get_editor_description, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Node.method_get_editor_description, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -3536,7 +3536,7 @@ open class Node: Object {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_set_unique_name_in_owner, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_set_unique_name_in_owner, handle, pArgs, nil)
                 }
                 
             }
@@ -3561,7 +3561,7 @@ open class Node: Object {
     fileprivate final func is_unique_name_in_owner() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Node.method_is_unique_name_in_owner, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Node.method_is_unique_name_in_owner, handle, nil, &_result)
         return _result
     }
     
@@ -3592,7 +3592,7 @@ open class Node: Object {
             withUnsafePointer(to: context.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node.method_atr, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Node.method_atr, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -3637,7 +3637,7 @@ open class Node: Object {
                     withUnsafePointer(to: context.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Node.method_atr_n, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(Node.method_atr_n, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -3678,7 +3678,7 @@ open class Node: Object {
             if arguments.isEmpty {
                 withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                        gi.object_method_bind_call(Node.method_rpc, UnsafeMutableRawPointer(mutating: handle), pArgs, 1, &_result, nil)
+                        gi.object_method_bind_call(Node.method_rpc, handle, pArgs, 1, &_result, nil)
                     }
                     
                 }
@@ -3705,7 +3705,7 @@ open class Node: Object {
                             pArgsBuffer.initializeElement(at: 1 + i, to: contentsPtr + i)
                         }
                     
-                        gi.object_method_bind_call(Node.method_rpc, UnsafeMutableRawPointer(mutating: handle), pArgs, Int64(1 + arguments.count), &_result, nil)
+                        gi.object_method_bind_call(Node.method_rpc, handle, pArgs, Int64(1 + arguments.count), &_result, nil)
                     }                           
                 }
                 
@@ -3748,7 +3748,7 @@ open class Node: Object {
                 if arguments.isEmpty {
                     withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                            gi.object_method_bind_call(Node.method_rpc_id, UnsafeMutableRawPointer(mutating: handle), pArgs, 2, &_result, nil)
+                            gi.object_method_bind_call(Node.method_rpc_id, handle, pArgs, 2, &_result, nil)
                         }
                         
                     }
@@ -3776,7 +3776,7 @@ open class Node: Object {
                                 pArgsBuffer.initializeElement(at: 2 + i, to: contentsPtr + i)
                             }
                         
-                            gi.object_method_bind_call(Node.method_rpc_id, UnsafeMutableRawPointer(mutating: handle), pArgs, Int64(2 + arguments.count), &_result, nil)
+                            gi.object_method_bind_call(Node.method_rpc_id, handle, pArgs, Int64(2 + arguments.count), &_result, nil)
                         }                           
                     }
                     
@@ -3810,7 +3810,7 @@ open class Node: Object {
     /// Refreshes the warnings displayed for this node in the Scene dock. Use ``_getConfigurationWarnings()`` to customize the warning messages to display.
     public final func updateConfigurationWarnings() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Node.method_update_configuration_warnings, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Node.method_update_configuration_warnings, handle, nil, nil)
         
     }
     
@@ -3834,7 +3834,7 @@ open class Node: Object {
             if arguments.isEmpty {
                 withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                        gi.object_method_bind_call(Node.method_call_deferred_thread_group, UnsafeMutableRawPointer(mutating: handle), pArgs, 1, &_result, nil)
+                        gi.object_method_bind_call(Node.method_call_deferred_thread_group, handle, pArgs, 1, &_result, nil)
                     }
                     
                 }
@@ -3861,7 +3861,7 @@ open class Node: Object {
                             pArgsBuffer.initializeElement(at: 1 + i, to: contentsPtr + i)
                         }
                     
-                        gi.object_method_bind_call(Node.method_call_deferred_thread_group, UnsafeMutableRawPointer(mutating: handle), pArgs, Int64(1 + arguments.count), &_result, nil)
+                        gi.object_method_bind_call(Node.method_call_deferred_thread_group, handle, pArgs, Int64(1 + arguments.count), &_result, nil)
                     }                           
                 }
                 
@@ -3889,7 +3889,7 @@ open class Node: Object {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node.method_set_deferred_thread_group, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node.method_set_deferred_thread_group, handle, pArgs, nil)
                     }
                     
                 }
@@ -3918,7 +3918,7 @@ open class Node: Object {
         withUnsafePointer(to: what) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_notify_deferred_thread_group, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_notify_deferred_thread_group, handle, pArgs, nil)
                 }
                 
             }
@@ -3948,7 +3948,7 @@ open class Node: Object {
             if arguments.isEmpty {
                 withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                        gi.object_method_bind_call(Node.method_call_thread_safe, UnsafeMutableRawPointer(mutating: handle), pArgs, 1, &_result, nil)
+                        gi.object_method_bind_call(Node.method_call_thread_safe, handle, pArgs, 1, &_result, nil)
                     }
                     
                 }
@@ -3975,7 +3975,7 @@ open class Node: Object {
                             pArgsBuffer.initializeElement(at: 1 + i, to: contentsPtr + i)
                         }
                     
-                        gi.object_method_bind_call(Node.method_call_thread_safe, UnsafeMutableRawPointer(mutating: handle), pArgs, Int64(1 + arguments.count), &_result, nil)
+                        gi.object_method_bind_call(Node.method_call_thread_safe, handle, pArgs, Int64(1 + arguments.count), &_result, nil)
                     }                           
                 }
                 
@@ -4003,7 +4003,7 @@ open class Node: Object {
             withUnsafePointer(to: value.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Node.method_set_thread_safe, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Node.method_set_thread_safe, handle, pArgs, nil)
                     }
                     
                 }
@@ -4032,7 +4032,7 @@ open class Node: Object {
         withUnsafePointer(to: what) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Node.method_notify_thread_safe, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Node.method_notify_thread_safe, handle, pArgs, nil)
                 }
                 
             }
@@ -4297,9 +4297,9 @@ func _Node_proxy_input (instance: UnsafeMutableRawPointer?, args: UnsafePointer<
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? Node else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._input (event: lookupObject (nativeHandle: resolved_0!, ownsRef: false) as! InputEvent)
+    swiftObject._input (event: getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as! InputEvent)
 }
 
 func _Node_proxy_physics_process (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -4330,9 +4330,9 @@ func _Node_proxy_shortcut_input (instance: UnsafeMutableRawPointer?, args: Unsaf
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? Node else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._shortcutInput (event: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? InputEvent)
+    swiftObject._shortcutInput (event: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? InputEvent)
 }
 
 func _Node_proxy_unhandled_input (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -4340,9 +4340,9 @@ func _Node_proxy_unhandled_input (instance: UnsafeMutableRawPointer?, args: Unsa
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? Node else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._unhandledInput (event: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? InputEvent)
+    swiftObject._unhandledInput (event: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? InputEvent)
 }
 
 func _Node_proxy_unhandled_key_input (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -4350,8 +4350,8 @@ func _Node_proxy_unhandled_key_input (instance: UnsafeMutableRawPointer?, args: 
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? Node else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._unhandledKeyInput (event: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? InputEvent)
+    swiftObject._unhandledKeyInput (event: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? InputEvent)
 }
 

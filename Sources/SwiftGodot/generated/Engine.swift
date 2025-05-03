@@ -26,7 +26,7 @@ open class Engine: Object {
     /// The shared instance of this class
     public static var shared: Engine {
         return withUnsafePointer(to: &Engine.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -178,7 +178,7 @@ open class Engine: Object {
         withUnsafePointer(to: physicsTicksPerSecond) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_physics_ticks_per_second, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_physics_ticks_per_second, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -202,7 +202,7 @@ open class Engine: Object {
     @inline(__always)
     fileprivate static func get_physics_ticks_per_second() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_physics_ticks_per_second, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_physics_ticks_per_second, shared.handle, nil, &_result)
         return _result
     }
     
@@ -222,7 +222,7 @@ open class Engine: Object {
         withUnsafePointer(to: maxPhysicsSteps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_max_physics_steps_per_frame, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_max_physics_steps_per_frame, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -246,7 +246,7 @@ open class Engine: Object {
     @inline(__always)
     fileprivate static func get_max_physics_steps_per_frame() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_max_physics_steps_per_frame, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_max_physics_steps_per_frame, shared.handle, nil, &_result)
         return _result
     }
     
@@ -266,7 +266,7 @@ open class Engine: Object {
         withUnsafePointer(to: physicsJitterFix) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_physics_jitter_fix, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_physics_jitter_fix, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -290,7 +290,7 @@ open class Engine: Object {
     @inline(__always)
     fileprivate static func get_physics_jitter_fix() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_get_physics_jitter_fix, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_physics_jitter_fix, shared.handle, nil, &_result)
         return _result
     }
     
@@ -308,7 +308,7 @@ open class Engine: Object {
     /// Returns the fraction through the current physics tick we are at the time of rendering the frame. This can be used to implement fixed timestep interpolation.
     public static func getPhysicsInterpolationFraction() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_get_physics_interpolation_fraction, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_physics_interpolation_fraction, shared.handle, nil, &_result)
         return _result
     }
     
@@ -328,7 +328,7 @@ open class Engine: Object {
         withUnsafePointer(to: maxFps) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_max_fps, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_max_fps, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -352,7 +352,7 @@ open class Engine: Object {
     @inline(__always)
     fileprivate static func get_max_fps() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_max_fps, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_max_fps, shared.handle, nil, &_result)
         return _result
     }
     
@@ -372,7 +372,7 @@ open class Engine: Object {
         withUnsafePointer(to: timeScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_time_scale, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_time_scale, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -396,7 +396,7 @@ open class Engine: Object {
     @inline(__always)
     fileprivate static func get_time_scale() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_get_time_scale, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_time_scale, shared.handle, nil, &_result)
         return _result
     }
     
@@ -417,7 +417,7 @@ open class Engine: Object {
     /// 
     public static func getFramesDrawn() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_frames_drawn, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_frames_drawn, shared.handle, nil, &_result)
         return _result
     }
     
@@ -435,7 +435,7 @@ open class Engine: Object {
     /// Returns the average frames rendered every second (FPS), also known as the framerate.
     public static func getFramesPerSecond() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_get_frames_per_second, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_frames_per_second, shared.handle, nil, &_result)
         return _result
     }
     
@@ -456,7 +456,7 @@ open class Engine: Object {
     /// 
     public static func getPhysicsFrames() -> UInt {
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(method_get_physics_frames, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_physics_frames, shared.handle, nil, &_result)
         return _result
     }
     
@@ -477,7 +477,7 @@ open class Engine: Object {
     /// 
     public static func getProcessFrames() -> UInt {
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(method_get_process_frames, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_process_frames, shared.handle, nil, &_result)
         return _result
     }
     
@@ -497,9 +497,9 @@ open class Engine: Object {
     /// > Note: The type instantiated as the main loop can changed with ``ProjectSettings/application/run/mainLoopType``.
     /// 
     public static func getMainLoop() -> MainLoop? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(method_get_main_loop, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(method_get_main_loop, shared.handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_version_info: GDExtensionMethodBindPtr = {
@@ -539,7 +539,7 @@ open class Engine: Object {
     /// 
     public static func getVersionInfo() -> VariantDictionary {
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(method_get_version_info, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_version_info, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -557,7 +557,7 @@ open class Engine: Object {
     /// Returns the engine author information as a ``VariantDictionary``, where each entry is an ``VariantArray`` of strings with the names of notable contributors to the Godot Engine: `lead_developers`, `founders`, `project_managers`, and `developers`.
     public static func getAuthorInfo() -> VariantDictionary {
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(method_get_author_info, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_author_info, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -584,7 +584,7 @@ open class Engine: Object {
     /// 
     public static func getCopyrightInfo() -> TypedArray<VariantDictionary> {
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(method_get_copyright_info, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_copyright_info, shared.handle, nil, &_result)
         return TypedArray<VariantDictionary>(takingOver: _result)
     }
     
@@ -605,7 +605,7 @@ open class Engine: Object {
     /// 
     public static func getDonorInfo() -> VariantDictionary {
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(method_get_donor_info, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_donor_info, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -623,7 +623,7 @@ open class Engine: Object {
     /// Returns a ``VariantDictionary`` of licenses used by Godot and included third party components. Each entry is a license name (such as "<a href="https://en.wikipedia.org/wiki/MIT_License#Ambiguity_and_variants">Expat</a>") and its associated text.
     public static func getLicenseInfo() -> VariantDictionary {
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(method_get_license_info, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_license_info, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -641,7 +641,7 @@ open class Engine: Object {
     /// Returns the full Godot license text.
     public static func getLicenseText() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_license_text, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_license_text, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -664,7 +664,7 @@ open class Engine: Object {
     /// 
     public static func getArchitectureName() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_architecture_name, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_architecture_name, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -683,7 +683,7 @@ open class Engine: Object {
     /// 
     public static func isInPhysicsFrame() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_in_physics_frame, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_in_physics_frame, shared.handle, nil, &_result)
         return _result
     }
     
@@ -707,7 +707,7 @@ open class Engine: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_singleton, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_singleton, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -733,18 +733,18 @@ open class Engine: Object {
     /// > Note: Global singletons are not the same as autoloaded nodes, which are configurable in the project settings.
     /// 
     public static func getSingleton(name: StringName) -> Object? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_singleton, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_singleton, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_register_singleton: GDExtensionMethodBindPtr = {
@@ -764,7 +764,7 @@ open class Engine: Object {
             withUnsafePointer(to: instance?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_register_singleton, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_register_singleton, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -792,7 +792,7 @@ open class Engine: Object {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_unregister_singleton, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_unregister_singleton, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -816,7 +816,7 @@ open class Engine: Object {
     /// Returns a list of names of all available global singletons. See also ``getSingleton(name:)``.
     public static func getSingletonList() -> PackedStringArray {
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(method_get_singleton_list, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_singleton_list, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -846,7 +846,7 @@ open class Engine: Object {
         withUnsafePointer(to: language?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_register_script_language, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_register_script_language, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -880,7 +880,7 @@ open class Engine: Object {
         withUnsafePointer(to: language?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_unregister_script_language, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_unregister_script_language, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -904,7 +904,7 @@ open class Engine: Object {
     /// Returns the number of available script languages. Use with ``getScriptLanguage(index:)``.
     public static func getScriptLanguageCount() -> Int32 {
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(method_get_script_language_count, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_script_language_count, shared.handle, nil, &_result)
         return _result
     }
     
@@ -921,18 +921,18 @@ open class Engine: Object {
     
     /// Returns an instance of a ``ScriptLanguage`` with the given `index`.
     public static func getScriptLanguage(index: Int32) -> ScriptLanguage? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_script_language, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_script_language, shared.handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_is_editor_hint: GDExtensionMethodBindPtr = {
@@ -954,7 +954,7 @@ open class Engine: Object {
     /// 
     public static func isEditorHint() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_editor_hint, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_editor_hint, shared.handle, nil, &_result)
         return _result
     }
     
@@ -972,7 +972,7 @@ open class Engine: Object {
     /// Returns `true` if the engine is running embedded in the editor. This is useful to prevent attempting to update window mode or window flags that are not supported when running the project embedded in the editor.
     public static func isEmbeddedInEditor() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_embedded_in_editor, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_embedded_in_editor, shared.handle, nil, &_result)
         return _result
     }
     
@@ -990,7 +990,7 @@ open class Engine: Object {
     /// Returns the path to the ``MovieWriter``'s output file, or an empty string if the engine wasn't started in Movie Maker mode. The default path can be changed in ``ProjectSettings/editor/movieWriter/movieFile``.
     public static func getWriteMoviePath() -> String {
         let _result = GString ()
-        gi.object_method_bind_ptrcall(method_get_write_movie_path, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_write_movie_path, shared.handle, nil, &_result.content)
         return _result.description
     }
     
@@ -1010,7 +1010,7 @@ open class Engine: Object {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_print_to_stdout, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_print_to_stdout, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1034,7 +1034,7 @@ open class Engine: Object {
     @inline(__always)
     fileprivate static func is_printing_to_stdout() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_printing_to_stdout, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_printing_to_stdout, shared.handle, nil, &_result)
         return _result
     }
     
@@ -1054,7 +1054,7 @@ open class Engine: Object {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_set_print_error_messages, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_set_print_error_messages, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -1078,7 +1078,7 @@ open class Engine: Object {
     @inline(__always)
     fileprivate static func is_printing_error_messages() -> Bool {
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(method_is_printing_error_messages, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_is_printing_error_messages, shared.handle, nil, &_result)
         return _result
     }
     

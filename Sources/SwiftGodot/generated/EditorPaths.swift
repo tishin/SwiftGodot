@@ -49,7 +49,7 @@ open class EditorPaths: Object {
     public final func getDataDir() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorPaths.method_get_data_dir, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorPaths.method_get_data_dir, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -71,7 +71,7 @@ open class EditorPaths: Object {
     public final func getConfigDir() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorPaths.method_get_config_dir, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorPaths.method_get_config_dir, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -93,7 +93,7 @@ open class EditorPaths: Object {
     public final func getCacheDir() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorPaths.method_get_cache_dir, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorPaths.method_get_cache_dir, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -121,7 +121,7 @@ open class EditorPaths: Object {
     public final func isSelfContained() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorPaths.method_is_self_contained, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorPaths.method_is_self_contained, handle, nil, &_result)
         return _result
     }
     
@@ -140,7 +140,7 @@ open class EditorPaths: Object {
     public final func getSelfContainedFile() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorPaths.method_get_self_contained_file, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorPaths.method_get_self_contained_file, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -159,7 +159,7 @@ open class EditorPaths: Object {
     public final func getProjectSettingsDir() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorPaths.method_get_project_settings_dir, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorPaths.method_get_project_settings_dir, handle, nil, &_result.content)
         return _result.description
     }
     

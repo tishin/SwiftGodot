@@ -129,7 +129,7 @@ open class GLTFPhysicsShape: Resource {
     
     /// Creates a new GLTFPhysicsShape instance from the given Godot ``CollisionShape3D`` node.
     public static func fromNode(shapeNode: CollisionShape3D?) -> GLTFPhysicsShape? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: shapeNode?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -140,7 +140,7 @@ open class GLTFPhysicsShape: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_to_node: GDExtensionMethodBindPtr = {
@@ -157,18 +157,18 @@ open class GLTFPhysicsShape: Resource {
     /// Converts this GLTFPhysicsShape instance into a Godot ``CollisionShape3D`` node.
     public final func toNode(cacheShapes: Bool = false) -> CollisionShape3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: cacheShapes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_to_node, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_to_node, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_from_resource: GDExtensionMethodBindPtr = {
@@ -184,7 +184,7 @@ open class GLTFPhysicsShape: Resource {
     
     /// Creates a new GLTFPhysicsShape instance from the given Godot ``Shape3D`` resource.
     public static func fromResource(shapeResource: Shape3D?) -> GLTFPhysicsShape? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: shapeResource?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -195,7 +195,7 @@ open class GLTFPhysicsShape: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_to_resource: GDExtensionMethodBindPtr = {
@@ -212,18 +212,18 @@ open class GLTFPhysicsShape: Resource {
     /// Converts this GLTFPhysicsShape instance into a Godot ``Shape3D`` resource.
     public final func toResource(cacheShapes: Bool = false) -> Shape3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: cacheShapes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_to_resource, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_to_resource, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_from_dictionary: GDExtensionMethodBindPtr = {
@@ -239,7 +239,7 @@ open class GLTFPhysicsShape: Resource {
     
     /// Creates a new GLTFPhysicsShape instance by parsing the given ``VariantDictionary``.
     public static func fromDictionary(_ dictionary: VariantDictionary) -> GLTFPhysicsShape? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: dictionary.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -250,7 +250,7 @@ open class GLTFPhysicsShape: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_to_dictionary: GDExtensionMethodBindPtr = {
@@ -268,7 +268,7 @@ open class GLTFPhysicsShape: Resource {
     public final func toDictionary() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_to_dictionary, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_to_dictionary, handle, nil, &_result.content)
         return _result
     }
     
@@ -287,7 +287,7 @@ open class GLTFPhysicsShape: Resource {
     fileprivate final func get_shape_type() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_get_shape_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_get_shape_type, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -309,7 +309,7 @@ open class GLTFPhysicsShape: Resource {
         withUnsafePointer(to: shapeType.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_set_shape_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_set_shape_type, handle, pArgs, nil)
                 }
                 
             }
@@ -334,7 +334,7 @@ open class GLTFPhysicsShape: Resource {
     fileprivate final func get_size() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -355,7 +355,7 @@ open class GLTFPhysicsShape: Resource {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_set_size, handle, pArgs, nil)
                 }
                 
             }
@@ -380,7 +380,7 @@ open class GLTFPhysicsShape: Resource {
     fileprivate final func get_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_get_radius, handle, nil, &_result)
         return _result
     }
     
@@ -401,7 +401,7 @@ open class GLTFPhysicsShape: Resource {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_set_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_set_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -426,7 +426,7 @@ open class GLTFPhysicsShape: Resource {
     fileprivate final func get_height() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_get_height, handle, nil, &_result)
         return _result
     }
     
@@ -447,7 +447,7 @@ open class GLTFPhysicsShape: Resource {
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_set_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_set_height, handle, pArgs, nil)
                 }
                 
             }
@@ -472,7 +472,7 @@ open class GLTFPhysicsShape: Resource {
     fileprivate final func get_is_trigger() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_get_is_trigger, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_get_is_trigger, handle, nil, &_result)
         return _result
     }
     
@@ -493,7 +493,7 @@ open class GLTFPhysicsShape: Resource {
         withUnsafePointer(to: isTrigger) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_set_is_trigger, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_set_is_trigger, handle, pArgs, nil)
                 }
                 
             }
@@ -518,7 +518,7 @@ open class GLTFPhysicsShape: Resource {
     fileprivate final func get_mesh_index() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_get_mesh_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_get_mesh_index, handle, nil, &_result)
         return _result
     }
     
@@ -539,7 +539,7 @@ open class GLTFPhysicsShape: Resource {
         withUnsafePointer(to: meshIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_set_mesh_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_set_mesh_index, handle, pArgs, nil)
                 }
                 
             }
@@ -563,9 +563,9 @@ open class GLTFPhysicsShape: Resource {
     @inline(__always)
     fileprivate final func get_importer_mesh() -> ImporterMesh? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_get_importer_mesh, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_get_importer_mesh, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_importer_mesh: GDExtensionMethodBindPtr = {
@@ -585,7 +585,7 @@ open class GLTFPhysicsShape: Resource {
         withUnsafePointer(to: importerMesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_set_importer_mesh, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GLTFPhysicsShape.method_set_importer_mesh, handle, pArgs, nil)
                 }
                 
             }

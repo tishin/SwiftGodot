@@ -119,7 +119,7 @@ open class VoxelGI: VisualInstance3D {
         withUnsafePointer(to: data?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VoxelGI.method_set_probe_data, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VoxelGI.method_set_probe_data, handle, pArgs, nil)
                 }
                 
             }
@@ -143,9 +143,9 @@ open class VoxelGI: VisualInstance3D {
     @inline(__always)
     fileprivate final func get_probe_data() -> VoxelGIData? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(VoxelGI.method_get_probe_data, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(VoxelGI.method_get_probe_data, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_subdiv: GDExtensionMethodBindPtr = {
@@ -165,7 +165,7 @@ open class VoxelGI: VisualInstance3D {
         withUnsafePointer(to: subdiv.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VoxelGI.method_set_subdiv, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VoxelGI.method_set_subdiv, handle, pArgs, nil)
                 }
                 
             }
@@ -190,7 +190,7 @@ open class VoxelGI: VisualInstance3D {
     fileprivate final func get_subdiv() -> VoxelGI.Subdiv {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VoxelGI.method_get_subdiv, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VoxelGI.method_get_subdiv, handle, nil, &_result)
         return VoxelGI.Subdiv (rawValue: _result)!
     }
     
@@ -211,7 +211,7 @@ open class VoxelGI: VisualInstance3D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VoxelGI.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VoxelGI.method_set_size, handle, pArgs, nil)
                 }
                 
             }
@@ -236,7 +236,7 @@ open class VoxelGI: VisualInstance3D {
     fileprivate final func get_size() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(VoxelGI.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VoxelGI.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -257,7 +257,7 @@ open class VoxelGI: VisualInstance3D {
         withUnsafePointer(to: cameraAttributes?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VoxelGI.method_set_camera_attributes, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VoxelGI.method_set_camera_attributes, handle, pArgs, nil)
                 }
                 
             }
@@ -281,9 +281,9 @@ open class VoxelGI: VisualInstance3D {
     @inline(__always)
     fileprivate final func get_camera_attributes() -> CameraAttributes? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(VoxelGI.method_get_camera_attributes, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(VoxelGI.method_get_camera_attributes, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_bake: GDExtensionMethodBindPtr = {
@@ -309,7 +309,7 @@ open class VoxelGI: VisualInstance3D {
             withUnsafePointer(to: createVisualDebug) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(VoxelGI.method_bake, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(VoxelGI.method_bake, handle, pArgs, nil)
                     }
                     
                 }
@@ -335,7 +335,7 @@ open class VoxelGI: VisualInstance3D {
     /// Calls ``bake(fromNode:createVisualDebug:)`` with `create_visual_debug` enabled.
     public final func debugBake() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(VoxelGI.method_debug_bake, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(VoxelGI.method_debug_bake, handle, nil, nil)
         
     }
     

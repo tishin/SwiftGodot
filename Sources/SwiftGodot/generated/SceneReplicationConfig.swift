@@ -48,7 +48,7 @@ open class SceneReplicationConfig: Resource {
     public final func getProperties() -> TypedArray<NodePath> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(SceneReplicationConfig.method_get_properties, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(SceneReplicationConfig.method_get_properties, handle, nil, &_result)
         return TypedArray<NodePath>(takingOver: _result)
     }
     
@@ -73,7 +73,7 @@ open class SceneReplicationConfig: Resource {
             withUnsafePointer(to: index) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SceneReplicationConfig.method_add_property, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SceneReplicationConfig.method_add_property, handle, pArgs, nil)
                     }
                     
                 }
@@ -103,7 +103,7 @@ open class SceneReplicationConfig: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneReplicationConfig.method_has_property, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneReplicationConfig.method_has_property, handle, pArgs, &_result)
                 }
                 
             }
@@ -130,7 +130,7 @@ open class SceneReplicationConfig: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneReplicationConfig.method_remove_property, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(SceneReplicationConfig.method_remove_property, handle, pArgs, nil)
                 }
                 
             }
@@ -158,7 +158,7 @@ open class SceneReplicationConfig: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_get_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_get_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -186,7 +186,7 @@ open class SceneReplicationConfig: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_get_spawn, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_get_spawn, handle, pArgs, &_result)
                 }
                 
             }
@@ -214,7 +214,7 @@ open class SceneReplicationConfig: Resource {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_set_spawn, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_set_spawn, handle, pArgs, nil)
                     }
                     
                 }
@@ -244,7 +244,7 @@ open class SceneReplicationConfig: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_get_replication_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_get_replication_mode, handle, pArgs, &_result)
                 }
                 
             }
@@ -272,7 +272,7 @@ open class SceneReplicationConfig: Resource {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_set_replication_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_set_replication_mode, handle, pArgs, nil)
                     }
                     
                 }
@@ -302,7 +302,7 @@ open class SceneReplicationConfig: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_get_sync, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_get_sync, handle, pArgs, &_result)
                 }
                 
             }
@@ -330,7 +330,7 @@ open class SceneReplicationConfig: Resource {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_set_sync, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_set_sync, handle, pArgs, nil)
                     }
                     
                 }
@@ -360,7 +360,7 @@ open class SceneReplicationConfig: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_get_watch, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_get_watch, handle, pArgs, &_result)
                 }
                 
             }
@@ -388,7 +388,7 @@ open class SceneReplicationConfig: Resource {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_set_watch, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(SceneReplicationConfig.method_property_set_watch, handle, pArgs, nil)
                     }
                     
                 }

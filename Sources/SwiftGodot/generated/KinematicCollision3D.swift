@@ -44,7 +44,7 @@ open class KinematicCollision3D: RefCounted {
     public final func getTravel() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_travel, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_travel, handle, nil, &_result)
         return _result
     }
     
@@ -63,7 +63,7 @@ open class KinematicCollision3D: RefCounted {
     public final func getRemainder() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_remainder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_remainder, handle, nil, &_result)
         return _result
     }
     
@@ -82,7 +82,7 @@ open class KinematicCollision3D: RefCounted {
     public final func getDepth() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_depth, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_depth, handle, nil, &_result)
         return _result
     }
     
@@ -101,7 +101,7 @@ open class KinematicCollision3D: RefCounted {
     public final func getCollisionCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_collision_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_collision_count, handle, nil, &_result)
         return _result
     }
     
@@ -123,7 +123,7 @@ open class KinematicCollision3D: RefCounted {
         withUnsafePointer(to: collisionIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -151,7 +151,7 @@ open class KinematicCollision3D: RefCounted {
         withUnsafePointer(to: collisionIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_normal, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_normal, handle, pArgs, &_result)
                 }
                 
             }
@@ -180,7 +180,7 @@ open class KinematicCollision3D: RefCounted {
             withUnsafePointer(to: upDirection) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_angle, handle, pArgs, &_result)
                     }
                     
                 }
@@ -206,18 +206,18 @@ open class KinematicCollision3D: RefCounted {
     /// Returns the moving object's colliding shape given a collision index (the deepest collision by default).
     public final func getLocalShape(collisionIndex: Int32 = 0) -> Object? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: collisionIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_local_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_local_shape, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_collider: GDExtensionMethodBindPtr = {
@@ -234,18 +234,18 @@ open class KinematicCollision3D: RefCounted {
     /// Returns the colliding body's attached ``Object`` given a collision index (the deepest collision by default).
     public final func getCollider(collisionIndex: Int32 = 0) -> Object? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: collisionIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_collider, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_collider, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_collider_id: GDExtensionMethodBindPtr = {
@@ -266,7 +266,7 @@ open class KinematicCollision3D: RefCounted {
         withUnsafePointer(to: collisionIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_collider_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_collider_id, handle, pArgs, &_result)
                 }
                 
             }
@@ -294,7 +294,7 @@ open class KinematicCollision3D: RefCounted {
         withUnsafePointer(to: collisionIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_collider_rid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_collider_rid, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -318,18 +318,18 @@ open class KinematicCollision3D: RefCounted {
     /// Returns the colliding body's shape given a collision index (the deepest collision by default).
     public final func getColliderShape(collisionIndex: Int32 = 0) -> Object? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: collisionIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_collider_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_collider_shape, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_collider_shape_index: GDExtensionMethodBindPtr = {
@@ -350,7 +350,7 @@ open class KinematicCollision3D: RefCounted {
         withUnsafePointer(to: collisionIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_collider_shape_index, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_collider_shape_index, handle, pArgs, &_result)
                 }
                 
             }
@@ -378,7 +378,7 @@ open class KinematicCollision3D: RefCounted {
         withUnsafePointer(to: collisionIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_collider_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(KinematicCollision3D.method_get_collider_velocity, handle, pArgs, &_result)
                 }
                 
             }

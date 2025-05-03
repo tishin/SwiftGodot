@@ -40,7 +40,7 @@ open class Skin: Resource {
         withUnsafePointer(to: bindCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Skin.method_set_bind_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Skin.method_set_bind_count, handle, pArgs, nil)
                 }
                 
             }
@@ -65,7 +65,7 @@ open class Skin: Resource {
     public final func getBindCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Skin.method_get_bind_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Skin.method_get_bind_count, handle, nil, &_result)
         return _result
     }
     
@@ -87,7 +87,7 @@ open class Skin: Resource {
             withUnsafePointer(to: pose) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Skin.method_add_bind, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Skin.method_add_bind, handle, pArgs, nil)
                     }
                     
                 }
@@ -118,7 +118,7 @@ open class Skin: Resource {
             withUnsafePointer(to: pose) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Skin.method_add_named_bind, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Skin.method_add_named_bind, handle, pArgs, nil)
                     }
                     
                 }
@@ -148,7 +148,7 @@ open class Skin: Resource {
             withUnsafePointer(to: pose) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Skin.method_set_bind_pose, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Skin.method_set_bind_pose, handle, pArgs, nil)
                     }
                     
                 }
@@ -178,7 +178,7 @@ open class Skin: Resource {
         withUnsafePointer(to: bindIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Skin.method_get_bind_pose, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Skin.method_get_bind_pose, handle, pArgs, &_result)
                 }
                 
             }
@@ -206,7 +206,7 @@ open class Skin: Resource {
             withUnsafePointer(to: name.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Skin.method_set_bind_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Skin.method_set_bind_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -236,7 +236,7 @@ open class Skin: Resource {
         withUnsafePointer(to: bindIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Skin.method_get_bind_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Skin.method_get_bind_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -264,7 +264,7 @@ open class Skin: Resource {
             withUnsafePointer(to: bone) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Skin.method_set_bind_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Skin.method_set_bind_bone, handle, pArgs, nil)
                     }
                     
                 }
@@ -294,7 +294,7 @@ open class Skin: Resource {
         withUnsafePointer(to: bindIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Skin.method_get_bind_bone, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Skin.method_get_bind_bone, handle, pArgs, &_result)
                 }
                 
             }
@@ -318,7 +318,7 @@ open class Skin: Resource {
     /// 
     public final func clearBinds() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Skin.method_clear_binds, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Skin.method_clear_binds, handle, nil, nil)
         
     }
     

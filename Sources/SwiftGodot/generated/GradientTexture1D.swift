@@ -82,7 +82,7 @@ open class GradientTexture1D: Texture2D {
         withUnsafePointer(to: gradient?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GradientTexture1D.method_set_gradient, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GradientTexture1D.method_set_gradient, handle, pArgs, nil)
                 }
                 
             }
@@ -106,9 +106,9 @@ open class GradientTexture1D: Texture2D {
     @inline(__always)
     fileprivate final func get_gradient() -> Gradient? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GradientTexture1D.method_get_gradient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GradientTexture1D.method_get_gradient, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_width: GDExtensionMethodBindPtr = {
@@ -128,7 +128,7 @@ open class GradientTexture1D: Texture2D {
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GradientTexture1D.method_set_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GradientTexture1D.method_set_width, handle, pArgs, nil)
                 }
                 
             }
@@ -155,7 +155,7 @@ open class GradientTexture1D: Texture2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GradientTexture1D.method_set_use_hdr, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GradientTexture1D.method_set_use_hdr, handle, pArgs, nil)
                 }
                 
             }
@@ -180,7 +180,7 @@ open class GradientTexture1D: Texture2D {
     fileprivate final func is_using_hdr() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GradientTexture1D.method_is_using_hdr, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GradientTexture1D.method_is_using_hdr, handle, nil, &_result)
         return _result
     }
     

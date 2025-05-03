@@ -160,7 +160,7 @@ open class GradientTexture2D: Texture2D {
         withUnsafePointer(to: gradient?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_gradient, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_gradient, handle, pArgs, nil)
                 }
                 
             }
@@ -184,9 +184,9 @@ open class GradientTexture2D: Texture2D {
     @inline(__always)
     fileprivate final func get_gradient() -> Gradient? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(GradientTexture2D.method_get_gradient, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(GradientTexture2D.method_get_gradient, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_width: GDExtensionMethodBindPtr = {
@@ -206,7 +206,7 @@ open class GradientTexture2D: Texture2D {
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_width, handle, pArgs, nil)
                 }
                 
             }
@@ -233,7 +233,7 @@ open class GradientTexture2D: Texture2D {
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_height, handle, pArgs, nil)
                 }
                 
             }
@@ -260,7 +260,7 @@ open class GradientTexture2D: Texture2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_use_hdr, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_use_hdr, handle, pArgs, nil)
                 }
                 
             }
@@ -285,7 +285,7 @@ open class GradientTexture2D: Texture2D {
     fileprivate final func is_using_hdr() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(GradientTexture2D.method_is_using_hdr, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GradientTexture2D.method_is_using_hdr, handle, nil, &_result)
         return _result
     }
     
@@ -306,7 +306,7 @@ open class GradientTexture2D: Texture2D {
         withUnsafePointer(to: fill.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_fill, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_fill, handle, pArgs, nil)
                 }
                 
             }
@@ -331,7 +331,7 @@ open class GradientTexture2D: Texture2D {
     fileprivate final func get_fill() -> GradientTexture2D.Fill {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GradientTexture2D.method_get_fill, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GradientTexture2D.method_get_fill, handle, nil, &_result)
         return GradientTexture2D.Fill (rawValue: _result)!
     }
     
@@ -352,7 +352,7 @@ open class GradientTexture2D: Texture2D {
         withUnsafePointer(to: fillFrom) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_fill_from, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_fill_from, handle, pArgs, nil)
                 }
                 
             }
@@ -377,7 +377,7 @@ open class GradientTexture2D: Texture2D {
     fileprivate final func get_fill_from() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(GradientTexture2D.method_get_fill_from, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GradientTexture2D.method_get_fill_from, handle, nil, &_result)
         return _result
     }
     
@@ -398,7 +398,7 @@ open class GradientTexture2D: Texture2D {
         withUnsafePointer(to: fillTo) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_fill_to, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_fill_to, handle, pArgs, nil)
                 }
                 
             }
@@ -423,7 +423,7 @@ open class GradientTexture2D: Texture2D {
     fileprivate final func get_fill_to() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(GradientTexture2D.method_get_fill_to, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GradientTexture2D.method_get_fill_to, handle, nil, &_result)
         return _result
     }
     
@@ -444,7 +444,7 @@ open class GradientTexture2D: Texture2D {
         withUnsafePointer(to: `repeat`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_repeat, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(GradientTexture2D.method_set_repeat, handle, pArgs, nil)
                 }
                 
             }
@@ -469,7 +469,7 @@ open class GradientTexture2D: Texture2D {
     fileprivate final func get_repeat() -> GradientTexture2D.Repeat {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(GradientTexture2D.method_get_repeat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(GradientTexture2D.method_get_repeat, handle, nil, &_result)
         return GradientTexture2D.Repeat (rawValue: _result)!
     }
     

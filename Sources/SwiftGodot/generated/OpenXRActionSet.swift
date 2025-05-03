@@ -86,7 +86,7 @@ open class OpenXRActionSet: Resource {
         withUnsafePointer(to: localizedName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRActionSet.method_set_localized_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRActionSet.method_set_localized_name, handle, pArgs, nil)
                 }
                 
             }
@@ -111,7 +111,7 @@ open class OpenXRActionSet: Resource {
     fileprivate final func get_localized_name() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(OpenXRActionSet.method_get_localized_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRActionSet.method_get_localized_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -132,7 +132,7 @@ open class OpenXRActionSet: Resource {
         withUnsafePointer(to: priority) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRActionSet.method_set_priority, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRActionSet.method_set_priority, handle, pArgs, nil)
                 }
                 
             }
@@ -157,7 +157,7 @@ open class OpenXRActionSet: Resource {
     fileprivate final func get_priority() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(OpenXRActionSet.method_get_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRActionSet.method_get_priority, handle, nil, &_result)
         return _result
     }
     
@@ -176,7 +176,7 @@ open class OpenXRActionSet: Resource {
     public final func getActionCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(OpenXRActionSet.method_get_action_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRActionSet.method_get_action_count, handle, nil, &_result)
         return _result
     }
     
@@ -197,7 +197,7 @@ open class OpenXRActionSet: Resource {
         withUnsafePointer(to: actions.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRActionSet.method_set_actions, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRActionSet.method_set_actions, handle, pArgs, nil)
                 }
                 
             }
@@ -222,7 +222,7 @@ open class OpenXRActionSet: Resource {
     fileprivate final func get_actions() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(OpenXRActionSet.method_get_actions, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRActionSet.method_get_actions, handle, nil, &_result.content)
         return _result
     }
     
@@ -243,7 +243,7 @@ open class OpenXRActionSet: Resource {
         withUnsafePointer(to: action?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRActionSet.method_add_action, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRActionSet.method_add_action, handle, pArgs, nil)
                 }
                 
             }
@@ -270,7 +270,7 @@ open class OpenXRActionSet: Resource {
         withUnsafePointer(to: action?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRActionSet.method_remove_action, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRActionSet.method_remove_action, handle, pArgs, nil)
                 }
                 
             }

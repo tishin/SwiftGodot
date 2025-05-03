@@ -224,7 +224,7 @@ open class CharFXTransform: RefCounted {
     fileprivate final func get_transform() -> Transform2D {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Transform2D = Transform2D ()
-        gi.object_method_bind_ptrcall(CharFXTransform.method_get_transform, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharFXTransform.method_get_transform, handle, nil, &_result)
         return _result
     }
     
@@ -245,7 +245,7 @@ open class CharFXTransform: RefCounted {
         withUnsafePointer(to: transform) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_transform, handle, pArgs, nil)
                 }
                 
             }
@@ -270,7 +270,7 @@ open class CharFXTransform: RefCounted {
     fileprivate final func get_range() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(CharFXTransform.method_get_range, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharFXTransform.method_get_range, handle, nil, &_result)
         return _result
     }
     
@@ -291,7 +291,7 @@ open class CharFXTransform: RefCounted {
         withUnsafePointer(to: range) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_range, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_range, handle, pArgs, nil)
                 }
                 
             }
@@ -316,7 +316,7 @@ open class CharFXTransform: RefCounted {
     fileprivate final func get_elapsed_time() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CharFXTransform.method_get_elapsed_time, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharFXTransform.method_get_elapsed_time, handle, nil, &_result)
         return _result
     }
     
@@ -337,7 +337,7 @@ open class CharFXTransform: RefCounted {
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_elapsed_time, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_elapsed_time, handle, pArgs, nil)
                 }
                 
             }
@@ -362,7 +362,7 @@ open class CharFXTransform: RefCounted {
     fileprivate final func is_visible() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CharFXTransform.method_is_visible, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharFXTransform.method_is_visible, handle, nil, &_result)
         return _result
     }
     
@@ -383,7 +383,7 @@ open class CharFXTransform: RefCounted {
         withUnsafePointer(to: visibility) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_visibility, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_visibility, handle, pArgs, nil)
                 }
                 
             }
@@ -408,7 +408,7 @@ open class CharFXTransform: RefCounted {
     fileprivate final func is_outline() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CharFXTransform.method_is_outline, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharFXTransform.method_is_outline, handle, nil, &_result)
         return _result
     }
     
@@ -429,7 +429,7 @@ open class CharFXTransform: RefCounted {
         withUnsafePointer(to: outline) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_outline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_outline, handle, pArgs, nil)
                 }
                 
             }
@@ -454,7 +454,7 @@ open class CharFXTransform: RefCounted {
     fileprivate final func get_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(CharFXTransform.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharFXTransform.method_get_offset, handle, nil, &_result)
         return _result
     }
     
@@ -475,7 +475,7 @@ open class CharFXTransform: RefCounted {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -500,7 +500,7 @@ open class CharFXTransform: RefCounted {
     fileprivate final func get_color() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(CharFXTransform.method_get_color, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharFXTransform.method_get_color, handle, nil, &_result)
         return _result
     }
     
@@ -521,7 +521,7 @@ open class CharFXTransform: RefCounted {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_color, handle, pArgs, nil)
                 }
                 
             }
@@ -546,7 +546,7 @@ open class CharFXTransform: RefCounted {
     fileprivate final func get_environment() -> VariantDictionary {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(CharFXTransform.method_get_environment, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CharFXTransform.method_get_environment, handle, nil, &_result.content)
         return _result
     }
     
@@ -567,7 +567,7 @@ open class CharFXTransform: RefCounted {
         withUnsafePointer(to: environment.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_environment, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_environment, handle, pArgs, nil)
                 }
                 
             }
@@ -592,7 +592,7 @@ open class CharFXTransform: RefCounted {
     fileprivate final func get_glyph_index() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(CharFXTransform.method_get_glyph_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharFXTransform.method_get_glyph_index, handle, nil, &_result)
         return _result
     }
     
@@ -613,7 +613,7 @@ open class CharFXTransform: RefCounted {
         withUnsafePointer(to: glyphIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_glyph_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_glyph_index, handle, pArgs, nil)
                 }
                 
             }
@@ -638,7 +638,7 @@ open class CharFXTransform: RefCounted {
     fileprivate final func get_relative_index() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CharFXTransform.method_get_relative_index, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharFXTransform.method_get_relative_index, handle, nil, &_result)
         return _result
     }
     
@@ -659,7 +659,7 @@ open class CharFXTransform: RefCounted {
         withUnsafePointer(to: relativeIndex) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_relative_index, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_relative_index, handle, pArgs, nil)
                 }
                 
             }
@@ -684,7 +684,7 @@ open class CharFXTransform: RefCounted {
     fileprivate final func get_glyph_count() -> UInt8 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt8 = 0
-        gi.object_method_bind_ptrcall(CharFXTransform.method_get_glyph_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharFXTransform.method_get_glyph_count, handle, nil, &_result)
         return _result
     }
     
@@ -705,7 +705,7 @@ open class CharFXTransform: RefCounted {
         withUnsafePointer(to: glyphCount) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_glyph_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_glyph_count, handle, pArgs, nil)
                 }
                 
             }
@@ -730,7 +730,7 @@ open class CharFXTransform: RefCounted {
     fileprivate final func get_glyph_flags() -> UInt16 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt16 = 0
-        gi.object_method_bind_ptrcall(CharFXTransform.method_get_glyph_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharFXTransform.method_get_glyph_flags, handle, nil, &_result)
         return _result
     }
     
@@ -751,7 +751,7 @@ open class CharFXTransform: RefCounted {
         withUnsafePointer(to: glyphFlags) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_glyph_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_glyph_flags, handle, pArgs, nil)
                 }
                 
             }
@@ -776,7 +776,7 @@ open class CharFXTransform: RefCounted {
     fileprivate final func get_font() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(CharFXTransform.method_get_font, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(CharFXTransform.method_get_font, handle, nil, &_result.content)
         return _result
     }
     
@@ -797,7 +797,7 @@ open class CharFXTransform: RefCounted {
         withUnsafePointer(to: font.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_font, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharFXTransform.method_set_font, handle, pArgs, nil)
                 }
                 
             }

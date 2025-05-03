@@ -213,7 +213,7 @@ open class AStarGrid2D: RefCounted {
             withUnsafePointer(to: endId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AStarGrid2D.method__estimate_cost, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AStarGrid2D.method__estimate_cost, handle, pArgs, &_result)
                     }
                     
                 }
@@ -248,7 +248,7 @@ open class AStarGrid2D: RefCounted {
             withUnsafePointer(to: toId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AStarGrid2D.method__compute_cost, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AStarGrid2D.method__compute_cost, handle, pArgs, &_result)
                     }
                     
                 }
@@ -277,7 +277,7 @@ open class AStarGrid2D: RefCounted {
         withUnsafePointer(to: region) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_region, handle, pArgs, nil)
                 }
                 
             }
@@ -302,7 +302,7 @@ open class AStarGrid2D: RefCounted {
     fileprivate final func get_region() -> Rect2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2i = Rect2i ()
-        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_region, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_region, handle, nil, &_result)
         return _result
     }
     
@@ -323,7 +323,7 @@ open class AStarGrid2D: RefCounted {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_size, handle, pArgs, nil)
                 }
                 
             }
@@ -348,7 +348,7 @@ open class AStarGrid2D: RefCounted {
     fileprivate final func get_size() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -369,7 +369,7 @@ open class AStarGrid2D: RefCounted {
         withUnsafePointer(to: offset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -394,7 +394,7 @@ open class AStarGrid2D: RefCounted {
     fileprivate final func get_offset() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_offset, handle, nil, &_result)
         return _result
     }
     
@@ -415,7 +415,7 @@ open class AStarGrid2D: RefCounted {
         withUnsafePointer(to: cellSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_cell_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_cell_size, handle, pArgs, nil)
                 }
                 
             }
@@ -440,7 +440,7 @@ open class AStarGrid2D: RefCounted {
     fileprivate final func get_cell_size() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_cell_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_cell_size, handle, nil, &_result)
         return _result
     }
     
@@ -461,7 +461,7 @@ open class AStarGrid2D: RefCounted {
         withUnsafePointer(to: cellShape.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_cell_shape, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_cell_shape, handle, pArgs, nil)
                 }
                 
             }
@@ -486,7 +486,7 @@ open class AStarGrid2D: RefCounted {
     fileprivate final func get_cell_shape() -> AStarGrid2D.CellShape {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_cell_shape, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_cell_shape, handle, nil, &_result)
         return AStarGrid2D.CellShape (rawValue: _result)!
     }
     
@@ -509,7 +509,7 @@ open class AStarGrid2D: RefCounted {
             withUnsafePointer(to: y) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AStarGrid2D.method_is_in_bounds, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(AStarGrid2D.method_is_in_bounds, handle, pArgs, &_result)
                     }
                     
                 }
@@ -539,7 +539,7 @@ open class AStarGrid2D: RefCounted {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStarGrid2D.method_is_in_boundsv, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AStarGrid2D.method_is_in_boundsv, handle, pArgs, &_result)
                 }
                 
             }
@@ -564,7 +564,7 @@ open class AStarGrid2D: RefCounted {
     public final func isDirty() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AStarGrid2D.method_is_dirty, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AStarGrid2D.method_is_dirty, handle, nil, &_result)
         return _result
     }
     
@@ -585,7 +585,7 @@ open class AStarGrid2D: RefCounted {
     /// 
     public final func update() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AStarGrid2D.method_update, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AStarGrid2D.method_update, handle, nil, nil)
         
     }
     
@@ -606,7 +606,7 @@ open class AStarGrid2D: RefCounted {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_jumping_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_jumping_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -631,7 +631,7 @@ open class AStarGrid2D: RefCounted {
     fileprivate final func is_jumping_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AStarGrid2D.method_is_jumping_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AStarGrid2D.method_is_jumping_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -652,7 +652,7 @@ open class AStarGrid2D: RefCounted {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_diagonal_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_diagonal_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -677,7 +677,7 @@ open class AStarGrid2D: RefCounted {
     fileprivate final func get_diagonal_mode() -> AStarGrid2D.DiagonalMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_diagonal_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_diagonal_mode, handle, nil, &_result)
         return AStarGrid2D.DiagonalMode (rawValue: _result)!
     }
     
@@ -698,7 +698,7 @@ open class AStarGrid2D: RefCounted {
         withUnsafePointer(to: heuristic.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_default_compute_heuristic, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_default_compute_heuristic, handle, pArgs, nil)
                 }
                 
             }
@@ -723,7 +723,7 @@ open class AStarGrid2D: RefCounted {
     fileprivate final func get_default_compute_heuristic() -> AStarGrid2D.Heuristic {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_default_compute_heuristic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_default_compute_heuristic, handle, nil, &_result)
         return AStarGrid2D.Heuristic (rawValue: _result)!
     }
     
@@ -744,7 +744,7 @@ open class AStarGrid2D: RefCounted {
         withUnsafePointer(to: heuristic.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_default_estimate_heuristic, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AStarGrid2D.method_set_default_estimate_heuristic, handle, pArgs, nil)
                 }
                 
             }
@@ -769,7 +769,7 @@ open class AStarGrid2D: RefCounted {
     fileprivate final func get_default_estimate_heuristic() -> AStarGrid2D.Heuristic {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_default_estimate_heuristic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AStarGrid2D.method_get_default_estimate_heuristic, handle, nil, &_result)
         return AStarGrid2D.Heuristic (rawValue: _result)!
     }
     
@@ -794,7 +794,7 @@ open class AStarGrid2D: RefCounted {
             withUnsafePointer(to: solid) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AStarGrid2D.method_set_point_solid, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AStarGrid2D.method_set_point_solid, handle, pArgs, nil)
                     }
                     
                 }
@@ -824,7 +824,7 @@ open class AStarGrid2D: RefCounted {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStarGrid2D.method_is_point_solid, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AStarGrid2D.method_is_point_solid, handle, pArgs, &_result)
                 }
                 
             }
@@ -855,7 +855,7 @@ open class AStarGrid2D: RefCounted {
             withUnsafePointer(to: weightScale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AStarGrid2D.method_set_point_weight_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AStarGrid2D.method_set_point_weight_scale, handle, pArgs, nil)
                     }
                     
                 }
@@ -885,7 +885,7 @@ open class AStarGrid2D: RefCounted {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStarGrid2D.method_get_point_weight_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AStarGrid2D.method_get_point_weight_scale, handle, pArgs, &_result)
                 }
                 
             }
@@ -916,7 +916,7 @@ open class AStarGrid2D: RefCounted {
             withUnsafePointer(to: solid) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AStarGrid2D.method_fill_solid_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AStarGrid2D.method_fill_solid_region, handle, pArgs, nil)
                     }
                     
                 }
@@ -949,7 +949,7 @@ open class AStarGrid2D: RefCounted {
             withUnsafePointer(to: weightScale) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(AStarGrid2D.method_fill_weight_scale_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(AStarGrid2D.method_fill_weight_scale_region, handle, pArgs, nil)
                     }
                     
                 }
@@ -975,7 +975,7 @@ open class AStarGrid2D: RefCounted {
     /// Clears the grid and sets the ``region`` to `Rect2i(0, 0, 0, 0)`.
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(AStarGrid2D.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(AStarGrid2D.method_clear, handle, nil, nil)
         
     }
     
@@ -997,7 +997,7 @@ open class AStarGrid2D: RefCounted {
         withUnsafePointer(to: id) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStarGrid2D.method_get_point_position, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AStarGrid2D.method_get_point_position, handle, pArgs, &_result)
                 }
                 
             }
@@ -1025,7 +1025,7 @@ open class AStarGrid2D: RefCounted {
         withUnsafePointer(to: region) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AStarGrid2D.method_get_point_data_in_region, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(AStarGrid2D.method_get_point_data_in_region, handle, pArgs, &_result)
                 }
                 
             }
@@ -1062,7 +1062,7 @@ open class AStarGrid2D: RefCounted {
                 withUnsafePointer(to: allowPartialPath) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AStarGrid2D.method_get_point_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(AStarGrid2D.method_get_point_path, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -1101,7 +1101,7 @@ open class AStarGrid2D: RefCounted {
                 withUnsafePointer(to: allowPartialPath) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(AStarGrid2D.method_get_id_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(AStarGrid2D.method_get_id_path, handle, pArgs, &_result)
                         }
                         
                     }

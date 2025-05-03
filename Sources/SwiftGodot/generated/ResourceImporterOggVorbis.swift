@@ -44,7 +44,7 @@ open class ResourceImporterOggVorbis: ResourceImporter {
     
     /// Creates a new ``AudioStreamOggVorbis`` instance from the given buffer. The buffer must contain Ogg Vorbis data.
     public static func loadFromBuffer(streamData: PackedByteArray) -> AudioStreamOggVorbis? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: streamData.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
@@ -55,7 +55,7 @@ open class ResourceImporterOggVorbis: ResourceImporter {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_load_from_file: GDExtensionMethodBindPtr = {
@@ -71,7 +71,7 @@ open class ResourceImporterOggVorbis: ResourceImporter {
     
     /// Creates a new ``AudioStreamOggVorbis`` instance from the given file path. The file must be in Ogg Vorbis format.
     public static func loadFromFile(path: String) -> AudioStreamOggVorbis? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let path = GString(path)
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
@@ -83,7 +83,7 @@ open class ResourceImporterOggVorbis: ResourceImporter {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

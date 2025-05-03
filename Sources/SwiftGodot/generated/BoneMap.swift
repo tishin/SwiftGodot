@@ -64,9 +64,9 @@ open class BoneMap: Resource {
     @inline(__always)
     fileprivate final func get_profile() -> SkeletonProfile? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(BoneMap.method_get_profile, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(BoneMap.method_get_profile, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_profile: GDExtensionMethodBindPtr = {
@@ -86,7 +86,7 @@ open class BoneMap: Resource {
         withUnsafePointer(to: profile?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BoneMap.method_set_profile, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(BoneMap.method_set_profile, handle, pArgs, nil)
                 }
                 
             }
@@ -117,7 +117,7 @@ open class BoneMap: Resource {
         withUnsafePointer(to: profileBoneName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BoneMap.method_get_skeleton_bone_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(BoneMap.method_get_skeleton_bone_name, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -148,7 +148,7 @@ open class BoneMap: Resource {
             withUnsafePointer(to: skeletonBoneName.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(BoneMap.method_set_skeleton_bone_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(BoneMap.method_set_skeleton_bone_name, handle, pArgs, nil)
                     }
                     
                 }
@@ -181,7 +181,7 @@ open class BoneMap: Resource {
         withUnsafePointer(to: skeletonBoneName.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(BoneMap.method_find_profile_bone_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(BoneMap.method_find_profile_bone_name, handle, pArgs, &_result.content)
                 }
                 
             }

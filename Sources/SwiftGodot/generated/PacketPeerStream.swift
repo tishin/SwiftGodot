@@ -83,7 +83,7 @@ open class PacketPeerStream: PacketPeer {
         withUnsafePointer(to: peer?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PacketPeerStream.method_set_stream_peer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PacketPeerStream.method_set_stream_peer, handle, pArgs, nil)
                 }
                 
             }
@@ -107,9 +107,9 @@ open class PacketPeerStream: PacketPeer {
     @inline(__always)
     fileprivate final func get_stream_peer() -> StreamPeer? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(PacketPeerStream.method_get_stream_peer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(PacketPeerStream.method_get_stream_peer, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_input_buffer_max_size: GDExtensionMethodBindPtr = {
@@ -129,7 +129,7 @@ open class PacketPeerStream: PacketPeer {
         withUnsafePointer(to: maxSizeBytes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PacketPeerStream.method_set_input_buffer_max_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PacketPeerStream.method_set_input_buffer_max_size, handle, pArgs, nil)
                 }
                 
             }
@@ -156,7 +156,7 @@ open class PacketPeerStream: PacketPeer {
         withUnsafePointer(to: maxSizeBytes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PacketPeerStream.method_set_output_buffer_max_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PacketPeerStream.method_set_output_buffer_max_size, handle, pArgs, nil)
                 }
                 
             }
@@ -181,7 +181,7 @@ open class PacketPeerStream: PacketPeer {
     fileprivate final func get_input_buffer_max_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PacketPeerStream.method_get_input_buffer_max_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PacketPeerStream.method_get_input_buffer_max_size, handle, nil, &_result)
         return _result
     }
     
@@ -200,7 +200,7 @@ open class PacketPeerStream: PacketPeer {
     fileprivate final func get_output_buffer_max_size() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(PacketPeerStream.method_get_output_buffer_max_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PacketPeerStream.method_get_output_buffer_max_size, handle, nil, &_result)
         return _result
     }
     

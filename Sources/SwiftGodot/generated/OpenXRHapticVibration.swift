@@ -82,7 +82,7 @@ open class OpenXRHapticVibration: OpenXRHapticBase {
         withUnsafePointer(to: duration) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRHapticVibration.method_set_duration, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRHapticVibration.method_set_duration, handle, pArgs, nil)
                 }
                 
             }
@@ -107,7 +107,7 @@ open class OpenXRHapticVibration: OpenXRHapticBase {
     fileprivate final func get_duration() -> Int {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int = 0
-        gi.object_method_bind_ptrcall(OpenXRHapticVibration.method_get_duration, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRHapticVibration.method_get_duration, handle, nil, &_result)
         return _result
     }
     
@@ -128,7 +128,7 @@ open class OpenXRHapticVibration: OpenXRHapticBase {
         withUnsafePointer(to: frequency) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRHapticVibration.method_set_frequency, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRHapticVibration.method_set_frequency, handle, pArgs, nil)
                 }
                 
             }
@@ -153,7 +153,7 @@ open class OpenXRHapticVibration: OpenXRHapticBase {
     fileprivate final func get_frequency() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRHapticVibration.method_get_frequency, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRHapticVibration.method_get_frequency, handle, nil, &_result)
         return _result
     }
     
@@ -174,7 +174,7 @@ open class OpenXRHapticVibration: OpenXRHapticBase {
         withUnsafePointer(to: amplitude) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRHapticVibration.method_set_amplitude, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRHapticVibration.method_set_amplitude, handle, pArgs, nil)
                 }
                 
             }
@@ -199,7 +199,7 @@ open class OpenXRHapticVibration: OpenXRHapticBase {
     fileprivate final func get_amplitude() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRHapticVibration.method_get_amplitude, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRHapticVibration.method_get_amplitude, handle, nil, &_result)
         return _result
     }
     

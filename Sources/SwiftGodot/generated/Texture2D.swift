@@ -49,7 +49,7 @@ open class Texture2D: Texture {
     open func _getWidth() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Texture2D.method__get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Texture2D.method__get_width, handle, nil, &_result)
         return _result
     }
     
@@ -69,7 +69,7 @@ open class Texture2D: Texture {
     open func _getHeight() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Texture2D.method__get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Texture2D.method__get_height, handle, nil, &_result)
         return _result
     }
     
@@ -93,7 +93,7 @@ open class Texture2D: Texture {
             withUnsafePointer(to: y) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Texture2D.method__is_pixel_opaque, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Texture2D.method__is_pixel_opaque, handle, pArgs, &_result)
                     }
                     
                 }
@@ -121,7 +121,7 @@ open class Texture2D: Texture {
     open func _hasAlpha() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Texture2D.method__has_alpha, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Texture2D.method__has_alpha, handle, nil, &_result)
         return _result
     }
     
@@ -149,7 +149,7 @@ open class Texture2D: Texture {
                     withUnsafePointer(to: transpose) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Texture2D.method__draw, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(Texture2D.method__draw, handle, pArgs, nil)
                             }
                             
                         }
@@ -190,7 +190,7 @@ open class Texture2D: Texture {
                         withUnsafePointer(to: transpose) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(Texture2D.method__draw_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(Texture2D.method__draw_rect, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -234,7 +234,7 @@ open class Texture2D: Texture {
                             withUnsafePointer(to: clipUv) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(Texture2D.method__draw_rect_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(Texture2D.method__draw_rect_region, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -269,7 +269,7 @@ open class Texture2D: Texture {
     public final func getWidth() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Texture2D.method_get_width, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Texture2D.method_get_width, handle, nil, &_result)
         return _result
     }
     
@@ -288,7 +288,7 @@ open class Texture2D: Texture {
     public final func getHeight() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Texture2D.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Texture2D.method_get_height, handle, nil, &_result)
         return _result
     }
     
@@ -307,7 +307,7 @@ open class Texture2D: Texture {
     public final func getSize() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(Texture2D.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Texture2D.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -326,7 +326,7 @@ open class Texture2D: Texture {
     public final func hasAlpha() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Texture2D.method_has_alpha, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Texture2D.method_has_alpha, handle, nil, &_result)
         return _result
     }
     
@@ -350,7 +350,7 @@ open class Texture2D: Texture {
                     withUnsafePointer(to: transpose) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Texture2D.method_draw, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(Texture2D.method_draw, handle, pArgs, nil)
                             }
                             
                         }
@@ -387,7 +387,7 @@ open class Texture2D: Texture {
                         withUnsafePointer(to: transpose) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(Texture2D.method_draw_rect, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(Texture2D.method_draw_rect, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -427,7 +427,7 @@ open class Texture2D: Texture {
                             withUnsafePointer(to: clipUv) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(Texture2D.method_draw_rect_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                        gi.object_method_bind_ptrcall(Texture2D.method_draw_rect_region, handle, pArgs, nil)
                                     }
                                     
                                 }
@@ -466,9 +466,9 @@ open class Texture2D: Texture {
     /// 
     public final func getImage() -> Image? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Texture2D.method_get_image, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Texture2D.method_get_image, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_create_placeholder: GDExtensionMethodBindPtr = {
@@ -485,9 +485,9 @@ open class Texture2D: Texture {
     /// Creates a placeholder version of this resource (``PlaceholderTexture2D``).
     public final func createPlaceholder() -> Resource? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(Texture2D.method_create_placeholder, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(Texture2D.method_create_placeholder, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {

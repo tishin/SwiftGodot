@@ -64,7 +64,7 @@ open class Shape2D: Resource {
         withUnsafePointer(to: bias) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Shape2D.method_set_custom_solver_bias, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Shape2D.method_set_custom_solver_bias, handle, pArgs, nil)
                 }
                 
             }
@@ -89,7 +89,7 @@ open class Shape2D: Resource {
     fileprivate final func get_custom_solver_bias() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Shape2D.method_get_custom_solver_bias, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Shape2D.method_get_custom_solver_bias, handle, nil, &_result)
         return _result
     }
     
@@ -116,7 +116,7 @@ open class Shape2D: Resource {
                 withUnsafePointer(to: shapeXform) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Shape2D.method_collide, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Shape2D.method_collide, handle, pArgs, &_result)
                         }
                         
                     }
@@ -155,7 +155,7 @@ open class Shape2D: Resource {
                         withUnsafePointer(to: shapeMotion) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(Shape2D.method_collide_with_motion, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(Shape2D.method_collide_with_motion, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -200,7 +200,7 @@ open class Shape2D: Resource {
                 withUnsafePointer(to: shapeXform) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Shape2D.method_collide_and_get_contacts, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(Shape2D.method_collide_and_get_contacts, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -243,7 +243,7 @@ open class Shape2D: Resource {
                         withUnsafePointer(to: shapeMotion) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(Shape2D.method_collide_with_motion_and_get_contacts, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                    gi.object_method_bind_ptrcall(Shape2D.method_collide_with_motion_and_get_contacts, handle, pArgs, &_result.content)
                                 }
                                 
                             }
@@ -279,7 +279,7 @@ open class Shape2D: Resource {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Shape2D.method_draw, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Shape2D.method_draw, handle, pArgs, nil)
                     }
                     
                 }
@@ -306,7 +306,7 @@ open class Shape2D: Resource {
     public final func getRect() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(Shape2D.method_get_rect, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Shape2D.method_get_rect, handle, nil, &_result)
         return _result
     }
     

@@ -48,7 +48,7 @@ open class EditorNode3DGizmoPlugin: Resource {
         withUnsafePointer(to: forNode3d?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__has_gizmo, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__has_gizmo, handle, pArgs, &_result)
                 }
                 
             }
@@ -73,18 +73,18 @@ open class EditorNode3DGizmoPlugin: Resource {
     @_documentation(visibility: public)
     open func _createGizmo(forNode3d: Node3D?) -> EditorNode3DGizmo? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: forNode3d?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__create_gizmo, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__create_gizmo, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method__get_gizmo_name: GDExtensionMethodBindPtr = {
@@ -103,7 +103,7 @@ open class EditorNode3DGizmoPlugin: Resource {
     open func _getGizmoName() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__get_gizmo_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__get_gizmo_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -126,7 +126,7 @@ open class EditorNode3DGizmoPlugin: Resource {
     open func _getPriority() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__get_priority, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__get_priority, handle, nil, &_result)
         return _result
     }
     
@@ -146,7 +146,7 @@ open class EditorNode3DGizmoPlugin: Resource {
     open func _canBeHidden() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__can_be_hidden, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__can_be_hidden, handle, nil, &_result)
         return _result
     }
     
@@ -166,7 +166,7 @@ open class EditorNode3DGizmoPlugin: Resource {
     open func _isSelectableWhenHidden() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__is_selectable_when_hidden, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__is_selectable_when_hidden, handle, nil, &_result)
         return _result
     }
     
@@ -188,7 +188,7 @@ open class EditorNode3DGizmoPlugin: Resource {
         withUnsafePointer(to: gizmo?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__redraw, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__redraw, handle, pArgs, nil)
                 }
                 
             }
@@ -219,7 +219,7 @@ open class EditorNode3DGizmoPlugin: Resource {
                 withUnsafePointer(to: secondary) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__get_handle_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__get_handle_name, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -254,7 +254,7 @@ open class EditorNode3DGizmoPlugin: Resource {
                 withUnsafePointer(to: secondary) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__is_handle_highlighted, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__is_handle_highlighted, handle, pArgs, &_result)
                         }
                         
                     }
@@ -294,7 +294,7 @@ open class EditorNode3DGizmoPlugin: Resource {
                 withUnsafePointer(to: secondary) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__get_handle_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__get_handle_value, handle, pArgs, &_result)
                         }
                         
                     }
@@ -328,7 +328,7 @@ open class EditorNode3DGizmoPlugin: Resource {
                 withUnsafePointer(to: secondary) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__begin_handle_action, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__begin_handle_action, handle, pArgs, nil)
                         }
                         
                     }
@@ -369,7 +369,7 @@ open class EditorNode3DGizmoPlugin: Resource {
                         withUnsafePointer(to: screenPos) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__set_handle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__set_handle, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -416,7 +416,7 @@ open class EditorNode3DGizmoPlugin: Resource {
                         withUnsafePointer(to: cancel) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__commit_handle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__commit_handle, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -455,7 +455,7 @@ open class EditorNode3DGizmoPlugin: Resource {
                 withUnsafePointer(to: screenPos) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__subgizmos_intersect_ray, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__subgizmos_intersect_ray, handle, pArgs, &_result)
                         }
                         
                     }
@@ -490,7 +490,7 @@ open class EditorNode3DGizmoPlugin: Resource {
                 withUnsafePointer(to: frustumPlanes.array.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__subgizmos_intersect_frustum, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__subgizmos_intersect_frustum, handle, pArgs, &_result.content)
                         }
                         
                     }
@@ -524,7 +524,7 @@ open class EditorNode3DGizmoPlugin: Resource {
             withUnsafePointer(to: subgizmoId) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__get_subgizmo_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__get_subgizmo_transform, handle, pArgs, &_result)
                     }
                     
                 }
@@ -556,7 +556,7 @@ open class EditorNode3DGizmoPlugin: Resource {
                 withUnsafePointer(to: transform) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__set_subgizmo_transform, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__set_subgizmo_transform, handle, pArgs, nil)
                         }
                         
                     }
@@ -594,7 +594,7 @@ open class EditorNode3DGizmoPlugin: Resource {
                     withUnsafePointer(to: cancel) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__commit_subgizmos, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method__commit_subgizmos, handle, pArgs, nil)
                             }
                             
                         }
@@ -632,7 +632,7 @@ open class EditorNode3DGizmoPlugin: Resource {
                         withUnsafePointer(to: useVertexColor) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method_create_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                    gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method_create_material, handle, pArgs, nil)
                                 }
                                 
                             }
@@ -671,7 +671,7 @@ open class EditorNode3DGizmoPlugin: Resource {
                     withUnsafePointer(to: color) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method_create_icon_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method_create_icon_material, handle, pArgs, nil)
                             }
                             
                         }
@@ -710,7 +710,7 @@ open class EditorNode3DGizmoPlugin: Resource {
                 withUnsafePointer(to: texture?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method_create_handle_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method_create_handle_material, handle, pArgs, nil)
                         }
                         
                     }
@@ -743,7 +743,7 @@ open class EditorNode3DGizmoPlugin: Resource {
             withUnsafePointer(to: material?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method_add_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method_add_material, handle, pArgs, nil)
                     }
                     
                 }
@@ -769,13 +769,13 @@ open class EditorNode3DGizmoPlugin: Resource {
     /// Gets material from the internal list of materials. If an ``EditorNode3DGizmo`` is provided, it will try to get the corresponding variant (selected and/or editable).
     public final func getMaterial(name: String, gizmo: EditorNode3DGizmo? = nil) -> StandardMaterial3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         let name = GString(name)
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: gizmo?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method_get_material, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(EditorNode3DGizmoPlugin.method_get_material, handle, pArgs, &_result)
                     }
                     
                 }
@@ -784,7 +784,7 @@ open class EditorNode3DGizmoPlugin: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     override class func getVirtualDispatcher(name: StringName) -> GDExtensionClassCallVirtual? {
@@ -840,9 +840,9 @@ func _EditorNode3DGizmoPlugin_proxy_begin_handle_action (instance: UnsafeMutable
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorNode3DGizmoPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._beginHandleAction (gizmo: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, handleId: args [1]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [2]!.assumingMemoryBound (to: Bool.self).pointee)
+    swiftObject._beginHandleAction (gizmo: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, handleId: args [1]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [2]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _EditorNode3DGizmoPlugin_proxy_can_be_hidden (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -858,9 +858,9 @@ func _EditorNode3DGizmoPlugin_proxy_commit_handle (instance: UnsafeMutableRawPoi
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorNode3DGizmoPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._commitHandle (gizmo: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, handleId: args [1]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [2]!.assumingMemoryBound (to: Bool.self).pointee, restore: args [3]!.assumingMemoryBound (to: Variant.self).pointee, cancel: args [4]!.assumingMemoryBound (to: Bool.self).pointee)
+    swiftObject._commitHandle (gizmo: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, handleId: args [1]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [2]!.assumingMemoryBound (to: Bool.self).pointee, restore: args [3]!.assumingMemoryBound (to: Variant.self).pointee, cancel: args [4]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _EditorNode3DGizmoPlugin_proxy_commit_subgizmos (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -868,9 +868,9 @@ func _EditorNode3DGizmoPlugin_proxy_commit_subgizmos (instance: UnsafeMutableRaw
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorNode3DGizmoPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._commitSubgizmos (gizmo: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, ids: PackedInt32Array (content: args [1]!.assumingMemoryBound (to: (Int64, Int64).self).pointee), restores: args [2]!.assumingMemoryBound (to: TypedArray<Transform3D>.self).pointee, cancel: args [3]!.assumingMemoryBound (to: Bool.self).pointee)
+    swiftObject._commitSubgizmos (gizmo: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, ids: PackedInt32Array (content: args [1]!.assumingMemoryBound (to: (Int64, Int64).self).pointee), restores: args [2]!.assumingMemoryBound (to: TypedArray<Transform3D>.self).pointee, cancel: args [3]!.assumingMemoryBound (to: Bool.self).pointee)
 }
 
 func _EditorNode3DGizmoPlugin_proxy_create_gizmo (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -878,10 +878,10 @@ func _EditorNode3DGizmoPlugin_proxy_create_gizmo (instance: UnsafeMutableRawPoin
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorNode3DGizmoPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._createGizmo (forNode3d: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Node3D)
-    retPtr!.storeBytes (of: ret?.handle, as: UnsafeRawPointer?.self) // EditorNode3DGizmo
+    let ret = swiftObject._createGizmo (forNode3d: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Node3D)
+    retPtr!.storeBytes (of: ret?.handle, as:  GodotNativeObjectPointer?.self) // EditorNode3DGizmo
 }
 
 func _EditorNode3DGizmoPlugin_proxy_get_gizmo_name (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -898,9 +898,9 @@ func _EditorNode3DGizmoPlugin_proxy_get_handle_name (instance: UnsafeMutableRawP
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorNode3DGizmoPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = GString (swiftObject._getHandleName (gizmo: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, handleId: args [1]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [2]!.assumingMemoryBound (to: Bool.self).pointee))
+    let ret = GString (swiftObject._getHandleName (gizmo: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, handleId: args [1]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [2]!.assumingMemoryBound (to: Bool.self).pointee))
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // String
     ret.content = GString.zero
 }
@@ -910,9 +910,9 @@ func _EditorNode3DGizmoPlugin_proxy_get_handle_value (instance: UnsafeMutableRaw
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorNode3DGizmoPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._getHandleValue (gizmo: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, handleId: args [1]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [2]!.assumingMemoryBound (to: Bool.self).pointee)
+    let ret = swiftObject._getHandleValue (gizmo: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, handleId: args [1]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [2]!.assumingMemoryBound (to: Bool.self).pointee)
     retPtr!.storeBytes(of: ret.content, as: Variant.ContentType.self)
     ret?.content = Variant.zero
 }
@@ -930,9 +930,9 @@ func _EditorNode3DGizmoPlugin_proxy_get_subgizmo_transform (instance: UnsafeMuta
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorNode3DGizmoPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._getSubgizmoTransform (gizmo: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, subgizmoId: args [1]!.assumingMemoryBound (to: Int32.self).pointee)
+    let ret = swiftObject._getSubgizmoTransform (gizmo: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, subgizmoId: args [1]!.assumingMemoryBound (to: Int32.self).pointee)
     retPtr!.storeBytes (of: ret, as: Transform3D.self)
 }
 
@@ -941,9 +941,9 @@ func _EditorNode3DGizmoPlugin_proxy_has_gizmo (instance: UnsafeMutableRawPointer
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorNode3DGizmoPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._hasGizmo (forNode3d: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? Node3D)
+    let ret = swiftObject._hasGizmo (forNode3d: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? Node3D)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
@@ -952,9 +952,9 @@ func _EditorNode3DGizmoPlugin_proxy_is_handle_highlighted (instance: UnsafeMutab
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorNode3DGizmoPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._isHandleHighlighted (gizmo: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, handleId: args [1]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [2]!.assumingMemoryBound (to: Bool.self).pointee)
+    let ret = swiftObject._isHandleHighlighted (gizmo: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, handleId: args [1]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [2]!.assumingMemoryBound (to: Bool.self).pointee)
     retPtr!.storeBytes (of: ret, as: Bool.self)
 }
 
@@ -971,9 +971,9 @@ func _EditorNode3DGizmoPlugin_proxy_redraw (instance: UnsafeMutableRawPointer?, 
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorNode3DGizmoPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._redraw (gizmo: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo)
+    swiftObject._redraw (gizmo: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo)
 }
 
 func _EditorNode3DGizmoPlugin_proxy_set_handle (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -981,10 +981,10 @@ func _EditorNode3DGizmoPlugin_proxy_set_handle (instance: UnsafeMutableRawPointe
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorNode3DGizmoPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_3 = args [3]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_3 = args [3]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._setHandle (gizmo: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, handleId: args [1]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [2]!.assumingMemoryBound (to: Bool.self).pointee, camera: resolved_3 == nil ? nil : lookupObject (nativeHandle: resolved_3!, ownsRef: false) as? Camera3D, screenPos: args [4]!.assumingMemoryBound (to: Vector2.self).pointee)
+    swiftObject._setHandle (gizmo: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, handleId: args [1]!.assumingMemoryBound (to: Int32.self).pointee, secondary: args [2]!.assumingMemoryBound (to: Bool.self).pointee, camera: resolved_3 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_3!, ownsRef: false) as? Camera3D, screenPos: args [4]!.assumingMemoryBound (to: Vector2.self).pointee)
 }
 
 func _EditorNode3DGizmoPlugin_proxy_set_subgizmo_transform (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -992,9 +992,9 @@ func _EditorNode3DGizmoPlugin_proxy_set_subgizmo_transform (instance: UnsafeMuta
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorNode3DGizmoPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
     
-    swiftObject._setSubgizmoTransform (gizmo: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, subgizmoId: args [1]!.assumingMemoryBound (to: Int32.self).pointee, transform: args [2]!.assumingMemoryBound (to: Transform3D.self).pointee)
+    swiftObject._setSubgizmoTransform (gizmo: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, subgizmoId: args [1]!.assumingMemoryBound (to: Int32.self).pointee, transform: args [2]!.assumingMemoryBound (to: Transform3D.self).pointee)
 }
 
 func _EditorNode3DGizmoPlugin_proxy_subgizmos_intersect_frustum (instance: UnsafeMutableRawPointer?, args: UnsafePointer<UnsafeRawPointer?>?, retPtr: UnsafeMutableRawPointer?) {
@@ -1002,10 +1002,10 @@ func _EditorNode3DGizmoPlugin_proxy_subgizmos_intersect_frustum (instance: Unsaf
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorNode3DGizmoPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._subgizmosIntersectFrustum (gizmo: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, camera: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? Camera3D, frustumPlanes: args [2]!.assumingMemoryBound (to: TypedArray<Plane>.self).pointee)
+    let ret = swiftObject._subgizmosIntersectFrustum (gizmo: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, camera: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? Camera3D, frustumPlanes: args [2]!.assumingMemoryBound (to: TypedArray<Plane>.self).pointee)
     retPtr!.storeBytes (of: ret.content, as: type (of: ret.content)) // PackedInt32Array
     ret.content = PackedInt32Array.zero
 }
@@ -1015,10 +1015,10 @@ func _EditorNode3DGizmoPlugin_proxy_subgizmos_intersect_ray (instance: UnsafeMut
     guard let args else { return }
     let reference = Unmanaged<WrappedReference>.fromOpaque(instance).takeUnretainedValue()
     guard let swiftObject = reference.value as? EditorNode3DGizmoPlugin else { return }
-    let resolved_0 = args [0]!.load (as: UnsafeRawPointer?.self)
-    let resolved_1 = args [1]!.load (as: UnsafeRawPointer?.self)
+    let resolved_0 = args [0]!.load (as: GodotNativeObjectPointer?.self)
+    let resolved_1 = args [1]!.load (as: GodotNativeObjectPointer?.self)
     
-    let ret = swiftObject._subgizmosIntersectRay (gizmo: resolved_0 == nil ? nil : lookupObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, camera: resolved_1 == nil ? nil : lookupObject (nativeHandle: resolved_1!, ownsRef: false) as? Camera3D, screenPos: args [2]!.assumingMemoryBound (to: Vector2.self).pointee)
+    let ret = swiftObject._subgizmosIntersectRay (gizmo: resolved_0 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_0!, ownsRef: false) as? EditorNode3DGizmo, camera: resolved_1 == nil ? nil : getOrInitSwiftObject (nativeHandle: resolved_1!, ownsRef: false) as? Camera3D, screenPos: args [2]!.assumingMemoryBound (to: Vector2.self).pointee)
     retPtr!.storeBytes (of: ret, as: Int32.self)
 }
 

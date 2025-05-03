@@ -118,7 +118,7 @@ open class RDPipelineMultisampleState: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_set_sample_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_set_sample_count, handle, pArgs, nil)
                 }
                 
             }
@@ -143,7 +143,7 @@ open class RDPipelineMultisampleState: RefCounted {
     fileprivate final func get_sample_count() -> RenderingDevice.TextureSamples {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_sample_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_sample_count, handle, nil, &_result)
         return RenderingDevice.TextureSamples (rawValue: _result)!
     }
     
@@ -164,7 +164,7 @@ open class RDPipelineMultisampleState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_set_enable_sample_shading, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_set_enable_sample_shading, handle, pArgs, nil)
                 }
                 
             }
@@ -189,7 +189,7 @@ open class RDPipelineMultisampleState: RefCounted {
     fileprivate final func get_enable_sample_shading() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_enable_sample_shading, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_enable_sample_shading, handle, nil, &_result)
         return _result
     }
     
@@ -210,7 +210,7 @@ open class RDPipelineMultisampleState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_set_min_sample_shading, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_set_min_sample_shading, handle, pArgs, nil)
                 }
                 
             }
@@ -235,7 +235,7 @@ open class RDPipelineMultisampleState: RefCounted {
     fileprivate final func get_min_sample_shading() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_min_sample_shading, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_min_sample_shading, handle, nil, &_result)
         return _result
     }
     
@@ -256,7 +256,7 @@ open class RDPipelineMultisampleState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_set_enable_alpha_to_coverage, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_set_enable_alpha_to_coverage, handle, pArgs, nil)
                 }
                 
             }
@@ -281,7 +281,7 @@ open class RDPipelineMultisampleState: RefCounted {
     fileprivate final func get_enable_alpha_to_coverage() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_enable_alpha_to_coverage, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_enable_alpha_to_coverage, handle, nil, &_result)
         return _result
     }
     
@@ -302,7 +302,7 @@ open class RDPipelineMultisampleState: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_set_enable_alpha_to_one, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_set_enable_alpha_to_one, handle, pArgs, nil)
                 }
                 
             }
@@ -327,7 +327,7 @@ open class RDPipelineMultisampleState: RefCounted {
     fileprivate final func get_enable_alpha_to_one() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_enable_alpha_to_one, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_enable_alpha_to_one, handle, nil, &_result)
         return _result
     }
     
@@ -348,7 +348,7 @@ open class RDPipelineMultisampleState: RefCounted {
         withUnsafePointer(to: masks.array.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_set_sample_masks, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_set_sample_masks, handle, pArgs, nil)
                 }
                 
             }
@@ -373,7 +373,7 @@ open class RDPipelineMultisampleState: RefCounted {
     fileprivate final func get_sample_masks() -> TypedArray<Int64> {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_sample_masks, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDPipelineMultisampleState.method_get_sample_masks, handle, nil, &_result)
         return TypedArray<Int64>(takingOver: _result)
     }
     

@@ -162,7 +162,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
         withUnsafePointer(to: actionSet?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_action_set, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_action_set, handle, pArgs, nil)
                 }
                 
             }
@@ -186,9 +186,9 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
     @inline(__always)
     fileprivate final func get_action_set() -> OpenXRActionSet? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_action_set, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_action_set, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_input_path: GDExtensionMethodBindPtr = {
@@ -209,7 +209,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
         withUnsafePointer(to: inputPath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_input_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_input_path, handle, pArgs, nil)
                 }
                 
             }
@@ -234,7 +234,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
     fileprivate final func get_input_path() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_input_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_input_path, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -255,7 +255,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
         withUnsafePointer(to: threshold) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_threshold, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_threshold, handle, pArgs, nil)
                 }
                 
             }
@@ -280,7 +280,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
     fileprivate final func get_threshold() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_threshold, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_threshold, handle, nil, &_result)
         return _result
     }
     
@@ -301,7 +301,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
         withUnsafePointer(to: thresholdReleased) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_threshold_released, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_threshold_released, handle, pArgs, nil)
                 }
                 
             }
@@ -326,7 +326,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
     fileprivate final func get_threshold_released() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_threshold_released, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_threshold_released, handle, nil, &_result)
         return _result
     }
     
@@ -347,7 +347,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
         withUnsafePointer(to: centerRegion) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_center_region, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_center_region, handle, pArgs, nil)
                 }
                 
             }
@@ -372,7 +372,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
     fileprivate final func get_center_region() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_center_region, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_center_region, handle, nil, &_result)
         return _result
     }
     
@@ -393,7 +393,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
         withUnsafePointer(to: wedgeAngle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_wedge_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_wedge_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -418,7 +418,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
     fileprivate final func get_wedge_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_wedge_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_wedge_angle, handle, nil, &_result)
         return _result
     }
     
@@ -439,7 +439,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
         withUnsafePointer(to: isSticky) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_is_sticky, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_is_sticky, handle, pArgs, nil)
                 }
                 
             }
@@ -464,7 +464,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
     fileprivate final func get_is_sticky() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_is_sticky, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_is_sticky, handle, nil, &_result)
         return _result
     }
     
@@ -485,7 +485,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
         withUnsafePointer(to: haptic?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_on_haptic, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_on_haptic, handle, pArgs, nil)
                 }
                 
             }
@@ -509,9 +509,9 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
     @inline(__always)
     fileprivate final func get_on_haptic() -> OpenXRHapticBase? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_on_haptic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_on_haptic, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_off_haptic: GDExtensionMethodBindPtr = {
@@ -531,7 +531,7 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
         withUnsafePointer(to: haptic?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_off_haptic, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_set_off_haptic, handle, pArgs, nil)
                 }
                 
             }
@@ -555,9 +555,9 @@ open class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
     @inline(__always)
     fileprivate final func get_off_haptic() -> OpenXRHapticBase? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_off_haptic, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(OpenXRDpadBindingModifier.method_get_off_haptic, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

@@ -70,7 +70,7 @@ open class EditorInspector: ScrollContainer {
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(EditorInspector.method_edit, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(EditorInspector.method_edit, handle, pArgs, nil)
                 }
                 
             }
@@ -95,7 +95,7 @@ open class EditorInspector: ScrollContainer {
     public final func getSelectedPath() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(EditorInspector.method_get_selected_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(EditorInspector.method_get_selected_path, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -113,9 +113,9 @@ open class EditorInspector: ScrollContainer {
     /// Returns the object currently selected in this inspector.
     public final func getEditedObject() -> Object? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(EditorInspector.method_get_edited_object, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(EditorInspector.method_get_edited_object, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_instantiate_property_editor: GDExtensionMethodBindPtr = {
@@ -131,7 +131,7 @@ open class EditorInspector: ScrollContainer {
     
     /// Creates a property editor that can be used by plugin UI to edit the specified property of an `object`.
     public static func instantiatePropertyEditor(object: Object?, type: Variant.GType, path: String, hint: PropertyHint, hintText: String, usage: UInt32, wide: Bool = false) -> EditorProperty? {
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: object?.handle) { pArg0 in
             withUnsafePointer(to: type.rawValue) { pArg1 in
                 let path = GString(path)
@@ -162,7 +162,7 @@ open class EditorInspector: ScrollContainer {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     // Signals 

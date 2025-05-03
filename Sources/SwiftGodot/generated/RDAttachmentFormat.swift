@@ -82,7 +82,7 @@ open class RDAttachmentFormat: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDAttachmentFormat.method_set_format, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDAttachmentFormat.method_set_format, handle, pArgs, nil)
                 }
                 
             }
@@ -107,7 +107,7 @@ open class RDAttachmentFormat: RefCounted {
     fileprivate final func get_format() -> RenderingDevice.DataFormat {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDAttachmentFormat.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDAttachmentFormat.method_get_format, handle, nil, &_result)
         return RenderingDevice.DataFormat (rawValue: _result)!
     }
     
@@ -128,7 +128,7 @@ open class RDAttachmentFormat: RefCounted {
         withUnsafePointer(to: pMember.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDAttachmentFormat.method_set_samples, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDAttachmentFormat.method_set_samples, handle, pArgs, nil)
                 }
                 
             }
@@ -153,7 +153,7 @@ open class RDAttachmentFormat: RefCounted {
     fileprivate final func get_samples() -> RenderingDevice.TextureSamples {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(RDAttachmentFormat.method_get_samples, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDAttachmentFormat.method_get_samples, handle, nil, &_result)
         return RenderingDevice.TextureSamples (rawValue: _result)!
     }
     
@@ -174,7 +174,7 @@ open class RDAttachmentFormat: RefCounted {
         withUnsafePointer(to: pMember) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(RDAttachmentFormat.method_set_usage_flags, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(RDAttachmentFormat.method_set_usage_flags, handle, pArgs, nil)
                 }
                 
             }
@@ -199,7 +199,7 @@ open class RDAttachmentFormat: RefCounted {
     fileprivate final func get_usage_flags() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(RDAttachmentFormat.method_get_usage_flags, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(RDAttachmentFormat.method_get_usage_flags, handle, nil, &_result)
         return _result
     }
     

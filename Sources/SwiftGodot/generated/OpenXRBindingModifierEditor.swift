@@ -45,9 +45,9 @@ open class OpenXRBindingModifierEditor: PanelContainer {
     /// Returns the ``OpenXRBindingModifier`` currently being edited.
     public final func getBindingModifier() -> OpenXRBindingModifier? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(OpenXRBindingModifierEditor.method_get_binding_modifier, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(OpenXRBindingModifierEditor.method_get_binding_modifier, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_setup: GDExtensionMethodBindPtr = {
@@ -68,7 +68,7 @@ open class OpenXRBindingModifierEditor: PanelContainer {
             withUnsafePointer(to: bindingModifier?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(OpenXRBindingModifierEditor.method_setup, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(OpenXRBindingModifierEditor.method_setup, handle, pArgs, nil)
                     }
                     
                 }

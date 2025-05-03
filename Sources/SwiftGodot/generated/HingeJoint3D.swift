@@ -74,7 +74,7 @@ open class HingeJoint3D: Joint3D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(HingeJoint3D.method_set_param, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(HingeJoint3D.method_set_param, handle, pArgs, nil)
                     }
                     
                 }
@@ -104,7 +104,7 @@ open class HingeJoint3D: Joint3D {
         withUnsafePointer(to: param.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HingeJoint3D.method_get_param, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(HingeJoint3D.method_get_param, handle, pArgs, &_result)
                 }
                 
             }
@@ -132,7 +132,7 @@ open class HingeJoint3D: Joint3D {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(HingeJoint3D.method_set_flag, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(HingeJoint3D.method_set_flag, handle, pArgs, nil)
                     }
                     
                 }
@@ -162,7 +162,7 @@ open class HingeJoint3D: Joint3D {
         withUnsafePointer(to: flag.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HingeJoint3D.method_get_flag, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(HingeJoint3D.method_get_flag, handle, pArgs, &_result)
                 }
                 
             }

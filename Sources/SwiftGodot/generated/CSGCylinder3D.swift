@@ -121,7 +121,7 @@ open class CSGCylinder3D: CSGPrimitive3D {
         withUnsafePointer(to: radius) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGCylinder3D.method_set_radius, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGCylinder3D.method_set_radius, handle, pArgs, nil)
                 }
                 
             }
@@ -146,7 +146,7 @@ open class CSGCylinder3D: CSGPrimitive3D {
     fileprivate final func get_radius() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CSGCylinder3D.method_get_radius, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGCylinder3D.method_get_radius, handle, nil, &_result)
         return _result
     }
     
@@ -167,7 +167,7 @@ open class CSGCylinder3D: CSGPrimitive3D {
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGCylinder3D.method_set_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGCylinder3D.method_set_height, handle, pArgs, nil)
                 }
                 
             }
@@ -192,7 +192,7 @@ open class CSGCylinder3D: CSGPrimitive3D {
     fileprivate final func get_height() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CSGCylinder3D.method_get_height, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGCylinder3D.method_get_height, handle, nil, &_result)
         return _result
     }
     
@@ -213,7 +213,7 @@ open class CSGCylinder3D: CSGPrimitive3D {
         withUnsafePointer(to: sides) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGCylinder3D.method_set_sides, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGCylinder3D.method_set_sides, handle, pArgs, nil)
                 }
                 
             }
@@ -238,7 +238,7 @@ open class CSGCylinder3D: CSGPrimitive3D {
     fileprivate final func get_sides() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CSGCylinder3D.method_get_sides, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGCylinder3D.method_get_sides, handle, nil, &_result)
         return _result
     }
     
@@ -259,7 +259,7 @@ open class CSGCylinder3D: CSGPrimitive3D {
         withUnsafePointer(to: cone) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGCylinder3D.method_set_cone, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGCylinder3D.method_set_cone, handle, pArgs, nil)
                 }
                 
             }
@@ -284,7 +284,7 @@ open class CSGCylinder3D: CSGPrimitive3D {
     fileprivate final func is_cone() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CSGCylinder3D.method_is_cone, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGCylinder3D.method_is_cone, handle, nil, &_result)
         return _result
     }
     
@@ -305,7 +305,7 @@ open class CSGCylinder3D: CSGPrimitive3D {
         withUnsafePointer(to: material?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGCylinder3D.method_set_material, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGCylinder3D.method_set_material, handle, pArgs, nil)
                 }
                 
             }
@@ -329,9 +329,9 @@ open class CSGCylinder3D: CSGPrimitive3D {
     @inline(__always)
     fileprivate final func get_material() -> Material? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CSGCylinder3D.method_get_material, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CSGCylinder3D.method_get_material, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_smooth_faces: GDExtensionMethodBindPtr = {
@@ -351,7 +351,7 @@ open class CSGCylinder3D: CSGPrimitive3D {
         withUnsafePointer(to: smoothFaces) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CSGCylinder3D.method_set_smooth_faces, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CSGCylinder3D.method_set_smooth_faces, handle, pArgs, nil)
                 }
                 
             }
@@ -376,7 +376,7 @@ open class CSGCylinder3D: CSGPrimitive3D {
     fileprivate final func get_smooth_faces() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CSGCylinder3D.method_get_smooth_faces, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CSGCylinder3D.method_get_smooth_faces, handle, nil, &_result)
         return _result
     }
     

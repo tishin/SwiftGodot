@@ -35,7 +35,7 @@ open class Performance: Object {
     /// The shared instance of this class
     public static var shared: Performance {
         return withUnsafePointer(to: &Performance.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -146,7 +146,7 @@ open class Performance: Object {
         withUnsafePointer(to: monitor.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_monitor, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_monitor, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -179,7 +179,7 @@ open class Performance: Object {
                 withUnsafePointer(to: arguments.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_add_custom_monitor, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_add_custom_monitor, shared.handle, pArgs, nil)
                         }
                         
                     }
@@ -209,7 +209,7 @@ open class Performance: Object {
         withUnsafePointer(to: id.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_remove_custom_monitor, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_remove_custom_monitor, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -236,7 +236,7 @@ open class Performance: Object {
         withUnsafePointer(to: id.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_has_custom_monitor, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_has_custom_monitor, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -263,7 +263,7 @@ open class Performance: Object {
         withUnsafePointer(to: id.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_custom_monitor, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_custom_monitor, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -287,7 +287,7 @@ open class Performance: Object {
     /// Returns the last tick in which custom monitor was added/removed (in microseconds since the engine started). This is set to ``Time/getTicksUsec()`` when the monitor is updated.
     public static func getMonitorModificationTime() -> UInt {
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(method_get_monitor_modification_time, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_monitor_modification_time, shared.handle, nil, &_result)
         return _result
     }
     
@@ -305,7 +305,7 @@ open class Performance: Object {
     /// Returns the names of active custom monitors in an ``VariantArray``.
     public static func getCustomMonitorNames() -> TypedArray<StringName> {
         var _result: Int64 = 0
-        gi.object_method_bind_ptrcall(method_get_custom_monitor_names, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_custom_monitor_names, shared.handle, nil, &_result)
         return TypedArray<StringName>(takingOver: _result)
     }
     

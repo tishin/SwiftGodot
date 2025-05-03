@@ -70,7 +70,7 @@ open class InputEventJoypadMotion: InputEvent {
         withUnsafePointer(to: axis.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventJoypadMotion.method_set_axis, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventJoypadMotion.method_set_axis, handle, pArgs, nil)
                 }
                 
             }
@@ -95,7 +95,7 @@ open class InputEventJoypadMotion: InputEvent {
     fileprivate final func get_axis() -> JoyAxis {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(InputEventJoypadMotion.method_get_axis, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventJoypadMotion.method_get_axis, handle, nil, &_result)
         return JoyAxis (rawValue: _result)!
     }
     
@@ -116,7 +116,7 @@ open class InputEventJoypadMotion: InputEvent {
         withUnsafePointer(to: axisValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(InputEventJoypadMotion.method_set_axis_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(InputEventJoypadMotion.method_set_axis_value, handle, pArgs, nil)
                 }
                 
             }
@@ -141,7 +141,7 @@ open class InputEventJoypadMotion: InputEvent {
     fileprivate final func get_axis_value() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(InputEventJoypadMotion.method_get_axis_value, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(InputEventJoypadMotion.method_get_axis_value, handle, nil, &_result)
         return _result
     }
     

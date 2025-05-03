@@ -137,7 +137,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: texture?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_texture, handle, pArgs, nil)
                 }
                 
             }
@@ -161,9 +161,9 @@ open class TileSetAtlasSource: TileSetSource {
     @inline(__always)
     fileprivate final func get_texture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_margins: GDExtensionMethodBindPtr = {
@@ -183,7 +183,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: margins) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_margins, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_margins, handle, pArgs, nil)
                 }
                 
             }
@@ -208,7 +208,7 @@ open class TileSetAtlasSource: TileSetSource {
     fileprivate final func get_margins() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_margins, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_margins, handle, nil, &_result)
         return _result
     }
     
@@ -229,7 +229,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: separation) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_separation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_separation, handle, pArgs, nil)
                 }
                 
             }
@@ -254,7 +254,7 @@ open class TileSetAtlasSource: TileSetSource {
     fileprivate final func get_separation() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_separation, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_separation, handle, nil, &_result)
         return _result
     }
     
@@ -275,7 +275,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: textureRegionSize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_texture_region_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_texture_region_size, handle, pArgs, nil)
                 }
                 
             }
@@ -300,7 +300,7 @@ open class TileSetAtlasSource: TileSetSource {
     fileprivate final func get_texture_region_size() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_texture_region_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_texture_region_size, handle, nil, &_result)
         return _result
     }
     
@@ -321,7 +321,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: useTexturePadding) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_use_texture_padding, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_use_texture_padding, handle, pArgs, nil)
                 }
                 
             }
@@ -346,7 +346,7 @@ open class TileSetAtlasSource: TileSetSource {
     fileprivate final func get_use_texture_padding() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_use_texture_padding, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_use_texture_padding, handle, nil, &_result)
         return _result
     }
     
@@ -368,7 +368,7 @@ open class TileSetAtlasSource: TileSetSource {
             withUnsafePointer(to: size) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_create_tile, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_create_tile, handle, pArgs, nil)
                     }
                     
                 }
@@ -397,7 +397,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_remove_tile, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_remove_tile, handle, pArgs, nil)
                 }
                 
             }
@@ -431,7 +431,7 @@ open class TileSetAtlasSource: TileSetSource {
                 withUnsafePointer(to: newSize) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TileSetAtlasSource.method_move_tile_in_atlas, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TileSetAtlasSource.method_move_tile_in_atlas, handle, pArgs, nil)
                         }
                         
                     }
@@ -463,7 +463,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_size_in_atlas, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_size_in_atlas, handle, pArgs, &_result)
                 }
                 
             }
@@ -496,7 +496,7 @@ open class TileSetAtlasSource: TileSetSource {
                             withUnsafePointer(to: ignoredTile) { pArg5 in
                                 withUnsafePointer(to: UnsafeRawPointersN6(pArg0, pArg1, pArg2, pArg3, pArg4, pArg5)) { pArgs in
                                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 6) { pArgs in
-                                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_has_room_for_tile, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_has_room_for_tile, handle, pArgs, &_result)
                                     }
                                     
                                 }
@@ -537,7 +537,7 @@ open class TileSetAtlasSource: TileSetSource {
                     withUnsafePointer(to: textureRegionSize) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tiles_to_be_removed_on_change, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                                gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tiles_to_be_removed_on_change, handle, pArgs, &_result.content)
                             }
                             
                         }
@@ -571,7 +571,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_at_coords, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_at_coords, handle, pArgs, &_result)
                 }
                 
             }
@@ -596,7 +596,7 @@ open class TileSetAtlasSource: TileSetSource {
     public final func hasTilesOutsideTexture() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_has_tiles_outside_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_has_tiles_outside_texture, handle, nil, &_result)
         return _result
     }
     
@@ -614,7 +614,7 @@ open class TileSetAtlasSource: TileSetSource {
     /// Removes all tiles that don't fit the available texture area. This method iterates over all the source's tiles, so it's advised to use ``hasTilesOutsideTexture()`` beforehand.
     public final func clearTilesOutsideTexture() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_clear_tiles_outside_texture, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_clear_tiles_outside_texture, handle, nil, nil)
         
     }
     
@@ -636,7 +636,7 @@ open class TileSetAtlasSource: TileSetSource {
             withUnsafePointer(to: frameColumns) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_tile_animation_columns, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_tile_animation_columns, handle, pArgs, nil)
                     }
                     
                 }
@@ -666,7 +666,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_animation_columns, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_animation_columns, handle, pArgs, &_result)
                 }
                 
             }
@@ -694,7 +694,7 @@ open class TileSetAtlasSource: TileSetSource {
             withUnsafePointer(to: separation) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_tile_animation_separation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_tile_animation_separation, handle, pArgs, nil)
                     }
                     
                 }
@@ -724,7 +724,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_animation_separation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_animation_separation, handle, pArgs, &_result)
                 }
                 
             }
@@ -752,7 +752,7 @@ open class TileSetAtlasSource: TileSetSource {
             withUnsafePointer(to: speed) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_tile_animation_speed, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_tile_animation_speed, handle, pArgs, nil)
                     }
                     
                 }
@@ -782,7 +782,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_animation_speed, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_animation_speed, handle, pArgs, &_result)
                 }
                 
             }
@@ -810,7 +810,7 @@ open class TileSetAtlasSource: TileSetSource {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_tile_animation_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_tile_animation_mode, handle, pArgs, nil)
                     }
                     
                 }
@@ -840,7 +840,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_animation_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_animation_mode, handle, pArgs, &_result)
                 }
                 
             }
@@ -868,7 +868,7 @@ open class TileSetAtlasSource: TileSetSource {
             withUnsafePointer(to: framesCount) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_tile_animation_frames_count, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_tile_animation_frames_count, handle, pArgs, nil)
                     }
                     
                 }
@@ -898,7 +898,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_animation_frames_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_animation_frames_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -927,7 +927,7 @@ open class TileSetAtlasSource: TileSetSource {
                 withUnsafePointer(to: duration) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_tile_animation_frame_duration, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_tile_animation_frame_duration, handle, pArgs, nil)
                         }
                         
                     }
@@ -960,7 +960,7 @@ open class TileSetAtlasSource: TileSetSource {
             withUnsafePointer(to: frameIndex) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_animation_frame_duration, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_animation_frame_duration, handle, pArgs, &_result)
                     }
                     
                 }
@@ -990,7 +990,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_animation_total_duration, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_animation_total_duration, handle, pArgs, &_result)
                 }
                 
             }
@@ -1022,7 +1022,7 @@ open class TileSetAtlasSource: TileSetSource {
             withUnsafePointer(to: alternativeIdOverride) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_create_alternative_tile, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_create_alternative_tile, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1055,7 +1055,7 @@ open class TileSetAtlasSource: TileSetSource {
             withUnsafePointer(to: alternativeTile) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_remove_alternative_tile, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_remove_alternative_tile, handle, pArgs, nil)
                     }
                     
                 }
@@ -1089,7 +1089,7 @@ open class TileSetAtlasSource: TileSetSource {
                 withUnsafePointer(to: newId) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_alternative_tile_id, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(TileSetAtlasSource.method_set_alternative_tile_id, handle, pArgs, nil)
                         }
                         
                     }
@@ -1121,7 +1121,7 @@ open class TileSetAtlasSource: TileSetSource {
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_next_alternative_tile_id, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_next_alternative_tile_id, handle, pArgs, &_result)
                 }
                 
             }
@@ -1145,12 +1145,12 @@ open class TileSetAtlasSource: TileSetSource {
     /// Returns the ``TileData`` object for the given atlas coordinates and alternative ID.
     public final func getTileData(atlasCoords: Vector2i, alternativeTile: Int32) -> TileData? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: atlasCoords) { pArg0 in
             withUnsafePointer(to: alternativeTile) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_data, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_data, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1159,7 +1159,7 @@ open class TileSetAtlasSource: TileSetSource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_atlas_grid_size: GDExtensionMethodBindPtr = {
@@ -1177,7 +1177,7 @@ open class TileSetAtlasSource: TileSetSource {
     public final func getAtlasGridSize() -> Vector2i {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2i = Vector2i ()
-        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_atlas_grid_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_atlas_grid_size, handle, nil, &_result)
         return _result
     }
     
@@ -1200,7 +1200,7 @@ open class TileSetAtlasSource: TileSetSource {
             withUnsafePointer(to: frame) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_texture_region, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_tile_texture_region, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1226,9 +1226,9 @@ open class TileSetAtlasSource: TileSetSource {
     /// If ``useTexturePadding`` is `false`, returns ``texture``. Otherwise, returns and internal ``ImageTexture`` created that includes the padding.
     public final func getRuntimeTexture() -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_runtime_texture, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_runtime_texture, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_runtime_tile_texture_region: GDExtensionMethodBindPtr = {
@@ -1253,7 +1253,7 @@ open class TileSetAtlasSource: TileSetSource {
             withUnsafePointer(to: frame) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_runtime_tile_texture_region, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(TileSetAtlasSource.method_get_runtime_tile_texture_region, handle, pArgs, &_result)
                     }
                     
                 }

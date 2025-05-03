@@ -76,7 +76,7 @@ open class World2D: Resource {
     fileprivate final func get_canvas() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(World2D.method_get_canvas, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(World2D.method_get_canvas, handle, nil, &_result.content)
         return _result
     }
     
@@ -95,7 +95,7 @@ open class World2D: Resource {
     fileprivate final func get_space() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(World2D.method_get_space, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(World2D.method_get_space, handle, nil, &_result.content)
         return _result
     }
     
@@ -114,7 +114,7 @@ open class World2D: Resource {
     fileprivate final func get_navigation_map() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(World2D.method_get_navigation_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(World2D.method_get_navigation_map, handle, nil, &_result.content)
         return _result
     }
     
@@ -132,9 +132,9 @@ open class World2D: Resource {
     @inline(__always)
     fileprivate final func get_direct_space_state() -> PhysicsDirectSpaceState2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(World2D.method_get_direct_space_state, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(World2D.method_get_direct_space_state, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

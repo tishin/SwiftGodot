@@ -97,7 +97,7 @@ open class OpenXRIPBinding: Resource {
         withUnsafePointer(to: action?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_set_action, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_set_action, handle, pArgs, nil)
                 }
                 
             }
@@ -121,9 +121,9 @@ open class OpenXRIPBinding: Resource {
     @inline(__always)
     fileprivate final func get_action() -> OpenXRAction? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(OpenXRIPBinding.method_get_action, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(OpenXRIPBinding.method_get_action, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_binding_path: GDExtensionMethodBindPtr = {
@@ -144,7 +144,7 @@ open class OpenXRIPBinding: Resource {
         withUnsafePointer(to: bindingPath.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_set_binding_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_set_binding_path, handle, pArgs, nil)
                 }
                 
             }
@@ -169,7 +169,7 @@ open class OpenXRIPBinding: Resource {
     fileprivate final func get_binding_path() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(OpenXRIPBinding.method_get_binding_path, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRIPBinding.method_get_binding_path, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -188,7 +188,7 @@ open class OpenXRIPBinding: Resource {
     public final func getBindingModifierCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(OpenXRIPBinding.method_get_binding_modifier_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRIPBinding.method_get_binding_modifier_count, handle, nil, &_result)
         return _result
     }
     
@@ -206,18 +206,18 @@ open class OpenXRIPBinding: Resource {
     /// Get the ``OpenXRBindingModifier`` at this index.
     public final func getBindingModifier(index: Int32) -> OpenXRActionBindingModifier? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: index) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_get_binding_modifier, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_get_binding_modifier, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_binding_modifiers: GDExtensionMethodBindPtr = {
@@ -237,7 +237,7 @@ open class OpenXRIPBinding: Resource {
         withUnsafePointer(to: bindingModifiers.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_set_binding_modifiers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_set_binding_modifiers, handle, pArgs, nil)
                 }
                 
             }
@@ -262,7 +262,7 @@ open class OpenXRIPBinding: Resource {
     fileprivate final func get_binding_modifiers() -> VariantArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: VariantArray = VariantArray ()
-        gi.object_method_bind_ptrcall(OpenXRIPBinding.method_get_binding_modifiers, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRIPBinding.method_get_binding_modifiers, handle, nil, &_result.content)
         return _result
     }
     
@@ -283,7 +283,7 @@ open class OpenXRIPBinding: Resource {
         withUnsafePointer(to: paths.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_set_paths, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_set_paths, handle, pArgs, nil)
                 }
                 
             }
@@ -308,7 +308,7 @@ open class OpenXRIPBinding: Resource {
     fileprivate final func get_paths() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(OpenXRIPBinding.method_get_paths, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(OpenXRIPBinding.method_get_paths, handle, nil, &_result.content)
         return _result
     }
     
@@ -327,7 +327,7 @@ open class OpenXRIPBinding: Resource {
     public final func getPathCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(OpenXRIPBinding.method_get_path_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(OpenXRIPBinding.method_get_path_count, handle, nil, &_result)
         return _result
     }
     
@@ -350,7 +350,7 @@ open class OpenXRIPBinding: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_has_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_has_path, handle, pArgs, &_result)
                 }
                 
             }
@@ -378,7 +378,7 @@ open class OpenXRIPBinding: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_add_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_add_path, handle, pArgs, nil)
                 }
                 
             }
@@ -406,7 +406,7 @@ open class OpenXRIPBinding: Resource {
         withUnsafePointer(to: path.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_remove_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(OpenXRIPBinding.method_remove_path, handle, pArgs, nil)
                 }
                 
             }

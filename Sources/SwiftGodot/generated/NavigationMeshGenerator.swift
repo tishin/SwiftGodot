@@ -35,7 +35,7 @@ open class NavigationMeshGenerator: Object {
     /// The shared instance of this class
     public static var shared: NavigationMeshGenerator {
         return withUnsafePointer(to: &NavigationMeshGenerator.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -60,7 +60,7 @@ open class NavigationMeshGenerator: Object {
             withUnsafePointer(to: rootNode?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_bake, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(method_bake, shared.handle, pArgs, nil)
                     }
                     
                 }
@@ -88,7 +88,7 @@ open class NavigationMeshGenerator: Object {
         withUnsafePointer(to: navigationMesh?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_clear, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(method_clear, shared.handle, pArgs, nil)
                 }
                 
             }
@@ -122,7 +122,7 @@ open class NavigationMeshGenerator: Object {
                     withUnsafePointer(to: callback.content) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(method_parse_source_geometry_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(method_parse_source_geometry_data, shared.handle, pArgs, nil)
                             }
                             
                         }
@@ -156,7 +156,7 @@ open class NavigationMeshGenerator: Object {
                 withUnsafePointer(to: callback.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(method_bake_from_source_geometry_data, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(method_bake_from_source_geometry_data, shared.handle, pArgs, nil)
                         }
                         
                     }

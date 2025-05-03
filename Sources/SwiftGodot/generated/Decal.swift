@@ -272,7 +272,7 @@ open class Decal: VisualInstance3D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Decal.method_set_size, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Decal.method_set_size, handle, pArgs, nil)
                 }
                 
             }
@@ -297,7 +297,7 @@ open class Decal: VisualInstance3D {
     fileprivate final func get_size() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(Decal.method_get_size, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Decal.method_get_size, handle, nil, &_result)
         return _result
     }
     
@@ -325,7 +325,7 @@ open class Decal: VisualInstance3D {
             withUnsafePointer(to: texture?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Decal.method_set_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Decal.method_set_texture, handle, pArgs, nil)
                     }
                     
                 }
@@ -357,18 +357,18 @@ open class Decal: VisualInstance3D {
     /// 
     fileprivate final func get_texture(_ type: Decal.DecalTexture) -> Texture2D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Decal.method_get_texture, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Decal.method_get_texture, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_emission_energy: GDExtensionMethodBindPtr = {
@@ -388,7 +388,7 @@ open class Decal: VisualInstance3D {
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Decal.method_set_emission_energy, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Decal.method_set_emission_energy, handle, pArgs, nil)
                 }
                 
             }
@@ -413,7 +413,7 @@ open class Decal: VisualInstance3D {
     fileprivate final func get_emission_energy() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Decal.method_get_emission_energy, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Decal.method_get_emission_energy, handle, nil, &_result)
         return _result
     }
     
@@ -434,7 +434,7 @@ open class Decal: VisualInstance3D {
         withUnsafePointer(to: energy) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Decal.method_set_albedo_mix, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Decal.method_set_albedo_mix, handle, pArgs, nil)
                 }
                 
             }
@@ -459,7 +459,7 @@ open class Decal: VisualInstance3D {
     fileprivate final func get_albedo_mix() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Decal.method_get_albedo_mix, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Decal.method_get_albedo_mix, handle, nil, &_result)
         return _result
     }
     
@@ -480,7 +480,7 @@ open class Decal: VisualInstance3D {
         withUnsafePointer(to: color) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Decal.method_set_modulate, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Decal.method_set_modulate, handle, pArgs, nil)
                 }
                 
             }
@@ -505,7 +505,7 @@ open class Decal: VisualInstance3D {
     fileprivate final func get_modulate() -> Color {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Color = Color ()
-        gi.object_method_bind_ptrcall(Decal.method_get_modulate, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Decal.method_get_modulate, handle, nil, &_result)
         return _result
     }
     
@@ -526,7 +526,7 @@ open class Decal: VisualInstance3D {
         withUnsafePointer(to: fade) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Decal.method_set_upper_fade, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Decal.method_set_upper_fade, handle, pArgs, nil)
                 }
                 
             }
@@ -551,7 +551,7 @@ open class Decal: VisualInstance3D {
     fileprivate final func get_upper_fade() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Decal.method_get_upper_fade, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Decal.method_get_upper_fade, handle, nil, &_result)
         return _result
     }
     
@@ -572,7 +572,7 @@ open class Decal: VisualInstance3D {
         withUnsafePointer(to: fade) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Decal.method_set_lower_fade, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Decal.method_set_lower_fade, handle, pArgs, nil)
                 }
                 
             }
@@ -597,7 +597,7 @@ open class Decal: VisualInstance3D {
     fileprivate final func get_lower_fade() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Decal.method_get_lower_fade, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Decal.method_get_lower_fade, handle, nil, &_result)
         return _result
     }
     
@@ -618,7 +618,7 @@ open class Decal: VisualInstance3D {
         withUnsafePointer(to: fade) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Decal.method_set_normal_fade, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Decal.method_set_normal_fade, handle, pArgs, nil)
                 }
                 
             }
@@ -643,7 +643,7 @@ open class Decal: VisualInstance3D {
     fileprivate final func get_normal_fade() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Decal.method_get_normal_fade, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Decal.method_get_normal_fade, handle, nil, &_result)
         return _result
     }
     
@@ -664,7 +664,7 @@ open class Decal: VisualInstance3D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Decal.method_set_enable_distance_fade, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Decal.method_set_enable_distance_fade, handle, pArgs, nil)
                 }
                 
             }
@@ -689,7 +689,7 @@ open class Decal: VisualInstance3D {
     fileprivate final func is_distance_fade_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Decal.method_is_distance_fade_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Decal.method_is_distance_fade_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -710,7 +710,7 @@ open class Decal: VisualInstance3D {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Decal.method_set_distance_fade_begin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Decal.method_set_distance_fade_begin, handle, pArgs, nil)
                 }
                 
             }
@@ -735,7 +735,7 @@ open class Decal: VisualInstance3D {
     fileprivate final func get_distance_fade_begin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Decal.method_get_distance_fade_begin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Decal.method_get_distance_fade_begin, handle, nil, &_result)
         return _result
     }
     
@@ -756,7 +756,7 @@ open class Decal: VisualInstance3D {
         withUnsafePointer(to: distance) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Decal.method_set_distance_fade_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Decal.method_set_distance_fade_length, handle, pArgs, nil)
                 }
                 
             }
@@ -781,7 +781,7 @@ open class Decal: VisualInstance3D {
     fileprivate final func get_distance_fade_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Decal.method_get_distance_fade_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Decal.method_get_distance_fade_length, handle, nil, &_result)
         return _result
     }
     
@@ -802,7 +802,7 @@ open class Decal: VisualInstance3D {
         withUnsafePointer(to: mask) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Decal.method_set_cull_mask, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Decal.method_set_cull_mask, handle, pArgs, nil)
                 }
                 
             }
@@ -827,7 +827,7 @@ open class Decal: VisualInstance3D {
     fileprivate final func get_cull_mask() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(Decal.method_get_cull_mask, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Decal.method_get_cull_mask, handle, nil, &_result)
         return _result
     }
     

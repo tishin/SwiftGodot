@@ -56,7 +56,7 @@ open class HashingContext: RefCounted {
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HashingContext.method_start, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(HashingContext.method_start, handle, pArgs, &_result)
                 }
                 
             }
@@ -84,7 +84,7 @@ open class HashingContext: RefCounted {
         withUnsafePointer(to: chunk.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(HashingContext.method_update, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(HashingContext.method_update, handle, pArgs, &_result)
                 }
                 
             }
@@ -109,7 +109,7 @@ open class HashingContext: RefCounted {
     public final func finish() -> PackedByteArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedByteArray = PackedByteArray ()
-        gi.object_method_bind_ptrcall(HashingContext.method_finish, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(HashingContext.method_finish, handle, nil, &_result.content)
         return _result
     }
     

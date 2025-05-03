@@ -71,7 +71,7 @@ open class VisualShaderNodeVarying: VisualShaderNode {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeVarying.method_set_varying_name, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeVarying.method_set_varying_name, handle, pArgs, nil)
                 }
                 
             }
@@ -96,7 +96,7 @@ open class VisualShaderNodeVarying: VisualShaderNode {
     fileprivate final func get_varying_name() -> String {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result = GString ()
-        gi.object_method_bind_ptrcall(VisualShaderNodeVarying.method_get_varying_name, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(VisualShaderNodeVarying.method_get_varying_name, handle, nil, &_result.content)
         return _result.description
     }
     
@@ -117,7 +117,7 @@ open class VisualShaderNodeVarying: VisualShaderNode {
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeVarying.method_set_varying_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeVarying.method_set_varying_type, handle, pArgs, nil)
                 }
                 
             }
@@ -142,7 +142,7 @@ open class VisualShaderNodeVarying: VisualShaderNode {
     fileprivate final func get_varying_type() -> VisualShader.VaryingType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeVarying.method_get_varying_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeVarying.method_get_varying_type, handle, nil, &_result)
         return VisualShader.VaryingType (rawValue: _result)!
     }
     

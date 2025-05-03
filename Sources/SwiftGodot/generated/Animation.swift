@@ -176,7 +176,7 @@ open class Animation: Resource {
             withUnsafePointer(to: atPosition) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_add_track, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Animation.method_add_track, handle, pArgs, &_result)
                     }
                     
                 }
@@ -205,7 +205,7 @@ open class Animation: Resource {
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_remove_track, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Animation.method_remove_track, handle, pArgs, nil)
                 }
                 
             }
@@ -230,7 +230,7 @@ open class Animation: Resource {
     public final func getTrackCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(Animation.method_get_track_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Animation.method_get_track_count, handle, nil, &_result)
         return _result
     }
     
@@ -252,7 +252,7 @@ open class Animation: Resource {
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_track_get_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Animation.method_track_get_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -280,7 +280,7 @@ open class Animation: Resource {
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_track_get_path, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Animation.method_track_get_path, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -311,7 +311,7 @@ open class Animation: Resource {
             withUnsafePointer(to: path.content) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_track_set_path, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Animation.method_track_set_path, handle, pArgs, nil)
                     }
                     
                 }
@@ -342,7 +342,7 @@ open class Animation: Resource {
             withUnsafePointer(to: type.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_find_track, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Animation.method_find_track, handle, pArgs, &_result)
                     }
                     
                 }
@@ -371,7 +371,7 @@ open class Animation: Resource {
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_track_move_up, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Animation.method_track_move_up, handle, pArgs, nil)
                 }
                 
             }
@@ -398,7 +398,7 @@ open class Animation: Resource {
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_track_move_down, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Animation.method_track_move_down, handle, pArgs, nil)
                 }
                 
             }
@@ -426,7 +426,7 @@ open class Animation: Resource {
             withUnsafePointer(to: toIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_track_move_to, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Animation.method_track_move_to, handle, pArgs, nil)
                     }
                     
                 }
@@ -456,7 +456,7 @@ open class Animation: Resource {
             withUnsafePointer(to: withIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_track_swap, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Animation.method_track_swap, handle, pArgs, nil)
                     }
                     
                 }
@@ -486,7 +486,7 @@ open class Animation: Resource {
             withUnsafePointer(to: imported) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_track_set_imported, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Animation.method_track_set_imported, handle, pArgs, nil)
                     }
                     
                 }
@@ -516,7 +516,7 @@ open class Animation: Resource {
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_track_is_imported, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Animation.method_track_is_imported, handle, pArgs, &_result)
                 }
                 
             }
@@ -544,7 +544,7 @@ open class Animation: Resource {
             withUnsafePointer(to: enabled) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_track_set_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Animation.method_track_set_enabled, handle, pArgs, nil)
                     }
                     
                 }
@@ -574,7 +574,7 @@ open class Animation: Resource {
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_track_is_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Animation.method_track_is_enabled, handle, pArgs, &_result)
                 }
                 
             }
@@ -604,7 +604,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: position) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_position_track_insert_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Animation.method_position_track_insert_key, handle, pArgs, &_result)
                         }
                         
                     }
@@ -638,7 +638,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: rotation) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_rotation_track_insert_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Animation.method_rotation_track_insert_key, handle, pArgs, &_result)
                         }
                         
                     }
@@ -672,7 +672,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: scale) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_scale_track_insert_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Animation.method_scale_track_insert_key, handle, pArgs, &_result)
                         }
                         
                     }
@@ -706,7 +706,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: amount) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_blend_shape_track_insert_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Animation.method_blend_shape_track_insert_key, handle, pArgs, &_result)
                         }
                         
                     }
@@ -740,7 +740,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: backward) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_position_track_interpolate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Animation.method_position_track_interpolate, handle, pArgs, &_result)
                         }
                         
                     }
@@ -774,7 +774,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: backward) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_rotation_track_interpolate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Animation.method_rotation_track_interpolate, handle, pArgs, &_result)
                         }
                         
                     }
@@ -808,7 +808,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: backward) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_scale_track_interpolate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Animation.method_scale_track_interpolate, handle, pArgs, &_result)
                         }
                         
                     }
@@ -842,7 +842,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: backward) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_blend_shape_track_interpolate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Animation.method_blend_shape_track_interpolate, handle, pArgs, &_result)
                         }
                         
                     }
@@ -877,7 +877,7 @@ open class Animation: Resource {
                     withUnsafePointer(to: transition) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Animation.method_track_insert_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                gi.object_method_bind_ptrcall(Animation.method_track_insert_key, handle, pArgs, &_result)
                             }
                             
                         }
@@ -911,7 +911,7 @@ open class Animation: Resource {
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_track_remove_key, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Animation.method_track_remove_key, handle, pArgs, nil)
                     }
                     
                 }
@@ -941,7 +941,7 @@ open class Animation: Resource {
             withUnsafePointer(to: time) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_track_remove_key_at_time, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Animation.method_track_remove_key_at_time, handle, pArgs, nil)
                     }
                     
                 }
@@ -972,7 +972,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: value.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_track_set_key_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Animation.method_track_set_key_value, handle, pArgs, nil)
                         }
                         
                     }
@@ -1005,7 +1005,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: transition) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_track_set_key_transition, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Animation.method_track_set_key_transition, handle, pArgs, nil)
                         }
                         
                     }
@@ -1038,7 +1038,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: time) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_track_set_key_time, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Animation.method_track_set_key_time, handle, pArgs, nil)
                         }
                         
                     }
@@ -1071,7 +1071,7 @@ open class Animation: Resource {
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_track_get_key_transition, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Animation.method_track_get_key_transition, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1101,7 +1101,7 @@ open class Animation: Resource {
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_track_get_key_count, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Animation.method_track_get_key_count, handle, pArgs, &_result)
                 }
                 
             }
@@ -1130,7 +1130,7 @@ open class Animation: Resource {
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_track_get_key_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Animation.method_track_get_key_value, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1161,7 +1161,7 @@ open class Animation: Resource {
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_track_get_key_time, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Animation.method_track_get_key_time, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1202,7 +1202,7 @@ open class Animation: Resource {
                         withUnsafePointer(to: backward) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(Animation.method_track_find_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(Animation.method_track_find_key, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -1238,7 +1238,7 @@ open class Animation: Resource {
             withUnsafePointer(to: interpolation.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_track_set_interpolation_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Animation.method_track_set_interpolation_type, handle, pArgs, nil)
                     }
                     
                 }
@@ -1268,7 +1268,7 @@ open class Animation: Resource {
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_track_get_interpolation_type, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Animation.method_track_get_interpolation_type, handle, pArgs, &_result)
                 }
                 
             }
@@ -1296,7 +1296,7 @@ open class Animation: Resource {
             withUnsafePointer(to: interpolation) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_track_set_interpolation_loop_wrap, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Animation.method_track_set_interpolation_loop_wrap, handle, pArgs, nil)
                     }
                     
                 }
@@ -1326,7 +1326,7 @@ open class Animation: Resource {
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_track_get_interpolation_loop_wrap, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Animation.method_track_get_interpolation_loop_wrap, handle, pArgs, &_result)
                 }
                 
             }
@@ -1354,7 +1354,7 @@ open class Animation: Resource {
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_track_is_compressed, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Animation.method_track_is_compressed, handle, pArgs, &_result)
                 }
                 
             }
@@ -1382,7 +1382,7 @@ open class Animation: Resource {
             withUnsafePointer(to: mode.rawValue) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_value_track_set_update_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Animation.method_value_track_set_update_mode, handle, pArgs, nil)
                     }
                     
                 }
@@ -1412,7 +1412,7 @@ open class Animation: Resource {
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_value_track_get_update_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Animation.method_value_track_get_update_mode, handle, pArgs, &_result)
                 }
                 
             }
@@ -1445,7 +1445,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: backward) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_value_track_interpolate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Animation.method_value_track_interpolate, handle, pArgs, &_result)
                         }
                         
                     }
@@ -1478,7 +1478,7 @@ open class Animation: Resource {
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_method_track_get_name, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Animation.method_method_track_get_name, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1509,7 +1509,7 @@ open class Animation: Resource {
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_method_track_get_params, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Animation.method_method_track_get_params, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -1546,7 +1546,7 @@ open class Animation: Resource {
                         withUnsafePointer(to: outHandle) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(Animation.method_bezier_track_insert_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(Animation.method_bezier_track_insert_key, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -1583,7 +1583,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: value) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_bezier_track_set_key_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Animation.method_bezier_track_set_key_value, handle, pArgs, nil)
                         }
                         
                     }
@@ -1617,7 +1617,7 @@ open class Animation: Resource {
                     withUnsafePointer(to: balancedValueTimeRatio) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Animation.method_bezier_track_set_key_in_handle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(Animation.method_bezier_track_set_key_in_handle, handle, pArgs, nil)
                             }
                             
                         }
@@ -1653,7 +1653,7 @@ open class Animation: Resource {
                     withUnsafePointer(to: balancedValueTimeRatio) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(Animation.method_bezier_track_set_key_out_handle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(Animation.method_bezier_track_set_key_out_handle, handle, pArgs, nil)
                             }
                             
                         }
@@ -1688,7 +1688,7 @@ open class Animation: Resource {
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_bezier_track_get_key_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Animation.method_bezier_track_get_key_value, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1719,7 +1719,7 @@ open class Animation: Resource {
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_bezier_track_get_key_in_handle, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Animation.method_bezier_track_get_key_in_handle, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1750,7 +1750,7 @@ open class Animation: Resource {
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_bezier_track_get_key_out_handle, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Animation.method_bezier_track_get_key_out_handle, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1781,7 +1781,7 @@ open class Animation: Resource {
             withUnsafePointer(to: time) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_bezier_track_interpolate, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Animation.method_bezier_track_interpolate, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1818,7 +1818,7 @@ open class Animation: Resource {
                         withUnsafePointer(to: endOffset) { pArg4 in
                             withUnsafePointer(to: UnsafeRawPointersN5(pArg0, pArg1, pArg2, pArg3, pArg4)) { pArgs in
                                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 5) { pArgs in
-                                    gi.object_method_bind_ptrcall(Animation.method_audio_track_insert_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                                    gi.object_method_bind_ptrcall(Animation.method_audio_track_insert_key, handle, pArgs, &_result)
                                 }
                                 
                             }
@@ -1855,7 +1855,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: stream?.handle) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_audio_track_set_key_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Animation.method_audio_track_set_key_stream, handle, pArgs, nil)
                         }
                         
                     }
@@ -1888,7 +1888,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: offset) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_audio_track_set_key_start_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Animation.method_audio_track_set_key_start_offset, handle, pArgs, nil)
                         }
                         
                     }
@@ -1921,7 +1921,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: offset) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_audio_track_set_key_end_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Animation.method_audio_track_set_key_end_offset, handle, pArgs, nil)
                         }
                         
                     }
@@ -1949,12 +1949,12 @@ open class Animation: Resource {
     /// Returns the audio stream of the key identified by `keyIdx`. The `trackIdx` must be the index of an Audio Track.
     public final func audioTrackGetKeyStream(trackIdx: Int32, keyIdx: Int32) -> Resource? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_audio_track_get_key_stream, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Animation.method_audio_track_get_key_stream, handle, pArgs, &_result)
                     }
                     
                 }
@@ -1963,7 +1963,7 @@ open class Animation: Resource {
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_audio_track_get_key_start_offset: GDExtensionMethodBindPtr = {
@@ -1988,7 +1988,7 @@ open class Animation: Resource {
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_audio_track_get_key_start_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Animation.method_audio_track_get_key_start_offset, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2022,7 +2022,7 @@ open class Animation: Resource {
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_audio_track_get_key_end_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                        gi.object_method_bind_ptrcall(Animation.method_audio_track_get_key_end_offset, handle, pArgs, &_result)
                     }
                     
                 }
@@ -2052,7 +2052,7 @@ open class Animation: Resource {
             withUnsafePointer(to: enable) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_audio_track_set_use_blend, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Animation.method_audio_track_set_use_blend, handle, pArgs, nil)
                     }
                     
                 }
@@ -2082,7 +2082,7 @@ open class Animation: Resource {
         withUnsafePointer(to: trackIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_audio_track_is_use_blend, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Animation.method_audio_track_is_use_blend, handle, pArgs, &_result)
                 }
                 
             }
@@ -2112,7 +2112,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: animation.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_animation_track_insert_key, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                            gi.object_method_bind_ptrcall(Animation.method_animation_track_insert_key, handle, pArgs, &_result)
                         }
                         
                     }
@@ -2145,7 +2145,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: animation.content) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_animation_track_set_key_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Animation.method_animation_track_set_key_animation, handle, pArgs, nil)
                         }
                         
                     }
@@ -2178,7 +2178,7 @@ open class Animation: Resource {
             withUnsafePointer(to: keyIdx) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_animation_track_get_key_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(Animation.method_animation_track_get_key_animation, handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -2208,7 +2208,7 @@ open class Animation: Resource {
             withUnsafePointer(to: time) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_add_marker, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Animation.method_add_marker, handle, pArgs, nil)
                     }
                     
                 }
@@ -2237,7 +2237,7 @@ open class Animation: Resource {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_remove_marker, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Animation.method_remove_marker, handle, pArgs, nil)
                 }
                 
             }
@@ -2265,7 +2265,7 @@ open class Animation: Resource {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_has_marker, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Animation.method_has_marker, handle, pArgs, &_result)
                 }
                 
             }
@@ -2293,7 +2293,7 @@ open class Animation: Resource {
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_get_marker_at_time, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Animation.method_get_marker_at_time, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2321,7 +2321,7 @@ open class Animation: Resource {
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_get_next_marker, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Animation.method_get_next_marker, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2349,7 +2349,7 @@ open class Animation: Resource {
         withUnsafePointer(to: time) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_get_prev_marker, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(Animation.method_get_prev_marker, handle, pArgs, &_result.content)
                 }
                 
             }
@@ -2377,7 +2377,7 @@ open class Animation: Resource {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_get_marker_time, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Animation.method_get_marker_time, handle, pArgs, &_result)
                 }
                 
             }
@@ -2402,7 +2402,7 @@ open class Animation: Resource {
     public final func getMarkerNames() -> PackedStringArray {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: PackedStringArray = PackedStringArray ()
-        gi.object_method_bind_ptrcall(Animation.method_get_marker_names, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(Animation.method_get_marker_names, handle, nil, &_result.content)
         return _result
     }
     
@@ -2424,7 +2424,7 @@ open class Animation: Resource {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_get_marker_color, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(Animation.method_get_marker_color, handle, pArgs, &_result)
                 }
                 
             }
@@ -2452,7 +2452,7 @@ open class Animation: Resource {
             withUnsafePointer(to: color) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_set_marker_color, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Animation.method_set_marker_color, handle, pArgs, nil)
                     }
                     
                 }
@@ -2481,7 +2481,7 @@ open class Animation: Resource {
         withUnsafePointer(to: timeSec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_set_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Animation.method_set_length, handle, pArgs, nil)
                 }
                 
             }
@@ -2506,7 +2506,7 @@ open class Animation: Resource {
     fileprivate final func get_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Animation.method_get_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Animation.method_get_length, handle, nil, &_result)
         return _result
     }
     
@@ -2527,7 +2527,7 @@ open class Animation: Resource {
         withUnsafePointer(to: loopMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_set_loop_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Animation.method_set_loop_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -2552,7 +2552,7 @@ open class Animation: Resource {
     fileprivate final func get_loop_mode() -> Animation.LoopMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(Animation.method_get_loop_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Animation.method_get_loop_mode, handle, nil, &_result)
         return Animation.LoopMode (rawValue: _result)!
     }
     
@@ -2573,7 +2573,7 @@ open class Animation: Resource {
         withUnsafePointer(to: sizeSec) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(Animation.method_set_step, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(Animation.method_set_step, handle, pArgs, nil)
                 }
                 
             }
@@ -2598,7 +2598,7 @@ open class Animation: Resource {
     fileprivate final func get_step() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(Animation.method_get_step, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Animation.method_get_step, handle, nil, &_result)
         return _result
     }
     
@@ -2616,7 +2616,7 @@ open class Animation: Resource {
     /// Clear the animation (clear all tracks and reset all).
     public final func clear() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(Animation.method_clear, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(Animation.method_clear, handle, nil, nil)
         
     }
     
@@ -2638,7 +2638,7 @@ open class Animation: Resource {
             withUnsafePointer(to: toAnimation?.handle) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(Animation.method_copy_track, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(Animation.method_copy_track, handle, pArgs, nil)
                     }
                     
                 }
@@ -2669,7 +2669,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: precision) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_optimize, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Animation.method_optimize, handle, pArgs, nil)
                         }
                         
                     }
@@ -2705,7 +2705,7 @@ open class Animation: Resource {
                 withUnsafePointer(to: splitTolerance) { pArg2 in
                     withUnsafePointer(to: UnsafeRawPointersN3(pArg0, pArg1, pArg2)) { pArgs in
                         pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 3) { pArgs in
-                            gi.object_method_bind_ptrcall(Animation.method_compress, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                            gi.object_method_bind_ptrcall(Animation.method_compress, handle, pArgs, nil)
                         }
                         
                     }
@@ -2734,7 +2734,7 @@ open class Animation: Resource {
     fileprivate final func is_capture_included() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(Animation.method_is_capture_included, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(Animation.method_is_capture_included, handle, nil, &_result)
         return _result
     }
     

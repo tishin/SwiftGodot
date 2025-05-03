@@ -105,7 +105,7 @@ open class PortableCompressedTexture2D: Texture2D {
                     withUnsafePointer(to: lossyQuality) { pArg3 in
                         withUnsafePointer(to: UnsafeRawPointersN4(pArg0, pArg1, pArg2, pArg3)) { pArgs in
                             pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 4) { pArgs in
-                                gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_create_from_image, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                                gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_create_from_image, handle, pArgs, nil)
                             }
                             
                         }
@@ -136,7 +136,7 @@ open class PortableCompressedTexture2D: Texture2D {
     public final func getFormat() -> Image.Format {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_get_format, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_get_format, handle, nil, &_result)
         return Image.Format (rawValue: _result)!
     }
     
@@ -155,7 +155,7 @@ open class PortableCompressedTexture2D: Texture2D {
     public final func getCompressionMode() -> PortableCompressedTexture2D.CompressionMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_get_compression_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_get_compression_mode, handle, nil, &_result)
         return PortableCompressedTexture2D.CompressionMode (rawValue: _result)!
     }
     
@@ -176,7 +176,7 @@ open class PortableCompressedTexture2D: Texture2D {
         withUnsafePointer(to: size) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_set_size_override, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_set_size_override, handle, pArgs, nil)
                 }
                 
             }
@@ -201,7 +201,7 @@ open class PortableCompressedTexture2D: Texture2D {
     fileprivate final func get_size_override() -> Vector2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector2 = Vector2 ()
-        gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_get_size_override, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_get_size_override, handle, nil, &_result)
         return _result
     }
     
@@ -222,7 +222,7 @@ open class PortableCompressedTexture2D: Texture2D {
         withUnsafePointer(to: keep) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_set_keep_compressed_buffer, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_set_keep_compressed_buffer, handle, pArgs, nil)
                 }
                 
             }
@@ -247,7 +247,7 @@ open class PortableCompressedTexture2D: Texture2D {
     fileprivate final func is_keeping_compressed_buffer() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_is_keeping_compressed_buffer, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(PortableCompressedTexture2D.method_is_keeping_compressed_buffer, handle, nil, &_result)
         return _result
     }
     

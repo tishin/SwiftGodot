@@ -35,7 +35,7 @@ open class Time: Object {
     /// The shared instance of this class
     public static var shared: Time {
         return withUnsafePointer(to: &Time.godotClassName.content) { ptr in
-            lookupObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
+            getOrInitSwiftObject(nativeHandle: gi.global_get_singleton(ptr)!, ownsRef: false)!
         }
         
     }
@@ -107,7 +107,7 @@ open class Time: Object {
         withUnsafePointer(to: unixTimeVal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_datetime_dict_from_unix_time, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_datetime_dict_from_unix_time, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -134,7 +134,7 @@ open class Time: Object {
         withUnsafePointer(to: unixTimeVal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_date_dict_from_unix_time, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_date_dict_from_unix_time, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -161,7 +161,7 @@ open class Time: Object {
         withUnsafePointer(to: unixTimeVal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_time_dict_from_unix_time, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_time_dict_from_unix_time, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -192,7 +192,7 @@ open class Time: Object {
             withUnsafePointer(to: useSpace) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_datetime_string_from_unix_time, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_get_datetime_string_from_unix_time, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -221,7 +221,7 @@ open class Time: Object {
         withUnsafePointer(to: unixTimeVal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_date_string_from_unix_time, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_date_string_from_unix_time, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -248,7 +248,7 @@ open class Time: Object {
         withUnsafePointer(to: unixTimeVal) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_time_string_from_unix_time, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_time_string_from_unix_time, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -282,7 +282,7 @@ open class Time: Object {
             withUnsafePointer(to: weekday) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_datetime_dict_from_datetime_string, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_get_datetime_dict_from_datetime_string, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -319,7 +319,7 @@ open class Time: Object {
             withUnsafePointer(to: useSpace) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_datetime_string_from_datetime_dict, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_get_datetime_string_from_datetime_dict, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -357,7 +357,7 @@ open class Time: Object {
         withUnsafePointer(to: datetime.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_unix_time_from_datetime_dict, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_unix_time_from_datetime_dict, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -390,7 +390,7 @@ open class Time: Object {
         withUnsafePointer(to: datetime.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_unix_time_from_datetime_string, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(method_get_unix_time_from_datetime_string, shared.handle, pArgs, &_result)
                 }
                 
             }
@@ -417,7 +417,7 @@ open class Time: Object {
         withUnsafePointer(to: offsetMinutes) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_offset_string_from_offset_minutes, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_offset_string_from_offset_minutes, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -444,7 +444,7 @@ open class Time: Object {
         withUnsafePointer(to: utc) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_datetime_dict_from_system, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_datetime_dict_from_system, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -474,7 +474,7 @@ open class Time: Object {
         withUnsafePointer(to: utc) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_date_dict_from_system, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_date_dict_from_system, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -504,7 +504,7 @@ open class Time: Object {
         withUnsafePointer(to: utc) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_time_dict_from_system, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_time_dict_from_system, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -537,7 +537,7 @@ open class Time: Object {
             withUnsafePointer(to: useSpace) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(method_get_datetime_string_from_system, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                        gi.object_method_bind_ptrcall(method_get_datetime_string_from_system, shared.handle, pArgs, &_result.content)
                     }
                     
                 }
@@ -569,7 +569,7 @@ open class Time: Object {
         withUnsafePointer(to: utc) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_date_string_from_system, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_date_string_from_system, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -599,7 +599,7 @@ open class Time: Object {
         withUnsafePointer(to: utc) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(method_get_time_string_from_system, UnsafeMutableRawPointer(mutating: shared.handle), pArgs, &_result.content)
+                    gi.object_method_bind_ptrcall(method_get_time_string_from_system, shared.handle, pArgs, &_result.content)
                 }
                 
             }
@@ -628,7 +628,7 @@ open class Time: Object {
     /// 
     public static func getTimeZoneFromSystem() -> VariantDictionary {
         let _result: VariantDictionary = VariantDictionary ()
-        gi.object_method_bind_ptrcall(method_get_time_zone_from_system, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(method_get_time_zone_from_system, shared.handle, nil, &_result.content)
         return _result
     }
     
@@ -649,7 +649,7 @@ open class Time: Object {
     /// 
     public static func getUnixTimeFromSystem() -> Double {
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(method_get_unix_time_from_system, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_unix_time_from_system, shared.handle, nil, &_result)
         return _result
     }
     
@@ -670,7 +670,7 @@ open class Time: Object {
     /// 
     public static func getTicksMsec() -> UInt {
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(method_get_ticks_msec, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_ticks_msec, shared.handle, nil, &_result)
         return _result
     }
     
@@ -691,7 +691,7 @@ open class Time: Object {
     /// 
     public static func getTicksUsec() -> UInt {
         var _result: UInt = 0
-        gi.object_method_bind_ptrcall(method_get_ticks_usec, UnsafeMutableRawPointer(mutating: shared.handle), nil, &_result)
+        gi.object_method_bind_ptrcall(method_get_ticks_usec, shared.handle, nil, &_result)
         return _result
     }
     

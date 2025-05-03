@@ -135,7 +135,7 @@ open class NavigationRegion2D: Node2D {
     public final func getRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -156,7 +156,7 @@ open class NavigationRegion2D: Node2D {
         withUnsafePointer(to: navigationPolygon?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_navigation_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_navigation_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -180,9 +180,9 @@ open class NavigationRegion2D: Node2D {
     @inline(__always)
     fileprivate final func get_navigation_polygon() -> NavigationPolygon? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_navigation_polygon, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_navigation_polygon, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_enabled: GDExtensionMethodBindPtr = {
@@ -202,7 +202,7 @@ open class NavigationRegion2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -227,7 +227,7 @@ open class NavigationRegion2D: Node2D {
     fileprivate final func is_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationRegion2D.method_is_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationRegion2D.method_is_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -248,7 +248,7 @@ open class NavigationRegion2D: Node2D {
         withUnsafePointer(to: navigationMap.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_navigation_map, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_navigation_map, handle, pArgs, nil)
                 }
                 
             }
@@ -273,7 +273,7 @@ open class NavigationRegion2D: Node2D {
     public final func getNavigationMap() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_navigation_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_navigation_map, handle, nil, &_result.content)
         return _result
     }
     
@@ -294,7 +294,7 @@ open class NavigationRegion2D: Node2D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_use_edge_connections, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_use_edge_connections, handle, pArgs, nil)
                 }
                 
             }
@@ -319,7 +319,7 @@ open class NavigationRegion2D: Node2D {
     fileprivate final func get_use_edge_connections() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_use_edge_connections, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_use_edge_connections, handle, nil, &_result)
         return _result
     }
     
@@ -340,7 +340,7 @@ open class NavigationRegion2D: Node2D {
         withUnsafePointer(to: navigationLayers) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_navigation_layers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_navigation_layers, handle, pArgs, nil)
                 }
                 
             }
@@ -365,7 +365,7 @@ open class NavigationRegion2D: Node2D {
     fileprivate final func get_navigation_layers() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_navigation_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_navigation_layers, handle, nil, &_result)
         return _result
     }
     
@@ -387,7 +387,7 @@ open class NavigationRegion2D: Node2D {
             withUnsafePointer(to: value) { pArg1 in
                 withUnsafePointer(to: UnsafeRawPointersN2(pArg0, pArg1)) { pArgs in
                     pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 2) { pArgs in
-                        gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_navigation_layer_value, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                        gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_navigation_layer_value, handle, pArgs, nil)
                     }
                     
                 }
@@ -417,7 +417,7 @@ open class NavigationRegion2D: Node2D {
         withUnsafePointer(to: layerNumber) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_navigation_layer_value, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_navigation_layer_value, handle, pArgs, &_result)
                 }
                 
             }
@@ -442,7 +442,7 @@ open class NavigationRegion2D: Node2D {
     public final func getRegionRid() -> RID {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: RID = RID ()
-        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_region_rid, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_region_rid, handle, nil, &_result.content)
         return _result
     }
     
@@ -463,7 +463,7 @@ open class NavigationRegion2D: Node2D {
         withUnsafePointer(to: enterCost) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_enter_cost, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_enter_cost, handle, pArgs, nil)
                 }
                 
             }
@@ -488,7 +488,7 @@ open class NavigationRegion2D: Node2D {
     fileprivate final func get_enter_cost() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_enter_cost, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_enter_cost, handle, nil, &_result)
         return _result
     }
     
@@ -509,7 +509,7 @@ open class NavigationRegion2D: Node2D {
         withUnsafePointer(to: travelCost) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_travel_cost, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_set_travel_cost, handle, pArgs, nil)
                 }
                 
             }
@@ -534,7 +534,7 @@ open class NavigationRegion2D: Node2D {
     fileprivate final func get_travel_cost() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_travel_cost, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_travel_cost, handle, nil, &_result)
         return _result
     }
     
@@ -555,7 +555,7 @@ open class NavigationRegion2D: Node2D {
         withUnsafePointer(to: onThread) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_bake_navigation_polygon, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NavigationRegion2D.method_bake_navigation_polygon, handle, pArgs, nil)
                 }
                 
             }
@@ -580,7 +580,7 @@ open class NavigationRegion2D: Node2D {
     public final func isBaking() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NavigationRegion2D.method_is_baking, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationRegion2D.method_is_baking, handle, nil, &_result)
         return _result
     }
     
@@ -599,7 +599,7 @@ open class NavigationRegion2D: Node2D {
     public final func getBounds() -> Rect2 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Rect2 = Rect2 ()
-        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_bounds, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NavigationRegion2D.method_get_bounds, handle, nil, &_result)
         return _result
     }
     

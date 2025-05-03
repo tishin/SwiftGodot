@@ -207,7 +207,7 @@ open class NoiseTexture2D: Texture2D {
         withUnsafePointer(to: width) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_width, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_width, handle, pArgs, nil)
                 }
                 
             }
@@ -234,7 +234,7 @@ open class NoiseTexture2D: Texture2D {
         withUnsafePointer(to: height) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_height, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_height, handle, pArgs, nil)
                 }
                 
             }
@@ -261,7 +261,7 @@ open class NoiseTexture2D: Texture2D {
         withUnsafePointer(to: invert) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_invert, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_invert, handle, pArgs, nil)
                 }
                 
             }
@@ -286,7 +286,7 @@ open class NoiseTexture2D: Texture2D {
     fileprivate final func get_invert() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NoiseTexture2D.method_get_invert, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NoiseTexture2D.method_get_invert, handle, nil, &_result)
         return _result
     }
     
@@ -307,7 +307,7 @@ open class NoiseTexture2D: Texture2D {
         withUnsafePointer(to: enable) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_in_3d_space, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_in_3d_space, handle, pArgs, nil)
                 }
                 
             }
@@ -332,7 +332,7 @@ open class NoiseTexture2D: Texture2D {
     fileprivate final func is_in_3d_space() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NoiseTexture2D.method_is_in_3d_space, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NoiseTexture2D.method_is_in_3d_space, handle, nil, &_result)
         return _result
     }
     
@@ -353,7 +353,7 @@ open class NoiseTexture2D: Texture2D {
         withUnsafePointer(to: invert) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_generate_mipmaps, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_generate_mipmaps, handle, pArgs, nil)
                 }
                 
             }
@@ -378,7 +378,7 @@ open class NoiseTexture2D: Texture2D {
     fileprivate final func is_generating_mipmaps() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NoiseTexture2D.method_is_generating_mipmaps, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NoiseTexture2D.method_is_generating_mipmaps, handle, nil, &_result)
         return _result
     }
     
@@ -399,7 +399,7 @@ open class NoiseTexture2D: Texture2D {
         withUnsafePointer(to: seamless) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_seamless, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_seamless, handle, pArgs, nil)
                 }
                 
             }
@@ -424,7 +424,7 @@ open class NoiseTexture2D: Texture2D {
     fileprivate final func get_seamless() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NoiseTexture2D.method_get_seamless, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NoiseTexture2D.method_get_seamless, handle, nil, &_result)
         return _result
     }
     
@@ -445,7 +445,7 @@ open class NoiseTexture2D: Texture2D {
         withUnsafePointer(to: seamlessBlendSkirt) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_seamless_blend_skirt, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_seamless_blend_skirt, handle, pArgs, nil)
                 }
                 
             }
@@ -470,7 +470,7 @@ open class NoiseTexture2D: Texture2D {
     fileprivate final func get_seamless_blend_skirt() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NoiseTexture2D.method_get_seamless_blend_skirt, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NoiseTexture2D.method_get_seamless_blend_skirt, handle, nil, &_result)
         return _result
     }
     
@@ -491,7 +491,7 @@ open class NoiseTexture2D: Texture2D {
         withUnsafePointer(to: asNormalMap) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_as_normal_map, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_as_normal_map, handle, pArgs, nil)
                 }
                 
             }
@@ -516,7 +516,7 @@ open class NoiseTexture2D: Texture2D {
     fileprivate final func is_normal_map() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NoiseTexture2D.method_is_normal_map, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NoiseTexture2D.method_is_normal_map, handle, nil, &_result)
         return _result
     }
     
@@ -537,7 +537,7 @@ open class NoiseTexture2D: Texture2D {
         withUnsafePointer(to: bumpStrength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_bump_strength, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_bump_strength, handle, pArgs, nil)
                 }
                 
             }
@@ -562,7 +562,7 @@ open class NoiseTexture2D: Texture2D {
     fileprivate final func get_bump_strength() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(NoiseTexture2D.method_get_bump_strength, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NoiseTexture2D.method_get_bump_strength, handle, nil, &_result)
         return _result
     }
     
@@ -583,7 +583,7 @@ open class NoiseTexture2D: Texture2D {
         withUnsafePointer(to: normalize) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_normalize, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_normalize, handle, pArgs, nil)
                 }
                 
             }
@@ -608,7 +608,7 @@ open class NoiseTexture2D: Texture2D {
     fileprivate final func is_normalized() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(NoiseTexture2D.method_is_normalized, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(NoiseTexture2D.method_is_normalized, handle, nil, &_result)
         return _result
     }
     
@@ -629,7 +629,7 @@ open class NoiseTexture2D: Texture2D {
         withUnsafePointer(to: gradient?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_color_ramp, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_color_ramp, handle, pArgs, nil)
                 }
                 
             }
@@ -653,9 +653,9 @@ open class NoiseTexture2D: Texture2D {
     @inline(__always)
     fileprivate final func get_color_ramp() -> Gradient? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(NoiseTexture2D.method_get_color_ramp, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(NoiseTexture2D.method_get_color_ramp, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_set_noise: GDExtensionMethodBindPtr = {
@@ -675,7 +675,7 @@ open class NoiseTexture2D: Texture2D {
         withUnsafePointer(to: noise?.handle) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_noise, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(NoiseTexture2D.method_set_noise, handle, pArgs, nil)
                 }
                 
             }
@@ -699,9 +699,9 @@ open class NoiseTexture2D: Texture2D {
     @inline(__always)
     fileprivate final func get_noise() -> Noise? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(NoiseTexture2D.method_get_noise, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(NoiseTexture2D.method_get_noise, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

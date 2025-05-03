@@ -48,7 +48,7 @@ open class GDScript: Script {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Variant.ContentType = Variant.zero
         if arguments.isEmpty {
-            gi.object_method_bind_call(GDScript.method_new, UnsafeMutableRawPointer(mutating: handle), nil, 0, &_result, nil) // no arguments
+            gi.object_method_bind_call(GDScript.method_new, handle, nil, 0, &_result, nil) // no arguments
         } else {
             // A temporary allocation containing pointers to `Variant.ContentType` of marshaled arguments
             withUnsafeTemporaryAllocation(of: UnsafeRawPointer?.self, capacity: arguments.count) { pArgsBuffer in
@@ -73,7 +73,7 @@ open class GDScript: Script {
                         pArgsBuffer.initializeElement(at: i, to: contentsPtr + i)
                     }
         
-                    gi.object_method_bind_call(GDScript.method_new, UnsafeMutableRawPointer(mutating: handle), pArgs, Int64(arguments.count), &_result, nil)
+                    gi.object_method_bind_call(GDScript.method_new, handle, pArgs, Int64(arguments.count), &_result, nil)
                 }
             }
         }

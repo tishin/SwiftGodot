@@ -267,7 +267,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func moveAndSlide() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_move_and_slide, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_move_and_slide, handle, nil, &_result)
         return _result
     }
     
@@ -285,7 +285,7 @@ open class CharacterBody3D: PhysicsBody3D {
     /// Allows to manually apply a snap to the floor regardless of the body's velocity. This function does nothing when ``isOnFloor()`` returns `true`.
     public final func applyFloorSnap() {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_apply_floor_snap, UnsafeMutableRawPointer(mutating: handle), nil, nil)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_apply_floor_snap, handle, nil, nil)
         
     }
     
@@ -306,7 +306,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: velocity) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_velocity, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_velocity, handle, pArgs, nil)
                 }
                 
             }
@@ -331,7 +331,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func get_velocity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -352,7 +352,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: margin) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_safe_margin, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_safe_margin, handle, pArgs, nil)
                 }
                 
             }
@@ -377,7 +377,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func get_safe_margin() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_safe_margin, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_safe_margin, handle, nil, &_result)
         return _result
     }
     
@@ -396,7 +396,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func is_floor_stop_on_slope_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_floor_stop_on_slope_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_floor_stop_on_slope_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -417,7 +417,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_floor_stop_on_slope_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_floor_stop_on_slope_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -444,7 +444,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_floor_constant_speed_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_floor_constant_speed_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -469,7 +469,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func is_floor_constant_speed_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_floor_constant_speed_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_floor_constant_speed_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -490,7 +490,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_floor_block_on_wall_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_floor_block_on_wall_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -515,7 +515,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func is_floor_block_on_wall_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_floor_block_on_wall_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_floor_block_on_wall_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -536,7 +536,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: enabled) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_slide_on_ceiling_enabled, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_slide_on_ceiling_enabled, handle, pArgs, nil)
                 }
                 
             }
@@ -561,7 +561,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func is_slide_on_ceiling_enabled() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_slide_on_ceiling_enabled, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_slide_on_ceiling_enabled, handle, nil, &_result)
         return _result
     }
     
@@ -582,7 +582,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: excludeLayer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_platform_floor_layers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_platform_floor_layers, handle, pArgs, nil)
                 }
                 
             }
@@ -607,7 +607,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func get_platform_floor_layers() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_floor_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_floor_layers, handle, nil, &_result)
         return _result
     }
     
@@ -628,7 +628,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: excludeLayer) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_platform_wall_layers, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_platform_wall_layers, handle, pArgs, nil)
                 }
                 
             }
@@ -653,7 +653,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func get_platform_wall_layers() -> UInt32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: UInt32 = 0
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_wall_layers, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_wall_layers, handle, nil, &_result)
         return _result
     }
     
@@ -672,7 +672,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func get_max_slides() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_max_slides, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_max_slides, handle, nil, &_result)
         return _result
     }
     
@@ -693,7 +693,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: maxSlides) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_max_slides, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_max_slides, handle, pArgs, nil)
                 }
                 
             }
@@ -718,7 +718,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func get_floor_max_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_floor_max_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_floor_max_angle, handle, nil, &_result)
         return _result
     }
     
@@ -739,7 +739,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_floor_max_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_floor_max_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -764,7 +764,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func get_floor_snap_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_floor_snap_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_floor_snap_length, handle, nil, &_result)
         return _result
     }
     
@@ -785,7 +785,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: floorSnapLength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_floor_snap_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_floor_snap_length, handle, pArgs, nil)
                 }
                 
             }
@@ -810,7 +810,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func get_wall_min_slide_angle() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_wall_min_slide_angle, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_wall_min_slide_angle, handle, nil, &_result)
         return _result
     }
     
@@ -831,7 +831,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: radians) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_wall_min_slide_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_wall_min_slide_angle, handle, pArgs, nil)
                 }
                 
             }
@@ -856,7 +856,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func get_up_direction() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_up_direction, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_up_direction, handle, nil, &_result)
         return _result
     }
     
@@ -877,7 +877,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: upDirection) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_up_direction, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_up_direction, handle, pArgs, nil)
                 }
                 
             }
@@ -904,7 +904,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_motion_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_motion_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -929,7 +929,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func get_motion_mode() -> CharacterBody3D.MotionMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_motion_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_motion_mode, handle, nil, &_result)
         return CharacterBody3D.MotionMode (rawValue: _result)!
     }
     
@@ -950,7 +950,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: onLeaveApplyVelocity.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_platform_on_leave, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_set_platform_on_leave, handle, pArgs, nil)
                 }
                 
             }
@@ -975,7 +975,7 @@ open class CharacterBody3D: PhysicsBody3D {
     fileprivate final func get_platform_on_leave() -> CharacterBody3D.PlatformOnLeave {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_on_leave, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_on_leave, handle, nil, &_result)
         return CharacterBody3D.PlatformOnLeave (rawValue: _result)!
     }
     
@@ -994,7 +994,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func isOnFloor() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_floor, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_floor, handle, nil, &_result)
         return _result
     }
     
@@ -1013,7 +1013,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func isOnFloorOnly() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_floor_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_floor_only, handle, nil, &_result)
         return _result
     }
     
@@ -1032,7 +1032,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func isOnCeiling() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_ceiling, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_ceiling, handle, nil, &_result)
         return _result
     }
     
@@ -1051,7 +1051,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func isOnCeilingOnly() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_ceiling_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_ceiling_only, handle, nil, &_result)
         return _result
     }
     
@@ -1070,7 +1070,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func isOnWall() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_wall, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_wall, handle, nil, &_result)
         return _result
     }
     
@@ -1089,7 +1089,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func isOnWallOnly() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_wall_only, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_is_on_wall_only, handle, nil, &_result)
         return _result
     }
     
@@ -1111,7 +1111,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func getFloorNormal() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_floor_normal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_floor_normal, handle, nil, &_result)
         return _result
     }
     
@@ -1133,7 +1133,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func getWallNormal() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_wall_normal, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_wall_normal, handle, nil, &_result)
         return _result
     }
     
@@ -1152,7 +1152,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func getLastMotion() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_last_motion, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_last_motion, handle, nil, &_result)
         return _result
     }
     
@@ -1171,7 +1171,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func getPositionDelta() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_position_delta, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_position_delta, handle, nil, &_result)
         return _result
     }
     
@@ -1190,7 +1190,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func getRealVelocity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_real_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_real_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -1212,7 +1212,7 @@ open class CharacterBody3D: PhysicsBody3D {
         withUnsafePointer(to: upDirection) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_get_floor_angle, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_get_floor_angle, handle, pArgs, &_result)
                 }
                 
             }
@@ -1237,7 +1237,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func getPlatformVelocity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -1256,7 +1256,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func getPlatformAngularVelocity() -> Vector3 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Vector3 = Vector3 ()
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_angular_velocity, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_platform_angular_velocity, handle, nil, &_result)
         return _result
     }
     
@@ -1275,7 +1275,7 @@ open class CharacterBody3D: PhysicsBody3D {
     public final func getSlideCollisionCount() -> Int32 {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int32 = 0
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_slide_collision_count, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_slide_collision_count, handle, nil, &_result)
         return _result
     }
     
@@ -1293,18 +1293,18 @@ open class CharacterBody3D: PhysicsBody3D {
     /// Returns a ``KinematicCollision3D``, which contains information about a collision that occurred during the last call to ``moveAndSlide()``. Since the body can collide several times in a single call to ``moveAndSlide()``, you must specify the index of the collision in the range 0 to (``getSlideCollisionCount()`` - 1).
     public final func getSlideCollision(slideIdx: Int32) -> KinematicCollision3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
         withUnsafePointer(to: slideIdx) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(CharacterBody3D.method_get_slide_collision, UnsafeMutableRawPointer(mutating: handle), pArgs, &_result)
+                    gi.object_method_bind_ptrcall(CharacterBody3D.method_get_slide_collision, handle, pArgs, &_result)
                 }
                 
             }
             
         }
         
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
     fileprivate static let method_get_last_slide_collision: GDExtensionMethodBindPtr = {
@@ -1321,9 +1321,9 @@ open class CharacterBody3D: PhysicsBody3D {
     /// Returns a ``KinematicCollision3D``, which contains information about the latest collision that occurred during the last call to ``moveAndSlide()``.
     public final func getLastSlideCollision() -> KinematicCollision3D? {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
-        var _result = UnsafeRawPointer (bitPattern: 0)
-        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_last_slide_collision, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
-        guard let _result else { return nil } ; return lookupObject (nativeHandle: _result, ownsRef: true)
+        var _result = GodotNativeObjectPointer(bitPattern: 0)
+        gi.object_method_bind_ptrcall(CharacterBody3D.method_get_last_slide_collision, handle, nil, &_result)
+        guard let _result else { return nil } ; return getOrInitSwiftObject (nativeHandle: _result, ownsRef: true)
     }
     
 }

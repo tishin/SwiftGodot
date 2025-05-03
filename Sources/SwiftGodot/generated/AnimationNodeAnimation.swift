@@ -163,7 +163,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
         withUnsafePointer(to: name.content) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_animation, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_animation, handle, pArgs, nil)
                 }
                 
             }
@@ -188,7 +188,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
     fileprivate final func get_animation() -> StringName {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         let _result: StringName = StringName ()
-        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_get_animation, UnsafeMutableRawPointer(mutating: handle), nil, &_result.content)
+        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_get_animation, handle, nil, &_result.content)
         return _result
     }
     
@@ -209,7 +209,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
         withUnsafePointer(to: mode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_play_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_play_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -234,7 +234,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
     fileprivate final func get_play_mode() -> AnimationNodeAnimation.PlayMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_get_play_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_get_play_mode, handle, nil, &_result)
         return AnimationNodeAnimation.PlayMode (rawValue: _result)!
     }
     
@@ -255,7 +255,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
         withUnsafePointer(to: advanceOnStart) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_advance_on_start, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_advance_on_start, handle, pArgs, nil)
                 }
                 
             }
@@ -280,7 +280,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
     fileprivate final func is_advance_on_start() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_is_advance_on_start, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_is_advance_on_start, handle, nil, &_result)
         return _result
     }
     
@@ -301,7 +301,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
         withUnsafePointer(to: useCustomTimeline) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_use_custom_timeline, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_use_custom_timeline, handle, pArgs, nil)
                 }
                 
             }
@@ -326,7 +326,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
     fileprivate final func is_using_custom_timeline() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_is_using_custom_timeline, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_is_using_custom_timeline, handle, nil, &_result)
         return _result
     }
     
@@ -347,7 +347,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
         withUnsafePointer(to: timelineLength) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_timeline_length, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_timeline_length, handle, pArgs, nil)
                 }
                 
             }
@@ -372,7 +372,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
     fileprivate final func get_timeline_length() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_get_timeline_length, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_get_timeline_length, handle, nil, &_result)
         return _result
     }
     
@@ -393,7 +393,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
         withUnsafePointer(to: stretchTimeScale) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_stretch_time_scale, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_stretch_time_scale, handle, pArgs, nil)
                 }
                 
             }
@@ -418,7 +418,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
     fileprivate final func is_stretching_time_scale() -> Bool {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Bool = false
-        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_is_stretching_time_scale, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_is_stretching_time_scale, handle, nil, &_result)
         return _result
     }
     
@@ -439,7 +439,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
         withUnsafePointer(to: startOffset) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_start_offset, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_start_offset, handle, pArgs, nil)
                 }
                 
             }
@@ -464,7 +464,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
     fileprivate final func get_start_offset() -> Double {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Double = 0.0
-        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_get_start_offset, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_get_start_offset, handle, nil, &_result)
         return _result
     }
     
@@ -485,7 +485,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
         withUnsafePointer(to: loopMode.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_loop_mode, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_set_loop_mode, handle, pArgs, nil)
                 }
                 
             }
@@ -510,7 +510,7 @@ open class AnimationNodeAnimation: AnimationRootNode {
     fileprivate final func get_loop_mode() -> Animation.LoopMode {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_get_loop_mode, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(AnimationNodeAnimation.method_get_loop_mode, handle, nil, &_result)
         return Animation.LoopMode (rawValue: _result)!
     }
     

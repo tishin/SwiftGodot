@@ -185,7 +185,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         withUnsafePointer(to: type.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_set_texture_type, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_set_texture_type, handle, pArgs, nil)
                 }
                 
             }
@@ -210,7 +210,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     fileprivate final func get_texture_type() -> VisualShaderNodeTextureParameter.TextureType {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_texture_type, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_texture_type, handle, nil, &_result)
         return VisualShaderNodeTextureParameter.TextureType (rawValue: _result)!
     }
     
@@ -231,7 +231,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         withUnsafePointer(to: color.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_set_color_default, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_set_color_default, handle, pArgs, nil)
                 }
                 
             }
@@ -256,7 +256,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     fileprivate final func get_color_default() -> VisualShaderNodeTextureParameter.ColorDefault {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_color_default, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_color_default, handle, nil, &_result)
         return VisualShaderNodeTextureParameter.ColorDefault (rawValue: _result)!
     }
     
@@ -277,7 +277,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         withUnsafePointer(to: filter.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_set_texture_filter, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_set_texture_filter, handle, pArgs, nil)
                 }
                 
             }
@@ -302,7 +302,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     fileprivate final func get_texture_filter() -> VisualShaderNodeTextureParameter.TextureFilter {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_texture_filter, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_texture_filter, handle, nil, &_result)
         return VisualShaderNodeTextureParameter.TextureFilter (rawValue: _result)!
     }
     
@@ -323,7 +323,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         withUnsafePointer(to: `repeat`.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_set_texture_repeat, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_set_texture_repeat, handle, pArgs, nil)
                 }
                 
             }
@@ -348,7 +348,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     fileprivate final func get_texture_repeat() -> VisualShaderNodeTextureParameter.TextureRepeat {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_texture_repeat, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_texture_repeat, handle, nil, &_result)
         return VisualShaderNodeTextureParameter.TextureRepeat (rawValue: _result)!
     }
     
@@ -369,7 +369,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
         withUnsafePointer(to: source.rawValue) { pArg0 in
             withUnsafePointer(to: UnsafeRawPointersN1(pArg0)) { pArgs in
                 pArgs.withMemoryRebound(to: UnsafeRawPointer?.self, capacity: 1) { pArgs in
-                    gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_set_texture_source, UnsafeMutableRawPointer(mutating: handle), pArgs, nil)
+                    gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_set_texture_source, handle, pArgs, nil)
                 }
                 
             }
@@ -394,7 +394,7 @@ open class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
     fileprivate final func get_texture_source() -> VisualShaderNodeTextureParameter.TextureSource {
         if handle == nil { Wrapped.attemptToUseObjectFreedByGodot() }
         var _result: Int64 = 0 // to avoid packed enums on the stack
-        gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_texture_source, UnsafeMutableRawPointer(mutating: handle), nil, &_result)
+        gi.object_method_bind_ptrcall(VisualShaderNodeTextureParameter.method_get_texture_source, handle, nil, &_result)
         return VisualShaderNodeTextureParameter.TextureSource (rawValue: _result)!
     }
     
